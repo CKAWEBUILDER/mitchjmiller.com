@@ -4,6 +4,34 @@ import { caseStudies } from "@/lib/data";
 import { caseStudyImages } from "@/lib/images";
 import { Link, useRoute } from "wouter";
 
+const gradientMap: Record<string, string> = {
+  "apple-seasonal-search": "from-slate-800 to-slate-600",
+  "apple-store-amr": "from-slate-800 to-slate-600",
+  "apple-education-store": "from-slate-800 to-slate-600",
+  "stanford-myhealth-seo": "from-red-900 to-red-700",
+  "commonspirit-locations-conversion-engine": "from-blue-900 to-blue-700",
+  "commonspirit-network-consolidation": "from-blue-900 to-blue-700",
+  "commonspirit-medical-content-library": "from-blue-900 to-blue-700",
+  "aem-content-fragmentation-architecture": "from-orange-900 to-orange-700",
+  "yext-entity-data-foundation": "from-violet-900 to-violet-700",
+  "claritypulse-ai-reporting": "from-sky-700 to-sky-500",
+  "searchforge-content-intelligence": "from-emerald-800 to-emerald-600",
+  "actionthread-transcript-execution": "from-indigo-800 to-indigo-600",
+  "aeo-visibility-infrastructure": "from-teal-800 to-teal-600",
+  "domainsignal": "from-zinc-700 to-zinc-500",
+  "date-night": "from-rose-800 to-rose-600",
+  "vet-advocates-growth-system": "from-green-800 to-green-600",
+};
+
+function DetailPlaceholder({ slug, title }: { slug: string; title: string }) {
+  const gradient = gradientMap[slug] ?? "from-slate-700 to-slate-500";
+  return (
+    <div className={`w-full h-full bg-gradient-to-br ${gradient} flex items-end p-8`}>
+      <span className="text-white/70 text-base font-semibold leading-snug">{title}</span>
+    </div>
+  );
+}
+
 export default function CaseStudyDetail() {
   const [, params] = useRoute("/case-studies/:slug");
   const study = caseStudies.find(c => c.slug === params?.slug);
@@ -51,16 +79,16 @@ export default function CaseStudyDetail() {
       <div className="container mx-auto px-4 md:px-8 max-w-4xl py-16">
         
         {/* Visual Hero */}
-        <div className="aspect-video bg-muted rounded-xl border border-border shadow-sm flex items-center justify-center mb-16 overflow-hidden relative">
-          {(caseStudyImages[study.slug] || (study as any).image) ? (
+        <div className="aspect-video rounded-xl border border-border shadow-sm mb-16 overflow-hidden relative">
+          {caseStudyImages[study.slug] ? (
             <img
-              src={caseStudyImages[study.slug] || (study as any).image}
+              src={caseStudyImages[study.slug]}
               alt={study.title}
               className="w-full h-full object-cover object-top"
               loading="lazy"
             />
           ) : (
-            <span className="text-muted-foreground font-medium text-sm px-8 text-center">{study.placeholder}</span>
+            <DetailPlaceholder slug={study.slug} title={study.title} />
           )}
           {(study as any).isMockup && (
             <span className="absolute bottom-3 right-3 bg-background/90 border border-border px-3 py-1 rounded text-xs font-semibold shadow">

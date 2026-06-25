@@ -5,6 +5,34 @@ import { caseStudyImages } from "@/lib/images";
 import { Link } from "wouter";
 import { useState } from "react";
 
+const gradientMap: Record<string, string> = {
+  "apple-seasonal-search": "from-slate-800 to-slate-600",
+  "apple-store-amr": "from-slate-800 to-slate-600",
+  "apple-education-store": "from-slate-800 to-slate-600",
+  "stanford-myhealth-seo": "from-red-900 to-red-700",
+  "commonspirit-locations-conversion-engine": "from-blue-900 to-blue-700",
+  "commonspirit-network-consolidation": "from-blue-900 to-blue-700",
+  "commonspirit-medical-content-library": "from-blue-900 to-blue-700",
+  "aem-content-fragmentation-architecture": "from-orange-900 to-orange-700",
+  "yext-entity-data-foundation": "from-violet-900 to-violet-700",
+  "claritypulse-ai-reporting": "from-sky-700 to-sky-500",
+  "searchforge-content-intelligence": "from-emerald-800 to-emerald-600",
+  "actionthread-transcript-execution": "from-indigo-800 to-indigo-600",
+  "aeo-visibility-infrastructure": "from-teal-800 to-teal-600",
+  "domainsignal": "from-zinc-700 to-zinc-500",
+  "date-night": "from-rose-800 to-rose-600",
+  "vet-advocates-growth-system": "from-green-800 to-green-600",
+};
+
+function CardPlaceholder({ slug, title }: { slug: string; title: string }) {
+  const gradient = gradientMap[slug] ?? "from-slate-700 to-slate-500";
+  return (
+    <div className={`w-full h-full bg-gradient-to-br ${gradient} flex items-end p-5`}>
+      <span className="text-white/80 text-sm font-semibold leading-tight">{title}</span>
+    </div>
+  );
+}
+
 export default function Work() {
   const [filter, setFilter] = useState("All");
 
@@ -63,16 +91,16 @@ export default function Work() {
           {filteredStudies.map((study) => (
             <Link key={study.slug} href={`/case-studies/${study.slug}`}>
               <div className="group cursor-pointer bg-card border border-border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all h-full flex flex-col">
-                <div className="aspect-video bg-muted flex items-center justify-center text-center border-b border-border relative overflow-hidden">
-                  {(caseStudyImages[study.slug] || (study as any).image) ? (
+                <div className="aspect-video border-b border-border relative overflow-hidden">
+                  {caseStudyImages[study.slug] ? (
                     <img
-                      src={caseStudyImages[study.slug] || (study as any).image}
+                      src={caseStudyImages[study.slug]}
                       alt={study.title}
                       className="w-full h-full object-cover object-top"
                       loading="lazy"
                     />
                   ) : (
-                    <span className="text-muted-foreground text-sm font-medium p-6">{study.placeholder}</span>
+                    <CardPlaceholder slug={study.slug} title={study.title} />
                   )}
                 </div>
                 <div className="p-6 flex-1 flex flex-col">

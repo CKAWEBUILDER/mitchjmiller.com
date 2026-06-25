@@ -1,0 +1,50 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "t8AgPBpF1sCr68OCC-Hfl"
+uri = "file://artifacts/portfolio/public/images/claritypulse.png"
+type = "image"
+title = "Executive data dashboard mockup"
+
+[[generated]]
+id = "IZPnlPbbYKrm9hXGZGAfW"
+uri = "file://artifacts/portfolio/public/images/searchforge.png"
+type = "image"
+title = "Content brief intelligence tool"
+
+[[generated]]
+id = "hkgWKieTwH-H31mTVUaZk"
+uri = "file://artifacts/portfolio/public/images/actionthread.png"
+type = "image"
+title = "Task workflow automation interface"
+
+[[generated]]
+id = "ncrOc0w_pc6aCPQgjCYAt"
+uri = "file://artifacts/portfolio/public/images/portrait.png"
+type = "image"
+title = "Professional male portrait placeholder"
+
+[[generated]]
+id = "Q57VVwmCf7oQkmMuP850h"
+uri = "file://artifacts/portfolio/public/images/domainsignal.png"
+type = "image"
+title = "Domain authority analytics tool"
+
+[[generated]]
+id = "c-cS95Yi35dkR9pxfFTWs"
+uri = "file://artifacts/portfolio/public/images/datenight.png"
+type = "image"
+title = "Couples dating app interface"
+
+[[generated]]
+id = "T5gQ4qCibBdzb0vWWcOZY"
+uri = "file://artifacts/portfolio/public/images/foliotrack.png"
+type = "image"
+title = "Personal finance tracker dashboard"
+
+[[generated]]
+id = "hdKNPSSATRL-Cjv6jwa8N"
+uri = "file://artifacts/portfolio/public/images/hero-bg.png"
+type = "image"
+title = "Abstract enterprise data background"

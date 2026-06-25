@@ -1,6 +1,7 @@
 import { Layout } from "@/components/layout";
 import { SEO } from "@/components/seo";
 import { caseStudies } from "@/lib/data";
+import { caseStudyImages } from "@/lib/images";
 import { Link, useRoute } from "wouter";
 
 export default function CaseStudyDetail() {
@@ -51,12 +52,21 @@ export default function CaseStudyDetail() {
         
         {/* Visual Hero */}
         <div className="aspect-video bg-muted rounded-xl border border-border shadow-sm flex items-center justify-center mb-16 overflow-hidden relative">
-          {study.image ? (
-            <img src={study.image} alt={study.placeholder} className="w-full h-full object-cover" />
+          {(caseStudyImages[study.slug] || (study as any).image) ? (
+            <img
+              src={caseStudyImages[study.slug] || (study as any).image}
+              alt={study.title}
+              className="w-full h-full object-cover object-top"
+              loading="lazy"
+            />
           ) : (
-            <span className="text-muted-foreground font-medium text-sm">{study.placeholder}</span>
+            <span className="text-muted-foreground font-medium text-sm px-8 text-center">{study.placeholder}</span>
           )}
-          {study.isMockup && <span className="absolute top-4 right-4 bg-background/80 px-3 py-1 rounded text-xs font-bold shadow">Representative mockup</span>}
+          {(study as any).isMockup && (
+            <span className="absolute bottom-3 right-3 bg-background/90 border border-border px-3 py-1 rounded text-xs font-semibold shadow">
+              Representative mockup — not client data
+            </span>
+          )}
         </div>
 
         <div className="grid md:grid-cols-3 gap-12">

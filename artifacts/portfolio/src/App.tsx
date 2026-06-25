@@ -15,6 +15,7 @@ import BlogIndex from "@/pages/blog-index";
 import BlogPost from "@/pages/blog-post";
 import CaseStudyDetail from "@/pages/case-study-detail";
 import CaseStudiesIndex from "@/pages/case-studies-index";
+import AeoGeo from "@/pages/aeo-geo";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,7 @@ function Router() {
       <Route path="/blog/:slug" component={BlogPost} />
       <Route path="/case-studies" component={CaseStudiesIndex} />
       <Route path="/case-studies/:slug" component={CaseStudyDetail} />
+      <Route path="/aeo-geo" component={AeoGeo} />
       <Route component={NotFound} />
     </Switch>
   );

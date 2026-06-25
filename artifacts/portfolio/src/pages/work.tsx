@@ -1,6 +1,7 @@
 import { Layout } from "@/components/layout";
 import { SEO } from "@/components/seo";
 import { caseStudies } from "@/lib/data";
+import { caseStudyImages } from "@/lib/images";
 import { Link } from "wouter";
 import { useState } from "react";
 
@@ -63,8 +64,13 @@ export default function Work() {
             <Link key={study.slug} href={`/case-studies/${study.slug}`}>
               <div className="group cursor-pointer bg-card border border-border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all h-full flex flex-col">
                 <div className="aspect-video bg-muted flex items-center justify-center text-center border-b border-border relative overflow-hidden">
-                  {(study as any).image ? (
-                    <img src={(study as any).image} alt={study.placeholder} className="w-full h-full object-cover" />
+                  {(caseStudyImages[study.slug] || (study as any).image) ? (
+                    <img
+                      src={caseStudyImages[study.slug] || (study as any).image}
+                      alt={study.title}
+                      className="w-full h-full object-cover object-top"
+                      loading="lazy"
+                    />
                   ) : (
                     <span className="text-muted-foreground text-sm font-medium p-6">{study.placeholder}</span>
                   )}

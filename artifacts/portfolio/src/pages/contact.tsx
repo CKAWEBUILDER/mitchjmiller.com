@@ -1,95 +1,96 @@
 import { Layout } from "@/components/layout";
 import { SEO } from "@/components/seo";
+import { Mail, Linkedin, Phone, FileText } from "lucide-react";
+import { Link } from "wouter";
 
 export default function Contact() {
   return (
     <Layout>
-      <SEO 
-        title="Contact | Mitchell Miller" 
-        description="Get in touch for roles in SEO, AEO/GEO, and AI Search strategy."
+      <SEO
+        title="Contact · Mitchell Miller — Director of SEO, AEO/GEO & AI Search Systems"
+        description="Get in touch with Mitchell Miller for SEO Director, AEO/GEO Lead, AI Search Strategist, or speaking engagement opportunities."
       />
       <div className="container mx-auto px-4 md:px-8 max-w-2xl py-24">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact</h1>
-        <p className="text-xl text-muted-foreground mb-12">
-          San Jose, CA / Remote-first.
+        <h1 className="text-4xl md:text-5xl font-bold mb-3 text-primary" style={{ letterSpacing: "-0.02em" }}>
+          Contact
+        </h1>
+        <p className="text-lg text-muted-foreground mb-12">
+          United States &middot; Remote-first.
         </p>
 
-        <div className="bg-card border border-border rounded-xl p-8 shadow-sm">
-          <form action="https://formsubmit.co/mitchelljmillerjr26@gmail.com" method="POST" className="space-y-6">
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-primary mb-2">Name</label>
-              <input 
-                type="text" 
-                id="name" 
-                name="name" 
-                required 
-                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              />
+        <div className="space-y-4 mb-12">
+          <a
+            href="mailto:mitchelljmillerjr26@gmail.com"
+            className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:shadow-md hover:border-secondary/40 transition-all group"
+            data-testid="link-email"
+          >
+            <div className="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center flex-shrink-0">
+              <Mail className="h-5 w-5 text-secondary" />
             </div>
-            
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-primary mb-2">Contact info / email</label>
-              <input 
-                type="text" 
-                id="email" 
-                name="email" 
-                required 
-                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              />
+              <p className="text-xs uppercase tracking-wider font-semibold text-muted-foreground mb-0.5">Email</p>
+              <p className="font-medium text-primary group-hover:text-secondary transition-colors">mitchelljmillerjr26@gmail.com</p>
             </div>
+          </a>
 
-            <div>
-              <label htmlFor="time" className="block text-sm font-medium text-primary mb-2">Best time to connect</label>
-              <select 
-                id="time" 
-                name="time" 
-                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              >
-                <option value="Morning">Morning</option>
-                <option value="Afternoon">Afternoon</option>
-                <option value="Evening">Evening</option>
-              </select>
+          <a
+            href="https://linkedin.com/in/mitchelljmillerjr"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:shadow-md hover:border-secondary/40 transition-all group"
+            data-testid="link-linkedin"
+          >
+            <div className="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center flex-shrink-0">
+              <Linkedin className="h-5 w-5 text-secondary" />
             </div>
-
             <div>
-              <label htmlFor="organization" className="block text-sm font-medium text-primary mb-2">Organization or collaboration type</label>
-              <input 
-                type="text" 
-                id="organization" 
-                name="organization" 
-                required 
-                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              />
+              <p className="text-xs uppercase tracking-wider font-semibold text-muted-foreground mb-0.5">LinkedIn</p>
+              <p className="font-medium text-primary group-hover:text-secondary transition-colors">linkedin.com/in/mitchelljmillerjr</p>
             </div>
+          </a>
 
+          <a
+            href="tel:+16263168682"
+            className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:shadow-md hover:border-secondary/40 transition-all group"
+            data-testid="link-phone"
+          >
+            <div className="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center flex-shrink-0">
+              <Phone className="h-5 w-5 text-secondary" />
+            </div>
             <div>
-              <label htmlFor="inquiry" className="block text-sm font-medium text-primary mb-2">Inquiry type</label>
-              <select 
-                id="inquiry" 
-                name="inquiry" 
-                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              >
-                <option value="Job Opportunity">Job Opportunity</option>
-                <option value="Consulting Inquiry">Consulting Inquiry</option>
-                <option value="Speaking Engagement">Speaking Engagement</option>
-                <option value="Collaboration">Collaboration</option>
-                <option value="General">General</option>
-              </select>
+              <p className="text-xs uppercase tracking-wider font-semibold text-muted-foreground mb-0.5">Phone</p>
+              <p className="font-medium text-primary group-hover:text-secondary transition-colors">+1 (626) 316-8682</p>
             </div>
-
-            <button 
-              type="submit" 
-              className="w-full inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring bg-primary text-primary-foreground shadow hover:bg-primary/90 h-10 px-4 py-2"
-            >
-              Send Message
-            </button>
-          </form>
+          </a>
         </div>
 
-        <div className="mt-12 flex items-center justify-center gap-6 text-sm text-muted-foreground">
-          <a href="mailto:mitchelljmillerjr26@gmail.com" className="hover:text-secondary transition-colors">mitchelljmillerjr26@gmail.com</a>
-          <span>|</span>
-          <a href="https://linkedin.com/in/mitchelljmillerjr" target="_blank" rel="noopener noreferrer" className="hover:text-secondary transition-colors">LinkedIn</a>
+        <div className="border-t border-border pt-10">
+          <h2 className="text-lg font-bold text-primary mb-4">Currently open to</h2>
+          <div className="flex flex-wrap gap-2 mb-8">
+            {[
+              "SEO Director",
+              "AEO/GEO Lead",
+              "AI Search Strategist",
+              "Agentic AI Engineer",
+              "Technical SEO/Product Manager",
+              "Organic Growth Lead",
+              "Speaking Engagements",
+              "Advisory / Consulting",
+            ].map(role => (
+              <span key={role} className="text-xs bg-muted border border-border rounded-full px-3 py-1.5 text-muted-foreground font-medium">
+                {role}
+              </span>
+            ))}
+          </div>
+
+          <Link
+            href="/resume"
+            className="inline-flex items-center gap-2 text-sm font-medium text-secondary hover:underline"
+            data-testid="link-resume"
+          >
+            <FileText className="h-4 w-4" />
+            Download resume (PDF)
+          </Link>
         </div>
       </div>
     </Layout>

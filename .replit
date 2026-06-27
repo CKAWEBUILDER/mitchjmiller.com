@@ -1,0 +1,11 @@
+modules = ["nodejs-24"]
+run = "npm run dev"
+entrypoint = "src/main.tsx"
+
+[deployment]
+build = ["npm", "run", "build"]
+deploymentTarget = "static"
+publicDir = "dist/public"
+
+[nix]
+channel = "stable-25_05"

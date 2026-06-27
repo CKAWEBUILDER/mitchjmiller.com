@@ -1,0 +1,7 @@
+node_modules
+.npm-cache
+.git
+dist
+asset-working
+.DS_Store
+.tsbuildinfo

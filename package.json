@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite --config vite.config.ts --host 0.0.0.0",
     "build": "vite build --config vite.config.ts",
-    "build:github": "BASE_PATH=/mitchjmiller.com/ vite build --config vite.config.ts && cp dist/public/index.html dist/public/404.html && touch dist/public/.nojekyll",
+    "build:github": "BASE_PATH=/mitchjmiller.com/ vite build --config vite.config.ts && node scripts/create-route-copies.mjs",
     "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },

@@ -57,7 +57,7 @@ export default function CaseStudiesIndex() {
                 </div>
                 <div className="p-6 flex-1 flex flex-col">
                   <h3 className="font-bold text-xl mb-2 group-hover:text-secondary transition-colors">{study.title}</h3>
-                  <p className="text-muted-foreground text-sm mt-auto">{study.thesis}</p>
+                  <p className="text-muted-foreground text-sm leading-relaxed break-words mt-auto">{study.thesis}</p>
                 </div>
               </div>
             </Link>
@@ -91,7 +91,7 @@ export default function CaseStudiesIndex() {
                   </div>
                   <div className="p-5 flex-1 flex flex-col">
                     <h3 className="font-bold text-lg mb-2 group-hover:text-secondary transition-colors">{study.title}</h3>
-                    <p className="text-muted-foreground text-sm mt-auto">{study.thesis}</p>
+                    <p className="text-muted-foreground text-sm leading-relaxed break-words mt-auto">{study.thesis}</p>
                   </div>
                 </div>
               </Link>

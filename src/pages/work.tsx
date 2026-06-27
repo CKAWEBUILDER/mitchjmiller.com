@@ -141,7 +141,7 @@ export default function Work() {
                 <div className="p-6 flex-1 flex flex-col">
                   <span className="text-xs font-bold text-secondary uppercase tracking-wider mb-2">{categoryMap[study.slug]}</span>
                   <h3 className="font-bold text-xl mb-2 group-hover:text-secondary transition-colors">{study.title}</h3>
-                  <p className="text-muted-foreground text-sm mt-auto">{study.thesis}</p>
+                  <p className="text-muted-foreground text-sm leading-relaxed break-words mt-auto">{study.thesis}</p>
                 </div>
               </div>
             </Link>

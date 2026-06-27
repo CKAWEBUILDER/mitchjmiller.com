@@ -219,7 +219,7 @@ export default function Home() {
                     <div className="p-6 flex-1">
                       <p className="text-xs uppercase tracking-wider font-semibold text-secondary mb-2">{cs.role}</p>
                       <h3 className="font-bold text-lg mb-2 group-hover:text-secondary transition-colors">{cs.title}</h3>
-                      <p className="text-muted-foreground text-sm leading-relaxed">{cs.thesis}</p>
+                      <p className="text-muted-foreground text-sm leading-relaxed break-words">{cs.thesis}</p>
                     </div>
                   </div>
                 </Link>

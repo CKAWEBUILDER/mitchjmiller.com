@@ -98,7 +98,7 @@ export const portfolioImages: Record<string, PortfolioImage> = {
       "https://www.dignityhealth.org/conditions-and-treatments/orthopedics/orthopedic-surgery",
   },
   "aem-content-fragmentation-architecture": {
-    src: publicPath("/images/proof-optimized/aem-content-fragmentation-architecture.svg"),
+    src: publicPath("/images/proof-optimized/aem-content-fragmentation-architecture-v2.svg"),
     alt: "Representative AEM content fragment architecture diagram",
     status: "ready",
     note: "Representative architecture diagram based on resume/profile experience.",

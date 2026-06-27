@@ -1,4 +1,5 @@
 import { Layout } from "@/components/layout";
+import { ResumeDownloadDialog } from "@/components/resume-download-dialog";
 import { SEO } from "@/components/seo";
 import { Link } from "wouter";
 import { ArrowRight, FileText, Mail, ExternalLink } from "lucide-react";
@@ -77,13 +78,15 @@ export default function Home() {
                 >
                   View AEO/GEO Lab <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
-                <Link
-                  href="/resume"
-                  className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-10 px-5"
-                  data-testid="link-download-resume"
-                >
-                  Download Resume <FileText className="ml-2 h-4 w-4" />
-                </Link>
+                <ResumeDownloadDialog>
+                  <button
+                    type="button"
+                    className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-10 px-5"
+                    data-testid="link-download-resume"
+                  >
+                    Download Resume <FileText className="ml-2 h-4 w-4" />
+                  </button>
+                </ResumeDownloadDialog>
                 <Link
                   href="/contact"
                   className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-10 px-5"

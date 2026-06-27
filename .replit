@@ -9,3 +9,6 @@ publicDir = "dist/public"
 
 [nix]
 channel = "stable-25_05"
+
+[agent]
+expertMode = true

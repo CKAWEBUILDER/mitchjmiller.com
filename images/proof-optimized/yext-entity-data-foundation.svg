@@ -1,0 +1,53 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Yext Entity Data Foundation</title>
+  <desc id="desc">Entity data foundation diagram for location cleanup, duplicate suppression, and publisher syndication.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2 2 L10 6 L2 10 Z" fill="#64748b"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#0f172a" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="900" fill="#f8fafc"/>
+  <rect x="64" y="64" width="1472" height="772" rx="28" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="116" y="138" font-family="Inter, Arial, sans-serif" font-size="48" font-weight="800" fill="#0f172a">Yext Entity Data Foundation</text>
+  <text x="118" y="182" font-family="Inter, Arial, sans-serif" font-size="22" fill="#475569">Network-wide entity cleanup, duplicate suppression, and publisher syndication</text>
+
+  <g filter="url(#shadow)" font-family="Inter, Arial, sans-serif">
+    <rect x="120" y="290" width="330" height="138" rx="16" fill="#eff6ff" stroke="#bfdbfe"/>
+    <rect x="120" y="290" width="9" height="138" rx="4" fill="#0284c7"/>
+    <text x="154" y="342" font-size="27" font-weight="800" fill="#0f172a">Source entities</text>
+    <text x="154" y="378" font-size="18" fill="#334155">Hospitals, clinics, physicians,</text>
+    <text x="154" y="404" font-size="18" fill="#334155">service lines</text>
+
+    <rect x="635" y="290" width="330" height="138" rx="16" fill="#ecfdf5" stroke="#bbf7d0"/>
+    <rect x="635" y="290" width="9" height="138" rx="4" fill="#16a34a"/>
+    <text x="669" y="342" font-size="27" font-weight="800" fill="#0f172a">Data governance</text>
+    <text x="669" y="378" font-size="18" fill="#334155">NAP cleanup, duplicates,</text>
+    <text x="669" y="404" font-size="18" fill="#334155">parent-child model</text>
+
+    <rect x="1150" y="290" width="330" height="138" rx="16" fill="#f5f3ff" stroke="#ddd6fe"/>
+    <rect x="1150" y="290" width="9" height="138" rx="4" fill="#7c3aed"/>
+    <text x="1184" y="342" font-size="27" font-weight="800" fill="#0f172a">Publisher graph</text>
+    <text x="1184" y="378" font-size="18" fill="#334155">Google, Apple Maps, Bing,</text>
+    <text x="1184" y="404" font-size="18" fill="#334155">Yelp, voice assistants</text>
+  </g>
+
+  <line x1="482" y1="359" x2="591" y2="359" stroke="#64748b" stroke-width="5" marker-end="url(#arrow)"/>
+  <line x1="997" y1="359" x2="1106" y2="359" stroke="#64748b" stroke-width="5" marker-end="url(#arrow)"/>
+
+  <g font-family="Inter, Arial, sans-serif">
+    <rect x="150" y="615" width="292" height="84" rx="14" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="182" y="664" font-size="19" font-weight="700" fill="#0f172a">NAP standardization</text>
+
+    <rect x="482" y="615" width="292" height="84" rx="14" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="514" y="664" font-size="19" font-weight="700" fill="#0f172a">Duplicate suppression</text>
+
+    <rect x="814" y="615" width="292" height="84" rx="14" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="846" y="664" font-size="19" font-weight="700" fill="#0f172a">Entity hierarchy</text>
+
+    <rect x="1146" y="615" width="292" height="84" rx="14" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="1178" y="664" font-size="19" font-weight="700" fill="#0f172a">Search-to-action attribution</text>
+  </g>
+</svg>

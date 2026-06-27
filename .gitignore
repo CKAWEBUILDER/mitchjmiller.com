@@ -1,0 +1,8 @@
+node_modules/
+.npm-cache/
+.tsbuildinfo
+dist/
+asset-working/
+.replit-artifact/
+.DS_Store
+*.log

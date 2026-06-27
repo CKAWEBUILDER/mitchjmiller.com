@@ -1,0 +1,61 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">CommonSpirit Network Consolidation</title>
+  <desc id="desc">Architecture diagram showing migration from fragmented sites to a unified network.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2 2 L10 6 L2 10 Z" fill="#64748b"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#0f172a" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="900" fill="#f8fafc"/>
+  <rect x="64" y="64" width="1472" height="772" rx="28" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="116" y="138" font-family="Inter, Arial, sans-serif" font-size="48" font-weight="800" fill="#0f172a">CommonSpirit Network Consolidation</text>
+  <text x="118" y="182" font-family="Inter, Arial, sans-serif" font-size="22" fill="#475569">Migration operating system for fragmented healthcare web properties</text>
+
+  <g filter="url(#shadow)">
+    <rect x="120" y="268" width="320" height="138" rx="16" fill="#fff1f2" stroke="#fecdd3"/>
+    <rect x="120" y="268" width="9" height="138" rx="4" fill="#e11d48"/>
+    <text x="154" y="318" font-family="Inter, Arial, sans-serif" font-size="27" font-weight="800" fill="#0f172a">Fragmented network</text>
+    <text x="154" y="354" font-family="Inter, Arial, sans-serif" font-size="19" fill="#334155">63+ sites, regional brands,</text>
+    <text x="154" y="380" font-family="Inter, Arial, sans-serif" font-size="19" fill="#334155">inconsistent templates</text>
+
+    <rect x="640" y="268" width="320" height="138" rx="16" fill="#eff6ff" stroke="#bfdbfe"/>
+    <rect x="640" y="268" width="9" height="138" rx="4" fill="#2563eb"/>
+    <text x="674" y="318" font-family="Inter, Arial, sans-serif" font-size="27" font-weight="800" fill="#0f172a">Migration rules</text>
+    <text x="674" y="354" font-family="Inter, Arial, sans-serif" font-size="19" fill="#334155">Redirects, analytics,</text>
+    <text x="674" y="380" font-family="Inter, Arial, sans-serif" font-size="19" fill="#334155">templates, QA</text>
+
+    <rect x="1160" y="268" width="320" height="138" rx="16" fill="#ecfdf5" stroke="#bbf7d0"/>
+    <rect x="1160" y="268" width="9" height="138" rx="4" fill="#16a34a"/>
+    <text x="1194" y="318" font-family="Inter, Arial, sans-serif" font-size="27" font-weight="800" fill="#0f172a">Unified network</text>
+    <text x="1194" y="354" font-family="Inter, Arial, sans-serif" font-size="19" fill="#334155">Search-preserved</text>
+    <text x="1194" y="380" font-family="Inter, Arial, sans-serif" font-size="19" fill="#334155">service-line surfaces</text>
+  </g>
+
+  <line x1="472" y1="337" x2="596" y2="337" stroke="#64748b" stroke-width="5" marker-end="url(#arrow)"/>
+  <line x1="992" y1="337" x2="1116" y2="337" stroke="#64748b" stroke-width="5" marker-end="url(#arrow)"/>
+
+  <g font-family="Inter, Arial, sans-serif">
+    <rect x="150" y="548" width="520" height="82" rx="14" fill="#f8fafc" stroke="#cbd5e1"/>
+    <rect x="150" y="548" width="8" height="82" rx="4" fill="#8b5cf6"/>
+    <text x="184" y="582" font-size="24" font-weight="800" fill="#0f172a">SEO QA loops</text>
+    <text x="184" y="613" font-size="18" fill="#475569">20+ migrations with regression checks</text>
+
+    <rect x="930" y="548" width="520" height="82" rx="14" fill="#f8fafc" stroke="#cbd5e1"/>
+    <rect x="930" y="548" width="8" height="82" rx="4" fill="#8b5cf6"/>
+    <text x="964" y="582" font-size="24" font-weight="800" fill="#0f172a">Analytics continuity</text>
+    <text x="964" y="613" font-size="18" fill="#475569">Adobe Analytics to GA4 measurement bridge</text>
+
+    <rect x="150" y="668" width="520" height="82" rx="14" fill="#f8fafc" stroke="#cbd5e1"/>
+    <rect x="150" y="668" width="8" height="82" rx="4" fill="#8b5cf6"/>
+    <text x="184" y="702" font-size="24" font-weight="800" fill="#0f172a">Stakeholder alignment</text>
+    <text x="184" y="733" font-size="18" fill="#475569">IT, regional executives, marketing, content</text>
+
+    <rect x="930" y="668" width="520" height="82" rx="14" fill="#f8fafc" stroke="#cbd5e1"/>
+    <rect x="930" y="668" width="8" height="82" rx="4" fill="#8b5cf6"/>
+    <text x="964" y="702" font-size="24" font-weight="800" fill="#0f172a">Outcome</text>
+    <text x="964" y="733" font-size="18" fill="#475569">Organic sessions scaled from 2.65M to 4.9M+</text>
+  </g>
+</svg>

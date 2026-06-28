@@ -22,14 +22,13 @@ export function ResumeDownloadDialog({ children }: ResumeDownloadDialogProps) {
       <DialogContent className="max-h-[calc(100vh-2rem)] w-[calc(100vw-2rem)] max-w-2xl overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-2xl text-primary">
-            Point Mitchell toward the right conversation.
+            Choose the conversation you want to have.
           </DialogTitle>
           <DialogDescription>
-            Pick the closest signal and pull the most relevant background.
+            Download the background that matches the role, project, or collaboration you are evaluating.
           </DialogDescription>
           <p className="text-xs leading-relaxed text-muted-foreground">
-            By selecting a signal, you agree Mitchell may use that choice in
-            aggregate personal market analysis.
+            Selections may be reviewed in aggregate to understand which paths are getting interest.
           </p>
         </DialogHeader>
 

@@ -13,11 +13,10 @@ export default function Resume() {
       <div className="container mx-auto px-4 md:px-8 max-w-5xl py-32">
         <h1 className="text-4xl md:text-5xl font-bold mb-6">Resume</h1>
         <p className="text-xl text-muted-foreground mb-12 max-w-2xl">
-          Point Mitchell toward the right conversation. Pick the closest signal and pull the most relevant background.
+          Choose the conversation you want to have. Download the background that matches the role, project, or collaboration you are evaluating.
         </p>
         <p className="mb-12 -mt-8 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-          By selecting a signal, you agree Mitchell may use that choice in
-          aggregate personal market analysis.
+          Selections may be reviewed in aggregate to understand which paths are getting interest.
         </p>
 
         <div className="grid gap-4 md:grid-cols-2">

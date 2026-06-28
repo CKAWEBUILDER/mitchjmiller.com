@@ -349,7 +349,8 @@ export const vibeProjects = [
     category: "Research & AI",
     description: "Prompt-set monitoring and AI share-of-voice measurement across ChatGPT, Perplexity, and Google AI Overviews.",
     goal: "Measure unmeasurable AI search visibility.",
-    placeholder: "Placeholder: AEO dashboard"
+    placeholder: "Placeholder: AEO dashboard",
+    image: publicPath("/images/aeo-measurement-dashboard.png")
   },
   {
     name: "Date Night",
@@ -364,7 +365,8 @@ export const vibeProjects = [
     category: "Mobile & Web Apps",
     description: "Digital infrastructure for a small outdoor business, including OTA listings, payments, and CRM.",
     goal: "Streamline local business operations.",
-    placeholder: "Placeholder: Clear Kayak Adventures website"
+    placeholder: "Placeholder: Clear Kayak Adventures website",
+    image: publicPath("/images/proof-optimized/clear-kayak-adventures-site.png")
   },
   {
     name: "FolioTrack",
@@ -375,24 +377,11 @@ export const vibeProjects = [
     image: publicPath("/images/foliotrack.png")
   },
   {
-    name: "Bloom",
-    category: "Mobile & Web Apps",
-    description: "Women's health tracking and advocacy information app concept.",
-    goal: "Provide private, actionable health insights.",
-    placeholder: "Placeholder: Bloom app interface"
-  },
-  {
-    name: "CivicPulse",
-    category: "Volunteer & Community",
-    description: "Local government transparency and community engagement platform concept.",
-    goal: "Improve local civic participation.",
-    placeholder: "Placeholder: CivicPulse community feed"
-  },
-  {
     name: "Vet Advocates",
     category: "Volunteer & Community",
     description: "Structured Facebook ad growth system for a veterans-services nonprofit.",
     goal: "Scale veteran outreach.",
-    placeholder: "Placeholder: Vet Advocates campaign metrics"
+    placeholder: "Placeholder: Vet Advocates campaign metrics",
+    image: publicPath("/images/proof-optimized/vet-advocates-growth-system.svg")
   }
 ];

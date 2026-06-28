@@ -12,6 +12,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
     { href: "/work", label: "Work" },
     { href: "/aeo-geo", label: "AEO/GEO Lab" },
     { href: "/case-studies", label: "Case Studies" },
+    { href: "/collab-ideas", label: "Collab Ideas" },
     { href: "/blog", label: "Blog" },
     { href: "/contact", label: "Contact" },
   ];
@@ -104,6 +105,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <li><Link href="/work" className="hover:text-secondary">Work</Link></li>
               <li><Link href="/systems" className="hover:text-secondary">Systems</Link></li>
               <li><Link href="/selected-builds" className="hover:text-secondary">Selected Builds</Link></li>
+              <li><Link href="/collab-ideas" className="hover:text-secondary">Collab Ideas</Link></li>
             </ul>
           </div>
           <div>
@@ -112,6 +114,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <li>United States</li>
               <li><a href="mailto:mitchelljmillerjr26@gmail.com" className="hover:text-secondary">Email</a></li>
               <li><a href="https://linkedin.com/in/mitchelljmillerjr" target="_blank" rel="noopener noreferrer" className="hover:text-secondary">LinkedIn</a></li>
+              <li><Link href="/collab-ideas" className="hover:text-secondary">Collaboration paths</Link></li>
               <li><Link href="/blog" className="hover:text-secondary">Signals & Systems Blog</Link></li>
             </ul>
           </div>

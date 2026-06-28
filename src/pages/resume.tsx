@@ -1,6 +1,6 @@
 import { Layout } from "@/components/layout";
+import { ResumeCard } from "@/components/resume-card";
 import { SEO } from "@/components/seo";
-import { Download, FileText } from "lucide-react";
 import { resumeOptions } from "@/lib/resumes";
 
 export default function Resume() {
@@ -22,28 +22,7 @@ export default function Resume() {
 
         <div className="grid gap-4 md:grid-cols-2">
           {resumeOptions.map((resume) => (
-            <a
-              key={resume.id}
-              href={resume.href}
-              download={resume.download}
-              className="group flex min-h-48 flex-col justify-between rounded-lg border border-border bg-card p-6 transition-colors hover:border-secondary hover:bg-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              data-testid={`card-resume-${resume.id}`}
-            >
-              <span>
-                <span className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-md bg-primary text-primary-foreground">
-                  <FileText className="h-5 w-5" />
-                </span>
-                <span className="block text-lg font-semibold leading-snug text-primary">
-                  {resume.label}
-                </span>
-                <span className="mt-3 block text-sm leading-relaxed text-muted-foreground">
-                  {resume.description}
-                </span>
-              </span>
-              <span className="mt-6 inline-flex items-center text-sm font-semibold text-secondary">
-                Download PDF <Download className="ml-2 h-4 w-4" />
-              </span>
-            </a>
+            <ResumeCard key={resume.id} resume={resume} />
           ))}
         </div>
       </div>

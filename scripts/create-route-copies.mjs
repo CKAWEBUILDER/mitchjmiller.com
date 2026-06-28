@@ -6,6 +6,7 @@ const outDir = "dist/public";
 const routes = [
   "about",
   "contact",
+  "collab-ideas",
   "resume",
   "systems",
   "work",

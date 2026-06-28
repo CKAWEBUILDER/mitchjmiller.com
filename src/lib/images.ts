@@ -119,10 +119,11 @@ export const portfolioImages: Record<string, PortfolioImage> = {
     note: "Representative measurement mockup; replace with a redacted Profound-style dashboard if available.",
   },
   "vet-advocates-growth-system": {
-    src: publicPath("/images/placeholders/vet-advocates-growth-system.png"),
-    alt: "Temporary placeholder for Vet Advocates growth system case study",
-    status: "placeholder",
-    note: "Replace with anonymized campaign or funnel proof asset.",
+    src: publicPath("/images/proof-optimized/vet-advocates-growth-system.svg"),
+    alt: "Anonymized Vet Advocates growth system showing before and after signup ranges",
+    status: "ready",
+    note: "Representative anonymized proof asset; no veteran, donor, or account data shown.",
+    fit: "contain",
   },
 };
 

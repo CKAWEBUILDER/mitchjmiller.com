@@ -22,7 +22,7 @@ export function ResumeDownloadDialog({ children }: ResumeDownloadDialogProps) {
       <DialogContent className="max-h-[calc(100vh-2rem)] w-[calc(100vw-2rem)] max-w-2xl overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-2xl text-primary">
-            Point Mitchell toward the conversation you want to have.
+            Point Mitchell toward the right conversation.
           </DialogTitle>
           <DialogDescription>
             Pick the closest signal and pull the most relevant background.

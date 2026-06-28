@@ -109,7 +109,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <div>
             <h4 className="font-semibold text-primary mb-4">Connect</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>United States &middot; Remote-first</li>
+              <li>United States</li>
               <li><a href="mailto:mitchelljmillerjr26@gmail.com" className="hover:text-secondary">Email</a></li>
               <li><a href="https://linkedin.com/in/mitchelljmillerjr" target="_blank" rel="noopener noreferrer" className="hover:text-secondary">LinkedIn</a></li>
               <li><Link href="/blog" className="hover:text-secondary">Signals & Systems Blog</Link></li>

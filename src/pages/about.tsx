@@ -15,7 +15,7 @@ export default function About() {
     <Layout>
       <SEO
         title="About · Mitchell Miller — Director of SEO, AEO/GEO & AI Search Systems"
-        description="Mitchell Miller is a remote-first SEO, AEO/GEO, and AI Search systems leader. He's led enterprise search at Apple, CommonSpirit Health, and Stanford Health Care."
+        description="Mitchell Miller is an SEO, AEO/GEO, and AI Search systems leader. He's led enterprise search at Apple, CommonSpirit Health, and Stanford Health Care."
       />
       <div className="container mx-auto px-4 md:px-8 max-w-3xl py-24">
         <div className="grid md:grid-cols-[1fr_auto] gap-10 items-start mb-14">
@@ -73,7 +73,7 @@ export default function About() {
           <div>
             <h2 className="text-xl font-bold text-primary mb-3">Open to</h2>
             <p className="text-muted-foreground">
-              Director-level roles in SEO, AEO/GEO, AI Search, or AI Systems leadership. Remote. I am also available for advisory engagements and speaking.
+              Director-level roles in SEO, AEO/GEO, AI Search, or AI Systems leadership. I am also available for advisory engagements and speaking.
             </p>
           </div>
 

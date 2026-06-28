@@ -2,6 +2,7 @@ import { Layout } from "@/components/layout";
 import { SEO } from "@/components/seo";
 import { caseStudies } from "@/lib/data";
 import { portfolioImages } from "@/lib/images";
+import { publicPath } from "@/lib/paths";
 import { CheckCircle2, ExternalLink } from "lucide-react";
 import { Link, useRoute } from "wouter";
 
@@ -23,6 +24,10 @@ const gradientMap: Record<string, string> = {
   "date-night": "from-rose-800 to-rose-600",
   "vet-advocates-growth-system": "from-green-800 to-green-600",
 };
+
+const dignityWaybackUrl =
+  "https://web.archive.org/web/20180209061904/https://www.dignityhealth.org/";
+const yextPagesUrl = "https://www.yext.com/products/pages";
 
 function DetailPlaceholder({ slug, title }: { slug: string; title: string }) {
   const gradient = gradientMap[slug] ?? "from-slate-700 to-slate-500";
@@ -166,6 +171,93 @@ export default function CaseStudyDetail() {
                   </div>
                 ))}
               </div>
+            )}
+
+            {study.slug === "commonspirit-locations-conversion-engine" && (
+              <section className="not-prose mb-12 space-y-8">
+                <div className="grid gap-4 sm:grid-cols-3">
+                  {[
+                    {
+                      label: "Before",
+                      title: "Nine regional web experiences",
+                      body: "Service areas behaved like separate sites, with inconsistent templates, local publishing habits, and weak patient-action paths.",
+                    },
+                    {
+                      label: "System",
+                      title: "Yext entity + page layer",
+                      body: "Structured location data, reusable templates, database uploads, and Yext engineering support created a scalable conversion surface.",
+                    },
+                    {
+                      label: "Result",
+                      title: "Measured patient-action lift",
+                      body: "The system became a major location-action layer across calls, directions, appointment starts, and booking pathways.",
+                    },
+                  ].map((item) => (
+                    <div key={item.label} className="rounded-lg border border-border bg-card p-4">
+                      <p className="mb-2 text-xs font-bold uppercase tracking-wider text-secondary">
+                        {item.label}
+                      </p>
+                      <h3 className="mb-2 text-base font-bold text-primary">
+                        {item.title}
+                      </h3>
+                      <p className="text-sm leading-relaxed text-muted-foreground">
+                        {item.body}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="grid gap-4 md:grid-cols-2">
+                  <figure>
+                    <div className="aspect-video overflow-hidden rounded-lg border border-border bg-muted shadow-sm">
+                      <img
+                        src={publicPath("/images/proof-optimized/dignity-wayback-locations-nav-2018.png")}
+                        alt="Archived Dignity Health homepage showing regional location navigation in 2018"
+                        className="h-full w-full object-cover object-top"
+                        loading="lazy"
+                      />
+                    </div>
+                    <figcaption className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                      Archived 2018 Dignity Health navigation showing separate service-area
+                      entry points before the location/entity layer matured.
+                    </figcaption>
+                  </figure>
+
+                  <figure>
+                    <div className="aspect-video overflow-hidden rounded-lg border border-border bg-muted shadow-sm">
+                      <img
+                        src={publicPath("/images/proof-optimized/dignity-locations-conversion-engine.png")}
+                        alt="Current CommonSpirit location finder showing structured location discovery"
+                        className="h-full w-full object-cover object-top"
+                        loading="lazy"
+                      />
+                    </div>
+                    <figcaption className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                      Current public location-finder surface used as representative proof
+                      context for structured location discovery.
+                    </figcaption>
+                  </figure>
+                </div>
+
+                <div className="flex flex-wrap gap-3">
+                  <a
+                    href={dignityWaybackUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-md border border-border px-3 py-2 text-sm font-semibold text-secondary transition-colors hover:bg-accent/40"
+                  >
+                    View Wayback Source <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
+                  <a
+                    href={yextPagesUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-md border border-border px-3 py-2 text-sm font-semibold text-secondary transition-colors hover:bg-accent/40"
+                  >
+                    Yext Pages Platform <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
+                </div>
+              </section>
             )}
 
             <h2 className="text-2xl font-bold text-primary mb-4">Execution Pattern</h2>

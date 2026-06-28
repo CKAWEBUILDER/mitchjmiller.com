@@ -76,11 +76,12 @@ export const portfolioImages: Record<string, PortfolioImage> = {
       "https://apps.apple.com/us/app/stanford-health-care-myhealth/id922978966",
   },
   "commonspirit-locations-conversion-engine": {
-    src: publicPath("/images/proof-optimized/dignity-locations-conversion-engine.png"),
-    alt: "CommonSpirit location finder public page showing location search and care-site discovery",
+    src: publicPath("/images/proof-optimized/dignity-wayback-locations-nav-2018.png"),
+    alt: "Archived Dignity Health homepage showing regional location navigation in 2018",
     status: "ready",
-    note: "Current public location-finder surface used as representative proof context.",
-    sourceUrl: "https://locations.dignityhealth.org/",
+    note: "Archived 2018 Dignity Health navigation showing separate service-area entry points before the location/entity layer matured.",
+    sourceUrl:
+      "https://web.archive.org/web/20180209061904/https://www.dignityhealth.org/",
   },
   "commonspirit-network-consolidation": {
     src: publicPath("/images/proof-optimized/commonspirit-network-consolidation.svg"),

@@ -25,7 +25,7 @@ export const resumeOptions = [
   {
     id: "organic-systems-architecture",
     label: "Organic Systems Architecture",
-    description: "Full-funnel organic growth + growth systems.",
+    description: "Programmatic SEO + organic growth systems.",
     href: publicPath("/files/Mitchell-Miller-Organic-Systems-Background-2026.pdf"),
     download: "Mitchell-Miller-Organic-Systems-Background-2026.pdf",
   },

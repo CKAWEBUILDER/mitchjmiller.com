@@ -15,6 +15,10 @@ export default function Resume() {
         <p className="text-xl text-muted-foreground mb-12 max-w-2xl">
           Point Mitchell toward the right conversation. Pick the closest signal and pull the most relevant background.
         </p>
+        <p className="mb-12 -mt-8 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+          By selecting a signal, you agree Mitchell may use that choice in
+          aggregate personal market analysis.
+        </p>
 
         <div className="grid gap-4 md:grid-cols-2">
           {resumeOptions.map((resume) => (

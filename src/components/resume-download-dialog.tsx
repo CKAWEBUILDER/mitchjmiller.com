@@ -27,6 +27,10 @@ export function ResumeDownloadDialog({ children }: ResumeDownloadDialogProps) {
           <DialogDescription>
             Pick the closest signal and pull the most relevant background.
           </DialogDescription>
+          <p className="text-xs leading-relaxed text-muted-foreground">
+            By selecting a signal, you agree Mitchell may use that choice in
+            aggregate personal market analysis.
+          </p>
         </DialogHeader>
 
         <div className="grid gap-3 sm:grid-cols-2">

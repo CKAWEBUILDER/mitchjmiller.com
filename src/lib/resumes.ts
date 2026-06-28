@@ -2,32 +2,32 @@ import { publicPath } from "./paths";
 
 export const resumeOptions = [
   {
-    id: "seo-aeo-geo-director",
+    id: "search-direction",
     label: "Search Direction",
     description: "Enterprise search leadership + AI-search strategy.",
-    href: publicPath("/files/Mitchell-Miller-SEO-AEO-GEO-Director-Resume-2026.pdf"),
-    download: "Mitchell-Miller-SEO-AEO-GEO-Director-Resume-2026.pdf",
+    href: publicPath("/files/Mitchell-Miller-Search-Systems-Background-2026.pdf"),
+    download: "Mitchell-Miller-Search-Systems-Background-2026.pdf",
   },
   {
-    id: "ai-search-optimization-engineer",
+    id: "ai-search-engineering",
     label: "AI Search Engineering",
     description: "Hands-on AEO/GEO optimization + AI tooling.",
-    href: publicPath("/files/Mitchell-Miller-AI-Search-AEO-GEO-Optimization-Engineer-Resume-2026.pdf"),
-    download: "Mitchell-Miller-AI-Search-AEO-GEO-Optimization-Engineer-Resume-2026.pdf",
+    href: publicPath("/files/Mitchell-Miller-AI-Search-Systems-Background-2026.pdf"),
+    download: "Mitchell-Miller-AI-Search-Systems-Background-2026.pdf",
   },
   {
-    id: "technical-ai-product-manager",
+    id: "product-management",
     label: "Product Management",
     description: "Roadmap, requirements, shipped AI products.",
-    href: publicPath("/files/Mitchell-Miller-Technical-AI-Product-Manager-Resume-2026.pdf"),
-    download: "Mitchell-Miller-Technical-AI-Product-Manager-Resume-2026.pdf",
+    href: publicPath("/files/Mitchell-Miller-Product-Systems-Background-2026.pdf"),
+    download: "Mitchell-Miller-Product-Systems-Background-2026.pdf",
   },
   {
-    id: "growth-systems-lead",
+    id: "organic-systems-architecture",
     label: "Organic Systems Architecture",
     description: "Full-funnel organic growth + growth systems.",
-    href: publicPath("/files/Mitchell-Miller-Growth-Systems-Organic-Growth-Lead-Resume-2026.pdf"),
-    download: "Mitchell-Miller-Growth-Systems-Organic-Growth-Lead-Resume-2026.pdf",
+    href: publicPath("/files/Mitchell-Miller-Organic-Systems-Background-2026.pdf"),
+    download: "Mitchell-Miller-Organic-Systems-Background-2026.pdf",
   },
 ] as const;
 

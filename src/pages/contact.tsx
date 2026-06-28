@@ -15,7 +15,7 @@ export default function Contact() {
           Contact
         </h1>
         <p className="text-lg text-muted-foreground mb-12">
-          United States &middot; Remote-first.
+          United States.
         </p>
 
         <div className="space-y-4 mb-12">

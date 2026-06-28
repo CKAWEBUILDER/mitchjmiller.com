@@ -1,6 +1,8 @@
 import { Link, useLocation } from "wouter";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { ResumeDownloadDialog } from "./resume-download-dialog";
+import { headshot } from "@/lib/images";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,7 +20,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
     <div className="min-h-screen flex flex-col bg-background font-sans">
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
-          <Link href="/" className="font-bold text-lg text-primary tracking-tight" data-testid="link-home">
+          <Link href="/" className="flex items-center gap-2.5 font-bold text-lg text-primary tracking-tight" data-testid="link-home">
+            <img
+              src={headshot}
+              alt=""
+              aria-hidden="true"
+              className="h-8 w-8 rounded-full border border-border object-cover object-top"
+            />
             Mitchell Miller
           </Link>
           
@@ -32,17 +40,20 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 {link.label}
               </Link>
             ))}
-            <Link 
-              href="/resume" 
-              className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2"
-            >
-              Download Resume
-            </Link>
+            <ResumeDownloadDialog>
+              <button
+                type="button"
+                className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2"
+              >
+                Download Resume
+              </button>
+            </ResumeDownloadDialog>
           </nav>
 
           <button 
             className="md:hidden p-2 text-primary"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -61,13 +72,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   {link.label}
                 </Link>
               ))}
-              <Link 
-                href="/resume" 
-                className="text-sm font-medium text-secondary"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Download Resume
-              </Link>
+              <ResumeDownloadDialog>
+                <button
+                  type="button"
+                  className="text-sm font-medium text-secondary"
+                >
+                  Download Resume
+                </button>
+              </ResumeDownloadDialog>
             </nav>
           </div>
         )}

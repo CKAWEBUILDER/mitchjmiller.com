@@ -13,7 +13,7 @@ export default function Resume() {
       <div className="container mx-auto px-4 md:px-8 max-w-5xl py-32">
         <h1 className="text-4xl md:text-5xl font-bold mb-6">Resume</h1>
         <p className="text-xl text-muted-foreground mb-12 max-w-2xl">
-          What are you interested in Mitchell for? Choose the closest match and download the role-specific PDF.
+          Point Mitchell toward the conversation you want to have. Pick the closest signal and pull the most relevant background.
         </p>
 
         <div className="grid gap-4 md:grid-cols-2">

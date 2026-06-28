@@ -22,10 +22,10 @@ export function ResumeDownloadDialog({ children }: ResumeDownloadDialogProps) {
       <DialogContent className="max-h-[calc(100vh-2rem)] w-[calc(100vw-2rem)] max-w-2xl overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-2xl text-primary">
-            What are you interested in Mitchell for?
+            Point Mitchell toward the conversation you want to have.
           </DialogTitle>
           <DialogDescription>
-            Choose the closest fit and download the matching resume.
+            Pick the closest signal and pull the most relevant background.
           </DialogDescription>
         </DialogHeader>
 

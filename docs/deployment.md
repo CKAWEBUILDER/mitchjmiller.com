@@ -9,6 +9,22 @@ This portfolio is a static Vite/React site. It does not need Replit compute to r
 - Build output directory: `dist/public`
 - Node version: Cloudflare default is fine unless the build UI asks; use Node 22 if prompted.
 
+## GitHub Pages Custom Domain
+
+When publishing to `mitchjmiller.com`, build with root paths:
+
+```bash
+npm run build
+```
+
+`public/CNAME` is copied into `dist/public/CNAME` and declares the custom domain for GitHub Pages.
+
+Only use `npm run build:github` for the fallback project URL:
+
+```txt
+https://ckawebuilder.github.io/mitchjmiller.com/
+```
+
 ## Domain
 
 Current domain owner/DNS manager appears to be Namecheap.

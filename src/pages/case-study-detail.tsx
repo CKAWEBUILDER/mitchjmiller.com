@@ -109,7 +109,7 @@ export default function CaseStudyDetail() {
             )}
             {image?.status === "placeholder" && (
               <span className="absolute bottom-3 left-3 bg-background/90 border border-border px-3 py-1 rounded text-xs font-semibold text-muted-foreground shadow">
-                Proof asset pending
+                Source image pending
               </span>
             )}
           </div>

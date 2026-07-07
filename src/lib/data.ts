@@ -11,7 +11,7 @@ export const caseStudies = [
     system: "Demand research, international SEO (hreflang), JS rendering/indexation remediation, evergreen content strategy, stakeholder readouts to 60+ audiences",
     partners: "Engineering, design, marketing, regional teams",
     tools: "GSC, Screaming Frog, internal tooling",
-    proof: "Engineering roadmap prioritization secured; seasonal search strategy presented to 60+ stakeholder audiences; AEO signals integrated into long-term strategy",
+    proof: "Secured engineering roadmap prioritization, presented seasonal search strategy to 60+ stakeholder audiences, and added AI search considerations to the long-term roadmap.",
     showsHiringManagers: "Ability to operate at massive enterprise scale, influence engineering without reporting authority, and present to large executive stakeholder groups.",
     placeholder: "Placeholder: Apple seasonal commerce screenshot — Apple Holiday Gift Guide"
   },
@@ -25,7 +25,7 @@ export const caseStudies = [
     system: "Coordinated merchandising updates, locale architecture mapping, and evergreen URLs.",
     partners: "Merchandising, Engineering",
     tools: "Internal CMS, GSC",
-    proof: "Successful deployment of seasonal visibility updates across AMR.",
+    proof: "Coordinated seasonal SEO updates across Americas store surfaces, including locale checks, rendering QA, and launch support.",
     showsHiringManagers: "Experience managing complex locale architectures for global ecommerce.",
     placeholder: "Placeholder: apple.com/store seasonal AMR merchandising screenshot"
   },
@@ -39,7 +39,7 @@ export const caseStudies = [
     system: "Pre-launch audits, rendering checks, and demand forecasting.",
     partners: "Education Marketing, Engineering",
     tools: "GSC, Screaming Frog",
-    proof: "Maximized visibility during critical Q3 back-to-school window.",
+    proof: "Supported back-to-school launch readiness with demand forecasting, pre-launch audits, and rendering/indexation checks.",
     showsHiringManagers: "Ability to handle high-stakes, time-sensitive enterprise campaigns.",
     placeholder: "Placeholder: Apple Education Store back-to-school screenshot"
   },
@@ -53,7 +53,7 @@ export const caseStudies = [
     system: "Budget/measurement ownership, keyword strategy, campaign taxonomy restructuring, cross-functional content/UX/clinical strategy work",
     partners: "Content, UX, Clinical Strategy",
     tools: "GA4, Google Ads, Bing Ads, GSC, Semrush",
-    proof: "Clinical service line paid + organic search coverage; restructured for emerging AI search patterns",
+    proof: "Restructured paid and organic search coverage for clinical service lines as patient search behavior shifted toward AI-assisted discovery.",
     showsHiringManagers: "Experience navigating HIPAA-compliant environments and balancing paid/organic strategy.",
     placeholder: "Placeholder: Stanford Health Care MyHealth mobile app screenshot"
   },
@@ -81,7 +81,7 @@ export const caseStudies = [
     system: "20+ enterprise migrations with technical requirements, stakeholder coordination, post-launch audits; analytics product ownership through org restructure; organic sessions from 2.65M to 4.9M+ across tenure",
     partners: "IT, Marketing, Regional Executives",
     tools: "Adobe Analytics, GA4, Screaming Frog",
-    proof: "Organic sessions scaled from 2.65M to 4.9M+ during massive organizational flux.",
+    proof: "Organic sessions increased from 2.65M to 4.9M+ while 20+ site migrations and post-merger analytics changes were underway.",
     showsHiringManagers: "Resilience and strategic vision during chaotic enterprise mergers.",
     placeholder: "Placeholder: CommonSpirit Health post-merger network consolidation screenshot"
   },
@@ -95,21 +95,21 @@ export const caseStudies = [
     system: "Proposed the initiative in PI planning to 70+ stakeholders; crawled competitor medical libraries against a 10,000-term condition/treatment universe; sorted opportunities by monthly search volume, competition, service-line alignment, and publication effort; converted the resulting glossary/library strategy into modular AEM content fragments with reusable metadata, summaries, FAQ/schema fields, and local-market variations.",
     partners: "Content strategy, medical reviewers, engineering, product, regional market leaders",
     tools: "Screaming Frog, Semrush, CMS, AEM content fragments, schema markup, keyword and competitor crawls",
-    proof: "Earned 80%+ stakeholder buy-in; library later generated 1M+ organic visits/year and helped reduce AEM adoption resistance across 34 healthcare markets.",
+    proof: "Earned 80%+ stakeholder buy-in; the library later generated 1M+ organic visits/year and gave 34 healthcare markets a concrete reason to adopt AEM content fragments.",
     showsHiringManagers: "Ability to turn data science-style opportunity sizing into a scalable content product, then use that product as change-management leverage for enterprise platform migration.",
     placeholder: "Placeholder: CommonSpirit Health medical content library screenshot"
   },
   {
     slug: "aem-content-fragmentation-architecture",
     title: "AEM Content Fragmentation Architecture",
-    thesis: "Used the Conditions & Treatments library as proof for modular AEM adoption",
+    thesis: "Turned the Conditions & Treatments library into a modular AEM adoption case",
     role: "PM, SEO & Web Analytics",
     context: "Adobe Experience Manager migration strategy",
     problem: "Top-down migration mandate faced regional resistance across 60+ unique websites; markets needed a practical reason to move, not another abstract platform directive.",
     system: "Turned the Conditions & Treatments glossary into a modular AEM content-fragment model: reusable titles, descriptions, summaries, FAQ/schema fields, taxonomy, and regional variations. The demo showed how markets could localize service-line content while preserving SEO governance and reducing duplicated CMS work.",
     partners: "Adobe Architects, Regional Leaders",
     tools: "AEM, Data mapping",
-    proof: "Accelerated AEM adoption, improved consistency of SEO execution, and gave regional teams a plug-and-play content asset instead of a migration mandate.",
+    proof: "Gave regional teams a reusable content model with titles, summaries, FAQ/schema fields, taxonomy, and local-market variations instead of a generic migration mandate.",
     showsHiringManagers: "Technical fluency with AEM and ability to translate engineering capabilities into executive and market-level business value.",
     placeholder: "Placeholder: Adobe Experience Manager content fragmentation architecture screenshot"
   },
@@ -123,7 +123,7 @@ export const caseStudies = [
     system: "NAP cleanup, duplicate suppression, entity management, syndication to Google, Apple Maps, Siri, Alexa, Bing, Yelp",
     partners: "Yext, Local Operations",
     tools: "Yext",
-    proof: "Standardized entity data across hundreds of digital touchpoints.",
+    proof: "Cleaned duplicate listings, standardized NAP data, and syndicated location entities across Google, Apple Maps, Siri, Alexa, Bing, and Yelp.",
     showsHiringManagers: "Mastery of local SEO and entity data management at scale.",
     placeholder: "Placeholder: Yext network-wide entity data cleanup screenshot"
   },
@@ -137,7 +137,7 @@ export const caseStudies = [
     system: "Built internal AI product with modules: header (generated time, client, source freshness, QA state), KPI cards with raw values and deltas, executive narrative with evidence tags, trend chart, risk/action queue table, source health, export lock / low-confidence review state",
     partners: "Internal Agency Teams",
     tools: "Python, LLM APIs, GA4/GSC APIs",
-    proof: "Automated hours of manual reporting into a clean, executive-ready dashboard.",
+    proof: "Converted GA4, GSC, ads, and SEO data into KPI cards, source-backed narratives, risk queues, and export-ready weekly briefs.",
     showsHiringManagers: "Ability to prototype AI tools that solve real operational bottlenecks.",
     placeholder: "Placeholder: ClarityPulse internal dashboard mockup",
     image: publicPath("/images/claritypulse-dashboard.png"),
@@ -153,7 +153,7 @@ export const caseStudies = [
     system: "AI system for briefs, entity gap detection, topic clusters, schema generation, FAQs, source/citation targets, editorial QA",
     partners: "Content Teams",
     tools: "Python, Search APIs, LLMs",
-    proof: "Drastically reduced brief creation time while increasing entity coverage.",
+    proof: "Automated entity gaps, topic clusters, schema prompts, FAQs, source targets, and editorial QA for SEO content briefs.",
     showsHiringManagers: "Deep understanding of how AI can scale high-quality SEO content operations.",
     placeholder: "Placeholder: SearchForge content intelligence screen",
     image: publicPath("/images/searchforge-dashboard.png")
@@ -168,7 +168,7 @@ export const caseStudies = [
     system: "Transcript → summary → decisions → owners → deadlines → follow-up tasks and task updates",
     partners: "Project Management",
     tools: "Whisper, LLMs, Task Management APIs",
-    proof: "Eliminated meeting-to-execution latency.",
+    proof: "Converted transcripts into owner-tagged follow-ups, decisions, deadlines, and task updates.",
     showsHiringManagers: "Focus on operational velocity and practical AI workflow automation.",
     placeholder: "Placeholder: ActionThread transcript-to-execution screen",
     image: publicPath("/images/actionthread-dashboard.png")
@@ -183,7 +183,7 @@ export const caseStudies = [
     system: "Prompt-set monitoring, citation velocity, AI share-of-voice, competitor gap analysis, source coverage tracking, prioritized fix queue across ChatGPT, Perplexity, Google AI Overviews",
     partners: "SEO Strategists",
     tools: "Profound, Custom Scripts",
-    proof: "Established baseline metrics for a previously unmeasurable channel.",
+    proof: "Built prompt-set tracking for AI citation share, competitor visibility, source inclusion, and prioritized fix queues.",
     showsHiringManagers: "Forward-thinking approach to the next generation of search visibility.",
     placeholder: "Placeholder: AEO Visibility Infrastructure dashboard"
   },
@@ -197,7 +197,7 @@ export const caseStudies = [
     system: "Scoring models, targeted data sources, and feedback-loop refinement",
     partners: "None",
     tools: "Python, Data APIs, LLMs",
-    proof: "Functional prototype for domain evaluation.",
+    proof: "Built a working domain-evaluation prototype using scoring models, targeted data sources, and feedback-loop refinement.",
     showsHiringManagers: "Technical curiosity and capability to build full data products.",
     placeholder: "Placeholder: DomainSignal dashboard",
     image: publicPath("/images/domainsignal.png")
@@ -212,7 +212,7 @@ export const caseStudies = [
     system: "Shared planning, relationship-first discovery, date recommendations.",
     partners: "None",
     tools: "React Native, Firebase",
-    proof: "Built functional app prototype to explore market gap.",
+    proof: "Built a working couples-app prototype for shared planning, discovery, and date recommendations.",
     showsHiringManagers: "Product sense, UX thinking, and ability to build beyond SEO.",
     placeholder: "Placeholder: Date Night mobile app screens",
     image: publicPath("/images/datenight.png")
@@ -348,7 +348,7 @@ export const vibeProjects = [
     name: "AEO Visibility Infrastructure",
     category: "Research & AI",
     description: "Prompt-set monitoring and AI share-of-voice measurement across ChatGPT, Perplexity, and Google AI Overviews.",
-    goal: "Measure unmeasurable AI search visibility.",
+    goal: "Track AI search visibility across prompt sets and citation sources.",
     placeholder: "Placeholder: AEO dashboard",
     image: publicPath("/images/aeo-measurement-dashboard.png")
   },

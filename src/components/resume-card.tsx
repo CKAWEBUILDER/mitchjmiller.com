@@ -106,7 +106,7 @@ export function ResumeCard({ resume, variant = "page" }: ResumeCardProps) {
         {!compact && (
           <span className="mt-4 block">
             <span className="block text-xs font-bold uppercase tracking-wider text-muted-foreground">
-              Useful conversation
+              Best fit
             </span>
             <span className="mt-1 block text-sm leading-relaxed text-primary/80">
               {resume.talkTrack}

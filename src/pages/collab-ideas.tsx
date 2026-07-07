@@ -68,8 +68,8 @@ export default function CollabIdeas() {
             Useful ways to work together.
           </h1>
           <p className="text-lg leading-relaxed text-muted-foreground">
-            The best conversations usually start with a concrete system, measurement gap, or growth decision.
-            These are the collaboration shapes where I can add value quickly.
+            The fastest starting points are search audits, AEO/GEO measurement, entity systems, migration planning,
+            and lightweight AI workflow prototypes.
           </p>
         </div>
 
@@ -101,8 +101,7 @@ export default function CollabIdeas() {
           <div>
             <h2 className="mb-4 text-2xl font-bold text-primary">Strong reasons to reach out.</h2>
             <p className="text-sm leading-relaxed text-muted-foreground">
-              A vague coffee chat is fine, but a specific operational question is better. These signals usually mean
-              there is enough substance for a useful collaboration conversation.
+              A vague coffee chat is fine, but a specific operational question is better. These are good reasons to reach out.
             </p>
           </div>
           <div className="space-y-3">

@@ -22,10 +22,10 @@ export function ResumeDownloadDialog({ children }: ResumeDownloadDialogProps) {
       <DialogContent className="max-h-[calc(100vh-2rem)] w-[calc(100vw-2rem)] max-w-2xl overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-2xl text-primary">
-            Choose the conversation you want to have.
+            Download the resume that fits the role.
           </DialogTitle>
           <DialogDescription>
-            Download the background that matches the role, project, or collaboration you are evaluating.
+            Each version emphasizes different evidence: enterprise SEO, AEO/GEO, AI product systems, or organic growth.
           </DialogDescription>
           <p className="text-xs leading-relaxed text-muted-foreground">
             Selections may be reviewed in aggregate to understand which paths are getting interest.

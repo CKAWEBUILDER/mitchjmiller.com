@@ -86,7 +86,8 @@ export default function AeoGeo() {
               Traditional SEO metrics are structurally blind to this outcome. An enterprise search program optimizing solely for blue-link rankings may be invisible in the channels that now serve the first touchpoint for a significant and growing share of high-intent queries.
             </p>
             <p className="text-base text-muted-foreground leading-relaxed" style={{ lineHeight: 1.7 }}>
-              This methodology operationalizes AEO/GEO measurement — making it reproducible, trackable, and actionable — using tooling and frameworks developed across enterprise client delivery at Clarity Digital.
+              This framework tracks prompt sets, citations, AI share-of-voice, competitor visibility, source inclusion,
+              and fix queues across ChatGPT, Perplexity, Google AI Overviews, and Bing Copilot.
             </p>
           </div>
         </section>

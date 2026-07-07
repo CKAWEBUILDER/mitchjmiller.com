@@ -51,7 +51,7 @@ export default function CaseStudiesIndex() {
                   )}
                   {portfolioImages[study.slug]?.status === "placeholder" && (
                     <span className="absolute bottom-3 left-3 rounded bg-background/90 px-2 py-1 text-[11px] font-semibold text-muted-foreground shadow-sm">
-                      Proof asset pending
+                      Source image pending
                     </span>
                   )}
                 </div>
@@ -66,11 +66,11 @@ export default function CaseStudiesIndex() {
 
         <div className="mt-20 border-t border-border pt-12">
           <div className="mb-8 max-w-3xl">
-            <p className="text-xs font-bold uppercase tracking-wider text-secondary mb-3">Supporting evidence</p>
-            <h2 className="text-2xl font-bold text-primary mb-3">Selected builds.</h2>
+            <p className="text-xs font-bold uppercase tracking-wider text-secondary mb-3">Personal builds</p>
+            <h2 className="text-2xl font-bold text-primary mb-3">Product Prototypes and Growth Systems</h2>
             <p className="text-muted-foreground leading-relaxed">
-              Side projects and growth systems that show product range, prototyping ability, and technical curiosity.
-              These support the core portfolio; they are not positioned as enterprise client work.
+              Personal prototypes and small-business systems showing hands-on product thinking, AI workflow design,
+              and execution speed.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-6">

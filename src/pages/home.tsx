@@ -67,7 +67,7 @@ export default function Home() {
 
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-6 max-w-xl" style={{ lineHeight: 1.65 }}>
                 Decade of enterprise organic at Apple, Stanford Health Care, and a 1,000+ location healthcare network.
-                Operationalizing AEO/GEO measurement before most teams have the metrics.
+                Building practical AEO/GEO measurement workflows for AI search visibility, citations, and content gaps.
               </p>
 
               <div className="flex flex-wrap gap-3 mb-8">
@@ -137,21 +137,21 @@ export default function Home() {
                 track: "Track 1",
                 title: "Enterprise SEO & Technical Search",
                 body: "Multi-location architecture, entity systems, JS rendering, migrations, Core Web Vitals, Knowledge Graph.",
-                proof: "Anchor proof: Apple, CommonSpirit, Stanford.",
+                proof: "Relevant work: Apple, CommonSpirit Health, Stanford Health Care.",
                 link: "/work",
               },
               {
                 track: "Track 2",
                 title: "AEO / GEO & AI Search Measurement",
-                body: "Profound-based citation tracking, AI share-of-voice across ChatGPT, Perplexity, Google AI Overviews. Closed-loop measurement on a category most haven't operationalized.",
-                proof: "Anchor proof: Clarity Digital enterprise portfolio.",
+                body: "Profound-based citation tracking, AI share-of-voice across ChatGPT, Perplexity, and Google AI Overviews. Closed-loop reporting turns visibility gaps into content and entity fixes.",
+                proof: "Relevant work: Clarity Digital enterprise portfolio.",
                 link: "/aeo-geo",
               },
               {
                 track: "Track 3",
                 title: "Applied AI Systems & Selected Builds",
                 body: "LLM workflows, agent orchestration, internal product builds. ClarityPulse, SearchForge, and ActionThread shipped end-to-end.",
-                proof: "Anchor proof: 3 internal AI products replacing Looker Studio, Surfer SEO, Fireflies.",
+                proof: "Relevant work: 3 internal AI tools replacing manual reporting, content briefs, and meeting follow-up.",
                 link: "/selected-builds",
               },
             ].map(item => (
@@ -190,7 +190,7 @@ export default function Home() {
       <section className="py-20 bg-muted/20 border-t border-border">
         <div className="container mx-auto px-4 md:px-8 max-w-6xl">
           <div className="flex items-center justify-between mb-10">
-            <h2 className="text-2xl font-bold text-primary">Selected work.</h2>
+            <h2 className="text-2xl font-bold text-primary">Enterprise Search Case Studies</h2>
             <Link href="/work" className="text-sm text-secondary font-medium hover:underline flex items-center">
               View all <ArrowRight className="ml-1 w-4 h-4" />
             </Link>
@@ -215,7 +215,7 @@ export default function Home() {
                       )}
                       {image?.status === "placeholder" && (
                         <span className="absolute bottom-3 left-3 rounded bg-background/90 px-2 py-1 text-[11px] font-semibold text-muted-foreground shadow-sm">
-                          Proof asset pending
+                          Source image pending
                         </span>
                       )}
                     </div>
@@ -238,9 +238,10 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-12 items-start">
             <div>
               <p className="text-xs uppercase tracking-wider font-semibold text-secondary mb-3">The differentiator</p>
-              <h2 className="text-2xl font-bold text-primary mb-4">AEO / GEO Lab — measurement most teams haven't operationalized.</h2>
+              <h2 className="text-2xl font-bold text-primary mb-4">AEO / GEO Lab — practical measurement for AI search visibility</h2>
               <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-                While most SEO programs are still learning what AEO stands for, this infrastructure has been running in production: tracking citation velocity, monitoring AI share-of-voice, and feeding those findings back into entity and content strategy.
+                The workflow tracks prompt clusters, citation velocity, AI share-of-voice, and source gaps, then feeds
+                the findings back into entity cleanup, schema work, and content prioritization.
               </p>
               <ul className="space-y-2 text-sm text-muted-foreground mb-6">
                 {[

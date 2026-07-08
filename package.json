@@ -7,6 +7,8 @@
     "dev": "vite --config vite.config.ts --host 0.0.0.0",
     "build": "vite build --config vite.config.ts && node scripts/create-route-copies.mjs",
     "build:github": "BASE_PATH=/mitchjmiller.com/ vite build --config vite.config.ts && node scripts/create-route-copies.mjs",
+    "cloudflare:login": "npm_config_cache=.npm-cache npx -y wrangler login --browser=false",
+    "deploy:cloudflare": "npm run build && npm_config_cache=.npm-cache npx -y wrangler pages deploy dist/public --project-name=mitchjmiller-com",
     "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },

@@ -2,12 +2,47 @@
 
 This portfolio is a static Vite/React site. It does not need Replit compute to run after build.
 
-## Free Cloudflare Pages Setup
+## Current Live Setup: GitHub Pages
+
+DNS for `mitchjmiller.com` currently points at GitHub Pages, but GitHub has not
+issued a valid HTTPS certificate yet. Use Cloudflare Pages as the free production
+target when Cloudflare auth is available.
+
+- Build command: `npm run build`
+- Build output directory: `dist/public`
+- Custom domain source: `public/CNAME`
+
+GitHub Pages custom-domain HTTPS may need to be reissued/enforced in the repo
+settings after DNS and the Pages build are healthy.
+
+## Target Free Setup: Cloudflare Pages
 
 - Project source: GitHub repo `CKAWEBUILDER/mitchjmiller.com`
 - Build command: `npm run build`
 - Build output directory: `dist/public`
 - Node version: Cloudflare default is fine unless the build UI asks; use Node 22 if prompted.
+
+CLI deploy after Cloudflare auth:
+
+```bash
+npm run cloudflare:login
+npm run deploy:cloudflare
+```
+
+Cloudflare project name:
+
+```txt
+mitchjmiller-com
+```
+
+The first successful deploy will produce a `*.pages.dev` URL with working HTTPS.
+After the preview is verified, add `mitchjmiller.com` and `www.mitchjmiller.com`
+as custom domains in Cloudflare Pages.
+
+For root-domain HTTPS on `mitchjmiller.com`, move DNS from Namecheap nameservers
+to the two Cloudflare nameservers assigned when the domain is added to Cloudflare.
+Do not point the apex domain back to Replit or leave it parked on GitHub Pages if
+Cloudflare becomes the production host.
 
 ## GitHub Pages Custom Domain
 
@@ -35,7 +70,7 @@ After Cloudflare Pages verifies the preview:
 
 1. Add custom domain `mitchjmiller.com` in Cloudflare Pages.
 2. Add `www.mitchjmiller.com` if desired.
-3. Update Namecheap DNS only to the records Cloudflare provides.
+3. Update Namecheap nameservers to the two Cloudflare nameservers for this zone.
 4. Verify:
    - `/`
    - `/about`
@@ -44,7 +79,7 @@ After Cloudflare Pages verifies the preview:
    - `/case-studies/commonspirit-locations-conversion-engine`
    - resume PDF downloads
    - image assets
-   - `noindex` remains until final launch.
+   - `noindex` remains until final launch, unless Mitch explicitly approves indexing.
 
 ## Static Routing
 

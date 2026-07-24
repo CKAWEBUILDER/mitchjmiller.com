@@ -14,6 +14,7 @@ import Work from "@/pages/work";
 import VibeCoding from "@/pages/vibe-coding";
 import BlogIndex from "@/pages/blog-index";
 import BlogPost from "@/pages/blog-post";
+import StudyNote from "@/pages/study-note";
 import CaseStudyDetail from "@/pages/case-study-detail";
 import CaseStudiesIndex from "@/pages/case-studies-index";
 import AeoGeo from "@/pages/aeo-geo";
@@ -32,6 +33,7 @@ function Router() {
       <Route path="/work" component={Work} />
       <Route path="/selected-builds" component={VibeCoding} />
       <Route path="/blog" component={BlogIndex} />
+      <Route path="/blog/studying/:slug" component={StudyNote} />
       <Route path="/blog/:slug" component={BlogPost} />
       <Route path="/case-studies" component={CaseStudiesIndex} />
       <Route path="/case-studies/:slug" component={CaseStudyDetail} />

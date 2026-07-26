@@ -16,6 +16,9 @@ const LIB = "/Users/mitchellmiler/Desktop/claude-code/youtube-library";
 const NOTES = [
   { slug: "build-ai-agents-full-course", dir: "agentic-engineering/build-ai-agents-to-automate-your-entire-business-full-course", topic: "Agentic Engineering", date: "2026-07-24" },
   { slug: "codex-voice-jarvis", dir: "agentic-engineering/openai-just-released-codex-voice-its-basically-jarvis", topic: "Agentic Engineering", date: "2026-07-24" },
+  { slug: "pi-coding-agent", dir: "agentic-engineering/the-pi-coding-agent", topic: "Agentic Engineering", date: "2026-07-25" },
+  { slug: "ships-100x-faster", dir: "agentic-engineering/why-this-dev-ships-100x-faster", topic: "Agentic Engineering", date: "2026-07-25" },
+  { slug: "forget-loop-engineering", dir: "agentic-engineering/forget-loop-engineering", topic: "Agentic Engineering", date: "2026-07-25" },
   { slug: "mark-cuban-ai-bubble", dir: "other/mark-cuban-on-the-ai-bubble-who-actually-gets-wiped-out", topic: "AI & Markets", date: "2026-07-24" },
   { slug: "hormozi-build-this-instead", dir: "other/alex-hormozis-warning-stop-chasing-ai-build-this-instead", topic: "Business & AI", date: "2026-07-24" },
   { slug: "old-seo-collapsing", dir: "other/the-old-seo-system-is-collapsing", topic: "AI Search / GEO", date: "2026-07-25" },

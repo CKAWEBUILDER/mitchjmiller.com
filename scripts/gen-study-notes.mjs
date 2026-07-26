@@ -14,6 +14,7 @@ const LIB = "/Users/mitchellmiler/Desktop/claude-code/youtube-library";
 
 // slug on the site  ->  { dir, topic }   (only publish-ready syntheses)
 const NOTES = [
+  { slug: "claude-code-make-money", dir: "agentic-engineering/i-asked-claude-code-to-make-me-as-much-money-as-possible", topic: "Agentic Engineering", date: "2026-07-25" },
   { slug: "build-ai-agents-full-course", dir: "agentic-engineering/build-ai-agents-to-automate-your-entire-business-full-course", topic: "Agentic Engineering", date: "2026-07-24" },
   { slug: "codex-voice-jarvis", dir: "agentic-engineering/openai-just-released-codex-voice-its-basically-jarvis", topic: "Agentic Engineering", date: "2026-07-24" },
   { slug: "pi-coding-agent", dir: "agentic-engineering/the-pi-coding-agent", topic: "Agentic Engineering", date: "2026-07-25" },

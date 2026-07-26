@@ -18,6 +18,9 @@ const NOTES = [
   { slug: "codex-voice-jarvis", dir: "agentic-engineering/openai-just-released-codex-voice-its-basically-jarvis", topic: "Agentic Engineering", date: "2026-07-24" },
   { slug: "mark-cuban-ai-bubble", dir: "other/mark-cuban-on-the-ai-bubble-who-actually-gets-wiped-out", topic: "AI & Markets", date: "2026-07-24" },
   { slug: "hormozi-build-this-instead", dir: "other/alex-hormozis-warning-stop-chasing-ai-build-this-instead", topic: "Business & AI", date: "2026-07-24" },
+  { slug: "old-seo-collapsing", dir: "other/the-old-seo-system-is-collapsing", topic: "AI Search / GEO", date: "2026-07-25" },
+  { slug: "seo-2026-ai-era", dir: "other/seo-in-2026-ai-era", topic: "AI Search / GEO", date: "2026-07-25" },
+  { slug: "aeo-geo-aio", dir: "other/aeo-vs-geo-vs-aio", topic: "AI Search / GEO", date: "2026-07-25" },
 ];
 
 marked.setOptions({ gfm: true });

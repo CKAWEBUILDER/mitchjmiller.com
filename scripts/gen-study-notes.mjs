@@ -25,6 +25,7 @@ const NOTES = [
   { slug: "old-seo-collapsing", dir: "other/the-old-seo-system-is-collapsing", topic: "AI Search / GEO", date: "2026-07-25" },
   { slug: "seo-2026-ai-era", dir: "other/seo-in-2026-ai-era", topic: "AI Search / GEO", date: "2026-07-25" },
   { slug: "aeo-geo-aio", dir: "other/aeo-vs-geo-vs-aio", topic: "AI Search / GEO", date: "2026-07-25" },
+  { slug: "smith-chart-scariest-ee", dir: "other/the-scariest-chart-in-electrical-engineering", topic: "Science / Systems", date: "2026-07-25" },
 ];
 
 marked.setOptions({ gfm: true });

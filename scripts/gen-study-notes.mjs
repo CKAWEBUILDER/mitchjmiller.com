@@ -14,6 +14,7 @@ const LIB = "/Users/mitchellmiler/Desktop/claude-code/youtube-library";
 
 // slug on the site  ->  { dir, topic }   (only publish-ready syntheses)
 const NOTES = [
+  { slug: "book-to-skill", dir: "agentic-engineering/i-accidentally-turned-a-book-into-an-ai-agent", topic: "Agentic Engineering", date: "2026-07-25" },
   { slug: "claude-code-6-new-rules", dir: "agentic-engineering/claude-code-just-changed-forever-6-new-rules-by-anthropic-engineers", topic: "Agentic Engineering", date: "2026-07-25" },
   { slug: "claude-code-make-money", dir: "agentic-engineering/i-asked-claude-code-to-make-me-as-much-money-as-possible", topic: "Agentic Engineering", date: "2026-07-25" },
   { slug: "build-ai-agents-full-course", dir: "agentic-engineering/build-ai-agents-to-automate-your-entire-business-full-course", topic: "Agentic Engineering", date: "2026-07-24" },
@@ -27,6 +28,7 @@ const NOTES = [
   { slug: "seo-2026-ai-era", dir: "other/seo-in-2026-ai-era", topic: "AI Search / GEO", date: "2026-07-25" },
   { slug: "aeo-geo-aio", dir: "other/aeo-vs-geo-vs-aio", topic: "AI Search / GEO", date: "2026-07-25" },
   { slug: "smith-chart-scariest-ee", dir: "other/the-scariest-chart-in-electrical-engineering", topic: "Science / Systems", date: "2026-07-25" },
+  { slug: "aeo-80-percent", dir: "other/learn-80-of-aeo-in-19-minutes", topic: "AI Search / GEO", date: "2026-07-25" },
 ];
 
 marked.setOptions({ gfm: true });

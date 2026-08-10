@@ -65,14 +65,19 @@ export default function StudyNote() {
               {note.why}
             </p>
           )}
-          <a
-            href={note.youtubeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-secondary transition-colors"
-          >
-            <Youtube className="h-4 w-4" /> Watch the original by {note.creator} on YouTube
-          </a>
+          {note.youtubeUrl && (
+            <a
+              href={note.youtubeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-secondary transition-colors"
+            >
+              <Youtube className="h-4 w-4" />{" "}
+              {note.isVideo
+                ? `Watch the original by ${note.creator} on YouTube`
+                : `Read the source${note.creator ? ` — ${note.creator}` : ""}`}
+            </a>
+          )}
         </header>
 
         <div
@@ -82,9 +87,13 @@ export default function StudyNote() {
 
         <footer className="mt-16 pt-8 border-t border-border text-sm text-muted-foreground">
           A study note synthesizing{" "}
-          <a href={note.youtubeUrl} target="_blank" rel="noopener noreferrer" className="text-secondary hover:underline">
-            {note.creator}&rsquo;s video
-          </a>
+          {note.youtubeUrl ? (
+            <a href={note.youtubeUrl} target="_blank" rel="noopener noreferrer" className="text-secondary hover:underline">
+              {note.creator ? `${note.creator}’s ` : ""}{note.isVideo ? "video" : "source"}
+            </a>
+          ) : (
+            "the source"
+          )}
           . All credit for the original ideas goes to the creator; the summary, structure, and
           diagrams here are my own.
         </footer>

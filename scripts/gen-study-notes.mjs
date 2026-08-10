@@ -14,6 +14,9 @@ const LIB = "/Users/mitchellmiler/Desktop/claude-code/youtube-library";
 
 // slug on the site  ->  { dir, topic }   (only publish-ready syntheses)
 const NOTES = [
+  { slug: "hermes-seo-agent", dir: "agentic-engineering/hermes-agent-just-automated-seo-completely", topic: "AI Search / GEO", date: "2026-08-09" },
+  { slug: "codex-obsolete-9-moves", dir: "agentic-engineering/codex-just-made-claude-obsolete", topic: "Agentic Engineering", date: "2026-08-09" },
+  { slug: "chatgpt-sites", dir: "agentic-engineering/chatgpt-sites-build-host-apps-from-codex", topic: "Agentic Engineering", date: "2026-08-09" },
   { slug: "book-to-skill", dir: "agentic-engineering/i-accidentally-turned-a-book-into-an-ai-agent", topic: "Agentic Engineering", date: "2026-07-25" },
   { slug: "claude-code-6-new-rules", dir: "agentic-engineering/claude-code-just-changed-forever-6-new-rules-by-anthropic-engineers", topic: "Agentic Engineering", date: "2026-07-25" },
   { slug: "claude-code-make-money", dir: "agentic-engineering/i-asked-claude-code-to-make-me-as-much-money-as-possible", topic: "Agentic Engineering", date: "2026-07-25" },
@@ -37,10 +40,13 @@ function extract(md, slug) {
   const titleM = md.match(/^#\s+(.+)$/m);
   const title = titleM ? titleM[1].trim() : slug;
   const bylineM = md.match(/\*Original video by \*\*(.+?)\*\*.*?\((https?:\/\/[^)]+)\)/s);
-  const creator = bylineM ? bylineM[1].trim() : "";
-  const youtubeUrl = bylineM ? bylineM[2].trim() : "";
+  // fallback: article-style byline "*Source: **Name** ... [label](url)"
+  const srcM = md.match(/\*Source:\s*\*\*(.+?)\*\*[\s\S]*?\((https?:\/\/[^)]+)\)/);
+  const creator = bylineM ? bylineM[1].trim() : srcM ? srcM[1].trim() : "";
+  const youtubeUrl = bylineM ? bylineM[2].trim() : srcM ? srcM[2].trim() : "";
+  const isVideo = !!bylineM;
   const whyM = md.match(/>\s*\*\*Why I'm studying this:\*\*\s*([\s\S]*?)(?:\*\(|\n\n|\n>?\s*---)/);
-  const why = whyM ? whyM[1].replace(/\s+/g, " ").trim() : "";
+  const why = whyM ? whyM[1].replace(/\*\*/g, "").replace(/\s+/g, " ").trim() : "";
   // body = TL;DR onward
   const idx = md.indexOf("## TL;DR");
   let body = idx >= 0 ? md.slice(idx) : md;
@@ -61,7 +67,7 @@ function extract(md, slug) {
   });
   // rewrite image src frames/x.jpg -> /images/study/<slug>/x.jpg
   html = html.replace(/src="frames\/([^"]+)"/g, `src="/images/study/${slug}/$1"`);
-  return { title, creator, youtubeUrl, why, excerpt, contentHtml: html };
+  return { title, creator, youtubeUrl, isVideo, why, excerpt, contentHtml: html };
 }
 
 const out = [];
@@ -88,6 +94,7 @@ export interface StudyNote {
   title: string;
   creator: string;
   youtubeUrl: string;
+  isVideo: boolean;
   topic: string;
   date: string;
   why: string;

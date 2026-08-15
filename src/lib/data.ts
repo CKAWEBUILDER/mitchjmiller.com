@@ -230,6 +230,22 @@ export const caseStudies = [
     proof: "Signups increased from 2-3/mo to 25-50/mo.",
     showsHiringManagers: "Ability to drive full-funnel growth and document systems for handoff.",
     placeholder: "Placeholder: Vet Advocates campaign results"
+  },
+  {
+    slug: "sfc-surf-school",
+    external: true,
+    href: "/case-studies/sfc-surf-school/",
+    title: "SFC Surf School Search Visibility",
+    thesis: "Competitive analysis and search growth plan for a Waikiki surf school",
+    role: "Growth / SEO Lead",
+    context: "Local service business competing in a saturated Waikiki tourism market",
+    problem: "A newly rebuilt site was indexed and relevant but ranking on page four to five, with the market leader holding roughly forty times more ranking keywords.",
+    system: "Derived the true competitor set from organic visibility data rather than reputation, crawled 973 competitor pages to map content patterns and coverage gaps, ran desktop and mobile keyword-gap studies, and built a prioritised page plan around measured demand.",
+    partners: "Owner and operations lead",
+    tools: "Google Search Console, Semrush, first-party crawler",
+    proof: "Identified 38 completed pages that had never been published, found the highest-volume opportunity nobody in the market had a page for, and surfaced that mobile visitors converted five times better than desktop.",
+    showsHiringManagers: "Ability to replace assumption with measurement, build original tooling when off-the-shelf data falls short, and turn analysis into a concrete publishing plan.",
+    placeholder: "SFC Surf School search visibility report"
   }
 ];
 

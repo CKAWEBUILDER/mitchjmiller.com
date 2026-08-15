@@ -74,8 +74,8 @@ export default function CaseStudiesIndex() {
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
-            {selectedBuilds.map((study) => (
-              <Link key={study.slug} href={`/case-studies/${study.slug}`}>
+            {selectedBuilds.map((study) => {
+              const card = (
                 <div className="group cursor-pointer bg-card border border-border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all h-full flex flex-col">
                   <div className="aspect-video bg-white flex items-center justify-center text-center border-b border-border relative overflow-hidden">
                     {portfolioImages[study.slug] ? (
@@ -94,8 +94,25 @@ export default function CaseStudiesIndex() {
                     <p className="text-muted-foreground text-sm leading-relaxed break-words mt-auto">{study.thesis}</p>
                   </div>
                 </div>
-              </Link>
-            ))}
+              );
+
+              // Studies published as their own standalone page need a real
+              // navigation so the static file is served, not the SPA route.
+              const standalone = study as { external?: boolean; href?: string };
+              if (standalone.external && standalone.href) {
+                return (
+                  <a key={study.slug} href={standalone.href}>
+                    {card}
+                  </a>
+                );
+              }
+
+              return (
+                <Link key={study.slug} href={`/case-studies/${study.slug}`}>
+                  {card}
+                </Link>
+              );
+            })}
           </div>
         </div>
       </div>

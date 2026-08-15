@@ -14,6 +14,7 @@ const LIB = "/Users/mitchellmiler/Desktop/claude-code/youtube-library";
 
 // slug on the site  ->  { dir, topic }   (only publish-ready syntheses)
 const NOTES = [
+  { slug: "all-in-ai-money-stack", dir: "other/all-in-anthropic-2t-ipo-zuck-manifesto-nvidia-grok", topic: "AI & Markets", date: "2026-08-14" },
   { slug: "hermes-seo-agent", dir: "agentic-engineering/hermes-agent-just-automated-seo-completely", topic: "AI Search / GEO", date: "2026-08-09" },
   { slug: "codex-obsolete-9-moves", dir: "agentic-engineering/codex-just-made-claude-obsolete", topic: "Agentic Engineering", date: "2026-08-09" },
   { slug: "chatgpt-sites", dir: "agentic-engineering/chatgpt-sites-build-host-apps-from-codex", topic: "Agentic Engineering", date: "2026-08-09" },

@@ -6,6 +6,7 @@ import { Link, useRoute } from "wouter";
 export default function BlogPost() {
   const [, params] = useRoute("/blog/:slug");
   const post = blogPosts.find(p => p.slug === params?.slug);
+  const contentHtml = (post as { contentHtml?: string } | undefined)?.contentHtml;
 
   if (!post) {
     return (
@@ -47,11 +48,16 @@ export default function BlogPost() {
               ← Back to all posts
             </Link>
           </div>
+        ) : contentHtml ? (
+          <div
+            className="prose prose-lg prose-slate dark:prose-invert max-w-none"
+            dangerouslySetInnerHTML={{ __html: contentHtml }}
+          />
         ) : (
-          <div 
+          <div
             className="prose prose-lg prose-slate max-w-none text-muted-foreground"
-            dangerouslySetInnerHTML={{ 
-              __html: post.content?.replace(/\n\n/g, '</p><p>').replace(/### (.*?)\n/g, '<h3 class="text-2xl font-bold text-primary mt-12 mb-4">$1</h3>').replace(/\*\*([^*]+)\*\*/g, '<strong class="text-primary">$1</strong>') || '' 
+            dangerouslySetInnerHTML={{
+              __html: post.content?.replace(/\n\n/g, '</p><p>').replace(/### (.*?)\n/g, '<h3 class="text-2xl font-bold text-primary mt-12 mb-4">$1</h3>').replace(/\*\*([^*]+)\*\*/g, '<strong class="text-primary">$1</strong>') || ''
             }}
           />
         )}

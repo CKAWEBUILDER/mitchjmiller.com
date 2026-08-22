@@ -55,10 +55,11 @@ That's the part people get right. Here's the part that bites.
 <text x="536" y="300" fill="#94a3b8" font-size="12"><tspan x="536" dy="0">HERMES.md / OpenClaw in your</tspan><tspan x="536" dy="17">git history &#8594; flagged as a 3rd-</tspan><tspan x="536" dy="17">party harness &#8594; API rates.</tspan></text>
 <text x="536" y="372" fill="#f87171" font-size="11.5" font-weight="800"><tspan x="536" dy="0">One case: ~$200 surprise bill</tspan><tspan x="536" dy="15">from a commit message.</tspan></text>
 </g>
-<rect x="30" y="424" width="720" height="60" rx="10" fill="rgba(16,185,129,0.12)" stroke="#10b981" stroke-width="1.5"/>
-<text x="50" y="450" fill="#10b981" font-size="14" font-weight="800">&#10003; The durable fix</text>
-<text x="50" y="472" fill="#f1f5f9" font-size="13">Run Claude Code in an <tspan font-weight="700">interactive tmux session</tspan> the orchestrator monitors &#8212; interactive terminal use stays on the subscription. Avoid <tspan font-weight="700">-p</tspan>. Grep git history for harness strings.</text>
-<text x="30" y="516" fill="#94a3b8" font-size="10.5">Sources: Anthropic support (Agent SDK + plan); TechTimes; koromo; Tygart Media; r/hermesagent. &#8220;Flat-fee&#8221; = a function of auth path + payload, not plan tier.</text>
+<rect x="30" y="424" width="720" height="74" rx="10" fill="rgba(16,185,129,0.12)" stroke="#10b981" stroke-width="1.5"/>
+<text x="50" y="448" fill="#10b981" font-size="14" font-weight="800">&#10003; The durable fix</text>
+<text x="50" y="470" fill="#f1f5f9" font-size="13">Run Claude Code in an <tspan font-weight="700">interactive tmux session</tspan> &#8212; it stays on your subscription.</text>
+<text x="50" y="489" fill="#f1f5f9" font-size="13">Avoid headless <tspan font-weight="700">-p</tspan>; grep your git history for harness strings (HERMES.md / OpenClaw).</text>
+<text x="30" y="524" fill="#94a3b8" font-size="10.5">Sources: Anthropic support; TechTimes; koromo; Tygart Media; r/hermesagent.</text>
 </svg><figcaption style="font-size:0.82rem;color:#64748b;margin-top:8px;text-align:center;font-style:italic;">The two-subscription agent stack and the three ways subscription work silently becomes metered API billing.</figcaption></figure>
 
 ## Trap 1 — Programmatic usage got unbundled (and it's live now)

@@ -9,10 +9,11 @@ Produce one genuinely valuable post that can pull inbound (AEO/GEO / AI-search /
 
 ## Steps
 1. **Ideate against `../trends-log.md`** — pick an angle with real demand + a unique take.
-2. **Keyword research (Semrush MCP).** Pull the primary KW's volume + difficulty and 2–3
-   secondaries / questions people actually search. Prefer winnable (mid-volume, lower-difficulty)
-   terms that match Mitchell's expertise. Record them in the draft front-matter.
-   - Tools: `mcp__...__keyword_research`, `keyword_*`, `domain_overview` (load via ToolSearch).
+2. **Keyword research (Semrush — via BROWSER).** The Semrush MCP has **no API units** (and
+   never has), so pull volume/difficulty by driving semrush.com in Mitchell's logged-in browser
+   (Claude-in-Chrome) — Keyword Overview / Keyword Magic Tool. Record primary + 2–3 secondaries
+   in the draft front-matter. If the browser is unavailable, demand-sense with WebSearch and
+   label the numbers as estimates.
 3. **Deep research** — WebSearch + WebFetch primary sources; capture real numbers with citations.
    Never fabricate a stat. If sources disagree, say so.
 4. **Find the unique insight** — original analysis, first-party experience (Clarity Digital AEO,

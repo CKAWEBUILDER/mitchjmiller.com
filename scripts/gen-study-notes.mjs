@@ -14,6 +14,7 @@ const LIB = "/Users/mitchellmiler/Desktop/claude-code/youtube-library";
 
 // slug on the site  ->  { dir, topic }   (only publish-ready syntheses)
 const NOTES = [
+  { slug: "hermes-concepts-field-guide", dir: "agentic-engineering/every-hermes-agent-concept-explained-for-normal-people", topic: "Agentic Engineering", date: "2026-08-31" },
   { slug: "claude-watermark-seo", dir: "other/claudes-watermarks-just-broke-seo", topic: "AI Search / GEO", date: "2026-08-18" },
   { slug: "all-in-ai-money-stack", dir: "other/all-in-anthropic-2t-ipo-zuck-manifesto-nvidia-grok", topic: "AI & Markets", date: "2026-08-14" },
   { slug: "hermes-seo-agent", dir: "agentic-engineering/hermes-agent-just-automated-seo-completely", topic: "AI Search / GEO", date: "2026-08-09" },

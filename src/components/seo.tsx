@@ -1,62 +1,18 @@
 import { useEffect } from "react";
-
-interface SEOProps {
-  title: string;
-  description: string;
-  canonical?: string;
-  ogImage?: string;
-}
-
+import { useLocation } from "wouter";
+interface SEOProps { title: string; description: string; canonical?: string; ogImage?: string; }
 export function SEO({ title, description, canonical, ogImage }: SEOProps) {
+  const [location] = useLocation();
   useEffect(() => {
-    document.title = `${title} | Mitchell Miller`;
-    
-    // Update meta description
-    let metaDescription = document.querySelector('meta[name="description"]');
-    if (!metaDescription) {
-      metaDescription = document.createElement('meta');
-      metaDescription.setAttribute('name', 'description');
-      document.head.appendChild(metaDescription);
-    }
-    metaDescription.setAttribute('content', description);
-
-    let robots = document.querySelector('meta[name="robots"]');
-    if (!robots) {
-      robots = document.createElement('meta');
-      robots.setAttribute('name', 'robots');
-      document.head.appendChild(robots);
-    }
-    robots.setAttribute('content', 'noindex, nofollow, noarchive');
-
-    // Update canonical
-    if (canonical) {
-      let canonicalLink = document.querySelector('link[rel="canonical"]');
-      if (!canonicalLink) {
-        canonicalLink = document.createElement('link');
-        canonicalLink.setAttribute('rel', 'canonical');
-        document.head.appendChild(canonicalLink);
-      }
-      canonicalLink.setAttribute('href', canonical);
-    }
-
-    // Open Graph
-    let ogTitle = document.querySelector('meta[property="og:title"]');
-    if (!ogTitle) {
-      ogTitle = document.createElement('meta');
-      ogTitle.setAttribute('property', 'og:title');
-      document.head.appendChild(ogTitle);
-    }
-    ogTitle.setAttribute('content', title);
-
-    let ogDesc = document.querySelector('meta[property="og:description"]');
-    if (!ogDesc) {
-      ogDesc = document.createElement('meta');
-      ogDesc.setAttribute('property', 'og:description');
-      document.head.appendChild(ogDesc);
-    }
-    ogDesc.setAttribute('content', description);
-
-  }, [title, description, canonical, ogImage]);
-
+    const finalTitle = title.includes('Mitchell Miller') ? title : `${title} | Mitchell Miller`;
+    const url = canonical || `https://mitchjmiller.com${location === '/' ? '/' : location.replace(/\/$/,'') + '/'}`;
+    const image = ogImage || 'https://mitchjmiller.com/images/portfolio-social.png';
+    document.title = finalTitle;
+    function meta(key:string,content:string,attribute='name') { let el = document.head.querySelector(`meta[${attribute}="${key}"]`); if (!el) {el = document.createElement('meta');el.setAttribute(attribute,key);document.head.appendChild(el);} el.setAttribute('content',content); }
+    meta('description',description); meta('robots',import.meta.env.VITE_SITE_INDEXABLE === 'true' ? 'index, follow, max-image-preview:large' : 'noindex, nofollow, noarchive');
+    meta('og:title',finalTitle,'property'); meta('og:description',description,'property'); meta('og:url',url,'property');meta('og:image',image,'property');
+    meta('twitter:title',finalTitle);meta('twitter:description',description);meta('twitter:image',image);
+    let link = document.head.querySelector('link[rel="canonical"]');if(!link){link=document.createElement('link');link.setAttribute('rel','canonical');document.head.appendChild(link);}link.setAttribute('href',url);
+  },[title,description,canonical,ogImage,location]);
   return null;
 }

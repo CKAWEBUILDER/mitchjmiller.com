@@ -27,9 +27,7 @@ export function ResumeDownloadDialog({ children }: ResumeDownloadDialogProps) {
           <DialogDescription>
             Each version emphasizes different evidence: enterprise SEO, AEO/GEO, AI product systems, or organic growth.
           </DialogDescription>
-          <p className="text-xs leading-relaxed text-muted-foreground">
-            Selections may be reviewed in aggregate to understand which paths are getting interest.
-          </p>
+
         </DialogHeader>
 
         <div className="grid gap-3 sm:grid-cols-2">

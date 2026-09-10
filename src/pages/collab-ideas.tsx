@@ -55,17 +55,17 @@ export default function CollabIdeas() {
   return (
     <Layout>
       <SEO
-        title="Collab Ideas | Mitchell Miller"
+        title="Work Together | Mitchell Miller"
         description="Ways to collaborate with Mitchell Miller across enterprise SEO, AEO/GEO measurement, organic systems, and practical AI workflow prototypes."
       />
 
       <div className="container mx-auto px-4 md:px-8 max-w-6xl py-24">
         <div className="mb-14 max-w-3xl">
           <p className="mb-3 text-xs font-bold uppercase tracking-wider text-secondary">
-            Collaboration paths
+            WAYS TO WORK TOGETHER
           </p>
           <h1 className="mb-5 text-4xl font-bold text-primary md:text-5xl">
-            Useful ways to work together.
+            Good problems deserve a practical partner.
           </h1>
           <p className="text-lg leading-relaxed text-muted-foreground">
             The fastest starting points are search audits, AEO/GEO measurement, entity systems, migration planning,
@@ -101,7 +101,7 @@ export default function CollabIdeas() {
           <div>
             <h2 className="mb-4 text-2xl font-bold text-primary">Strong reasons to reach out.</h2>
             <p className="text-sm leading-relaxed text-muted-foreground">
-              A vague coffee chat is fine, but a specific operational question is better. These are good reasons to reach out.
+              A useful starting point is the decision you need to make or the bottleneck you want to remove.
             </p>
           </div>
           <div className="space-y-3">
@@ -115,7 +115,7 @@ export default function CollabIdeas() {
         </section>
 
         <section className="mt-14 rounded-lg border border-border bg-primary p-7 text-primary-foreground">
-          <h2 className="mb-2 text-xl font-bold">Bring the problem, not a perfect brief.</h2>
+          <h2 className="mb-2 text-xl font-bold text-primary-foreground">Tell me what you want to change.</h2>
           <p className="mb-6 max-w-2xl text-sm leading-relaxed text-primary-foreground/80">
             A useful first message can be simple: what you are trying to change, what is blocked, what has already been tried,
             and what decision needs to happen next.

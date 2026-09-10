@@ -2,29 +2,31 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mitchell Miller Portfolio</title>
-    <meta name="description" content="Mitchell Miller portfolio preview for enterprise SEO, AEO/GEO, AI search systems, and technical growth work." />
+    <meta name="description" content="Enterprise search leadership, practical AI, and growth systems. Explore Mitchell Miller’s work and interactive tools." />
     <meta name="robots" content="noindex, nofollow, noarchive" />
-    <meta property="og:title" content="Mitchell Miller Portfolio Preview" />
-    <meta property="og:description" content="Portfolio preview for enterprise SEO, AEO/GEO, AI search systems, and technical growth work." />
+    <meta property="og:title" content="Mitchell Miller — Search, Systems & Growth" />
+    <meta property="og:description" content="Enterprise search leadership, practical AI, and growth systems." />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Mitchell Miller Portfolio" />
-    <meta name="twitter:description" content="Mitchell Miller Portfolio — built on Replit. Update this description to reflect the app." />
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HCKYWCZQ8E"></script>
+    <meta name="twitter:description" content="Search strategy, useful content, and practical AI. Explore the work of Mitchell Miller." />
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-HCKYWCZQ8E');
+      if (['mitchjmiller.com','www.mitchjmiller.com'].includes(location.hostname)) {
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function(){dataLayer.push(arguments);};
+        gtag('js',new Date()); gtag('config','G-HCKYWCZQ8E');
+        var analyticsScript=document.createElement('script'); analyticsScript.async=true;
+        analyticsScript.src='https://www.googletagmanager.com/gtag/js?id=G-HCKYWCZQ8E';document.head.appendChild(analyticsScript);
+      }
     </script>
     <link rel="icon" type="image/png" sizes="32x32" href="%BASE_URL%favicon.png" />
     <link rel="icon" href="%BASE_URL%favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" sizes="180x180" href="%BASE_URL%apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   </head>
   <body>
     <div id="root"></div>

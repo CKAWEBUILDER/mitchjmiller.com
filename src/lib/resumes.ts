@@ -1,10 +1,11 @@
 import { publicPath } from "./paths";
 
+// Refreshed September 10, 2026. Each PDF is two pages; stable paths preserve inbound links.
 export const resumeOptions = [
   {
     id: "search-direction",
-    label: "Search Direction",
-    description: "Enterprise search leadership + AI-search strategy.",
+    label: "Search Leadership",
+    description: "Enterprise SEO, AI-search strategy, and revenue-linked execution.",
     href: publicPath("/files/Mitchell-Miller-Search-Systems-Background-2026.pdf"),
     download: "Mitchell-Miller-Search-Systems-Background-2026.pdf",
     signals: ["Search strategy", "Enterprise scale", "AI visibility"],
@@ -14,7 +15,7 @@ export const resumeOptions = [
   {
     id: "ai-search-engineering",
     label: "AI Search Engineering",
-    description: "Hands-on AEO/GEO optimization + AI tooling.",
+    description: "AEO/GEO measurement, reporting workflows, and hands-on builds.",
     href: publicPath("/files/Mitchell-Miller-AI-Search-Systems-Background-2026.pdf"),
     download: "Mitchell-Miller-AI-Search-Systems-Background-2026.pdf",
     signals: ["AEO/GEO", "LLM tooling", "Measurement"],
@@ -23,8 +24,8 @@ export const resumeOptions = [
   },
   {
     id: "product-management",
-    label: "Product Management",
-    description: "Roadmap, requirements, shipped AI products.",
+    label: "Growth & Product Systems",
+    description: "Roadmaps, implementation, analytics, and practical growth operations.",
     href: publicPath("/files/Mitchell-Miller-Product-Systems-Background-2026.pdf"),
     download: "Mitchell-Miller-Product-Systems-Background-2026.pdf",
     signals: ["Roadmaps", "Requirements", "Execution"],
@@ -34,7 +35,7 @@ export const resumeOptions = [
   {
     id: "organic-systems-architecture",
     label: "Organic Systems Architecture",
-    description: "Programmatic SEO + organic growth systems.",
+    description: "Entity architecture, local discovery, and organic growth at scale.",
     href: publicPath("/files/Mitchell-Miller-Organic-Systems-Background-2026.pdf"),
     download: "Mitchell-Miller-Organic-Systems-Background-2026.pdf",
     signals: ["Programmatic SEO", "Entity systems", "Growth loops"],

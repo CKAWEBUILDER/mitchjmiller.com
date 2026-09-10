@@ -6,3 +6,5 @@ asset-working/
 .replit-artifact/
 .DS_Store
 *.log
+__pycache__/
+*.pyc

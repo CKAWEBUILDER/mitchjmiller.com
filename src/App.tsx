@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -12,12 +13,14 @@ import Resume from "@/pages/resume";
 import Systems from "@/pages/systems";
 import Work from "@/pages/work";
 import VibeCoding from "@/pages/vibe-coding";
-import BlogIndex from "@/pages/blog-index";
-import BlogPost from "@/pages/blog-post";
-import StudyNote from "@/pages/study-note";
+const BlogIndex = lazy(() => import("@/pages/blog-index"));
+const BlogPost = lazy(() => import("@/pages/blog-post"));
+const StudyNote = lazy(() => import("@/pages/study-note"));
 import CaseStudyDetail from "@/pages/case-study-detail";
 import CaseStudiesIndex from "@/pages/case-studies-index";
-import AeoGeo from "@/pages/aeo-geo";
+const AeoGeo = lazy(() => import("@/pages/aeo-geo"));
+
+const Lab = lazy(() => import("@/pages/lab"));
 
 const queryClient = new QueryClient();
 
@@ -29,6 +32,7 @@ function Router() {
       <Route path="/contact" component={Contact} />
       <Route path="/collab-ideas" component={CollabIdeas} />
       <Route path="/resume" component={Resume} />
+      <Route path="/lab" component={Lab} />
       <Route path="/systems" component={Systems} />
       <Route path="/work" component={Work} />
       <Route path="/selected-builds" component={VibeCoding} />
@@ -48,7 +52,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-          <Router />
+          <Suspense fallback={<div className="site-wrap py-24" role="status">Loading…</div>}><Router /></Suspense>
         </WouterRouter>
         <Toaster />
       </TooltipProvider>

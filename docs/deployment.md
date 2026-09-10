@@ -1,151 +1,32 @@
 # Deployment
 
-This portfolio is a static Vite/React site. It does not need Replit compute to run after build.
+## Verified September 10, 2026
 
-## ⚠️ CURRENT STATE — read first (updated 2026-07-24 by Claude Code)
+GitHub repository: `CKAWEBUILDER/mitchjmiller.com`.
+Production: https://mitchjmiller.com/ on GitHub Pages, with HTTPS enforced.
+GitHub Pages API returned `build_type: legacy`, source branch `gh-pages`, path `/`, status `built`.
 
-**Live host = GitHub Pages, deploy-from-branch `gh-pages`. HTTPS on `mitchjmiller.com` works.**
+Source changes belong in GitHub before deployment. A feature-branch push does not deploy this site. Publishing requires an approved release and a deliberate push of built files to `gh-pages`. Do not change Pages mode, DNS or hosts as part of the redesign.
 
-What was broken and what I changed:
-- GitHub Pages had been set to **"GitHub Actions" build mode** (`build_type: workflow`) but the repo had **no workflow file** — so nothing had deployed since **2026-07-07**. Manual pushes to `gh-pages` did nothing.
-- I switched Pages back to **legacy "deploy from branch" mode** (`gh-pages` / `/`) via the API. Pushing to `gh-pages` now triggers GitHub's built-in `pages-build-deployment` and publishes.
+## Build modes
 
-**How to deploy right now (MANUAL — one driver at a time):**
-```bash
-npm run build                       # outputs dist/public (base "/", includes CNAME)
-git worktree add /tmp/ghp gh-pages
-rsync -a --delete --exclude='.git' dist/public/ /tmp/ghp/
-cd /tmp/ghp && git add -A && git commit -m "Deploy" && git push origin gh-pages
-git worktree remove /tmp/ghp
-```
+- `npm run build`: review build, noindex/nofollow and disallowing robots.txt.
+- `npm run build:production`: approved production build, index/follow metadata and sitemap declaration in robots.txt.
+- Output: `dist/public`. The build copies `public/CNAME` and creates `.nojekyll`, a 404 shell, 54 route copies with unique metadata, and `sitemap.xml`.
+- Existing GA4 measurement ID is retained. The analytics script loads only on the production hostname or www hostname, so local review does not pollute reports.
 
-**To restore push-to-deploy (recommended, needs Codex/Mitch — token scope):**
-The proper fix is a GitHub Actions workflow, but the `gh` CLI token in the CKAWEBUILDER
-keyring **lacks `workflow` scope**, so Claude Code could not push `.github/workflows/`.
-With a token that has `workflow` scope, add `.github/workflows/deploy.yml` below **and**
-switch Pages back to Actions mode (`gh api --method PUT repos/CKAWEBUILDER/mitchjmiller.com/pages -f build_type=workflow`):
+## Publish an approved version
 
-```yaml
-name: Deploy to GitHub Pages
-on:
-  push: { branches: [main] }
-  workflow_dispatch:
-permissions: { contents: read, pages: write, id-token: write }
-concurrency: { group: pages, cancel-in-progress: true }
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: 22, cache: npm }
-      - run: npm ci
-      - run: npm run build
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with: { path: dist/public }
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment: { name: github-pages, url: '${{ steps.deployment.outputs.page_url }}' }
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
-```
+1. Ensure the reviewed source commit is pushed to GitHub and record it in the release notes. Use one deploy driver.
+2. Run `npm run typecheck` and `npm run build:production` from that commit.
+3. Check `dist/public/robots.txt`, sitemap, CNAME, key page metadata, PDFs and image assets. Never copy the temporary `_responsive-review.html` QA harness to production.
+4. Fetch `origin/gh-pages` and create a separate clean deploy worktree from it. Confirm that worktree path before replacing its contents. Copy only `dist/public/` into that worktree while preserving `.git`.
+5. Review the complete deploy diff, commit it and push only `gh-pages`. Record the previous deploy commit for rollback.
+6. Verify the Pages deployment, HTTPS, direct loading of homepage, SFC case study, lab, a writing/study route and resume PDFs. Confirm production allows indexing. Then inspect sitemap submission separately; generating a sitemap does not submit it to Search Console.
+7. Remove the deploy worktree and stop temporary QA servers once no longer needed.
 
-**New feature added (2026-07-24):** a "Studying" filter on `/blog` (All/Writing/Studying) +
-study-note pages at `/blog/studying/:slug`. Content is generated from a private library via
-`scripts/gen-study-notes.mjs` into `src/lib/study-notes.ts`; images live in
-`public/images/study/<slug>/`. Uses the `mermaid` dep (code-split, loaded only on study pages).
+## Historical context
 
----
+The July 24 recovery switched Pages from an Actions configuration without a workflow to its working branch-based deployment. Older Cloudflare migration notes were superseded by the verified GitHub Pages setup. Existing Cloudflare CLI scripts are legacy utilities, not the current deployment path; do not invoke them for this release. The fallback `build:github` command is also unrelated to the custom-domain release.
 
-
-## Current Live Setup: GitHub Pages
-
-DNS for `mitchjmiller.com` currently points at GitHub Pages, but GitHub has not
-issued a valid HTTPS certificate yet. Use Cloudflare Pages as the free production
-target when Cloudflare auth is available.
-
-- Build command: `npm run build`
-- Build output directory: `dist/public`
-- Custom domain source: `public/CNAME`
-
-GitHub Pages custom-domain HTTPS may need to be reissued/enforced in the repo
-settings after DNS and the Pages build are healthy.
-
-## Target Free Setup: Cloudflare Pages
-
-- Project source: GitHub repo `CKAWEBUILDER/mitchjmiller.com`
-- Build command: `npm run build`
-- Build output directory: `dist/public`
-- Node version: Cloudflare default is fine unless the build UI asks; use Node 22 if prompted.
-
-CLI deploy after Cloudflare auth:
-
-```bash
-npm run cloudflare:login
-npm run deploy:cloudflare
-```
-
-Cloudflare project name:
-
-```txt
-mitchjmiller-com
-```
-
-The first successful deploy will produce a `*.pages.dev` URL with working HTTPS.
-After the preview is verified, add `mitchjmiller.com` and `www.mitchjmiller.com`
-as custom domains in Cloudflare Pages.
-
-For root-domain HTTPS on `mitchjmiller.com`, move DNS from Namecheap nameservers
-to the two Cloudflare nameservers assigned when the domain is added to Cloudflare.
-Do not point the apex domain back to Replit or leave it parked on GitHub Pages if
-Cloudflare becomes the production host.
-
-## GitHub Pages Custom Domain
-
-When publishing to `mitchjmiller.com`, build with root paths:
-
-```bash
-npm run build
-```
-
-`public/CNAME` is copied into `dist/public/CNAME` and declares the custom domain for GitHub Pages.
-
-Only use `npm run build:github` for the fallback project URL:
-
-```txt
-https://ckawebuilder.github.io/mitchjmiller.com/
-```
-
-## Domain
-
-Current domain owner/DNS manager appears to be Namecheap.
-
-Do not change DNS until a Cloudflare Pages preview URL has been verified.
-
-After Cloudflare Pages verifies the preview:
-
-1. Add custom domain `mitchjmiller.com` in Cloudflare Pages.
-2. Add `www.mitchjmiller.com` if desired.
-3. Update Namecheap nameservers to the two Cloudflare nameservers for this zone.
-4. Verify:
-   - `/`
-   - `/about`
-   - `/resume`
-   - `/collab-ideas`
-   - `/case-studies/commonspirit-locations-conversion-engine`
-   - resume PDF downloads
-   - image assets
-   - `noindex` remains until final launch, unless Mitch explicitly approves indexing.
-
-## Static Routing
-
-`public/_redirects` provides Cloudflare Pages SPA fallback:
-
-```txt
-/* /index.html 200
-```
-
-`scripts/create-route-copies.mjs` also creates physical route copies during build for hosts that do not honor SPA fallback rules.
+The September 10 redesign is a review build on `codex/portfolio-overhaul-20260910`. Production remains unchanged pending approval of this finished version.

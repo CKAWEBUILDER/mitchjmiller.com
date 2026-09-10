@@ -1,0 +1,78 @@
+{
+  "date": "2026-09-10",
+  "status": "pass",
+  "outputs": [
+    {
+      "file": "public/files/Mitchell-Miller-Search-Systems-Background-2026.pdf",
+      "bytes": 421917,
+      "sha256": "8f48d7d786880c3a2c6f745174bf21a06af114da1cb14c146ecb342972ad8587",
+      "pages": 2,
+      "page_size": [
+        612,
+        792
+      ],
+      "image_counts": [
+        1,
+        0
+      ],
+      "all_text_within_page": true,
+      "first_experience": "SFC Surf School",
+      "impact_geometry_and_black_text": "pass",
+      "visual_qa": "both pages inspected with view_image; compared to approved source; no clipping or text overlap"
+    },
+    {
+      "file": "public/files/Mitchell-Miller-AI-Search-Systems-Background-2026.pdf",
+      "bytes": 421854,
+      "sha256": "f5f4564846729c20dc3105d6ab44e0a1443ed6fc8df33a5d8b9aa3433b018914",
+      "pages": 2,
+      "page_size": [
+        612,
+        792
+      ],
+      "image_counts": [
+        1,
+        0
+      ],
+      "all_text_within_page": true,
+      "first_experience": "SFC Surf School",
+      "impact_geometry_and_black_text": "pass",
+      "visual_qa": "both pages inspected with view_image; compared to approved source; no clipping or text overlap"
+    },
+    {
+      "file": "public/files/Mitchell-Miller-Product-Systems-Background-2026.pdf",
+      "bytes": 421918,
+      "sha256": "4f08e5861180b2111442bda249c3062c832e725fe3c766b756cc14c86d9a857d",
+      "pages": 2,
+      "page_size": [
+        612,
+        792
+      ],
+      "image_counts": [
+        1,
+        0
+      ],
+      "all_text_within_page": true,
+      "first_experience": "SFC Surf School",
+      "impact_geometry_and_black_text": "pass",
+      "visual_qa": "both pages inspected with view_image; compared to approved source; no clipping or text overlap"
+    },
+    {
+      "file": "public/files/Mitchell-Miller-Organic-Systems-Background-2026.pdf",
+      "bytes": 421926,
+      "sha256": "82837461bd20e3b2380c441996aec6ad92eb97e86402f628e4bc26b9d65a7291",
+      "pages": 2,
+      "page_size": [
+        612,
+        792
+      ],
+      "image_counts": [
+        1,
+        0
+      ],
+      "all_text_within_page": true,
+      "first_experience": "SFC Surf School",
+      "impact_geometry_and_black_text": "pass",
+      "visual_qa": "both pages inspected with view_image; compared to approved source; no clipping or text overlap"
+    }
+  ]
+}

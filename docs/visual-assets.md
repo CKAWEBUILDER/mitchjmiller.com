@@ -11,7 +11,16 @@ This site should not use random image-search results, unlicensed stock photograp
 - Do not publish private account data, client analytics, applicant data, donor data, veteran data, patient data, or screenshots from authenticated tools without redaction and approval.
 - Keep `noindex` until final content, legal, and source QA are complete.
 
-## Current Public Assets
+## September 10, 2026 approval and additions
+
+Mitch explicitly approved promotion of everything already public on mitchjmiller.com and requested inclusion of the current SFC work. That instruction resolves earlier confirmation notes in the table below for existing assets; it does not authorize adding future client material without his approval.
+
+- `public/images/portfolio-social.svg` is an original vector brand composition created for this redesign. `portfolio-social.png` is its 1200×630 export and the active social-preview image, replacing the legacy image of unknown provenance.
+- `public/images/portfolio-proof/sfc-south-shore-explorer.png` is the production map review screenshot, including the real aerial and attribution. It shows the released interface, not the staged marker revision.
+- `public/images/portfolio-proof/sfc-search-console-insights.jpg` is the approved report capture, cropped to remove account controls and identity while retaining numbers and labels. Exact source and crop are recorded in `overhaul-2026-09-10/content-evidence.md`.
+- Homepage diagrams, responsive UI illustrations and interactive lab visuals are original CSS/SVG. Existing portrait and approved employer/public screenshots are preserved.
+
+## Existing Public Assets
 
 | Asset | Current use | Provenance / license status | Notes |
 | --- | --- | --- | --- |

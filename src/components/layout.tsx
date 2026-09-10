@@ -1,125 +1,28 @@
 import { Link, useLocation } from "wouter";
-import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { Menu, X, ArrowUpRight, ArrowUp } from "lucide-react";
+import { useEffect, useState } from "react";
 import { ResumeDownloadDialog } from "./resume-download-dialog";
-import { headshot } from "@/lib/images";
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const [location] = useLocation();
-
-  const navLinks = [
-    { href: "/work", label: "Work" },
-    { href: "/aeo-geo", label: "AEO/GEO Lab" },
-    { href: "/case-studies", label: "Case Studies" },
-    { href: "/collab-ideas", label: "Collab Ideas" },
-    { href: "/blog", label: "Blog" },
-    { href: "/contact", label: "Contact" },
-  ];
-
-  return (
-    <div className="min-h-screen flex flex-col bg-background font-sans">
-      <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2.5 font-bold text-lg text-primary tracking-tight" data-testid="link-home">
-            <img
-              src={headshot}
-              alt=""
-              aria-hidden="true"
-              className="h-8 w-8 rounded-full border border-border object-cover object-top"
-            />
-            Mitchell Miller
-          </Link>
-          
-          <nav className="hidden md:flex items-center gap-6">
-            {navLinks.map((link) => (
-              <Link 
-                key={link.href} 
-                href={link.href}
-                className={`text-sm font-medium transition-colors hover:text-secondary ${location.startsWith(link.href) ? "text-secondary" : "text-muted-foreground"}`}
-              >
-                {link.label}
-              </Link>
-            ))}
-            <ResumeDownloadDialog>
-              <button
-                type="button"
-                className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2"
-              >
-                Download Resume
-              </button>
-            </ResumeDownloadDialog>
-          </nav>
-
-          <button 
-            className="md:hidden p-2 text-primary"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-
-        {isMenuOpen && (
-          <div className="md:hidden border-b border-border/40 bg-background px-4 py-4">
-            <nav className="flex flex-col space-y-4">
-              {navLinks.map((link) => (
-                <Link 
-                  key={link.href} 
-                  href={link.href}
-                  className={`text-sm font-medium ${location.startsWith(link.href) ? "text-secondary" : "text-primary"}`}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              ))}
-              <ResumeDownloadDialog>
-                <button
-                  type="button"
-                  className="text-sm font-medium text-secondary"
-                >
-                  Download Resume
-                </button>
-              </ResumeDownloadDialog>
-            </nav>
-          </div>
-        )}
-      </header>
-
-      <main className="flex-1">
-        {children}
-      </main>
-
-      <footer className="border-t border-border bg-card py-12">
-        <div className="container mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="col-span-1 md:col-span-2">
-            <h3 className="font-bold text-lg text-primary mb-2">Mitchell Miller</h3>
-            <p className="text-muted-foreground text-sm max-w-sm">
-              SEO, AEO/GEO & AI Search Systems Leader. From data to decisions to systems.
-            </p>
-          </div>
-          <div>
-            <h4 className="font-semibold text-primary mb-4">Links</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link href="/about" className="hover:text-secondary">About</Link></li>
-              <li><Link href="/work" className="hover:text-secondary">Work</Link></li>
-              <li><Link href="/systems" className="hover:text-secondary">Systems</Link></li>
-              <li><Link href="/selected-builds" className="hover:text-secondary">Selected Builds</Link></li>
-              <li><Link href="/collab-ideas" className="hover:text-secondary">Collab Ideas</Link></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold text-primary mb-4">Connect</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>United States</li>
-              <li><a href="mailto:mitchelljmillerjr26@gmail.com" className="hover:text-secondary">Email</a></li>
-              <li><a href="https://linkedin.com/in/mitchelljmillerjr" target="_blank" rel="noopener noreferrer" className="hover:text-secondary">LinkedIn</a></li>
-              <li><Link href="/collab-ideas" className="hover:text-secondary">Collaboration paths</Link></li>
-              <li><Link href="/blog" className="hover:text-secondary">Signals & Systems Blog</Link></li>
-            </ul>
-          </div>
-        </div>
-      </footer>
-    </div>
-  );
+  useEffect(() => { setOpen(false); window.scrollTo({ top: 0, behavior: "instant" }); }, [location]);
+  const links = [{ href: "/case-studies", label: "Selected work" }, { href: "/lab", label: "Interactive lab" }, { href: "/about", label: "About" }, { href: "/blog", label: "Field notes" }];
+  return <div className="site-shell">
+    <a className="skip-link" href="#main-content">Skip to content</a>
+    <header className="site-header">
+      <div className="site-wrap header-inner">
+        <Link href="/" className="wordmark" aria-label="Mitchell Miller home"><span className="monogram">m<span>m</span><i>.</i></span><span className="wordmark-name">MITCHELL MILLER<span>SEARCH · SYSTEMS · GROWTH</span></span></Link>
+        <nav aria-label="Main navigation" className="desktop-nav">{links.map(l => <Link key={l.href} href={l.href} aria-current={location.startsWith(l.href) ? "page" : undefined}>{l.label}</Link>)}</nav>
+        <Link href="/contact" className="header-contact">Let’s talk <ArrowUpRight size={16}/></Link>
+        <button className="mobile-toggle" aria-expanded={open} aria-controls="mobile-navigation" aria-label={open ? "Close navigation" : "Open navigation"} onClick={() => setOpen(!open)}>{open ? <X/> : <Menu/>}</button>
+      </div>
+      {open && <nav id="mobile-navigation" aria-label="Mobile navigation" className="mobile-nav">{[...links,{href:"/resume",label:"Resumes"},{href:"/contact",label:"Let’s talk"}].map(l=><Link key={l.href} href={l.href} onClick={()=>setOpen(false)}>{l.label}<ArrowUpRight size={18}/></Link>)}</nav>}
+    </header>
+    <main id="main-content" tabIndex={-1}>{children}</main>
+    <footer className="site-footer"><div className="site-wrap">
+      <div className="footer-top"><div><p className="eyebrow">HAVE SOMETHING WORTH BUILDING?</p><Link className="footer-invite" href="/contact">Let’s connect the dots.<ArrowUpRight aria-hidden="true"/></Link></div><button className="back-top" onClick={()=>window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'})} aria-label="Back to top"><ArrowUp/></button></div>
+      <div className="footer-bottom"><p>© {new Date().getFullYear()} Mitchell Miller<br/><span>Strategy that gets built. Work you can explore.</span></p><nav aria-label="Footer navigation"><Link href="/resume">Resumes</Link><Link href="/collab-ideas">Work together</Link><Link href="/systems">My approach</Link><a href="https://linkedin.com/in/mitchelljmillerjr" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="mailto:mitchelljmillerjr26@gmail.com">Email ↗</a></nav><ResumeDownloadDialog><button className="footer-resume">Download a resume <ArrowUpRight size={16}/></button></ResumeDownloadDialog></div>
+    </div></footer>
+  </div>;
 }

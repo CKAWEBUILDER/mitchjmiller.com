@@ -1,3 +1,5 @@
+import { marked } from "marked";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { Layout } from "@/components/layout";
 import { SEO } from "@/components/seo";
 import { blogPosts } from "@/lib/data";
@@ -5,62 +7,41 @@ import { Link, useRoute } from "wouter";
 
 export default function BlogPost() {
   const [, params] = useRoute("/blog/:slug");
-  const post = blogPosts.find(p => p.slug === params?.slug);
-  const contentHtml = (post as { contentHtml?: string } | undefined)?.contentHtml;
+  const post = blogPosts.find((item) => item.slug === params?.slug && item.status === "published");
 
   if (!post) {
     return (
       <Layout>
-        <div className="container mx-auto px-4 py-24 text-center">
-          <h1 className="text-4xl font-bold mb-4">Post Not Found</h1>
-          <Link href="/blog" className="text-secondary hover:underline">Return to Blog</Link>
+        <SEO title="Post not found" description="Explore published writing and study notes by Mitchell Miller." />
+        <div className="site-wrap page-intro pb-24">
+          <p className="eyebrow">FIELD NOTES</p>
+          <h1>Post not found.</h1>
+          <Link href="/blog" className="text-link"><ArrowLeft size={17} /> Return to all notes</Link>
         </div>
       </Layout>
     );
   }
 
+  // Content is authored locally in the repository. Preserve rich HTML posts;
+  // parse legacy Markdown fully so paragraphs, headings and lists remain semantic.
+  const contentHtml = post.contentHtml || marked.parse(post.content || "", { async: false, gfm: true });
+
   return (
     <Layout>
-      <SEO 
-        title={`${post.title} | Signals & Systems`} 
-        description={post.teaser}
-      />
-      <article className="container mx-auto px-4 md:px-8 max-w-3xl py-24">
-        
-        <header className="mb-12">
-          <div className="mb-4">
-            <span className={`text-sm font-bold uppercase tracking-wider ${post.status === 'draft' ? 'text-muted-foreground' : 'text-secondary'}`}>
-              {post.date} {post.status === 'draft' && '— Coming Soon'}
-            </span>
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6 leading-tight">
-            {post.title}
-          </h1>
-          <p className="text-xl text-muted-foreground leading-relaxed">
-            {post.teaser}
-          </p>
+      <SEO title={`${post.title} | Signals & Systems`} description={post.teaser} />
+      <article className="site-wrap max-w-4xl! pb-16 md:pb-24">
+        <header className="page-intro border-b border-border">
+          <Link href="/blog" className="text-link mb-9"><ArrowLeft size={16} /> All field notes</Link>
+          <p className="eyebrow">WRITING / {post.date}</p>
+          <h1 className="text-[clamp(32px,4vw,54px)]!">{post.title}</h1>
+          <p className="intro-deck max-w-none!">{post.teaser}</p>
+          <p className="mt-6 text-xs text-muted-foreground">By {post.author}</p>
         </header>
-
-        {post.status === 'draft' ? (
-          <div className="p-8 border border-border rounded-xl bg-muted/30 text-center">
-            <p className="text-lg text-muted-foreground">This content is currently being written.</p>
-            <Link href="/blog" className="inline-block mt-4 text-secondary font-medium hover:underline">
-              ← Back to all posts
-            </Link>
-          </div>
-        ) : contentHtml ? (
-          <div
-            className="prose prose-lg prose-slate dark:prose-invert max-w-none"
-            dangerouslySetInnerHTML={{ __html: contentHtml }}
-          />
-        ) : (
-          <div
-            className="prose prose-lg prose-slate max-w-none text-muted-foreground"
-            dangerouslySetInnerHTML={{
-              __html: post.content?.replace(/\n\n/g, '</p><p>').replace(/### (.*?)\n/g, '<h3 class="text-2xl font-bold text-primary mt-12 mb-4">$1</h3>').replace(/\*\*([^*]+)\*\*/g, '<strong class="text-primary">$1</strong>') || ''
-            }}
-          />
-        )}
+        <div className="prose prose-lg mt-9 max-w-none text-muted-foreground prose-headings:font-medium prose-headings:text-primary prose-a:text-secondary prose-strong:text-primary prose-img:rounded-none prose-pre:overflow-x-auto" dangerouslySetInnerHTML={{ __html: contentHtml }} />
+        <footer className="mt-14 flex flex-wrap items-center justify-between gap-5 border-t border-border pt-7">
+          <Link href="/blog" className="text-link"><ArrowLeft size={17} /> More field notes</Link>
+          <Link href="/collab-ideas" className="text-link">Put an idea to work <ArrowUpRight size={17} /></Link>
+        </footer>
       </article>
     </Layout>
   );

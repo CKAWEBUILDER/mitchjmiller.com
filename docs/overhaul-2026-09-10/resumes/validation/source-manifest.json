@@ -1,0 +1,22 @@
+{
+  "canonical_renderer": {
+    "path": "/Users/mitchellmiler/Documents/Career Coach/scripts/build_exact_resume.py",
+    "sha256": "92ae25acbbb5e9122ae35e365b91cc588895fdf02efd9eae749816ee7a277300"
+  },
+  "canonical_resume_rows": {
+    "path": "/Users/mitchellmiler/Documents/Career Coach/data/resume-template/tailored_resume_rows.csv",
+    "sha256": "fef29dd30f00a70cf8ab97dc45c8a0398e07cbcce7c7336b3127e2f7d35ffa7d"
+  },
+  "approved_reference_pdf": {
+    "path": "/Users/mitchellmiler/Documents/AA - Personal Admin/AA - Employment Docments/AA - Resumes 2026/CVSEODirectorMitchellMiller2026 (1).pdf",
+    "sha256": "257db4f48252637687823f9e0dec4264eecab6ab2f32cc516155f3edfc9bd6a1"
+  },
+  "headshot": {
+    "path": "/Users/mitchellmiler/Documents/Career Coach/assets/resume-template/headshot_circle.png",
+    "sha256": "3fe5a2d50f17bb00017256704622a14d0bc80528e4a60533a1215f25f489ae72"
+  },
+  "sfc_evidence_record": {
+    "path": "/private/tmp/sfc-surf-breaks-20260910/docs/reports/kathy-2026-09-10/README.md",
+    "sha256": "cf321c031d8176eb84ba9110c91e70af89f017d038ab736d887c1dda43f31f48"
+  }
+}

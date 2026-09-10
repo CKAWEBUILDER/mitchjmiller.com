@@ -1,44 +1,20 @@
-import { copyFileSync, mkdirSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
-
-const outDir = "dist/public";
-
-const routes = [
-  "about",
-  "contact",
-  "collab-ideas",
-  "resume",
-  "systems",
-  "work",
-  "selected-builds",
-  "blog",
-  "blog/mitchell-miller-journey",
-  "blog/traditional-seo-to-ai-search",
-  "case-studies",
-  "case-studies/apple-seasonal-search",
-  "case-studies/apple-store-amr",
-  "case-studies/apple-education-store",
-  "case-studies/stanford-myhealth-seo",
-  "case-studies/commonspirit-locations-conversion-engine",
-  "case-studies/commonspirit-network-consolidation",
-  "case-studies/commonspirit-medical-content-library",
-  "case-studies/aem-content-fragmentation-architecture",
-  "case-studies/yext-entity-data-foundation",
-  "case-studies/claritypulse-ai-reporting",
-  "case-studies/searchforge-content-intelligence",
-  "case-studies/actionthread-transcript-execution",
-  "case-studies/aeo-visibility-infrastructure",
-  "case-studies/domainsignal",
-  "case-studies/date-night",
-  "case-studies/vet-advocates-growth-system",
-  "aeo-geo",
-];
-
-for (const route of routes) {
-  const routeDir = join(outDir, route);
-  mkdirSync(routeDir, { recursive: true });
-  copyFileSync(join(outDir, "index.html"), join(routeDir, "index.html"));
-}
-
-copyFileSync(join(outDir, "index.html"), join(outDir, "404.html"));
-writeFileSync(join(outDir, ".nojekyll"), "");
+import { copyFileSync, mkdirSync, writeFileSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { build } from 'esbuild';
+const outDir='dist/public';
+const indexable=process.env.VITE_SITE_INDEXABLE==='true';
+const bundled=await build({stdin:{contents:'export {caseStudies,blogPosts} from "./src/lib/data.ts"; export {studyNotes} from "./src/lib/study-notes.ts";',resolveDir:process.cwd()},bundle:true,write:false,platform:'node',format:'esm',define:{'import.meta.env.BASE_URL':JSON.stringify(process.env.BASE_PATH||'/')}});
+const {caseStudies,blogPosts,studyNotes}=await import('data:text/javascript;base64,'+Buffer.from(bundled.outputFiles[0].text).toString('base64'));
+const plain = value => String(value || '').replace(/<[^>]*(?:>|$)/g, ' ').replace(/\s+/g, ' ').trim();
+const routes=new Map();
+for(const [path,title] of Object.entries({'':'Search, AI & Growth Systems','about':'About Mitchell Miller','contact':'Work with Mitchell Miller','collab-ideas':'Ways to Work Together','resume':'Current Resumes','systems':'How I Build Growth Systems','work':'Selected Work','selected-builds':'Selected Builds','blog':'Field Notes','case-studies':'Case Studies','aeo-geo':'AI Search & AEO/GEO','lab':'The Interactive Lab'}))routes.set(path,{title,description:'Enterprise search leadership meets hands-on AI and growth engineering. Explore the work of Mitchell Miller.'});
+for(const c of caseStudies)routes.set(`case-studies/${c.slug}`,{title:c.title,description:c.thesis});
+for(const p of blogPosts)if(p.status==='published')routes.set(`blog/${p.slug}`,{title:p.title,description:p.teaser||p.excerpt||p.title});
+for(const p of studyNotes)routes.set(`blog/studying/${p.slug}`,{title:p.title,description:plain(p.excerpt||p.why)||p.title});
+const shell=readFileSync(join(outDir,'index.html'),'utf8').replace(/(<meta name="robots" content=")[^"]*/, '$1'+(indexable?'index, follow, max-image-preview:large':'noindex, nofollow, noarchive')).replace(/<link rel="canonical"[^>]*>/g,'').replace(/<meta property="og:(?:url|image)"[^>]*>/g,'');const escape=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+for(const [path,meta] of routes){const title=meta.title.includes('Mitchell Miller')?meta.title:`${meta.title} | Mitchell Miller`;const canonical=`https://mitchjmiller.com/${path}${path?'/':''}`;let html=shell.replace(/<title>[^<]*<\/title>/,`<title>${escape(title)}</title>`).replace(/(<meta name="description" content=")[^"]*/,`$1${escape(meta.description)}`).replace(/(<meta property="og:title" content=")[^"]*/,`$1${escape(title)}`).replace(/(<meta property="og:description" content=")[^"]*/,`$1${escape(meta.description)}`).replace(/(<meta name="twitter:title" content=")[^"]*/,`$1${escape(title)}`).replace(/(<meta name="twitter:description" content=")[^"]*/,`$1${escape(meta.description)}`).replace('</head>',`<link rel="canonical" href="${canonical}"/><meta property="og:url" content="${canonical}"/><meta property="og:image" content="https://mitchjmiller.com/images/portfolio-social.png"/></head>`);const dir=join(outDir,path);mkdirSync(dir,{recursive:true});writeFileSync(join(dir,'index.html'),html);}
+copyFileSync(join(outDir,'index.html'),join(outDir,'404.html'));writeFileSync(join(outDir,'.nojekyll'),'');
+writeFileSync(join(outDir,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+[...routes.keys()].map(p=>`<url><loc>https://mitchjmiller.com/${p}${p?'/':''}</loc></url>`).join('')+'</urlset>\n');
+writeFileSync(join(outDir,'route-manifest.json'),JSON.stringify([...routes].map(([path,meta])=>({path:'/'+path,...meta})),null,2));
+writeFileSync(join(outDir,'robots.txt'),indexable?'User-agent: *\nAllow: /\n\nSitemap: https://mitchjmiller.com/sitemap.xml\n':'User-agent: *\nDisallow: /\n');
+console.log(`Generated ${routes.size} routes with unique metadata, canonical links and sitemap entries. Indexable: ${indexable}.`);

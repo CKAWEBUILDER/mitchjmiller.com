@@ -6,7 +6,7 @@ Built 2026-09-11 (overnight Lane 3, Claude Code). Account `Clearkayakrentalsoahu
 
 | Resource | Name / id | URL |
 |---|---|---|
-| Worker (contact/lead API) | `mitchjmiller-api`, version `0c792635-d43e-4621-8d5f-adee8df470fc` | https://mitchjmiller-api.clearkayakrentalsoahu.workers.dev |
+| Worker (contact/lead API) | `mitchjmiller-api`, version `8a08874e-9be0-4b1c-9139-007502857a3d` (security fix; previous `0c792635-d43e-4621-8d5f-adee8df470fc`) | https://mitchjmiller-api.clearkayakrentalsoahu.workers.dev |
 | D1 database | `mitchjmiller-leads`, `523da23f-88ff-4af2-b9eb-4774eeb9d000` (table `leads`) | — |
 | KV namespace (rate limiting) | `RATE`, `be0386e14b584a8d9b24586051a808d9` | — |
 | Turnstile widget | name "mitchjmiller.com contact form", managed mode, **sitekey `0x4AAAAAAEwq_uUlQ6tYWRDc`**, domains `mitchjmiller.com`, `www.mitchjmiller.com`, `localhost`, `mitchjmiller-com.pages.dev` | — |
@@ -22,7 +22,7 @@ Wrangler: run `npm_config_cache=.npm-cache npx -y wrangler <cmd>` from the repo 
 Endpoint: `POST https://mitchjmiller-api.clearkayakrentalsoahu.workers.dev/contact`
 Health: `GET https://mitchjmiller-api.clearkayakrentalsoahu.workers.dev/health` → `{"ok":true,...}`
 
-Accepted bodies: `application/json`, `application/x-www-form-urlencoded`, `multipart/form-data` (a plain `FormData` post works). Max 16 KB.
+Accepted bodies: `application/json`, `application/x-www-form-urlencoded`, `multipart/form-data` (a plain `FormData` post works). Max 16,384 bytes, counted as received (413 even without Content-Length); other content types get 415 before the body is read.
 
 | Field | Required | Limit | Notes |
 |---|---|---|---|
@@ -125,3 +125,13 @@ CI: `.github/workflows/cloudflare-pages.yml` (site mirror) and `.github/workflow
 4. GitHub → `CKAWEBUILDER/mitchjmiller.com` and `CKAWEBUILDER/mitchjmiller-clients` → Settings → Secrets → `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` (`e956c778b32a922cca488cfdb46fbec8`).
 5. Client portal: sign in at https://mitchjmiller-clients.pages.dev with workspace `demo` and the passcode in `/Users/mitchellmiler/Documents/mitchjmiller-clients/.local/demo-passcode.txt`; then delete that file. Tell Claude which real client to onboard first.
 6. Later: `clients.mitchjmiller.com` custom domain and the Cloudflare Access upgrade for the portal.
+
+## Security fixes (2026-09-11 17:38 EDT)
+
+From the independent CISO review of 2026-09-11 (finding 8): the Worker trusted `Content-Length`, so a chunked request could deliver a body of any size to the form/multipart parser. `src/index.js` now reads the body through a stream reader with a byte counter and answers 413 as soon as 16,384 bytes are exceeded, whatever the headers say; unsupported content types get 415 before any read; field caps are unchanged. Deployed as version `8a08874e-9be0-4b1c-9139-007502857a3d` (commit `75cc700`).
+
+Tests: `node cloudflare/api-worker/scripts/test-limits.mjs` (local, imports the Worker: 18,114-byte form/JSON/multipart bodies streamed without Content-Length → 413, exact-limit body parsed, field caps → 400, 415, health; 9/9) and `--live https://mitchjmiller-api.clearkayakrentalsoahu.workers.dev` (chunked 18,114-byte body → 413, oversized JSON → 413, 4001-char message → 400, 415, 405, 403 origin; 7/7 after deploy).
+
+Known limitation (review finding 6, not changed): the 5-per-IP-per-hour KV counter is best-effort — KV read/modify/write is not atomic and allows about one write per key per second — so a concurrent burst can under-count. Turnstile remains the primary abuse control for this endpoint; a WAF rate-limiting rule on `/contact` is the atomic limit to add once `mitchjmiller.com` is a zone and the Worker has a route on it.
+
+The private client portal's fixes from the same review are recorded in its own repo (`CKAWEBUILDER/mitchjmiller-clients`, `PROJECT.md` and `docs/verification-2026-09-11.md`).

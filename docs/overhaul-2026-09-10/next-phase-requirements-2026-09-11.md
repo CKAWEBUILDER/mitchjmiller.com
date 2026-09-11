@@ -12,7 +12,10 @@ Captured from Mitch's live review. This is a requirements record, not approval t
 
 ## Private client areas
 
-- Provide client-specific areas accessible to Mitch and the relevant authorized client users.
+- Provide client-specific areas under a dedicated section or subfolder of Mitch’s website, accessible to Mitch and the relevant authorized client users.
+- Mitch wants to issue each client sign-in access so clients can see only their authorized workspace and artifacts. The exact credential/authentication mechanism is a design decision, not yet chosen.
+- Host and serve the actual interactive HTML applications and their assets under Mitch’s control, rather than making Google Drive links or PDF/CSV exports the primary client experience. Preserve freedom to code the interactions each deliverable needs.
+- Cloudflare is Mitch’s likely hosting candidate for this capability; no provider selection or migration has been finalized.
 - House interactive HTML experiences, reports and related assets that lose functionality when converted to PDF.
 - Preserve those deliverables in durable storage with an organized inventory, stable links and versions. Open tabs and temporary files are not the archive.
 - Use enforceable authentication and authorization for pages and their underlying files. A hidden path, unlisted link, noindex directive or client-side-only gate is not sufficient for confidential content.
@@ -30,3 +33,5 @@ Mitch emphasized his contribution to Stanford/MyHealth, the scale of Dignity loc
 ## Exact next step
 
 Continue collecting Mitch's requirements and feedback. Then reconcile the active-project inventory and category model, and propose a concrete client-workspace architecture with real access protection and operational costs. Do not treat this record as production approval.
+
+During the live review, Mitch chose to open the current public site in an adjacent Chrome tab for comparison with the local redesign. Leave the review tab available and avoid competing with his navigation.

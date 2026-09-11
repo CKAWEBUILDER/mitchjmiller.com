@@ -1,0 +1,26 @@
+{
+  "source": "U.S. Census Bureau, 2019 ACS 1-Year PUMS (person records, California)",
+  "totalPopulation": 39512223,
+  "sampleRecords": 380091,
+  "meanPersonalIncome": 39473,
+  "medianPersonalIncome": 16768.0,
+  "adultMeanIncome": 50871,
+  "povertyLine": 12490,
+  "raceShares": {
+    "American Indian / Alaska Native": 0.0081,
+    "Asian": 0.1485,
+    "Black": 0.0578,
+    "Native Hawaiian / Pacific Islander": 0.0039,
+    "Other race": 0.1371,
+    "Two or more races": 0.0498,
+    "White": 0.5947
+  },
+  "eduShares": {
+    "Bachelor's": 0.1598,
+    "Graduate degree": 0.0898,
+    "High school": 0.1706,
+    "N/A (under 3 yrs)": 0.0345,
+    "No HS diploma": 0.3063,
+    "Some college / Associate": 0.2389
+  }
+}

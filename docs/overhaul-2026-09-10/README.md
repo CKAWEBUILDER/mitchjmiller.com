@@ -1,5 +1,11 @@
 # Portfolio overhaul — September 10, 2026
 
+## September 11 direction supersedes the old release step
+
+Mitch requested a complete-HTML Astro migration roadmap, public crawlability/indexability and broader inbound positioning across data science, design, engineering, search/growth and independent projects. The prior React review build must not be published as the final answer to that request. The consolidated [HTML migration roadmap](../migration-2026-09-11/README.md) and [formatted review](../migration-2026-09-11/roadmap.html) preserve scope, estimates, sources, agent responsibilities and release gates. Initial public release is planned on existing GitHub Pages; Cloudflare and the future authenticated, dated client-deliverable library are separate phases. UBI, Date Night and DomainSignal are explicit inventory priorities. This planning task has not implemented Astro or changed hosting.
+
+The September 11 robots-only fix is already live from main; the new implementation must reconcile it with this feature branch rather than replacing main with an older snapshot. The original files and design below remain reusable reference work. The exact next step is the project/URL register and three-page Astro proof described in the migration roadmap.
+
 ## Outcome
 
 Complete review build on `codex/portfolio-overhaul-20260910`, based on `0f9e48cc9102e88edc4a8a657395add4be16d5fe`. GitHub repository: `CKAWEBUILDER/mitchjmiller.com`. Production uses GitHub Pages from `gh-pages`, verified through the GitHub API. No production deployment, DNS or host change was performed.

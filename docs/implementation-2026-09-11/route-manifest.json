@@ -507,7 +507,9 @@
       "expected": [
         "Client workspace sign-in",
         "Sign in to your workspace"
-      ]
+      ],
+      "minText": 250,
+      "note": "Deliberately short sign-in page (one paragraph plus the portal link)."
     }
   ],
   "note": "kind 'added' = routes introduced by the 2026-09-12 release (not in production snapshot 2745c7e): public lab page, population workbench (lane 2) and the client workspace entrance. They are indexable and in the sitemap; scripts/verify-parity.mjs checks them separately from the 57 archived routes."

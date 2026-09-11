@@ -1,0 +1,14 @@
+---
+import ParityShell from '../../layouts/ParityShell.astro';
+// Public entrance to the private client workspace (Cloudflare Pages, lane 3).
+// Not linked from the main navigation; clients arrive from their onboarding email.
+const portal = 'https://mitchjmiller-clients.pages.dev/';
+---
+<ParityShell path="/clients/" title="Client workspace sign-in | Mitchell Miller" description="Sign in to the private client workspace where Mitchell Miller shares interactive deliverables and files for your engagement.">
+  <div class="container mx-auto px-4 md:px-8 max-w-2xl py-24">
+    <p class="text-xs uppercase tracking-wider font-semibold text-muted-foreground mb-0.5">Clients</p>
+    <h1 class="text-4xl md:text-5xl font-bold mb-3 text-primary">Client workspace sign-in</h1>
+    <p class="text-lg text-muted-foreground mb-12">Clients receive a workspace name and passcode by email. The workspace holds the interactive deliverables and files for your engagement; it is private and not indexed. If you have not received your sign-in, <a href="/contact/" class="text-secondary hover:underline">get in touch</a>.</p>
+    <a href={portal} rel="noopener" class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2">Sign in to your workspace</a>
+  </div>
+</ParityShell>

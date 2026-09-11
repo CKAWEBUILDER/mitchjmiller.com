@@ -3,7 +3,8 @@ import {join} from 'node:path';
 const release=process.env.SITE_BUILD_MODE==='release';
 const manifest=JSON.parse(readFileSync('docs/implementation-2026-09-11/route-manifest.json','utf8'));
 const eligible=new Set(manifest.routes.filter(r=>r.kind!=='placeholder').map(r=>r.path));
-if(release) for(const p of ['review','design','proof','themes','lab','review-assets','artifacts']) rmSync(join('dist',p),{recursive:true,force:true});
+// Review-only output never ships. /lab/ is public since release 2026-09-12 (manifest kind 'added').
+if(release) for(const p of ['review','design','proof','themes','review-assets','artifacts']) rmSync(join('dist',p),{recursive:true,force:true});
 function walk(dir){return readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(join(dir,e.name)):[join(dir,e.name)]);}
 for(const file of walk('dist').filter(p=>p.endsWith('.html'))){
  let html=readFileSync(file,'utf8');
@@ -20,4 +21,4 @@ for(const file of walk('dist').filter(p=>p.endsWith('.html'))){
 writeFileSync('dist/sitemap.xml','<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+[...eligible].map(p=>`<url><loc>https://mitchjmiller.com${p}</loc></url>`).join('')+'</urlset>');
 writeFileSync('dist/robots.txt',`User-agent: *\nAllow: /\nSitemap: https://mitchjmiller.com/sitemap.xml\n`);
 if(release){rmSync('dist/_headers',{force:true});writeFileSync('dist/CNAME','mitchjmiller.com\n');writeFileSync('dist/.nojekyll','');}
-console.log(`${release?'Local release candidate (not deployed)':'Private review'} finalized; ${eligible.size} published URLs and four preserved placeholders.`);
+console.log(`${release?'Local release candidate (not deployed)':'Private review'} finalized; ${eligible.size} published URLs (${manifest.routes.filter(r=>r.kind==='added').length} added in this release) and four preserved placeholders.`);

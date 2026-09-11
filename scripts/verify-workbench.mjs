@@ -4,7 +4,7 @@
  *
  *   node scripts/verify-workbench.mjs                # model + built HTML checks
  *   node scripts/verify-workbench.mjs --no-html      # model checks only
- *   node scripts/verify-workbench.mjs --screenshots  # also drive the preview at 127.0.0.1:5189
+ *   node scripts/verify-workbench.mjs --screenshots  # also drive the preview at $WORKBENCH_BASE (default 127.0.0.1:5189)
  *
  * Model checks bundle site/islands/workbench/model.ts with esbuild and compare it
  * against (1) the ported ubi.ts, (2) the original ubi.ts in the mids-portfolio
@@ -197,7 +197,9 @@ if (!args.has('--no-html')) {
     check((m.match(/<h1[\s>]/g) || []).length === 1 && /[Mm]ethodology/.test(m), 'methodology page has exactly one h1');
     check(m.includes('<noscript') && m.includes('2019 ACS 1-Year PUMS') && /Observed/.test(m) && /Simulated/.test(m) && /Assumed/.test(m) && /Changelog/.test(m), 'methodology page names the data source, value labels and changelog');
     check(m.includes(M.fmtInt(meta.totalPopulation)) && m.includes(M.fmtInt(meta.sampleRecords)), 'methodology page prints the population and full-file record counts from meta');
-    check(!/https?:\/\/(?!mitchjmiller\.com|www\.census\.gov|github\.com)/.test(t.replace(/https:\/\/mitchjmiller\.com/g, '')), 'tool page references no third-party hosts');
+    // Site-wide head resources (Google Fonts, GA4 in release mode) are allowed; the tool itself must not add hosts.
+    const siteHosts = /https?:\/\/(?:mitchjmiller\.com|www\.census\.gov|github\.com|www\.w3\.org|linkedin\.com|fonts\.googleapis\.com|fonts\.gstatic\.com|www\.googletagmanager\.com)/g;
+    check(!/https?:\/\//.test(t.replace(siteHosts, '')), 'tool page references no third-party hosts beyond the site-wide fonts/analytics');
     const dataOut = resolve(root, 'dist/data/ca-pums-sample-2019.json');
     check(existsSync(dataOut) && statSync(dataOut).size === statSync(resolve(root, 'public/data/ca-pums-sample-2019.json')).size && existsSync(resolve(root, 'dist/data/ca-pums-meta-2019.json')), 'sample and meta JSON are copied into dist/data/');
   }
@@ -207,7 +209,7 @@ if (!args.has('--no-html')) {
 if (args.has('--screenshots')) {
   const puppeteer = (await import('puppeteer-core')).default;
   const chrome = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-  const base = 'http://127.0.0.1:5189';
+  const base = process.env.WORKBENCH_BASE || 'http://127.0.0.1:5189';
   const shotDir = resolve(root, 'docs/lab/screenshots');
   mkdirSync(shotDir, { recursive: true });
   const dlDir = join(tmp, 'downloads');
@@ -219,7 +221,8 @@ if (args.has('--screenshots')) {
     page.on('pageerror', (e) => errors.push(String(e)));
     page.on('console', (msg) => { if (msg.type() === 'error') errors.push(msg.text()); });
     const external = [];
-    page.on('request', (req) => { if (!req.url().startsWith(base)) external.push(req.url()); });
+    const siteWide = /^https:\/\/(fonts\.googleapis\.com|fonts\.gstatic\.com|www\.googletagmanager\.com|www\.google-analytics\.com|analytics\.google\.com|stats\.g\.doubleclick\.net)\//;
+    page.on('request', (req) => { if (!req.url().startsWith(base) && !siteWide.test(req.url())) external.push(req.url()); });
     // client:visible hydrates on intersection; headless Chrome never scrolls on its own.
     const hydrate = async (p) => { await p.$eval('.wb', (el) => el.scrollIntoView()); await p.waitForSelector('[data-workbench-state="ready"]', { timeout: 60000 }); };
     const client = await page.createCDPSession();
@@ -269,7 +272,7 @@ if (args.has('--screenshots')) {
         await rp.close();
       }
     }
-    check(external.length === 0, `no external network requests from the tool page${external.length ? `: ${external.slice(0, 3).join(', ')}` : ''}`);
+    check(external.length === 0, `no external network requests from the tool page beyond site-wide fonts/analytics${external.length ? `: ${external.slice(0, 3).join(', ')}` : ''}`);
     check(errors.length === 0, `no page errors${errors.length ? `: ${errors.slice(0, 3).join(' | ')}` : ''}`);
   } finally {
     await browser.close();

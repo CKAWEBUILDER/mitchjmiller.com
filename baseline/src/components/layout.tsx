@@ -94,6 +94,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <li><Link href="/work" className="hover:text-secondary">Work</Link></li>
               <li><Link href="/systems" className="hover:text-secondary">Systems</Link></li>
               <li><Link href="/selected-builds" className="hover:text-secondary">Selected Builds</Link></li>
+              <li><Link href="/lab/" className="hover:text-secondary">Lab</Link></li>
               <li><Link href="/collab-ideas" className="hover:text-secondary">Collab Ideas</Link></li>
             </ul>
           </div>

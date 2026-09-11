@@ -11,6 +11,11 @@ const release = process.env.SITE_BUILD_MODE === 'release';
 const read = path => readFileSync(path, 'utf8');
 const manifest = JSON.parse(read(join(root, 'docs/implementation-2026-09-11/route-manifest.json')));
 const production = JSON.parse(read(join(root, 'docs/implementation-2026-09-11/production-files.json')));
+// Release 2026-09-12 ships the corrected September 10 PDFs at the same paths (release-owner decision).
+const releaseFiles = JSON.parse(read(join(root, 'docs/release-2026-09-12/release-files.json')));
+// Routes added after the production snapshot (kind 'added') are checked apart from the 57 archived routes.
+const addedRoutes = manifest.routes.filter(route => route.kind === 'added');
+const productionManifestRoutes = manifest.routes.filter(route => route.kind !== 'added');
 const reference = await exportParityReference();
 const failures = [];
 const historicalBrokenAnchors = [];
@@ -38,9 +43,10 @@ const localFile = pathname => {
 };
 const walk = dir => readdirSync(dir, { withFileTypes: true }).flatMap(entry => entry.isDirectory() ? walk(join(dir, entry.name)) : [join(dir, entry.name)]);
 const expectedRoutes = new Map(reference.routes.map(route => [route.path, route]));
-const declaredRoutes = new Map(manifest.routes.map(route => [route.path, route]));
+const declaredRoutes = new Map(productionManifestRoutes.map(route => [route.path, route]));
 if (manifest.source !== reference.source) fail('manifest', `source ${manifest.source} does not match archived ${reference.source}`);
-if (expectedRoutes.size !== 57 || declaredRoutes.size !== 57 || manifest.routes.length !== 57) fail('manifest', `expected 57 unique routes; source=${expectedRoutes.size}, manifest=${declaredRoutes.size}, rows=${manifest.routes.length}`);
+if (expectedRoutes.size !== 57 || declaredRoutes.size !== 57 || productionManifestRoutes.length !== 57) fail('manifest', `expected 57 unique production routes; source=${expectedRoutes.size}, manifest=${declaredRoutes.size}, rows=${productionManifestRoutes.length}`);
+for (const route of addedRoutes) if (expectedRoutes.has(route.path)) fail('manifest', `added route ${route.path} duplicates a production route`);
 for (const [path, source] of expectedRoutes) {
   if (!declaredRoutes.has(path)) fail('manifest', `missing production route ${path}`);
   else if (declaredRoutes.get(path).kind !== source.kind) fail(path, `manifest kind ${declaredRoutes.get(path).kind} != source ${source.kind}`);
@@ -90,18 +96,31 @@ if (!originalSfcBody || body(rendered.get(sfcPath) || '') !== originalSfcBody) f
 for (const { href } of attrTags(originalSfcBody, 'a')) {
   try { const url = new URL(href, `https://mitchjmiller.com${sfcPath}`); if (url.hash) historicalAnchors.add(`${sfcPath}|${url.href}`); } catch {}
 }
-for (const pdf of production.pdfs) {
+const expectedPdfs = release ? releaseFiles.pdfs : production.pdfs;
+for (const pdf of expectedPdfs) {
   const file = localFile(pdf.path);
-  if (!file) fail(pdf.path, 'missing preserved PDF');
+  if (!file) fail(pdf.path, 'missing PDF');
   else {
     const bytes = readFileSync(file);
-    if (hash(bytes) !== pdf.sha256 || bytes.length !== pdf.bytes) fail(pdf.path, 'bytes differ from verified gh-pages PDF');
+    if (hash(bytes) !== pdf.sha256 || bytes.length !== pdf.bytes) fail(pdf.path, release ? 'bytes differ from the corrected September 10 PDF recorded in docs/release-2026-09-12/release-files.json' : 'bytes differ from verified gh-pages PDF');
     if (bytes.subarray(0, 5).toString() !== '%PDF-') fail(pdf.path, 'not a PDF file');
   }
   checks.pdfs++;
 }
 
-const eligible = new Set(reference.routes.filter(route => route.kind !== 'placeholder').map(route => route.path));
+const eligible = new Set([...reference.routes.filter(route => route.kind !== 'placeholder').map(route => route.path), ...addedRoutes.map(route => route.path)]);
+const canonicalRoutes = new Set([...expectedRoutes.keys(), ...addedRoutes.map(route => route.path)]);
+checks.addedRoutes = 0;
+for (const route of addedRoutes) {
+  const file = localFile(route.path);
+  if (!file) { fail(route.path, 'missing generated HTML for added route'); continue; }
+  checks.addedRoutes++;
+  const html = read(file), pageBody = body(html), normalized = text(pageBody);
+  if ((pageBody.match(/<h1\b/gi) || []).length !== 1) fail(route.path, 'added route must have exactly one h1');
+  if (normalized.length < 400) fail(route.path, `added route body too short (${normalized.length} characters)`);
+  if (!/<main\b[^>]*id=["']main-content["']/i.test(pageBody) || !/<header\b/i.test(pageBody) || !/<footer\b/i.test(pageBody)) fail(route.path, 'added route is not wrapped in the production shell');
+  for (const expected of route.expected || []) if (!normalized.includes(text(expected))) fail(route.path, `missing expected content: ${expected}`);
+}
 let indexableDocuments = 0;
 const htmlFiles = existsSync(dist) ? walk(dist).filter(file => file.endsWith('.html')) : [];
 const anchorCache = new Map();
@@ -126,7 +145,7 @@ for (const file of htmlFiles) {
   if (!release && analytics) fail(route, 'analytics would send unwanted staging traffic');
   if (indexable && !html.includes('G-HCKYWCZQ8E')) fail(route, 'production analytics ID missing from local release candidate');
   if (indexable && [...html.matchAll(/googletagmanager\.com\/gtag/g)].length !== 1) fail(route, 'expected exactly one analytics loader');
-  if (expectedRoutes.has(route)) {
+  if (canonicalRoutes.has(route)) {
     const canonical = attrTags(html, 'link').filter(link => link.rel === 'canonical');
     if (canonical.length !== 1 || canonical[0].href !== `https://mitchjmiller.com${route}`) fail(route, 'canonical missing, duplicate or inconsistent with retained URL');
   }
@@ -145,7 +164,7 @@ for (const file of htmlFiles) {
       checks.localLinksAndAssets++;
       const target = localFile(url.pathname);
       if (!target) { fail(route, `missing internal ${name}: ${value}`); continue; }
-      if (!url.hash || !target.endsWith('.html') || !expectedRoutes.has(route)) continue;
+      if (!url.hash || !target.endsWith('.html') || !canonicalRoutes.has(route)) continue;
       checks.anchorLinks++;
       let id; try { id = decodeURIComponent(url.hash.slice(1)); } catch { id = url.hash.slice(1); }
       if (!id || idsForFile(target).has(id)) continue;
@@ -155,13 +174,13 @@ for (const file of htmlFiles) {
     }
   }
 }
-if (indexableDocuments !== (release ? 53 : 0)) fail('indexing', `expected ${release ? 53 : 0} indexable documents; found ${indexableDocuments}`);
+if (indexableDocuments !== (release ? eligible.size : 0)) fail('indexing', `expected ${release ? eligible.size : 0} indexable documents; found ${indexableDocuments}`);
 const sitemapFile = join(dist, 'sitemap.xml');
 if (!existsSync(sitemapFile)) fail('sitemap', 'missing sitemap.xml');
 else {
   const urls = [...read(sitemapFile).matchAll(/<loc>([\s\S]*?)<\/loc>/g)].map(match => decodeHTML(match[1]));
   const expected = new Set([...eligible].map(path => `https://mitchjmiller.com${path}`));
-  if (urls.length !== 53 || new Set(urls).size !== 53) fail('sitemap', `expected 53 unique published URLs; found ${urls.length}`);
+  if (urls.length !== eligible.size || new Set(urls).size !== eligible.size) fail('sitemap', `expected ${eligible.size} unique published URLs; found ${urls.length}`);
   for (const url of urls) if (!expected.has(url)) fail('sitemap', `unexpected URL ${url}`);
   for (const url of expected) if (!urls.includes(url)) fail('sitemap', `missing URL ${url}`);
 }
@@ -172,14 +191,14 @@ if (release && existsSync(join(dist, '_headers'))) fail('release', 'staging noin
 if (!release && (!existsSync(join(dist, '_headers')) || !/X-Robots-Tag:\s*noindex/i.test(read(join(dist, '_headers'))))) fail('staging', 'missing noindex response-header configuration');
 const report = {
   mode: release ? 'local-release-candidate' : 'private-staging', passed: failures.length === 0,
-  source: reference.source, productionDeployment: production.deployed, checks,
+  source: reference.source, productionDeployment: production.deployed, checks, addedRoutes: addedRoutes.map(route => route.path), pdfExpectation: release ? 'docs/release-2026-09-12/release-files.json (corrected September 10 PDFs)' : 'docs/implementation-2026-09-11/production-files.json (gh-pages bytes)',
   indexableDocuments, preservedStandaloneBodySha256: hash(originalSfcBody),
   duplicatePublishedSlugsDeduplicated: reference.duplicateSlugs,
   historicalBrokenAnchors: [...new Set(historicalBrokenAnchors)], failures: [...new Set(failures)],
   limits: ['HTTP 200/404 behavior, visual parity, responsive layout and interaction behavior require separate local/browser verification.', 'Local or private-staging checks do not establish production indexing.'],
 };
 if (process.env.PARITY_REPORT_PATH) writeFileSync(resolve(root, process.env.PARITY_REPORT_PATH), `${JSON.stringify(report, null, 2)}\n`);
-console.log(`Parity verification ${report.passed ? 'passed' : 'FAILED'} (${report.mode}): ${checks.routes}/57 routes, ${checks.fullBodies}/25 complete articles/notes, ${checks.caseFields} original case fields, ${checks.pdfs}/4 exact PDFs.`);
+console.log(`Parity verification ${report.passed ? 'passed' : 'FAILED'} (${report.mode}): ${checks.routes}/57 routes, ${checks.addedRoutes}/${addedRoutes.length} added routes, ${checks.fullBodies}/25 complete articles/notes, ${checks.caseFields} original case fields, ${checks.pdfs}/4 exact PDFs (${release ? 'corrected September 10' : 'production'}), ${eligible.size} sitemap URLs.`);
 if (report.historicalBrokenAnchors.length) console.log(`Historical broken anchors retained (${report.historicalBrokenAnchors.length}):\n${report.historicalBrokenAnchors.map(value => `  - ${value}`).join('\n')}`);
 if (report.failures.length) console.error(report.failures.map(value => `  - ${value}`).join('\n'));
 process.exitCode = report.passed ? 0 : 1;

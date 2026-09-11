@@ -173,7 +173,7 @@
       "expected": [
         "ActionThread",
         "Post-call follow-up was manual, inconsistent, and created execution debt",
-        "Transcript → summary → decisions → owners → deadlines → follow-up tasks and task updates",
+        "Transcript \u2192 summary \u2192 decisions \u2192 owners \u2192 deadlines \u2192 follow-up tasks and task updates",
         "Converted transcripts into owner-tagged follow-ups, decisions, deadlines, and task updates."
       ]
     },
@@ -235,17 +235,17 @@
     {
       "path": "/blog/gbp-2026-ai-grounding/",
       "kind": "article",
-      "title": "Your Google Business Profile Is Now an AI Grounding Source — What Actually Changed in 2026",
+      "title": "Your Google Business Profile Is Now an AI Grounding Source \u2014 What Actually Changed in 2026",
       "expected": [
-        "Your Google Business Profile Is Now an AI Grounding Source — What Actually Changed in 2026"
+        "Your Google Business Profile Is Now an AI Grounding Source \u2014 What Actually Changed in 2026"
       ]
     },
     {
       "path": "/blog/multi-agent-billing-traps/",
       "kind": "article",
-      "title": "The Flat-Fee Multi-Agent Stack — and the 3 Billing Traps That Quietly Meter You",
+      "title": "The Flat-Fee Multi-Agent Stack \u2014 and the 3 Billing Traps That Quietly Meter You",
       "expected": [
-        "The Flat-Fee Multi-Agent Stack — and the 3 Billing Traps That Quietly Meter You"
+        "The Flat-Fee Multi-Agent Stack \u2014 and the 3 Billing Traps That Quietly Meter You"
       ]
     },
     {
@@ -299,9 +299,9 @@
     {
       "path": "/blog/studying/hermes-concepts-field-guide/",
       "kind": "note",
-      "title": "Every Hermes Concept in Plain English — a Field Guide to the Agent Harness",
+      "title": "Every Hermes Concept in Plain English \u2014 a Field Guide to the Agent Harness",
       "expected": [
-        "Every Hermes Concept in Plain English — a Field Guide to the Agent Harness"
+        "Every Hermes Concept in Plain English \u2014 a Field Guide to the Agent Harness"
       ]
     },
     {
@@ -323,17 +323,17 @@
     {
       "path": "/blog/studying/hermes-seo-agent/",
       "kind": "note",
-      "title": "A \"Hermes\" Agent That Runs SEO End-to-End — What Actually Holds Up",
+      "title": "A \"Hermes\" Agent That Runs SEO End-to-End \u2014 What Actually Holds Up",
       "expected": [
-        "A \"Hermes\" Agent That Runs SEO End-to-End — What Actually Holds Up"
+        "A \"Hermes\" Agent That Runs SEO End-to-End \u2014 What Actually Holds Up"
       ]
     },
     {
       "path": "/blog/studying/codex-obsolete-9-moves/",
       "kind": "note",
-      "title": "Codex Just Made Claude \"Obsolete\"? — 9 Platform Moves Worth Studying",
+      "title": "Codex Just Made Claude \"Obsolete\"? \u2014 9 Platform Moves Worth Studying",
       "expected": [
-        "Codex Just Made Claude \"Obsolete\"? — 9 Platform Moves Worth Studying"
+        "Codex Just Made Claude \"Obsolete\"? \u2014 9 Platform Moves Worth Studying"
       ]
     },
     {
@@ -355,9 +355,9 @@
     {
       "path": "/blog/studying/claude-code-6-new-rules/",
       "kind": "note",
-      "title": "Claude Code Just Changed — the 6 New Rules of Context Engineering",
+      "title": "Claude Code Just Changed \u2014 the 6 New Rules of Context Engineering",
       "expected": [
-        "Claude Code Just Changed — the 6 New Rules of Context Engineering"
+        "Claude Code Just Changed \u2014 the 6 New Rules of Context Engineering"
       ]
     },
     {
@@ -371,9 +371,9 @@
     {
       "path": "/blog/studying/build-ai-agents-full-course/",
       "kind": "note",
-      "title": "Build AI Agents to Automate Your Business — the Full Framework",
+      "title": "Build AI Agents to Automate Your Business \u2014 the Full Framework",
       "expected": [
-        "Build AI Agents to Automate Your Business — the Full Framework"
+        "Build AI Agents to Automate Your Business \u2014 the Full Framework"
       ]
     },
     {
@@ -387,9 +387,9 @@
     {
       "path": "/blog/studying/pi-coding-agent/",
       "kind": "note",
-      "title": "The Pi Coding Agent — the Only Real Claude Code Competitor",
+      "title": "The Pi Coding Agent \u2014 the Only Real Claude Code Competitor",
       "expected": [
-        "The Pi Coding Agent — the Only Real Claude Code Competitor"
+        "The Pi Coding Agent \u2014 the Only Real Claude Code Competitor"
       ]
     },
     {
@@ -403,9 +403,9 @@
     {
       "path": "/blog/studying/forget-loop-engineering/",
       "kind": "note",
-      "title": "Forget \"Loop Engineering\" — Agentic Engineering Is About This",
+      "title": "Forget \"Loop Engineering\" \u2014 Agentic Engineering Is About This",
       "expected": [
-        "Forget \"Loop Engineering\" — Agentic Engineering Is About This"
+        "Forget \"Loop Engineering\" \u2014 Agentic Engineering Is About This"
       ]
     },
     {
@@ -427,9 +427,9 @@
     {
       "path": "/blog/studying/old-seo-collapsing/",
       "kind": "note",
-      "title": "The Old SEO System Is Collapsing — Here's What Replaces It",
+      "title": "The Old SEO System Is Collapsing \u2014 Here's What Replaces It",
       "expected": [
-        "The Old SEO System Is Collapsing — Here's What Replaces It"
+        "The Old SEO System Is Collapsing \u2014 Here's What Replaces It"
       ]
     },
     {
@@ -443,9 +443,9 @@
     {
       "path": "/blog/studying/aeo-geo-aio/",
       "kind": "note",
-      "title": "AEO vs GEO vs AIO — How AI Search Actually Works in 2026",
+      "title": "AEO vs GEO vs AIO \u2014 How AI Search Actually Works in 2026",
       "expected": [
-        "AEO vs GEO vs AIO — How AI Search Actually Works in 2026"
+        "AEO vs GEO vs AIO \u2014 How AI Search Actually Works in 2026"
       ]
     },
     {
@@ -463,6 +463,52 @@
       "expected": [
         "Learn 80% of AEO in 19 Minutes (Ahrefs)"
       ]
+    },
+    {
+      "path": "/lab/",
+      "kind": "added",
+      "since": "release-2026-09-12",
+      "title": "Lab \u00b7 Interactive tools",
+      "expected": [
+        "Think it through.",
+        "Build your own simulated population",
+        "Destination intent",
+        "Growth readout",
+        "Content architecture"
+      ]
+    },
+    {
+      "path": "/lab/population-workbench/",
+      "kind": "added",
+      "since": "release-2026-09-12",
+      "title": "Build your own simulated population",
+      "expected": [
+        "Build your own simulated population",
+        "Statewide baseline",
+        "Methodology"
+      ]
+    },
+    {
+      "path": "/lab/population-workbench/methodology/",
+      "kind": "added",
+      "since": "release-2026-09-12",
+      "title": "Population workbench methodology",
+      "expected": [
+        "Methodology and limitations",
+        "Data source",
+        "Changelog"
+      ]
+    },
+    {
+      "path": "/clients/",
+      "kind": "added",
+      "since": "release-2026-09-12",
+      "title": "Client workspace sign-in",
+      "expected": [
+        "Client workspace sign-in",
+        "Sign in to your workspace"
+      ]
     }
-  ]
+  ],
+  "note": "kind 'added' = routes introduced by the 2026-09-12 release (not in production snapshot 2745c7e): public lab page, population workbench (lane 2) and the client workspace entrance. They are indexable and in the sitemap; scripts/verify-parity.mjs checks them separately from the 57 archived routes."
 }

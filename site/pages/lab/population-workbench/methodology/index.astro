@@ -1,5 +1,11 @@
 ---
-import WorkbenchLayout from '../../../../layouts/WorkbenchLayout.astro';
+import ParityShell from '../../../../layouts/ParityShell.astro';
 import PopulationWorkbenchMethodology from '../../../../components/workbench/PopulationWorkbenchMethodology.astro';
+import '../../../../components/workbench/workbench-shell.css';
 ---
-<WorkbenchLayout title="Population workbench methodology" description="Data source, weighting, what is observed versus calculated, simulated and assumed, limitations, reuse and changelog for the population workbench." canonical="https://mitchjmiller.com/lab/population-workbench/methodology/"><PopulationWorkbenchMethodology /></WorkbenchLayout>
+<ParityShell path="/lab/population-workbench/methodology/" title="Population workbench methodology | Mitchell Miller" description="Data source, weighting, what is observed versus calculated, simulated and assumed, limitations, reuse and changelog for the population workbench.">
+  <div class="workbench-shell">
+    <ul class="wb-crumbs" aria-label="Population workbench pages"><li><a href="/lab/">Lab</a></li><li><a href="/lab/population-workbench/">Population workbench</a></li><li aria-current="page">Methodology</li></ul>
+    <PopulationWorkbenchMethodology />
+  </div>
+</ParityShell>

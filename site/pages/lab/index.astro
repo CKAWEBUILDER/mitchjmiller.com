@@ -1,0 +1,50 @@
+---
+import ParityShell from '../../layouts/ParityShell.astro';
+import { DestinationIntent } from '../../../src/components/lab/destination-intent';
+import { GrowthReadout } from '../../../src/components/lab/growth-readout';
+import { ContentArchitecture } from '../../../src/components/lab/content-architecture';
+import '../../../src/components/lab/lab.css';
+---
+<ParityShell path="/lab/" title="Lab · Interactive tools | Mitchell Miller" description="Working tools from Mitchell Miller's practice: destination search intent, an evidence-based growth readout, reusable content architecture, and a free population workbench on public Census microdata.">
+  <div class="mjm-lab">
+    <header class="lab-intro">
+      <p class="lab-eyebrow">Mitchell Miller / Working notes, made interactive</p>
+      <div class="lab-intro-grid">
+        <h1>Think it through.<br /><em>Then try it.</em></h1>
+        <div>
+          <p>Strategy is easier to understand when you can move the pieces. Three working explorations from the way I build search, content and measurement systems, plus a free population workbench. Each describes its assumptions and limits.</p>
+          <a href="#lab-workbench" class="lab-text-link">Open the experiments ↓</a>
+        </div>
+      </div>
+      <div class="lab-intro-footer"><span>03 working experiments · 01 free tool</span><span>Change the inputs. Follow the consequences.</span></div>
+    </header>
+
+    <section class="lab-tool-card" aria-labelledby="population-workbench-heading">
+      <p class="lab-eyebrow">Free tool</p>
+      <h2 id="population-workbench-heading">Build your own simulated population — free tool</h2>
+      <p>Filter 39.5 million Californians from public Census microdata, compare a verified UBI policy model with an assumption-driven reach scenario, draw attribute-only personas and export a self-contained report. It runs entirely in your browser and labels every number as observed, calculated, simulated or assumed.</p>
+      <p class="lab-tool-links"><a href="/lab/population-workbench/">Open the population workbench →</a> <a href="/lab/population-workbench/methodology/">Methodology and limitations</a></p>
+    </section>
+
+    <nav aria-label="Experiments" class="lab-jump"><a href="#intent">01 · Destination intent</a><a href="#evidence">02 · Growth readout</a><a href="#architecture">03 · Content architecture</a></nav>
+    <noscript><p class="lab-noscript">The examples and their starting results are visible below. Enable JavaScript to change their controls.</p></noscript>
+    <div class="lab-workbench" id="lab-workbench">
+      <section id="intent"><DestinationIntent client:load /></section>
+      <section id="evidence"><GrowthReadout client:load /></section>
+      <section id="architecture"><ContentArchitecture client:load /></section>
+    </div>
+  </div>
+</ParityShell>
+<style is:global>
+.mjm-lab .lab-tool-card{max-width:1280px;margin:0 auto;border:1px solid var(--lab-rule);background:var(--lab-white);padding:2rem 2.25rem}
+.mjm-lab .lab-tool-card h2{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(1.7rem,3vw,2.4rem);letter-spacing:-.03em;line-height:1.1;margin:.6rem 0 .8rem}
+.mjm-lab .lab-tool-card p{max-width:720px;line-height:1.7;color:var(--lab-muted)}
+.mjm-lab .lab-tool-links{display:flex;flex-wrap:wrap;gap:1.5rem;margin-top:1.2rem}
+.mjm-lab .lab-tool-links a{font-weight:700;text-decoration:none;border-bottom:1px solid currentColor;color:var(--lab-ink)}
+.mjm-lab .lab-tool-links a:first-child{color:var(--lab-accent)}
+.mjm-lab .lab-jump{max-width:1280px;margin:2.5rem auto 0;display:flex;flex-wrap:wrap;gap:.6rem 1.8rem;font-size:.85rem;font-weight:600}
+.mjm-lab .lab-jump a{text-decoration:none;border-bottom:1px solid var(--lab-rule)}
+.mjm-lab .lab-noscript{max-width:1280px;margin:1.5rem auto 0;color:var(--lab-muted)}
+.mjm-lab .lab-workbench>section+section{border-top:1px solid var(--lab-rule)}
+@media(max-width:720px){.mjm-lab .lab-tool-card{padding:1.4rem 1.2rem}}
+</style>

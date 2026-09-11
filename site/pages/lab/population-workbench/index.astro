@@ -1,5 +1,12 @@
 ---
-import WorkbenchLayout from '../../../layouts/WorkbenchLayout.astro';
+import ParityShell from '../../../layouts/ParityShell.astro';
 import PopulationWorkbenchPage from '../../../components/workbench/PopulationWorkbenchPage.astro';
+import '../../../components/workbench/workbench-shell.css';
 ---
-<WorkbenchLayout title="Build your own simulated population" description="Free lab tool: filter 39.5 million Californians from public Census microdata, compare a verified UBI policy model with an assumption-driven reach scenario, draw attribute-only personas and export a self-contained report." canonical="https://mitchjmiller.com/lab/population-workbench/"><PopulationWorkbenchPage /></WorkbenchLayout>
+<ParityShell path="/lab/population-workbench/" title="Build your own simulated population — free lab tool | Mitchell Miller" description="Free lab tool: filter 39.5 million Californians from public Census microdata, compare a verified UBI policy model with an assumption-driven reach scenario, draw attribute-only personas and export a self-contained report.">
+  <div class="workbench-shell">
+    <ul class="wb-crumbs" aria-label="Population workbench pages"><li><a href="/lab/">Lab</a></li><li aria-current="page">Population workbench</li><li><a href="/lab/population-workbench/methodology/">Methodology, limitations and reuse</a></li></ul>
+    <PopulationWorkbenchPage />
+    <p class="wb-footnote">Free lab tool on public Census microdata. Runs entirely in your browser; nothing you type is sent anywhere. <a href="/lab/population-workbench/methodology/">Methodology, limitations and reuse</a>.</p>
+  </div>
+</ParityShell>

@@ -220,13 +220,16 @@ if (args.has('--screenshots')) {
     page.on('console', (msg) => { if (msg.type() === 'error') errors.push(msg.text()); });
     const external = [];
     page.on('request', (req) => { if (!req.url().startsWith(base)) external.push(req.url()); });
+    // client:visible hydrates on intersection; headless Chrome never scrolls on its own.
+    const hydrate = async (p) => { await p.$eval('.wb', (el) => el.scrollIntoView()); await p.waitForSelector('[data-workbench-state="ready"]', { timeout: 60000 }); };
     const client = await page.createCDPSession();
     await client.send('Browser.setDownloadBehavior', { behavior: 'allow', downloadPath: dlDir, eventsEnabled: true });
 
     for (const [width, height, name] of [[1360, 900, 'tool-1360'], [390, 844, 'tool-390']]) {
       await page.setViewport({ width, height, deviceScaleFactor: 1 });
       await page.goto(`${base}/lab/population-workbench/`, { waitUntil: 'networkidle0', timeout: 60000 });
-      await page.waitForSelector('[data-workbench-state="ready"]', { timeout: 60000 });
+      await hydrate(page);
+      await page.evaluate(() => window.scrollTo(0, 0));
       await page.screenshot({ path: join(shotDir, `${name}.png`), fullPage: true });
       ok(`screenshot docs/lab/screenshots/${name}.png (${width}px)`);
     }
@@ -237,7 +240,7 @@ if (args.has('--screenshots')) {
 
     // Interaction: the hydrated count equals the build-time baseline, then changes with a filter.
     await page.goto(`${base}/lab/population-workbench/`, { waitUntil: 'networkidle0', timeout: 60000 });
-    await page.waitForSelector('[data-workbench-state="ready"]', { timeout: 60000 });
+    await hydrate(page);
     const liveCount = await page.$eval('[data-testid="people-count"]', (el) => el.textContent.trim());
     check(liveCount === M.fmtInt(full.people), `hydrated weighted count ${liveCount} equals the build-time baseline`);
     await page.click('[data-testid="chip-employment-Employed"]');

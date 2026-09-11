@@ -1,0 +1,67 @@
+---
+/**
+ * Static, build-time summary of the default (statewide) population.
+ * This is the no-JavaScript baseline: every number here was computed during
+ * `astro build` from public/data/ca-pums-sample-2019.json.
+ */
+import { fmtInt, fmtPct, fmtUSD, fmtBillions, fmtMillions, DISCLAIMERS, type ShareRow } from '../../islands/workbench/model';
+import type { Baseline } from './baseline';
+interface Props { baseline: Baseline; }
+const { baseline: b } = Astro.props;
+const s = b.summary;
+const bars = (rows: ShareRow[]) => { const max = Math.max(...rows.map((r) => r.share), 1e-6); return rows.map((r) => ({ ...r, width: (r.share / max) * 100 })); };
+const ageRows = bars(s.ageHistogram);
+const incomeRows = bars(s.incomeHistogram);
+---
+<section class="baseline" aria-labelledby="baseline-h">
+  <div class="baseline-head">
+    <h2 id="baseline-h">Statewide baseline</h2>
+    <p class="baseline-note">Default population, no filters. Computed at build time from {fmtInt(b.records)} Census records, each representing {fmtInt(b.recordWeight)} Californians.</p>
+  </div>
+  <dl class="stats">
+    <div><dt><em class="tag">observed</em> Records</dt><dd>{fmtInt(s.records)}</dd></div>
+    <div><dt><em class="tag">calculated</em> People represented</dt><dd>{fmtInt(s.people)}</dd></div>
+    <div><dt><em class="tag">calculated</em> Share of California</dt><dd>{fmtPct(s.shareOfCalifornia, 0)}</dd></div>
+    <div><dt><em class="tag">calculated</em> Median personal income</dt><dd>{fmtUSD(s.medianIncome)}</dd></div>
+    <div><dt><em class="tag">calculated</em> Mean personal income</dt><dd>{fmtUSD(s.meanIncome)}</dd></div>
+    <div><dt><em class="tag">calculated</em> Mean age</dt><dd>{s.meanAge.toFixed(1)}</dd></div>
+  </dl>
+  <div class="charts">
+    <figure>
+      <figcaption>Age <em class="tag">calculated</em></figcaption>
+      {ageRows.map((r) => (
+        <div class="bar"><span class="bar-l">{r.label}</span><svg viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true"><rect x="0" y="0" width={r.width.toFixed(2)} height="8"/></svg><span class="bar-v">{fmtPct(r.share)}</span></div>
+      ))}
+    </figure>
+    <figure>
+      <figcaption>Personal income <em class="tag">calculated</em></figcaption>
+      {incomeRows.map((r) => (
+        <div class="bar"><span class="bar-l">{r.label}</span><svg viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true"><rect x="0" y="0" width={r.width.toFixed(2)} height="8"/></svg><span class="bar-v">{fmtPct(r.share)}</span></div>
+      ))}
+    </figure>
+  </div>
+  <p class="baseline-ubi"><em class="tag tag-sim">simulated</em> Default UBI scenario on this baseline — $1,000/month to adults 18+, 30% flat tax on personal income: program cost {fmtBillions(b.ubi.totalUbiCost)}, tax revenue {fmtBillions(b.ubi.totalTaxRevenue)}, net gainers {fmtMillions(b.ubi.beneficiaries)}, poverty proxy {fmtPct(b.ubi.povertyBefore)} → {fmtPct(b.ubi.povertyAfter)}. {DISCLAIMERS.ubi}</p>
+</section>
+<style>
+.baseline{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:22px 0 18px;margin:30px 0}
+.baseline-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 24px}
+.baseline h2{margin:0;font-size:22px}
+.baseline-note{font-size:14px;color:var(--muted);margin:0;max-width:640px}
+.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin:20px 0 6px}
+.stats div{border-left:2px solid var(--rule);padding-left:12px}
+.stats dt{font-size:12px;color:var(--muted);line-height:1.4}
+.stats dd{margin:2px 0 0;font-size:24px;font-weight:700;letter-spacing:-.02em}
+.tag{display:inline-block;font-style:normal;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border:1px solid var(--rule);padding:1px 6px;border-radius:2px;vertical-align:middle;margin-right:4px;background:#fff}
+.tag-sim{color:var(--verm);border-color:#e7b3a9}
+.charts{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:18px}
+figure{margin:0}
+figcaption{font-size:13px;font-weight:700;margin-bottom:8px}
+.bar{display:grid;grid-template-columns:minmax(118px,150px) 1fr 52px;align-items:center;gap:10px;font-size:13px;margin:3px 0}
+.bar svg{width:100%;height:9px;display:block;background:#ecede6}
+.bar rect{fill:var(--verm)}
+.bar-l{color:#3d433f}
+.bar-v{text-align:right;color:var(--muted)}
+.baseline-ubi{font-size:14px;color:#3d433f;margin:20px 0 0;max-width:900px}
+@media(max-width:960px){.stats{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:620px){.stats{grid-template-columns:1fr 1fr}.charts{grid-template-columns:1fr}.bar{grid-template-columns:minmax(96px,120px) 1fr 48px}}
+</style>

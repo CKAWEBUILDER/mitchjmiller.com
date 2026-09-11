@@ -403,6 +403,8 @@ export function samplePersonas(pop: Population, idx: number[], count: number, se
 
 export const fmtInt = (v: number) => Math.round(v).toLocaleString('en-US');
 export const fmtUSD = (v: number) => v.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+/** Two decimals for small per-person amounts such as budget per adopter. */
+export const fmtUSDcents = (v: number) => v.toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
 export const fmtPct = (v: number, digits = 1) => `${(v * 100).toFixed(digits)}%`;
 export const fmtBillions = (v: number) => `${v < 0 ? '-' : ''}$${(Math.abs(v) / 1e9).toFixed(1)}B`;
 export const fmtMillions = (v: number) => `${(v / 1e6).toFixed(2)}M`;
@@ -582,7 +584,7 @@ ${ubiBlock}
 <div class="stat"><small>estimate · adopters</small><b id="o3">${fmtInt(r.adopters)}</b></div>
 <div class="stat"><small>estimate · adopters as share of filtered</small><b id="o4">${fmtPct(r.adopterShareOfFiltered, 2)}</b></div>
 <div class="stat"><small>estimate · total ${esc(state.reach.valueKind)}</small><b id="o5">${fmtUSD(r.totalValue)}</b></div>
-<div class="stat"><small>estimate · budget per adopter</small><b id="o6">${r.budgetPerAdopter === null ? '—' : fmtUSD(r.budgetPerAdopter)}</b></div>
+<div class="stat"><small>estimate · budget per adopter</small><b id="o6">${r.budgetPerAdopter === null ? '—' : fmtUSDcents(r.budgetPerAdopter)}</b></div>
 </div>
 
 <h2>Personas</h2>
@@ -599,8 +601,9 @@ function n(v){v=parseFloat(v);return isFinite(v)?v:0}
 function pct(v){return Math.min(1,Math.max(0,n(v)/100))}
 function fi(v){return Math.round(v).toLocaleString('en-US')}
 function fu(v){return v.toLocaleString('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0})}
+function fc(v){return v.toLocaleString('en-US',{style:'currency',currency:'USD',minimumFractionDigits:2,maximumFractionDigits:2})}
 function run(){var e=P*pct(g('a1').value),a=e*pct(g('a2').value),d=a*pct(g('a3').value),t=d*Math.max(0,n(g('a4').value)),b=Math.max(0,n(g('a5').value));
-g('o1').textContent=fi(e);g('o2').textContent=fi(a);g('o3').textContent=fi(d);g('o4').textContent=(P>0?(d/P*100):0).toFixed(2)+'%';g('o5').textContent=fu(t);g('o6').textContent=d>0?fu(b/d):'—';}
+g('o1').textContent=fi(e);g('o2').textContent=fi(a);g('o3').textContent=fi(d);g('o4').textContent=(P>0?(d/P*100):0).toFixed(2)+'%';g('o5').textContent=fu(t);g('o6').textContent=d>0?fc(b/d):'—';}
 ['a1','a2','a3','a4','a5'].forEach(function(id){g(id).addEventListener('input',run)});})();
 </script>
 </body></html>

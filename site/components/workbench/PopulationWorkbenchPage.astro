@@ -1,0 +1,56 @@
+---
+/**
+ * Complete content of /lab/population-workbench/ — drop into any layout with one import.
+ * Static baseline numbers are computed at build time; the React island hydrates
+ * when visible and loads the same JSON the build used.
+ */
+import { loadBaseline, DATA_PATH, META_PATH } from './baseline';
+import WorkbenchBaseline from './WorkbenchBaseline.astro';
+import WorkbenchCta from './WorkbenchCta.astro';
+import Workbench from '../../islands/workbench/Workbench';
+import { DISCLAIMERS, MODEL_VERSION, fmtInt } from '../../islands/workbench/model';
+const b = loadBaseline();
+const millions = (b.meta.totalPopulation / 1e6).toFixed(1);
+---
+<article class="wb-page">
+  <p class="kicker">Lab · Free tool · v{MODEL_VERSION}</p>
+  <h1>Build your own simulated population</h1>
+  <p class="deck">Turn a question into an inspectable population model. Filter {millions} million Californians from public Census microdata, weigh two kinds of scenario against the people you selected, draw attribute-only personas, and export everything with its assumptions attached.</p>
+
+  <ol class="steps" aria-label="What the workbench does">
+    <li><strong>Define the question.</strong> One sentence. It travels with every export so the assumptions stay attached to the decision.</li>
+    <li><strong>Filter the population.</strong> Age, personal income band, education, employment, sex and race. Every count is weighted, so it reads as people in California, not rows in a file.</li>
+    <li><strong>Compare scenarios.</strong> A verified universal-basic-income policy model, and a reach-and-adoption estimate for a product, price or budget decision where every assumption is a visible input.</li>
+    <li><strong>Draw personas.</strong> Records sampled from your selection in proportion to their survey weight, described by attributes only. {DISCLAIMERS.personas}</li>
+    <li><strong>Export.</strong> A self-contained interactive HTML report, a CSV of the personas and a JSON of every input, built in your browser.</li>
+  </ol>
+
+  <p class="labels"><span>How to read the numbers:</span> <em>observed</em> comes straight from a Census record · <em>calculated</em> is weighted arithmetic on those records · <em>simulated</em> is the UBI model's output · <em>assumed</em> is something you typed · <em>estimate</em> is arithmetic on assumptions and not a forecast.</p>
+
+  <WorkbenchBaseline baseline={b} />
+
+  <section class="tool" aria-labelledby="tool-h">
+    <h2 id="tool-h">Workbench</h2>
+    <p class="tool-note">Loads {fmtInt(b.records)} records ({Math.round(b.fileBytes / 1024)} KB) into your browser on first view. Nothing you enter leaves the page. {DISCLAIMERS.reach.replace(/\.$/, '')} applies to every reach output.</p>
+    <noscript>
+      <p class="noscript"><strong>JavaScript is off, so the interactive workbench is not running.</strong> The statewide baseline above, the step-by-step description and the <a href="/lab/population-workbench/methodology/">methodology</a> are complete without it. With JavaScript on, the tool runs entirely in your browser and makes no network requests beyond loading the public data file.</p>
+    </noscript>
+    <Workbench client:visible baseline={b.summary} dataUrl={DATA_PATH} metaUrl={META_PATH} />
+  </section>
+
+  <WorkbenchCta />
+</article>
+<style>
+.steps{counter-reset:step;list-style:none;padding:0;margin:26px 0 22px;display:grid;grid-template-columns:repeat(5,1fr);gap:18px;border-top:1px solid var(--rule);padding-top:20px}
+.steps li{counter-increment:step;font-size:14px;line-height:1.5;max-width:none;color:#3d433f}
+.steps li::before{content:"0" counter(step);display:block;font-size:12px;letter-spacing:.14em;color:var(--verm);margin-bottom:6px}
+.steps strong{display:block;color:var(--ink);margin-bottom:4px}
+.labels{font-size:14px;color:var(--muted);max-width:900px}
+.labels span{color:var(--ink);font-weight:700}
+.labels em{font-style:normal;color:var(--ink);border-bottom:1px solid var(--rule)}
+.tool h2{margin-top:32px}
+.tool-note{font-size:14px;color:var(--muted);max-width:820px}
+.noscript{border-left:3px solid var(--verm);padding:10px 16px;background:#fff;font-size:15px;max-width:820px}
+@media(max-width:960px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.steps{grid-template-columns:1fr}}
+</style>

@@ -1,0 +1,87 @@
+---
+/**
+ * Complete content of /lab/population-workbench/methodology/ — one import.
+ * Numbers are computed at build time from the same JSON the tool loads.
+ */
+import { loadBaseline } from './baseline';
+import { DISCLAIMERS, MODEL_VERSION, DATA_SOURCE, INCOME_BANDS, fmtInt, fmtPct, fmtUSD, fmtBillions, fmtMillions } from '../../islands/workbench/model';
+const b = loadBaseline();
+const m = b.meta;
+const s = b.summary;
+const raceRows = Object.entries(m.raceShares).map(([label, full]) => ({ label, full, sample: s.raceShares.find((r) => r.label === label)?.share ?? 0 }));
+const eduRows = Object.entries(m.eduShares).map(([label, full]) => ({ label, full, sample: s.educationShares.find((r) => r.label === label)?.share ?? 0 }));
+const maxGap = Math.max(...[...raceRows, ...eduRows].map((r) => Math.abs(r.full - r.sample)));
+const pp = (v: number) => `${(v * 100).toFixed(1)}`;
+---
+<article class="method">
+  <p class="kicker">Lab · Population workbench · Methodology</p>
+  <h1>Methodology and limitations</h1>
+  <p class="deck">What the workbench observes, what it calculates, what it simulates and what it simply assumes — and what would make its answers better.</p>
+
+  <h2 id="data">Data source</h2>
+  <p>{DATA_SOURCE}. The Public Use Microdata Sample is disclosure-protected person-level survey data released by the Census Bureau; it is in the public domain. The full 2019 1-Year file for California holds {fmtInt(m.sampleRecords)} person records with survey weights that sum to {fmtInt(m.totalPopulation)} people.</p>
+  <p>The workbench loads a {fmtInt(b.records)}-record sample of that file ({Math.round(b.fileBytes / 1024)} KB), prepared for the earlier California UBI simulator from the Census FTP release. Six attributes are carried per record: age, personal income, sex, race, education and employment status, coded into the categories shown in the tool. The preparation script is not part of this repository, so the sampling procedure is not re-verified here; the comparison below shows how closely the sample's weighted shares track the full file's published benchmarks.</p>
+
+  <h2 id="weighting">Weighting</h2>
+  <p>Every sampled record carries the same scaled weight, {b.recordWeight.toFixed(4)}, which is the state population divided by the record count ({fmtInt(m.totalPopulation)} ÷ {fmtInt(b.records)}). Weighted totals therefore reproduce the state population ({fmtInt(b.totalWeight)} people) and every count, share, mean and median in the tool is a weighted statistic. The original person weights (PWGTP) are not carried in the sample, so within this dataset "probability proportional to weight" persona sampling is equivalent to uniform sampling; the code is written for unequal weights so a differently weighted dataset behaves correctly.</p>
+  <div class="table-scroll"><table>
+    <caption>Sample versus full-file benchmarks (percent of people). Largest gap: {pp(maxGap)} points.</caption>
+    <thead><tr><th>Attribute</th><th>Category</th><th>Full file</th><th>This sample (weighted)</th><th>Gap</th></tr></thead>
+    <tbody>
+      {raceRows.map((r) => <tr><td>Race</td><td>{r.label}</td><td>{pp(r.full)}</td><td>{pp(r.sample)}</td><td>{(Math.abs(r.full - r.sample) * 100).toFixed(1)}</td></tr>)}
+      {eduRows.map((r) => <tr><td>Education</td><td>{r.label}</td><td>{pp(r.full)}</td><td>{pp(r.sample)}</td><td>{(Math.abs(r.full - r.sample) * 100).toFixed(1)}</td></tr>)}
+    </tbody>
+  </table></div>
+  <p>Full-file benchmarks: mean personal income {fmtUSD(m.meanPersonalIncome)}, median {fmtUSD(m.medianPersonalIncome)}, adult mean {fmtUSD(m.adultMeanIncome)}. Sample (weighted): mean {fmtUSD(s.meanIncome)}, median {fmtUSD(s.medianIncome)}. Estimates from small filtered selections are unstable; the tool flags selections under 100 records.</p>
+
+  <h2 id="labels">Observed, calculated, simulated, assumed</h2>
+  <div class="table-scroll"><table>
+    <thead><tr><th>Label</th><th>Meaning</th><th>Examples in the tool</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Observed</strong></td><td>Read directly from a Census microdata record.</td><td>Record count; each persona's age, income band, education, employment, sex and race.</td></tr>
+      <tr><td><strong>Calculated</strong></td><td>Arithmetic on observed records and their survey weights. No model.</td><td>People represented, share of California, weighted median income, age and income histograms, category shares.</td></tr>
+      <tr><td><strong>Simulated</strong></td><td>Output of the UBI policy model applied record by record, then weighted.</td><td>Program cost, tax revenue, net fiscal position, net gainers and payers, poverty proxy before and after.</td></tr>
+      <tr><td><strong>Assumed</strong></td><td>A number you typed. The tool does not check it against anything.</td><td>Eligible share, awareness rate, adoption rate, value per adopter, budget; all UBI parameters.</td></tr>
+      <tr><td><strong>Estimate</strong></td><td>Arithmetic on assumed numbers. Explicitly not a forecast.</td><td>Eligible people, aware people, adopters, total revenue or cost, budget per adopter.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2 id="ubi">Scenario A: the UBI policy model</h2>
+  <p>The model is the TypeScript module from the California UBI simulator, carried over without changes to its logic. For each record it computes an annual benefit (adult or child amount × 12, by the chosen adult age), a tax (the chosen rate × personal income, or × income above the exemption when progressive), and the net change (benefit − tax). Weighted sums give program cost and revenue; the "revenue-neutral flat rate" is cost divided by total taxable income. Poverty uses a personal-income proxy of {fmtUSD(m.povertyLine)} and is labeled illustrative because the official measure is household-based.</p>
+  <p>Verification: the model, the ported file and the original file produce identical outputs on this sample, and an independent plain-loop calculation matches the headline figures. Default parameters ($1,000/month to adults 18+, 30% flat tax) on the statewide baseline give program cost {fmtBillions(b.ubi.totalUbiCost)}, tax revenue {fmtBillions(b.ubi.totalTaxRevenue)}, net gainers {fmtMillions(b.ubi.beneficiaries)}, net payers {fmtMillions(b.ubi.payers)}, and a poverty proxy of {fmtPct(b.ubi.povertyBefore)} before and {fmtPct(b.ubi.povertyAfter)} after. The same logic on the full {fmtInt(m.sampleRecords)}-record file gives near-identical, not identical, aggregates. When a filter is active the model runs on the selection only, so "revenue-neutral" means neutral within that selection.</p>
+
+  <h2 id="reach">Scenario B: reach and adoption</h2>
+  <p>Eligible people = filtered people × eligible share. Aware people = eligible × awareness rate. Adopters = aware × adoption rate. Total revenue or cost = adopters × value per adopter. Budget per adopter = budget ÷ adopters. That is the whole model. There is no behavioral response, no calibration and no uncertainty range, which is why every output is labeled "{DISCLAIMERS.reach}" The value of the scenario is that the population it starts from is real and weighted, and that every assumption is written down and exported.</p>
+
+  <h2 id="personas">Personas</h2>
+  <p>Personas are records drawn from the filtered selection without replacement, with probability proportional to survey weight (Efraimidis–Spirakis keys from a seeded generator, so a seed reproduces the same draw). A card shows only the attributes on the record: age, personal income band, education, employment, sex and race. No names, photos, quotes, goals or behaviors are generated, because none of that is in the data. {DISCLAIMERS.personas}</p>
+
+  <h2 id="limitations">Limitations</h2>
+  <ul>
+    <li>2019 data: pre-pandemic incomes and employment. Nothing here describes 2026 California.</li>
+    <li>Personal income, not household income. Poverty is a proxy, not the official measure.</li>
+    <li>A {fmtInt(b.records)}-record sample of a {fmtInt(m.sampleRecords)}-record file. Filtered selections can become small quickly; the tool warns under 100 records.</li>
+    <li>No geography. A county-group filter via PUMA codes was planned but not shipped because the mapping was not verified.</li>
+    <li>Income bands are fixed ({INCOME_BANDS.length} bands from "{INCOME_BANDS[0].label}" to "{INCOME_BANDS[INCOME_BANDS.length - 1].label}"); Census top-coding and a few negative reported incomes are kept as reported.</li>
+    <li>Categories are as coded by the preparation pipeline. "Other race" and "Two or more races" follow the ACS race question, not Hispanic origin.</li>
+    <li>The reach scenario has no behavioral content. It cannot tell you whether an adoption rate is plausible.</li>
+    <li>The tool runs in your browser and stores nothing. Close the tab and the work is gone unless you exported it.</li>
+  </ul>
+  <p>What would improve the answers: the full-file weights, household variables, a current-year file, geography, and — for a real decision — calibration against records you actually hold and validation against outcomes you have actually observed.</p>
+
+  <h2 id="reuse">Reuse</h2>
+  <p>The Census microdata is public domain and can be reused freely; cite the U.S. Census Bureau, 2019 ACS 1-Year PUMS. Reports, CSVs and JSON files you export from the workbench are yours; attribution to this tool is welcome but not required. The workbench source is published as part of this site for inspection; no separate open-source license is granted for it at this time, so ask before reusing the code itself.</p>
+
+  <h2 id="changelog">Changelog</h2>
+  <ul>
+    <li><strong>v{MODEL_VERSION} — 2026-09-11.</strong> First public version: question, six filters, weighted distributions, UBI policy model, reach-and-adoption estimate, weighted persona sampling, HTML/CSV/JSON export.</li>
+  </ul>
+  <noscript><p class="noscript">This page is complete without JavaScript. The interactive workbench itself needs JavaScript to run in your browser.</p></noscript>
+  <p><a href="/lab/population-workbench/">Back to the workbench</a></p>
+</article>
+<style>
+caption{caption-side:top;text-align:left;font-size:14px;color:var(--muted);padding:0 0 8px}
+.method ul{padding-left:20px}
+.method li{margin-bottom:8px}
+.noscript{border-left:3px solid var(--verm);padding:10px 16px;background:#fff;font-size:15px}
+</style>

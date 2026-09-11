@@ -24,7 +24,7 @@ GitHub is canonical. The persistent checkout is the designated continuation fold
 
 ## Active build update — September 11
 
-Mitch has now explicitly authorized design-first collaboration, a theme to review and agree upon, and rebuilding in a new staging environment. The current implementation branch is `codex/astro-html-staging-20260911`, incorporating main's robots hotfix. Two HTML/CSS themes and Astro content proofs are implemented. The build passed: nine static pages, full case-study bodies and four PDF paths. Local review responded 200 on port 5187; private staging publication is in progress. See [staging task record](docs/design-review-2026-09-11/README.md). The live public site is unchanged. Older planning-only statements below are historical; implementation is now authorized and underway. Full migration and production promotion remain incomplete.
+Mitch has now explicitly authorized design-first collaboration, a theme to review and agree upon, and rebuilding in a new staging environment. The current implementation branch is `codex/astro-html-staging-20260911`, incorporating main's robots hotfix. Two HTML/CSS themes and Astro content proofs are implemented. The build passed: nine static pages, full case-study bodies and four PDF paths. Local review responded 200 on port 5187; owner-private staging is published at https://mitch-portfolio-html-staging.clearkayakrentalsoah.chatgpt.site. See [staging task record](docs/design-review-2026-09-11/README.md). The live public site is unchanged. Older planning-only statements below are historical; implementation is now authorized and underway. Full migration and production promotion remain incomplete.
 
 ## What is done
 
@@ -56,7 +56,7 @@ The public lab can share constructive ideas and unfinished demonstrations, invit
 
 ## Exact next task
 
-Complete private staging publication and show the two HTML/CSS design directions for theme review. Then apply the agreed design to the full route/content inventory. The implementation branch already includes main's robots fix and the Astro proof passes raw HTML checks. Browser/mobile QA and full route migration still remain.
+Obtain theme direction from Mitch using the published private staging comparison. Then apply the agreed design to the full route/content inventory. The implementation branch already includes main's robots fix and the Astro proof passes raw HTML checks. Browser/mobile QA and full route migration still remain.
 
 Do not ask Mitch to restate the context. Present a prefilled project register when missing project identities need confirmation. Existing public-material permission does not need repeating. The latest request for this handoff is not a production/DNS approval.
 
@@ -80,6 +80,6 @@ The consolidated full public-release allowance is 32–51 focused human-equivale
 
 ## Operating notes
 
-The original checkout has two untracked drafts: `content-studio/drafts/assets/gbp-2026-ai-grounding.png` and `content-studio/drafts/gbp-2026-ai-grounding.linkedin.md`. Leave them untouched. Existing npm scripts still build React/Vite; do not describe them as Astro commands. No credentials belong in these records.
+The original checkout has two untracked drafts: `content-studio/drafts/assets/gbp-2026-ai-grounding.png` and `content-studio/drafts/gbp-2026-ai-grounding.linkedin.md`. Leave them untouched. Default development/build scripts now use Astro; historical React/Vite commands have a `:legacy` suffix. Production release scripts remain blocked pending review and a validated full migration. No credentials belong in these records.
 
 SFC is a separate project. Mitch requested a week for Kathy/Scott to respond before follow-up; focus on the personal site meanwhile. That preference is recorded, not scheduled as an automated email or reminder. Preserve user-open browser tabs. The GitHub roadmap was left open for review; a source push did not deploy the website.

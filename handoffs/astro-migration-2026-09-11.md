@@ -44,3 +44,7 @@ Planning and durable handoff complete. Astro not implemented. Production remains
 ## Stop conditions and completion records
 
 Do not deploy the React review, migrate DNS, purchase plans or upload private artifacts without the applicable authorization. Ask only for genuinely missing facts/access; existing public-material approval persists. Update PROJECT.md and this handoff with completed changes, checks, source/deploy references and exact next action after each milestone.
+
+## Staging completion update
+
+Private staging succeeded: https://mitch-portfolio-html-staging.clearkayakrentalsoah.chatgpt.site. Deployed source is `5bca30b7b79bd84936eb0afe008a88815415bfbc`; exact deployment/version evidence is in `docs/design-review-2026-09-11/README.md`. Local task preview stopped. Next: theme selection, full template/content migration, QA, then separate production approval. Public domain unchanged.

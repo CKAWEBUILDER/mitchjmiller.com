@@ -25,3 +25,18 @@ Review the two themes, agree the visual direction, then apply the chosen tokens 
 ## Verification before staging publication
 
 Astro 7.3.2 static build succeeded and generated nine pages. The output verifier passed full case-body checks, headings, noindex metadata, four PDF paths and exclusion of production CNAME/legacy SFC HTML. Local root readiness returned HTTP 200 at `http://127.0.0.1:5187/`. Visual/browser QA is not claimed. Astro preview is a task-specific background process managed by `astro preview stop`; the review remains available through publication.
+
+## Private staging published
+
+Native Sites deployment status reported `succeeded` on September 11, 2026. Owner-private review URL: https://mitch-portfolio-html-staging.clearkayakrentalsoah.chatgpt.site
+
+- Source used for this build: `5bca30b7b79bd84936eb0afe008a88815415bfbc`, pushed to the canonical GitHub feature branch and the Sites deployment mirror.
+- Site: `appgprj_6aa39e9ddc0881919bc64cbef445b4a3`.
+- Saved version 1: `appgprj_6aa39e9ddc0881919bc64cbef445b4a3~appgver_e96eb0da17388191962421d5a19092b4`.
+- Successful deployment: `appgdep_6aa3a201c92081918980fd97d990fe29`.
+- Archive validated: static index and hosting manifest present; no Git or environment-file leakage.
+- Browser opening was queued, not visually verified. No browser/mobile QA is claimed.
+- Task-specific local Astro preview on port 5187 was stopped after successful hosting. Historical user review resources were preserved.
+- Production domain/DNS remain unchanged. Theme selection is pending; full migration and production approval remain outstanding.
+
+Exact next step: Mitch reviews Independent Practice versus Research Atelier and selects or combines their visual direction. Apply that decision across the full inventory, then complete route, content, SEO and interaction QA before requesting production release approval. This follow-up documentation commit does not change the deployed artifact or its source revision.

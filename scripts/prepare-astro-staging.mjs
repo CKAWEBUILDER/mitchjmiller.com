@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 const output=resolve('.stage-assets');
 if(output!==resolve(process.cwd(),'.stage-assets')) throw new Error('Unexpected staging asset directory');
 rmSync(output,{recursive:true,force:true}); mkdirSync(output,{recursive:true});
-for(const name of ['images','files','artifacts','favicon.ico','favicon.png','favicon.svg','apple-touch-icon.png','opengraph.jpg']){
+for(const name of ['images','files','artifacts','favicon.ico','favicon.png','favicon.svg','apple-touch-icon.png','opengraph.jpg','data/ca-pums-sample-2019.json','data/ca-pums-meta-2019.json']){
  const source=resolve('public',name); if(existsSync(source)) cpSync(source,resolve(output,name),{recursive:true});
 }
 // Keep the production download bytes at the public URLs. Updated review PDFs

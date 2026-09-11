@@ -1,12 +1,12 @@
 # Production HTML parity + separate design candidate
 
-## Latest update — overnight QA complete
+## Published outcome — September 11, 2026, 20:29 UTC
 
-Browser and native connector access recovered. All focused desktop/mobile, native-menu, resume-dialog, category-filter, Mermaid, existing-lab and JavaScript-disabled navigation checks passed. The only new fix cleans a historical study-note teaser that exposed truncated HTML markup; full source bodies remain unchanged. See [QA evidence](qa-overnight.md). Task browser/server resources were cleaned up. The previous authentication blocker below is historical and resolved. Next action is the authorized update of the existing owner-private Sites review from this branch, then record its exact source/version/deployment. Public release remains separate.
+The final browser QA and private update succeeded. [Publication evidence](publication.json) records Sites version2 and exact deployed source59d84a980dc6b99302dbecf62f62e399a93f9ea0. [Review hub](https://mitch-portfolio-html-staging.clearkayakrentalsoah.chatgpt.site/review/), [homepage candidate](https://mitch-portfolio-html-staging.clearkayakrentalsoah.chatgpt.site/design/), [full SFC candidate](https://mitch-portfolio-html-staging.clearkayakrentalsoah.chatgpt.site/design/case-studies/sfc-surf-school/). Public domain unchanged by this task. Browser tests and all checks passed; [QA evidence](qa-overnight.md). Earlier blockers and pending-work statements retained below are historical; root PROJECT.md and this published outcome are current.
 
 September 11, 2026. Implementation task `01a091b4-5b45-7843-8174-bff6d23ece68`; originating task `01a091b0-6e3a-79c1-8641-14a21d028522`.
 
-## Current outcome
+## Earlier implementation checkpoint (superseded by published outcome)
 
 Implemented locally on `codex/html-parity-design-20260911` in `/Users/mitchellmiler/Documents/Career Coach/work/mitchjmiller-parity-20260911`. Both static build modes pass. Implementation commit `c2746011e054af777ed4ac1ba9f11dfa26c64764` is pushed to GitHub. Final browser QA and the private-stage update remain outstanding. The current public site and previous private staging are unchanged. Do not claim a fresh deployment.
 
@@ -48,13 +48,13 @@ Native document navigation replaces SPA transitions; all content is immediately 
 
 The production visual fixture was exported locally with its analytics removed before browser testing. External destinations were retained; their remote health was not re-audited. Mermaid's optional client chunk triggers the build-size warning; it loads only when diagram nodes exist. This is not a whole-site React bundle.
 
-## Auth blocker and remaining QA
+## Historical authentication interruption (resolved)
 
 Automatic approval review rejected the mobile menu/scroll test: “Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.” The later read-only Sites request returned HTTP401 token_revoked. Do not bypass these gates or keep retrying the same request. Sign out of Codex and back in before resuming affected actions. User implementation/source/private-stage authorization already exists.
 
 Pending browser checks: complete candidate case desktop/mobile, menu keyboard/touch interactions, resume dialog and downloads, filters, representative article/diagram, all three lab controls, no-JavaScript behavior with JavaScript disabled. Unknown-route404 is already verified by HTTP. A raw HTML verifier proves initial body content and native destinations, but it does not replace these interaction checks. All existing asset and local destination files resolve in both output modes.
 
-## Reproduce and finish
+## Reproduce the validated build
 
 ```sh
 npm run typecheck

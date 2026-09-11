@@ -1,0 +1,15 @@
+{
+  "date": "2026-09-11",
+  "source_commit": "59d84a980dc6b99302dbecf62f62e399a93f9ea0",
+  "github_branch": "codex/html-parity-design-20260911",
+  "project_id": "appgprj_6aa39e9ddc0881919bc64cbef445b4a3",
+  "version_number": 2,
+  "version_id": "appgprj_6aa39e9ddc0881919bc64cbef445b4a3~appgver_5b078c6e51e08191a715679ccfec9843",
+  "deployment_id": "appgdep_6aa4649e19cc819195330a88ab5c106a",
+  "status": "succeeded",
+  "verified_at": "2026-09-11T20:29:38.452983+00:00",
+  "url": "https://mitch-portfolio-html-staging.clearkayakrentalsoah.chatgpt.site",
+  "audience": "owner-only; verified sole owner, no groups or external visitors",
+  "archive_content_hash": "sha256:6a1dc83322cfc5d6204e6c504c778911e5962ea611e058a64b1cefcceb8fa708",
+  "public_domain_changed_by_this_task": false
+}

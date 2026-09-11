@@ -1,55 +1,50 @@
 # Mitchell Miller portfolio — current state
 
-## Latest update — overnight QA complete
+Updated September 11, 2026 at 20:29 UTC. Owner: Mitchell Miller. GitHub: https://github.com/CKAWEBUILDER/mitchjmiller.com.git.
 
-Browser and native connector access recovered. All focused desktop/mobile, native-menu, resume-dialog, category-filter, Mermaid, existing-lab and JavaScript-disabled navigation checks passed. The only new fix cleans a historical study-note teaser that exposed truncated HTML markup; full source bodies remain unchanged. See [QA evidence](docs/implementation-2026-09-11/qa-overnight.md). Task browser/server resources were cleaned up. The previous authentication blocker below is historical and resolved. Next action is the authorized update of the existing owner-private Sites review from this branch, then record its exact source/version/deployment. Public release remains separate.
+## Completed outcome
 
-Updated September 11, 2026. Owner: Mitchell Miller. Canonical source: https://github.com/CKAWEBUILDER/mitchjmiller.com.git. Public domain: https://mitchjmiller.com/.
+The production-parity complete-HTML migration and separate new design candidate are implemented, validated, committed/pushed, and published to the existing owner-private Sites review. The previous authentication interruption is resolved. This task did not change the public domain, DNS or public production deployment.
 
-## Current objective and permissions
+- [Review hub](https://mitch-portfolio-html-staging.clearkayakrentalsoah.chatgpt.site/review/)
+- [Current-site HTML migration](https://mitch-portfolio-html-staging.clearkayakrentalsoah.chatgpt.site/)
+- [New homepage candidate](https://mitch-portfolio-html-staging.clearkayakrentalsoah.chatgpt.site/design/)
+- [Full SFC case candidate](https://mitch-portfolio-html-staging.clearkayakrentalsoah.chatgpt.site/design/case-studies/sfc-surf-school/)
 
-Mitch explicitly authorized two simultaneous tracks: convert the existing production site to complete initial HTML while preserving its appearance/content/URLs/assets, and prepare a separate new design candidate for review. Both earlier themes were rejected. The new direction follows the supplied Contiem reference: navy photographic hero, restrained white header, green actions, enterprise work first and substantial work imagery.
-
-Local implementation, validation, GitHub source push and an update of the existing owner-private Sites review are authorized. Applying the candidate across the site requires design review. Public deployment, DNS/Cloudflare changes, private client systems, CRM/simulation work and spending are not authorized by this task.
-
-## Locations and source/deploy state
+## Source and deployment
 
 | Item | State |
 |---|---|
-| Persistent canonical checkout | `/Users/mitchellmiler/Documents/mitchjmiller-html-migration` |
-| Canonical checkout branch | `codex/astro-html-staging-20260911`, HEAD `424e035eba4f393c9fc7e90769181a72202a10bd` at last inspection |
-| Isolated implementation worktree | `/Users/mitchellmiler/Documents/Career Coach/work/mitchjmiller-parity-20260911` |
-| Implementation branch | `codex/html-parity-design-20260911`, based on `424e035` |
-| Production source snapshot | main `2745c7e20cea0a30d0dc3c5341fc609bfde4b3ea` |
-| Public deployed branch | gh-pages `923dfd85597253786da407fe78de6d0011bbfe16` (robots-only fix) |
-| Existing private review | https://mitch-portfolio-html-staging.clearkayakrentalsoah.chatgpt.site |
-| Last successful private review source | `5bca30b7b79bd84936eb0afe008a88815415bfbc`, the earlier nine-page review |
+| Canonical persistent checkout | `/Users/mitchellmiler/Documents/mitchjmiller-html-migration` — Claude's independent release work; preserve its changes |
+| This isolated implementation | `/Users/mitchellmiler/Documents/Career Coach/work/mitchjmiller-parity-20260911` |
+| Branch | `codex/html-parity-design-20260911` |
+| Verified deployed source | `59d84a980dc6b99302dbecf62f62e399a93f9ea0`; subsequent documentation commits do not imply a different deployment |
+| Private review | Sites version2, owner-only; exact IDs/evidence in [publication.json](docs/implementation-2026-09-11/publication.json) |
+| Production source baseline | main `2745c7e20cea0a30d0dc3c5341fc609bfde4b3ea` |
+| Public deployment baseline | gh-pages `923dfd85597253786da407fe78de6d0011bbfe16`; read live state before any separate release because Claude owns that work |
 
-Implementation commit `c2746011e054af777ed4ac1ba9f11dfa26c64764` is committed and pushed to GitHub on the implementation branch; a documentation follow-up records the final state. The remote staging URL still shows the earlier review; do not represent it as the new candidate. Claude's original branch and proposed overnight plan were preserved. The original checkout has only the coordination addition to PROJECT.md from this task; no source overwrite or merge was performed. The original user checkout `/Users/mitchellmiler/Documents/mitchjmiller.com` and its unpublished drafts remain untouched.
+GitHub source was pushed before the identical commit was mirrored into the existing Sites repository. The validated staging artifact was packaged from this source and privately deployed; terminal status succeeded. No new Site was created. The old private version remains a rollback option. Original user checkout/drafts and Claude proposal/source changes were preserved.
 
-## Implemented
+## Implementation and decisions
 
-- 53 published URLs plus four existing Coming Soon placeholders, and a real 404 document. Complete initial HTML; no whole-site React hydration.
-- Production homepage/templates/styles, native links, native mobile menu/resume dialog, category filters and progressive Mermaid rendering. Full article/note bodies and source images retained.
-- The standalone SFC report remains owner of `/case-studies/sfc-surf-school/`; its body and the four original production PDFs are preserved exactly. Updated review PDFs are separate.
-- New `/design/` homepage and `/design/case-studies/sfc-surf-school/` full narrative candidate. Shared content and image imports; original work imagery; source/metric chronology labels.
-- `/review/` hub, image-complete case previews, and the three pre-existing lab demonstrations as bounded interactive islands. No new simulation product.
-- Separate staging and local release modes. Staging has noindex/no analytics. Release candidate has exactly 53 indexable sitemap URLs, excludes review pages/assets and contains one analytics loader per eligible page. Building never deploys.
+- 53 published URLs, four retained Coming Soon/noindex placeholders, and404. Full original article/note bodies, native links and production styling. No whole-site client hydration.
+- The standalone SFC report remains owner of its original URL with identical body. Four original production PDFs retain exact bytes. Newer review PDFs stay at `/review-assets/files/`.
+- New design uses the supplied Contiem direction: navy photographic hero, quiet white header, green actions, enterprise work first, substantial actual work imagery. Both older themes were rejected; they are historical references only.
+- `/design/` and its full SFC case share content/image sources with the migration. Applying this candidate to other pages awaits design review.
+- Existing three lab demonstrations are bounded islands. No new simulation, CRM or client portal was built by this task.
+- Explicit small parity exceptions: native document navigation/enhancements, duplicate identical article listing removed, SFC category repaired for filters, and one historical teaser cleaned of truncated HTML. Full content was not rewritten.
+- Staging: noindex and no analytics. Local release mode: exactly53 indexable sitemap URLs, placeholders still noindex, review pages/assets excluded and one analytics loader per eligible page. Build commands do not deploy.
 
-## Evidence and current blocker
+## Validation
 
-See [implementation and QA record](docs/implementation-2026-09-11/README.md), [route manifest](docs/implementation-2026-09-11/route-manifest.json), [staging checks](docs/implementation-2026-09-11/validation-staging.json), [release checks](docs/implementation-2026-09-11/validation-release.json), and [continuation handoff](handoffs/parity-design-2026-09-11.md).
+[Focused browser QA](docs/implementation-2026-09-11/qa-overnight.md) passed: full SFC candidate desktop/mobile, both menus, resume dialog/Escape, writing/build filters, Mermaid SVG/source fallback, all three lab controls and native resume navigation with JavaScript disabled. Screenshots are linked there. No horizontal overflow at390px on tested views.
 
-Both static modes pass: 57 routes, 25 full article/note bodies, 160 original case fields, four exact PDFs, exact SFC report body, all local links/assets/anchors, correct indexing/sitemap policy. Typecheck and diff whitespace checks pass. Browser desktop homepage parity and candidate homepage desktop/mobile were inspected. Candidate mobile measured 390px without horizontal overflow.
+[Static staging](docs/implementation-2026-09-11/validation-staging.json), [local release](docs/implementation-2026-09-11/validation-release.json), both TypeScript configurations and [62 HTTP checks](docs/implementation-2026-09-11/validation-http.json) passed. Full checks cover57 retained routes,25 complete article/note bodies,160 case fields,4 exact PDFs, the exact SFC report body, local assets/links/anchors, sitemap/indexing and missing-page404. Local visual parity was checked against an analytics-free export of deployed production. External destination health and public indexing were not claimed.
 
-Remaining interaction/case-study visual QA is blocked: automatic approval review rejected the mobile menu/scroll action because its refresh token was revoked. Sites independently returns HTTP401 `token_revoked`. The user must sign out of Codex and back in to restore the affected connection. Do not retry rejected actions through another surface or change approval settings. The full local HTTP sweep passed after authorized escalation: 62 URLs with correct200/404 status.
+## Ownership, permissions and next step
 
-## Exact next task
+Mitch authorized implementation, source pushes, private review publication and coordinated overnight agents. This task's authorized portfolio work is complete. Review the new homepage/full case, then decide whether to extend the design and separately approve public promotion. Claude is the sole public release owner; this implementation task did not promote production or alter DNS. Do not infer approval of the rejected themes from older proposals.
 
-After authentication is restored: finish the focused browser checks (candidate full case desktop/mobile; native menu, resume dialog, filters; three lab controls; representative article/diagram; unknown-route404), then commit/push any necessary QA repairs and mirror the current implementation-branch commit into the existing Sites source repository and update the existing owner-private review. Retain the same Sites project ID in `.openai/hosting.json`. Present `/review/`, `/design/`, and the full candidate case for design review. Do not restart the audit or ask for blanket implementation permission.
+The overnight coordinator and Claude use their existing private coordination document and per-owner status files under `/Users/mitchellmiler/Documents/ai-os/ops/overnight-2026-09-11/`. Read their current claims before starting work; do not duplicate Finance, Date Night, DomainSignal, Gmail or AI OS writers.
 
-One integrating agent owns source/deployment. Public release remains gated on review of the concrete result. Rollback for the future public release: retain and restore gh-pages `923dfd8`; rollback for private staging: redeploy its previously saved version. No production change has occurred.
-
-## Historical records
-
-[Prior roadmap](docs/migration-2026-09-11/README.md), [earlier staging](docs/design-review-2026-09-11/README.md), [reviewed narratives/evidence](docs/overhaul-2026-09-10/content-evidence.md), [resume evidence](docs/overhaul-2026-09-10/resumes/README.md), [prior handoff](handoffs/astro-migration-2026-09-11.md). Old theme-selection and three-page-proof instructions are superseded by this record.
+All task-specific portfolio browser/server resources were closed, viewport/script testing restored, and credentials kept out of source/records. Follow [handoff](handoffs/parity-design-2026-09-11.md) for the concrete next step. [Earlier roadmap](docs/migration-2026-09-11/README.md), [implementation detail](docs/implementation-2026-09-11/README.md), [content evidence](docs/overhaul-2026-09-10/content-evidence.md) remain linked references.

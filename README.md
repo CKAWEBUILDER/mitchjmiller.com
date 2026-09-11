@@ -2,7 +2,7 @@
 
 Read [PROJECT.md](PROJECT.md) for current source, review state, permissions and the exact next task. [AGENTS.md](AGENTS.md) is the shared operating contract; [CLAUDE.md](CLAUDE.md) references the same records.
 
-The current branch implements the production portfolio as complete Astro HTML and keeps a separate new design candidate at `/design/`. The public site and existing private stage have not yet been updated with this branch. Final browser QA has now passed and private publication is being finalized; see [implementation evidence](docs/implementation-2026-09-11/README.md).
+The current branch implements the production portfolio as complete Astro HTML and keeps a separate new design candidate at `/design/`. The existing owner-private stage now serves this branch’s validated implementation. This task did not update the public site. See [implementation evidence](docs/implementation-2026-09-11/README.md).
 
 ## Commands
 

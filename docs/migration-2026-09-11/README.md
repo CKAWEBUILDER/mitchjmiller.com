@@ -22,6 +22,8 @@ Create a distinct independent-projects area for Date Night, DomainSignal and the
 
 The data-science lab's proposed flagship is now **Build your own simulated population**: a guided workbench that starts with a business/research question, suggests relevant data sources, helps prepare data, constructs a synthetic population and compares scenarios. A retailer's hypothetical product launch is one example, not a claim of work for that retailer. Begin with a public-data demonstration and transparent assumptions; authorized private CRM imports are a later capability. This new product needs its own discovery/model-validation scope and is not included in the HTML migration estimate. The UBI calculator remains a priority existing-artifact candidate and a related demonstration. [Flagship concept brief](simulation-workbench-concept.md)
 
+The lab should also welcome constructive ideas, incomplete experiments and potential collaborators. Mitch described a similar future lab within DomainSignal's web/mobile products: public idea-sharing and useful demonstrations that can lead to partnerships, community and qualified inbound work. Label concept, prototype and released work clearly; provide a focused way to propose collaboration. This is not an instruction to open-source proprietary repositories or build a discussion platform now. Public browser-delivered HTML/JavaScript remains inspectable; private backend code and data need a separate boundary. Adding the lab inside DomainSignal itself is a separate project, not part of this portfolio migration.
+
 ## Established baseline
 
 | Area | Current public site | Unpublished September redesign |

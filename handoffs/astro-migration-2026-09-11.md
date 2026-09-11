@@ -48,3 +48,27 @@ Do not deploy the React review, migrate DNS, purchase plans or upload private ar
 ## Staging completion update
 
 Private staging succeeded: https://mitch-portfolio-html-staging.clearkayakrentalsoah.chatgpt.site. Deployed source is `5bca30b7b79bd84936eb0afe008a88815415bfbc`; exact deployment/version evidence is in `docs/design-review-2026-09-11/README.md`. Local task preview stopped. Next: theme selection, full template/content migration, QA, then separate production approval. Public domain unchanged.
+
+## Lane 3 — Cloudflare foundation (2026-09-11, overnight)
+
+Built by Claude Code on branch `claude/cloudflare-foundation` (worktree `/Users/mitchellmiler/Documents/mitchjmiller-cloud`). Files: `cloudflare/api-worker/`, `.github/workflows/cloudflare-pages.yml`, `.github/workflows/cloudflare-worker.yml`, `docs/cloudflare/README.md`. Nothing was merged, nothing deployed to GitHub Pages, no DNS or zone changes. Full detail and the form contract: `docs/cloudflare/README.md`.
+
+### What exists now
+
+- Worker `mitchjmiller-api` at https://mitchjmiller-api.clearkayakrentalsoahu.workers.dev (version `0c792635-d43e-4621-8d5f-adee8df470fc`): `GET /health`, `POST /contact` (validation, Turnstile verify, salted IP hash, 5 per IP per hour via KV `RATE`, insert into D1 `mitchjmiller-leads`), CORS allowlist for the site origins and the two local ports. Secrets `TURNSTILE_SECRET` and `IP_SALT` are set. Verified over HTTPS: `/health` 200; bogus Turnstile token → 403 `turnstile_failed`; missing fields → 400 `validation`; foreign origin → 403; preflight 204.
+- D1 `mitchjmiller-leads` (`523da23f-88ff-4af2-b9eb-4774eeb9d000`), schema applied. Lead check: `node cloudflare/api-worker/scripts/leads.mjs`.
+- Turnstile widget (managed) sitekey `0x4AAAAAAEwq_uUlQ6tYWRDc` for `mitchjmiller.com`, `www.mitchjmiller.com`, `localhost`, `mitchjmiller-com.pages.dev`.
+- Pages project `mitchjmiller-com` (production branch `main`): first deployment `c45f83f7` of this worktree's `npm run build` output (9 pages, noindex staging) at https://mitchjmiller-com.pages.dev. Custom domains `mitchjmiller.com` and `www.mitchjmiller.com` added via REST; both `pending` until the zone exists (expected).
+- Private client portal: repo `CKAWEBUILDER/mitchjmiller-clients` (`main` at `807dc9c`), Pages project `mitchjmiller-clients` at https://mitchjmiller-clients.pages.dev (deployment `8663ffcd`), KV `CLIENT_PORTAL`, secret `SESSION_SECRET`, demo workspace `demo` seeded with the approved public `destination-intent-explorer.html`. 14/14 end-to-end checks passed (unauthenticated file → 302 with no body; wrong passcode denied; correct passcode → index + artifact; other slug denied; `?download=1` → attachment). Passcode only in `/Users/mitchellmiler/Documents/mitchjmiller-clients/.local/demo-passcode.txt`.
+
+### What the site lane must wire (contact form)
+
+`POST https://mitchjmiller-api.clearkayakrentalsoahu.workers.dev/contact` with `name`, `email`, `topic` (optional), `message`, `turnstileToken` (or the widget's own `cf-turnstile-response`), `source_url` (optional). JSON or form-encoded/FormData. Turnstile: `<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>` plus `<div class="cf-turnstile" data-sitekey="0x4AAAAAAEwq_uUlQ6tYWRDc" data-theme="light" data-size="flexible"></div>` inside the form. Success `{"ok":true,"id"}`; errors are JSON with `error` codes (`validation`, `turnstile_failed`, `rate_limited`, ...). Keep the `mailto:` fallback in `<noscript>`. A public `/clients/` page can link to https://mitchjmiller-clients.pages.dev until `clients.mitchjmiller.com` exists.
+
+### Morning checklist for Mitch
+
+1. Cloudflare → Add a site `mitchjmiller.com` (Free); note the two nameservers. Namecheap → Custom DNS → those nameservers.
+2. GitHub → both repos → Settings → Secrets: `CLOUDFLARE_API_TOKEN` (Pages: Edit, Workers Scripts: Edit, D1: Edit, KV: Edit) and `CLOUDFLARE_ACCOUNT_ID` = `e956c778b32a922cca488cfdb46fbec8`. The workflows skip until then.
+3. After the zone is active and the production build is on the mirror: Pages → `mitchjmiller-com` → Custom domains → activate both. Not before: the mirror currently serves the noindex staging build.
+4. Test the client portal demo with the passcode file above, then delete the file and name the first real client.
+5. Later: `clients.mitchjmiller.com` domain, Cloudflare Access upgrade, Email Routing send binding for lead notifications.

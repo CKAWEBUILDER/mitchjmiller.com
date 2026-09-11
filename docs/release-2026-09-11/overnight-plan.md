@@ -13,7 +13,7 @@ Prepared by Claude Code after reading PROJECT.md, AGENTS.md, the Codex handoff, 
 | Item | State |
 |---|---|
 | GitHub | `CKAWEBUILDER/mitchjmiller.com`, Pages = legacy branch deploy from `gh-pages`, HTTPS enforced, CNAME `mitchjmiller.com` |
-| DNS | Namecheap nameservers; apex A → GitHub Pages; `www` CNAME → `ckawebuilder.github.io`; MX → Namecheap email forwarding; SPF for Namecheap forwarding; a stale `replit-verify` TXT; no DNSSEC |
+| DNS | Namecheap nameservers; apex A → GitHub Pages; `www` CNAME → `ckawebuilder.github.io`; MX/SPF for Namecheap email forwarding that is **verified unused** (zero Gmail threads ever to, from, cc or delivered-to any `@mitchjmiller.com` address, including spam/trash; site and records use the Gmail address only); a stale `replit-verify` TXT; no DNSSEC |
 | Cloudflare | Wrangler OAuth session works (refreshed today) for the clearkayakrentalsoahu account. Existing Pages projects include `mids-portfolio` (old MIDS site, hosts the working UBI simulator). No zones on the account yet. Token scopes cover Pages, Workers, KV, D1, Turnstile, Email Routing; not zone creation or DNS edits |
 | GA4 | `G-HCKYWCZQ8E` in the live head; no Search Console verification tag or DNS record found, so GSC is probably verified through GA4. The tag must stay. |
 | UBI simulator | Real 2019 ACS PUMS California microdata; TypeScript model (`ubi.ts`) plus a 12k-record weighted browser sample already live at `mids-portfolio.pages.dev/ubi-simulator`. Reusable as the first population-workbench model. |
@@ -61,7 +61,7 @@ Prepared by Claude Code after reading PROJECT.md, AGENTS.md, the Codex handoff, 
 ## Morning checklist for Mitch (about 20 minutes)
 
 1. Cloudflare dashboard → Add a site → `mitchjmiller.com` → Free plan. Note the two nameservers shown.
-2. **Before** changing nameservers: Cloudflare → Email → Email Routing → enable and add the forwarding rule(s) you rely on today (Namecheap forwarding stops working the moment nameservers move). I will have the DNS record list ready to recreate.
+2. No email precautions needed: the `@mitchjmiller.com` forwarding is verified unused, so the MX/SPF records are not recreated. I will have the remaining record list ready.
 3. Namecheap → Domain → Nameservers → Custom DNS → paste the two Cloudflare nameservers. Propagation is usually under an hour.
 4. Search Console: submit `https://mitchjmiller.com/sitemap.xml`, request indexing for home, work, lab, resume, one case study. Add a Domain property via the DNS TXT once the zone is on Cloudflare.
 5. GitHub → both repos → Settings → Secrets → add `CLOUDFLARE_API_TOKEN` (Pages:Edit, Workers:Edit, D1, KV) and `CLOUDFLARE_ACCOUNT_ID` so pushes deploy automatically.
@@ -69,7 +69,6 @@ Prepared by Claude Code after reading PROJECT.md, AGENTS.md, the Codex handoff, 
 
 ## Questions you should be asking
 
-- Do you receive any mail at an `@mitchjmiller.com` address today? If yes, Email Routing must be configured before the nameserver change or that mail bounces.
 - GitHub Pages terms discourage primarily commercial sites. A freemium tool with quoted engagements is another reason to finish the Cloudflare move rather than stay on Pages.
 - Who owns production if I am unavailable: the `gh-pages` rollback commit and the Cloudflare deployment list are both recorded so anyone can revert.
 - Personas from public microdata describe the population, not your prospect's customers. Paid engagements need the client's data and a validation step, or the tool over-promises.

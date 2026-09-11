@@ -1,6 +1,6 @@
 # RELEASE-READY — mitchjmiller.com public release candidate 2026-09-12
 
-Prepared 2026-09-11 17:12 EDT by the Claude integration/QA worker. **Not published.** The lead (release owner) publishes after reading [docs/release-2026-09-12/qa-report.md](docs/release-2026-09-12/qa-report.md).
+Prepared 2026-09-11 17:12 EDT by the Claude integration/QA worker. **PUBLISHED 2026-09-11 17:14 EDT as gh-pages `1b2d2a6`; probes passed (see PROJECT.md).** Originally: the lead (release owner) publishes after reading [docs/release-2026-09-12/qa-report.md](docs/release-2026-09-12/qa-report.md).
 
 ## What this is
 

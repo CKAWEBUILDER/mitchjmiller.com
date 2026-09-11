@@ -19,3 +19,8 @@ Done: workbench and methodology pages in the production shell (`site/layouts/Par
 Evidence: `docs/release-2026-09-12/qa-report.md` (verify-parity PASS 57/57 + 4/4 added, verify-workbench 58/58 on the merged build, typecheck PASS, crawl 757/757 over 61 routes, browser 203/203, screenshots at 1360/390). `origin/codex/html-parity-design-20260911` had no new commits after `bc8f019` at the final fetch.
 
 Next: lead reads the QA report, publishes to `gh-pages` (RELEASE-READY.md), runs the post-publish probes, then the morning items (Search Console, GA4 realtime, live contact test, merge to main). Open decisions for Mitch: `/lab/` public in the sitemap (57 URLs), workbench reuse statement, UBI-on-filtered-selection. QA server on 5193 and headless Chrome were stopped at the end of the task.
+
+
+## Published — 2026-09-11 17:14 EDT
+
+Release owner Claude Code published gh-pages `1b2d2a6` from `c422377` (artifact `18b6093162b76…`); `main` = `036b526`. Live probes passed at 17:15 EDT (details in PROJECT.md). Next: morning Search Console submission, GA4 realtime check, live contact test, design-candidate decision, Cloudflare zone creation and custom-domain activation.

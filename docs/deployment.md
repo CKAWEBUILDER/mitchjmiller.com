@@ -19,7 +19,7 @@ Source changes belong in GitHub before deployment. A feature-branch push does no
 
 1. Ensure the reviewed source commit is pushed to GitHub and record it in the release notes. Use one deploy driver.
 2. Run `npm run typecheck` and `npm run build:production` from that commit.
-3. Check `dist/public/robots.txt`, sitemap, CNAME, key page metadata, PDFs and image assets. Never copy the temporary `_responsive-review.html` QA harness to production.
+3. Check `dist/public/robots.txt`, sitemap, CNAME, key page metadata, PDFs and image assets. Never copy the temporary `_responsive-review.html` or `_presentation-notes.html` review helpers to production.
 4. Fetch `origin/gh-pages` and create a separate clean deploy worktree from it. Confirm that worktree path before replacing its contents. Copy only `dist/public/` into that worktree while preserving `.git`.
 5. Review the complete deploy diff, commit it and push only `gh-pages`. Record the previous deploy commit for rollback.
 6. Verify the Pages deployment, HTTPS, direct loading of homepage, SFC case study, lab, a writing/study route and resume PDFs. Confirm production allows indexing. Then inspect sitemap submission separately; generating a sitemap does not submit it to Search Console.

@@ -43,3 +43,11 @@ The isolated checkout is `/private/tmp/mitchjmiller-overhaul-20260910`. The orig
 ## Exact next step
 
 Review the finished redesign. After approval, publish the same source version using `docs/deployment.md` and verify production. Do not push `gh-pages` or change DNS before that approval. The separate SFC staged logo marker and homepage work are not part of this portfolio deployment.
+
+## September 11 client-style walkthrough
+
+Mitch requested a live, agenda-led presentation in a separate Chrome window, with visible follow-along notes. `presentation-notes.html` records the six-stop script: positioning, proof, live tools, resumes/writing, inquiry path and next phase. It is available locally as the temporary `_presentation-notes.html` review page and was linked visibly in the conversation. It is not a public production asset.
+
+The walkthrough exercised the homepage stages; the 17-project/9-enterprise filters and SFC narrative; destination query/location changes; the clicks/impressions chart; shared call-to-action propagation with a Cardiology override; four resume options; 4-writing/21-studying filters; and the contact project selector. No email was sent from the demonstration form. The Chrome website tab was marked to remain available for review. The user moved the first native Chrome window to the extended display; Chrome subsequently relaunched during an update, requiring reconnection to the available profile. Native window-control inspection was blocked by automatic approval review, so presentation actions used the scoped website browser interface.
+
+New direction discussed: attracting more inbound client opportunities and eventually providing authenticated client workspaces for interactive HTML deliverables, including EDC material. This was exploratory planning, not authorization to upload client files, build authentication, migrate hosts or deploy the redesign. Existing production remains GitHub Pages; private-client storage/access controls need separate design. Browser tabs and temporary HTML are not the long-term archive for client deliverables.

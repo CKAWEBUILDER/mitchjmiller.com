@@ -7,7 +7,9 @@
  *   OPTIONS *      → CORS preflight for allowlisted origins
  *
  * Bindings: LEADS (D1), RATE (KV). Vars: ALLOWED_ORIGINS. Secrets: TURNSTILE_SECRET, IP_SALT.
- * Accepts application/json, application/x-www-form-urlencoded or multipart/form-data.
+ * Accepts application/json, application/x-www-form-urlencoded or multipart/form-data. The body is read through a
+ * byte-counting stream reader and rejected with 413 past 16,384 bytes regardless of Content-Length; every field is
+ * capped server-side in validate().
  * Form contract is documented in docs/cloudflare/README.md.
  */
 
@@ -52,8 +54,14 @@ async function handleContact(request, env, cors) {
   const declared = Number(request.headers.get('Content-Length') || 0);
   if (declared > LIMITS.body) return json({ ok: false, error: 'payload_too_large' }, 413, cors);
 
-  const fields = await readFields(request);
-  if (!fields) return json({ ok: false, error: 'unsupported_media_type' }, 415, cors);
+  const type = (request.headers.get('Content-Type') || '').toLowerCase();
+  if (!supportedType(type)) return json({ ok: false, error: 'unsupported_media_type' }, 415, cors);
+
+  // Count the bytes actually received, whatever Content-Length claims (chunked bodies have none).
+  const body = await readBodyBounded(request, LIMITS.body);
+  if (body === null) return json({ ok: false, error: 'payload_too_large' }, 413, cors);
+
+  const fields = await parseFields(request.headers.get('Content-Type') || '', body);
 
   const { data, errors } = validate(fields);
   if (Object.keys(errors).length) return json({ ok: false, error: 'validation', fields: errors }, 400, cors);
@@ -97,25 +105,69 @@ async function handleContact(request, env, cors) {
   return json({ ok: true, id }, 200, cors);
 }
 
-async function readFields(request) {
-  const type = (request.headers.get('Content-Type') || '').toLowerCase();
-  if (type.includes('application/json')) {
-    const text = await request.text();
-    if (text.length > LIMITS.body) return null;
+function supportedType(type) {
+  return type.includes('application/json') || type.includes('application/x-www-form-urlencoded') || type.includes('multipart/form-data');
+}
+
+/**
+ * Read the body through a stream reader with a byte counter. Returns a Uint8Array, or null as soon as more than
+ * `limit` bytes have arrived (the rest is never read), regardless of any Content-Length header.
+ */
+async function readBodyBounded(request, limit) {
+  if (!request.body) return new Uint8Array(0);
+  const reader = request.body.getReader();
+  const chunks = [];
+  let total = 0;
+  try {
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      total += value.byteLength;
+      if (total > limit) {
+        try {
+          await reader.cancel();
+        } catch {
+          /* ignore */
+        }
+        return null;
+      }
+      chunks.push(value);
+    }
+  } finally {
     try {
-      const parsed = JSON.parse(text);
+      reader.releaseLock();
+    } catch {
+      /* ignore */
+    }
+  }
+  const out = new Uint8Array(total);
+  let offset = 0;
+  for (const c of chunks) {
+    out.set(c, offset);
+    offset += c.byteLength;
+  }
+  return out;
+}
+
+/** Parse an already-bounded body. Unparseable input yields {} so validation reports the missing fields. */
+async function parseFields(rawType, bytes) {
+  const type = rawType.toLowerCase();
+  if (type.includes('application/json')) {
+    try {
+      const parsed = JSON.parse(new TextDecoder().decode(bytes));
       return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {};
     } catch {
       return {};
     }
   }
-  if (type.includes('application/x-www-form-urlencoded') || type.includes('multipart/form-data')) {
-    const form = await request.formData();
+  try {
+    const form = await new Response(bytes, { headers: { 'Content-Type': rawType } }).formData();
     const out = {};
     for (const [k, v] of form.entries()) if (typeof v === 'string') out[k] = v;
     return out;
+  } catch {
+    return {};
   }
-  return null;
 }
 
 function validate(fields) {

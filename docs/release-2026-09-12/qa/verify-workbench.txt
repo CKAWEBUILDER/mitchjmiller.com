@@ -1,0 +1,60 @@
+PASS sample has 12,000 records (12000)
+PASS all sample columns have equal length
+PASS n × scaledWeight ≈ meta.totalPopulation (39512222.4 vs 39512223)
+PASS fromSample totalWeight = n × scaledWeight
+PASS default filters keep every record (12000)
+PASS model.runUbi(all records) equals ported ubi.simulate on every scalar output at default params
+PASS model.runUbi histogram/byAge/byRace/byEducation equal ported output
+PASS original mids-portfolio ubi.ts gives identical scalar outputs
+PASS ported ubi.ts is byte-identical to the original
+PASS independent loop matches program cost $367.7B and revenue $460.6B
+PASS independent loop matches net gainers 18.34M
+PASS independent loop matches poverty proxy 45.8% → 32.9%
+PASS progressive params on an age 25–54 subset (4900 records) match the ported model
+PASS full-population weighted count = 39,512,222
+PASS full-population share of California = 100%
+PASS every distribution sums to the weighted count
+PASS filter (employed women 25–44, $50k–$100k) keeps 366 records = 1,205,123 people
+PASS filtered weighted mean income $69,335 matches independent loop
+PASS filtered category shares are 100% for the selected categories
+PASS filtered share of California 3.05%
+PASS weightedMedian respects weights
+PASS empty selection summarizes to zeros without throwing
+PASS reach scenario arithmetic (1M × 50% × 20% × 5% × $120)
+PASS reach scenario cost variant (funded adopters, budget coverage)
+PASS reach scenario handles an empty population
+PASS six distinct personas sampled
+PASS personas come from the filtered records only
+PASS same seed reproduces the same personas
+PASS different seed changes the sample
+PASS persona count is capped by the selection size
+PASS weight-proportional sampling: 9-weight record drawn 90.1% of 20000 single draws (expected 90%)
+PASS JSON export round-trips inputs, results and labels
+PASS CSV export has a header, six persona rows and the disclaimer
+PASS HTML report escapes the question and carries the disclaimers
+PASS HTML report loads no external resources
+PASS HTML report includes the inline reach recalculation script
+PASS tool page has exactly one h1 with the tool title
+PASS tool page carries a <noscript> notice
+PASS tool page baseline shows 39,512,222 people, 12,000 records, median $16,566
+PASS tool page static HTML carries the persona and reach disclaimers
+PASS tool page links the freemium contact CTA
+PASS methodology page has exactly one h1
+PASS methodology page names the data source, value labels and changelog
+PASS methodology page prints the population and full-file record counts from meta
+PASS tool page references no third-party hosts beyond the site-wide fonts/analytics
+PASS sample and meta JSON are copied into dist/data/
+PASS screenshot docs/lab/screenshots/tool-1360.png (1360px)
+PASS screenshot docs/lab/screenshots/tool-390.png (390px)
+PASS screenshot docs/lab/screenshots/methodology-1360.png
+PASS hydrated weighted count 39,512,222 equals the build-time baseline
+PASS filter chip updates the count to 19,219,404 (employed only)
+PASS download export-html produced population-workbench-report-2026-09-11-21-09.html (32698 bytes)
+PASS downloaded HTML report carries disclaimers and the inline script
+PASS downloaded report recalculates reach in-page (96,097 → 960,970 adopters at 50% adoption)
+PASS download export-csv produced population-workbench-personas-2026-09-11-21-09.csv (1121 bytes)
+PASS download export-json produced population-workbench-assumptions-2026-09-11-21-09.json (13347 bytes)
+PASS no external network requests from the tool page beyond site-wide fonts/analytics
+PASS no page errors
+
+58 passed, 0 failed

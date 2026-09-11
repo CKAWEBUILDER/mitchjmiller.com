@@ -1,0 +1,34 @@
+{
+  "mode": "local-release-candidate",
+  "passed": true,
+  "source": "2745c7e",
+  "productionDeployment": "923dfd85597253786da407fe78de6d0011bbfe16",
+  "checks": {
+    "routes": 57,
+    "fullBodies": 25,
+    "caseFields": 160,
+    "pdfs": 4,
+    "htmlDocuments": 62,
+    "localLinksAndAssets": 2446,
+    "anchorLinks": 64,
+    "addedRoutes": 4
+  },
+  "addedRoutes": [
+    "/lab/",
+    "/lab/population-workbench/",
+    "/lab/population-workbench/methodology/",
+    "/clients/"
+  ],
+  "pdfExpectation": "docs/release-2026-09-12/release-files.json (corrected September 10 PDFs)",
+  "indexableDocuments": 57,
+  "preservedStandaloneBodySha256": "7abc1d27604b146280d63c87a420fc06eab85706304081727dd8b435ca4edd77",
+  "duplicatePublishedSlugsDeduplicated": [
+    "multi-agent-billing-traps"
+  ],
+  "historicalBrokenAnchors": [],
+  "failures": [],
+  "limits": [
+    "HTTP 200/404 behavior, visual parity, responsive layout and interaction behavior require separate local/browser verification.",
+    "Local or private-staging checks do not establish production indexing."
+  ]
+}

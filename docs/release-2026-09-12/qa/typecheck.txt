@@ -1,0 +1,2 @@
+npm notice run mitchjmiller-com@0.0.0 typecheck
+npm notice run tsc -p tsconfig.json --noEmit && tsc -p tsconfig.parity.json --noEmit

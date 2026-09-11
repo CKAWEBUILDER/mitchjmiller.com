@@ -1,6 +1,22 @@
 # Mitchell Miller portfolio — current state
 
-Updated September 11, 2026 at 20:29 UTC. Owner: Mitchell Miller. GitHub: https://github.com/CKAWEBUILDER/mitchjmiller.com.git.
+Updated September 11, 2026 at 17:12 EDT (21:12 UTC). Owner: Mitchell Miller. GitHub: https://github.com/CKAWEBUILDER/mitchjmiller.com.git.
+
+## Release candidate 2026-09-12 — verified, not yet published
+
+Branch `claude/release-2026-09-12` in worktree `/Users/mitchellmiler/Documents/mitchjmiller-release` (from Codex's `codex/html-parity-design-20260911` at `bc8f019`, plus lane 2 `claude/population-workbench` merged at `a6abd03`). Release source commit `c422377`; artifact hash `18b6093162b76fddff62aa088013eff67090eb2779c4746fd438a00f6ac7f6d7` (sorted sha256 of `dist/`, reproduced by two builds). Public site unchanged: `gh-pages` is still `923dfd8`.
+
+| Item | State |
+|---|---|
+| Content | 53 production-parity routes (exact content, complete HTML) + `/lab/` (three existing tools as islands, workbench card) + `/lab/population-workbench/` and `/methodology/` + `/clients/` sign-in entrance. Sitemap 57 URLs; four Coming Soon placeholders stay reachable/noindex. Design candidate not included. |
+| Resume PDFs | Corrected September 10 files at the existing four paths in the release build (`docs/release-2026-09-12/release-files.json`); staging build keeps the July bytes. |
+| Contact | Real form → `https://mitchjmiller-api.clearkayakrentalsoahu.workers.dev/contact` with Turnstile; mailto path kept without JavaScript; `?topic=population-simulation` pre-fills. Live submission is a post-publish probe. |
+| QA | verify-parity PASS, verify-workbench 58/58, typecheck PASS, JavaScript-off crawl 757/757, headless Chrome 203/203 with screenshots — [qa-report](docs/release-2026-09-12/qa-report.md). |
+| Next task | Lead reads the QA report and publishes per [RELEASE-READY.md](RELEASE-READY.md) (clean `gh-pages` worktree from `923dfd8`, replace contents with `dist/`, push, probes; rollback = revert or reset to `923dfd8`), then morning items (Search Console sitemap, GA4 realtime, live contact test, merge to `main`). Decisions for Mitch in the QA report §8. |
+
+Lane status files: `/Users/mitchellmiler/Documents/ai-os/ops/overnight-2026-09-11/`. Continuation record: `handoffs/parity-design-2026-09-11.md` ("Release candidate 2026-09-12").
+
+## Implementation state recorded September 11, 2026 (Codex parity build)
 
 ## Completed outcome
 
@@ -16,6 +32,7 @@ The production-parity complete-HTML migration and separate new design candidate 
 | Item | State |
 |---|---|
 | Canonical persistent checkout | `/Users/mitchellmiler/Documents/mitchjmiller-html-migration` — Claude's independent release work; preserve its changes |
+| Release candidate worktree | `/Users/mitchellmiler/Documents/mitchjmiller-release`, branch `claude/release-2026-09-12` (see the section above) |
 | This isolated implementation | `/Users/mitchellmiler/Documents/Career Coach/work/mitchjmiller-parity-20260911` |
 | Branch | `codex/html-parity-design-20260911` |
 | Verified deployed source | `59d84a980dc6b99302dbecf62f62e399a93f9ea0`; subsequent documentation commits do not imply a different deployment |
@@ -43,7 +60,7 @@ GitHub source was pushed before the identical commit was mirrored into the exist
 
 ## Ownership, permissions and next step
 
-Mitch authorized implementation, source pushes, private review publication and coordinated overnight agents. This task's authorized portfolio work is complete. Review the new homepage/full case, then decide whether to extend the design and separately approve public promotion. Claude is the sole public release owner; this implementation task did not promote production or alter DNS. Do not infer approval of the rejected themes from older proposals.
+Mitch authorized implementation, source pushes, private review publication and coordinated overnight agents. Codex's authorized portfolio work is complete. Review the new homepage/full case, then decide whether to extend the design. Claude is the sole public release owner: the parity track plus lanes 2/3 is the verified release candidate above (release decision recorded in the overnight coordination file); Codex's implementation task did not promote production or alter DNS. Do not infer approval of the rejected themes from older proposals.
 
 The overnight coordinator and Claude use their existing private coordination document and per-owner status files under `/Users/mitchellmiler/Documents/ai-os/ops/overnight-2026-09-11/`. Read their current claims before starting work; do not duplicate Finance, Date Night, DomainSignal, Gmail or AI OS writers.
 

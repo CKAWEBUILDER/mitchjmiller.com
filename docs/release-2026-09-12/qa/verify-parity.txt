@@ -1,0 +1,1 @@
+Parity verification passed (local-release-candidate): 57/57 routes, 4/4 added routes, 25/25 complete articles/notes, 160 original case fields, 4/4 exact PDFs (corrected September 10), 57 sitemap URLs.

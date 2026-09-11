@@ -2,6 +2,7 @@ import { Layout } from "@/components/layout";
 import { SEO } from "@/components/seo";
 import { visibleBlogPosts } from "@/lib/published";
 import { studyNotes } from "@/lib/study-notes";
+import { studyNoteTeaser } from "@/lib/study-note-teaser";
 import { Link } from "@/components/native-link";
 
 type Filter = "all" | "writing" | "studying";
@@ -22,7 +23,7 @@ const studyingItems = studyNotes.map((n) => ({
   slug: n.slug,
   href: `/blog/studying/${n.slug}`,
   title: n.title,
-  teaser: n.excerpt,
+  teaser: studyNoteTeaser(n),
   date: n.date,
   status: undefined as string | undefined,
   meta: `${n.topic} · via ${n.creator}`,

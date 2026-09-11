@@ -2,6 +2,7 @@ import { Router } from "wouter";
 import type { ComponentType } from "react";
 import { caseStudies } from "../../baseline/src/lib/data";
 import { studyNotes } from "../../baseline/src/lib/study-notes";
+import { studyNoteTeaser } from "../../baseline/src/lib/study-note-teaser";
 import { visibleBlogPosts, excludedDraftSlugs, duplicateBlogSlugs } from "../../baseline/src/lib/published";
 import { headshot, portfolioImages } from "../../baseline/src/lib/images";
 import BlogPost from "../../baseline/src/pages/blog-post";
@@ -56,7 +57,7 @@ export const parityRoutes: ParityRoute[] = [
   })),
   ...studyNotes.map(note => ({
     path: `/blog/studying/${note.slug}`, title: `${note.title} | Studying — Mitchell Miller`,
-    description: note.excerpt.replace(/<[^>]*>/g, "").replace(/&amp;/g, "&").replace(/&nbsp;/g, " "), Component: StudyNote,
+    description: studyNoteTeaser(note), Component: StudyNote,
   })),
 ];
 

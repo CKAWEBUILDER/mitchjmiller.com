@@ -1,5 +1,9 @@
 # Continue the two-track implementation
 
+## Latest update — overnight QA complete
+
+Browser and native connector access recovered. All focused desktop/mobile, native-menu, resume-dialog, category-filter, Mermaid, existing-lab and JavaScript-disabled navigation checks passed. The only new fix cleans a historical study-note teaser that exposed truncated HTML markup; full source bodies remain unchanged. See [QA evidence](../docs/implementation-2026-09-11/qa-overnight.md). Task browser/server resources were cleaned up. The previous authentication blocker below is historical and resolved. Next action is the authorized update of the existing owner-private Sites review from this branch, then record its exact source/version/deployment. Public release remains separate.
+
 Read root PROJECT.md and docs/implementation-2026-09-11/README.md. The full production HTML migration and separate new homepage/full SFC case candidate are implemented locally on `codex/html-parity-design-20260911` in `/Users/mitchellmiler/Documents/Career Coach/work/mitchjmiller-parity-20260911`. Implementation commit `c2746011e054af777ed4ac1ba9f11dfa26c64764` is pushed to GitHub. It is not deployed to Sites or production. Authentication was revoked during final QA. Do not redo the implementation or restart planning.
 
 1. Restore Codex authentication (sign out/in); Sites returned token_revoked and approval review rejected the browser interaction check for that same reason.

@@ -1,5 +1,9 @@
 # Mitchell Miller portfolio — current state
 
+## Latest update — overnight QA complete
+
+Browser and native connector access recovered. All focused desktop/mobile, native-menu, resume-dialog, category-filter, Mermaid, existing-lab and JavaScript-disabled navigation checks passed. The only new fix cleans a historical study-note teaser that exposed truncated HTML markup; full source bodies remain unchanged. See [QA evidence](docs/implementation-2026-09-11/qa-overnight.md). Task browser/server resources were cleaned up. The previous authentication blocker below is historical and resolved. Next action is the authorized update of the existing owner-private Sites review from this branch, then record its exact source/version/deployment. Public release remains separate.
+
 Updated September 11, 2026. Owner: Mitchell Miller. Canonical source: https://github.com/CKAWEBUILDER/mitchjmiller.com.git. Public domain: https://mitchjmiller.com/.
 
 ## Current objective and permissions

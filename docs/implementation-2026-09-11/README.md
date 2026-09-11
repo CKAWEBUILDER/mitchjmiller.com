@@ -1,5 +1,9 @@
 # Production HTML parity + separate design candidate
 
+## Latest update — overnight QA complete
+
+Browser and native connector access recovered. All focused desktop/mobile, native-menu, resume-dialog, category-filter, Mermaid, existing-lab and JavaScript-disabled navigation checks passed. The only new fix cleans a historical study-note teaser that exposed truncated HTML markup; full source bodies remain unchanged. See [QA evidence](qa-overnight.md). Task browser/server resources were cleaned up. The previous authentication blocker below is historical and resolved. Next action is the authorized update of the existing owner-private Sites review from this branch, then record its exact source/version/deployment. Public release remains separate.
+
 September 11, 2026. Implementation task `01a091b4-5b45-7843-8174-bff6d23ece68`; originating task `01a091b0-6e3a-79c1-8641-14a21d028522`.
 
 ## Current outcome

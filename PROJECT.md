@@ -2,6 +2,10 @@
 
 Updated September 11, 2026. Owner: Mitchell Miller. Canonical public domain: `https://mitchjmiller.com/`.
 
+## Active coordination — two-track implementation
+
+The existing Codex parity/design branch codex/html-parity-design-20260911 is complete and privately published from59d84a980dc6b99302dbecf62f62e399a93f9ea0 (documentation follow-up bc8f019). Worktree /Users/mitchellmiler/Documents/Career Coach/work/mitchjmiller-parity-20260911 contains current PROJECT.md, full QA and publication evidence. Review: https://mitch-portfolio-html-staging.clearkayakrentalsoah.chatgpt.site/review/ . Browser/auth blockers resolved;57route/body/PDF checks and62HTTP checks plus desktop/mobile/interaction/no-JS QA passed. Claude retains ownership of public release; this task did not deploy public production or change DNS. Preserve parity of existing production content/appearance/PDFs and separate the new design candidate. Both earlier palettes were rejected. This coordination section is the only direct edit from the implementation owner in this checkout; preserve all other Claude/user changes.
+
 ## Purpose
 
 Build a public, complete-HTML portfolio that attracts qualified inbound work and shows the range of Mitch's practice: data science, creativity, UX/UI, engineering/backend systems, content, enterprise search and growth/CRO. Preserve the recruiting/resume path. Use reusable templates so the identity and work can develop over time.

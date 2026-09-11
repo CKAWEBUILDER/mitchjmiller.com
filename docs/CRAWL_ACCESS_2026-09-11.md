@@ -11,3 +11,9 @@ Only robots.txt changes in the deployed tree. Source public/robots.txt is update
 Validation: Python robots parser allows Screaming Frog and the previously named bot groups on the homepage, work, resume and an existing case-study path. Git deployment diff must contain exactly robots.txt. Follow publication with GitHub Pages completion and a fresh read of the live robots response.
 
 Existing meta noindex/nofollow directives in HTML and React are a separate audit finding. They are not removed by this crawl-access-only patch. Audit of the current live site, its active-project inventory and indexing is continuing independently.
+
+## Publication outcome
+
+Source fix 7d0cc82 was pushed to main and codex/allow-production-crawling-20260911 before deployment. GitHub Pages deployment commit 923dfd85597253786da407fe78de6d0011bbfe16 completed with status built and no error at 05:02 UTC on September 11. A fresh live robots response returned User-agent: * / Allow: /. The complete deployment diff from the previous release is exactly robots.txt; all other tracked site files are unchanged.
+
+Mitch was informed immediately that crawling is allowed and to begin a fresh Screaming Frog crawl to reload the rules. The existing noindex directives remain a distinct audit finding. No redesign or hosting migration was deployed.

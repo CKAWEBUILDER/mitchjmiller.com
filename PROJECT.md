@@ -1,10 +1,20 @@
 # Mitchell Miller portfolio — current state
 
-Updated September 11, 2026 at 17:12 EDT (21:12 UTC). Owner: Mitchell Miller. GitHub: https://github.com/CKAWEBUILDER/mitchjmiller.com.git.
+Updated September 11, 2026 at 18:00 EDT (22:00 UTC). Owner: Mitchell Miller. GitHub: https://github.com/CKAWEBUILDER/mitchjmiller.com.git.
 
-## Release candidate 2026-09-12 — verified, not yet published
+## PUBLISHED — September 11, 2026 (release owner: Claude Code)
 
-Branch `claude/release-2026-09-12` in worktree `/Users/mitchellmiler/Documents/mitchjmiller-release` (from Codex's `codex/html-parity-design-20260911` at `bc8f019`, plus lane 2 `claude/population-workbench` merged at `a6abd03`). Release source commit `c422377`; artifact hash `18b6093162b76fddff62aa088013eff67090eb2779c4746fd438a00f6ac7f6d7` (sorted sha256 of `dist/`, reproduced by two builds). Public site unchanged: `gh-pages` is still `923dfd8`.
+- 17:14 EDT: gh-pages `1b2d2a6` (previous `923dfd8`) from release source `c422377`; `main` fast-forwarded. Artifact sha256 `18b6093162b76fddff62aa088013eff67090eb2779c4746fd438a00f6ac7f6d7`, rebuilt and hash-matched immediately before deploy.
+- Live probes 17:15 EDT after Pages reported `built`: home 200, one h1, no `noindex`; robots allows all and declares the sitemap; sitemap 57 URLs; Search Systems PDF sha256 begins `8f48d7d7` (corrected file); `/blog/gbp-2026-ai-grounding/` and `/blog/studying/hermes-concepts-field-guide/` 200 (formerly 404 shells); `/lab/population-workbench/` and `/clients/` 200; unknown route 404 with the real 404 page; Turnstile on `/contact/`.
+- 17:41 EDT follow-up: gh-pages `79de2b6` from source `c52664f` adds only the IndexNow key file `/9b0893b8818bd5bce05d66051f2bc971.txt` (artifact sha256 `6d2a55c4e8e8891c9ad06d941848e1175690b9dd67ba85e42e721512f11c3325`, manifest `docs/release-2026-09-12/artifact-manifest-indexnow.txt`, one-file diff verified). All 57 URLs submitted to IndexNow: `202 Accepted`. Google does not use IndexNow; Search Console submission is a morning item.
+- Cloudflare Pages mirror `mitchjmiller-com` carries the 17:14 artifact plus an `X-Robots-Tag: noindex` header scoped to the pages.dev host; custom domains stay pending until the zone exists. Client portal Pages project set to `fail_open: false` at 17:50 EDT.
+- Not released: the new design candidate (Codex, private review hub). Production shows the parity appearance.
+- Rollback: in a clean gh-pages worktree, `git revert --no-edit 79de2b6 1b2d2a6 && git push origin gh-pages`.
+- Morning: Search Console sitemap submission and indexing requests; GA4 realtime check; live contact test (`node cloudflare/api-worker/scripts/leads.mjs 5` from the cloud worktree); design-candidate decision; Cloudflare zone and custom-domain activation.
+
+## Release candidate 2026-09-12 — verified (published as above)
+
+Branch `claude/release-2026-09-12` in worktree `/Users/mitchellmiler/Documents/mitchjmiller-release` (from Codex's `codex/html-parity-design-20260911` at `bc8f019`, plus lane 2 `claude/population-workbench` merged at `a6abd03`). Release source commit `c422377`; artifact hash `18b6093162b76fddff62aa088013eff67090eb2779c4746fd438a00f6ac7f6d7` (sorted sha256 of `dist/`, reproduced by two builds). Public site updated: `gh-pages` is now `79de2b6` (see PUBLISHED above).
 
 | Item | State |
 |---|---|

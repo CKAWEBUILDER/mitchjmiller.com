@@ -1,6 +1,312 @@
 [
   {
     "path": "/",
-    "error": "fetch failed"
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/about/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/contact/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/collab-ideas/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/resume/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/systems/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/work/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/selected-builds/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/blog/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/case-studies/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/aeo-geo/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/case-studies/apple-seasonal-search/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/case-studies/apple-store-amr/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/case-studies/apple-education-store/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/case-studies/stanford-myhealth-seo/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/case-studies/commonspirit-locations-conversion-engine/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/case-studies/commonspirit-network-consolidation/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/case-studies/commonspirit-medical-content-library/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/case-studies/aem-content-fragmentation-architecture/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/case-studies/yext-entity-data-foundation/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/case-studies/claritypulse-ai-reporting/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/case-studies/searchforge-content-intelligence/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/case-studies/actionthread-transcript-execution/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/case-studies/aeo-visibility-infrastructure/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/case-studies/domainsignal/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/case-studies/date-night/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/case-studies/vet-advocates-growth-system/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/case-studies/sfc-surf-school/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/blog/gbp-2026-ai-grounding/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/blog/multi-agent-billing-traps/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/blog/intrepid-agency-spotlight/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/blog/mitchell-miller-journey/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/blog/traditional-seo-to-ai-search/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/blog/aeo-geo-measurement-framework/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/blog/entity-seo-for-ai-retrieval/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/blog/enterprise-seo-business-cases/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/blog/studying/hermes-concepts-field-guide/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/blog/studying/claude-watermark-seo/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/blog/studying/all-in-ai-money-stack/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/blog/studying/hermes-seo-agent/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/blog/studying/codex-obsolete-9-moves/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/blog/studying/chatgpt-sites/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/blog/studying/book-to-skill/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/blog/studying/claude-code-6-new-rules/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/blog/studying/claude-code-make-money/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/blog/studying/build-ai-agents-full-course/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/blog/studying/codex-voice-jarvis/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/blog/studying/pi-coding-agent/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/blog/studying/ships-100x-faster/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/blog/studying/forget-loop-engineering/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/blog/studying/mark-cuban-ai-bubble/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/blog/studying/hormozi-build-this-instead/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/blog/studying/old-seo-collapsing/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/blog/studying/seo-2026-ai-era/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/blog/studying/aeo-geo-aio/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/blog/studying/smith-chart-scariest-ee/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/blog/studying/aeo-80-percent/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/design/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/design/case-studies/sfc-surf-school/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/lab/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/review/",
+    "status": 200,
+    "expected": 200
+  },
+  {
+    "path": "/__qa-missing-route__/",
+    "status": 404,
+    "expected": 404
   }
 ]

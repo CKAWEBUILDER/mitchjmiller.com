@@ -21,7 +21,7 @@ Local implementation, validation, GitHub source push and an update of the existi
 | Existing private review | https://mitch-portfolio-html-staging.clearkayakrentalsoah.chatgpt.site |
 | Last successful private review source | `5bca30b7b79bd84936eb0afe008a88815415bfbc`, the earlier nine-page review |
 
-The new implementation is currently local and uncommitted. The remote staging URL still shows the earlier review; do not represent it as the new candidate. Claude's original branch and proposed overnight plan were preserved. The original checkout has only the coordination addition to PROJECT.md from this task; no source overwrite or merge was performed. The original user checkout `/Users/mitchellmiler/Documents/mitchjmiller.com` and its unpublished drafts remain untouched.
+Implementation commit `c2746011e054af777ed4ac1ba9f11dfa26c64764` is committed and pushed to GitHub on the implementation branch; a documentation follow-up records the final state. The remote staging URL still shows the earlier review; do not represent it as the new candidate. Claude's original branch and proposed overnight plan were preserved. The original checkout has only the coordination addition to PROJECT.md from this task; no source overwrite or merge was performed. The original user checkout `/Users/mitchellmiler/Documents/mitchjmiller.com` and its unpublished drafts remain untouched.
 
 ## Implemented
 
@@ -38,11 +38,11 @@ See [implementation and QA record](docs/implementation-2026-09-11/README.md), [r
 
 Both static modes pass: 57 routes, 25 full article/note bodies, 160 original case fields, four exact PDFs, exact SFC report body, all local links/assets/anchors, correct indexing/sitemap policy. Typecheck and diff whitespace checks pass. Browser desktop homepage parity and candidate homepage desktop/mobile were inspected. Candidate mobile measured 390px without horizontal overflow.
 
-Remaining interaction/case-study visual QA is blocked: automatic approval review rejected the mobile menu/scroll action because its refresh token was revoked. Sites independently returns HTTP401 `token_revoked`. The user must sign out of Codex and back in to restore the affected connection. Do not retry rejected actions through another surface or change approval settings. A full local HTTP sweep also could not connect under the sandbox; earlier escalated readiness checks returned 200 for the two servers.
+Remaining interaction/case-study visual QA is blocked: automatic approval review rejected the mobile menu/scroll action because its refresh token was revoked. Sites independently returns HTTP401 `token_revoked`. The user must sign out of Codex and back in to restore the affected connection. Do not retry rejected actions through another surface or change approval settings. The full local HTTP sweep passed after authorized escalation: 62 URLs with correct200/404 status.
 
 ## Exact next task
 
-After authentication is restored: finish the focused browser checks (candidate full case desktop/mobile; native menu, resume dialog, filters; three lab controls; representative article/diagram; unknown-route404), then commit the already implemented source, push the implementation branch to GitHub, mirror that exact commit into the existing Sites source repository and update the existing owner-private review. Retain the same Sites project ID in `.openai/hosting.json`. Present `/review/`, `/design/`, and the full candidate case for design review. Do not restart the audit or ask for blanket implementation permission.
+After authentication is restored: finish the focused browser checks (candidate full case desktop/mobile; native menu, resume dialog, filters; three lab controls; representative article/diagram; unknown-route404), then commit/push any necessary QA repairs and mirror the current implementation-branch commit into the existing Sites source repository and update the existing owner-private review. Retain the same Sites project ID in `.openai/hosting.json`. Present `/review/`, `/design/`, and the full candidate case for design review. Do not restart the audit or ask for blanket implementation permission.
 
 One integrating agent owns source/deployment. Public release remains gated on review of the concrete result. Rollback for the future public release: retain and restore gh-pages `923dfd8`; rollback for private staging: redeploy its previously saved version. No production change has occurred.
 

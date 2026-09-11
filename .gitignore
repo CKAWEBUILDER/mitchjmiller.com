@@ -8,3 +8,8 @@ asset-working/
 *.log
 __pycache__/
 *.pyc
+
+# Isolated Astro staging output/cache
+.stage-assets/
+.astro/
+.sites-runtime/

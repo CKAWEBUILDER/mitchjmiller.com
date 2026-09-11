@@ -1,5 +1,9 @@
 # Mitchell Miller — mitchjmiller.com
 
+## Active HTML staging build
+
+The Astro implementation is now underway on `codex/astro-html-staging-20260911`. `npm run build` generates the design review and complete-HTML content proofs in `dist`; `npm run serve` serves them locally on port 5187. The production-named commands are gated pending theme review and the full migration. Read [PROJECT.md](PROJECT.md) and the [staging task record](docs/design-review-2026-09-11/README.md) first. The former React scripts are retained with `:legacy` suffixes, and the older description below is historical.
+
 **Agent entry point:** read [AGENTS.md](AGENTS.md), [PROJECT.md](PROJECT.md), and the [current handoff](handoffs/astro-migration-2026-09-11.md). Claude Code also has a root [CLAUDE.md](CLAUDE.md) entry point. The active direction is the [complete-HTML Astro migration](docs/migration-2026-09-11/README.md); the commands and React review description below are the existing implementation, not a completed Astro conversion.
 
 Personal portfolio for enterprise search leadership, AI engineering and growth systems. The September 2026 redesign includes 17 case studies, four current resume PDFs, 25 writing/study notes and three interactive lab experiences.

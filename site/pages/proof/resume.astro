@@ -1,0 +1,5 @@
+---
+import ProofLayout from '../../layouts/ProofLayout.astro';
+import {resumeOptions} from '../../../src/lib/resumes';
+---
+<ProofLayout title="Current resumes"><h1>A background for the work ahead.</h1><p class="deck">Four focused views of the same experience. Each download is a current two-page PDF.</p><div class="grid">{resumeOptions.map(resume=><section class="card"><h2>{resume.label}</h2><p>{resume.description}</p><ul>{resume.signals.map(signal=><li>{signal}</li>)}</ul><a href={resume.href} download={resume.download}>Download {resume.label} PDF</a></section>)}</div></ProofLayout>

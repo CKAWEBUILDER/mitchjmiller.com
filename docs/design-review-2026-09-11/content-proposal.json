@@ -1,0 +1,693 @@
+{
+  "schemaVersion": 1,
+  "preparedAt": "2026-09-11",
+  "purpose": "Design review and reusable content proposal; not a production release",
+  "brand": {
+    "name": "Mitchell Miller",
+    "shortName": "Mitch",
+    "eyebrow": "DATA · DESIGN · ENGINEERING",
+    "positioning": "An independent practice connecting analytical thinking, creative experience design and practical implementation.",
+    "voice": [
+      "First person",
+      "Concrete problems and delivered work",
+      "Clear about role and status",
+      "Enterprise depth with room for curiosity"
+    ]
+  },
+  "navigation": {
+    "primary": [
+      {
+        "label": "Work",
+        "href": "/work/"
+      },
+      {
+        "label": "How I help",
+        "href": "/collab-ideas/"
+      },
+      {
+        "label": "Lab",
+        "href": "/lab/"
+      },
+      {
+        "label": "Writing",
+        "href": "/blog/"
+      },
+      {
+        "label": "About",
+        "href": "/about/"
+      }
+    ],
+    "action": {
+      "label": "Let’s talk",
+      "href": "/contact/"
+    },
+    "utility": {
+      "label": "Resumes",
+      "href": "/resume/"
+    }
+  },
+  "home": {
+    "title": "Mitchell Miller — Data, Design & Growth Systems",
+    "description": "Explore Mitchell Miller’s work across enterprise search, data and AI systems, product design, engineering and business growth.",
+    "hero": {
+      "eyebrow": "DATA · DESIGN · ENGINEERING",
+      "heading": "Make the complex useful.",
+      "body": "I’m Mitch Miller. I connect data, design and engineering to build useful tools, clearer experiences and stronger growth systems.",
+      "primaryCta": {
+        "label": "Explore the work",
+        "href": "/work/"
+      },
+      "secondaryCta": {
+        "label": "Start a conversation",
+        "href": "/contact/"
+      },
+      "utilityCta": {
+        "label": "Hiring? View my resumes",
+        "href": "/resume/"
+      }
+    },
+    "experience": {
+      "label": "Experience across",
+      "items": [
+        {
+          "name": "Apple",
+          "href": "/case-studies/apple-seasonal-search/"
+        },
+        {
+          "name": "CommonSpirit / Dignity Health",
+          "href": "/case-studies/commonspirit-locations-conversion-engine/"
+        },
+        {
+          "name": "Stanford Health Care",
+          "href": "/case-studies/stanford-myhealth-seo/"
+        },
+        {
+          "name": "Clarity AI",
+          "href": "/case-studies/claritypulse-ai-reporting/"
+        }
+      ]
+    },
+    "selectedWork": {
+      "eyebrow": "SELECTED WORK",
+      "heading": "Different scales. A connected way of thinking.",
+      "body": "Enterprise programs, useful software and hands-on client work. Each starts with understanding the problem and stays with it through delivery.",
+      "layoutPriority": [
+        "apple-seasonal-search",
+        "commonspirit-locations-conversion-engine",
+        "sfc-surf-school",
+        "claritypulse-ai-reporting"
+      ],
+      "cta": {
+        "label": "Explore all work",
+        "href": "/work/"
+      }
+    },
+    "capabilities": {
+      "eyebrow": "HOW I CAN HELP",
+      "heading": "From the question to the working thing.",
+      "items": [
+        {
+          "id": "understand",
+          "title": "Understand",
+          "body": "Connect research, data and measurement to a question worth answering.",
+          "details": [
+            "Data analysis & modeling",
+            "Research & measurement design",
+            "Profound and search-source interpretation"
+          ],
+          "evidenceLinks": [
+            {
+              "label": "AI visibility measurement",
+              "href": "/case-studies/aeo-visibility-infrastructure/"
+            },
+            {
+              "label": "Content intelligence",
+              "href": "/case-studies/searchforge-content-intelligence/"
+            }
+          ]
+        },
+        {
+          "id": "design",
+          "title": "Design",
+          "body": "Make the information clear and the experience useful.",
+          "details": [
+            "UX/UI & interaction design",
+            "Visual communication",
+            "Content structure & storytelling"
+          ],
+          "evidenceLinks": [
+            {
+              "label": "SFC surf explorer",
+              "href": "/case-studies/sfc-surf-school/"
+            },
+            {
+              "label": "Date Night prototype",
+              "href": "/case-studies/date-night/"
+            }
+          ]
+        },
+        {
+          "id": "build",
+          "title": "Build",
+          "body": "Connect the interface, content and underlying system so the idea can work.",
+          "details": [
+            "Software & workflow engineering",
+            "Entity models & data architecture",
+            "AI-assisted tools & reusable templates"
+          ],
+          "evidenceLinks": [
+            {
+              "label": "The location platform",
+              "href": "/case-studies/commonspirit-locations-conversion-engine/"
+            },
+            {
+              "label": "ClarityPulse",
+              "href": "/case-studies/claritypulse-ai-reporting/"
+            }
+          ]
+        },
+        {
+          "id": "grow",
+          "title": "Grow",
+          "body": "Improve discovery, clarify the next action and measure the change.",
+          "details": [
+            "SEO & AI search",
+            "Content & conversion optimization",
+            "Growth operations"
+          ],
+          "evidenceLinks": [
+            {
+              "label": "Apple seasonal search",
+              "href": "/case-studies/apple-seasonal-search/"
+            },
+            {
+              "label": "SFC growth work",
+              "href": "/case-studies/sfc-surf-school/"
+            }
+          ]
+        }
+      ]
+    },
+    "lab": {
+      "eyebrow": "THE LAB",
+      "heading": "Working tools. Open questions. Useful conversations.",
+      "body": "Explore an idea, try a working tool or help shape what comes next. Each experiment is labeled so you know what is ready and what is still a question.",
+      "cta": {
+        "label": "Explore the lab",
+        "href": "/lab/"
+      },
+      "workingArtifactIds": [
+        "destination-intent",
+        "growth-readout",
+        "content-architecture"
+      ],
+      "conceptIds": [
+        "ubi-showcase",
+        "simulated-population"
+      ],
+      "collaborationCta": {
+        "label": "Have a useful problem or idea?",
+        "href": "/contact/"
+      }
+    },
+    "independent": {
+      "eyebrow": "INDEPENDENT WORK",
+      "heading": "Curiosity makes things happen.",
+      "body": "Product experiments and side projects that explore a useful question beyond a client brief.",
+      "items": [
+        {
+          "title": "Date Night",
+          "summary": "A couples-focused prototype for shared discovery and planning.",
+          "status": "Prototype",
+          "href": "/case-studies/date-night/"
+        },
+        {
+          "title": "DomainSignal",
+          "summary": "An independent domain-intelligence prototype.",
+          "status": "Prototype",
+          "href": "/case-studies/domainsignal/"
+        }
+      ],
+      "cta": {
+        "label": "See selected builds",
+        "href": "/selected-builds/"
+      }
+    },
+    "writing": {
+      "eyebrow": "WRITING & FIELD NOTES",
+      "heading": "The thinking continues.",
+      "body": "Observations, research and ideas from the work.",
+      "cta": {
+        "label": "Read the notes",
+        "href": "/blog/"
+      }
+    },
+    "about": {
+      "heading": "Curiosity is the through line.",
+      "body": "I’ve worked inside global brands, healthcare networks, agencies and small businesses. The setting changes. I keep coming back to the same work: understand the problem, connect the pieces and make something useful.",
+      "cta": {
+        "label": "A little more about me",
+        "href": "/about/"
+      },
+      "hiringCta": {
+        "label": "Get the full picture — resumes",
+        "href": "/resume/"
+      }
+    },
+    "inquiry": {
+      "heading": "What are you trying to make possible?",
+      "body": "A clearer customer experience, a better growth system or an idea ready to become real. Tell me the problem and what you want to change.",
+      "cta": {
+        "label": "Start a conversation",
+        "href": "/contact/"
+      }
+    }
+  },
+  "workCards": [
+    {
+      "id": "apple-seasonal-search",
+      "name": "Apple",
+      "title": "From seasonal demand to enterprise execution.",
+      "summary": "Search strategy, international architecture and the alignment behind seasonal commerce.",
+      "context": "Enterprise",
+      "status": "Historical case study",
+      "capabilities": [
+        "Content & discovery",
+        "Data & measurement",
+        "Program delivery"
+      ],
+      "href": "/case-studies/apple-seasonal-search/",
+      "image": "/images/proof-optimized/apple-seasonal-holiday.png",
+      "imageAlt": "Public Apple seasonal page used to illustrate the commerce context",
+      "imageNote": "Public Apple imagery; representative context for the work."
+    },
+    {
+      "id": "commonspirit-locations-conversion-engine",
+      "name": "Dignity Health / CommonSpirit",
+      "title": "A thousand locations. A clearer path to care.",
+      "summary": "Entity data, reusable pages and patient-action measurement at network scale.",
+      "context": "Enterprise",
+      "status": "Historical case study",
+      "capabilities": [
+        "Software & data systems",
+        "UX & visual design",
+        "CRO & growth"
+      ],
+      "href": "/case-studies/commonspirit-locations-conversion-engine/",
+      "image": "/images/proof-optimized/dignity-wayback-locations-nav-2018.png",
+      "imageAlt": "Archived Dignity Health site showing regional location navigation",
+      "proof": {
+        "value": "1,000+",
+        "label": "Location pages",
+        "note": "Later continuing-system reporting includes $15.21M FY22 attributable revenue."
+      }
+    },
+    {
+      "id": "sfc-surf-school",
+      "name": "SFC Surf School",
+      "title": "Local knowledge, made interactive.",
+      "summary": "Research, web and content work, a ten-break surf explorer and a measurable search trajectory.",
+      "context": "Client growth & operations",
+      "status": "Current engagement",
+      "capabilities": [
+        "UX & visual design",
+        "Software & data systems",
+        "Content & discovery",
+        "CRO & growth"
+      ],
+      "href": "/case-studies/sfc-surf-school/",
+      "image": "/images/portfolio-proof/sfc-south-shore-explorer.png",
+      "imageAlt": "SFC South Shore explorer with ten named surf breaks on a real aerial photograph",
+      "proof": {
+        "value": "5 → 54",
+        "label": "Google Search clicks",
+        "note": "Aug 12–Sep 8 vs Jul 15–Aug 11, 2026. The map launched Sep 10, after this comparison."
+      }
+    },
+    {
+      "id": "claritypulse-ai-reporting",
+      "name": "Clarity AI · internal work",
+      "title": "A narrative you can trace back to the data.",
+      "summary": "An internal reporting prototype connecting performance inputs, source evidence and next actions.",
+      "context": "Enterprise / internal",
+      "status": "Internal prototype",
+      "capabilities": [
+        "AI & measurement",
+        "Software & data systems",
+        "UX & visual design"
+      ],
+      "href": "/case-studies/claritypulse-ai-reporting/",
+      "image": "/images/claritypulse-dashboard.png",
+      "imageAlt": "Representative ClarityPulse reporting interface",
+      "imageNote": "Representative interface; no client data shown."
+    }
+  ],
+  "caseStudies": [
+    {
+      "slug": "apple-seasonal-search",
+      "title": "Apple Seasonal Search",
+      "headline": "From seasonal demand to enterprise execution.",
+      "deck": "Connected research, technical requirements and stakeholder alignment across Apple’s Americas seasonal commerce program.",
+      "context": "Apple · enterprise commerce",
+      "status": "Historical case study",
+      "role": "Program Manager, SEO - Americas Region (AMR)",
+      "capabilities": [
+        "Research & demand planning",
+        "International SEO",
+        "Technical requirements",
+        "Cross-functional program delivery"
+      ],
+      "heroImage": "/images/proof-optimized/apple-seasonal-holiday.png",
+      "heroAlt": "Public Apple holiday-season page illustrating seasonal commerce",
+      "heroCaption": "Public Apple seasonal surface, used as representative context.",
+      "chapters": [
+        {
+          "heading": "Start with the seasonal customer need.",
+          "paragraphs": [
+            "Holiday gifting, Mother’s Day, back-to-school and education bring different customer questions and tight execution windows. Across the Americas, the search program also had to work across markets, languages and teams.",
+            "I translated seasonal demand into coordinated search requirements, connecting the opportunity to the people responsible for commerce, content and engineering."
+          ]
+        },
+        {
+          "heading": "Make the requirements actionable.",
+          "paragraphs": [
+            "The work connected demand research, hreflang and locale architecture, JavaScript rendering and indexation checks, and evergreen content strategy. Those disciplines informed a program that engineering, design, marketing and regional stakeholders could act on.",
+            "Strategy readouts reached audiences of more than 60 stakeholders. They supported engineering roadmap prioritization and brought AI search considerations into longer-term planning."
+          ]
+        },
+        {
+          "heading": "Carry search into the operating rhythm.",
+          "paragraphs": [
+            "The contribution was a repeatable execution path for search across seasonal planning and launch. It required technical fluency, a clear business case and the ability to align teams without direct reporting authority."
+          ]
+        }
+      ],
+      "takeaway": "A useful search recommendation needs an owner, an execution path and a reason to make the roadmap.",
+      "sourceNote": "Responsibilities and scale are from approved career and portfolio records. No unpublished Apple performance lift or global-program ownership is asserted.",
+      "primaryCta": {
+        "label": "Explore related enterprise work",
+        "href": "/work/"
+      }
+    },
+    {
+      "slug": "sfc-surf-school",
+      "title": "SFC Surf School",
+      "headline": "Turn local knowledge into something people can explore.",
+      "deck": "A connected engagement across research, website and content architecture, interactive design, engineering and performance reporting.",
+      "context": "Waikīkī, Hawaiʻi · 2026 pilot",
+      "status": "Current client engagement",
+      "role": "Growth strategy, search, design & engineering",
+      "capabilities": [
+        "Research & measurement",
+        "UX/UI",
+        "Web engineering",
+        "Content & discovery",
+        "Growth operations"
+      ],
+      "heroImage": "/images/portfolio-proof/sfc-south-shore-explorer.png",
+      "heroAlt": "Ten-break SFC surf explorer on a real Waikīkī aerial",
+      "heroCaption": "Production release review, September 10, 2026. Aerial: USDA-FSA NAIP, January 27, 2022, via NOAA Digital Coast.",
+      "metrics": [
+        {
+          "value": "5 → 54",
+          "label": "Google Search clicks",
+          "change": "+980%",
+          "period": "Aug 12–Sep 8 vs Jul 15–Aug 11, 2026"
+        },
+        {
+          "value": "470 → 1,652",
+          "label": "Search impressions",
+          "change": "+251% rounded",
+          "period": "Aug 12–Sep 8 vs Jul 15–Aug 11, 2026"
+        },
+        {
+          "value": "10",
+          "label": "Breaks and connected guides",
+          "period": "Explorer and articles released September 10, 2026"
+        }
+      ],
+      "metricInterpretation": "Search growth reflects the earlier website work. The September 10 map launch came after the measured period.",
+      "chapters": [
+        {
+          "heading": "Find the useful opening.",
+          "paragraphs": [
+            "SFC competes in a busy destination market. Its local knowledge and teaching approach needed to become useful information before a visitor booked.",
+            "I mapped competitors through search visibility, crawled 973 pages across ten businesses and combined desktop/mobile keyword research with a concrete publishing plan. The audit also identified 38 completed pages that had not been published."
+          ]
+        },
+        {
+          "heading": "Build a product around the place.",
+          "paragraphs": [
+            "The South Shore guide became a ten-break explorer. A visitor can select a reef, see footage from that break, follow the original video source, check conditions and open its dedicated guide.",
+            "I replaced an inaccurate generated map with a real, georeferenced NAIP aerial and incorporated the owner’s placement corrections. Readable controls, keyboard selection and lighter preview images made the experience usable across desktop and mobile."
+          ]
+        },
+        {
+          "heading": "Deliver the surrounding system.",
+          "paragraphs": [
+            "Ten linked break articles, lesson-planning content, campaign planning and source-backed reporting supported the feature. The production release brought the sitemap to 63 indexable pages and passed the route and interaction checks.",
+            "Staging parity, exact-commit promotion and rollback verification were part of delivery. The goal was a better working business website, not a standalone demonstration."
+          ]
+        },
+        {
+          "heading": "Show what changed, and when.",
+          "paragraphs": [
+            "Search Console recorded 54 clicks and 1,652 impressions for August 12–September 8, up from five clicks and 470 impressions in the preceding 28-day period.",
+            "The new explorer launched September 10. Reporting separates that delivery from the earlier search gains, and search engagement from confirmed bookings."
+          ]
+        }
+      ],
+      "takeaway": "The opportunity became a connected piece of work: research, content, interface, implementation and evidence.",
+      "sourceNote": "Google Search Console comparison and production-release records, reviewed September 10, 2026. Exact reef placement combines geographic references and owner review; recorded footage is not live conditions.",
+      "primaryCta": {
+        "label": "Explore the live surf map",
+        "href": "https://sfcsurfschool.com/surf-guides/south-shore-surf-breaks/",
+        "external": true
+      },
+      "secondaryCta": {
+        "label": "More growth and product work",
+        "href": "/work/"
+      }
+    }
+  ],
+  "lab": {
+    "title": "The Lab",
+    "heading": "Try something. Question something. Make it better.",
+    "body": "Working tools and developing ideas at the intersection of data, design and useful software.",
+    "workingArtifacts": [
+      {
+        "id": "destination-intent",
+        "title": "Destination intent explorer",
+        "status": "Working demonstration",
+        "summary": "Change the query and searcher location to explore what the request tells us.",
+        "href": "/lab/#intent"
+      },
+      {
+        "id": "growth-readout",
+        "title": "The story behind a growth number",
+        "status": "Working demonstration",
+        "summary": "Compare source counts and see how the baseline changes the interpretation.",
+        "href": "/lab/#evidence"
+      },
+      {
+        "id": "content-architecture",
+        "title": "One field. Connected experiences.",
+        "status": "Working demonstration",
+        "summary": "Change a shared value and see how reuse and local overrides interact.",
+        "href": "/lab/#architecture"
+      }
+    ],
+    "concepts": [
+      {
+        "id": "ubi-showcase",
+        "title": "UBI calculator",
+        "status": "Proposed portfolio showcase",
+        "publicSummary": "A planned showcase for the UBI calculator, with its assumptions and underlying model made clear.",
+        "href": null,
+        "cta": {
+          "label": "Talk about this idea",
+          "href": "/contact/"
+        },
+        "internal": {
+          "sourceStatus": "Existing artifact candidate named by Mitch; source and functionality not yet verified",
+          "publishAsWorkingTool": false,
+          "nextCheck": "Locate canonical source, review calculations and data, verify controls and actual outputs. Do not invent a demo URL or result."
+        }
+      },
+      {
+        "id": "simulated-population",
+        "title": "Build your own simulated population",
+        "status": "Concept",
+        "publicSummary": "A proposed workbench for turning a question and suitable public data into a transparent population model and scenario comparison.",
+        "href": null,
+        "cta": {
+          "label": "Help shape the concept",
+          "href": "/contact/"
+        },
+        "internal": {
+          "publishAsWorkingTool": false,
+          "scope": "New model and product implementation are separate from the portfolio migration. CRM import, saved experiments and predictive validation are future capabilities."
+        }
+      }
+    ],
+    "collaboration": {
+      "heading": "A good question is a useful place to start.",
+      "body": "If an experiment connects with something you’re working on, tell me the problem, the idea or the evidence that could move it forward.",
+      "cta": {
+        "label": "Share a problem or idea",
+        "href": "/contact/"
+      }
+    },
+    "sourcePolicy": {
+      "publicCopy": "Ideas and demonstrations are shared here. Repository access is separate.",
+      "internalBoundary": "Public browser-delivered HTML and JavaScript are inspectable. Do not expose proprietary backend source, private data or confidential client artifacts. No community platform or source-code publication is implied. DomainSignal’s own future lab is separate scope."
+    }
+  },
+  "templateContracts": {
+    "global": {
+      "required": [
+        "nativeNavigation",
+        "skipLink",
+        "main",
+        "footer",
+        "buildTimeMetadata",
+        "canonical",
+        "indexingPolicy"
+      ],
+      "htmlFirst": true
+    },
+    "collection": {
+      "required": [
+        "title",
+        "description",
+        "completeStaticItems",
+        "itemDestinations"
+      ],
+      "optional": [
+        "contextFilter",
+        "capabilityFilter",
+        "statusFilter",
+        "search"
+      ],
+      "htmlFirst": true
+    },
+    "project": {
+      "required": [
+        "id",
+        "name",
+        "relationship",
+        "status",
+        "statusDate",
+        "role",
+        "summary",
+        "actualImplementation"
+      ],
+      "optional": [
+        "verifiedDemoLinks",
+        "artifacts",
+        "metrics",
+        "relatedCaseStudies"
+      ],
+      "doNotInfer": [
+        "activeStatus",
+        "productionAvailability",
+        "backendImplementation",
+        "appStoreUrl"
+      ]
+    },
+    "caseStudy": {
+      "required": [
+        "slug",
+        "title",
+        "role",
+        "context",
+        "chapters",
+        "evidence"
+      ],
+      "optional": [
+        "figures",
+        "metrics",
+        "relatedWork"
+      ],
+      "metricFields": [
+        "value",
+        "label",
+        "period",
+        "source",
+        "interpretation"
+      ]
+    },
+    "lab": {
+      "required": [
+        "title",
+        "status",
+        "question",
+        "explanation"
+      ],
+      "workingRequired": [
+        "actualArtifact",
+        "instructions",
+        "sourceContext"
+      ],
+      "conceptRequired": [
+        "conceptLabel",
+        "scopeBoundary"
+      ],
+      "htmlFirst": true
+    },
+    "writing": {
+      "required": [
+        "slug",
+        "title",
+        "type",
+        "author",
+        "date",
+        "fullBody",
+        "publicationStatus"
+      ],
+      "exclude": [
+        "drafts",
+        "privateNotes"
+      ]
+    },
+    "resume": {
+      "required": [
+        "audience",
+        "htmlSummary",
+        "verifiedPdfPath"
+      ],
+      "preserveExistingUrls": true
+    },
+    "contact": {
+      "required": [
+        "clearInquiryPurpose",
+        "honestSubmissionBehavior"
+      ],
+      "currentBehavior": "Prepare a draft in the visitor’s email app; visitor reviews and sends."
+    }
+  },
+  "inventory": {
+    "caseStudyCount": 17,
+    "existingSelectedBuildCount": 9,
+    "activeProjectEstimate": 15,
+    "activeProjectCountVerified": false,
+    "priorityCandidates": [
+      "UBI calculator",
+      "Public-data population/society simulations",
+      "Other active projects from canonical records"
+    ],
+    "futureSeparateWork": [
+      "DomainSignal product lab",
+      "Authenticated client workspaces",
+      "New simulation functionality",
+      "Community platform",
+      "SEM service expansion"
+    ]
+  },
+  "implementationNotes": [
+    "Internal keys are for the build team; do not render them as visitor copy.",
+    "null href means no verified live destination; do not manufacture a launch link.",
+    "Retain current public routes and PDF filenames.",
+    "This content proposal requires shared theme/content review before production promotion."
+  ]
+}

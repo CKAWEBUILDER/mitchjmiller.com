@@ -11,6 +11,8 @@
 
 ## Current status
 
+**Newer implementation update:** Mitch authorized design-first Astro staging. Branch `codex/astro-html-staging-20260911` now contains two HTML/CSS directions, nine generated review/proof routes and passing static-output checks. See `docs/design-review-2026-09-11/README.md` and PROJECT.md for publication state. Theme selection is the next user checkpoint; complete route conversion follows. The older planning context below is retained as history, not current implementation status.
+
 Planning and durable handoff complete. Astro not implemented. Production remains the old GitHub Pages site plus a robots-only crawl fix. The reviewed React redesign is separate and must not be published as the requested HTML conversion.
 
 ## Start points

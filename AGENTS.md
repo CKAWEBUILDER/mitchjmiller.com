@@ -10,7 +10,7 @@ Read `PROJECT.md`, then `handoffs/astro-migration-2026-09-11.md`, then the appli
 - Active persistent migration checkout: `/Users/mitchellmiler/Documents/mitchjmiller-html-migration`.
 - Original checkout `/Users/mitchellmiler/Documents/mitchjmiller.com` contains unpublished user drafts. Preserve it; do not reset, clean, overwrite or publish those drafts.
 - The September review checkout under `/private/tmp/mitchjmiller-overhaul-20260910` is a historical preview/reference, not the durable handoff location.
-- Verify the current branch, working tree and remote before edits or pushes. Current documented branch is `codex/portfolio-overhaul-20260910`; a subsequent implementation branch should use `codex/` and be recorded in PROJECT.md.
+- Verify the current branch, working tree and remote before edits or pushes. Current documented branch is `codex/astro-html-staging-20260911`; a subsequent implementation branch should use `codex/` and be recorded in PROJECT.md.
 - GitHub source comes before host deployment. Push accepted source before publishing any host. One agent owns production release; do not run competing deployment workflows.
 
 ## Product contract
@@ -24,7 +24,7 @@ Read `PROJECT.md`, then `handoffs/astro-migration-2026-09-11.md`, then the appli
 ## Permission and release boundaries
 
 - Existing public portfolio content is approved for promotion; recent SFC work was explicitly requested. New private client material requires the permission Mitch said he will obtain.
-- The latest completed request was a roadmap and durable handoff. Astro implementation has not started. Follow the next user's implementation instruction; do not pretend the plan already changed the app.
+- Mitch has authorized collaborative design, theme review and the Astro staging build. Implementation is underway; consult PROJECT.md and the staging task record. Production publication still requires the concrete release review.
 - The React redesign has not been approved for production as the answer to the HTML request. Do not publish it. Production promotion, DNS/host changes, subscriptions and confidential artifact uploads require the applicable explicit authorization.
 - Preserve the live robots-only hotfix on main. Integrate it into the migration instead of overwriting main with the older feature branch.
 - Private data, credentials, client inventories and internal screenshots do not belong in public source, static output, source maps or public CI logs. Keep secrets in approved host/account secret storage.

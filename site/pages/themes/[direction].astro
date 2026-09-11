@@ -1,0 +1,7 @@
+---
+import editorial from '../../designs/editorial.html?raw';
+import atelier from '../../designs/atelier.html?raw';
+export function getStaticPaths(){return ['editorial','atelier'].map(direction=>({params:{direction}}));}
+const document=Astro.params.direction==='editorial'?editorial:atelier;
+---
+<Fragment set:html={document}/>

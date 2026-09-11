@@ -12,7 +12,7 @@ Build a public, complete-HTML portfolio that attracts qualified inbound work and
 |---|---|
 | Source repository | `https://github.com/CKAWEBUILDER/mitchjmiller.com.git` |
 | Active persistent checkout | `/Users/mitchellmiler/Documents/mitchjmiller-html-migration` |
-| Current planning/review branch | `codex/portfolio-overhaul-20260910` |
+| Current planning/review branch | `codex/astro-html-staging-20260911` |
 | Original user checkout, preserve drafts | `/Users/mitchellmiler/Documents/mitchjmiller.com` |
 | Historical local review checkout | `/private/tmp/mitchjmiller-overhaul-20260910` |
 | Latest roadmap before this handoff | `b33e28c` on the planning branch |
@@ -21,6 +21,10 @@ Build a public, complete-HTML portfolio that attracts qualified inbound work and
 | Main source after robots fix/docs | `2745c7e` as verified during the session; fetch before implementation |
 
 GitHub is canonical. The persistent checkout is the designated continuation folder. The temporary preview remains a reference and may still serve the old React review on port 5186; it is not the new Astro site. Do not depend on temporary files or prior agent memory to continue.
+
+## Active build update — September 11
+
+Mitch has now explicitly authorized design-first collaboration, a theme to review and agree upon, and rebuilding in a new staging environment. The current implementation branch is `codex/astro-html-staging-20260911`, incorporating main's robots hotfix. Two HTML/CSS themes and Astro content proofs are implemented. The build passed: nine static pages, full case-study bodies and four PDF paths. Local review responded 200 on port 5187; private staging publication is in progress. See [staging task record](docs/design-review-2026-09-11/README.md). The live public site is unchanged. Older planning-only statements below are historical; implementation is now authorized and underway. Full migration and production promotion remain incomplete.
 
 ## What is done
 
@@ -32,7 +36,7 @@ GitHub is canonical. The persistent checkout is the designated continuation fold
 
 ## What is not done
 
-- No Astro implementation, new full-HTML site, production redesign, Cloudflare migration or client authentication exists from this planning task.
+- The full public-site migration, approved production redesign, public-domain Cloudflare cutover and private client authentication are not complete. The nine-page Astro design-review/content-proof slice is implemented; it is not the full public migration.
 - The approximately fifteen active projects have not been reconciled. Seventeen cases and nine existing Selected Builds are different inventories.
 - The UBI source/functionality and verified app-store/demo destinations still need discovery.
 - No new simulation model, CRM importer, community platform, client upload system or private deliverable library has been built.
@@ -52,7 +56,7 @@ The public lab can share constructive ideas and unfinished demonstrations, invit
 
 ## Exact next task
 
-On an instruction to proceed with implementation, fetch current source; preserve user drafts; reconcile main's robots hotfix with the useful review branch; create the dedicated implementation branch; prepare the route/project register and three-page Astro proof. Agree on the shared content schema before dividing page conversion among agents. Verify actual raw body HTML and JavaScript-disabled behavior before scaling.
+Complete private staging publication and show the two HTML/CSS design directions for theme review. Then apply the agreed design to the full route/content inventory. The implementation branch already includes main's robots fix and the Astro proof passes raw HTML checks. Browser/mobile QA and full route migration still remain.
 
 Do not ask Mitch to restate the context. Present a prefilled project register when missing project identities need confirmation. Existing public-material permission does not need repeating. The latest request for this handoff is not a production/DNS approval.
 

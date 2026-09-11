@@ -6,7 +6,13 @@ rmSync(output,{recursive:true,force:true}); mkdirSync(output,{recursive:true});
 for(const name of ['images','files','artifacts','favicon.ico','favicon.png','favicon.svg','apple-touch-icon.png','opengraph.jpg']){
  const source=resolve('public',name); if(existsSync(source)) cpSync(source,resolve(output,name),{recursive:true});
 }
-// Public source is an allowlist: no production CNAME, SPA rewrites, drafts, or legacy SFC index.
+// Keep the production download bytes at the public URLs. Updated review PDFs
+// have an explicit separate location and cannot silently replace production.
+mkdirSync(resolve(output,'review-assets'),{recursive:true});
+cpSync(resolve('public/files'),resolve(output,'review-assets/files'),{recursive:true});
+cpSync(resolve('baseline/public/files'),resolve(output,'files'),{recursive:true});
+cpSync(resolve('baseline/public/case-studies'),resolve(output,'case-studies'),{recursive:true});
+// Public source is an allowlist: no production CNAME, SPA rewrites or unapproved drafts.
 writeFileSync(resolve(output,'robots.txt'),'User-agent: *\nAllow: /\n');
 writeFileSync(resolve(output,'_headers'),'/*\n  X-Robots-Tag: noindex, follow\n  X-Content-Type-Options: nosniff\n');
-console.log('Prepared staging assets; production bindings and legacy HTML excluded.');
+console.log('Prepared shared imagery, production PDFs, separate updated review PDFs and retained standalone SFC report.');

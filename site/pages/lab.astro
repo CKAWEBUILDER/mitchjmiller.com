@@ -1,0 +1,13 @@
+---
+import ProofLayout from '../layouts/ProofLayout.astro';
+import {DestinationIntent} from '../../src/components/lab/destination-intent';
+import {GrowthReadout} from '../../src/components/lab/growth-readout';
+import {ContentArchitecture} from '../../src/components/lab/content-architecture';
+import '../../src/components/lab/lab.css';
+---
+<ProofLayout title="Interactive lab — review" description="Three existing strategy demonstrations, retained for review.">
+<p>Existing work · interactive review</p><h1>Ideas you can try.</h1><p class="deck">Three working demonstrations for exploring search intent, reading evidence and connecting content. Each describes its assumptions and limits.</p>
+<nav aria-label="Experiments"><a href="#intent">Destination intent</a> · <a href="#evidence">Growth readout</a> · <a href="#architecture">Content architecture</a></nav>
+<noscript><p>The examples and their starting results are visible below. Enable JavaScript to change their controls.</p></noscript>
+<section id="intent"><DestinationIntent client:load /></section><section id="evidence"><GrowthReadout client:load /></section><section id="architecture"><ContentArchitecture client:load /></section>
+</ProofLayout>

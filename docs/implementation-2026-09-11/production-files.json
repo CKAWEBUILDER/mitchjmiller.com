@@ -1,0 +1,26 @@
+{
+  "source": "2745c7e20cea0a30d0dc3c5341fc609bfde4b3ea",
+  "deployed": "923dfd85597253786da407fe78de6d0011bbfe16",
+  "pdfs": [
+    {
+      "path": "/files/Mitchell-Miller-AI-Search-Systems-Background-2026.pdf",
+      "sha256": "316f0d659d852e563353dff1efe6fc42a83ec1ce09224ffcf9b2d7ae5f9f3b30",
+      "bytes": 8933
+    },
+    {
+      "path": "/files/Mitchell-Miller-Organic-Systems-Background-2026.pdf",
+      "sha256": "4175811e68079a06d481546564ec18b3a033dafe66187d06a67163282b018223",
+      "bytes": 9179
+    },
+    {
+      "path": "/files/Mitchell-Miller-Product-Systems-Background-2026.pdf",
+      "sha256": "a5182dd924cb725513bfc8f22c29c5c2f0ab011f58d8428527808b8333db1fc4",
+      "bytes": 9116
+    },
+    {
+      "path": "/files/Mitchell-Miller-Search-Systems-Background-2026.pdf",
+      "sha256": "80dc6d91137c9d866be7fca16709dc6ab05f09145fe836497e18777f30d2937e",
+      "bytes": 9432
+    }
+  ]
+}

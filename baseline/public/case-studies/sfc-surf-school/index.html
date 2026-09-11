@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Search visibility report for SFC Surf School — competitive analysis, first-party crawl of 973 competitor pages, and the growth plan.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://mitchjmiller.com/case-studies/sfc-surf-school/">
+<meta property="og:title" content="SFC Surf School — Search Visibility Report">
+<meta property="og:description" content="Competitive analysis and search growth plan for a Waikiki surf school.">
+<meta property="og:type" content="article">
+<style>
+.cs-back{max-width:1180px;margin:0 auto;padding:18px 20px 0;font:600 13px/1 ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.cs-back a{color:#1B6E8C;text-decoration:none}
+.cs-back a:hover,.cs-back a:focus-visible{text-decoration:underline}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .cs-back a{color:#4FA8C4}}
+</style>
+</head>
+<body>
+<div class="cs-back"><a href="/case-studies">&#8592; Case studies</a></div>
+<title>SFC Search Visibility</title>
+<style>
+:root{
+  --ground:#F2F5F7; --panel:#FFFFFF; --ink:#12212B; --body:#3B4E5C; --mute:#7C8FA0;
+  --ocean:#0B2A3D; --teal:#1B6E8C; --sand:#E8C77A; --coral:#D96A5B; --kelp:#2E8B6F;
+  --line:#DCE5EB; --panel-deep:#0B2A3D; --on-deep:#EAF2F7; --on-deep-mute:#9FBACB;
+  --shadow:0 1px 2px rgba(11,42,61,.06),0 8px 28px rgba(11,42,61,.09);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0A171F; --panel:#122430; --ink:#EAF2F7; --body:#B6C9D6; --mute:#7D96A6;
+  --ocean:#0A1B26; --teal:#4FA8C4; --sand:#E8C77A; --coral:#E8887A; --kelp:#4CB394;
+  --line:#22394A; --panel-deep:#08151D; --on-deep:#EAF2F7; --on-deep-mute:#9FBACB;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.45);
+}}
+:root[data-theme="dark"]{
+  --ground:#0A171F; --panel:#122430; --ink:#EAF2F7; --body:#B6C9D6; --mute:#7D96A6;
+  --ocean:#0A1B26; --teal:#4FA8C4; --sand:#E8C77A; --coral:#E8887A; --kelp:#4CB394;
+  --line:#22394A; --panel-deep:#08151D; --on-deep:#EAF2F7; --on-deep-mute:#9FBACB;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);
+  font-family:ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.deck{max-width:1180px;margin:0 auto;padding:28px 20px 60px;display:flex;flex-direction:column;gap:26px}
+.slide{background:var(--panel);border-radius:14px;box-shadow:var(--shadow);padding:40px 44px;
+  display:flex;flex-direction:column;gap:22px;min-height:520px;position:relative;overflow:hidden}
+.slide.deep{background:var(--panel-deep);color:var(--on-deep)}
+.num{position:absolute;top:18px;right:24px;font-size:11px;letter-spacing:.14em;color:var(--mute);
+  font-variant-numeric:tabular-nums}
+.slide.deep .num{color:var(--on-deep-mute)}
+h1,h2{font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  margin:0;text-wrap:balance;font-weight:600;letter-spacing:-.01em}
+h1{font-size:clamp(2.1rem,4.6vw,3.4rem);line-height:1.08}
+h2{font-size:clamp(1.5rem,2.9vw,2.05rem);line-height:1.15}
+.eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);font-weight:700}
+.slide.deep .eyebrow{color:var(--sand)}
+.sub{color:var(--mute);font-size:15px;margin:0}
+.slide.deep .sub{color:var(--on-deep-mute)}
+p{margin:0}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.split{display:grid;grid-template-columns:1.15fr .85fr;gap:26px;align-items:start}
+.card{background:var(--ground);border-radius:10px;padding:18px 20px;display:flex;flex-direction:column;gap:7px}
+.slide.deep .card{background:rgba(255,255,255,.06)}
+.card h3{margin:0;font-size:15px;font-weight:700;color:var(--ink)}
+.slide.deep .card h3{color:var(--on-deep)}
+.card p{font-size:13px;color:var(--body);line-height:1.5}
+.slide.deep .card p{color:var(--on-deep-mute)}
+.stat{font-family:"Iowan Old Style",Palatino,Georgia,serif;font-size:clamp(2.4rem,6vw,4.2rem);
+  line-height:1;font-weight:600;font-variant-numeric:tabular-nums}
+.stat.mega{font-size:clamp(4rem,12vw,8.5rem)}
+.lbl{font-size:12.5px;color:var(--mute);letter-spacing:.02em}
+.slide.deep .lbl{color:var(--on-deep-mute)}
+.feature{background:var(--ocean);color:var(--on-deep);border-radius:10px;padding:20px 22px;
+  display:flex;flex-direction:column;gap:6px}
+.feature .lbl{color:var(--on-deep-mute)}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px;font-variant-numeric:tabular-nums}
+.tbl th{text-align:left;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--mute);font-weight:700;padding:0 10px 9px;border-bottom:1px solid var(--line)}
+.tbl td{padding:9px 10px;border-bottom:1px solid var(--line);color:var(--body)}
+.tbl td.k{color:var(--ink);font-weight:500}
+.tbl td.n{text-align:right;font-weight:600;color:var(--ink)}
+.tbl tr:last-child td{border-bottom:0}
+.wrap{overflow-x:auto}
+.dot{width:11px;height:11px;border-radius:50%;display:inline-block;flex:none}
+.legend{display:flex;flex-direction:column;gap:11px}
+.lrow{display:flex;align-items:center;gap:11px;font-size:14px}
+.lrow .nm{flex:1;color:var(--ink)} .lrow .vl{font-weight:700;font-variant-numeric:tabular-nums}
+.note{font-size:12px;color:var(--mute);border-top:1px solid var(--line);padding-top:12px;margin-top:auto}
+.slide.deep .note{color:var(--on-deep-mute);border-top-color:rgba(255,255,255,.14)}
+.pill{display:inline-flex;align-items:center;gap:7px;background:var(--sand);color:#3A2E12;
+  font-size:12px;font-weight:700;padding:7px 14px;border-radius:99px;width:fit-content}
+.steps{display:flex;flex-direction:column;gap:11px}
+.step{display:grid;grid-template-columns:34px 1fr;gap:14px;align-items:start;
+  background:var(--ground);border-radius:10px;padding:14px 16px}
+.step .idx{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+  font-size:14px;font-weight:700;color:#fff}
+.step h3{margin:0;font-size:14.5px;font-weight:700}
+.step p{font-size:12.5px;color:var(--body);margin-top:3px}
+.big-quote{font-family:"Iowan Old Style",Palatino,Georgia,serif;font-size:clamp(1.1rem,2.1vw,1.5rem);
+  line-height:1.45;color:var(--on-deep)}
+svg{display:block;max-width:100%;height:auto}
+@media(max-width:880px){
+  .split,.g2,.g3,.g4{grid-template-columns:1fr}
+  .slide{padding:28px 22px;min-height:0}
+}
+@media(prefers-reduced-motion:no-preference){
+  .slide{transition:none}
+}
+</style>
+
+<div class="deck">
+
+<!-- 1 TITLE -->
+<section class="slide deep" style="justify-content:center;gap:26px">
+  <span class="num">01 / 13</span>
+  <p class="eyebrow">SFC Surf School &#183; Prepared for management</p>
+  <h1 style="max-width:19ch">Search Visibility Report</h1>
+  <p class="big-quote" style="max-width:56ch">The site is live, Google understands it, and it is already surfacing for the searches that matter. The work now is moving it up the page.</p>
+  <span class="pill">Data through 14 August 2026</span>
+  <p class="note" style="border-top-color:rgba(255,255,255,.14)">Google Search Console &#183; Semrush Keyword Gap &#183; first-party crawl of 973 competitor pages</p>
+</section>
+
+<!-- 2 WHAT WE'VE DONE -->
+<section class="slide">
+  <span class="num">02 / 13</span>
+  <div><p class="eyebrow">Where we started</p><h2>What we have done</h2>
+  <p class="sub">Foundation work &#8212; the part nobody sees, that everything else stands on</p></div>
+  <div class="grid g3">
+    <div class="card"><h3>Site rebuilt and shipped</h3><p>58 pages live, indexed, sitemap clean and crawlable.</p></div>
+    <div class="card"><h3>Pricing corrected sitewide</h3><p>Every price mirrored to the live booking system.</p></div>
+    <div class="card"><h3>Lesson section restructured</h3><p>Private lessons reorganised, with redirects preserving old links.</p></div>
+    <div class="card"><h3>Media library curated</h3><p>Licensed, face-safe imagery replacing placeholder photography.</p></div>
+    <div class="card"><h3>Competitive study</h3><p>973 competitor pages crawled and read across ten businesses.</p></div>
+    <div class="card"><h3>Keyword gap analysis</h3><p>Two Semrush studies &#8212; desktop and mobile, organic and paid.</p></div>
+  </div>
+  <p class="note">Sources: production sitemap, internal QA records, first-party crawl</p>
+</section>
+
+<!-- 3 ENVIRONMENT / VENN -->
+<section class="slide">
+  <span class="num">03 / 13</span>
+  <div><p class="eyebrow">The market</p><h2>The environment we are breaking into</h2>
+  <p class="sub">Organic keyword footprint &#8212; circle size is proportional to keywords held</p></div>
+  <div class="split">
+    <svg viewBox="0 0 350 300" role="img" aria-label="Overlap of competitor keyword footprints; SFC is the smallest by a wide margin">
+      <circle cx="145" cy="160" r="133" fill="#E8A93C" fill-opacity=".45" stroke="#E8A93C"/>
+      <circle cx="261" cy="160" r="72"  fill="#3FB795" fill-opacity=".45" stroke="#3FB795"/>
+      <circle cx="265" cy="124" r="67"  fill="#9E76C9" fill-opacity=".45" stroke="#9E76C9"/>
+      <circle cx="241" cy="99"  r="68"  fill="#E0705F" fill-opacity=".45" stroke="#E0705F"/>
+      <circle cx="250" cy="100" r="20"  fill="#2F4BC4" fill-opacity=".75" stroke="#2F4BC4"/>
+    </svg>
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div class="legend">
+        <div class="lrow"><span class="dot" style="background:#E8A93C"></span><span class="nm">gonesurfinghawaii.com</span><span class="vl">1,400</span></div>
+        <div class="lrow"><span class="dot" style="background:#3FB795"></span><span class="nm">kahusurfingschool.com</span><span class="vl">402</span></div>
+        <div class="lrow"><span class="dot" style="background:#E0705F"></span><span class="nm">starbeachboys.com</span><span class="vl">353</span></div>
+        <div class="lrow"><span class="dot" style="background:#9E76C9"></span><span class="nm">hhsurf.com</span><span class="vl">348</span></div>
+        <div class="lrow" style="font-weight:700"><span class="dot" style="background:#2F4BC4"></span><span class="nm" style="font-weight:700">sfcsurfschool.com</span><span class="vl">32</span></div>
+      </div>
+      <div class="card"><p>Two competitors are genuinely strong. Three rank on thin or empty pages &#8212; Kahu's traffic sits largely on tag pages with a <strong>median of zero body words</strong>. That is beatable on quality alone.</p></div>
+    </div>
+  </div>
+  <p class="note">Semrush Keyword Gap, US desktop, 13 Aug 2026 &#183; page counts from first-party sitemap crawl</p>
+</section>
+
+<!-- 4 GOOGLE KNOWS US -->
+<section class="slide">
+  <span class="num">04 / 13</span>
+  <div><p class="eyebrow">The good news</p><h2>Google already knows what we are</h2>
+  <p class="sub">The site is being served for precisely the searches we want</p></div>
+  <div class="split">
+    <div class="wrap"><table class="tbl">
+      <thead><tr><th>Search</th><th style="text-align:right">Impressions</th><th style="text-align:right">Position</th></tr></thead>
+      <tbody>
+        <tr><td class="k">surf lessons waikiki</td><td class="n">19</td><td class="n" style="color:var(--coral)">50.3</td></tr>
+        <tr><td class="k">surfing lessons in waikiki</td><td class="n">12</td><td class="n" style="color:var(--coral)">55.3</td></tr>
+        <tr><td class="k">surf lessons oahu</td><td class="n">9</td><td class="n" style="color:var(--coral)">69.0</td></tr>
+        <tr><td class="k">waikiki surf lessons</td><td class="n">8</td><td class="n" style="color:var(--coral)">53.6</td></tr>
+        <tr><td class="k">surfing lessons waikiki</td><td class="n">6</td><td class="n" style="color:var(--coral)">53.3</td></tr>
+        <tr><td class="k">learn to surf waikiki</td><td class="n">5</td><td class="n" style="color:var(--coral)">68.6</td></tr>
+        <tr><td class="k">oahu surf lessons</td><td class="n">4</td><td class="n" style="color:var(--coral)">56.5</td></tr>
+      </tbody></table></div>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="feature"><span class="stat" style="color:var(--sand)">20</span>
+        <span class="lbl">commercial searches already ranking &#8212; the right topics, every one</span></div>
+      <div class="card"><h3>Why this matters</h3>
+        <p>Relevance is the hard problem, and it is already solved. Google has correctly classified what SFC sells and where. What remains is position &#8212; a matter of content depth and authority, not identity.</p></div>
+    </div>
+  </div>
+  <p class="note">Google Search Console, sfcsurfschool.com, three months to 13 Aug 2026</p>
+</section>
+
+<!-- 5 MOVEMENT -->
+<section class="slide">
+  <span class="num">05 / 13</span>
+  <div><p class="eyebrow">Early signal</p><h2>The movement we have seen</h2>
+  <p class="sub">Impressions are the first thing to move &#8212; and they have started</p></div>
+  <div class="split">
+    <svg viewBox="0 0 600 260" role="img" aria-label="Daily search impressions rising from zero in mid-July to about 88 by 12 August">
+      <g stroke="var(--line)" stroke-width="1">
+        <line x1="44" y1="30" x2="548" y2="30"/><line x1="44" y1="85" x2="548" y2="85"/>
+        <line x1="44" y1="140" x2="548" y2="140"/><line x1="44" y1="195" x2="548" y2="195"/>
+        <line x1="44" y1="220" x2="548" y2="220"/>
+      </g>
+      <g fill="var(--mute)" font-size="11" text-anchor="end" font-family="sans-serif">
+        <text x="36" y="34">100</text><text x="36" y="89">75</text><text x="36" y="144">50</text><text x="36" y="199">25</text><text x="36" y="224">0</text>
+      </g>
+      <polyline points="60,220 114,216 168,207 222,196 276,163 330,121 384,136 438,145 492,84 546,26"
+        fill="none" stroke="var(--teal)" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
+      <circle cx="546" cy="26" r="6" fill="var(--teal)"/>
+      <g fill="var(--mute)" font-size="11" text-anchor="middle" font-family="sans-serif">
+        <text x="60" y="242">Jul 16</text><text x="222" y="242">Jul 25</text><text x="384" y="242">Aug 3</text><text x="546" y="242">Aug 12</text>
+      </g>
+    </svg>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div class="card"><span class="stat" style="color:var(--teal)">548</span><span class="lbl">impressions, three months</span></div>
+      <div class="card"><span class="stat" style="color:var(--teal)">8</span><span class="lbl">first clicks landing</span></div>
+      <div class="feature"><span class="stat" style="color:var(--sand)">0&#8202;&#8594;&#8202;88</span><span class="lbl">impressions per day, since late July</span></div>
+    </div>
+  </div>
+  <p class="note">Google Search Console. Impressions lead; clicks and bookings follow position.</p>
+</section>
+
+<!-- 6 THE GAP -->
+<section class="slide deep">
+  <span class="num">06 / 13</span>
+  <p class="eyebrow">The constraint</p>
+  <h2 style="color:var(--on-deep)">The gap is position, not relevance</h2>
+  <div class="split" style="align-items:center;gap:34px">
+    <div><span class="stat mega" style="color:var(--sand)">43.6</span>
+      <p class="lbl" style="font-size:16px;margin-top:8px">average search position</p></div>
+    <p class="big-quote">That is page four to five. Almost nobody scrolls past page one &#8212; clicks concentrate in the first three positions. Our pages are relevant and indexed; they are simply too far down to be seen. Closing that distance is the whole job of the next two quarters.</p>
+  </div>
+  <div class="card" style="background:rgba(232,199,122,.14)">
+    <p style="color:var(--on-deep);font-size:14px"><strong>One immediate flag.</strong> SFC ranks at position 7.7 for its own brand name. A business should own its own name outright &#8212; quick to fix, and worth doing first.</p>
+  </div>
+  <p class="note">Google Search Console, three months to 13 Aug 2026</p>
+</section>
+
+<!-- 7 MOBILE -->
+<section class="slide">
+  <span class="num">07 / 13</span>
+  <div><p class="eyebrow">Where the customer is</p><h2>Mobile is already our strongest channel</h2>
+  <p class="sub">Visitors on phones convert five times better than desktop visitors</p></div>
+  <div class="split">
+    <svg viewBox="0 0 480 250" role="img" aria-label="Click-through rate: mobile 3.7 percent versus desktop 0.7 percent">
+      <g stroke="var(--line)" stroke-width="1">
+        <line x1="60" y1="20" x2="470" y2="20"/><line x1="60" y1="67.5" x2="470" y2="67.5"/>
+        <line x1="60" y1="115" x2="470" y2="115"/><line x1="60" y1="162.5" x2="470" y2="162.5"/>
+        <line x1="60" y1="210" x2="470" y2="210"/>
+      </g>
+      <g fill="var(--mute)" font-size="11" text-anchor="end" font-family="sans-serif">
+        <text x="52" y="24">4%</text><text x="52" y="71.5">3%</text><text x="52" y="119">2%</text><text x="52" y="166.5">1%</text>
+      </g>
+      <rect x="110" y="34" width="110" height="176" rx="5" fill="var(--sand)"/>
+      <rect x="300" y="177" width="110" height="33" rx="5" fill="var(--mute)"/>
+      <text x="165" y="26" fill="var(--ink)" font-size="19" font-weight="700" text-anchor="middle" font-family="sans-serif">3.7%</text>
+      <text x="355" y="169" fill="var(--ink)" font-size="19" font-weight="700" text-anchor="middle" font-family="sans-serif">0.7%</text>
+      <text x="165" y="232" fill="var(--ink)" font-size="14" font-weight="600" text-anchor="middle" font-family="sans-serif">Mobile</text>
+      <text x="355" y="232" fill="var(--body)" font-size="14" text-anchor="middle" font-family="sans-serif">Desktop</text>
+    </svg>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div class="feature"><span class="stat" style="color:var(--sand)">62%</span>
+        <span class="lbl">of all clicks come from mobile &#8212; from only 24% of impressions</span></div>
+      <div class="card"><h3>What this tells us</h3>
+        <p>The customer is a visitor with a phone &#8212; in a hotel room, or standing on the beach deciding what to do today. When they find SFC, they click. The constraint is not persuasion; it is being found at all. Every point of position gained on mobile is worth roughly five times the same gain on desktop.</p></div>
+    </div>
+  </div>
+  <p class="note">GSC device breakdown &#8212; mobile 5 clicks / 134 impressions; desktop 3 clicks / 413 impressions</p>
+</section>
+
+<!-- 8 TIMELINE -->
+<section class="slide">
+  <span class="num">08 / 13</span>
+  <div><p class="eyebrow">Expectations</p><h2>What to expect, and when</h2>
+  <p class="sub">Organic search compounds &#8212; it does not switch on</p></div>
+  <div class="grid g4">
+    <div class="card" style="border-top:0"><span class="pill" style="background:var(--teal);color:#fff">Weeks 0&#8211;4</span>
+      <h3 style="margin-top:8px">Indexing and impressions</h3>
+      <p>Pages get crawled and start appearing. Impressions rise before anything else. We are here now.</p></div>
+    <div class="card"><span class="pill" style="background:var(--kelp);color:#fff">Months 1&#8211;3</span>
+      <h3 style="margin-top:8px">Long-tail positions</h3>
+      <p>Specific, low-competition pages reach page one first &#8212; sunrise and sunset sessions, occasions, groups.</p></div>
+    <div class="card"><span class="pill" style="background:var(--sand);color:#3A2E12">Months 3&#8211;6</span>
+      <h3 style="margin-top:8px">Head terms move</h3>
+      <p>Competitive phrases climb off page four. Clicks convert at the rates mobile already shows.</p></div>
+    <div class="card"><span class="pill" style="background:var(--mute);color:#fff">Months 6+</span>
+      <h3 style="margin-top:8px">Compounding</h3>
+      <p>Authority accumulates, new pages rank faster than earlier ones did, and the gap narrows.</p></div>
+  </div>
+  <p class="note">Indicative ranges based on current authority and measured competitive depth &#8212; not guarantees.</p>
+</section>
+
+<!-- 9 STRATEGY -->
+<section class="slide">
+  <span class="num">09 / 13</span>
+  <div><p class="eyebrow">The plan</p><h2>Pages built around real demand</h2>
+  <p class="sub">Every target below is a search with measured volume that SFC does not rank for today</p></div>
+  <div class="split">
+    <div class="wrap"><table class="tbl">
+      <thead><tr><th>Target search</th><th style="text-align:right">Monthly</th><th style="text-align:right">Difficulty</th></tr></thead>
+      <tbody>
+        <tr><td class="k">waikiki learn to surf</td><td class="n">2,900</td><td class="n">26</td></tr>
+        <tr><td class="k">surf waikiki hawaii</td><td class="n">1,300</td><td class="n" style="color:var(--kelp)">17</td></tr>
+        <tr><td class="k">surf lessons oahu</td><td class="n">1,000</td><td class="n">42</td></tr>
+        <tr><td class="k">surfing lessons waikiki</td><td class="n">590</td><td class="n">37</td></tr>
+        <tr><td class="k">learn to surf oahu</td><td class="n">390</td><td class="n">33</td></tr>
+        <tr><td class="k">surf schools in waikiki</td><td class="n">320</td><td class="n">37</td></tr>
+        <tr><td class="k">surfing lessons in honolulu</td><td class="n">260</td><td class="n" style="color:var(--kelp)">28</td></tr>
+      </tbody></table></div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="feature"><h3 style="color:var(--on-deep);font-size:14.5px">Already built, not yet live</h3>
+        <p style="color:var(--on-deep-mute);font-size:13px">38 pages &#8212; sunrise and sunset sessions, honeymoons, camps, group pages. <strong style="color:var(--sand)">No competitor holds a honeymoon page</strong>; sunrise is held by one.</p></div>
+      <div class="card"><h3>Location pages</h3><p>Honolulu and O&#699;ahu variants, currently unserved.</p></div>
+      <div class="card"><h3>Guides and blog</h3><p>Waik&#299;k&#299; surf spots, best place to learn in Hawai&#699;i, private versus group &#8212; a contested search where travel publishers win and no surf school competes.</p></div>
+      <div class="card"><h3>Named instructor pages</h3><p>Not one of the ten competitors names a single instructor. SFC has Uncle Savage. Unclaimed.</p></div>
+    </div>
+  </div>
+  <p class="note">Semrush Keyword Gap (volume, difficulty) &#183; first-party crawl of 973 competitor pages (coverage gaps)</p>
+</section>
+
+<!-- 10 PAID -->
+<section class="slide">
+  <span class="num">10 / 13</span>
+  <div><p class="eyebrow">An open door</p><h2>Paid search: nobody is competing</h2>
+  <p class="sub">Seven paid keywords exist in this entire market &#8212; and not one is a customer search</p></div>
+  <div class="split">
+    <div class="wrap"><table class="tbl">
+      <thead><tr><th>Keyword being bought</th><th>By</th><th style="text-align:right">Type</th></tr></thead>
+      <tbody>
+        <tr><td class="k">the stoke house waikiki</td><td>Stoke Drift</td><td class="n" style="font-weight:400;color:var(--mute)">own brand</td></tr>
+        <tr><td class="k">hawaii surfing academy</td><td>Stoke Drift</td><td class="n" style="color:var(--coral)">rival's brand</td></tr>
+        <tr><td class="k">jamie o brien surf experience</td><td>Job School</td><td class="n" style="font-weight:400;color:var(--mute)">own brand</td></tr>
+        <tr><td class="k">stoke surf</td><td>Stoke Drift</td><td class="n" style="font-weight:400;color:var(--mute)">own brand</td></tr>
+        <tr><td class="k">beach candy rentals</td><td>Job School</td><td class="n" style="font-weight:400;color:var(--mute)">own brand</td></tr>
+      </tbody></table>
+      <p class="sub" style="margin-top:12px;font-style:italic">All defensive. Nobody bids on &#8220;surf lessons Waik&#299;k&#299;&#8221; or anything like it.</p></div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div class="feature"><h3 style="color:var(--on-deep);font-size:15px">The opportunity</h3>
+        <p style="color:var(--on-deep-mute);font-size:13px">A single ad on the stand-up guarantee, pointed at the booking page, could produce bookings <strong style="color:var(--sand)">this week</strong> rather than this quarter. Clicks cost roughly $2.35, and with no competitor bidding, that price should hold.</p>
+        <p style="color:var(--on-deep-mute);font-size:13px;margin-top:8px">A small optional test alongside the organic plan &#8212; not a change of direction.</p></div>
+      <div class="card"><p style="font-style:italic">Any advertised guarantee should clear the same claims review the website copy goes through before it runs.</p></div>
+    </div>
+  </div>
+  <p class="note">Semrush Keyword Gap, paid keywords, 13 Aug 2026</p>
+</section>
+
+<!-- 11 TEAM -->
+<section class="slide">
+  <span class="num">11 / 13</span>
+  <div><p class="eyebrow">Over to you</p><h2>What we need from the SFC team</h2>
+  <p class="sub">Two things that move the needle, and only you can do them</p></div>
+  <div class="grid g2">
+    <div class="card" style="gap:12px">
+      <h3 style="font-size:18px;color:var(--sand);background:var(--ocean);padding:12px 16px;border-radius:8px">&#9733; &nbsp;Keep hammering for reviews</h3>
+      <p>Hans Hedemann carries over a thousand reviews. Star Beachboys and Kahu each claim more than a thousand. That is a moat built one guest at a time, and it is the strongest signal in local search.</p>
+      <p>Every lesson should end with a review request &#8212; in person, while the guest is still elated and still standing on the beach. Nothing we do on the website substitutes for this.</p>
+      <p><strong>It lifts map rankings and booking conversion at the same time.</strong></p>
+    </div>
+    <div class="card" style="gap:12px">
+      <h3 style="font-size:18px;color:var(--on-deep);background:var(--teal);padding:12px 16px;border-radius:8px">&#9654; &nbsp;Get busier on social</h3>
+      <p>The GoPro and drone library is a genuine asset sitting unused. No competitor has anything like it.</p>
+      <p>Posting it consistently builds brand recognition &#8212; and brand searches are the one category SFC can win quickly. Recall we sit at position 7.7 for our own name.</p>
+      <p><strong>It does not need to be polished.</strong> Real footage of real guests standing up for the first time, posted regularly, beats anything produced.</p>
+    </div>
+  </div>
+  <p class="note">Hans Hedemann verified at 4.8 stars / 1,014 reviews. Kahu and Star Beachboys figures are their own published claims.</p>
+</section>
+
+<!-- 12 NEXT 30 -->
+<section class="slide">
+  <span class="num">12 / 13</span>
+  <div><p class="eyebrow">Commitments</p><h2>The next thirty days</h2>
+  <p class="sub">Specific and checkable</p></div>
+  <div class="steps">
+    <div class="step"><span class="idx" style="background:var(--sand);color:#3A2E12">1</span>
+      <div><h3>Publish the 38 completed pages</h3><p>Written, built and waiting &#8212; including the sunrise and sunset sessions.</p></div></div>
+    <div class="step"><span class="idx" style="background:var(--teal)">2</span>
+      <div><h3>Finish the lesson-page template</h3><p>One locked layout so every lesson page is consistent and correct.</p></div></div>
+    <div class="step"><span class="idx" style="background:var(--kelp)">3</span>
+      <div><h3>Fix the brand-name ranking</h3><p>SFC should own position one for its own name.</p></div></div>
+    <div class="step"><span class="idx" style="background:var(--ocean)">4</span>
+      <div><h3>Start the review engine</h3><p>A repeatable ask at the end of every lesson.</p></div></div>
+    <div class="step"><span class="idx" style="background:var(--mute)">5</span>
+      <div><h3>Optional &#8212; run the paid test</h3><p>One ad, small budget, measured against bookings.</p></div></div>
+  </div>
+  <p class="note">Progress against these items will be reported at the next review.</p>
+</section>
+
+<!-- 13 CLOSE -->
+<section class="slide deep" style="justify-content:center;gap:24px">
+  <span class="num">13 / 13</span>
+  <p class="eyebrow">The horizon</p>
+  <h2 style="color:var(--on-deep)">Where this goes</h2>
+  <p class="big-quote" style="max-width:70ch">Impressions keep compounding. The specific pages &#8212; sunrise, sunset, occasions, groups &#8212; reach page one first, because almost nobody is competing for them. The competitive phrases follow, climbing off page four over the months after. Brand searches consolidate as the social library goes to work, and reviews lift both the map listing and the booking rate at once.</p>
+  <p class="big-quote" style="max-width:70ch">The plan does not change. We continue optimising the site and filling it with the right content and the right media, built around what people are actually searching for.</p>
+  <p class="big-quote" style="max-width:70ch;color:var(--sand)">This is slow by nature, and the trajectory is the measure &#8212; not any single month's numbers. Right now the trajectory is up.</p>
+  <p class="note" style="border-top-color:rgba(255,255,255,.14)">Questions, and the decision on the paid test, are what we need from you today.</p>
+</section>
+
+</div>
+
+</body>
+</html>

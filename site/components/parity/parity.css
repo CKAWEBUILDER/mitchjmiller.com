@@ -1,0 +1,13 @@
+/* Narrow additions for native controls; colors and layout remain production CSS. */
+[hidden] { display: none !important; }
+.parity-skip-link { position: fixed; left: 1rem; top: -10rem; z-index: 100; background: white; color: #0f172a; padding: .75rem 1rem; }
+.parity-skip-link:focus { top: 1rem; }
+.parity-mobile-menu summary::-webkit-details-marker { display: none; }
+.parity-mobile-menu summary:focus-visible, a:focus-visible, button:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+.parity-resume-dialog { margin: auto; width: min(42rem, calc(100vw - 2rem)); max-height: calc(100dvh - 2rem); overflow-y: auto; }
+.parity-resume-dialog::backdrop { background: rgb(0 0 0 / .65); }
+.study-content pre, .study-content table { overflow-x: auto; }
+.study-content table { display: block; max-width: 100%; }
+.parity-diagram { margin: 2rem 0; overflow-x: auto; background: white; }
+.parity-diagram svg { min-width: 36rem; width: 100%; height: auto; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; } }

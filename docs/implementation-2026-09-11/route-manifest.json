@@ -1,0 +1,468 @@
+{
+  "source": "2745c7e",
+  "routes": [
+    {
+      "path": "/",
+      "kind": "general"
+    },
+    {
+      "path": "/about/",
+      "kind": "general"
+    },
+    {
+      "path": "/contact/",
+      "kind": "general"
+    },
+    {
+      "path": "/collab-ideas/",
+      "kind": "general"
+    },
+    {
+      "path": "/resume/",
+      "kind": "general"
+    },
+    {
+      "path": "/systems/",
+      "kind": "general"
+    },
+    {
+      "path": "/work/",
+      "kind": "general"
+    },
+    {
+      "path": "/selected-builds/",
+      "kind": "general"
+    },
+    {
+      "path": "/blog/",
+      "kind": "general"
+    },
+    {
+      "path": "/case-studies/",
+      "kind": "general"
+    },
+    {
+      "path": "/aeo-geo/",
+      "kind": "general"
+    },
+    {
+      "path": "/case-studies/apple-seasonal-search/",
+      "kind": "case",
+      "title": "Apple Seasonal Search",
+      "expected": [
+        "Apple Seasonal Search",
+        "Seasonal commerce surfaces (holiday, Mother's Day, back to school, education) needed search strategy, rendering fixes, and executive alignment",
+        "Demand research, international SEO (hreflang), JS rendering/indexation remediation, evergreen content strategy, stakeholder readouts to 60+ audiences",
+        "Secured engineering roadmap prioritization, presented seasonal search strategy to 60+ stakeholder audiences, and added AI search considerations to the long-term roadmap."
+      ]
+    },
+    {
+      "path": "/case-studies/apple-store-amr/",
+      "kind": "case",
+      "title": "Apple Store AMR",
+      "expected": [
+        "Apple Store AMR",
+        "Needed consistent seasonal merchandising visibility across multiple locales and languages.",
+        "Coordinated merchandising updates, locale architecture mapping, and evergreen URLs.",
+        "Coordinated seasonal SEO updates across Americas store surfaces, including locale checks, rendering QA, and launch support."
+      ]
+    },
+    {
+      "path": "/case-studies/apple-education-store/",
+      "kind": "case",
+      "title": "Apple Education Store",
+      "expected": [
+        "Apple Education Store",
+        "High-stakes seasonal peak requiring flawless execution.",
+        "Pre-launch audits, rendering checks, and demand forecasting.",
+        "Supported back-to-school launch readiness with demand forecasting, pre-launch audits, and rendering/indexation checks."
+      ]
+    },
+    {
+      "path": "/case-studies/stanford-myhealth-seo/",
+      "kind": "case",
+      "title": "Stanford MyHealth SEO",
+      "expected": [
+        "Stanford MyHealth SEO",
+        "High-value clinical service lines needed full-funnel search coverage; AI-driven search behavior shifting query patterns",
+        "Budget/measurement ownership, keyword strategy, campaign taxonomy restructuring, cross-functional content/UX/clinical strategy work",
+        "Restructured paid and organic search coverage for clinical service lines as patient search behavior shifted toward AI-assisted discovery."
+      ]
+    },
+    {
+      "path": "/case-studies/commonspirit-locations-conversion-engine/",
+      "kind": "case",
+      "title": "Dignity Health Yext Location Conversion Engine",
+      "expected": [
+        "Dignity Health Yext Location Conversion Engine",
+        "Dignity Health operated like nine regional web experiences with inconsistent templates, local governance, conversion paths, SEO architecture, and location data. Legacy Sitecore publishing constraints made it difficult to scale clean patient-action pages, and Google often lacked enough structured location context to match the right specialty, facility, or market to the right local search intent.",
+        "Developed a 1,000+ page Yext location conversion system driven by the SEO team and built cross-functionally with design, analytics, internal data owners, regional stakeholders, and Yext engineering; used Yext Pages, parent/child entity architecture, reusable templates, structured data, database uploads, and feed pushes to create scalable location pages outside the legacy CMS bottleneck; standardized NAP, specialty, service-area, and location metadata so Google, Apple Maps, Siri, Alexa, and other publishers could understand each entity and market; connected the page system to appointment, call, direction, and location-action measurement so SEO could claim attributable patient-acquisition value.",
+        "Estimated 60-80% share of tracked location actions within months of launch, across calls, directions, appointment starts, and booking pathways depending on metric and reporting window; the system continued compounding into later CommonSpirit reporting, including 175K calls/directions, 88K appointments, and $15.21M FY22 attributable revenue"
+      ]
+    },
+    {
+      "path": "/case-studies/commonspirit-network-consolidation/",
+      "kind": "case",
+      "title": "CommonSpirit Network Consolidation",
+      "expected": [
+        "CommonSpirit Network Consolidation",
+        "Post-merger web fragmentation, analytics infrastructure dissolution, migration risk",
+        "20+ enterprise migrations with technical requirements, stakeholder coordination, post-launch audits; analytics product ownership through org restructure; organic sessions from 2.65M to 4.9M+ across tenure",
+        "Organic sessions increased from 2.65M to 4.9M+ while 20+ site migrations and post-merger analytics changes were underway."
+      ]
+    },
+    {
+      "path": "/case-studies/commonspirit-medical-content-library/",
+      "kind": "case",
+      "title": "Dignity Health Conditions & Treatments Library",
+      "expected": [
+        "Dignity Health Conditions & Treatments Library",
+        "No unified SEO content strategy for conditions and treatments; 60+ legacy CMS environments had inconsistent structure; content capacity was limited to 5-6 new articles per month while WebMD, Mayo Clinic, Cleveland Clinic, and other medical-library competitors owned symptom and treatment intent.",
+        "Proposed the initiative in PI planning to 70+ stakeholders; crawled competitor medical libraries against a 10,000-term condition/treatment universe; sorted opportunities by monthly search volume, competition, service-line alignment, and publication effort; converted the resulting glossary/library strategy into modular AEM content fragments with reusable metadata, summaries, FAQ/schema fields, and local-market variations.",
+        "Earned 80%+ stakeholder buy-in; the library later generated 1M+ organic visits/year and gave 34 healthcare markets a concrete reason to adopt AEM content fragments."
+      ]
+    },
+    {
+      "path": "/case-studies/aem-content-fragmentation-architecture/",
+      "kind": "case",
+      "title": "AEM Content Fragmentation Architecture",
+      "expected": [
+        "AEM Content Fragmentation Architecture",
+        "Top-down migration mandate faced regional resistance across 60+ unique websites; markets needed a practical reason to move, not another abstract platform directive.",
+        "Turned the Conditions & Treatments glossary into a modular AEM content-fragment model: reusable titles, descriptions, summaries, FAQ/schema fields, taxonomy, and regional variations. The demo showed how markets could localize service-line content while preserving SEO governance and reducing duplicated CMS work.",
+        "Gave regional teams a reusable content model with titles, summaries, FAQ/schema fields, taxonomy, and local-market variations instead of a generic migration mandate."
+      ]
+    },
+    {
+      "path": "/case-studies/yext-entity-data-foundation/",
+      "kind": "case",
+      "title": "Yext Entity Data Foundation",
+      "expected": [
+        "Yext Entity Data Foundation",
+        "Duplicate listings, NAP inconsistency, no publisher network coverage",
+        "NAP cleanup, duplicate suppression, entity management, syndication to Google, Apple Maps, Siri, Alexa, Bing, Yelp",
+        "Cleaned duplicate listings, standardized NAP data, and syndicated location entities across Google, Apple Maps, Siri, Alexa, Bing, and Yelp."
+      ]
+    },
+    {
+      "path": "/case-studies/claritypulse-ai-reporting/",
+      "kind": "case",
+      "title": "ClarityPulse",
+      "expected": [
+        "ClarityPulse",
+        "Client reporting was manual, time-consuming, inconsistent; no single surface connected GA4, GSC, ads, SEO data into a narrative",
+        "Built internal AI product with modules: header (generated time, client, source freshness, QA state), KPI cards with raw values and deltas, executive narrative with evidence tags, trend chart, risk/action queue table, source health, export lock / low-confidence review state",
+        "Converted GA4, GSC, ads, and SEO data into KPI cards, source-backed narratives, risk queues, and export-ready weekly briefs."
+      ]
+    },
+    {
+      "path": "/case-studies/searchforge-content-intelligence/",
+      "kind": "case",
+      "title": "SearchForge",
+      "expected": [
+        "SearchForge",
+        "Content briefs were generic; entity gaps and topical authority gaps were identified manually",
+        "AI system for briefs, entity gap detection, topic clusters, schema generation, FAQs, source/citation targets, editorial QA",
+        "Automated entity gaps, topic clusters, schema prompts, FAQs, source targets, and editorial QA for SEO content briefs."
+      ]
+    },
+    {
+      "path": "/case-studies/actionthread-transcript-execution/",
+      "kind": "case",
+      "title": "ActionThread",
+      "expected": [
+        "ActionThread",
+        "Post-call follow-up was manual, inconsistent, and created execution debt",
+        "Transcript → summary → decisions → owners → deadlines → follow-up tasks and task updates",
+        "Converted transcripts into owner-tagged follow-ups, decisions, deadlines, and task updates."
+      ]
+    },
+    {
+      "path": "/case-studies/aeo-visibility-infrastructure/",
+      "kind": "case",
+      "title": "AEO Visibility Infrastructure",
+      "expected": [
+        "AEO Visibility Infrastructure",
+        "No measurement for brand visibility in AI search engines",
+        "Prompt-set monitoring, citation velocity, AI share-of-voice, competitor gap analysis, source coverage tracking, prioritized fix queue across ChatGPT, Perplexity, Google AI Overviews",
+        "Built prompt-set tracking for AI citation share, competitor visibility, source inclusion, and prioritized fix queues."
+      ]
+    },
+    {
+      "path": "/case-studies/domainsignal/",
+      "kind": "case",
+      "title": "DomainSignal",
+      "expected": [
+        "DomainSignal",
+        "Needed better ways to score and aggregate domain intelligence signals.",
+        "Scoring models, targeted data sources, and feedback-loop refinement",
+        "Built a working domain-evaluation prototype using scoring models, targeted data sources, and feedback-loop refinement."
+      ]
+    },
+    {
+      "path": "/case-studies/date-night/",
+      "kind": "case",
+      "title": "Date Night",
+      "expected": [
+        "Date Night",
+        "Dating app market has forgotten about people who are already in relationships.",
+        "Shared planning, relationship-first discovery, date recommendations.",
+        "Built a working couples-app prototype for shared planning, discovery, and date recommendations."
+      ]
+    },
+    {
+      "path": "/case-studies/vet-advocates-growth-system/",
+      "kind": "case",
+      "title": "Vet Advocates Growth System",
+      "expected": [
+        "Vet Advocates Growth System",
+        "Nonprofit lacked structured acquisition to reach veterans in need.",
+        "Built structured Facebook ad system, codified the system, and trained an outsourced VA.",
+        "Signups increased from 2-3/mo to 25-50/mo."
+      ]
+    },
+    {
+      "path": "/case-studies/sfc-surf-school/",
+      "kind": "case",
+      "title": "SFC Surf School Search Visibility",
+      "expected": [
+        "SFC Surf School Search Visibility",
+        "A newly rebuilt site was indexed and relevant but ranking on page four to five, with the market leader holding roughly forty times more ranking keywords.",
+        "Derived the true competitor set from organic visibility data rather than reputation, crawled 973 competitor pages to map content patterns and coverage gaps, ran desktop and mobile keyword-gap studies, and built a prioritised page plan around measured demand.",
+        "Identified 38 completed pages that had never been published, found the highest-volume opportunity nobody in the market had a page for, and surfaced that mobile visitors converted five times better than desktop."
+      ]
+    },
+    {
+      "path": "/blog/gbp-2026-ai-grounding/",
+      "kind": "article",
+      "title": "Your Google Business Profile Is Now an AI Grounding Source — What Actually Changed in 2026",
+      "expected": [
+        "Your Google Business Profile Is Now an AI Grounding Source — What Actually Changed in 2026"
+      ]
+    },
+    {
+      "path": "/blog/multi-agent-billing-traps/",
+      "kind": "article",
+      "title": "The Flat-Fee Multi-Agent Stack — and the 3 Billing Traps That Quietly Meter You",
+      "expected": [
+        "The Flat-Fee Multi-Agent Stack — and the 3 Billing Traps That Quietly Meter You"
+      ]
+    },
+    {
+      "path": "/blog/intrepid-agency-spotlight/",
+      "kind": "article",
+      "title": "Agency Spotlight: Intrepid Digital and the Long Game in Search Marketing",
+      "expected": [
+        "Agency Spotlight: Intrepid Digital and the Long Game in Search Marketing"
+      ]
+    },
+    {
+      "path": "/blog/mitchell-miller-journey/",
+      "kind": "article",
+      "title": "The Long Road to Systems Thinking: My Journey in Search, AI, and Building Things",
+      "expected": [
+        "The Long Road to Systems Thinking: My Journey in Search, AI, and Building Things"
+      ]
+    },
+    {
+      "path": "/blog/traditional-seo-to-ai-search/",
+      "kind": "placeholder",
+      "title": "From Traditional SEO to AI Search: What Actually Changed",
+      "expected": [
+        "From Traditional SEO to AI Search: What Actually Changed"
+      ]
+    },
+    {
+      "path": "/blog/aeo-geo-measurement-framework/",
+      "kind": "placeholder",
+      "title": "AEO vs GEO vs SEO: A Practical Measurement Framework",
+      "expected": [
+        "AEO vs GEO vs SEO: A Practical Measurement Framework"
+      ]
+    },
+    {
+      "path": "/blog/entity-seo-for-ai-retrieval/",
+      "kind": "placeholder",
+      "title": "Entity SEO for AI Retrieval Systems",
+      "expected": [
+        "Entity SEO for AI Retrieval Systems"
+      ]
+    },
+    {
+      "path": "/blog/enterprise-seo-business-cases/",
+      "kind": "placeholder",
+      "title": "The Enterprise SEO Business Case: How to Get Engineering Prioritized",
+      "expected": [
+        "The Enterprise SEO Business Case: How to Get Engineering Prioritized"
+      ]
+    },
+    {
+      "path": "/blog/studying/hermes-concepts-field-guide/",
+      "kind": "note",
+      "title": "Every Hermes Concept in Plain English — a Field Guide to the Agent Harness",
+      "expected": [
+        "Every Hermes Concept in Plain English — a Field Guide to the Agent Harness"
+      ]
+    },
+    {
+      "path": "/blog/studying/claude-watermark-seo/",
+      "kind": "note",
+      "title": "Did Claude's Watermark Just \"Break\" SEO? The Fear Chain vs. the Evidence",
+      "expected": [
+        "Did Claude's Watermark Just \"Break\" SEO? The Fear Chain vs. the Evidence"
+      ]
+    },
+    {
+      "path": "/blog/studying/all-in-ai-money-stack/",
+      "kind": "note",
+      "title": "TL;DW: Anthropic's $2T IPO, Zuck's Manifesto, Nvidia's $500B Bet & Grok's Comeback",
+      "expected": [
+        "TL;DW: Anthropic's $2T IPO, Zuck's Manifesto, Nvidia's $500B Bet & Grok's Comeback"
+      ]
+    },
+    {
+      "path": "/blog/studying/hermes-seo-agent/",
+      "kind": "note",
+      "title": "A \"Hermes\" Agent That Runs SEO End-to-End — What Actually Holds Up",
+      "expected": [
+        "A \"Hermes\" Agent That Runs SEO End-to-End — What Actually Holds Up"
+      ]
+    },
+    {
+      "path": "/blog/studying/codex-obsolete-9-moves/",
+      "kind": "note",
+      "title": "Codex Just Made Claude \"Obsolete\"? — 9 Platform Moves Worth Studying",
+      "expected": [
+        "Codex Just Made Claude \"Obsolete\"? — 9 Platform Moves Worth Studying"
+      ]
+    },
+    {
+      "path": "/blog/studying/chatgpt-sites/",
+      "kind": "note",
+      "title": "ChatGPT Sites: Build + Host a Real Internal App From One Conversation",
+      "expected": [
+        "ChatGPT Sites: Build + Host a Real Internal App From One Conversation"
+      ]
+    },
+    {
+      "path": "/blog/studying/book-to-skill/",
+      "kind": "note",
+      "title": "I Turned a Book into an AI Agent (book-to-skill)",
+      "expected": [
+        "I Turned a Book into an AI Agent (book-to-skill)"
+      ]
+    },
+    {
+      "path": "/blog/studying/claude-code-6-new-rules/",
+      "kind": "note",
+      "title": "Claude Code Just Changed — the 6 New Rules of Context Engineering",
+      "expected": [
+        "Claude Code Just Changed — the 6 New Rules of Context Engineering"
+      ]
+    },
+    {
+      "path": "/blog/studying/claude-code-make-money/",
+      "kind": "note",
+      "title": "I Asked Claude Code to Make Me as Much Money as Possible",
+      "expected": [
+        "I Asked Claude Code to Make Me as Much Money as Possible"
+      ]
+    },
+    {
+      "path": "/blog/studying/build-ai-agents-full-course/",
+      "kind": "note",
+      "title": "Build AI Agents to Automate Your Business — the Full Framework",
+      "expected": [
+        "Build AI Agents to Automate Your Business — the Full Framework"
+      ]
+    },
+    {
+      "path": "/blog/studying/codex-voice-jarvis/",
+      "kind": "note",
+      "title": "OpenAI's Codex Voice: Real-Time Voice That Runs Your Computer",
+      "expected": [
+        "OpenAI's Codex Voice: Real-Time Voice That Runs Your Computer"
+      ]
+    },
+    {
+      "path": "/blog/studying/pi-coding-agent/",
+      "kind": "note",
+      "title": "The Pi Coding Agent — the Only Real Claude Code Competitor",
+      "expected": [
+        "The Pi Coding Agent — the Only Real Claude Code Competitor"
+      ]
+    },
+    {
+      "path": "/blog/studying/ships-100x-faster/",
+      "kind": "note",
+      "title": "Why This Dev Ships 100x Faster Than 99% of Engineers",
+      "expected": [
+        "Why This Dev Ships 100x Faster Than 99% of Engineers"
+      ]
+    },
+    {
+      "path": "/blog/studying/forget-loop-engineering/",
+      "kind": "note",
+      "title": "Forget \"Loop Engineering\" — Agentic Engineering Is About This",
+      "expected": [
+        "Forget \"Loop Engineering\" — Agentic Engineering Is About This"
+      ]
+    },
+    {
+      "path": "/blog/studying/mark-cuban-ai-bubble/",
+      "kind": "note",
+      "title": "Mark Cuban on the AI Bubble: Who Actually Gets Wiped Out?",
+      "expected": [
+        "Mark Cuban on the AI Bubble: Who Actually Gets Wiped Out?"
+      ]
+    },
+    {
+      "path": "/blog/studying/hormozi-build-this-instead/",
+      "kind": "note",
+      "title": "Alex Hormozi's Warning: Stop Chasing AI, Build This Instead",
+      "expected": [
+        "Alex Hormozi's Warning: Stop Chasing AI, Build This Instead"
+      ]
+    },
+    {
+      "path": "/blog/studying/old-seo-collapsing/",
+      "kind": "note",
+      "title": "The Old SEO System Is Collapsing — Here's What Replaces It",
+      "expected": [
+        "The Old SEO System Is Collapsing — Here's What Replaces It"
+      ]
+    },
+    {
+      "path": "/blog/studying/seo-2026-ai-era/",
+      "kind": "note",
+      "title": "SEO in 2026: How I'd Rank in Google in the AI Era",
+      "expected": [
+        "SEO in 2026: How I'd Rank in Google in the AI Era"
+      ]
+    },
+    {
+      "path": "/blog/studying/aeo-geo-aio/",
+      "kind": "note",
+      "title": "AEO vs GEO vs AIO — How AI Search Actually Works in 2026",
+      "expected": [
+        "AEO vs GEO vs AIO — How AI Search Actually Works in 2026"
+      ]
+    },
+    {
+      "path": "/blog/studying/smith-chart-scariest-ee/",
+      "kind": "note",
+      "title": "The Scariest Chart in Electrical Engineering (The Smith Chart)",
+      "expected": [
+        "The Scariest Chart in Electrical Engineering (The Smith Chart)"
+      ]
+    },
+    {
+      "path": "/blog/studying/aeo-80-percent/",
+      "kind": "note",
+      "title": "Learn 80% of AEO in 19 Minutes (Ahrefs)",
+      "expected": [
+        "Learn 80% of AEO in 19 Minutes (Ahrefs)"
+      ]
+    }
+  ]
+}

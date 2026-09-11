@@ -1,38 +1,34 @@
-# Mitchell Miller — mitchjmiller.com
+# Mitchell Miller portfolio
 
-## Active HTML staging build
+Read [PROJECT.md](PROJECT.md) for current source, review state, permissions and the exact next task. [AGENTS.md](AGENTS.md) is the shared operating contract; [CLAUDE.md](CLAUDE.md) references the same records.
 
-The Astro implementation is now underway on `codex/astro-html-staging-20260911`. `npm run build` generates the design review and complete-HTML content proofs in `dist`; `npm run serve` serves them locally on port 5187. The production-named commands are gated pending theme review and the full migration. Read [PROJECT.md](PROJECT.md) and the [staging task record](docs/design-review-2026-09-11/README.md) first. The former React scripts are retained with `:legacy` suffixes, and the older description below is historical.
+The current branch implements the production portfolio as complete Astro HTML and keeps a separate new design candidate at `/design/`. The public site and existing private stage have not yet been updated with this branch. Authentication blocked final browser checks and publication; see [implementation evidence](docs/implementation-2026-09-11/README.md).
 
-**Agent entry point:** read [AGENTS.md](AGENTS.md), [PROJECT.md](PROJECT.md), and the [current handoff](handoffs/astro-migration-2026-09-11.md). Claude Code also has a root [CLAUDE.md](CLAUDE.md) entry point. The active direction is the [complete-HTML Astro migration](docs/migration-2026-09-11/README.md); the commands and React review description below are the existing implementation, not a completed Astro conversion.
-
-Personal portfolio for enterprise search leadership, AI engineering and growth systems. The September 2026 redesign includes 17 case studies, four current resume PDFs, 25 writing/study notes and three interactive lab experiences.
-
-## Develop and review
+## Commands
 
 ```sh
 npm ci
-npm run dev
+npm run dev                    # Astro, localhost:5191
+npm run build                  # noindex, analytics-free review in dist/
+node scripts/serve-review.mjs dist 5191
 npm run typecheck
-npm run build
-npm run serve -- --host 127.0.0.1 --port 5186
+npm run build:release-candidate # local only; removes review routes/assets
 ```
 
-The default build creates a review version with `noindex` and a disallowing robots.txt. Build output is `dist/public`. Route generation preserves direct links and supplies unique metadata, canonicals and a 54-URL sitemap.
+After a release-candidate test, run `npm run build` again before private publication. `npm run build:production`, `build:github` and `deploy:cloudflare` deliberately remain gated. GitHub source must be pushed before an authorized host update. Never use the legacy deployment scripts for the Astro build.
 
-## Production
+## Implementation map
 
-```sh
-npm run build:production
-```
+- `baseline/src/`: production source snapshot, with static-navigation/enhancement adapters. Canonical source commit is recorded in the [asset manifest](docs/implementation-2026-09-11/production-files.json).
+- `site/components/ParityPage.tsx` and `site/pages/[...path].astro`: complete production HTML and route metadata.
+- `baseline/public/`: exact original PDFs and standalone SFC report. Shared images remain in `public/images/`.
+- `site/lib/content.ts`: content/image references shared by parity and candidate.
+- `site/pages/design/`, `site/layouts/CandidateLayout.astro`, `site/styles/candidate.css`: isolated design candidate.
+- `site/pages/lab.astro`: three existing React islands, with complete initial content.
+- `scripts/prepare-astro-staging.mjs`, `finalize-parity.mjs`, `verify-parity.mjs`: deterministic assets, indexing policy and parity checks.
 
-This explicitly enables indexing in static HTML, React metadata and robots.txt. Building does not deploy. GitHub is canonical; production is GitHub Pages from the `gh-pages` branch. Follow [deployment instructions](docs/deployment.md) only after approval of the finished release. No DNS or hosting migration is required.
+## Review paths
 
-## Project records
+`/review/` links the current-site migration, new candidate, expanded case proofs, newer resume PDFs and existing tools. Production PDF URLs keep production bytes. The newer resume review files live under `/review-assets/files/`. Old theme routes are historical references and are not offered as current choices.
 
-- [September 10 overhaul and verification](docs/overhaul-2026-09-10/README.md)
-- [Case-study evidence and image sources](docs/overhaul-2026-09-10/content-evidence.md)
-- [Interactive lab](docs/overhaul-2026-09-10/interactive-lab.md)
-- [Visual asset provenance](docs/visual-assets.md)
-
-Existing public content is approved by Mitch for promotion. The SFC work was explicitly requested for this overhaul. Future client material requires the approval Mitch said he will obtain. Preserve unpublished drafts separately from public source.
+Continue with [handoffs/parity-design-2026-09-11.md](handoffs/parity-design-2026-09-11.md). Keep earlier records as history; do not treat proposed overnight work as completed implementation.

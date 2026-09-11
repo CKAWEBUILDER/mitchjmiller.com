@@ -1,0 +1,78 @@
+---
+import CandidateLayout from '../../layouts/CandidateLayout.astro';
+import {caseStudies, portfolioImages, headshot, resumeOptions, studyEditorial, sfcEvidenceImages} from '../../lib/content';
+
+const enterprise = ['apple-seasonal-search', 'commonspirit-locations-conversion-engine'].map(slug => ({
+  slug, entry: caseStudies.find(entry => entry.slug === slug)!, story: studyEditorial[slug], image: portfolioImages[slug],
+}));
+const products = ['claritypulse-ai-reporting', 'searchforge-content-intelligence', 'domainsignal', 'date-night'].map(slug => ({
+  slug, entry: caseStudies.find(entry => entry.slug === slug)!, story: studyEditorial[slug], image: portfolioImages[slug],
+}));
+const sfc = studyEditorial['sfc-surf-school'];
+const sfcImage = sfcEvidenceImages[0];
+const stanford = studyEditorial['stanford-myhealth-seo'];
+const stanfordImage = portfolioImages['stanford-myhealth-seo'];
+---
+<CandidateLayout title="Search, data and digital products" description="Mitchell Miller connects research, design and engineering to build useful digital systems. Explore enterprise work, client projects and independent products.">
+  <section class="candidate-hero" aria-labelledby="home-heading">
+    <div class="candidate-wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Enterprise experience. Hands-on delivery.</p>
+        <h1 id="home-heading">From a complex problem to something useful.</h1>
+        <p class="hero-deck">I’m Mitchell Miller. I connect search, data, design and engineering to help people find what they need—and businesses build what comes next.</p>
+        <a class="candidate-button" href="#selected-work">Explore my work <span aria-hidden="true">↗</span></a>
+      </div>
+      <figure class="hero-portrait">
+        <div class="portrait-frame"><img src={headshot} alt="Mitchell Miller" width="400" height="400" fetchpriority="high" /></div>
+        <figcaption><strong>A strategist who builds.</strong><span>From enterprise programs to working prototypes.</span></figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="experience-strip" aria-label="Professional experience">
+    <div class="candidate-wrap">
+      <p>Experience includes</p>
+      <ul><li>Apple</li><li>Dignity Health<span>CommonSpirit Health</span></li><li>Stanford<span>Health Care</span></li><li>Clarity AI</li></ul>
+    </div>
+  </section>
+
+  <section id="selected-work" class="candidate-section candidate-wrap" aria-labelledby="work-heading">
+    <div class="section-heading"><div><p class="eyebrow">Selected enterprise work</p><h2 id="work-heading">Big systems. Specific contributions.</h2></div><a class="text-link" href="/work/">All case studies <span aria-hidden="true">→</span></a></div>
+    <p class="section-intro">Search programs, patient journeys and the infrastructure that connects discovery to a useful next action.</p>
+    <div class="enterprise-grid">
+      {enterprise.map(({slug, entry, story, image}) => <article class="work-card">
+        <figure>
+          <a class="work-image" href={`/case-studies/${slug}/`} aria-label={`Read ${entry.title}`}><img src={image.src} alt={image.alt} loading="lazy" width="1400" height="900" /></a>
+          <figcaption>{image.note}</figcaption>
+        </figure>
+        <div class="work-card-copy"><p class="eyebrow">{story.client}</p><h3><a href={`/case-studies/${slug}/`}>{story.headline}</a></h3><p>{story.summary}</p><div class="card-foot"><span>{story.metrics[0].value} <small>{story.metrics[0].label}</small></span><a class="text-link" href={`/case-studies/${slug}/`}>Read the case <span aria-hidden="true">→</span></a></div></div>
+      </article>)}
+    </div>
+    <article class="enterprise-followon">
+      <figure><a href="/case-studies/stanford-myhealth-seo/" aria-label="Read the Stanford MyHealth case study"><img src={stanfordImage.src} alt={stanfordImage.alt} loading="lazy" width="1400" height="900" /></a><figcaption>{stanfordImage.note}</figcaption></figure>
+      <div><p class="eyebrow">{stanford.client}</p><h3>{stanford.headline}</h3><p>{stanford.summary}</p><a class="text-link" href="/case-studies/stanford-myhealth-seo/">Explore the work <span aria-hidden="true">→</span></a></div>
+    </article>
+  </section>
+
+  <section class="client-feature" aria-labelledby="sfc-heading">
+    <div class="candidate-wrap">
+      <div class="section-heading"><div><p class="eyebrow">Recent client work · {sfc.accent}</p><h2 id="sfc-heading">Local knowledge, made useful.</h2></div><span class="project-type">SFC Surf School</span></div>
+      <div class="client-feature-grid">
+        <figure><a href="/design/case-studies/sfc-surf-school/" aria-label="Read the complete SFC Surf School case study"><img src={sfcImage.src} alt={sfcImage.alt} loading="lazy" width="1440" height="1000" /></a><figcaption>{sfcImage.caption}</figcaption></figure>
+        <div class="client-feature-copy"><h3>Research, a better website and a guide worth exploring.</h3><p>{sfc.summary}</p><div class="feature-result"><strong>{sfc.metrics[0].value}</strong><span>{sfc.metrics[0].label}<small>{sfc.metrics[0].note}</small></span></div><p class="measurement-note">Aug 12–Sep 8 vs Jul 15–Aug 11, 2026. This measured the earlier search work; the explorer launched September 10.</p><a class="candidate-button" href="/design/case-studies/sfc-surf-school/">See the complete case <span aria-hidden="true">↗</span></a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="candidate-section candidate-wrap" aria-labelledby="builds-heading">
+    <div class="section-heading"><div><p class="eyebrow">Products &amp; experiments</p><h2 id="builds-heading">Make the idea tangible.</h2></div><a class="text-link" href="/selected-builds/">More builds <span aria-hidden="true">→</span></a></div>
+    <p class="section-intro">Reporting workflows, content intelligence and independent product ideas—made concrete enough to inspect and improve.</p>
+    <div class="product-grid">
+      {products.map(({slug, entry, story, image}) => <article class:list={['product-card', {'mobile-product': slug === 'domainsignal' || slug === 'date-night'}]}>
+        <figure><a class="product-image" href={`/case-studies/${slug}/`} aria-label={`Read ${entry.title}`}><img src={image.src} alt={image.alt} loading="lazy" /></a><figcaption>{image.note || `${story.client}. Existing product prototype interface.`}</figcaption></figure>
+        <div class="product-copy"><p class="eyebrow">{story.client}</p><h3><a href={`/case-studies/${slug}/`}>{entry.title}</a></h3><p>{story.summary}</p><a class="text-link" href={`/case-studies/${slug}/`}>See the thinking <span aria-hidden="true">→</span></a></div>
+      </article>)}
+    </div>
+  </section>
+
+  <section class="candidate-cta" aria-labelledby="contact-heading"><div class="candidate-wrap cta-grid"><div><p class="eyebrow">The next useful conversation</p><h2 id="contact-heading">What are you trying to make possible?</h2><p>Bring a problem, a project or a role. I’m interested in work that connects thoughtful strategy with something people can actually use.</p><a class="candidate-button" href="/contact/">Let’s talk <span aria-hidden="true">↗</span></a></div><div class="resume-aside"><h3>Considering me for your team?</h3><p>Start with the experience most relevant to the role.</p><ul>{resumeOptions.map(resume => <li><a href={resume.href}>{resume.label}<span>PDF <span aria-hidden="true">↓</span></span></a></li>)}</ul></div></div></section>
+</CandidateLayout>

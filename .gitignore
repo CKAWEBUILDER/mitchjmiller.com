@@ -13,3 +13,11 @@ __pycache__/
 .stage-assets/
 .astro/
 .sites-runtime/
+
+# Local comparison fixture; exported from identified production commit
+.reference-dist/
+
+.vite-cache/
+.release-candidate/
+
+/node_modules

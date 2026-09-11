@@ -1,0 +1,26 @@
+{
+  "mode": "local-release-candidate",
+  "passed": true,
+  "source": "2745c7e",
+  "productionDeployment": "923dfd85597253786da407fe78de6d0011bbfe16",
+  "checks": {
+    "routes": 57,
+    "fullBodies": 25,
+    "caseFields": 160,
+    "pdfs": 4,
+    "htmlDocuments": 58,
+    "localLinksAndAssets": 2198,
+    "anchorLinks": 56
+  },
+  "indexableDocuments": 53,
+  "preservedStandaloneBodySha256": "7abc1d27604b146280d63c87a420fc06eab85706304081727dd8b435ca4edd77",
+  "duplicatePublishedSlugsDeduplicated": [
+    "multi-agent-billing-traps"
+  ],
+  "historicalBrokenAnchors": [],
+  "failures": [],
+  "limits": [
+    "HTTP 200/404 behavior, visual parity, responsive layout and interaction behavior require separate local/browser verification.",
+    "Local or private-staging checks do not establish production indexing."
+  ]
+}

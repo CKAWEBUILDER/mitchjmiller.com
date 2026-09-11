@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "baseline/src/**/*",
+    "site/**/*.ts",
+    "site/**/*.tsx"
+  ],
+  "compilerOptions": {
+    "incremental": false,
+    "paths": {
+      "@/*": [
+        "./baseline/src/*"
+      ]
+    }
+  }
+}

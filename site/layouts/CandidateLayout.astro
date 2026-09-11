@@ -1,0 +1,46 @@
+---
+import '../styles/candidate.css';
+interface Props { title: string; description: string; }
+const {title, description} = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#112f50" />
+    <title>{title} · Mitchell Miller · Design review</title>
+    <link rel="icon" href="/favicon.svg" />
+  </head>
+  <body class="candidate">
+    <a class="candidate-skip" href="#main">Skip to content</a>
+    <div class="review-ribbon">
+      <div class="candidate-wrap"><span>New design candidate · Private review</span><a href="/review/">Back to review hub <span aria-hidden="true">↗</span></a></div>
+    </div>
+    <header class="candidate-header">
+      <div class="candidate-wrap header-inner">
+        <a href="/design/" class="candidate-brand" aria-label="Mitchell Miller, design candidate home">
+          <span class="brand-monogram" aria-hidden="true">mm</span>
+          <span>Mitchell Miller<small>Search, data &amp; digital products</small></span>
+        </a>
+        <nav class="desktop-nav" aria-label="Primary navigation">
+          <a href="/design/#selected-work">Work</a><a href="/about/">About</a><a href="/blog/">Writing</a><a href="/resume/">Résumé</a><a class="nav-contact" href="/contact/">Let’s talk <span aria-hidden="true">↗</span></a>
+        </nav>
+        <details class="mobile-nav">
+          <summary>Menu <span aria-hidden="true">☰</span></summary>
+          <nav aria-label="Mobile navigation"><a href="/design/#selected-work">Selected work</a><a href="/about/">About</a><a href="/blog/">Writing</a><a href="/resume/">Résumé</a><a href="/contact/">Let’s talk</a></nav>
+        </details>
+      </div>
+    </header>
+    <main id="main"><slot /></main>
+    <footer class="candidate-footer">
+      <div class="candidate-wrap footer-main">
+        <a class="footer-brand" href="/design/">Mitchell Miller<span>Research. Design. Delivery.</span></a>
+        <nav aria-label="Footer navigation"><a href="/work/">All work</a><a href="/blog/">Writing</a><a href="/resume/">Résumé</a><a href="/contact/">Contact</a></nav>
+      </div>
+      <div class="candidate-wrap footer-bottom"><span>© {new Date().getFullYear()} Mitchell Miller</span><span>Visual direction for review · <a href="/">View the current-site migration</a></span></div>
+    </footer>
+  </body>
+</html>

@@ -2,7 +2,7 @@
 
 ## Start here
 
-Read `PROJECT.md`, then `handoffs/astro-migration-2026-09-11.md`, then the applicable linked project records before substantive work. Use the newest explicit user instruction if it changes this record, and update the record. Do not re-discover documented facts or infer completed work from a plan.
+Read `PROJECT.md`, then `handoffs/parity-design-2026-09-11.md`, then the applicable linked project records before substantive work. Use the newest explicit user instruction if it changes this record, and update the record. Do not re-discover documented facts or infer completed work from a plan.
 
 ## Source of truth and workspace
 
@@ -10,7 +10,7 @@ Read `PROJECT.md`, then `handoffs/astro-migration-2026-09-11.md`, then the appli
 - Active persistent migration checkout: `/Users/mitchellmiler/Documents/mitchjmiller-html-migration`.
 - Original checkout `/Users/mitchellmiler/Documents/mitchjmiller.com` contains unpublished user drafts. Preserve it; do not reset, clean, overwrite or publish those drafts.
 - The September review checkout under `/private/tmp/mitchjmiller-overhaul-20260910` is a historical preview/reference, not the durable handoff location.
-- Verify the current branch, working tree and remote before edits or pushes. Current documented branch is `codex/astro-html-staging-20260911`; a subsequent implementation branch should use `codex/` and be recorded in PROJECT.md.
+- Verify the current branch, working tree and remote before edits or pushes. Current implementation branch is `codex/html-parity-design-20260911`; a subsequent implementation branch should use `codex/` and be recorded in PROJECT.md.
 - GitHub source comes before host deployment. Push accepted source before publishing any host. One agent owns production release; do not run competing deployment workflows.
 
 ## Product contract
@@ -18,7 +18,7 @@ Read `PROJECT.md`, then `handoffs/astro-migration-2026-09-11.md`, then the appli
 - Public target: Astro-generated complete HTML with native navigation, full article/case bodies and build-time SEO. JavaScript may enhance individual tools, filters and menus. A whole-site client-only React wrapper or copied metadata shell is not an HTML migration.
 - Keep existing public routes and PDF paths unless an explicit keep/redirect/retire decision is documented. Maintain a route/content manifest and exclude drafts/private files.
 - Position the site across data science, design, engineering, enterprise work, search/growth, independent products and hiring. Distinguish active projects from historical cases and concepts from released products.
-- Reuse the researched narratives, current resume PDFs, evidence and working tools. Do not recreate completed assets without a reason.
+- Retain production content/PDF bytes in the parity track. Reuse researched narratives, current review PDFs, evidence and working tools in the separate design/review track. Do not silently replace production assets with review assets.
 - Cloudflare and the authenticated client-deliverable timeline are future phases, separate from the first public HTML release. New population-simulation functionality is also a separate product workstream.
 
 ## Permission and release boundaries

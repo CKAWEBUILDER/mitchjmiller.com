@@ -4,20 +4,21 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node scripts/prepare-astro-staging.mjs && astro dev --host 127.0.0.1 --port 5187",
-    "build": "node scripts/prepare-astro-staging.mjs && astro build && node scripts/verify-astro-staging.mjs",
+    "dev": "node scripts/prepare-astro-staging.mjs && astro dev --host 127.0.0.1 --port 5191",
+    "build": "node scripts/prepare-astro-staging.mjs && astro build && node scripts/finalize-parity.mjs && node scripts/verify-parity.mjs",
     "build:github": "node -e \"console.error('Production is gated pending theme approval and completion of the HTML migration. See PROJECT.md.'); process.exit(1)\"",
     "cloudflare:login": "npm_config_cache=.npm-cache npx -y wrangler login --browser=false",
     "deploy:cloudflare": "node -e \"console.error('Production is gated pending theme approval and completion of the HTML migration. See PROJECT.md.'); process.exit(1)\"",
-    "serve": "astro preview --host 127.0.0.1 --port 5187",
-    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "serve": "astro preview --host 127.0.0.1 --port 5191",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.parity.json --noEmit",
     "build:production": "node -e \"console.error('Production is gated pending theme approval and completion of the HTML migration. See PROJECT.md.'); process.exit(1)\"",
     "dev:legacy": "vite --config vite.config.ts --host 0.0.0.0",
     "build:legacy": "vite build --config vite.config.ts && node scripts/create-route-copies.mjs",
     "serve:legacy": "vite preview --config vite.config.ts --host 0.0.0.0",
     "build:production:legacy": "VITE_SITE_INDEXABLE=true npm run build",
     "build:github:legacy": "BASE_PATH=/mitchjmiller.com/ vite build --config vite.config.ts && node scripts/create-route-copies.mjs",
-    "build:staging": "npm run build"
+    "build:staging": "npm run build",
+    "build:release-candidate": "node scripts/prepare-astro-staging.mjs && SITE_BUILD_MODE=release astro build && SITE_BUILD_MODE=release node scripts/finalize-parity.mjs && SITE_BUILD_MODE=release node scripts/verify-parity.mjs"
   },
   "dependencies": {
     "@astrojs/react": "6.0.5",

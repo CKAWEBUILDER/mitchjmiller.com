@@ -1,0 +1,35 @@
+{
+  "decision": "Release owner decision 2026-09-11 (coordination.md): ship the September 10 corrected two-page resume PDFs at the existing four public paths instead of the July production bytes. Hashes are the outputs recorded in docs/overhaul-2026-09-10/resumes/validation/qa-report.json.",
+  "source": "public/files (branch codex/astro-html-staging-20260911 and this checkout)",
+  "replaces": "docs/implementation-2026-09-11/production-files.json (gh-pages 923dfd8 bytes)",
+  "pdfs": [
+    {
+      "path": "/files/Mitchell-Miller-AI-Search-Systems-Background-2026.pdf",
+      "sha256": "f5f4564846729c20dc3105d6ab44e0a1443ed6fc8df33a5d8b9aa3433b018914",
+      "bytes": 421854,
+      "previousSha256": "316f0d659d852e563353dff1efe6fc42a83ec1ce09224ffcf9b2d7ae5f9f3b30",
+      "previousBytes": 8933
+    },
+    {
+      "path": "/files/Mitchell-Miller-Organic-Systems-Background-2026.pdf",
+      "sha256": "82837461bd20e3b2380c441996aec6ad92eb97e86402f628e4bc26b9d65a7291",
+      "bytes": 421926,
+      "previousSha256": "4175811e68079a06d481546564ec18b3a033dafe66187d06a67163282b018223",
+      "previousBytes": 9179
+    },
+    {
+      "path": "/files/Mitchell-Miller-Product-Systems-Background-2026.pdf",
+      "sha256": "4f08e5861180b2111442bda249c3062c832e725fe3c766b756cc14c86d9a857d",
+      "bytes": 421918,
+      "previousSha256": "a5182dd924cb725513bfc8f22c29c5c2f0ab011f58d8428527808b8333db1fc4",
+      "previousBytes": 9116
+    },
+    {
+      "path": "/files/Mitchell-Miller-Search-Systems-Background-2026.pdf",
+      "sha256": "8f48d7d786880c3a2c6f745174bf21a06af114da1cb14c146ecb342972ad8587",
+      "bytes": 421917,
+      "previousSha256": "80dc6d91137c9d866be7fca16709dc6ab05f09145fe836497e18777f30d2937e",
+      "previousBytes": 9432
+    }
+  ]
+}

@@ -18,7 +18,7 @@
     "build:production:legacy": "VITE_SITE_INDEXABLE=true npm run build",
     "build:github:legacy": "BASE_PATH=/mitchjmiller.com/ vite build --config vite.config.ts && node scripts/create-route-copies.mjs",
     "build:staging": "npm run build",
-    "build:release-candidate": "node scripts/prepare-astro-staging.mjs && SITE_BUILD_MODE=release astro build && SITE_BUILD_MODE=release node scripts/finalize-parity.mjs && SITE_BUILD_MODE=release node scripts/verify-parity.mjs"
+    "build:release-candidate": "SITE_BUILD_MODE=release node scripts/prepare-astro-staging.mjs && SITE_BUILD_MODE=release astro build && SITE_BUILD_MODE=release node scripts/finalize-parity.mjs && SITE_BUILD_MODE=release node scripts/verify-parity.mjs"
   },
   "dependencies": {
     "@astrojs/react": "6.0.5",

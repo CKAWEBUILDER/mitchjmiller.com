@@ -1,0 +1,102 @@
+{
+  "label": "Experience across",
+  "note": "Draft data, not final assets. Every entry renders as a text wordmark (wordmark: true, logo: null) until Mitch supplies rights-cleared logo files for that specific brand — do not substitute an unlicensed logo found online. url is intentionally left null in this pass (not all of these should necessarily deep-link off-site from a marquee); confirm which, if any, get a live href before build. Array order is best-known-first for the marquee, by general audience recognition — an editorial judgment, not a metric; re-order freely. `label` is the marquee heading BrandMarquee.astro falls back to when no `heading` prop is passed (currently true on both / and /services/) — reuses the approved home.experience.label string from docs/design-review-2026-09-11/content-proposal.json. Every evidence line is derived only from src/lib/data.ts, src/lib/case-study-editorial.ts and docs/overhaul-2026-09-10/resumes/README.md. Where a record did not include a year or a title, none is stated here rather than invented.",
+  "brands": [
+    {
+      "name": "Apple",
+      "kind": "employer",
+      "wordmark": true,
+      "logo": null,
+      "url": null,
+      "evidence": "Program Manager, SEO - Americas Region (AMR), Aug 2022-Jan 2024."
+    },
+    {
+      "name": "Stanford Health Care",
+      "kind": "employer",
+      "wordmark": true,
+      "logo": null,
+      "url": null,
+      "evidence": "Interim SEO/SEM Manager, regulated academic healthcare; role ran through Dec 2025."
+    },
+    {
+      "name": "Dignity Health",
+      "kind": "employer",
+      "wordmark": true,
+      "logo": null,
+      "url": null,
+      "evidence": "Product Manager, SEO & Web Analytics; built the 1,000+ location Yext conversion system, 2018-2019 build period, within a Sept 2018-Aug 2022 tenure."
+    },
+    {
+      "name": "CommonSpirit Health",
+      "kind": "employer",
+      "wordmark": true,
+      "logo": null,
+      "url": null,
+      "evidence": "PM, SEO & Web Analytics through the CHI-Dignity Health merger and 63+ site network consolidation, Sept 2018-Aug 2022."
+    },
+    {
+      "name": "Wpromote",
+      "kind": "employer",
+      "wordmark": true,
+      "logo": null,
+      "url": null,
+      "evidence": "Agency SEO foundations (alongside DemandWave), Apr 2015-Aug 2018."
+    },
+    {
+      "name": "DemandWave",
+      "kind": "employer",
+      "wordmark": true,
+      "logo": null,
+      "url": null,
+      "evidence": "Agency SEO foundations (alongside Wpromote), Apr 2015-Aug 2018."
+    },
+    {
+      "name": "Clarity AI",
+      "kind": "employer",
+      "wordmark": true,
+      "logo": null,
+      "url": null,
+      "evidence": "Builder / AI Practitioner - AEO/GEO measurement and internal AI reporting systems (ClarityPulse); role ran through Feb 2026."
+    },
+    {
+      "name": "SFC Surf School",
+      "kind": "client",
+      "wordmark": true,
+      "logo": null,
+      "url": null,
+      "evidence": "Growth strategy, search, design & engineering - current client engagement, May 2026-present (90-day pilot)."
+    },
+    {
+      "name": "Clear Kayak Adventures",
+      "kind": "client",
+      "wordmark": true,
+      "logo": null,
+      "url": null,
+      "evidence": "Website, OTA listings, payments, SOPs and CRM build-out for a small outdoor operator (years not dated in the records)."
+    },
+    {
+      "name": "Vet Advocates",
+      "kind": "client",
+      "wordmark": true,
+      "logo": null,
+      "url": null,
+      "evidence": "Pro bono growth consultant - structured Facebook ad acquisition system for a veterans-services nonprofit (years not dated in the records)."
+    },
+    {
+      "name": "DomainSignal",
+      "kind": "project",
+      "wordmark": true,
+      "logo": null,
+      "url": null,
+      "evidence": "Independent solo build - AI-driven domain scoring and intelligence prototype."
+    },
+    {
+      "name": "Date Night",
+      "kind": "project",
+      "wordmark": true,
+      "logo": null,
+      "url": null,
+      "evidence": "Independent solo build - couples-focused discovery and planning app prototype."
+    }
+  ]
+}

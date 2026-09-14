@@ -1,0 +1,110 @@
+---
+/**
+ * Agency shell (2026-09-14 redesign): Contiem-style white header with logo left,
+ * horizontal navigation with dropdowns, green actions, navy hero support, link-column
+ * footer. Owns the per-page head (title, description, self-canonical, OG/Twitter,
+ * JSON-LD). scripts/finalize-parity.mjs still owns the final robots/analytics policy.
+ */
+import { ResumeChooser } from '../../baseline/src/components/resume-download-dialog';
+import { site, primaryNav, utilityNav, contactCta, footerColumns, isCurrent } from '../lib/agency';
+import '../../baseline/src/index.css';
+import '../components/parity/parity.css';
+import '../styles/agency.css';
+
+interface Props {
+  path: string; title: string; description: string; image?: string;
+  type?: 'website' | 'article'; noindex?: boolean; jsonLd?: unknown[]; bodyClass?: string;
+}
+const { path, title, description, image, type = 'website', noindex = false, jsonLd = [], bodyClass = '' } = Astro.props;
+const canonical = new URL(path, site.url).href;
+const ogImage = new URL(image || site.socialImage, site.url).href;
+const release = process.env.SITE_BUILD_MODE === 'release';
+const year = new Date().getFullYear();
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={release && !noindex ? 'index, follow' : 'noindex, nofollow, noarchive'} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#0f2440" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content={type} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    {jsonLd.map(item => <script type="application/ld+json" set:html={JSON.stringify(item)} />)}
+    <noscript><style>[data-filter-card][hidden]{display:block!important}[data-filter-value]{display:none!important}</style></noscript>
+    <slot name="head" />
+  </head>
+  <body class:list={['ag-body', bodyClass]}>
+    <a class="ag-skip" href="#main-content">Skip to content</a>
+    <header class="ag-header">
+      <div class="ag-wrap ag-header-inner">
+        <a class="ag-brand" href="/" aria-label="Mitchell Miller — home">
+          <img src={site.headshot} alt="" width="40" height="40" />
+          <span><span class="ag-brand-name">{site.name}</span><span class="ag-brand-tag">{site.tagline}</span></span>
+        </a>
+        <nav class="ag-nav" aria-label="Primary">
+          <ul>
+            {primaryNav.map(item => (
+              <li class:list={{ 'ag-has-drop': Boolean(item.children) }}>
+                <a href={item.href} aria-current={isCurrent(path, item.href) ? 'page' : undefined}>{item.label}{item.children && <span class="ag-caret" aria-hidden="true" />}</a>
+                {item.children && <ul class="ag-drop">{item.children.map(child => <li><a href={child.href}>{child.label}</a></li>)}</ul>}
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <div class="ag-header-actions">
+          {utilityNav.map(link => <a class="ag-utility-link" href={link.href} data-resume-open={link.href === '/resume/' ? 'true' : undefined}>{link.label}</a>)}
+          <a class="ag-button ag-button--sm" href={contactCta.href}>{contactCta.label}</a>
+        </div>
+        <details class="ag-menu">
+          <summary aria-label="Open navigation">Menu <span aria-hidden="true">☰</span></summary>
+          <nav class="ag-menu-panel" aria-label="Mobile">
+            <ul>
+              {primaryNav.map(item => <>
+                <li><a href={item.href} aria-current={isCurrent(path, item.href) ? 'page' : undefined}>{item.label}</a></li>
+                {item.children?.filter(child => child.href !== item.href).map(child => <li class="ag-menu-sub"><a href={child.href}>{child.label}</a></li>)}
+              </>)}
+            </ul>
+            <div class="ag-menu-utility">{utilityNav.map(link => <a class="ag-utility-link" href={link.href} data-resume-open={link.href === '/resume/' ? 'true' : undefined}>{link.label}</a>)}</div>
+            <a class="ag-button" href={contactCta.href}>{contactCta.label}</a>
+          </nav>
+        </details>
+      </div>
+    </header>
+    <main id="main-content"><slot /></main>
+    <ResumeChooser />
+    <footer class="ag-footer">
+      <div class="ag-wrap ag-footer-main">
+        <div>
+          <a class="ag-footer-brand" href="/">{site.name}</a>
+          <p class="ag-footer-blurb">Search, growth and AI-search systems for enterprises and growing businesses. Led hands-on by Mitchell Miller.</p>
+          <ul class="ag-footer-contact">
+            <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+            <li><a href={site.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            <li>United States</li>
+          </ul>
+        </div>
+        {footerColumns.map(column => <div><h2>{column.heading}</h2><ul>{column.links.map(link => <li><a href={link.href}>{link.label}</a></li>)}</ul></div>)}
+      </div>
+      <div class="ag-wrap ag-footer-bottom"><span>© {year} Mitchell Miller. Case studies describe work delivered in the roles and periods stated on each page.</span><span><a href="/resume/">Resumes</a> · <a href="/clients/">Client sign-in</a> · <a href="/contact/">Contact</a></span></div>
+    </footer>
+    <script>import '../components/parity/enhance';</script>
+  </body>
+</html>

@@ -60,12 +60,12 @@
   --elevate-2: rgba(0,0,0, .08);
 
   /* Background: clean light gray/white */
-  --background: 210 20% 98%;
+  --background: 0 0% 100%;
   --foreground: 222 47% 11%;
 
   --border: 214 32% 91%;
   --input: 214 32% 91%;
-  --ring: 221 83% 53%;
+  --ring: 150 73% 29%;
 
   --card: 0 0% 100%;
   --card-foreground: 222 47% 11%;
@@ -75,12 +75,12 @@
   --popover-foreground: 222 47% 11%;
   --popover-border: 214 32% 91%;
 
-  /* Primary: Deep Navy / Slate */
-  --primary: 222 47% 11%;
+  /* Primary: navy #0f2440 (agency redesign 2026-09-14) */
+  --primary: 214 62% 15%;
   --primary-foreground: 210 40% 98%;
 
-  /* Secondary: Soft Blue / Muted Teal */
-  --secondary: 199 89% 48%;
+  /* Secondary: green #14804a — 4.98:1 on white, 3.17:1 against the navy hero; no teal */
+  --secondary: 150 73% 29%;
   --secondary-foreground: 210 40% 98%;
 
   /* Muted */
@@ -98,7 +98,7 @@
   --app-font-serif: Georgia, serif;
   --app-font-mono: 'Space Mono', ui-monospace, SFMono-Regular, monospace;
 
-  --radius: 0.5rem;
+  --radius: 0.375rem;
 }
 
 @layer base {

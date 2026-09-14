@@ -1,0 +1,38 @@
+---
+/**
+ * Scrolling brand-logo strip fed by site/data/brands.json.
+ * CSS-only infinite scroll: the list is rendered twice (second copy aria-hidden)
+ * and the track translates by half its width; hover/focus pauses it and
+ * prefers-reduced-motion renders one static, wrapped row. Text wordmarks in
+ * uniform grayscale until rights-cleared logo files are supplied (`logo` path).
+ */
+import brands from '../data/brands.json';
+interface Brand { name: string; kind: 'employer' | 'client' | 'project'; wordmark?: boolean; logo?: string | null; url?: string | null; }
+interface Props { heading?: string; id?: string; }
+const { heading = brands.label, id = 'brands' } = Astro.props;
+const list = brands.brands as Brand[];
+const kindLabel: Record<Brand['kind'], string> = { employer: 'Employer', client: 'Client', project: 'Independent project' };
+const kindAbbr: Record<Brand['kind'], string> = { employer: 'EMP', client: 'CLI', project: 'PRJ' };
+---
+<section class="ag-marquee" aria-labelledby={`${id}-label`} data-marquee>
+  <div class="ag-wrap ag-marquee-head">
+    <p class="ag-marquee-label" id={`${id}-label`}>{heading}</p>
+    <p class="ag-marquee-key">Employers, clients and independent projects, mixed — each is labelled. Logos appear as text wordmarks until rights-cleared files are added.</p>
+  </div>
+  <div class="ag-marquee-viewport">
+    <div class="ag-marquee-track">
+      {[false, true].map(duplicate => (
+        <ul aria-hidden={duplicate ? 'true' : undefined} data-marquee-copy={duplicate ? 'duplicate' : 'primary'}>
+          {list.map(brand => (
+            <li title={`${brand.name} — ${kindLabel[brand.kind]}`}>
+              {brand.logo
+                ? <img src={brand.logo} alt={brand.name} loading="lazy" height="30" />
+                : <span>{brand.name}</span>}
+              <abbr aria-label={kindLabel[brand.kind]}>{kindAbbr[brand.kind]}</abbr>
+            </li>
+          ))}
+        </ul>
+      ))}
+    </div>
+  </div>
+</section>

@@ -24,3 +24,14 @@ Next: lead reads the QA report, publishes to `gh-pages` (RELEASE-READY.md), runs
 ## Published — 2026-09-11 17:14 EDT
 
 Release owner Claude Code published gh-pages `1b2d2a6` from `c422377` (artifact `18b6093162b76…`); `main` = `036b526`. Live probes passed at 17:15 EDT (details in PROJECT.md). Next: morning Search Console submission, GA4 realtime check, live contact test, design-candidate decision, Cloudflare zone creation and custom-domain activation.
+
+
+## Agency redesign 2026-09-14 (Claude build worker)
+
+Written September 14, 2026 at 15:13 EDT. Branch `claude/agency-redesign` from `main` `5cf4ab1`, single checkout `/Users/mitchellmiler/Documents/mitchjmiller-html-migration`, pushed. **Not merged to main, not deployed; gh-pages and Cloudflare untouched.**
+
+Done: Contiem-style agency shell around every route (`site/layouts/AgencyLayout.astro`, `site/styles/agency.css`, `site/lib/agency.ts`; archived React `Layout` is a passthrough); new home `site/pages/index.astro`; new `/services/` (`site/pages/services/index.astro`, manifest `kind: added`, sitemap 58); `site/components/BrandMarquee.astro` (CSS-only, pauses on hover, reduced-motion static row) fed by the content worker's `site/data/brands.json`; navy `#0f2440` / green `#14804a` tokens shared with the parity pages through `baseline/src/index.css`; JSON-LD on home, services, posts, notes and cases; titles/descriptions from the copy pack §(h). `scripts/verify-agency.mjs` added to both build scripts; `scripts/qa/crawl.mjs` and `scripts/qa/browser.mjs` extended; npm scripts `verify:agency`, `qa:serve` (5189), `qa:crawl`, `qa:browser`.
+
+Evidence: `docs/redesign-2026-09-14/README.md` (decisions incl. contrast), `docs/redesign-2026-09-14/qa/` (verify-agency, crawl 831/831 over 62 routes, browser 233/233), `docs/redesign-2026-09-14/screenshots/` (1360/390; PNGs over 1 MB kept local with JPEG copies committed).
+
+Next: Mitch reviews locally and decides the open items (hero headline option, logo files, About opener, SFC report in/out of the shell); the lead merges and publishes per RELEASE-READY.md, then resubmits the 58-URL sitemap and re-runs the live probes. QA server on 5189 and headless Chrome were stopped; 5187/5188 untouched.

@@ -4,7 +4,7 @@ document.querySelectorAll<HTMLAnchorElement>("[data-resume-open]").forEach(trigg
   trigger.addEventListener("click", event => {
     if (!resumeChooser?.showModal) return;
     event.preventDefault();
-    document.querySelectorAll<HTMLDetailsElement>(".parity-mobile-menu").forEach(menu => menu.open = false);
+    document.querySelectorAll<HTMLDetailsElement>(".parity-mobile-menu, .ag-menu").forEach(menu => menu.open = false);
     resumeChooser.showModal();
   });
 });

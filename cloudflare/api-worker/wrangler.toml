@@ -1,0 +1,25 @@
+# mitchjmiller-api — contact/lead intake Worker for mitchjmiller.com
+# Deploy from the repo root:
+#   npm_config_cache=.npm-cache npx -y wrangler deploy --config cloudflare/api-worker/wrangler.toml
+# Secrets (set once, never committed): TURNSTILE_SECRET, IP_SALT
+#   npm_config_cache=.npm-cache npx -y wrangler secret put IP_SALT --config cloudflare/api-worker/wrangler.toml
+name = "mitchjmiller-api"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+workers_dev = true
+
+[observability]
+enabled = true
+
+[vars]
+# Comma-separated browser origins allowed to call POST /contact.
+ALLOWED_ORIGINS = "https://mitchjmiller.com,https://www.mitchjmiller.com,https://mitchjmiller-com.pages.dev,http://127.0.0.1:5187,http://127.0.0.1:5188"
+
+[[d1_databases]]
+binding = "LEADS"
+database_name = "mitchjmiller-leads"
+database_id = "523da23f-88ff-4af2-b9eb-4774eeb9d000"
+
+[[kv_namespaces]]
+binding = "RATE"
+id = "be0386e14b584a8d9b24586051a808d9"

@@ -1,0 +1,67 @@
+# Deploys the built site (dist/) to the Cloudflare Pages project `mitchjmiller-com` on every push to main.
+#
+# INACTIVE until Mitch adds the repository secrets CLOUDFLARE_API_TOKEN (Pages: Edit) and
+# CLOUDFLARE_ACCOUNT_ID (e956c778b32a922cca488cfdb46fbec8). The gate step below skips every
+# deploy step while they are missing, so pushes stay green instead of failing.
+#
+# The public production host is still GitHub Pages; this Pages project is the staging/cutover mirror.
+# BUILD_SCRIPT is `build` (currently the noindex staging build). Switch it to the production build
+# script once the site lane unlocks it in package.json, before the custom domains are activated.
+name: Cloudflare Pages mirror
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: cloudflare-pages-mirror
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  BUILD_SCRIPT: build
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for Cloudflare secrets
+        id: gate
+        env:
+          CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -n "$CF_TOKEN" ] && [ -n "$CF_ACCOUNT" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "CLOUDFLARE_API_TOKEN / CLOUDFLARE_ACCOUNT_ID not set; skipping the Cloudflare Pages deploy."
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.gate.outputs.enabled == 'true'
+
+      - uses: actions/setup-node@v4
+        if: steps.gate.outputs.enabled == 'true'
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        if: steps.gate.outputs.enabled == 'true'
+        run: npm ci
+
+      - name: Build
+        if: steps.gate.outputs.enabled == 'true'
+        run: npm run "$BUILD_SCRIPT"
+
+      - name: Deploy to Cloudflare Pages
+        if: steps.gate.outputs.enabled == 'true'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name mitchjmiller-com --branch main --commit-hash ${{ github.sha }}

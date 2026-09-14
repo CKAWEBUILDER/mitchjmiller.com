@@ -1,6 +1,6 @@
 # Current refinement checkpoint
 
-September 14: agency + software + portfolio refinement implemented on `claude/agency-redesign`; staging build/typecheck and 348 changed-page link checks pass. Private staging publication and read-only Claude review are in progress. See [current refinement record](docs/redesign-2026-09-14/README.md). Public production remains unchanged by this task; earlier release records below remain historical evidence.
+September 14: agency + software + portfolio refinement implemented on `claude/agency-redesign`; staging build/typecheck and 348 changed-page link checks pass. Private staging publication and read-only Claude review are complete. Review: https://mitch-portfolio-html-staging.clearkayakrentalsoah.chatgpt.site . Direct design review fixes were applied; lead notification and conversion tracking are recorded follow-ups. M² is a proposed brand, not selected or implemented. See [current refinement record](docs/redesign-2026-09-14/README.md). Public production remains unchanged by this task; earlier release records below remain historical evidence.
 
 # Mitchell Miller portfolio — current state
 

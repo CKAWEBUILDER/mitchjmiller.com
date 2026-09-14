@@ -63,6 +63,8 @@ for (const file of walk(dist).filter(file => file.endsWith('.html'))) {
   if (/lorem ipsum|\bTODO\b|\bTBD\b|\[insert|Design review|THEME UNDER REVIEW/i.test(text(pageBody))) fail(route, 'placeholder or review wording');
 }
 
+if (!manifest.routes.some(route => route.path === '/products/' && route.kind === 'added')) fail('manifest', '/products/ missing or not kind added');
+
 // 3. Marquee on home and services, fed by brands.json.
 for (const route of ['/', '/services/']) {
   const file = fileFor(route);

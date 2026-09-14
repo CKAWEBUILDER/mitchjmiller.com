@@ -3,7 +3,7 @@
  * Headless-Chrome QA for the release candidate (puppeteer-core + local Chrome).
  * Requires the static server: node scripts/qa/serve.mjs dist 5193
  *
- *   node scripts/qa/browser.mjs [--base http://127.0.0.1:5193] [--out docs/release-2026-09-12/qa/browser.json] [--shots docs/release-2026-09-12/screenshots]
+ *   node scripts/qa/browser.mjs [--base http://127.0.0.1:5193] [--out docs/redesign-2026-09-14/qa/browser.json] [--shots docs/redesign-2026-09-14/screenshots]
  *
  * Per page and viewport (1360×900, 390×844): HTTP status, console/page errors,
  * horizontal overflow, broken images, placeholder text, full-page screenshot.
@@ -19,14 +19,14 @@ import { dirname, join, resolve } from 'node:path';
 
 const args = Object.fromEntries(process.argv.slice(2).map((value, index, list) => value.startsWith('--') ? [value.slice(2), list[index + 1]] : []).filter(Boolean));
 const base = args.base || 'http://127.0.0.1:5193';
-const out = resolve(args.out || 'docs/release-2026-09-12/qa/browser.json');
-const shots = resolve(args.shots || 'docs/release-2026-09-12/screenshots');
+const out = resolve(args.out || 'docs/redesign-2026-09-14/qa/browser.json');
+const shots = resolve(args.shots || 'docs/redesign-2026-09-14/screenshots');
 const chrome = process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const endpoint = 'https://mitchjmiller-api.clearkayakrentalsoahu.workers.dev/contact';
 const blocked = /^(https?:\/\/)(fonts\.googleapis\.com|fonts\.gstatic\.com|www\.googletagmanager\.com|www\.google-analytics\.com|analytics\.google\.com|stats\.g\.doubleclick\.net|challenges\.cloudflare\.com|linkedin\.com|www\.linkedin\.com)\//;
 
 const pages = [
-  ['home', '/'], ['work', '/work/'], ['case-commonspirit', '/case-studies/commonspirit-locations-conversion-engine/'],
+  ['home', '/'], ['services', '/services/'], ['work', '/work/'], ['case-commonspirit', '/case-studies/commonspirit-locations-conversion-engine/'],
   ['case-sfc', '/case-studies/sfc-surf-school/'], ['post-gbp', '/blog/gbp-2026-ai-grounding/'],
   ['note-hermes-mermaid', '/blog/studying/hermes-concepts-field-guide/'], ['lab', '/lab/'],
   ['workbench', '/lab/population-workbench/'], ['workbench-methodology', '/lab/population-workbench/methodology/'],
@@ -70,8 +70,9 @@ try {
       if (name === 'lab') await page.waitForFunction(() => document.querySelectorAll('astro-island[ssr]').length === 0, { timeout: 20000 }).catch(() => {});
       if (name === 'note-hermes-mermaid') await page.waitForSelector('.parity-diagram svg', { timeout: 30000 }).catch(() => {});
       // Scroll through the page so lazy-loaded images are fetched before the full-page capture, then return to the top.
-      await page.evaluate(async () => { const step = window.innerHeight; for (let y = 0; y < document.documentElement.scrollHeight; y += step) { window.scrollTo(0, y); await new Promise(r => setTimeout(r, 60)); } window.scrollTo(0, 0); });
-      await page.evaluate(() => Promise.all([...document.images].filter(img => !img.complete).map(img => new Promise(r => { img.onload = img.onerror = r; })))).catch(() => {});
+      await page.evaluate(async () => { const step = window.innerHeight; for (let y = 0; y < document.documentElement.scrollHeight; y += step) { window.scrollTo({ top: y, behavior: 'instant' }); await new Promise(r => setTimeout(r, 60)); } window.scrollTo({ top: 0, behavior: 'instant' }); });
+      // Wait for in-flight images, but never longer than 10 s (a never-loading image is reported as broken below, not hung on).
+      await page.evaluate(() => Promise.race([Promise.all([...document.images].filter(img => !img.complete).map(img => new Promise(r => { img.onload = img.onerror = r; }))), new Promise(r => setTimeout(r, 10000))])).catch(() => {});
       await wait(300);
       const metrics = await page.evaluate(() => ({
         scrollWidth: document.documentElement.scrollWidth, innerWidth: window.innerWidth,
@@ -92,6 +93,48 @@ try {
     }
   }
 
+  // Agency shell (2026-09-14): marquee motion, pause on hover, reduced-motion fallback, nav dropdown, green CTA, mobile menu.
+  for (const [name, path] of [['home', '/'], ['services', '/services/']]) {
+    const { page, errors } = await newPage();
+    await page.setViewport({ width: 1360, height: 900 });
+    await page.goto(`${base}${path}`, { waitUntil: 'networkidle0', timeout: 60000 });
+    const marquee = await page.evaluate(() => {
+      const track = document.querySelector('.ag-marquee-track');
+      const style = track && getComputedStyle(track);
+      const lists = document.querySelectorAll('.ag-marquee-track ul');
+      return { animation: style?.animationName, state: style?.animationPlayState, lists: lists.length, hiddenDuplicate: lists[1]?.getAttribute('aria-hidden') === 'true', items: document.querySelectorAll('.ag-marquee-track li').length, labelled: Boolean(document.querySelector('.ag-marquee[aria-labelledby]')) };
+    });
+    record(name, 'brand marquee animates (CSS only, duplicated track, aria-hidden copy, labelled section)', marquee.animation === 'ag-marquee' && marquee.state === 'running' && marquee.lists === 2 && marquee.hiddenDuplicate && marquee.items >= 16 && marquee.labelled, `${marquee.animation} ${marquee.state}, ${marquee.items} items`);
+    await page.hover('.ag-marquee-track li');
+    await wait(100);
+    record(name, 'marquee pauses on hover', await page.$eval('.ag-marquee-track', el => getComputedStyle(el).animationPlayState) === 'paused', '');
+    const cta = await page.$eval('.ag-header .ag-button', el => ({ bg: getComputedStyle(el).backgroundColor, color: getComputedStyle(el).color, text: el.textContent.trim(), href: el.getAttribute('href') }));
+    record(name, 'header “Let’s talk” button is green with white text and links to /contact/', cta.bg === 'rgb(20, 128, 74)' && cta.color === 'rgb(255, 255, 255)' && cta.href === '/contact/' && /Let’s talk/.test(cta.text), `${cta.bg} ${cta.color} ${cta.href}`);
+    const navLabels = await page.$$eval('.ag-nav > ul > li > a', links => links.map(link => link.textContent.trim()));
+    record(name, 'primary nav order Services · Work · Lab · Writing · About', navLabels.join(' · ') === 'Services · Work · Lab · Writing · About', navLabels.join(' · '));
+    await page.hover('.ag-nav .ag-has-drop > a');
+    await wait(100);
+    record(name, 'nav dropdown opens on hover', await page.$eval('.ag-nav .ag-has-drop .ag-drop', el => getComputedStyle(el).display === 'block'), '');
+    await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
+    await wait(100);
+    const reduced = await page.evaluate(() => { const track = document.querySelector('.ag-marquee-track'); const duplicate = document.querySelector('.ag-marquee-track ul[aria-hidden="true"]'); return { animation: getComputedStyle(track).animationName, duplicate: getComputedStyle(duplicate).display, overflow: document.documentElement.scrollWidth <= window.innerWidth }; });
+    record(name, 'prefers-reduced-motion: marquee static, duplicate hidden, no overflow', reduced.animation === 'none' && reduced.duplicate === 'none' && reduced.overflow, `${reduced.animation} / duplicate ${reduced.duplicate}`);
+    record(name, 'no console or page errors (shell checks)', errors.length === 0, errors.slice(0, 3).join(' | '));
+    await page.close();
+  }
+  {
+    const { page, errors } = await newPage();
+    await page.setViewport({ width: 390, height: 844, isMobile: true, hasTouch: true });
+    await page.goto(`${base}/`, { waitUntil: 'networkidle0', timeout: 60000 });
+    const desktopHidden = await page.$eval('.ag-nav', el => getComputedStyle(el).display === 'none');
+    await page.click('.ag-menu summary');
+    await wait(150);
+    const menu = await page.evaluate(() => ({ open: document.querySelector('.ag-menu').open, links: document.querySelectorAll('.ag-menu-panel a').length, cta: document.querySelector('.ag-menu-panel .ag-button')?.getAttribute('href'), width: document.documentElement.scrollWidth, viewport: window.innerWidth }));
+    record('home@390', 'mobile menu opens with the full navigation and the contact button; no overflow', desktopHidden && menu.open && menu.links >= 12 && menu.cta === '/contact/' && menu.width <= menu.viewport, `${menu.links} links, scrollWidth ${menu.width}`);
+    await page.screenshot({ path: join(shots, 'home-390-menu-open.png'), fullPage: false });
+    record('home@390', 'no console or page errors (menu)', errors.length === 0, errors.slice(0, 3).join(' | '));
+    await page.close();
+  }
   // Hydration and interaction checks at desktop width.
   {
     const { page, errors } = await newPage();

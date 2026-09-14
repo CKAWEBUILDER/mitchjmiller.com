@@ -4,7 +4,7 @@
  * Reads every route in docs/implementation-2026-09-11/route-manifest.json from the
  * built files AND over HTTP from a local static server (scripts/qa/serve.mjs).
  *
- *   node scripts/qa/crawl.mjs [--base http://127.0.0.1:5193] [--dist dist] [--out docs/release-2026-09-12/qa/crawl.json]
+ *   node scripts/qa/crawl.mjs [--base http://127.0.0.1:5193] [--dist dist] [--out docs/redesign-2026-09-14/qa/crawl.json]
  *
  * Checks: HTTP 200, exactly one h1, main text length above a per-template threshold,
  * canonical present/correct, meta description present and unique, robots policy,
@@ -21,7 +21,7 @@ import { decodeHTML } from 'entities';
 const args = Object.fromEntries(process.argv.slice(2).map((value, index, list) => value.startsWith('--') ? [value.slice(2), list[index + 1]] : []).filter(Boolean));
 const base = args.base || 'http://127.0.0.1:5193';
 const dist = resolve(args.dist || 'dist');
-const out = resolve(args.out || 'docs/release-2026-09-12/qa/crawl.json');
+const out = resolve(args.out || 'docs/redesign-2026-09-14/qa/crawl.json');
 const manifest = JSON.parse(readFileSync('docs/implementation-2026-09-11/route-manifest.json', 'utf8'));
 const releaseFiles = JSON.parse(readFileSync('docs/release-2026-09-12/release-files.json', 'utf8'));
 const GA = 'G-HCKYWCZQ8E';
@@ -79,6 +79,7 @@ for (const route of manifest.routes) {
   record(scope, 'images have alt attributes', missingAlt.length === 0, `${images.length} images, ${missingAlt.length} without alt${missingAlt.length ? ': ' + missingAlt.map(i => i.src).slice(0, 3).join(', ') : ''}`);
   record(scope, 'no whole-page client shell', !/<div\b[^>]*id=["']root["'][^>]*>\s*<\/div>/i.test(body), '');
   record(scope, 'no staging/review wording', !/THEME UNDER REVIEW|NOT PRODUCTION|Design review/.test(body), '');
+  record(scope, 'agency shell (header, primary nav, green contact button, footer)', /<header class="ag-header">/.test(body) && /aria-label="Primary"/.test(body) && /class="ag-button ag-button--sm" href="\/contact\/"/.test(body) && /<footer class="ag-footer">/.test(body) || route.path === '/case-studies/sfc-surf-school/', route.path === '/case-studies/sfc-surf-school/' ? 'standalone report keeps its archived body by parity rule' : '');
   for (const tag of [...tags(body, 'a'), ...tags(body, 'img'), ...tags(body, 'source'), ...tags(html, 'link'), ...tags(html, 'script')]) {
     const a = attrs(tag);
     for (const name of ['href', 'src']) {

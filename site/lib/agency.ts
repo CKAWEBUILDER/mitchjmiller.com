@@ -5,8 +5,8 @@ import { headshot } from '../../baseline/src/lib/images';
 
 export const site = {
   name: 'Mitchell Miller',
-  legalName: 'Mitchell Miller — Search, Growth & AI-Search Systems',
-  tagline: 'Search, growth and AI-search systems',
+  legalName: 'Mitchell Miller — Digital Growth, Software & Consulting',
+  tagline: 'Digital growth. Software. Consulting.',
   url: 'https://mitchjmiller.com',
   email: 'mitchelljmillerjr26@gmail.com',
   phone: '+1-626-316-8682',
@@ -21,10 +21,16 @@ export interface NavItem extends NavLink { children?: NavLink[]; }
 
 export const primaryNav: NavItem[] = [
   { label: 'Services', href: '/services/', children: [
-    { label: 'Understand — research and measurement', href: '/services/#understand' },
-    { label: 'Design — experience and content', href: '/services/#design' },
-    { label: 'Build — systems and tools', href: '/services/#build' },
-    { label: 'Grow — search, AI search and conversion', href: '/services/#grow' },
+    { label: 'Research & analytics', href: '/services/#understand' },
+    { label: 'Websites & experience design', href: '/services/#design' },
+    { label: 'Software & automation', href: '/services/#build' },
+    { label: 'SEO, AI search & conversion', href: '/services/#grow' },
+  ] },
+  { label: 'Products', href: '/products/', children: [
+    { label: 'Software & tools', href: '/products/' },
+    { label: 'Population workbench — try free', href: '/lab/population-workbench/' },
+    { label: 'DomainSignal', href: '/products/#domainsignal' },
+    { label: 'Date Night', href: '/products/#date-night' },
   ] },
   { label: 'Work', href: '/work/', children: [
     { label: 'All work', href: '/work/' },
@@ -64,7 +70,8 @@ export const footerColumns: { heading: string; links: NavLink[] }[] = [
     { label: 'AEO/GEO methodology', href: '/aeo-geo/' },
     { label: 'Collaboration ideas', href: '/collab-ideas/' },
   ] },
-  { heading: 'Lab & writing', links: [
+  { heading: 'Products & resources', links: [
+    { label: 'Software & tools', href: '/products/' },
     { label: 'Interactive lab', href: '/lab/' },
     { label: 'Population workbench', href: '/lab/population-workbench/' },
     { label: 'Signals & Systems', href: '/blog/' },

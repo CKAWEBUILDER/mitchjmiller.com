@@ -1,3 +1,7 @@
+# Current refinement checkpoint
+
+September 14: agency + software + portfolio refinement implemented on `claude/agency-redesign`; staging build/typecheck and 348 changed-page link checks pass. Private staging publication and read-only Claude review are in progress. See [current refinement record](docs/redesign-2026-09-14/README.md). Public production remains unchanged by this task; earlier release records below remain historical evidence.
+
 # Mitchell Miller portfolio — current state
 
 Updated September 14, 2026 at 15:13 EDT. Owner: Mitchell Miller. GitHub: https://github.com/CKAWEBUILDER/mitchjmiller.com.git.

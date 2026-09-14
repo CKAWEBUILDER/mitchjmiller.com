@@ -1,0 +1,10 @@
+---
+import {products} from '../data/products';
+const {featured = false} = Astro.props;
+const list = featured ? products.filter(p => p.featured) : products;
+---
+<div class="ag-grid-3 ag-product-grid">{list.map(product => <article class="ag-product-card" id={product.id}>
+  <a class:list={['ag-product-visual', {'ag-product-visual--population': product.visual === 'population'}]} href={product.href} aria-label={product.name}>
+    {product.visual === 'population' ? <div class="ag-population-art" aria-hidden="true"><span>POPULATION WORKBENCH</span><div class="ag-population-dots">{Array.from({length: 60}, (_, i) => <i class:list={{accent: i % 5 === 0}} />)}</div><strong>Explore. Compare. Export.</strong><small>Public data · Interactive scenarios</small></div> : <img src={product.image} alt={product.alt} width="900" height="600" loading="lazy" />}
+  </a><div class="ag-product-body"><p class="ag-eyebrow">{product.category}</p><h3>{product.name}</h3><span class="ag-product-status">{product.status}</span><p>{product.description}</p>{product.note && <small>{product.note}</small>}<a class="ag-textlink" href={product.href}>{product.cta} <span aria-hidden="true">→</span></a></div>
+</article>)}</div>

@@ -36,10 +36,10 @@ const typesOf = html => jsonLdOf(html).flatMap(doc => doc ? (doc['@graph'] || [d
 
 // 1. Routes: 58 published (53 archived public + lab, workbench, methodology, clients, services) + 4 placeholders.
 const eligible = manifest.routes.filter(route => route.kind !== 'placeholder').map(route => route.path);
-if (eligible.length !== 58) fail('manifest', `expected 58 published routes, found ${eligible.length}`);
+if (eligible.length !== 59) fail('manifest', `expected 59 published routes, found ${eligible.length}`);
 if (!manifest.routes.some(route => route.path === '/services/' && route.kind === 'added')) fail('manifest', '/services/ missing or not kind "added"');
 const sitemap = existsSync(join(dist, 'sitemap.xml')) ? [...read(join(dist, 'sitemap.xml')).matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]) : [];
-if (sitemap.length !== 58 || !sitemap.includes('https://mitchjmiller.com/services/')) fail('sitemap', `expected 58 URLs including /services/, found ${sitemap.length}`);
+if (sitemap.length !== 59 || !sitemap.includes('https://mitchjmiller.com/services/')) fail('sitemap', `expected 59 URLs including /services/, found ${sitemap.length}`);
 tick('routes');
 
 // 2. Shell on every document except the standalone SFC report (byte-preserved by parity rule).
@@ -54,7 +54,7 @@ for (const file of walk(dist).filter(file => file.endsWith('.html'))) {
   if (!/<footer class="ag-footer">/.test(pageBody)) fail(route, 'missing agency footer');
   if (!/<main id="main-content">/.test(pageBody)) fail(route, 'missing main#main-content');
   if (!/<nav class="ag-nav" aria-label="Primary">/.test(pageBody)) fail(route, 'missing primary navigation');
-  for (const label of ['Services', 'Work', 'Lab', 'Writing', 'About']) if (!new RegExp(`<a href="[^"]+"[^>]*>${label}(<span class="ag-caret"[^>]*></span>)?</a>`).test(pageBody)) fail(route, `primary nav lacks ${label}`);
+  for (const label of ['Services', 'Products', 'Work', 'Lab', 'Writing', 'About']) if (!new RegExp(`<a href="[^"]+"[^>]*>${label}(<span class="ag-caret"[^>]*></span>)?</a>`).test(pageBody)) fail(route, `primary nav lacks ${label}`);
   if (!/<a class="ag-button ag-button--sm" href="\/contact\/">Let’s talk<\/a>/.test(pageBody)) fail(route, 'missing green “Let’s talk” contact button');
   if (!/href="\/resume\/"/.test(pageBody) || !/href="\/clients\/"/.test(pageBody)) fail(route, 'utility links (Resumes, Clients) missing');
   if (!/<details class="ag-menu">/.test(pageBody)) fail(route, 'missing mobile menu');
@@ -93,7 +93,7 @@ const services = read(fileFor('/services/'));
 const serviceTypes = typesOf(services);
 if (!serviceTypes.includes('Service') || !serviceTypes.includes('FAQPage')) fail('/services/', `services JSON-LD types ${serviceTypes.join(',')} lack Service + FAQPage`);
 const faqDoc = jsonLdOf(services).flatMap(doc => doc?.['@graph'] || []).find(node => node['@type'] === 'FAQPage');
-const faqBlock = services.match(/<div class="ag-faq">([\s\S]*?)<p class="ag-scope-note"/)?.[1] || "";
+const faqBlock = services.match(/<section[^>]*aria-labelledby="faq-heading"[^>]*>([\s\S]*?)<\/section>/)?.[1] || "";
 const visibleQuestions = [...faqBlock.matchAll(/<h3>([\s\S]*?)<\/h3>/g)].map(m => text(m[1]));
 if (!faqDoc || faqDoc.mainEntity.length < 4 || faqDoc.mainEntity.length > 6) fail('/services/', 'FAQPage needs 4–6 questions');
 else for (const question of faqDoc.mainEntity) {
@@ -116,10 +116,10 @@ const servicesText = text(body(services).match(/<main\b[^>]*>([\s\S]*?)<\/main>/
 if (servicesText.length < 1500) fail('/services/', `main text too short (${servicesText.length})`);
 for (const id of ['understand', 'design', 'build', 'grow', 'process']) if (!new RegExp(`id="${id}"`).test(services)) fail('/services/', `missing section anchor #${id}`);
 if (!/href="\/case-studies\//.test(services)) fail('/services/', 'no evidence links to case studies');
-const heroImage = home.match(/<figure class="ag-hero-media">[\s\S]*?<img src="([^"]+)"/)?.[1];
+const heroImage = home.match(/<div class="ag-showcase"[\s\S]*?<img src="([^"]+)"/)?.[1];
 if (!heroImage || !existsSync(join(dist, heroImage))) fail('/', `hero image missing: ${heroImage}`);
 if (!/<section class="ag-lifecycle"/.test(home)) fail('/', 'lifecycle strip missing');
-for (const section of ['objectives-heading', 'services-heading', 'industries-heading', 'work-heading', 'lab-heading', 'writing-heading', 'cta-heading']) if (!home.includes(`id="${section}"`)) fail('/', `home section ${section} missing`);
+for (const section of ['objectives-heading', 'services-heading', 'products-heading', 'industries-heading', 'work-heading', 'lab-heading', 'writing-heading', 'cta-heading']) if (!home.includes(`id="${section}"`)) fail('/', `home section ${section} missing`);
 if (!/href="\/work\/"/.test(home)) fail('/', 'home lacks the portfolio link');
 
 // 6. Contrast of the tokens (WCAG 2.x relative luminance).

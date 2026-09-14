@@ -9,14 +9,14 @@ import AgencyLayout from '../../layouts/AgencyLayout.astro';
 import BrandMarquee from '../../components/BrandMarquee.astro';
 import { site, organizationJsonLd, breadcrumbJsonLd, graph } from '../../lib/agency';
 
-const title = 'Services — Search, Growth & AI-Search Systems';
-const description = 'How engagements run, stage by stage — Understand, Design, Build, Grow — with evidence from real case studies.';
+const title = 'Digital Strategy, Web Development & Growth Services — Mitchell Miller';
+const description = 'SEO and AI search, UX design, web development, workflow automation and analytics. Get a focused engagement or ongoing support for your business.';
 
 const lifecycle = [
-  { id: 'understand', name: 'Understand', line: 'Connect research, data and measurement to a question worth answering.' },
-  { id: 'design', name: 'Design', line: 'Make the information clear and the experience useful.' },
-  { id: 'build', name: 'Build', line: 'Connect the interface, content and underlying system so the idea can work.' },
-  { id: 'grow', name: 'Grow', line: 'Improve discovery, clarify the next action and measure the change.' },
+  { id: 'understand', name: 'Understand', line: 'Identify your market opportunities and performance gaps.' },
+  { id: 'design', name: 'Design', line: 'Improve your customer journeys, content and interfaces.' },
+  { id: 'build', name: 'Build', line: 'Launch connected websites, applications and workflows.' },
+  { id: 'grow', name: 'Grow', line: 'Grow search visibility and qualified inquiries.' },
 ];
 // Stage copy adopted from content-studio/drafts/2026-09-14-agency-copy-pack.md §(d); every figure traces to its claims ledger §(i).
 const stages = [
@@ -25,7 +25,7 @@ const stages = [
     lede: 'Every engagement starts by finding out what is actually happening: who competes for the same visitors, what people search for and where, and which numbers the organization can trust.',
     problems: ['Performance data scattered across GA4, GSC, ads and SEO tools with no single narrative to act on', 'No way to measure whether an AI answer engine cites the business at all', 'Content briefs built on guesswork instead of entity and topic-gap research'],
     outputs: ['Source-backed KPI narratives and risk queues', 'Prompt-set visibility tracking across AI answer engines', 'Competitive and keyword research at real scale — hundreds to thousands of pages or terms, not a spot check'],
-    approach: 'Pull from the client’s actual data, label every number by where it came from, and stop at a finding someone can act on — not a slide that just restates the dashboard.',
+    approach: 'Connect your existing data sources, establish the baseline and prioritize improvements by customer demand, business impact and effort.',
     evidence: [
       { label: 'AEO Visibility Infrastructure', note: 'Prompt-set tracking across ChatGPT, Perplexity and Google AI Overviews.', href: '/case-studies/aeo-visibility-infrastructure/' },
       { label: 'SearchForge', note: 'Entity-gap and topic-cluster research behind content briefs.', href: '/case-studies/searchforge-content-intelligence/' },
@@ -36,9 +36,9 @@ const stages = [
   {
     id: 'design', name: 'Design', kicker: 'Experiences, content and clear next actions',
     lede: 'Once the question is clear, the work is to make expertise useful before somebody books, calls or applies — on the page, in the guide and in the path to the next action.',
-    problems: ['Nine regional web experiences with inconsistent templates and no shared conversion path', 'A generated map that looked polished and described the coastline wrong', 'A product category that had stopped designing for people who already found each other'],
+    problems: ['Nine regional web experiences with inconsistent templates and no shared conversion path', 'Customers unable to find reliable location or service information', 'A product experience that needs clearer navigation and stronger engagement'],
     outputs: ['Reusable entity and page templates', 'Interactive, real-data-driven interfaces', 'Reporting UIs that show the source next to the number instead of burying it'],
-    approach: 'Design from the research, not around it — and ship an interface that works on a phone, with the underlying data model doing the work the visual design usually gets sole credit for.',
+    approach: 'Map the customer journey, design reusable page templates and test key actions across desktop and mobile before launch.',
     evidence: [
       { label: 'Dignity Health Yext Location Conversion Engine', note: 'Parent/child entity templates standardized across 1,000+ locations.', href: '/case-studies/commonspirit-locations-conversion-engine/' },
       { label: 'SFC Surf School', note: 'A ten-break interactive explorer built on a real, georeferenced aerial photograph.', href: '/case-studies/sfc-surf-school/' },
@@ -50,7 +50,7 @@ const stages = [
     lede: 'Growth that depends on publishing one page at a time stalls. The durable asset is the system: clean entities, reusable templates and tools that remove the bottleneck.',
     problems: ['Legacy CMS constraints (Sitecore) blocking clean, scalable patient-action pages', 'A migration mandate facing resistance across 60+ regional websites with no practical reason to move', 'Manual, inconsistent post-call follow-up creating execution debt'],
     outputs: ['Production entity and data systems', 'Modular CMS content models built for reuse across markets', 'Internal AI tools shipped with real release discipline — staging, rollback, verification'],
-    approach: 'Build in the client’s actual stack, ship behind staging-to-production controls, and verify before calling it done — the SFC release, for example, passed a 63-route audit and a rollback check before launch.',
+    approach: 'Work within your existing technology where it fits. Review working software before launch, validate integrations and provide the documentation needed to maintain it.',
     evidence: [
       { label: 'Dignity Health Yext Location Conversion Engine', note: 'A 1,000+ page system built outside the legacy CMS bottleneck; later CommonSpirit reporting attributed $15.21M in FY22 revenue to the continuing system.', href: '/case-studies/commonspirit-locations-conversion-engine/' },
       { label: 'AEM Content Fragmentation Architecture', note: 'A reusable content model proposed for 60+ regional sites.', href: '/case-studies/aem-content-fragmentation-architecture/' },
@@ -59,9 +59,9 @@ const stages = [
   },
   {
     id: 'grow', name: 'Grow', kicker: 'Search, AI search and conversion, measured',
-    lede: 'Ongoing search, AI-search and conversion work with the before and after periods stated, so growth claims stay checkable by the people paying for them.',
+    lede: 'Improve how customers find and choose your business through technical SEO, useful content, AI-search visibility and conversion optimization.',
     problems: ['Organic sessions at risk during a post-merger, 63-plus-site consolidation', 'A veterans-services nonprofit with no structured way to reach the people it serves', 'Clinical service lines losing full-funnel coverage as AI-assisted search shifted query patterns'],
-    outputs: ['Migration-safe organic growth', 'Honestly attributed campaign reporting', 'Before/after measurement with explicit date ranges and a clear line under what each number does and doesn’t prove'],
+    outputs: ['Migration-safe organic growth', 'Campaign reporting tied to qualified inquiries and conversions', 'Performance comparisons and a prioritized plan for the next cycle'],
     approach: 'Pair the technical and content work with conversion and measurement from day one, and report growth the way the SFC case study does — a measured gain, a specific date range, and an explicit boundary around what launched after that window.',
     evidence: [
       { label: 'CommonSpirit Network Consolidation', note: 'Organic sessions from 2.65M to 4.9M+ across tenure, through 20+ enterprise migrations.', href: '/case-studies/commonspirit-network-consolidation/' },
@@ -101,8 +101,8 @@ const jsonLd = [graph(
       <div>
         <ol class="ag-crumbs" aria-label="Breadcrumb"><li><a href="/">Home</a></li><li aria-current="page">Services</li></ol>
         <p class="ag-eyebrow">Services</p>
-        <h1 id="services-heading">Search, growth and AI&#8209;search systems — one connected practice.</h1>
-        <p class="ag-hero-deck">Four stages, usually in this order: understand what is happening, design the experience and content, build the systems that publish and measure, then grow search, AI-search and conversion against a stated baseline. Each stage below lists the problems it solves, what you receive and the case studies behind it.</p>
+        <h1 id="services-heading">Strategy, design and technology.<br />Built around your growth.</h1>
+        <p class="ag-hero-deck">Reach the right customers, improve how they experience your business and connect the systems that support your team. Choose focused support or an engagement that runs from discovery through delivery.</p>
         <div class="ag-hero-actions"><a class="ag-button" href="/contact/">Start a conversation</a><a class="ag-button ag-button--light" href="#process">How we work</a></div>
       </div>
     </div>
@@ -119,7 +119,7 @@ const jsonLd = [graph(
     {stages.map((stage, index) => <section class="ag-stage" aria-labelledby={`${stage.id}-heading`}>
       <div class="ag-stage-head">
         <div><p class="ag-eyebrow">Stage 0{index + 1} · {stage.kicker}</p><h2 id={stage.id}><span id={`${stage.id}-heading`}>{stage.name}</span></h2><p class="ag-stage-lede">{stage.lede}</p></div>
-        <div class="ag-stage-evidence"><h3>Evidence</h3><ul>{stage.evidence.map(item => <li><a href={item.href}>{item.label}</a><span>{item.note}</span></li>)}</ul></div>
+        <div class="ag-stage-evidence"><h3>Related client work</h3><ul>{stage.evidence.map(item => <li><a href={item.href}>{item.label}</a><span>{item.note}</span></li>)}</ul></div>
       </div>
       <div class="ag-stage-grid">
         <div><h3>Problems solved</h3><ul>{stage.problems.map(item => <li>{item}</li>)}</ul></div>
@@ -133,7 +133,7 @@ const jsonLd = [graph(
 
   <section class="ag-section ag-section--tint" id="process" aria-labelledby="process-heading">
     <div class="ag-wrap">
-      <div class="ag-section-head"><div><p class="ag-eyebrow">Process</p><h2 id="process-heading">How an engagement runs.</h2><p>The same discipline used on enterprise programs, sized to the organization: diagnosis before scope, staging checks before release, and reporting you can verify.</p></div></div>
+      <div class="ag-section-head"><div><p class="ag-eyebrow">Process</p><h2 id="process-heading">How an engagement runs.</h2><p>Agree the objectives and scope, review the work as it develops, then launch with clear ownership and a measurement plan.</p></div></div>
       <ol class="ag-process">{process.map(step => <li><h3>{step.name}</h3><p>{step.body}</p></li>)}</ol>
     </div>
   </section>
@@ -142,13 +142,13 @@ const jsonLd = [graph(
     <div class="ag-wrap">
       <div class="ag-section-head"><div><p class="ag-eyebrow">FAQ</p><h2 id="faq-heading">Frequently asked questions</h2></div></div>
       <div class="ag-faq">{faq.map(item => <div><h3>{item.q}</h3><p>{item.a}{item.q.startsWith('Is there a free way') && <> <a href="/lab/population-workbench/">Open the population workbench.</a></>}</p></div>)}</div>
-      <p class="ag-scope-note" style="margin-top:36px">Scope note: the case studies linked above describe work delivered in the roles and periods stated on each page; enterprise figures such as $15.21M FY22 attributable revenue are later-system totals reported by the organizations concerned, not launch-period lifts.</p>
+
     </div>
   </section>
 
   <section class="ag-cta ag-dark" aria-labelledby="services-cta-heading">
     <div class="ag-wrap ag-cta-inner">
-      <div><p class="ag-eyebrow">Ready to explore further?</p><h2 id="services-cta-heading">What are you trying to make possible?</h2><p>Start with a conversation about the problem, or look through the seventeen case studies first.</p></div>
+      <div><p class="ag-eyebrow">Ready to explore further?</p><h2 id="services-cta-heading">Let’s work on your next stage of growth.</h2><p>Tell us what you want to improve. We’ll identify the right services, deliverables and next steps for your business.</p></div>
       <div class="ag-cta-actions"><a class="ag-button" href="/contact/">Start a conversation</a><a class="ag-button ag-button--light" href="/work/">See the work</a></div>
     </div>
   </section>

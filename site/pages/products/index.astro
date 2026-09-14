@@ -1,0 +1,12 @@
+---
+import AgencyLayout from '../../layouts/AgencyLayout.astro';
+import ProductGrid from '../../components/ProductGrid.astro';
+import {breadcrumbJsonLd, graph} from '../../lib/agency';
+const title = 'Software & Tools — Mitchell Miller';
+const description = 'Explore software for analytics, domain research, content and everyday planning. Try the free Population Workbench and discover products in development.';
+---
+<AgencyLayout path="/products/" title={title} description={description} jsonLd={[graph(breadcrumbJsonLd([{name:'Home',href:'/'},{name:'Software & tools',href:'/products/'}]))]}>
+<section class="ag-hero ag-dark"><div class="ag-wrap ag-products-hero"><p class="ag-eyebrow">Software &amp; tools</p><h1>Better decisions.<br />Less busywork.</h1><p class="ag-hero-deck">Applications for finding opportunities, understanding data and turning plans into action. Try a live tool, explore a prototype or discuss a custom solution for your business.</p><div class="ag-hero-actions"><a class="ag-button" href="/lab/population-workbench/">Try the free workbench</a><a class="ag-button ag-button--light" href="/contact/">Discuss a custom build</a></div></div></section>
+<section class="ag-section"><div class="ag-wrap"><div class="ag-section-head"><div><p class="ag-eyebrow">Product collection</p><h2>Explore the applications.</h2><p>The Population Workbench is available to use now. Other entries show internal tools and products in development; their pages include scope and current status.</p></div></div><ProductGrid /></div></section>
+<section class="ag-cta ag-dark"><div class="ag-wrap ag-cta-inner"><div><p class="ag-eyebrow">Custom software</p><h2>Your workflow. A better way to run it.</h2><p>Connect your data, automate reporting or build a customer-facing application around the way your business works.</p></div><a class="ag-button" href="/contact/">Talk about your project</a></div></section>
+</AgencyLayout>

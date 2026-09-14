@@ -69,7 +69,7 @@ const stanfordImage = portfolioImages['stanford-myhealth-seo'];
     <div class="product-grid">
       {products.map(({slug, entry, story, image}) => <article class:list={['product-card', {'mobile-product': slug === 'domainsignal' || slug === 'date-night'}]}>
         <figure><a class="product-image" href={`/case-studies/${slug}/`} aria-label={`Read ${entry.title}`}><img src={image.src} alt={image.alt} loading="lazy" /></a><figcaption>{image.note || `${story.client}. Existing product prototype interface.`}</figcaption></figure>
-        <div class="product-copy"><p class="eyebrow">{story.client}</p><h3><a href={`/case-studies/${slug}/`}>{entry.title}</a></h3><p>{story.summary}</p><a class="text-link" href={`/case-studies/${slug}/`}>See the thinking <span aria-hidden="true">→</span></a></div>
+        <div class="product-copy"><p class="eyebrow">{story.client}</p><h3><a href={`/case-studies/${slug}/`}>{entry.title}</a></h3><p>{story.summary}</p><a class="text-link" href={`/case-studies/${slug}/`}>View the project <span aria-hidden="true">→</span></a></div>
       </article>)}
     </div>
   </section>

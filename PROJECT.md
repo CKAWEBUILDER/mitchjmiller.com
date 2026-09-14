@@ -1,6 +1,21 @@
 # Mitchell Miller portfolio — current state
 
-Updated September 11, 2026 at 18:00 EDT (22:00 UTC). Owner: Mitchell Miller. GitHub: https://github.com/CKAWEBUILDER/mitchjmiller.com.git.
+Updated September 14, 2026 at 15:13 EDT. Owner: Mitchell Miller. GitHub: https://github.com/CKAWEBUILDER/mitchjmiller.com.git.
+
+## AGENCY REDESIGN — September 14, 2026 (built, not merged, not deployed)
+
+Mitch's order (September 14): position the site as an agency (portfolio present but secondary), copy the Contiem.com structure/templates/style with green CTAs instead of teal, add a scrolling brand-logo carousel on the homepage and the Services page, keep SEO.
+
+| Item | State |
+|---|---|
+| Branch / checkout | `claude/agency-redesign` from `main` `5cf4ab1`, single checkout `/Users/mitchellmiler/Documents/mitchjmiller-html-migration`, pushed to origin. Live production is unchanged (gh-pages `79de2b6`). |
+| Built | Agency shell (`site/layouts/AgencyLayout.astro`, `site/styles/agency.css`, `site/lib/agency.ts`), new home (`site/pages/index.astro`), new `/services/` (manifest kind `added` → 58 published URLs), `site/components/BrandMarquee.astro` fed by `site/data/brands.json` (content worker, 12 entries), all other templates in the new shell with content unchanged; JSON-LD (ProfessionalService + Person on home, Service + FAQPage on services, Article/CreativeWork elsewhere). Copy pack `content-studio/drafts/2026-09-14-agency-copy-pack.md` adopted for lifecycle lines, objectives bodies, services stages/process/FAQ, industries and meta titles. |
+| Decisions | Green `#14804a` (4.98:1 white text; 3.13:1 against the navy hero `#0f2440` — the suggested `#0b6b3a` fails 3:1 there); SFC explorer image as the hero photo; five evidence-backed industries; `/work/` stays the complete collection page; standalone SFC report stays outside the shell (parity rule). Full list: [docs/redesign-2026-09-14/README.md](docs/redesign-2026-09-14/README.md). |
+| Evidence | typecheck PASS; staging and release builds PASS (verify-parity 57/57 + 5/5 added, 58 sitemap URLs; new verify-agency PASS); JavaScript-off crawl 831/831 over 62 routes; headless Chrome 233/233 with screenshots at 1360/390 under `docs/redesign-2026-09-14/screenshots/`. |
+| Open for Mitch | Hero headline (brief's sentence vs. the pack's three options), rights-cleared logo files for the marquee, About opener (§g of the pack) not applied, SFC report inside/outside the shell. |
+| Next task | Mitch reviews locally (`npm run build:release-candidate && npm run qa:serve` → http://127.0.0.1:5189/) and decides the open items; the lead merges `claude/agency-redesign` into `main` and publishes per [RELEASE-READY.md](RELEASE-READY.md), then resubmits the 58-URL sitemap (Search Console, IndexNow) and re-runs the live probes. |
+
+Continuation record: `handoffs/parity-design-2026-09-11.md` ("Agency redesign 2026-09-14"). Status file: `/Users/mitchellmiler/Documents/ai-os/ops/overnight-2026-09-11/status-redesign-build.md`.
 
 ## PUBLISHED — September 11, 2026 (release owner: Claude Code)
 

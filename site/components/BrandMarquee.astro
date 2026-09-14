@@ -12,7 +12,6 @@ interface Props { heading?: string; id?: string; }
 const { heading = brands.label, id = 'brands' } = Astro.props;
 const list = brands.brands as Brand[];
 const kindLabel: Record<Brand['kind'], string> = { employer: 'Employer', client: 'Client', project: 'Independent project' };
-const kindAbbr: Record<Brand['kind'], string> = { employer: 'EMP', client: 'CLI', project: 'PRJ' };
 ---
 <section class="ag-marquee" aria-labelledby={`${id}-label`} data-marquee>
   <div class="ag-wrap ag-marquee-head">

@@ -100,7 +100,7 @@ export function organizationJsonLd() {
     name: site.legalName,
     alternateName: site.name,
     url: `${site.url}/`,
-    description: 'Search, growth and AI-search systems for enterprises and growing businesses: research and measurement, experience and content design, systems and tools, and organic growth.',
+    description: 'Digital strategy, websites, software and analytics for growing businesses: search and AI visibility, customer experience, application development and conversion optimization.',
     email: site.email,
     telephone: site.phone,
     image: `${site.url}${site.socialImage}`,

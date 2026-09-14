@@ -47,3 +47,15 @@ Validation: staging build PASS; typecheck PASS; parity 57/57 archived routes, 6/
 Claude Code was prompted through its installed CLI for a read-only review with Read/Grep/Glob only. Exact brief: `claude-review-brief.md`; result: `claude-review.md` when complete. Five pillars: UX/UI + design psychology; SEO/AEO/GEO; front/back engineering; CRO; analytics + automated reporting + optional AI/chatbot. Chatbot implementation, paid services, live analytics changes and public release are not authorized by this review request.
 
 Preserve the pre-existing untracked content drafts and screenshots. Production/DNS remain unchanged. Private Sites staging publication is the review target; public promotion remains subject to Mitch's review. Next: finish staging publication, review Claude's findings, and show Mitch the customer-facing design.
+
+## Completed refinement and Claude review
+
+Private staging deployment SUCCEEDED September 14, 2026: https://mitch-portfolio-html-staging.clearkayakrentalsoah.chatgpt.site
+
+Deployed source: `d667da1580455f07fae28781020e05a42dcd853e`, saved version 4 (`appgprj_6aa39e9ddc0881919bc64cbef445b4a3~appgver_038769589e1881918c0a48461287f0ce`), deployment `appgdep_6aa86f0394248191ab2da368d3faea3a`. GitHub branch and deployment mirror were pushed before saving. Native status is the hosting evidence; browser handoff was queued, not visually confirmed.
+
+Claude review completed (CLI exit 0), saved in `docs/redesign-2026-09-14/claude-review.md`, with lead reconciliation distinguishing verified source facts from untested live services. Its direct design findings were corrected: laptop navigation, visible development status, showcase group semantics, stale organization description and product manifest check. Final staging rebuild passed parity and agency validation. Prior 348 link/asset/fragment checks and typecheck passed; later changes did not change those destinations or type interfaces. No new browser/mobile QA claimed.
+
+Next: Mitch reviews the agency + software design; prioritize lead notifications, agency-specific contact topics and successful-inquiry measurement before public promotion. The backend currently stores inquiries in D1; live notification services and analytics collection remain unverified. No paid reporting/email service, chatbot or live analytics change was activated. Production/DNS unchanged. Local task dev server on 5191 stopped after private hosting succeeded; pre-existing user resources preserved.
+
+Brand exploration: Mitch proposed M² (M to the second power) for Mitchell Miller. This is a proposal only, not a selected identity or authorization to replace the current brand. Naming, domain and trademark availability have not been checked.

@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "checks": 348,
+  "failures": [],
+  "scope": "Changed homepage, services and products: built HTML links, local assets and fragment targets. No browser/live analytics verification."
+}

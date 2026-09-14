@@ -8,25 +8,26 @@
  */
 import AgencyLayout from '../layouts/AgencyLayout.astro';
 import BrandMarquee from '../components/BrandMarquee.astro';
+import ProductGrid from '../components/ProductGrid.astro';
 import { caseStudies, portfolioImages, headshot, studyEditorial, sfcEvidenceImages } from '../lib/content';
 import { publishedBlogPosts } from '../../baseline/src/lib/published';
 import { site, organizationJsonLd, personJsonLd, graph } from '../lib/agency';
 
-const title = 'Mitchell Miller — Search, Growth & AI-Search Systems';
-const description = 'Search, growth and AI-search systems for enterprise and small business, built by principal Mitchell Miller.';
+const title = 'Mitchell Miller — Digital Growth, Software & Consulting';
+const description = 'Digital strategy, websites, AI tools and analytics for growing businesses. Explore consulting services, software products and enterprise case studies.';
 const hero = sfcEvidenceImages[0];
 
 const stages = [
-  { id: 'understand', name: 'Understand', line: 'Connect research, data and measurement to a question worth answering.' },
-  { id: 'design', name: 'Design', line: 'Make the information clear and the experience useful.' },
-  { id: 'build', name: 'Build', line: 'Connect the interface, content and underlying system so the idea can work.' },
-  { id: 'grow', name: 'Grow', line: 'Improve discovery, clarify the next action and measure the change.' },
+  { id: 'understand', name: 'Understand', line: 'Find your strongest customer and market opportunities.' },
+  { id: 'design', name: 'Design', line: 'Make it easier for customers to choose you.' },
+  { id: 'build', name: 'Build', line: 'Launch websites, applications and connected workflows.' },
+  { id: 'grow', name: 'Grow', line: 'Improve acquisition, conversion and retention.' },
 ];
 const objectives = [
   { title: 'Be found in search and AI answers', body: 'As search shifts from ranked links to generated answers, visibility depends on structured, entity-rich content an AI can cite. We build and measure that: prompt-set tracking across ChatGPT, Perplexity and Google AI Overviews, and the entity architecture underneath it.', href: '/services/#grow' },
   { title: 'Turn traffic into customers', body: 'Location pages, service-line surfaces and conversion paths that connect discovery to a call, a booking or an appointment.', href: '/services/#design' },
-  { title: 'Build the data and content systems behind growth', body: 'A thousand-location health network or a sixty-site publishing environment can turn into an inconsistent mess or a repeatable system — the difference is architecture. We’ve built the entity data, reusable templates and migration discipline that keep scale from becoming the liability.', href: '/services/#build' },
-  { title: 'Measure what actually happened', body: 'Every metric gets a source, a date range and a plain statement of what it does and doesn’t prove — the way the SFC case study separates a measured search-traffic gain from a feature that launched after the measurement window.', href: '/services/#understand' },
+  { title: 'Build the data and content systems behind growth', body: 'Replace disconnected pages and manual updates with reusable content, connected data and software that supports your next stage of growth.', href: '/services/#build' },
+  { title: 'Measure what actually happened', body: 'Connect search, website and lead data so you can see which channels bring qualified inquiries, where customers drop off and what to improve next.', href: '/services/#understand' },
 ];
 const services = [
   { title: 'Search and AI-search strategy', body: 'Demand research, competitor sets from actual visibility data, and prioritised plans for organic search and AI answer surfaces (AEO/GEO).', href: '/services/#understand', mark: '01' },
@@ -57,22 +58,22 @@ const jsonLd = [graph(organizationJsonLd(), personJsonLd(), { '@type': 'WebSite'
   <section class="ag-hero ag-dark" aria-labelledby="home-heading">
     <div class="ag-wrap ag-hero-grid">
       <div>
-        <p class="ag-eyebrow">Search · Growth · AI-search systems</p>
-        <h1 id="home-heading">Search, growth and AI&#8209;search systems for enterprises and growing businesses.</h1>
-        <p class="ag-hero-deck">We help organizations get found in search and AI answers, turn that attention into customers, and build the data, content and measurement systems behind durable growth — from Apple-scale programs and a 1,000-location health system to a surf school in Waikīkī.</p>
-        <div class="ag-hero-actions"><a class="ag-button" href="/contact/">Start a conversation</a><a class="ag-button ag-button--light" href="/work/">See the work</a></div>
+        <p class="ag-eyebrow">Digital growth · Software · Consulting</p>
+        <h1 id="home-heading">Get found. Win customers.<br />Build what comes next.</h1>
+        <p class="ag-hero-deck">Websites that convert. Search strategies that reach the right customers. Software that makes your business run better. Bring strategy, design, engineering and analytics together with one hands-on partner.</p>
+        <div class="ag-hero-actions"><a class="ag-button" href="/contact/">Start a conversation</a><a class="ag-button ag-button--light" href="/products/">Explore software &amp; tools</a></div>
         <p class="ag-hero-meta">Led hands-on by <a href="/about/">Mitchell Miller</a> · Apple · CommonSpirit Health · Stanford Health Care · Clarity AI</p>
       </div>
-      <figure class="ag-hero-media">
-        <div class="ag-hero-frame"><img src={hero.src} alt={hero.alt} width="1440" height="1000" fetchpriority="high" /></div>
-        <figcaption>SFC Surf School South Shore explorer, shipped September 10, 2026. Aerial: USDA-FSA NAIP, January 27, 2022, via NOAA Digital Coast.</figcaption>
-      </figure>
+      <div class="ag-showcase" aria-label="Software and client work">
+        <a class="ag-showcase-main" href="/case-studies/claritypulse-ai-reporting/"><span class="ag-showcase-label">Analytics &amp; AI reporting <span>ClarityPulse</span></span><img src="/images/claritypulse-dashboard.png" alt="ClarityPulse reporting interface — representative product mockup" width="1400" height="900" fetchpriority="high" /><span class="ag-showcase-caption">Internal reporting prototype · Representative interface</span></a>
+        <div class="ag-showcase-bottom"><a href="/case-studies/sfc-surf-school/"><img src={hero.src} alt={hero.alt} width="600" height="400" /><span>Customer experiences <strong>SFC Surf School ↗</strong></span></a><a href="/products/#domainsignal"><img src="/images/domainsignal.png" alt="DomainSignal mobile app prototype" width="600" height="400" /><span>Software &amp; apps <strong>DomainSignal ↗</strong></span></a></div>
+      </div>
     </div>
   </section>
 
   <section class="ag-lifecycle" aria-label="How the work fits together">
     <div class="ag-wrap">
-      <p class="ag-lifecycle-label">One lifecycle</p>
+      <p class="ag-lifecycle-label">Strategy through delivery</p>
       <ol>{stages.map(stage => <li><a href={`/services/#${stage.id}`}><strong>{stage.name}</strong><span>{stage.line}</span></a></li>)}</ol>
     </div>
   </section>
@@ -81,28 +82,30 @@ const jsonLd = [graph(organizationJsonLd(), personJsonLd(), { '@type': 'WebSite'
 
   <section class="ag-section" aria-labelledby="objectives-heading">
     <div class="ag-wrap">
-      <div class="ag-section-head"><div><p class="ag-eyebrow">Objectives</p><h2 id="objectives-heading">What are you trying to make possible?</h2><p>Most engagements start with one of these four questions. Each maps to a stage of the work and to case studies where it was answered.</p></div><a class="ag-textlink" href="/services/">All services <span aria-hidden="true">→</span></a></div>
+      <div class="ag-section-head"><div><p class="ag-eyebrow">Objectives</p><h2 id="objectives-heading">What does your business need next?</h2><p>Reach more customers, improve your website, or replace a manual process with software built around your needs.</p></div><a class="ag-textlink" href="/services/">All services <span aria-hidden="true">→</span></a></div>
       <div class="ag-grid-4">{objectives.map(item => <a class="ag-tile" href={item.href}><h3>{item.title}</h3><p>{item.body}</p><span class="ag-textlink">How we help <span aria-hidden="true">→</span></span></a>)}</div>
     </div>
   </section>
 
   <section class="ag-section ag-section--tint" aria-labelledby="services-heading">
     <div class="ag-wrap">
-      <div class="ag-section-head"><div><p class="ag-eyebrow">Services</p><h2 id="services-heading">From the question to the working system.</h2><p>Research, design, build and growth work that stays connected — the same practice that owned enterprise search programs now applied to organizations of any size.</p></div><a class="ag-textlink" href="/services/">Service details <span aria-hidden="true">→</span></a></div>
+      <div class="ag-section-head"><div><p class="ag-eyebrow">Services</p><h2 id="services-heading">Digital services that move your business forward.</h2><p>Get specialist support for a specific challenge or a partner who can take a project from strategy through launch and ongoing improvement.</p></div><a class="ag-textlink" href="/services/">Service details <span aria-hidden="true">→</span></a></div>
       <div class="ag-grid-3">{services.map(item => <a class="ag-tile" href={item.href}><span class="ag-tile-icon" aria-hidden="true">{item.mark}</span><h3>{item.title}</h3><p>{item.body}</p><span class="ag-textlink">Read more <span aria-hidden="true">→</span></span></a>)}</div>
     </div>
   </section>
 
+  <section class="ag-section ag-products-section" aria-labelledby="products-heading"><div class="ag-wrap"><div class="ag-section-head"><div><p class="ag-eyebrow">Software &amp; tools</p><h2 id="products-heading">Put better tools to work.</h2><p>Explore applications for research, reporting and everyday decisions. Try the live workbench or see the products in development.</p></div><a class="ag-textlink" href="/products/">All products <span aria-hidden="true">→</span></a></div><ProductGrid featured /></div></section>
+
   <section class="ag-section" aria-labelledby="industries-heading">
     <div class="ag-wrap">
-      <div class="ag-section-head"><div><p class="ag-eyebrow">Industries</p><h2 id="industries-heading">Where the work has been done.</h2><p>Only sectors with published evidence are listed; each links to the case studies that support it.</p></div></div>
+      <div class="ag-section-head"><div><p class="ag-eyebrow">Industries</p><h2 id="industries-heading">Enterprise experience. Practical business solutions.</h2><p>Experience across complex health systems, global commerce, software and growing local businesses.</p></div></div>
       <div class="ag-grid-3">{industries.map(item => <div class="ag-tile ag-industry"><h3>{item.name}</h3><p>{item.body}</p><p>{item.links.map((link, index) => <>{index > 0 && ' · '}<a href={link.href}>{link.label}</a></>)}</p></div>)}</div>
     </div>
   </section>
 
   <section class="ag-section ag-section--tint" aria-labelledby="work-heading">
     <div class="ag-wrap">
-      <div class="ag-section-head"><div><p class="ag-eyebrow">Selected work</p><h2 id="work-heading">Evidence, with the timeline intact.</h2><p>Four of seventeen case studies. Figures are quoted with their source and period; later-system totals are labelled as such.</p></div><a class="ag-textlink" href="/work/">All case studies <span aria-hidden="true">→</span></a></div>
+      <div class="ag-section-head"><div><p class="ag-eyebrow">Selected work</p><h2 id="work-heading">Client challenges. Delivered solutions.</h2><p>Explore selected projects in customer acquisition, content platforms, search and reporting.</p></div><a class="ag-textlink" href="/work/">All case studies <span aria-hidden="true">→</span></a></div>
       <div class="ag-grid-2">{selected.map(({ slug, entry, story, image }) => <article class="ag-work-card">
         <figure><a class="ag-work-image" href={`/case-studies/${slug}/`} aria-label={`Read ${entry.title}`}><img src={image.src} alt={image.alt} loading="lazy" width="1400" height="900" class:list={{ contain: (image as { fit?: string }).fit === 'contain' }} /></a>{image.note && <figcaption>{image.note}</figcaption>}</figure>
         <div class="ag-work-body"><p class="ag-eyebrow">{story.client} · {story.category}</p><h3><a href={`/case-studies/${slug}/`}>{story.headline}</a></h3><p>{story.summary}</p>
@@ -121,21 +124,21 @@ const jsonLd = [graph(organizationJsonLd(), personJsonLd(), { '@type': 'WebSite'
 
   <section class="ag-section ag-section--tint" aria-labelledby="writing-heading">
     <div class="ag-wrap ag-split">
-      <div><p class="ag-eyebrow">Writing</p><h2 id="writing-heading">Signals &amp; Systems.</h2><p>Practical notes on enterprise SEO, AEO/GEO, AI search and growth systems, plus study notes on what we are learning.</p><a class="ag-textlink" href="/blog/">Read the notes <span aria-hidden="true">→</span></a></div>
+      <div><p class="ag-eyebrow">Writing</p><h2 id="writing-heading">Signals &amp; Systems.</h2><p>Guides to improving search visibility, choosing useful AI applications and measuring digital performance.</p><a class="ag-textlink" href="/blog/">Explore insights <span aria-hidden="true">→</span></a></div>
       <ul class="ag-posts">{posts.map(post => <li><span class="ag-post-date">{post.date}</span><h3><a href={`/blog/${post.slug}/`}>{post.title}</a></h3><p>{post.teaser}</p></li>)}</ul>
     </div>
   </section>
 
   <section class="ag-section" aria-labelledby="principal-heading">
     <div class="ag-wrap ag-split">
-      <div><p class="ag-eyebrow">About</p><h2 id="principal-heading">A practice, led hands-on.</h2><p>Mitchell Miller has led enterprise search at Apple, CommonSpirit Health and Stanford Health Care and now runs this practice directly: research, design, engineering and measurement on the same engagement. No work is described here that was not delivered in the roles and periods stated on each case study.</p><a class="ag-textlink" href="/about/">About Mitchell <span aria-hidden="true">→</span></a></div>
+      <div><p class="ag-eyebrow">About</p><h2 id="principal-heading">Senior expertise. Direct collaboration.</h2><p>Work directly with Mitchell Miller, whose experience spans Apple, CommonSpirit Health and Stanford Health Care. Get strategic direction and hands-on delivery across your website, search presence, software and reporting.</p><a class="ag-textlink" href="/about/">About Mitchell <span aria-hidden="true">→</span></a></div>
       <div class="ag-principal"><img src={headshot} alt="Mitchell Miller" width="88" height="88" loading="lazy" /><div><strong>Mitchell Miller</strong><p>Director of SEO, AEO/GEO &amp; AI Search Systems · Hiring? <a href="/resume/">Four resumes by role</a>.</p></div></div>
     </div>
   </section>
 
   <section class="ag-cta ag-dark" aria-labelledby="cta-heading">
     <div class="ag-wrap ag-cta-inner">
-      <div><p class="ag-eyebrow">Ready to explore further?</p><h2 id="cta-heading">Tell us the problem and what you want to change.</h2><p>A clearer customer experience, a better growth system or an idea ready to become real. The first conversation is about the problem, not a pitch.</p></div>
+      <div><p class="ag-eyebrow">Ready to explore further?</p><h2 id="cta-heading">Let’s work on your next stage of growth.</h2><p>Tell us what you want to improve. We’ll identify the right services, deliverables and next steps for your business.</p></div>
       <div class="ag-cta-actions"><a class="ag-button" href="/contact/">Start a conversation</a><a class="ag-button ag-button--light" href="/services/">See the services</a></div>
     </div>
   </section>

@@ -17,7 +17,7 @@ const kindAbbr: Record<Brand['kind'], string> = { employer: 'EMP', client: 'CLI'
 <section class="ag-marquee" aria-labelledby={`${id}-label`} data-marquee>
   <div class="ag-wrap ag-marquee-head">
     <p class="ag-marquee-label" id={`${id}-label`}>{heading}</p>
-    <p class="ag-marquee-key">Employers, clients and independent projects, mixed — each is labelled. Logos appear as text wordmarks until rights-cleared files are added.</p>
+    <p class="ag-marquee-key">Enterprise roles, client engagements and independent products.</p>
   </div>
   <div class="ag-marquee-viewport">
     <div class="ag-marquee-track">
@@ -28,7 +28,7 @@ const kindAbbr: Record<Brand['kind'], string> = { employer: 'EMP', client: 'CLI'
               {brand.logo
                 ? <img src={brand.logo} alt={brand.name} loading="lazy" height="30" />
                 : <span>{brand.name}</span>}
-              <abbr aria-label={kindLabel[brand.kind]}>{kindAbbr[brand.kind]}</abbr>
+              <abbr aria-label={kindLabel[brand.kind]}>{kindLabel[brand.kind]}</abbr>
             </li>
           ))}
         </ul>

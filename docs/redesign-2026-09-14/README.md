@@ -1,3 +1,15 @@
+## Agency + software refinement — September 14, 2026
+
+Mitch rejected self-referential portfolio copy and requested a Contiem-inspired agency + SaaS + portfolio presentation, followed by a Claude review. This update builds on the existing `claude/agency-redesign` branch in the same canonical checkout. No new checkout or project record set was created.
+
+Implemented: customer-outcome homepage, white/navy/green agency design with a software showcase, a dedicated `/products/` catalog (59 sitemap-eligible URLs), Products navigation throughout the shared shell, live-tool vs. prototype/internal-tool availability, clearer services copy and client-work sections. The existing case studies and public routes remain intact; the specifically rejected historical 'See the thinking' CTA now reads 'View the project'. Prototype interfaces remain labeled as representative where applicable.
+
+Validation: staging build PASS; typecheck PASS; parity 57/57 archived routes, 6/6 added routes, 25 complete article/note bodies, 160 original case fields and four exact staging PDFs; agency checks PASS; 348 changed-page link/asset/fragment checks PASS (`qa/agency-products-links.json`). Existing September 14 screenshot/browser results describe the earlier design, not this refinement; no new browser/mobile QA is claimed.
+
+Claude Code was prompted through its installed CLI for a read-only review with Read/Grep/Glob only. Exact brief: `claude-review-brief.md`; result: `claude-review.md` when complete. Five pillars: UX/UI + design psychology; SEO/AEO/GEO; front/back engineering; CRO; analytics + automated reporting + optional AI/chatbot. Chatbot implementation, paid services, live analytics changes and public release are not authorized by this review request.
+
+Preserve the pre-existing untracked content drafts and screenshots. Production/DNS remain unchanged. Private Sites staging publication is the review target; public promotion remains subject to Mitch's review. Next: finish staging publication, review Claude's findings, and show Mitch the customer-facing design.
+
 # Agency redesign — 2026-09-14
 
 Built by the Claude build worker on branch `claude/agency-redesign` (from `main` `5cf4ab1`) in the single checkout `/Users/mitchellmiler/Documents/mitchjmiller-html-migration`. **Not merged, not deployed.** Mitch's order (September 14, 2026): position the site as an agency (portfolio present but secondary), follow the Contiem.com structure and style with green CTAs instead of teal, add a scrolling brand-logo carousel on the homepage and the Services page, keep SEO.

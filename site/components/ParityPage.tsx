@@ -32,18 +32,20 @@ export interface ParityRoute {
 }
 
 // Production snapshot 2745c7e. Existing Coming Soon routes remain noindex.
+// Titles/descriptions for work, writing, about, contact and resume follow the
+// 2026-09-14 agency copy pack (content-studio/drafts/2026-09-14-agency-copy-pack.md §h).
 // Duplicate slugs resolve to the first entry, matching production behavior.
 export const parityExceptions = { excludedDraftSlugs, duplicateBlogSlugs };
 export const parityRoutes: ParityRoute[] = [
   { path: "/", title: "Mitchell Miller \u2014 Director of SEO, AEO/GEO & AI Search Systems", description: "Senior search and AI-growth leader with a decade owning enterprise organic at Apple, CommonSpirit, and Stanford Health Care. $15.21M FY22 attributable revenue, 4.9M+ organic sessions, three shipped AI products.", Component: Home },
-  { path: "/about", title: "About \u00b7 Mitchell Miller \u2014 Director of SEO, AEO/GEO & AI Search Systems", description: "Mitchell Miller is an SEO, AEO/GEO, and AI Search systems leader. He's led enterprise search at Apple, CommonSpirit Health, and Stanford Health Care.", Component: About },
-  { path: "/contact", title: "Contact \u00b7 Mitchell Miller \u2014 Director of SEO, AEO/GEO & AI Search Systems", description: "Get in touch with Mitchell Miller for SEO Director, AEO/GEO Lead, AI Search Strategist, or speaking engagement opportunities.", Component: Contact },
+  { path: "/about", title: "About Mitchell Miller, Principal", description: "From Apple and CommonSpirit Health to SFC Surf School \u2014 the practice behind the search and growth work.", Component: About },
+  { path: "/contact", title: "Contact \u2014 Start a Conversation", description: "Tell Mitchell Miller the problem you want to solve. No booking confirmation, no pricing quote \u2014 just a reply.", Component: Contact },
   { path: "/collab-ideas", title: "Collab Ideas | Mitchell Miller", description: "Ways to collaborate with Mitchell Miller across enterprise SEO, AEO/GEO measurement, organic systems, and practical AI workflow prototypes.", Component: CollabIdeas },
-  { path: "/resume", title: "Resume | Mitchell Miller", description: "Download Mitchell Miller's resume.", Component: Resume },
+  { path: "/resume", title: "Resumes \u2014 Mitchell Miller", description: "Four resumes, one chronology: Search Direction, AI Search Engineering, Product Management, Organic Systems Architecture.", Component: Resume },
   { path: "/systems", title: "Systems Architecture | Mitchell Miller", description: "Mitchell Miller's operating architecture across search, analytics, and AI systems.", Component: Systems },
-  { path: "/work", title: "Work | Mitchell Miller", description: "Portfolio of work across Enterprise SEO, AEO/GEO, and AI Products.", Component: Work },
+  { path: "/work", title: "Work \u2014 Search, Growth & AI-Search Case Studies", description: "17 case studies spanning Apple, CommonSpirit Health, Stanford Health Care, SFC Surf School and more.", Component: Work },
   { path: "/selected-builds", title: "Selected Builds | Mitchell Miller", description: "Selected side builds, AI experiments, and workflow tools that support Mitchell Miller's SEO, AEO/GEO, and product systems portfolio.", Component: VibeCoding },
-  { path: "/blog", title: "Signals & Systems | Blog by Mitchell Miller", description: "Practical notes on enterprise SEO, AEO/GEO, AI search, and growth systems \u2014 plus what I'm currently studying.", Component: BlogIndex },
+  { path: "/blog", title: "Writing \u2014 Search, Growth & AI-Search Notes", description: "Field notes on enterprise search, AI-search measurement and growth systems, from real engagements.", Component: BlogIndex },
   { path: "/case-studies", title: "Case Studies | Mitchell Miller", description: "In-depth case studies on enterprise SEO, AEO/GEO, and AI Search.", Component: CaseStudiesIndex },
   { path: "/aeo-geo", title: "AEO/GEO Measurement Methodology \u00b7 Mitchell Miller", description: "Mitchell Miller's AEO/GEO measurement methodology: prompt-cluster construction, citation velocity tracking, AI share-of-voice benchmarking, and closed-loop optimization across ChatGPT, Perplexity, and Google AI Overviews.", Component: AeoGeo },
   ...caseStudies.map(study => ({

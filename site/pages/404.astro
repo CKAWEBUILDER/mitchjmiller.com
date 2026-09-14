@@ -1,6 +1,7 @@
 ---
+import AgencyLayout from '../layouts/AgencyLayout.astro';
 import ParityPage from '../components/ParityPage';
-import '../../baseline/src/index.css';
-import '../components/parity/parity.css';
 ---
-<!doctype html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Page not found | Mitchell Miller</title><meta name="robots" content="noindex, follow"/></head><body><ParityPage path="/__not-found__"/><script>import '../components/parity/enhance';</script></body></html>
+<AgencyLayout path="/404.html" title="Page not found | Mitchell Miller" description="There is no page at this address." noindex={true} bodyClass="ag-parity">
+  <ParityPage path="/__not-found__" />
+</AgencyLayout>

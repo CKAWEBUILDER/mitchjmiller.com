@@ -1,0 +1,282 @@
+[
+  {
+    "path": "/",
+    "title": "Search, AI & Growth Systems",
+    "description": "Enterprise search leadership meets hands-on AI and growth engineering. Explore the work of Mitchell Miller."
+  },
+  {
+    "path": "/about",
+    "title": "About Mitchell Miller",
+    "description": "Enterprise search leadership meets hands-on AI and growth engineering. Explore the work of Mitchell Miller."
+  },
+  {
+    "path": "/contact",
+    "title": "Work with Mitchell Miller",
+    "description": "Enterprise search leadership meets hands-on AI and growth engineering. Explore the work of Mitchell Miller."
+  },
+  {
+    "path": "/collab-ideas",
+    "title": "Ways to Work Together",
+    "description": "Enterprise search leadership meets hands-on AI and growth engineering. Explore the work of Mitchell Miller."
+  },
+  {
+    "path": "/resume",
+    "title": "Current Resumes",
+    "description": "Enterprise search leadership meets hands-on AI and growth engineering. Explore the work of Mitchell Miller."
+  },
+  {
+    "path": "/systems",
+    "title": "How I Build Growth Systems",
+    "description": "Enterprise search leadership meets hands-on AI and growth engineering. Explore the work of Mitchell Miller."
+  },
+  {
+    "path": "/work",
+    "title": "Selected Work",
+    "description": "Enterprise search leadership meets hands-on AI and growth engineering. Explore the work of Mitchell Miller."
+  },
+  {
+    "path": "/selected-builds",
+    "title": "Selected Builds",
+    "description": "Enterprise search leadership meets hands-on AI and growth engineering. Explore the work of Mitchell Miller."
+  },
+  {
+    "path": "/blog",
+    "title": "Field Notes",
+    "description": "Enterprise search leadership meets hands-on AI and growth engineering. Explore the work of Mitchell Miller."
+  },
+  {
+    "path": "/case-studies",
+    "title": "Case Studies",
+    "description": "Enterprise search leadership meets hands-on AI and growth engineering. Explore the work of Mitchell Miller."
+  },
+  {
+    "path": "/aeo-geo",
+    "title": "AI Search & AEO/GEO",
+    "description": "Enterprise search leadership meets hands-on AI and growth engineering. Explore the work of Mitchell Miller."
+  },
+  {
+    "path": "/lab",
+    "title": "The Interactive Lab",
+    "description": "Enterprise search leadership meets hands-on AI and growth engineering. Explore the work of Mitchell Miller."
+  },
+  {
+    "path": "/case-studies/apple-seasonal-search",
+    "title": "Apple Seasonal Search",
+    "description": "Enterprise SEO program across Apple seasonal commerce surfaces"
+  },
+  {
+    "path": "/case-studies/apple-store-amr",
+    "title": "Apple Store AMR",
+    "description": "Seasonal merchandising SEO for the Americas"
+  },
+  {
+    "path": "/case-studies/apple-education-store",
+    "title": "Apple Education Store",
+    "description": "Back-to-school search optimization"
+  },
+  {
+    "path": "/case-studies/stanford-myhealth-seo",
+    "title": "Stanford MyHealth SEO",
+    "description": "Full-funnel paid and organic search for regulated academic healthcare"
+  },
+  {
+    "path": "/case-studies/commonspirit-locations-conversion-engine",
+    "title": "Dignity Health Yext Location Conversion Engine",
+    "description": "Programmatic SEO and conversion infrastructure across 1,000+ healthcare location pages"
+  },
+  {
+    "path": "/case-studies/commonspirit-network-consolidation",
+    "title": "CommonSpirit Network Consolidation",
+    "description": "Analytics and SEO preservation during massive health system merger"
+  },
+  {
+    "path": "/case-studies/commonspirit-medical-content-library",
+    "title": "Dignity Health Conditions & Treatments Library",
+    "description": "Competitive-intelligence content library that became AEM migration leverage"
+  },
+  {
+    "path": "/case-studies/aem-content-fragmentation-architecture",
+    "title": "AEM Content Fragmentation Architecture",
+    "description": "Turned the Conditions & Treatments library into a modular AEM adoption case"
+  },
+  {
+    "path": "/case-studies/yext-entity-data-foundation",
+    "title": "Yext Entity Data Foundation",
+    "description": "Network-wide entity cleanup and syndication"
+  },
+  {
+    "path": "/case-studies/claritypulse-ai-reporting",
+    "title": "ClarityPulse",
+    "description": "Internal AI reporting system: source data → a brief people can act on"
+  },
+  {
+    "path": "/case-studies/searchforge-content-intelligence",
+    "title": "SearchForge",
+    "description": "AI content intelligence for entity-driven brief generation"
+  },
+  {
+    "path": "/case-studies/actionthread-transcript-execution",
+    "title": "ActionThread",
+    "description": "AI transcript-to-execution workflow automation"
+  },
+  {
+    "path": "/case-studies/aeo-visibility-infrastructure",
+    "title": "AEO Visibility Infrastructure",
+    "description": "Measurement system for brand visibility in AI search engines"
+  },
+  {
+    "path": "/case-studies/domainsignal",
+    "title": "DomainSignal",
+    "description": "AI-driven domain authority and intelligence platform"
+  },
+  {
+    "path": "/case-studies/date-night",
+    "title": "Date Night",
+    "description": "Couples-focused app prototype for shared discovery"
+  },
+  {
+    "path": "/case-studies/vet-advocates-growth-system",
+    "title": "Vet Advocates Growth System",
+    "description": "Structured acquisition system for a veterans-services nonprofit"
+  },
+  {
+    "path": "/case-studies/sfc-surf-school",
+    "title": "SFC Surf School",
+    "description": "From search research to a working growth system on Waikīkī’s South Shore"
+  },
+  {
+    "path": "/blog/gbp-2026-ai-grounding",
+    "title": "Your Google Business Profile Is Now an AI Grounding Source — What Actually Changed in 2026",
+    "description": "For a decade a Google Business Profile was a visibility asset. In 2026 it became an AI grounding source — and a thin profile now gets an unfavorable AI summary regardless of its star rating. The levers that actually changed, and the 2026 playbook."
+  },
+  {
+    "path": "/blog/multi-agent-billing-traps",
+    "title": "The Flat-Fee Multi-Agent Stack — and the 3 Billing Traps That Quietly Meter You",
+    "description": "The two-subscription agent stack (orchestrator + Claude Code) is real and works — but three silent traps reclassify that flat-fee work to metered API rates. What they are, the verified 2026 timeline, and the durable fix."
+  },
+  {
+    "path": "/blog/intrepid-agency-spotlight",
+    "title": "Agency Spotlight: Intrepid Digital and the Long Game in Search Marketing",
+    "description": "Intrepid has produced content for AWS for about seven years — a strong run in a field where SEO clients churn near 38% a year. An observational look at the repeatable mechanics behind search-client longevity: specialization, broad-spectrum coverage, CRO, and metric discipline."
+  },
+  {
+    "path": "/blog/mitchell-miller-journey",
+    "title": "The Long Road to Systems Thinking: My Journey in Search, AI, and Building Things",
+    "description": "From enterprise search programs to AI tools and a Waikīkī surf explorer: how I learned to carry an idea all the way into a working system."
+  },
+  {
+    "path": "/blog/studying/fde-1m-ai-job",
+    "title": "FDE: The $1M/Year AI Job, Explained",
+    "description": "Every company can now buy the same intelligence — the frontier models ship weekly and everyone runs the same stack (Claude Code, Codex, Cursor, Copilot). So intelligence stops being the moat; the edge moves to deployment"
+  },
+  {
+    "path": "/blog/studying/pocock-agentic-workflow",
+    "title": "Matt Pocock's Agentic Engineering Workflow — Harness Over Model",
+    "description": "Matt Pocock's core claim: everyone obsesses over the model (the engine); the leverage is in the harness — the prompts, skills, tests, docs, and codebase the model runs inside, all of which *you* control. He frames it thr"
+  },
+  {
+    "path": "/blog/studying/hermes-concepts-field-guide",
+    "title": "Every Hermes Concept in Plain English — a Field Guide to the Agent Harness",
+    "description": "Hermes (the open-source agent from Nous Research) is a harness wrapped around a swappable model — and this video walks every concept a non-coder needs to actually use it. The mental model: the model is the engine, the ha"
+  },
+  {
+    "path": "/blog/studying/claude-watermark-seo",
+    "title": "Did Claude's Watermark Just \"Break\" SEO? The Fear Chain vs. the Evidence",
+    "description": "Anthropic began watermarking all Claude-written text (every model since Aug 2, 2026, across API/Code/Cowork, worldwide). The scary story: the mark rides onto your pages → Anthropic ships a detector → Google sorts the ind"
+  },
+  {
+    "path": "/blog/studying/all-in-ai-money-stack",
+    "title": "TL;DW: Anthropic's $2T IPO, Zuck's Manifesto, Nvidia's $500B Bet & Grok's Comeback",
+    "description": "TL;DW: Anthropic's $2T IPO, Zuck's Manifesto, Nvidia's $500B Bet & Grok's Comeback"
+  },
+  {
+    "path": "/blog/studying/hermes-seo-agent",
+    "title": "A \"Hermes\" Agent That Runs SEO End-to-End — What Actually Holds Up",
+    "description": "The pitch is a \"24/7 traffic engine\": an AI agent (confusingly called *Hermes* — memory across sessions, 40+ tools, reusable skills) that runs SEO in four stages while you sleep. (1) Keywords — plug into the Google Searc"
+  },
+  {
+    "path": "/blog/studying/codex-obsolete-9-moves",
+    "title": "Codex Just Made Claude \"Obsolete\"? — 9 Platform Moves Worth Studying",
+    "description": "A creator ran through nine things Codex can do that Claude Code (mostly) can't yet — and the interesting thread isn't \"Claude is obsolete\" (it isn't), it's that OpenAI is winning on platform, not reasoning. The standouts"
+  },
+  {
+    "path": "/blog/studying/chatgpt-sites",
+    "title": "ChatGPT Sites: Build + Host a Real Internal App From One Conversation",
+    "description": "ChatGPT Sites lets you describe an internal site or lightweight app in the Codex desktop app, review it, and deploy a live URL — with hosting, access controls, file storage, and a database included, no coding. It's aimed"
+  },
+  {
+    "path": "/blog/studying/book-to-skill",
+    "title": "I Turned a Book into an AI Agent (book-to-skill)",
+    "description": "A trending open-source repo — `book-to-skill` (MIT, ~14k★) — ingests a PDF you own and turns it into a queryable agent skill: it reads the book, splits it into chapters, and packages `chapters/`, a `cheat-sheet`, `glossa"
+  },
+  {
+    "path": "/blog/studying/claude-code-6-new-rules",
+    "title": "Claude Code Just Changed — the 6 New Rules of Context Engineering",
+    "description": "Anthropic engineer Tariq published \"The new rules of context engineering for Claude 5 models\" (4M+ views), and several of the rules are the *opposite* of the advice we followed for months — because the models got dramati"
+  },
+  {
+    "path": "/blog/studying/claude-code-make-money",
+    "title": "I Asked Claude Code to Make Me as Much Money as Possible",
+    "description": "Claude is tuned to make you feel *productive*, not to make you *money* — and your income is capped by output quality × speed. Nate fixes four baked-in problems with four upgrades, building a real business live to demo ea"
+  },
+  {
+    "path": "/blog/studying/build-ai-agents-full-course",
+    "title": "Build AI Agents to Automate Your Business — the Full Framework",
+    "description": "The jump from chat (question → answer) to agents (goal → result) is a 5–10× productivity divide, and most people are stuck on the wrong side. An agent is just a loop — observe → think → act — run by a \"harness\" (Claude C"
+  },
+  {
+    "path": "/blog/studying/codex-voice-jarvis",
+    "title": "OpenAI's Codex Voice: Real-Time Voice That Runs Your Computer",
+    "description": "OpenAI put real-time voice directly inside Codex — not dictation, but a live voice agent that can see your screen, use the skills you've already built, control an in-app browser, and spin up parallel background tasks whi"
+  },
+  {
+    "path": "/blog/studying/pi-coding-agent",
+    "title": "The Pi Coding Agent — the Only Real Claude Code Competitor",
+    "description": "Claude Code created the agentic-coding category with great architecture, a great harness, and models strong enough to drive it — but it's a *for-profit, closed, opinionated* tool optimizing for the masses. Pi is the coun"
+  },
+  {
+    "path": "/blog/studying/ships-100x-faster",
+    "title": "Why This Dev Ships 100x Faster Than 99% of Engineers",
+    "description": "Mickey — a senior dev who has AI write 95% of his code — isn't typing prompts into a chatbot; he runs a tight, repeatable pipeline. The model is just a next-text predictor; the harness (Cursor + a best-in-class model) is"
+  },
+  {
+    "path": "/blog/studying/forget-loop-engineering",
+    "title": "Forget \"Loop Engineering\" — Agentic Engineering Is About This",
+    "description": "\"Loop engineering\" is a hype-y rebrand of the software development life cycle — and a misleading one (by that logic you'd also need \"condition engineering,\" \"function engineering,\" etc., forever). The better frame: you'r"
+  },
+  {
+    "path": "/blog/studying/mark-cuban-ai-bubble",
+    "title": "Mark Cuban on the AI Bubble: Who Actually Gets Wiped Out?",
+    "description": "Cuban's core claim: this is not the dot-com bubble. There's no retail mania — it won't wipe out \"most people.\" What it *can* destroy is VCs, funds, and PE who went all-in at peak entry prices, plus over-levered data-cent"
+  },
+  {
+    "path": "/blog/studying/hormozi-build-this-instead",
+    "title": "Alex Hormozi's Warning: Stop Chasing AI, Build This Instead",
+    "description": "Hormozi's warning isn't \"avoid AI\" — it's stop building AI businesses and stop outsourcing your thinking to it. Use AI *inside* your business, and only if the answer to *\"am I making more money?\"* is yes. The thing to bu"
+  },
+  {
+    "path": "/blog/studying/old-seo-collapsing",
+    "title": "The Old SEO System Is Collapsing — Here's What Replaces It",
+    "description": "Rankings are holding, but organic clicks are collapsing on any query AI touches — over half of Google searches now end without a click. That's not a bug Google will fix; it's Google's survival move against ChatGPT/Perple"
+  },
+  {
+    "path": "/blog/studying/seo-2026-ai-era",
+    "title": "SEO in 2026: How I'd Rank in Google in the AI Era",
+    "description": "When an AI Overview appears, the #1 organic page now loses ~58% of its clicks (up from 35% in April). But last year's turmoil revealed three shifts that tell you what to do: (1) discovery is multi-platform — AI assistant"
+  },
+  {
+    "path": "/blog/studying/aeo-geo-aio",
+    "title": "AEO vs GEO vs AIO — How AI Search Actually Works in 2026",
+    "description": "Ranking #1 no longer guarantees anyone sees you — AI answers before people reach your site. Winning now means optimizing three distinct layers: AEO = getting your *words pulled into* the AI answer (cited), GEO = getting"
+  },
+  {
+    "path": "/blog/studying/smith-chart-scariest-ee",
+    "title": "The Scariest Chart in Electrical Engineering (The Smith Chart)",
+    "description": "The Smith Chart looks like sci-fi witchcraft (some versions literally say \"Black Magic\"), but it solves one concrete problem: impedance matching on transmission lines. When a signal travels down a line into an antenna (o"
+  },
+  {
+    "path": "/blog/studying/aeo-80-percent",
+    "title": "Learn 80% of AEO in 19 Minutes (Ahrefs)",
+    "description": "Winning in AI search isn't luck — it's a 5-piece system on top of solid SEO. (1) Understand query fan-out (one prompt explodes into dozens of sub-searches), and that AI cites for consensus + freshness + authority (76% of"
+  }
+]

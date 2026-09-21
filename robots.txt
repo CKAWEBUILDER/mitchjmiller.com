@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://mitchjmiller.com/sitemap.xml
+Sitemap: https://mj2.pro/sitemap.xml

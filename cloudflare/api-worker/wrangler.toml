@@ -13,7 +13,7 @@ enabled = true
 
 [vars]
 # Comma-separated browser origins allowed to call POST /contact.
-ALLOWED_ORIGINS = "https://mitchjmiller.com,https://www.mitchjmiller.com,https://mitchjmiller-com.pages.dev,http://127.0.0.1:5187,http://127.0.0.1:5188"
+ALLOWED_ORIGINS = "https://mj2.pro,https://www.mj2.pro,https://mitchjmiller.com,https://www.mitchjmiller.com,https://mitchjmiller-com.pages.dev,http://127.0.0.1:5187,http://127.0.0.1:5188"
 
 [[d1_databases]]
 binding = "LEADS"

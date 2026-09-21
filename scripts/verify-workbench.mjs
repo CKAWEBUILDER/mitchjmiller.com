@@ -198,7 +198,7 @@ if (!args.has('--no-html')) {
     check(m.includes('<noscript') && m.includes('2019 ACS 1-Year PUMS') && /Observed/.test(m) && /Simulated/.test(m) && /Assumed/.test(m) && /Changelog/.test(m), 'methodology page names the data source, value labels and changelog');
     check(m.includes(M.fmtInt(meta.totalPopulation)) && m.includes(M.fmtInt(meta.sampleRecords)), 'methodology page prints the population and full-file record counts from meta');
     // Site-wide head resources (Google Fonts, GA4 in release mode) are allowed; the tool itself must not add hosts.
-    const siteHosts = /https?:\/\/(?:mitchjmiller\.com|www\.census\.gov|github\.com|www\.w3\.org|linkedin\.com|fonts\.googleapis\.com|fonts\.gstatic\.com|www\.googletagmanager\.com)/g;
+    const siteHosts = /https?:\/\/(?:mj2\.pro|www\.mj2\.pro|mitchjmiller\.com|www\.census\.gov|github\.com|www\.w3\.org|linkedin\.com|fonts\.googleapis\.com|fonts\.gstatic\.com|www\.googletagmanager\.com)/g;
     check(!/https?:\/\//.test(t.replace(siteHosts, '')), 'tool page references no third-party hosts beyond the site-wide fonts/analytics');
     const dataOut = resolve(root, 'dist/data/ca-pums-sample-2019.json');
     check(existsSync(dataOut) && statSync(dataOut).size === statSync(resolve(root, 'public/data/ca-pums-sample-2019.json')).size && existsSync(resolve(root, 'dist/data/ca-pums-meta-2019.json')), 'sample and meta JSON are copied into dist/data/');

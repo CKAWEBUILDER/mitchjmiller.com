@@ -441,7 +441,7 @@ export interface ExportBundle {
 export function buildBundle(state: WorkbenchState, results: WorkbenchResults, meta: UbiMeta, pop: Population, generatedAt = new Date().toISOString()): ExportBundle {
   return {
     generatedAt,
-    tool: { name: 'Population workbench', version: MODEL_VERSION, url: 'https://mitchjmiller.com/lab/population-workbench/' },
+    tool: { name: 'Population workbench', version: MODEL_VERSION, url: 'https://mj2.pro/lab/population-workbench/' },
     data: {
       source: DATA_SOURCE,
       sampleRecords: pop.n,

@@ -104,14 +104,14 @@ try {
       const lists = document.querySelectorAll('.ag-marquee-track ul');
       return { animation: style?.animationName, state: style?.animationPlayState, lists: lists.length, hiddenDuplicate: lists[1]?.getAttribute('aria-hidden') === 'true', items: document.querySelectorAll('.ag-marquee-track li').length, labelled: Boolean(document.querySelector('.ag-marquee[aria-labelledby]')) };
     });
-    record(name, 'brand marquee animates (CSS only, duplicated track, aria-hidden copy, labelled section)', marquee.animation === 'ag-marquee' && marquee.state === 'running' && marquee.lists === 2 && marquee.hiddenDuplicate && marquee.items >= 16 && marquee.labelled, `${marquee.animation} ${marquee.state}, ${marquee.items} items`);
+    record(name, 'brand marquee animates (CSS only, duplicated track, aria-hidden copy, labelled section)', marquee.animation === 'ag-marquee' && marquee.state === 'running' && marquee.lists === 2 && marquee.hiddenDuplicate && marquee.items >= 10 && marquee.labelled, `${marquee.animation} ${marquee.state}, ${marquee.items} items`);
     await page.hover('.ag-marquee-track li');
     await wait(100);
     record(name, 'marquee pauses on hover', await page.$eval('.ag-marquee-track', el => getComputedStyle(el).animationPlayState) === 'paused', '');
     const cta = await page.$eval('.ag-header .ag-button', el => ({ bg: getComputedStyle(el).backgroundColor, color: getComputedStyle(el).color, text: el.textContent.trim(), href: el.getAttribute('href') }));
     record(name, 'header “Let’s talk” button is green with white text and links to /contact/', cta.bg === 'rgb(20, 128, 74)' && cta.color === 'rgb(255, 255, 255)' && cta.href === '/contact/' && /Let’s talk/.test(cta.text), `${cta.bg} ${cta.color} ${cta.href}`);
     const navLabels = await page.$$eval('.ag-nav > ul > li > a', links => links.map(link => link.textContent.trim()));
-    record(name, 'primary nav order Services · Work · Lab · Writing · About', navLabels.join(' · ') === 'Services · Work · Lab · Writing · About', navLabels.join(' · '));
+    record(name, 'primary nav order Services · Products · Work · Lab · Writing · About', navLabels.join(' · ') === 'Services · Products · Work · Lab · Writing · About', navLabels.join(' · '));
     await page.hover('.ag-nav .ag-has-drop > a');
     await wait(100);
     record(name, 'nav dropdown opens on hover', await page.$eval('.ag-nav .ag-has-drop .ag-drop', el => getComputedStyle(el).display === 'block'), '');

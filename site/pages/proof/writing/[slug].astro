@@ -4,4 +4,4 @@ import {blogPosts} from '../../../../src/lib/data';
 export function getStaticPaths(){const post=blogPosts.find(p=>p.status==='published')!;return[{params:{slug:post.slug},props:{post}}];}
 const {post}=Astro.props;
 ---
-<ProofLayout title={post.title} description={post.teaser||post.title} canonical={`https://mitchjmiller.com/blog/${post.slug}/`}><p>{post.author} · {post.date}</p><h1>{post.title}</h1><p class="deck">{post.teaser}</p><article class="body" set:html={post.contentHtml}/><p><a href="/proof/">Back to all content proofs</a></p></ProofLayout>
+<ProofLayout title={post.title} description={post.teaser||post.title} canonical={`https://mj2.pro/blog/${post.slug}/`}><p>{post.author} · {post.date}</p><h1>{post.title}</h1><p class="deck">{post.teaser}</p><article class="body" set:html={post.contentHtml}/><p><a href="/proof/">Back to all content proofs</a></p></ProofLayout>

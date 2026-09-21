@@ -25,13 +25,19 @@ const out = resolve(args.out || 'docs/redesign-2026-09-14/qa/crawl.json');
 const manifest = JSON.parse(readFileSync('docs/implementation-2026-09-11/route-manifest.json', 'utf8'));
 const releaseFiles = JSON.parse(readFileSync('docs/release-2026-09-12/release-files.json', 'utf8'));
 const GA = 'G-HCKYWCZQ8E';
+const canonicalOrigin = 'https://mj2.pro';
 const minText = { general: 300, case: 700, article: 1500, note: 1500, placeholder: 40, added: 400 };
 
 const results = [];
 const record = (scope, check, pass, detail = '') => results.push({ scope, check, pass, detail });
 const tagPattern = /<(?:"[^"]*"|'[^']*'|[^'">])*>/g;
 const text = html => decodeHTML(html.replace(/<!--([\s\S]*?)-->/g, '').replace(/<(script|style|noscript)\b[^>]*>[\s\S]*?<\/\1>/gi, '').replace(tagPattern, ' ')).replace(/\s+/gu, ' ').trim();
-const attrs = tag => Object.fromEntries([...tag.matchAll(/([\w:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/g)].map(m => [m[1].toLowerCase(), decodeHTML(m[2] ?? m[3] ?? m[4])]));
+const attrs = tag => {
+  const parsed = Object.fromEntries([...tag.matchAll(/([\w:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/g)].map(m => [m[1].toLowerCase(), decodeHTML(m[2] ?? m[3] ?? m[4])]));
+  // Astro serializes an empty alt="" as a boolean `alt`; it is still a valid alt attribute.
+  if (/\balt(?:\s|>)/i.test(tag) && !Object.prototype.hasOwnProperty.call(parsed, 'alt')) parsed.alt = '';
+  return parsed;
+};
 const tags = (html, name) => [...html.matchAll(tagPattern)].map(m => m[0]).filter(t => new RegExp(`^<${name}\\b`, 'i').test(t));
 const mainOf = html => html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)?.[1] ?? html.match(/<body\b[^>]*>([\s\S]*?)<\/body>/i)?.[1] ?? '';
 const sha256 = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -62,7 +68,7 @@ for (const route of manifest.routes) {
   const floor = route.minText || minText[kind];
   record(scope, `main text ≥ ${floor} chars (${kind})`, length >= floor, `${length} chars`);
   const canonical = tags(html, 'link').map(attrs).filter(l => l.rel === 'canonical');
-  record(scope, 'one correct canonical', canonical.length === 1 && canonical[0].href === `https://mitchjmiller.com${route.path}`, canonical.map(c => c.href).join(', ') || 'none');
+  record(scope, 'one correct canonical', canonical.length === 1 && canonical[0].href === `${canonicalOrigin}${route.path}`, canonical.map(c => c.href).join(', ') || 'none');
   const description = tags(html, 'meta').map(attrs).find(m => m.name === 'description')?.content?.trim();
   record(scope, 'meta description present', Boolean(description), (description || '').slice(0, 90));
   if (description) descriptions.set(route.path, description);
@@ -85,8 +91,8 @@ for (const route of manifest.routes) {
     for (const name of ['href', 'src']) {
       const value = a[name];
       if (!value || /^(?:mailto:|tel:|data:|javascript:|#)/i.test(value)) continue;
-      let url; try { url = new URL(value, `https://mitchjmiller.com${route.path}`); } catch { record(scope, 'valid URL', false, value); continue; }
-      if (url.hostname === 'mitchjmiller.com' || url.hostname === 'www.mitchjmiller.com') internal.add(url.pathname);
+      let url; try { url = new URL(value, `${canonicalOrigin}${route.path}`); } catch { record(scope, 'valid URL', false, value); continue; }
+      if (url.hostname === 'mj2.pro' || url.hostname === 'www.mj2.pro') internal.add(url.pathname);
     }
   }
 }
@@ -135,11 +141,11 @@ if (health.status === 200) {
 // Artifact-level checks.
 const sitemap = existsSync(join(dist, 'sitemap.xml')) ? readFileSync(join(dist, 'sitemap.xml'), 'utf8') : '';
 const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => decodeHTML(m[1]));
-const expectedLocs = manifest.routes.filter(r => r.kind !== 'placeholder').map(r => `https://mitchjmiller.com${r.path}`);
+const expectedLocs = manifest.routes.filter(r => r.kind !== 'placeholder').map(r => `${canonicalOrigin}${r.path}`);
 record('sitemap.xml', `lists exactly the ${expectedLocs.length} indexable URLs`, locs.length === expectedLocs.length && expectedLocs.every(u => locs.includes(u)) && new Set(locs).size === locs.length, `${locs.length} URLs`);
 const robotsTxt = existsSync(join(dist, 'robots.txt')) ? readFileSync(join(dist, 'robots.txt'), 'utf8') : '';
-record('robots.txt', 'allows all and declares the sitemap', /User-agent:\s*\*/.test(robotsTxt) && /Allow:\s*\//.test(robotsTxt) && !/Disallow:\s*\/\s*$/m.test(robotsTxt) && robotsTxt.includes('Sitemap: https://mitchjmiller.com/sitemap.xml'), robotsTxt.replace(/\n/g, ' / '));
-record('CNAME', 'contains mitchjmiller.com', existsSync(join(dist, 'CNAME')) && readFileSync(join(dist, 'CNAME'), 'utf8').trim() === 'mitchjmiller.com', '');
+record('robots.txt', 'allows all and declares the sitemap', /User-agent:\s*\*/.test(robotsTxt) && /Allow:\s*\//.test(robotsTxt) && !/Disallow:\s*\/\s*$/m.test(robotsTxt) && robotsTxt.includes(`Sitemap: ${canonicalOrigin}/sitemap.xml`), robotsTxt.replace(/\n/g, ' / '));
+record('CNAME', 'contains mj2.pro', existsSync(join(dist, 'CNAME')) && readFileSync(join(dist, 'CNAME'), 'utf8').trim() === 'mj2.pro', '');
 record('.nojekyll', 'present', existsSync(join(dist, '.nojekyll')), '');
 record('404.html', 'present with public copy', existsSync(join(dist, '404.html')) && /Page not found/.test(readFileSync(join(dist, '404.html'), 'utf8')) && !/forget to add the page to the router/.test(readFileSync(join(dist, '404.html'), 'utf8')), '');
 const allFiles = walk(dist);

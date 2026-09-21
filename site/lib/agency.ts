@@ -7,7 +7,7 @@ export const site = {
   name: 'Mitchell Miller',
   legalName: 'Mitchell Miller — Digital Growth, Software & Consulting',
   tagline: 'Digital growth. Software. Consulting.',
-  url: 'https://mitchjmiller.com',
+  url: 'https://mj2.pro',
   email: 'mitchelljmillerjr26@gmail.com',
   phone: '+1-626-316-8682',
   linkedin: 'https://linkedin.com/in/mitchelljmillerjr',

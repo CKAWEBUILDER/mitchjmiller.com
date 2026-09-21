@@ -8,42 +8,123 @@
  */
 import AgencyLayout from '../layouts/AgencyLayout.astro';
 import BrandMarquee from '../components/BrandMarquee.astro';
+import ServiceIcon from '../components/ServiceIcon.astro';
 import ProductGrid from '../components/ProductGrid.astro';
 import { caseStudies, portfolioImages, headshot, studyEditorial, sfcEvidenceImages } from '../lib/content';
 import { publishedBlogPosts } from '../../baseline/src/lib/published';
 import { site, organizationJsonLd, personJsonLd, graph } from '../lib/agency';
 
 const title = 'Mitchell Miller — Digital Growth, Software & Consulting';
-const description = 'Digital strategy, websites, AI tools and analytics for growing businesses. Explore consulting services, software products and enterprise case studies.';
+const description = 'Research, digital strategy, experience design and engineering. Work with Mitchell Miller to turn complex questions into practical growth.';
 const hero = sfcEvidenceImages[0];
 
 const stages = [
-  { id: 'understand', name: 'Understand', line: 'Find your strongest customer and market opportunities.' },
-  { id: 'design', name: 'Design', line: 'Make it easier for customers to choose you.' },
-  { id: 'build', name: 'Build', line: 'Launch websites, applications and connected workflows.' },
-  { id: 'grow', name: 'Grow', line: 'Improve acquisition, conversion and retention.' },
+  {
+    "id": "understand",
+    "name": "Understand",
+    "line": "Find the opportunity.",
+    "icon": "research"
+  },
+  {
+    "id": "design",
+    "name": "Design",
+    "line": "Make the next step clear.",
+    "icon": "design"
+  },
+  {
+    "id": "build",
+    "name": "Build",
+    "line": "Connect the pieces.",
+    "icon": "engineering"
+  },
+  {
+    "id": "grow",
+    "name": "Grow",
+    "line": "Learn. Refine. Grow.",
+    "icon": "growth"
+  }
 ];
 const objectives = [
-  { title: 'Be found in search and AI answers', body: 'As search shifts from ranked links to generated answers, visibility depends on structured, entity-rich content an AI can cite. We build and measure that: prompt-set tracking across ChatGPT, Perplexity and Google AI Overviews, and the entity architecture underneath it.', href: '/services/#grow' },
-  { title: 'Turn traffic into customers', body: 'Location pages, service-line surfaces and conversion paths that connect discovery to a call, a booking or an appointment.', href: '/services/#design' },
-  { title: 'Build the data and content systems behind growth', body: 'Replace disconnected pages and manual updates with reusable content, connected data and software that supports your next stage of growth.', href: '/services/#build' },
-  { title: 'Measure what actually happened', body: 'Connect search, website and lead data so you can see which channels bring qualified inquiries, where customers drop off and what to improve next.', href: '/services/#understand' },
+  {
+    "title": "Find the opportunity.",
+    "body": "Research turns market signals into a direction worth pursuing.",
+    "href": "/services/#understand",
+    "icon": "research",
+    "keyword": "Research"
+  },
+  {
+    "title": "Make it feel simple.",
+    "body": "Experience design connects what people need with what you make possible.",
+    "href": "/services/#design",
+    "icon": "design",
+    "keyword": "Experience design"
+  },
+  {
+    "title": "Make more possible.",
+    "body": "Engineering brings useful ideas to life, with room to evolve.",
+    "href": "/services/#build",
+    "icon": "engineering",
+    "keyword": "Engineering"
+  },
+  {
+    "title": "Know what works.",
+    "body": "Measurement makes the next decision clearer than the last.",
+    "href": "/services/#grow",
+    "icon": "measurement",
+    "keyword": "Measurement"
+  }
 ];
 const services = [
-  { title: 'Search and AI-search strategy', body: 'Demand research, competitor sets from actual visibility data, and prioritised plans for organic search and AI answer surfaces (AEO/GEO).', href: '/services/#understand', mark: '01' },
-  { title: 'Measurement and reporting systems', body: 'Metric definitions, Search Console and analytics setups, and reporting that traces every number back to a source and a period.', href: '/services/#understand', mark: '02' },
-  { title: 'Websites, content and experience design', body: 'Pages and interactive guides that make expertise useful before someone books, calls or applies.', href: '/services/#design', mark: '03' },
-  { title: 'Entity data and content architecture', body: 'Location and service entities, structured data and reusable templates that publish at network scale outside a legacy CMS bottleneck.', href: '/services/#build', mark: '04' },
-  { title: 'AI-assisted tools and workflow builds', body: 'Reporting, content-intelligence and execution tools built around real operating gaps, with their assumptions made explicit.', href: '/services/#build', mark: '05' },
-  { title: 'Organic growth and conversion', body: 'Ongoing search, content and conversion work with before/after periods stated, so growth claims stay checkable.', href: '/services/#grow', mark: '06' },
+  {
+    "title": "Research & analysis",
+    "body": "Research reveals demand, competition and the questions your data can answer.",
+    "href": "/services/#understand",
+    "icon": "research",
+    "keyword": "Research"
+  },
+  {
+    "title": "Digital strategy",
+    "body": "Digital strategy connects immediate priorities to a stronger long-term position.",
+    "href": "/services/#understand",
+    "icon": "strategy",
+    "keyword": "Digital strategy"
+  },
+  {
+    "title": "Experience design",
+    "body": "Experience design gives content, interfaces and customer journeys a clear purpose.",
+    "href": "/services/#design",
+    "icon": "design",
+    "keyword": "Experience design"
+  },
+  {
+    "title": "Engineering",
+    "body": "Engineering connects websites, applications, databases and content systems built to last.",
+    "href": "/services/#build",
+    "icon": "engineering",
+    "keyword": "Engineering"
+  },
+  {
+    "title": "Search & growth",
+    "body": "SEO brings relevant demand closer. AEO and conversion testing help turn attention into opportunity.",
+    "href": "/services/#grow",
+    "icon": "growth",
+    "keyword": "SEO"
+  },
+  {
+    "title": "AI workflows",
+    "body": "AI workflows put useful automation around the work, with human judgment where it matters.",
+    "href": "/services/#build",
+    "icon": "automation",
+    "keyword": "AI workflows"
+  }
 ];
 // Industries adopted from the copy pack §(e): five sectors with published evidence; links go to the supporting case studies.
 const industries = [
-  { name: 'Healthcare', body: 'Enterprise and academic health systems — entity-driven location platforms, AEM content migration and full-funnel search for Stanford Health Care, Dignity Health and CommonSpirit Health.', links: [{ label: 'Location conversion engine', href: '/case-studies/commonspirit-locations-conversion-engine/' }, { label: 'Stanford MyHealth', href: '/case-studies/stanford-myhealth-seo/' }, { label: 'AEM architecture', href: '/case-studies/aem-content-fragmentation-architecture/' }] },
-  { name: 'Global commerce & tech', body: 'Seasonal and international search programs at Apple scale, across the Americas region’s store and education storefronts.', links: [{ label: 'Apple seasonal search', href: '/case-studies/apple-seasonal-search/' }, { label: 'Apple Store AMR', href: '/case-studies/apple-store-amr/' }, { label: 'Apple Education Store', href: '/case-studies/apple-education-store/' }] },
-  { name: 'AI & software', body: 'Internal AI reporting, AEO/GEO measurement and content-intelligence tools built at Clarity AI and as independent prototypes.', links: [{ label: 'ClarityPulse', href: '/case-studies/claritypulse-ai-reporting/' }, { label: 'AEO visibility infrastructure', href: '/case-studies/aeo-visibility-infrastructure/' }, { label: 'SearchForge', href: '/case-studies/searchforge-content-intelligence/' }] },
-  { name: 'Travel, recreation & local services', body: 'Search, content and growth systems for small, real-world operators — SFC Surf School and Clear Kayak Adventures.', links: [{ label: 'SFC Surf School', href: '/case-studies/sfc-surf-school/' }] },
-  { name: 'Nonprofit', body: 'A pro bono acquisition system for a veterans-services nonprofit, built to keep running without the original builder.', links: [{ label: 'Vet Advocates growth system', href: '/case-studies/vet-advocates-growth-system/' }] },
+  { name: 'Healthcare', body: 'Healthcare experiences that help people find the right care.', links: [{ label: 'Location conversion engine', href: '/case-studies/commonspirit-locations-conversion-engine/' }, { label: 'Stanford MyHealth', href: '/case-studies/stanford-myhealth-seo/' }, { label: 'AEM architecture', href: '/case-studies/aem-content-fragmentation-architecture/' }] },
+  { name: 'Global commerce & tech', body: 'Commerce programs connecting global reach with local intent.', links: [{ label: 'Apple seasonal search', href: '/case-studies/apple-seasonal-search/' }, { label: 'Apple Store AMR', href: '/case-studies/apple-store-amr/' }, { label: 'Apple Education Store', href: '/case-studies/apple-education-store/' }] },
+  { name: 'AI & software', body: 'Software that makes research, reporting and decisions more useful.', links: [{ label: 'ClarityPulse', href: '/case-studies/claritypulse-ai-reporting/' }, { label: 'AEO visibility infrastructure', href: '/case-studies/aeo-visibility-infrastructure/' }, { label: 'SearchForge', href: '/case-studies/searchforge-content-intelligence/' }] },
+  { name: 'Travel, recreation & local services', body: 'Local discovery that leads to real-world experiences.', links: [{ label: 'SFC Surf School', href: '/case-studies/sfc-surf-school/' }] },
+  { name: 'Nonprofit', body: 'Nonprofit outreach that turns awareness into participation.', links: [{ label: 'Vet Advocates growth system', href: '/case-studies/vet-advocates-growth-system/' }] },
 ];
 const selected = [
   { slug: 'commonspirit-locations-conversion-engine', image: portfolioImages['commonspirit-locations-conversion-engine'] },
@@ -57,58 +138,58 @@ const jsonLd = [graph(organizationJsonLd(), personJsonLd(), { '@type': 'WebSite'
 <AgencyLayout path="/" title={title} description={description} jsonLd={jsonLd} bodyClass="ag-home">
   <section class="ag-hero ag-dark" aria-labelledby="home-heading">
     <div class="ag-wrap ag-hero-grid">
-      <div>
-        <p class="ag-eyebrow">Digital growth · Software · Consulting</p>
-        <h1 id="home-heading">Get found. Win customers.<br />Build what comes next.</h1>
-        <p class="ag-hero-deck">Websites that convert. Search strategies that reach the right customers. Software that makes your business run better. Bring strategy, design, engineering and analytics together with one hands-on partner.</p>
-        <div class="ag-hero-actions"><a class="ag-button" href="/contact/">Start a conversation</a><a class="ag-button ag-button--light" href="/products/">Explore software &amp; tools</a></div>
-        <p class="ag-hero-meta">Led hands-on by <a href="/about/">Mitchell Miller</a> · Apple · CommonSpirit Health · Stanford Health Care · Clarity AI</p>
+      <div class="ag-hero-copy">
+        <p class="ag-eyebrow">Research · Strategy · Design · Engineering</p>
+        <h1 id="home-heading">Make the next<br />move matter.</h1>
+        <p class="ag-hero-deck">Turn complex questions into clear direction, useful experiences and systems built for growth.</p>
+        <div class="ag-hero-actions"><a class="ag-button" href="/contact/">Start a conversation</a></div>
       </div>
-      <div class="ag-showcase" role="group" aria-label="Software and client work">
-        <a class="ag-showcase-main" href="/case-studies/claritypulse-ai-reporting/"><span class="ag-showcase-label">Analytics &amp; AI reporting <span>ClarityPulse</span></span><img src="/images/claritypulse-dashboard.png" alt="ClarityPulse reporting interface — representative product mockup" width="1400" height="900" fetchpriority="high" /><span class="ag-showcase-caption">Internal reporting prototype · Representative interface</span></a>
-        <div class="ag-showcase-bottom"><a href="/case-studies/sfc-surf-school/"><img src={hero.src} alt={hero.alt} width="600" height="400" /><span>Customer experiences <strong>SFC Surf School ↗</strong></span></a><a href="/products/#domainsignal"><img src="/images/domainsignal.png" alt="DomainSignal mobile app prototype" width="600" height="400" /><span>App in development <strong>DomainSignal ↗</strong></span></a></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="ag-lifecycle" aria-label="How the work fits together">
-    <div class="ag-wrap">
-      <p class="ag-lifecycle-label">Strategy through delivery</p>
-      <ol>{stages.map(stage => <li><a href={`/services/#${stage.id}`}><strong>{stage.name}</strong><span>{stage.line}</span></a></li>)}</ol>
     </div>
   </section>
 
   <BrandMarquee id="home-brands" />
 
+  <section class="ag-lifecycle" aria-label="How the work fits together">
+    <div class="ag-wrap">
+      <p class="ag-lifecycle-label">Strategy through delivery</p>
+      <ol>{stages.map(stage => <li><a href={`/services/#${stage.id}`}><ServiceIcon name={stage.icon} label={stage.name} decorative /><strong>{stage.name}</strong><span>{stage.line}</span></a></li>)}</ol>
+    </div>
+  </section>
+
   <section class="ag-section" aria-labelledby="objectives-heading">
     <div class="ag-wrap">
-      <div class="ag-section-head"><div><p class="ag-eyebrow">Objectives</p><h2 id="objectives-heading">What does your business need next?</h2><p>Reach more customers, improve your website, or replace a manual process with software built around your needs.</p></div><a class="ag-textlink" href="/services/">All services <span aria-hidden="true">→</span></a></div>
-      <div class="ag-grid-4">{objectives.map(item => <a class="ag-tile" href={item.href}><h3>{item.title}</h3><p>{item.body}</p><span class="ag-textlink">How we help <span aria-hidden="true">→</span></span></a>)}</div>
+      <div class="ag-section-head"><div><p class="ag-eyebrow">Objectives</p><h2 id="objectives-heading">What could come next?</h2><p>A sharper question can open a different path.</p></div><a class="ag-textlink" href="/services/">All services <span aria-hidden="true">→</span></a></div>
+      <div class="ag-grid-4">{objectives.map(item => <a class="ag-tile" href={item.href}><ServiceIcon name={item.icon} label={item.keyword} /><h3>{item.title}</h3><p>{item.body}</p><span class="ag-textlink">How we help <span aria-hidden="true">→</span></span></a>)}</div>
     </div>
   </section>
 
   <section class="ag-section ag-section--tint" aria-labelledby="services-heading">
     <div class="ag-wrap">
-      <div class="ag-section-head"><div><p class="ag-eyebrow">Services</p><h2 id="services-heading">Digital services that move your business forward.</h2><p>Get specialist support for a specific challenge or a partner who can take a project from strategy through launch and ongoing improvement.</p></div><a class="ag-textlink" href="/services/">Service details <span aria-hidden="true">→</span></a></div>
-      <div class="ag-grid-3">{services.map(item => <a class="ag-tile" href={item.href}><span class="ag-tile-icon" aria-hidden="true">{item.mark}</span><h3>{item.title}</h3><p>{item.body}</p><span class="ag-textlink">Read more <span aria-hidden="true">→</span></span></a>)}</div>
+      <div class="ag-section-head"><div><p class="ag-eyebrow">Services</p><h2 id="services-heading">Clear thinking. Useful work.</h2><p>One challenge or the whole journey. Bring the right disciplines together.</p></div><a class="ag-textlink" href="/services/">Service details <span aria-hidden="true">→</span></a></div>
+      <div class="ag-grid-3">{services.map(item => <a class="ag-tile" href={item.href}><ServiceIcon name={item.icon} label={item.keyword} /><h3>{item.title}</h3><p>{item.body}</p><span class="ag-textlink">Read more <span aria-hidden="true">→</span></span></a>)}</div>
     </div>
   </section>
 
-  <section class="ag-section ag-products-section" aria-labelledby="products-heading"><div class="ag-wrap"><div class="ag-section-head"><div><p class="ag-eyebrow">Software &amp; tools</p><h2 id="products-heading">Put better tools to work.</h2><p>Explore applications for research, reporting and everyday decisions. Try the live workbench or see the products in development.</p></div><a class="ag-textlink" href="/products/">All products <span aria-hidden="true">→</span></a></div><ProductGrid featured /></div></section>
+  <section class="ag-section ag-products-section" aria-labelledby="products-heading"><div class="ag-wrap"><div class="ag-section-head"><div><p class="ag-eyebrow">Software &amp; tools</p><h2 id="products-heading">Put better tools to work.</h2><p>Explore a working tool. Follow an idea taking shape.</p></div><a class="ag-textlink" href="/products/">All products <span aria-hidden="true">→</span></a></div><ProductGrid featured /></div></section>
 
   <section class="ag-section" aria-labelledby="industries-heading">
     <div class="ag-wrap">
-      <div class="ag-section-head"><div><p class="ag-eyebrow">Industries</p><h2 id="industries-heading">Enterprise experience. Practical business solutions.</h2><p>Experience across complex health systems, global commerce, software and growing local businesses.</p></div></div>
+      <div class="ag-section-head"><div><p class="ag-eyebrow">Industries</p><h2 id="industries-heading">Different worlds. Connected thinking.</h2><p>From global systems to the businesses next door.</p></div></div>
       <div class="ag-grid-3">{industries.map(item => <div class="ag-tile ag-industry"><h3>{item.name}</h3><p>{item.body}</p><p>{item.links.map((link, index) => <>{index > 0 && ' · '}<a href={link.href}>{link.label}</a></>)}</p></div>)}</div>
     </div>
   </section>
 
   <section class="ag-section ag-section--tint" aria-labelledby="work-heading">
     <div class="ag-wrap">
-      <div class="ag-section-head"><div><p class="ag-eyebrow">Selected work</p><h2 id="work-heading">Client challenges. Delivered solutions.</h2><p>Explore selected projects in customer acquisition, content platforms, search and reporting.</p></div><a class="ag-textlink" href="/work/">All case studies <span aria-hidden="true">→</span></a></div>
+      <div class="ag-section-head"><div><p class="ag-eyebrow">Selected work</p><h2 id="work-heading">The work makes it tangible.</h2><p>A closer look at the questions, decisions and outcomes.</p></div><a class="ag-textlink" href="/work/">All case studies <span aria-hidden="true">→</span></a></div>
       <div class="ag-grid-2">{selected.map(({ slug, entry, story, image }) => <article class="ag-work-card">
         <figure><a class="ag-work-image" href={`/case-studies/${slug}/`} aria-label={`Read ${entry.title}`}><img src={image.src} alt={image.alt} loading="lazy" width="1400" height="900" class:list={{ contain: (image as { fit?: string }).fit === 'contain' }} /></a>{image.note && <figcaption>{image.note}</figcaption>}</figure>
-        <div class="ag-work-body"><p class="ag-eyebrow">{story.client} · {story.category}</p><h3><a href={`/case-studies/${slug}/`}>{story.headline}</a></h3><p>{story.summary}</p>
+        <div class="ag-work-body"><p class="ag-eyebrow">{story.client} · {story.category}</p><h3><a href={`/case-studies/${slug}/`}>{story.headline}</a></h3><p>{({
+  "commonspirit-locations-conversion-engine": "A clearer path from finding care to taking action.",
+  "apple-seasonal-search": "Search planning for the moments customers care about.",
+  "sfc-surf-school": "Local insight, useful experiences and a path to the water.",
+  "claritypulse-ai-reporting": "An internal reporting prototype that keeps evidence close to the answer."
+} as Record<string, string>)[slug]}</p>
           <div class="ag-work-foot">{story.metrics[0] ? <span><strong>{story.metrics[0].value}</strong><small>{story.metrics[0].label}{story.metrics[0].note ? ` · ${story.metrics[0].note}` : ''}</small></span> : <span><small>{story.period}</small></span>}<a class="ag-textlink" href={`/case-studies/${slug}/`}>Read the case <span aria-hidden="true">→</span></a></div>
         </div>
       </article>)}</div>
@@ -117,29 +198,29 @@ const jsonLd = [graph(organizationJsonLd(), personJsonLd(), { '@type': 'WebSite'
 
   <section class="ag-section" aria-labelledby="lab-heading">
     <div class="ag-wrap ag-split">
-      <div><p class="ag-eyebrow">Lab</p><h2 id="lab-heading">Build your own simulated population — free tool.</h2><p>Filter 39.5 million Californians from public Census microdata, compare a verified UBI policy model with an assumption-driven reach scenario, draw attribute-only personas and export a self-contained report. It runs entirely in your browser and labels every number as observed, calculated, simulated or assumed.</p><a class="ag-button" href="/lab/population-workbench/">Open the population workbench</a></div>
+      <div><p class="ag-eyebrow">Lab</p><h2 id="lab-heading">Follow your curiosity.</h2><p>The learning lab turns data into something you can explore. Change an assumption. Compare a scenario. See what changes.</p><a class="ag-button" href="/lab/">Explore the learning lab</a></div>
       <div class="ag-panel"><h3>Also in the lab</h3><ul><li><a href="/lab/#intent">Destination intent explorer</a> — what a destination-qualified query tells you.</li><li><a href="/lab/#evidence">The story behind a growth number</a> — how the baseline changes the interpretation.</li><li><a href="/lab/#architecture">One field, connected experiences</a> — reuse and local overrides in content systems.</li><li><a href="/lab/population-workbench/methodology/">Workbench methodology and limitations</a></li></ul></div>
     </div>
   </section>
 
   <section class="ag-section ag-section--tint" aria-labelledby="writing-heading">
     <div class="ag-wrap ag-split">
-      <div><p class="ag-eyebrow">Writing</p><h2 id="writing-heading">Signals &amp; Systems.</h2><p>Guides to improving search visibility, choosing useful AI applications and measuring digital performance.</p><a class="ag-textlink" href="/blog/">Explore insights <span aria-hidden="true">→</span></a></div>
-      <ul class="ag-posts">{posts.map(post => <li><span class="ag-post-date">{post.date}</span><h3><a href={`/blog/${post.slug}/`}>{post.title}</a></h3><p>{post.teaser}</p></li>)}</ul>
+      <div><p class="ag-eyebrow">Writing</p><h2 id="writing-heading">Signals &amp; Systems.</h2><p>Ideas about search, technology and the decisions between them.</p><a class="ag-textlink" href="/blog/">Explore insights <span aria-hidden="true">→</span></a></div>
+      <ul class="ag-posts">{posts.map(post => <li><span class="ag-post-date">{post.date}</span><h3><a href={`/blog/${post.slug}/`}>{post.title}</a></h3></li>)}</ul>
     </div>
   </section>
 
   <section class="ag-section" aria-labelledby="principal-heading">
     <div class="ag-wrap ag-split">
-      <div><p class="ag-eyebrow">About</p><h2 id="principal-heading">Senior expertise. Direct collaboration.</h2><p>Work directly with Mitchell Miller, whose experience spans Apple, CommonSpirit Health and Stanford Health Care. Get strategic direction and hands-on delivery across your website, search presence, software and reporting.</p><a class="ag-textlink" href="/about/">About Mitchell <span aria-hidden="true">→</span></a></div>
-      <div class="ag-principal"><img src={headshot} alt="Mitchell Miller" width="88" height="88" loading="lazy" /><div><strong>Mitchell Miller</strong><p>Director of SEO, AEO/GEO &amp; AI Search Systems · Hiring? <a href="/resume/">Four resumes by role</a>.</p></div></div>
+      <div><p class="ag-eyebrow">About</p><h2 id="principal-heading">A thinking partner. A hands-on builder.</h2><p>Work directly with Mitchell Miller—from the first question to the details that make it work.</p><a class="ag-textlink" href="/about/">About Mitchell <span aria-hidden="true">→</span></a></div>
+      <div class="ag-principal"><img src={headshot} alt="Mitchell Miller" width="88" height="88" loading="lazy" /><div><strong>Mitchell Miller</strong><p>Digital strategy, research &amp; engineering · Hiring? <a href="/resume/">Four resumes by role</a>.</p></div></div>
     </div>
   </section>
 
   <section class="ag-cta ag-dark" aria-labelledby="cta-heading">
     <div class="ag-wrap ag-cta-inner">
-      <div><p class="ag-eyebrow">Ready to explore further?</p><h2 id="cta-heading">Let’s work on your next stage of growth.</h2><p>Tell us what you want to improve. We’ll identify the right services, deliverables and next steps for your business.</p></div>
-      <div class="ag-cta-actions"><a class="ag-button" href="/contact/">Start a conversation</a><a class="ag-button ag-button--light" href="/services/">See the services</a></div>
+      <div><p class="ag-eyebrow">Ready to explore further?</p><h2 id="cta-heading">What are you imagining?</h2><p>Bring the question. We’ll work out the next move together.</p></div>
+      <div class="ag-cta-actions"><a class="ag-button" href="/contact/">Start a conversation</a></div>
     </div>
   </section>
 </AgencyLayout>

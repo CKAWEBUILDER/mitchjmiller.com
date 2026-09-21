@@ -8,6 +8,7 @@ import { exportParityReference } from './export-parity-reference.mjs';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = resolve(root, process.env.PARITY_DIST || 'dist');
 const release = process.env.SITE_BUILD_MODE === 'release';
+const canonicalOrigin = 'https://mj2.pro';
 const read = path => readFileSync(path, 'utf8');
 const manifest = JSON.parse(read(join(root, 'docs/implementation-2026-09-11/route-manifest.json')));
 const production = JSON.parse(read(join(root, 'docs/implementation-2026-09-11/production-files.json')));
@@ -58,7 +59,7 @@ const historicalAnchors = new Set();
 for (const source of reference.routes) {
   if (source.bodyHtml) for (const { href } of attrTags(source.bodyHtml, 'a')) {
     if (!href) continue;
-    try { const url = new URL(href, `https://mitchjmiller.com${source.path}`); if (url.hash) historicalAnchors.add(`${source.path}|${url.href}`); } catch {}
+    try { const url = new URL(href, `${canonicalOrigin}${source.path}`); if (url.hash) historicalAnchors.add(`${source.path}|${url.href}`); } catch {}
   }
   const file = localFile(source.path);
   if (!file) { fail(source.path, 'missing generated HTML'); continue; }
@@ -94,7 +95,7 @@ const originalSfc = read(join(root, 'baseline/public/case-studies/sfc-surf-schoo
 const originalSfcBody = body(originalSfc);
 if (!originalSfcBody || body(rendered.get(sfcPath) || '') !== originalSfcBody) fail(sfcPath, 'standalone report body differs from archived production bytes');
 for (const { href } of attrTags(originalSfcBody, 'a')) {
-  try { const url = new URL(href, `https://mitchjmiller.com${sfcPath}`); if (url.hash) historicalAnchors.add(`${sfcPath}|${url.href}`); } catch {}
+  try { const url = new URL(href, `${canonicalOrigin}${sfcPath}`); if (url.hash) historicalAnchors.add(`${sfcPath}|${url.href}`); } catch {}
 }
 const expectedPdfs = release ? releaseFiles.pdfs : production.pdfs;
 for (const pdf of expectedPdfs) {
@@ -147,7 +148,7 @@ for (const file of htmlFiles) {
   if (indexable && [...html.matchAll(/googletagmanager\.com\/gtag/g)].length !== 1) fail(route, 'expected exactly one analytics loader');
   if (canonicalRoutes.has(route)) {
     const canonical = attrTags(html, 'link').filter(link => link.rel === 'canonical');
-    if (canonical.length !== 1 || canonical[0].href !== `https://mitchjmiller.com${route}`) fail(route, 'canonical missing, duplicate or inconsistent with retained URL');
+    if (canonical.length !== 1 || canonical[0].href !== `${canonicalOrigin}${route}`) fail(route, 'canonical missing, duplicate or inconsistent with retained URL');
   }
   // Assets/destinations from all documents; anchor checks from production pages.
   // Ignore text examples and scripts: inspect actual opening HTML tags only.
@@ -159,8 +160,8 @@ for (const file of htmlFiles) {
       const value = attrs[name];
       if (!value || /^(?:mailto:|tel:|data:|blob:|javascript:)/i.test(value)) continue;
       let url;
-      try { url = new URL(value, `https://mitchjmiller.com${route}`); } catch { fail(route, `invalid ${name}: ${value.slice(0, 100)}`); continue; }
-      if (!['mitchjmiller.com', 'www.mitchjmiller.com'].includes(url.hostname)) continue;
+      try { url = new URL(value, `${canonicalOrigin}${route}`); } catch { fail(route, `invalid ${name}: ${value.slice(0, 100)}`); continue; }
+      if (!['mj2.pro', 'www.mj2.pro'].includes(url.hostname)) continue;
       checks.localLinksAndAssets++;
       const target = localFile(url.pathname);
       if (!target) { fail(route, `missing internal ${name}: ${value}`); continue; }
@@ -179,14 +180,14 @@ const sitemapFile = join(dist, 'sitemap.xml');
 if (!existsSync(sitemapFile)) fail('sitemap', 'missing sitemap.xml');
 else {
   const urls = [...read(sitemapFile).matchAll(/<loc>([\s\S]*?)<\/loc>/g)].map(match => decodeHTML(match[1]));
-  const expected = new Set([...eligible].map(path => `https://mitchjmiller.com${path}`));
+  const expected = new Set([...eligible].map(path => `${canonicalOrigin}${path}`));
   if (urls.length !== eligible.size || new Set(urls).size !== eligible.size) fail('sitemap', `expected ${eligible.size} unique published URLs; found ${urls.length}`);
   for (const url of urls) if (!expected.has(url)) fail('sitemap', `unexpected URL ${url}`);
   for (const url of expected) if (!urls.includes(url)) fail('sitemap', `missing URL ${url}`);
 }
 if (!existsSync(join(dist, '404.html'))) fail('404', 'missing static 404 document (HTTP behavior verified separately)');
 const robotsFile = join(dist, 'robots.txt');
-if (!existsSync(robotsFile) || !read(robotsFile).includes('Sitemap: https://mitchjmiller.com/sitemap.xml')) fail('robots.txt', 'missing sitemap reference');
+if (!existsSync(robotsFile) || !read(robotsFile).includes(`Sitemap: ${canonicalOrigin}/sitemap.xml`)) fail('robots.txt', 'missing sitemap reference');
 if (release && existsSync(join(dist, '_headers'))) fail('release', 'staging noindex headers survived into release candidate');
 if (!release && (!existsSync(join(dist, '_headers')) || !/X-Robots-Tag:\s*noindex/i.test(read(join(dist, '_headers'))))) fail('staging', 'missing noindex response-header configuration');
 const report = {

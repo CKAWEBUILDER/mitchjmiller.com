@@ -6,88 +6,194 @@
  * Truthful: no staff counts, client counts, prices or invented results.
  */
 import AgencyLayout from '../../layouts/AgencyLayout.astro';
+import ServiceIcon from '../../components/ServiceIcon.astro';
 import BrandMarquee from '../../components/BrandMarquee.astro';
 import { site, organizationJsonLd, breadcrumbJsonLd, graph } from '../../lib/agency';
 
-const title = 'Digital Strategy, Web Development & Growth Services — Mitchell Miller';
-const description = 'SEO and AI search, UX design, web development, workflow automation and analytics. Get a focused engagement or ongoing support for your business.';
+const title = 'Digital Strategy, Design & Engineering — Mitchell Miller';
+const description = 'Research, digital strategy, UX and content design, front-end engineering, AI workflows and search growth. Focused support from discovery through delivery.';
 
 const lifecycle = [
-  { id: 'understand', name: 'Understand', line: 'Identify your market opportunities and performance gaps.' },
-  { id: 'design', name: 'Design', line: 'Improve your customer journeys, content and interfaces.' },
-  { id: 'build', name: 'Build', line: 'Launch connected websites, applications and workflows.' },
-  { id: 'grow', name: 'Grow', line: 'Grow search visibility and qualified inquiries.' },
+  {
+    "id": "understand",
+    "name": "Understand",
+    "line": "Find the opportunity.",
+    "icon": "research"
+  },
+  {
+    "id": "design",
+    "name": "Design",
+    "line": "Make the next step clear.",
+    "icon": "design"
+  },
+  {
+    "id": "build",
+    "name": "Build",
+    "line": "Connect the pieces.",
+    "icon": "engineering"
+  },
+  {
+    "id": "grow",
+    "name": "Grow",
+    "line": "Learn. Refine. Grow.",
+    "icon": "growth"
+  }
 ];
 // Stage copy adopted from content-studio/drafts/2026-09-14-agency-copy-pack.md §(d); every figure traces to its claims ledger §(i).
 const stages = [
   {
-    id: 'understand', name: 'Understand', kicker: 'Research, data and measurement design',
-    lede: 'Every engagement starts by finding out what is actually happening: who competes for the same visitors, what people search for and where, and which numbers the organization can trust.',
-    problems: ['Performance data scattered across GA4, GSC, ads and SEO tools with no single narrative to act on', 'No way to measure whether an AI answer engine cites the business at all', 'Content briefs built on guesswork instead of entity and topic-gap research'],
-    outputs: ['Source-backed KPI narratives and risk queues', 'Prompt-set visibility tracking across AI answer engines', 'Competitive and keyword research at real scale — hundreds to thousands of pages or terms, not a spot check'],
-    approach: 'Connect your existing data sources, establish the baseline and prioritize improvements by customer demand, business impact and effort.',
-    evidence: [
-      { label: 'AEO Visibility Infrastructure', note: 'Prompt-set tracking across ChatGPT, Perplexity and Google AI Overviews.', href: '/case-studies/aeo-visibility-infrastructure/' },
-      { label: 'SearchForge', note: 'Entity-gap and topic-cluster research behind content briefs.', href: '/case-studies/searchforge-content-intelligence/' },
-      { label: 'SFC Surf School', note: '973 pages crawled across ten competing businesses before a word was rewritten.', href: '/case-studies/sfc-surf-school/' },
-      { label: 'Dignity Health Conditions & Treatments Library', note: 'A 10,000-term research universe that grew into 1M+ annual organic visits across 34 healthcare markets.', href: '/case-studies/commonspirit-medical-content-library/' },
+    "id": "understand",
+    "name": "Understand",
+    "kicker": "Research & direction",
+    "icon": "research",
+    "keyword": "Research",
+    "lede": "Research connects customer needs, market signals and performance data so the next decision has a firmer foundation.",
+    "outputs": [
+      "Market & competitor analysis",
+      "Measurement plans",
+      "Prioritized recommendations"
     ],
+    "approach": "Establish the baseline. Test the assumptions. Turn the findings into decisions your team can use.",
+    "evidence": [
+      {
+        "label": "SFC Surf School",
+        "note": "Competitor research shaped the content and discovery experience.",
+        "href": "/case-studies/sfc-surf-school/"
+      },
+      {
+        "label": "ClarityPulse",
+        "note": "A reporting prototype that keeps evidence close to the decision.",
+        "href": "/case-studies/claritypulse-ai-reporting/"
+      }
+    ]
   },
   {
-    id: 'design', name: 'Design', kicker: 'Experiences, content and clear next actions',
-    lede: 'Once the question is clear, the work is to make expertise useful before somebody books, calls or applies — on the page, in the guide and in the path to the next action.',
-    problems: ['Nine regional web experiences with inconsistent templates and no shared conversion path', 'Customers unable to find reliable location or service information', 'A product experience that needs clearer navigation and stronger engagement'],
-    outputs: ['Reusable entity and page templates', 'Interactive, real-data-driven interfaces', 'Reporting UIs that show the source next to the number instead of burying it'],
-    approach: 'Map the customer journey, design reusable page templates and test key actions across desktop and mobile before launch.',
-    evidence: [
-      { label: 'Dignity Health Yext Location Conversion Engine', note: 'Parent/child entity templates standardized across 1,000+ locations.', href: '/case-studies/commonspirit-locations-conversion-engine/' },
-      { label: 'SFC Surf School', note: 'A ten-break interactive explorer built on a real, georeferenced aerial photograph.', href: '/case-studies/sfc-surf-school/' },
-      { label: 'ClarityPulse', note: 'A reporting interface designed around evidence tags, not just KPI tiles.', href: '/case-studies/claritypulse-ai-reporting/' },
+    "id": "design",
+    "name": "Design",
+    "kicker": "Content & experience",
+    "icon": "design",
+    "keyword": "Experience design",
+    "lede": "Experience design makes information easier to understand and the next action easier to take.",
+    "outputs": [
+      "UX/UI direction",
+      "Content architecture",
+      "Reusable page patterns"
     ],
+    "approach": "Connect the journey, the words and the interface. Review the experience where people will use it.",
+    "evidence": [
+      {
+        "label": "Dignity Health location experience",
+        "note": "A common structure for location information and patient actions.",
+        "href": "/case-studies/commonspirit-locations-conversion-engine/"
+      },
+      {
+        "label": "SFC Surf School",
+        "note": "An interactive guide connects real places with a visitor’s decision.",
+        "href": "/case-studies/sfc-surf-school/"
+      }
+    ]
   },
   {
-    id: 'build', name: 'Build', kicker: 'Entity data, content systems and working tools',
-    lede: 'Growth that depends on publishing one page at a time stalls. The durable asset is the system: clean entities, reusable templates and tools that remove the bottleneck.',
-    problems: ['Legacy CMS constraints (Sitecore) blocking clean, scalable patient-action pages', 'A migration mandate facing resistance across 60+ regional websites with no practical reason to move', 'Manual, inconsistent post-call follow-up creating execution debt'],
-    outputs: ['Production entity and data systems', 'Modular CMS content models built for reuse across markets', 'Internal AI tools shipped with real release discipline — staging, rollback, verification'],
-    approach: 'Work within your existing technology where it fits. Review working software before launch, validate integrations and provide the documentation needed to maintain it.',
-    evidence: [
-      { label: 'Dignity Health Yext Location Conversion Engine', note: 'A 1,000+ page system built outside the legacy CMS bottleneck; later CommonSpirit reporting attributed $15.21M in FY22 revenue to the continuing system.', href: '/case-studies/commonspirit-locations-conversion-engine/' },
-      { label: 'AEM Content Fragmentation Architecture', note: 'A reusable content model proposed for 60+ regional sites.', href: '/case-studies/aem-content-fragmentation-architecture/' },
-      { label: 'ActionThread', note: 'Call transcripts turned into owner-tagged follow-up work automatically.', href: '/case-studies/actionthread-transcript-execution/' },
+    "id": "build",
+    "name": "Build",
+    "kicker": "Engineering & connected systems",
+    "icon": "engineering",
+    "keyword": "Engineering",
+    "lede": "Engineering turns the plan into useful interfaces, connected data and repeatable workflows your team can maintain.",
+    "outputs": [
+      "Front-end development",
+      "Database & content structures",
+      "AI-assisted workflows"
     ],
+    "approach": "Build in reviewable steps. Validate the working pieces. Leave clear ownership and documentation.",
+    "evidence": [
+      {
+        "label": "Location conversion engine",
+        "note": "Reusable entities and templates across a large health network.",
+        "href": "/case-studies/commonspirit-locations-conversion-engine/"
+      },
+      {
+        "label": "ActionThread",
+        "note": "A transcript-to-follow-up workflow documented as an internal tool.",
+        "href": "/case-studies/actionthread-transcript-execution/"
+      }
+    ]
   },
   {
-    id: 'grow', name: 'Grow', kicker: 'Search, AI search and conversion, measured',
-    lede: 'Improve how customers find and choose your business through technical SEO, useful content, AI-search visibility and conversion optimization.',
-    problems: ['Organic sessions at risk during a post-merger, 63-plus-site consolidation', 'A veterans-services nonprofit with no structured way to reach the people it serves', 'Clinical service lines losing full-funnel coverage as AI-assisted search shifted query patterns'],
-    outputs: ['Migration-safe organic growth', 'Campaign reporting tied to qualified inquiries and conversions', 'Performance comparisons and a prioritized plan for the next cycle'],
-    approach: 'Pair the technical and content work with conversion and measurement from day one, and report growth the way the SFC case study does — a measured gain, a specific date range, and an explicit boundary around what launched after that window.',
-    evidence: [
-      { label: 'CommonSpirit Network Consolidation', note: 'Organic sessions from 2.65M to 4.9M+ across tenure, through 20+ enterprise migrations.', href: '/case-studies/commonspirit-network-consolidation/' },
-      { label: 'SFC Surf School', note: 'Google Search clicks +980% (5→54) and impressions +251% (470→1,652, rounded), Aug 12–Sep 8 vs. Jul 15–Aug 11, 2026.', href: '/case-studies/sfc-surf-school/' },
-      { label: 'Vet Advocates Growth System', note: 'Monthly signups from 2–3 to 25–50.', href: '/case-studies/vet-advocates-growth-system/' },
+    "id": "grow",
+    "name": "Grow",
+    "kicker": "Discovery & improvement",
+    "icon": "growth",
+    "keyword": "Growth strategy",
+    "lede": "Growth strategy connects search, content and conversion with a cycle of measurement, learning and improvement.",
+    "outputs": [
+      "SEO & AI-search plans",
+      "Conversion tests",
+      "Performance reporting"
     ],
-  },
+    "approach": "Prioritize useful gains today while protecting the foundations for what comes next.",
+    "evidence": [
+      {
+        "label": "CommonSpirit network consolidation",
+        "note": "Search continuity and growth through enterprise migrations.",
+        "href": "/case-studies/commonspirit-network-consolidation/"
+      },
+      {
+        "label": "SFC Surf School",
+        "note": "Measured search changes with the dates and release boundaries shown.",
+        "href": "/case-studies/sfc-surf-school/"
+      }
+    ]
+  }
 ];
 const process = [
-  { name: 'Start with the real question.', body: 'A working conversation about the problem, the goal, and what data or access already exists.' },
-  { name: 'Establish the evidence.', body: 'Research, measurement and competitive audits, each number labeled by what’s observed versus assumed.' },
-  { name: 'Design and build the system.', body: 'The specific mix of content, entity architecture, interface and engineering the problem actually needs — not a fixed package.' },
-  { name: 'Ship and report honestly.', body: 'A staged release, then results reported with real dates and a clear statement of what each number does and doesn’t prove.' },
+  {
+    "name": "Define the question.",
+    "body": "Agree what matters, who it serves and what success would mean."
+  },
+  {
+    "name": "Find the evidence.",
+    "body": "Inspect the data, constraints and assumptions shaping the decision."
+  },
+  {
+    "name": "Make it useful.",
+    "body": "Review the strategy, content or software as it develops."
+  },
+  {
+    "name": "Learn from the result.",
+    "body": "Measure what changed and decide what deserves attention next."
+  }
 ];
 const faq = [
-  { q: 'Is this a team or one person?', a: 'Mitch Miller is the principal on every engagement — scoping the research, setting the strategy, and on most projects doing the entity architecture, content and code himself. Specialist help gets brought in per engagement rather than kept on a fixed roster.' },
-  { q: 'What does this cost?', a: 'It depends on scope — an enterprise entity migration and a small operator’s search overhaul aren’t priced the same way, and no fixed rates are published here. Start a conversation and get a scoped recommendation before anything is agreed.' },
-  { q: 'Do you only work with large companies?', a: 'No. The work spans enterprise programs (Apple, Stanford Health Care, Dignity Health, CommonSpirit Health) and small, hands-on engagements (SFC Surf School, Clear Kayak Adventures, a pro bono system for Vet Advocates). Same discipline, different scale.' },
-  { q: 'Is there a free way to see how this works before hiring?', a: 'Yes — the population workbench in the Lab is free: define a question, filter real Census microdata, compare two scenarios and export the result. If it’s useful applied to your own customer or CRM data, calibrated and validated, that becomes a paid conversation; no pricing is posted publicly.' },
-  { q: 'How do you report results — can the numbers be trusted?', a: 'Every figure carries a source and a date range, with a plain statement of what it does and doesn’t prove. The SFC case study, for example, separates a measured search-traffic gain (Aug 12–Sep 8 vs. Jul 15–Aug 11) from the ten-break explorer that launched after that window, so the two aren’t confused. The population workbench uses the same discipline — every output labeled observed, calculated, simulated or assumed.' },
-  { q: 'Can you work alongside our in-house team or agency?', a: 'Yes. The enterprise programs described here were delivered with engineering, design, marketing, analytics and vendor teams (for example Yext engineering), without reporting authority over them. The working model is shared requirements, shared measurement and clear ownership of each part.' },
+  {
+    "q": "Who will I work with?",
+    "a": "Mitchell Miller leads the work directly, from research and strategy through hands-on delivery. The scope determines any additional specialist support."
+  },
+  {
+    "q": "What does an engagement cost?",
+    "a": "Cost follows the question, scope and deliverables. Start with a conversation; agree the work before it begins."
+  },
+  {
+    "q": "Do you work with smaller businesses?",
+    "a": "Yes. The work spans enterprise programs and independent businesses, with the approach shaped to the opportunity."
+  },
+  {
+    "q": "Is there a free way to explore the approach?",
+    "a": "Yes. The learning lab offers interactive tools for exploring data, testing assumptions and comparing scenarios."
+  },
+  {
+    "q": "How are results measured?",
+    "a": "Agree the baseline and success measures first. Reports connect each result to its source, time period and limits. The case studies show that discipline in practice."
+  },
+  {
+    "q": "Can you work with our existing team?",
+    "a": "Yes. Work can complement your engineering, design, marketing or analytics team through shared priorities, clear requirements and practical handoffs."
+  }
 ];
 const jsonLd = [graph(
   organizationJsonLd(),
   {
-    '@type': 'Service', '@id': `${site.url}/services/#service`, name: 'Search, growth and AI-search systems', serviceType: 'Search, growth and AI-search systems',
+    '@type': 'Service', '@id': `${site.url}/services/#service`, name: 'Digital strategy, design and engineering', serviceType: 'Digital strategy, design and engineering',
     provider: { '@id': `${site.url}/#organization` }, areaServed: 'United States', url: `${site.url}/services/`, description,
     hasOfferCatalog: { '@type': 'OfferCatalog', name: 'Services by stage', itemListElement: stages.map(stage => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: `${stage.name} — ${stage.kicker}`, description: stage.lede, url: `${site.url}/services/#${stage.id}` } })) },
   },
@@ -101,39 +207,39 @@ const jsonLd = [graph(
       <div>
         <ol class="ag-crumbs" aria-label="Breadcrumb"><li><a href="/">Home</a></li><li aria-current="page">Services</li></ol>
         <p class="ag-eyebrow">Services</p>
-        <h1 id="services-heading">Strategy, design and technology.<br />Built around your growth.</h1>
-        <p class="ag-hero-deck">Reach the right customers, improve how they experience your business and connect the systems that support your team. Choose focused support or an engagement that runs from discovery through delivery.</p>
-        <div class="ag-hero-actions"><a class="ag-button" href="/contact/">Start a conversation</a><a class="ag-button ag-button--light" href="#process">How we work</a></div>
+        <h1 id="services-heading">See the opportunity.<br />Bring it to life.</h1>
+        <p class="ag-hero-deck">Research, design and technology around one question: what will make the most useful difference?</p>
+        <div class="ag-hero-actions"><a class="ag-button" href="/contact/">Start a conversation</a></div>
       </div>
     </div>
   </section>
 
+  <BrandMarquee id="services-brands" />
+
   <section class="ag-lifecycle" aria-label="Stages of the work">
     <div class="ag-wrap">
-      <p class="ag-lifecycle-label">The four stages</p>
-      <ol>{lifecycle.map(stage => <li><a href={`#${stage.id}`}><strong>{stage.name}</strong><span>{stage.line}</span></a></li>)}</ol>
+      <p class="ag-lifecycle-label">Strategy through delivery</p>
+      <ol>{lifecycle.map(stage => <li><a href={`#${stage.id}`}><ServiceIcon name={stage.icon} label={stage.name} decorative /><strong>{stage.name}</strong><span>{stage.line}</span></a></li>)}</ol>
     </div>
   </section>
 
   <div class="ag-wrap">
     {stages.map((stage, index) => <section class="ag-stage" aria-labelledby={`${stage.id}-heading`}>
       <div class="ag-stage-head">
-        <div><p class="ag-eyebrow">Stage 0{index + 1} · {stage.kicker}</p><h2 id={stage.id}><span id={`${stage.id}-heading`}>{stage.name}</span></h2><p class="ag-stage-lede">{stage.lede}</p></div>
-        <div class="ag-stage-evidence"><h3>Related client work</h3><ul>{stage.evidence.map(item => <li><a href={item.href}>{item.label}</a><span>{item.note}</span></li>)}</ul></div>
+        <ServiceIcon name={stage.icon} label={stage.keyword} />
+        <p class="ag-eyebrow">{stage.kicker}</p>
+        <h2 id={stage.id}><span id={`${stage.id}-heading`}>{stage.name}</span></h2>
+        <p class="ag-stage-lede">{stage.lede}</p>
       </div>
-      <div class="ag-stage-grid">
-        <div><h3>Problems solved</h3><ul>{stage.problems.map(item => <li>{item}</li>)}</ul></div>
-        <div><h3>Typical outputs</h3><ul>{stage.outputs.map(item => <li>{item}</li>)}</ul></div>
-        <div><h3>How we work</h3><p>{stage.approach}</p></div>
-      </div>
+      <ul class="ag-stage-outputs" aria-label={`${stage.name} deliverables`}>{stage.outputs.map(item => <li>{item}</li>)}</ul>
+      <p class="ag-stage-approach">{stage.approach}</p>
+      <details class="ag-stage-proof"><summary>Explore the work <span aria-hidden="true">+</span></summary><ul>{stage.evidence.map(item => <li><a href={item.href}>{item.label}</a><p>{item.note}</p></li>)}</ul></details>
     </section>)}
   </div>
 
-  <BrandMarquee id="services-brands" />
-
   <section class="ag-section ag-section--tint" id="process" aria-labelledby="process-heading">
     <div class="ag-wrap">
-      <div class="ag-section-head"><div><p class="ag-eyebrow">Process</p><h2 id="process-heading">How an engagement runs.</h2><p>Agree the objectives and scope, review the work as it develops, then launch with clear ownership and a measurement plan.</p></div></div>
+      <div class="ag-section-head"><div><p class="ag-eyebrow">Process</p><h2 id="process-heading">Start small. See clearly. Move forward.</h2><p>Clear priorities. Shared progress. A useful next step.</p></div></div>
       <ol class="ag-process">{process.map(step => <li><h3>{step.name}</h3><p>{step.body}</p></li>)}</ol>
     </div>
   </section>
@@ -141,15 +247,15 @@ const jsonLd = [graph(
   <section class="ag-section" aria-labelledby="faq-heading">
     <div class="ag-wrap">
       <div class="ag-section-head"><div><p class="ag-eyebrow">FAQ</p><h2 id="faq-heading">Frequently asked questions</h2></div></div>
-      <div class="ag-faq">{faq.map(item => <div><h3>{item.q}</h3><p>{item.a}{item.q.startsWith('Is there a free way') && <> <a href="/lab/population-workbench/">Open the population workbench.</a></>}</p></div>)}</div>
+      <div class="ag-faq">{faq.map(item => <details><summary><h3>{item.q}</h3><span aria-hidden="true">+</span></summary><p>{item.a}{item.q.startsWith('Is there a free way') && <> <a href="/lab/">Explore the lab.</a></>}</p></details>)}</div>
 
     </div>
   </section>
 
   <section class="ag-cta ag-dark" aria-labelledby="services-cta-heading">
     <div class="ag-wrap ag-cta-inner">
-      <div><p class="ag-eyebrow">Ready to explore further?</p><h2 id="services-cta-heading">Let’s work on your next stage of growth.</h2><p>Tell us what you want to improve. We’ll identify the right services, deliverables and next steps for your business.</p></div>
-      <div class="ag-cta-actions"><a class="ag-button" href="/contact/">Start a conversation</a><a class="ag-button ag-button--light" href="/work/">See the work</a></div>
+      <div><p class="ag-eyebrow">Ready to explore further?</p><h2 id="services-cta-heading">What are you imagining?</h2><p>Bring the question. We’ll work out the next move together.</p></div>
+      <div class="ag-cta-actions"><a class="ag-button" href="/contact/">Start a conversation</a></div>
     </div>
   </section>
 </AgencyLayout>

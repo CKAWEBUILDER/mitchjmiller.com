@@ -95,7 +95,7 @@ if (contactForm) {
     validation: "Please check the highlighted fields and try again.",
     turnstile_failed: "The spam check did not pass. Please try again.",
     rate_limited: `Too many messages from this connection in the last hour. Please try again later or email ${email}.`,
-    origin_not_allowed: `This form only works on mitchjmiller.com. Please email ${email}.`,
+    origin_not_allowed: `This form only works on mj2.pro. Please email ${email}.`,
     network: `The message could not be sent (network error). Please email ${email}.`,
   };
   contactForm.addEventListener("submit", async event => {

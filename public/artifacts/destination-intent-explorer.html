@@ -14,7 +14,7 @@
 </head>
 <body>
 <main>
-  <header><span class="eyebrow">Mitchell Miller / interactive field notes</span><a href="https://mitchjmiller.com/lab/" target="_blank" rel="noreferrer">More working ideas ↗</a></header>
+  <header><span class="eyebrow">Mitchell Miller / interactive field notes</span><a href="https://mj2.pro/lab/" target="_blank" rel="noreferrer">More working ideas ↗</a></header>
   <section class="intro"><h1>Read the query.<br><em>See the destination.</em></h1><p>A person can be thousands of miles from the place they want to visit. Explore how a location in the query changes the strategy—and why organic discovery and Maps both deserve attention.</p></section>
   <section class="workbench" aria-label="Destination intent workbench">
     <div class="topline"><span class="eyebrow">Change the search. Move the searcher.</span><span class="status">● Working strategy model</span></div>
@@ -63,7 +63,7 @@
   $('reset').addEventListener('click', () => { $('scenario').value = 'private'; $('origin').value = 'connecticut'; update(); });
   $('save').addEventListener('click', () => {
     const r = describe();
-    const text = 'DESTINATION INTENT BRIEF\nMitchell Miller — Interactive Field Notes\n\nQuery: ' + r.query + '\nSearcher location: ' + r.searcher + '\nDestination: ' + r.destination + '\nIntent: ' + r.intent + '\n\nINTERPRETATION\n' + r.interpretation + '\n\nORGANIC DISCOVERY\n' + r.organic + '\n\nMAPS & LOCAL EVALUATION\n' + r.maps + '\n\nCONTENT DIRECTIONS\n' + r.content + '\n\nStrategy model; not a live search-results preview.\nhttps://mitchjmiller.com/lab/\n';
+    const text = 'DESTINATION INTENT BRIEF\nMitchell Miller — Interactive Field Notes\n\nQuery: ' + r.query + '\nSearcher location: ' + r.searcher + '\nDestination: ' + r.destination + '\nIntent: ' + r.intent + '\n\nINTERPRETATION\n' + r.interpretation + '\n\nORGANIC DISCOVERY\n' + r.organic + '\n\nMAPS & LOCAL EVALUATION\n' + r.maps + '\n\nCONTENT DIRECTIONS\n' + r.content + '\n\nStrategy model; not a live search-results preview.\nhttps://mj2.pro/lab/\n';
     const url = URL.createObjectURL(new Blob([text], { type: 'text/plain;charset=utf-8' }));
     const anchor = document.createElement('a');
     anchor.href = url;

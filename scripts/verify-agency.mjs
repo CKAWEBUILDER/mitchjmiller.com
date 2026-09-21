@@ -18,6 +18,7 @@ import { decodeHTML } from 'entities';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = resolve(root, process.env.PARITY_DIST || 'dist');
 const release = process.env.SITE_BUILD_MODE === 'release';
+const canonicalOrigin = 'https://mj2.pro';
 const read = path => readFileSync(path, 'utf8');
 const manifest = JSON.parse(read(join(root, 'docs/implementation-2026-09-11/route-manifest.json')));
 const brands = JSON.parse(read(join(root, 'site/data/brands.json')));
@@ -39,7 +40,7 @@ const eligible = manifest.routes.filter(route => route.kind !== 'placeholder').m
 if (eligible.length !== 59) fail('manifest', `expected 59 published routes, found ${eligible.length}`);
 if (!manifest.routes.some(route => route.path === '/services/' && route.kind === 'added')) fail('manifest', '/services/ missing or not kind "added"');
 const sitemap = existsSync(join(dist, 'sitemap.xml')) ? [...read(join(dist, 'sitemap.xml')).matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]) : [];
-if (sitemap.length !== 59 || !sitemap.includes('https://mitchjmiller.com/services/')) fail('sitemap', `expected 59 URLs including /services/, found ${sitemap.length}`);
+if (sitemap.length !== 59 || !sitemap.includes(`${canonicalOrigin}/services/`)) fail('sitemap', `expected 59 URLs including /services/, found ${sitemap.length}`);
 tick('routes');
 
 // 2. Shell on every document except the standalone SFC report (byte-preserved by parity rule).
@@ -77,8 +78,8 @@ for (const route of ['/', '/services/']) {
   const lists = marquee.match(/<ul[^>]*>/g) || [];
   if (lists.length !== 2 || !lists[1].includes('aria-hidden="true"')) fail(route, 'marquee needs two lists with the duplicate aria-hidden');
   const items = (marquee.match(/<li /g) || []).length;
-  if (items !== brands.brands.length * 2) fail(route, `marquee items ${items} != 2 × ${brands.brands.length} brands`);
-  for (const brand of brands.brands) if (!marquee.includes(brand.logo ? `alt="${brand.name}"` : `<span>${brand.name}</span>`)) fail(route, `brand ${brand.name} missing`);
+  if (items !== brands.brands.filter(b => b.logo).length * 2) fail(route, `marquee items ${items} != 2 × ${brands.brands.filter(b => b.logo).length} brands`);
+  for (const brand of brands.brands.filter(b => b.logo)) if (!marquee.includes(brand.logo ? `alt="${brand.name}"` : `<span>${brand.name}</span>`)) fail(route, `brand ${brand.name} missing`);
   if (!text(marquee).includes(brands.label)) fail(route, 'marquee label text missing');
   tick('marquees');
 }
@@ -118,8 +119,14 @@ const servicesText = text(body(services).match(/<main\b[^>]*>([\s\S]*?)<\/main>/
 if (servicesText.length < 1500) fail('/services/', `main text too short (${servicesText.length})`);
 for (const id of ['understand', 'design', 'build', 'grow', 'process']) if (!new RegExp(`id="${id}"`).test(services)) fail('/services/', `missing section anchor #${id}`);
 if (!/href="\/case-studies\//.test(services)) fail('/services/', 'no evidence links to case studies');
-const heroImage = home.match(/<div class="ag-showcase"[\s\S]*?<img src="([^"]+)"/)?.[1];
-if (!heroImage || !existsSync(join(dist, heroImage))) fail('/', `hero image missing: ${heroImage}`);
+// The approved refinement uses a quiet text-only hero; supporting imagery stays in products/work.
+for (const [route, html] of [['/', home], ['/services/', services]]) {
+  const hero = html.match(/<section class="ag-hero[^>]*>[\s\S]*?<\/section>/)?.[0] || '';
+  if ((hero.match(/class="ag-button(?:\s|"|$)/g) || []).length !== 1) fail(route, 'hero needs exactly one CTA button');
+  if (html.indexOf('data-marquee') > html.indexOf('class="ag-lifecycle"')) fail(route, 'brand logos must precede strategy through delivery');
+  const marquee = html.match(/<section class="ag-marquee"[\s\S]*?<\/section>/)?.[0] || '';
+  if (/employer|<abbr|<li[^>]*>\s*<span/i.test(marquee)) fail(route, 'marquee must render only logo art without relationship badges');
+}
 if (!/<section class="ag-lifecycle"/.test(home)) fail('/', 'lifecycle strip missing');
 for (const section of ['objectives-heading', 'services-heading', 'products-heading', 'industries-heading', 'work-heading', 'lab-heading', 'writing-heading', 'cta-heading']) if (!home.includes(`id="${section}"`)) fail('/', `home section ${section} missing`);
 if (!/href="\/work\/"/.test(home)) fail('/', 'home lacks the portfolio link');

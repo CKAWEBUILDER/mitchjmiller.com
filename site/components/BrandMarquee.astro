@@ -1,33 +1,21 @@
 ---
-/**
- * Scrolling brand-logo strip fed by site/data/brands.json.
- * CSS-only infinite scroll: the list is rendered twice (second copy aria-hidden)
- * and the track translates by half its width; hover/focus pauses it and
- * prefers-reduced-motion renders one static, wrapped row. Text wordmarks in
- * uniform grayscale until rights-cleared logo files are supplied (`logo` path).
- */
 import brands from '../data/brands.json';
-interface Brand { name: string; kind: 'employer' | 'client' | 'project'; wordmark?: boolean; logo?: string | null; url?: string | null; }
 interface Props { heading?: string; id?: string; }
 const { heading = brands.label, id = 'brands' } = Astro.props;
-const list = brands.brands as Brand[];
-const kindLabel: Record<Brand['kind'], string> = { employer: 'Employer', client: 'Client', project: 'Independent project' };
+const list = brands.brands.filter(brand => brand.logo);
 ---
 <section class="ag-marquee" aria-labelledby={`${id}-label`} data-marquee>
   <div class="ag-wrap ag-marquee-head">
     <p class="ag-marquee-label" id={`${id}-label`}>{heading}</p>
-    <p class="ag-marquee-key">Enterprise roles, client engagements and independent products.</p>
+    <button class="ag-marquee-toggle" type="button" aria-pressed="false" aria-controls={`${id}-track`} data-marquee-toggle hidden>Pause logos</button>
   </div>
-  <div class="ag-marquee-viewport">
-    <div class="ag-marquee-track">
+  <div class="ag-marquee-viewport" tabindex="0" role="group" aria-label="Brand logos. Focus here to pause scrolling.">
+    <div class="ag-marquee-track" id={`${id}-track`}>
       {[false, true].map(duplicate => (
         <ul aria-hidden={duplicate ? 'true' : undefined} data-marquee-copy={duplicate ? 'duplicate' : 'primary'}>
           {list.map(brand => (
-            <li title={`${brand.name} — ${kindLabel[brand.kind]}`}>
-              {brand.logo
-                ? <img src={brand.logo} alt={brand.name} loading="lazy" height="30" />
-                : <span>{brand.name}</span>}
-              <abbr aria-label={kindLabel[brand.kind]}>{kindLabel[brand.kind]}</abbr>
+            <li title={brand.name} data-brand={brand.name}>
+              <img src={brand.logo!} alt={duplicate ? '' : brand.name} loading="eager" width={'width' in brand ? brand.width : undefined} height={'height' in brand ? brand.height : undefined} />
             </li>
           ))}
         </ul>
@@ -35,3 +23,16 @@ const kindLabel: Record<Brand['kind'], string> = { employer: 'Employer', client:
     </div>
   </div>
 </section>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-marquee]').forEach(marquee => {
+    const toggle = marquee.querySelector<HTMLButtonElement>('[data-marquee-toggle]');
+    if (!toggle) return;
+    toggle.hidden = false;
+    toggle.addEventListener('click', () => {
+      const paused = toggle.getAttribute('aria-pressed') !== 'true';
+      toggle.setAttribute('aria-pressed', String(paused));
+      marquee.dataset.paused = String(paused);
+      toggle.textContent = paused ? 'Resume logos' : 'Pause logos';
+    });
+  });
+</script>

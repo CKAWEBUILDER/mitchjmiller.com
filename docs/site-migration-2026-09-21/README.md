@@ -114,7 +114,8 @@ warm white/pale gray for breathing room, editorial typography, and restrained mo
 
   Then set registrar URL forwarding for `mitchjmiller.com` → `https://mj2.pro` (path-preserving, 301). After propagation, confirm HTTPS in the repository's Pages settings (`Enforce HTTPS`) once the certificate is issued. Rollback: delete the added records — parking returns and nothing else is touched.
 - [ ] Activate `clients.mj2.pro` and verify the demo workspace.
-- [ ] Verify GSC sitemap, GA4 realtime and contact origin.
+- [x] Contact origin verified September 22, 2026. The deployed Worker was stale — last deployed September 11, before the mj2.pro decision — so it rejected `https://mj2.pro` at CORS preflight and the contact form would have failed on every submission after cutover. Redeployed from the committed source at version `cdf6a033-8e6e-4006-93c6-28580f08e9e2` (previous version `8a08874e-9be0-4b1c-9139-007502857a3d` is the rollback). Probed after deploy: `mj2.pro`, `www.mj2.pro`, `mitchjmiller.com`, `www.mitchjmiller.com` and `mitchjmiller-com.pages.dev` are allowed; an unknown origin gets no `Access-Control-Allow-Origin`. A real end-to-end submission still has to wait for DNS.
+- [ ] Verify GSC sitemap and GA4 realtime. Both need the site reachable, so they are blocked behind DNS.
 - [ ] Update personal LinkedIn and create the M² business page.
 - [ ] Invite Rio as Talent Acquisition Manager after exact profile resolution.
 

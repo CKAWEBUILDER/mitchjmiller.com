@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Search Results by Intent — Field Chart 2026</title>
+<!--
+  DIRECTION 03 — THE REFERENCE POSTER
+  Self-contained. No network requests, no webfonts, no external assets.
+
+  Query params
+    ?size=1080x1350   portrait poster (default)
+    ?size=1080x1080   square poster
+    ?static=1         freeze at the settled state (also: ?poster=1)
+    ?gif=1            gif capture mode (identical layout; kept for kit parity)
+    ?t=2.4            seek to a specific second and freeze
+
+  Export hooks (contract shared with content-studio/viz/kit/export/lib/browser.mjs)
+    window.VIZ.ready      Promise, resolves once laid out
+    window.VIZ.duration   timeline length in seconds
+    window.VIZ.seek(t)    deterministic render of frame at t seconds
+    document.documentElement.dataset.ready === '1'
+-->
+<style>
+  /* ---------------------------------------------------------------- palette
+     Bright print poster. Flat high-saturation fields, one ink, one paper.
+     Every band colour carries INK text at >= 5.97:1 (computed, see README).
+     Colour never carries meaning alone: each band is also named on its rail and
+     in the legend, and every cell is numbered in reading order. */
+  :root{
+    --ink:      #131015;
+    --paper:    #FFF3DE;
+    --white:    #FFFFFF;
+
+    --c-info:   #FF5A36;   /* informational   ink on it  6.08:1 */
+    --c-comm:   #FFC01E;   /* commercial      ink on it 11.51:1 */
+    --c-trans:  #00C2A0;   /* transactional   ink on it  8.29:1 */
+    --c-nav:    #5B8CFF;   /* navigational    ink on it  5.97:1 */
+    --c-local:  #33D17A;   /* local           ink on it  9.47:1 */
+    --c-all:    #C77DFF;   /* every intent    ink on it  7.02:1 */
+
+    --tk: 1;               /* type scale, dialled down for the square */
+    --stroke: 3px;
+    --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+
+  *{ box-sizing: border-box; margin: 0; padding: 0; }
+  html,body{ height:100%; overflow:hidden; background: var(--ink); }
+  body{ font-family: var(--sans); color: var(--ink); -webkit-font-smoothing: antialiased; }
+
+  #stage{
+    position: absolute; top:0; left:0;
+    transform-origin: top left;
+    background: var(--paper);
+  }
+
+  .poster{
+    width:100%; height:100%;
+    display:flex; flex-direction:column;
+    background: var(--paper);
+    position: relative;
+  }
+
+  /* ------------------------------------------------------------ title bar */
+  .titlebar{
+    background: var(--ink); color: var(--paper);
+    padding: calc(21px * var(--tk)) calc(32px * var(--tk)) calc(19px * var(--tk));
+    flex: 0 0 auto;
+  }
+  .eyebrow{
+    font-family: var(--mono);
+    font-size: calc(15px * var(--tk));
+    letter-spacing: .16em; text-transform: uppercase;
+    color: var(--c-comm);
+    margin-bottom: calc(12px * var(--tk));
+  }
+  .headrow{ display:flex; align-items:center; gap: calc(26px * var(--tk)); }
+  .counter{
+    font-size: calc(92px * var(--tk));
+    line-height: 1.16;
+    font-weight: 900; letter-spacing: -.045em;
+    font-variant-numeric: tabular-nums;
+    color: var(--c-comm);
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+  .headline{
+    font-size: calc(36px * var(--tk));
+    line-height: 1.14;
+    font-weight: 800; letter-spacing: -.012em;
+    text-transform: uppercase;
+  }
+  .headline em{ font-style: normal; color: var(--c-trans); }
+  .subline{
+    margin-top: calc(13px * var(--tk));
+    font-family: var(--mono);
+    font-size: calc(14.5px * var(--tk));
+    line-height: 1.34;
+    color: #CFC6BC;
+  }
+
+  /* --------------------------------------------------------------- legend */
+  .legend{
+    flex: 0 0 auto;
+    display:flex; align-items:center; flex-wrap: wrap;
+    gap: calc(8px * var(--tk)) calc(11px * var(--tk));
+    padding: calc(11px * var(--tk)) calc(32px * var(--tk));
+    border-bottom: var(--stroke) solid var(--ink);
+    background: var(--paper);
+  }
+  .legend .lab{
+    font-family: var(--mono);
+    font-size: calc(13px * var(--tk));
+    letter-spacing: .12em; text-transform: uppercase;
+    opacity: .62;
+    margin-right: calc(4px * var(--tk));
+  }
+  .chip{
+    display:flex; align-items:center; gap: calc(7px * var(--tk));
+    font-size: calc(13px * var(--tk));
+    font-weight: 800; letter-spacing: .09em; text-transform: uppercase;
+  }
+  .chip i{
+    display:block;
+    width: calc(17px * var(--tk)); height: calc(17px * var(--tk));
+    border: calc(2px * var(--tk)) solid var(--ink);
+  }
+
+  /* ----------------------------------------------------------------- grid */
+  .grid{
+    flex: 1 1 auto; min-height: 0;
+    display:flex; flex-direction:column;
+    gap: calc(16px * var(--tk));
+    padding: calc(14px * var(--tk)) calc(30px * var(--tk)) calc(12px * var(--tk));
+  }
+  .row{
+    flex: 1 1 0; min-height: 0;
+    display:grid;
+    grid-template-columns: calc(56px * var(--tk)) repeat(3, 1fr);
+    gap: calc(16px * var(--tk));
+  }
+
+  .rail{
+    border: var(--stroke) solid var(--ink);
+    box-shadow: calc(5px * var(--tk)) calc(5px * var(--tk)) 0 var(--ink);
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+  .rail span{
+    writing-mode: vertical-rl; transform: rotate(180deg);
+    font-size: calc(17px * var(--tk));
+    font-weight: 900; letter-spacing: .20em; text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* ----------------------------------------------------------------- cell */
+  .cell{
+    border: var(--stroke) solid var(--ink);
+    box-shadow: calc(5px * var(--tk)) calc(5px * var(--tk)) 0 var(--ink);
+    padding: calc(12px * var(--tk)) calc(13px * var(--tk)) calc(9px * var(--tk));
+    display:flex; flex-direction:column;
+    min-height: 0; overflow:hidden;
+    transform-origin: 50% 0%;
+    will-change: transform, opacity;
+  }
+  .chead{
+    display:flex; align-items:center; justify-content:space-between;
+    height: calc(25px * var(--tk));
+    flex: 0 0 auto;
+  }
+  .num{
+    font-family: var(--mono);
+    font-size: calc(15px * var(--tk));
+    font-weight: 700; letter-spacing: .06em;
+    background: var(--ink); color: var(--paper);
+    padding: calc(2px * var(--tk)) calc(7px * var(--tk));
+  }
+  .chead svg{ display:block; width: calc(26px * var(--tk)); height: calc(26px * var(--tk)); }
+  .cbig{
+    margin-top: calc(5px * var(--tk));
+    font-size: calc(38px * var(--tk));
+    line-height: 1.10;
+    font-weight: 900; letter-spacing: -.035em;
+    font-variant-numeric: tabular-nums;
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+  .cbig.sm{ font-size: calc(30px * var(--tk)); letter-spacing: -.02em; }
+  .ctitle{
+    margin-top: calc(4px * var(--tk));
+    font-size: calc(18px * var(--tk));
+    line-height: 1.14;
+    font-weight: 900; letter-spacing: .025em; text-transform: uppercase;
+    flex: 0 0 auto;
+  }
+  .clines{
+    margin-top: calc(6px * var(--tk));
+    font-size: calc(15.5px * var(--tk));
+    line-height: 1.28;
+    font-weight: 600;
+    flex: 1 1 auto; min-height: 0;
+  }
+  .csrc{
+    margin-top: calc(5px * var(--tk));
+    font-family: var(--mono);
+    font-size: calc(12px * var(--tk));
+    letter-spacing: .02em;
+    opacity: .72;
+    flex: 0 0 auto;
+    border-top: calc(2px * var(--tk)) solid rgba(19,16,21,.35);
+    padding-top: calc(4px * var(--tk));
+    white-space: nowrap; overflow: hidden; text-overflow: clip;
+  }
+
+  /* ----------------------------------------------------------------- foot */
+  .foot{
+    flex: 0 0 auto;
+    padding: 0 calc(30px * var(--tk)) calc(16px * var(--tk));
+  }
+  .gapstrip{
+    border: var(--stroke) solid var(--ink);
+    background: var(--white);
+    padding: calc(6px * var(--tk)) calc(11px * var(--tk));
+    display:flex; align-items:baseline; gap: calc(10px * var(--tk));
+    font-size: calc(13.5px * var(--tk));
+    line-height: 1.3;
+    font-weight: 600;
+  }
+  .gapstrip b{
+    font-family: var(--mono);
+    font-size: calc(12.5px * var(--tk));
+    letter-spacing: .1em; text-transform: uppercase;
+    background: var(--ink); color: var(--paper);
+    padding: calc(2px * var(--tk)) calc(7px * var(--tk));
+    flex: 0 0 auto;
+    font-weight: 700;
+  }
+  .sources{
+    margin-top: calc(7px * var(--tk));
+    font-family: var(--mono);
+    font-size: calc(11px * var(--tk));
+    line-height: 1.3;
+    opacity: .66;
+  }
+</style>
+</head>
+<body>
+<div id="stage"><div class="poster" id="poster"></div></div>
+
+<script>
+/* ------------------------------------------------------------------ params */
+const Q = new URLSearchParams(location.search);
+const SIZES = { '1080x1350': [1080, 1350], '1080x1080': [1080, 1080] };
+const sizeKey = SIZES[Q.get('size')] ? Q.get('size') : '1080x1350';
+const [W, H] = SIZES[sizeKey];
+const SQUARE = sizeKey === '1080x1080';
+const STATIC = Q.has('static') || Q.has('poster');
+const SEEK_T = Q.has('t') ? Number(Q.get('t')) : null;
+
+/* ------------------------------------------------------------- the content
+   Every figure below is copied from
+   content-studio/research/2026-09-14/search-intent/data.json.
+   Nothing here is estimated, rounded up, or blended across studies. */
+
+const BANDS = {
+  info:  { name: 'Informational',  css: 'var(--c-info)'  },
+  comm:  { name: 'Commercial',     css: 'var(--c-comm)'  },
+  trans: { name: 'Transactional',  css: 'var(--c-trans)' },
+  nav:   { name: 'Navigational',   css: 'var(--c-nav)'   },
+  local: { name: 'Local',          css: 'var(--c-local)' },
+  all:   { name: 'Every intent',   css: 'var(--c-all)'   },
+};
+
+const ICON = {
+  search:  '<circle cx="12" cy="12" r="7.6" fill="none" stroke="#131015" stroke-width="3.2"/><path d="M17.6 17.6 L26 26" stroke="#131015" stroke-width="4" stroke-linecap="round"/>',
+  ask:     '<path d="M8.4 10.2a6.6 6.6 0 1 1 6.6 6.6v3.4" fill="none" stroke="#131015" stroke-width="3.4" stroke-linecap="round"/><circle cx="15" cy="25.4" r="2.6" fill="#131015"/>',
+  quote:   '<path d="M3 6h10v9.5c0 5.2-3.9 8.4-10 9.5v-4.4c3.4-.9 5.2-2.2 5.2-5.1H3z" fill="#131015"/><path d="M17 6h10v9.5c0 5.2-3.9 8.4-10 9.5v-4.4c3.4-.9 5.2-2.2 5.2-5.1H17z" fill="#131015"/>',
+  tag:     '<path d="M2.5 2.5h12.6L27.5 14.9 15.1 27.3 2.5 14.9z" fill="#131015"/><circle cx="9.6" cy="9.6" r="3.1" fill="#FFC01E"/>',
+  versus:  '<rect x="0.8" y="6.5" width="11.4" height="17" fill="#131015"/><rect x="17.8" y="6.5" width="11.4" height="17" fill="#131015"/><path d="M19.8 1.5 10.2 28.5" stroke="#FFC01E" stroke-width="4.6"/><path d="M19.8 1.5 10.2 28.5" stroke="#131015" stroke-width="2" stroke-linecap="round"/>',
+  up:      '<path d="M15 27V9" stroke="#131015" stroke-width="4.2" stroke-linecap="round"/><path d="M15 2.5 25 13.5H5z" fill="#131015"/>',
+  cart:    '<path d="M2.5 4.5h4.2l3.6 14h13" stroke="#131015" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M8.2 8.5h19l-2.6 7.6H10z" fill="#131015"/><circle cx="12" cy="25" r="2.6" fill="#131015"/><circle cx="22" cy="25" r="2.6" fill="#131015"/>',
+  down:    '<path d="M15 3v18" stroke="#131015" stroke-width="4.2" stroke-linecap="round"/><path d="M15 27.5 5 16.5h20z" fill="#131015"/>',
+  click:   '<path d="M5.5 2.5 24.5 13.4 15.4 15.6 11.4 24.6z" fill="#131015"/><path d="M17.5 17.5 27.5 27.5" stroke="#131015" stroke-width="3.6" stroke-linecap="round"/><path d="M27 8 L8.5 26.5" stroke="#00C2A0" stroke-width="5"/><path d="M27 8 L8.5 26.5" stroke="#131015" stroke-width="2.2" stroke-linecap="round"/>',
+  urlbar:  '<rect x="1.8" y="6" width="26.4" height="18" rx="3" fill="none" stroke="#131015" stroke-width="3.2"/><circle cx="7.4" cy="15" r="2.4" fill="#131015"/><path d="M12.4 15h12" stroke="#131015" stroke-width="3.2" stroke-linecap="round"/>',
+  pin:     '<path d="M15 2.5c-5.2 0-9.4 4.1-9.4 9.2 0 6.9 9.4 15.8 9.4 15.8s9.4-8.9 9.4-15.8c0-5.1-4.2-9.2-9.4-9.2z" fill="#131015"/><circle cx="15" cy="11.5" r="3.6" fill="#FFF3DE"/>',
+  rank:    '<rect x="2" y="17" width="7.2" height="11" fill="#131015"/><rect x="11.4" y="10" width="7.2" height="18" fill="#131015"/><rect x="20.8" y="21" width="7.2" height="7" fill="#131015"/><path d="M11.4 10V3.2" stroke="#131015" stroke-width="3" stroke-dasharray="3.4 3" stroke-linecap="round"/>',
+};
+
+const CELLS = [
+  { n:'01', band:'info', icon:'search', big:'36%', title:'AI Overview trigger',
+    lines:'of informational queries show one. 5.47M queries, 53 brands tracked.',
+    src:'Seer Interactive · 2026' },
+
+  { n:'02', band:'info', icon:'ask', big:'85.9%', title:'Question queries',
+    lines:'of “what / how / why” searches trigger an AI Overview.',
+    src:'Seer Interactive · 2026' },
+
+  { n:'03', band:'info', icon:'quote', big:'0.94%', title:'The citation cliff',
+    lines:'organic CTR when an AI Overview shows and you are not cited. 3.35% with none, 2.07% when cited.',
+    src:'Seer Interactive · 2026' },
+
+  { n:'04', band:'comm', icon:'tag', big:'8%', title:'AI Overview trigger',
+    lines:'of commercial-investigation queries. 4.5× rarer than informational.',
+    src:'Seer Interactive · 2026' },
+
+  { n:'05', band:'comm', icon:'versus', big:'95.4%', title:'“X vs Y” searches',
+    lines:'of comparison queries — the highest trigger rate of any query pattern in the study.',
+    src:'Seer Interactive · 2026' },
+
+  { n:'06', band:'comm', icon:'up', big:'+71%', title:'Still climbing',
+    lines:'growth in commercial SERPs carrying an AI Overview, Nov 2025 → Apr 2026. Finance +231%.',
+    src:'Semrush · 600K keywords · 2026' },
+
+  { n:'07', band:'trans', icon:'cart', big:'5%', title:'AI Overview trigger',
+    lines:'of transactional queries — the lowest of the three intents tracked.',
+    src:'Seer Interactive · 2026' },
+
+  { n:'08', band:'trans', icon:'down', big:'−5%', title:'Going the other way',
+    lines:'change in transactional AI Overview share over the same six months commercial grew 71%.',
+    src:'Semrush · 2026' },
+
+  { n:'09', band:'trans', icon:'click', big:'2.15%', title:'The checkout click',
+    lines:'organic CTR on transactional queries, AI Overview shown, brand not cited. Was 4.17%.',
+    src:'Seer Interactive · Dec 2025' },
+
+  { n:'10', band:'nav', icon:'urlbar', big:'0% → 10.33%', bigSm:true, title:'Even “take me there”',
+    lines:'navigational AI Overview presence, Dec 2024 → Oct 2025.',
+    src:'Authoritas 2025 · Semrush 2026' },
+
+  { n:'11', band:'local', icon:'pin', big:'15%', title:'The local exception',
+    lines:'of local-intent queries show an AI Overview. 93% still show a Local Pack.',
+    src:'Whitespark · 540 queries · 2025' },
+
+  { n:'12', band:'all', icon:'rank', big:'−58%', title:'What rank 1 now costs',
+    lines:'position-one organic CTR when an AI Overview appears. Was −34.5% in April 2025.',
+    src:'Ahrefs · 300K keywords · 2026' },
+];
+
+const ROW_RAILS = [
+  { label: 'Informational', fill: 'var(--c-info)' },
+  { label: 'Commercial',    fill: 'var(--c-comm)' },
+  { label: 'Transactional', fill: 'var(--c-trans)' },
+  { label: 'The edges',     fill: 'linear-gradient(180deg, var(--c-nav) 0 33.34%, var(--c-local) 33.34% 66.67%, var(--c-all) 66.67% 100%)' },
+];
+
+/* --------------------------------------------------------------- build DOM */
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+
+const legendHtml = Object.values(BANDS)
+  .map(b => `<div class="chip"><i style="background:${b.css}"></i>${esc(b.name)}</div>`).join('');
+
+const rowsHtml = ROW_RAILS.map((rail, r) => {
+  const cells = CELLS.slice(r * 3, r * 3 + 3).map((c, i) => `
+    <div class="cell" data-cell="${r * 3 + i}" style="background:${BANDS[c.band].css}">
+      <div class="chead">
+        <div class="num">${esc(c.n)}</div>
+        <svg viewBox="0 0 30 30" aria-hidden="true">${ICON[c.icon]}</svg>
+      </div>
+      <div class="cbig${c.bigSm ? ' sm' : ''}">${esc(c.big)}</div>
+      <div class="ctitle">${esc(c.title)}</div>
+      <div class="clines">${esc(c.lines)}</div>
+      <div class="csrc">${esc(c.src)}</div>
+    </div>`).join('');
+  return `<div class="row">
+      <div class="rail" data-rail="${r}" style="background:${rail.fill}"><span>${esc(rail.label)}</span></div>
+      ${cells}
+    </div>`;
+}).join('');
+
+document.getElementById('poster').innerHTML = `
+  <div class="titlebar" id="titlebar">
+    <div class="eyebrow">Search results by intent · field chart · Sept 2026</div>
+    <div class="headrow">
+      <div class="counter" id="counter">0.00%</div>
+      <div class="headline">of U.S. Google searches<br>now end with <em>no click</em></div>
+    </div>
+    <div class="subline">68.01% measured Jan–Apr 2026, up from 60.45% across 2024. SparkToro,<br>on Similarweb clickstream data. Below: what the other 31.99% run into, by intent.</div>
+  </div>
+
+  <div class="legend" id="legend">
+    <div class="lab">Colour = intent</div>
+    ${legendHtml}
+  </div>
+
+  <div class="grid" id="grid">${rowsHtml}</div>
+
+  <div class="foot" id="foot">
+    <div class="gapstrip">
+      <b>Not measured</b>
+      <div>No public study segments AI-platform citations, People Also Ask presence, or shopping-unit presence by query intent. Checked 2026-09-14 — treat those cells as open.</div>
+    </div>
+    <div class="sources">Sources: Seer Interactive 2026-04-24 · Semrush 2026-02-02 &amp; 2026-07-02 · Ahrefs 2026-02-04 · SparkToro / Similarweb 2026-06-09 · Authoritas 2025-01 · Whitespark 2025-05-12 · chart: mitchjmiller.com</div>
+  </div>`;
+
+/* ------------------------------------------------------------------ layout */
+const stage = document.getElementById('stage');
+function layout(){
+  document.documentElement.style.setProperty('--tk', SQUARE ? '0.80' : '1');
+  stage.style.width = W + 'px';
+  stage.style.height = H + 'px';
+  const s = Math.min(window.innerWidth / W, window.innerHeight / H);
+  stage.style.transform = `scale(${s})`;
+}
+layout();
+window.addEventListener('resize', layout);
+
+/* --------------------------------------------------------------- animation
+   No CSS transitions or keyframes anywhere: every frame is a pure function of
+   t, so window.VIZ.seek(t) gives byte-identical captures on every run. */
+const DURATION = 4.2;
+
+const els = {
+  titlebar: document.getElementById('titlebar'),
+  counter:  document.getElementById('counter'),
+  legend:   document.getElementById('legend'),
+  foot:     document.getElementById('foot'),
+  cells:    [...document.querySelectorAll('.cell')],
+  rails:    [...document.querySelectorAll('.rail')],
+};
+
+const clamp01 = x => x < 0 ? 0 : x > 1 ? 1 : x;
+const seg = (t, a, b) => clamp01((t - a) / (b - a));
+const outCubic  = p => 1 - Math.pow(1 - p, 3);
+const outQuint  = p => 1 - Math.pow(1 - p, 5);
+const outBack   = p => { const c = 1.9; return 1 + (c + 1) * Math.pow(p - 1, 3) + c * Math.pow(p - 1, 2); };
+
+const CELL_START = 0.62;     // first cell begins
+const CELL_STEP  = 0.185;    // stagger between cells
+const CELL_RUN   = 0.40;     // each cell's own flip length
+const RAIL_START = 0.42;
+const RAIL_STEP  = 0.46;
+
+function render(t){
+  // title bar is present from frame zero — the first frame of the GIF has to be
+  // a usable thumbnail, not an empty page
+  els.titlebar.style.opacity = '1';
+
+  // headline counter rolls to 68.01
+  const pC = outQuint(seg(t, 0.06, 1.5));
+  els.counter.textContent = (68.01 * pC).toFixed(2) + '%';
+
+  // legend wipes in
+  const pL = outCubic(seg(t, 0.34, 0.86));
+  els.legend.style.opacity = pL.toFixed(3);
+  els.legend.style.clipPath = `inset(0 ${((1 - pL) * 100).toFixed(2)}% 0 0)`;
+
+  // rails grow downward, one per row
+  els.rails.forEach((r, i) => {
+    const p = outCubic(seg(t, RAIL_START + i * RAIL_STEP, RAIL_START + i * RAIL_STEP + 0.44));
+    r.style.clipPath = `inset(0 0 ${((1 - p) * 100).toFixed(2)}% 0)`;
+    r.style.opacity = p > 0 ? '1' : '0';
+  });
+
+  // cells flip up in reading order
+  els.cells.forEach((c, i) => {
+    const a = CELL_START + i * CELL_STEP;
+    const p = seg(t, a, a + CELL_RUN);
+    const e = outBack(p);
+    const rot = -74 * (1 - e);
+    const lift = 22 * (1 - e);
+    c.style.opacity = clamp01(p * 2.6).toFixed(3);
+    c.style.transform = `perspective(1100px) translateY(${lift.toFixed(2)}px) rotateX(${rot.toFixed(2)}deg)`;
+    c.style.boxShadow = `${(5 * e).toFixed(2)}px ${(5 * e).toFixed(2)}px 0 var(--ink)`;
+  });
+
+  // footer last
+  const pF = outCubic(seg(t, CELL_START + 11 * CELL_STEP + 0.2, CELL_START + 11 * CELL_STEP + 0.7));
+  els.foot.style.opacity = pF.toFixed(3);
+  els.foot.style.transform = `translateY(${(12 * (1 - pF)).toFixed(2)}px)`;
+}
+
+/* ------------------------------------------------------------- export hook */
+let raf = null;
+function play(){
+  const t0 = performance.now();
+  const step = now => {
+    const t = (now - t0) / 1000;
+    render(Math.min(t, DURATION));
+    if (t < DURATION + 1.2) raf = requestAnimationFrame(step);
+    else { const again = performance.now(); raf = requestAnimationFrame(function loop(n){
+      const tt = (n - again) / 1000;
+      if (tt > 0.8) { play(); return; }
+      raf = requestAnimationFrame(loop);
+    }); }
+  };
+  raf = requestAnimationFrame(step);
+}
+
+window.VIZ = {
+  duration: DURATION,
+  size: [W, H],
+  seek(t){ if (raf) { cancelAnimationFrame(raf); raf = null; } render(Math.max(0, Math.min(Number(t) || 0, DURATION))); },
+  ready: (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve())
+    .then(() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))))
+    .then(() => {
+      layout();
+      if (SEEK_T !== null) render(SEEK_T);
+      else if (STATIC) render(DURATION);
+      else play();
+      document.documentElement.dataset.ready = '1';
+      return true;
+    }),
+};
+
+// first paint is the settled state for stills, an empty stage for the reveal
+if (SEEK_T !== null) render(SEEK_T);
+else if (STATIC) render(DURATION);
+else render(0);
+</script>
+</body>
+</html>

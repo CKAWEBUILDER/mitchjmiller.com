@@ -1,0 +1,1204 @@
+{
+ "Table 1: ": {
+  "caption": "Table 1: invivo statistics across different platforms.",
+  "rows": [
+   [
+    "Company",
+    "Platform",
+    "# Users",
+    "# Convs",
+    "# Turns",
+    "# Turns With Web Search"
+   ],
+   [
+    "OpenAI",
+    "ChatGPT",
+    "310",
+    "143,730",
+    "690,754",
+    "42,273"
+   ],
+   [
+    "Anthropic",
+    "Claude",
+    "102",
+    "9,267",
+    "64,354",
+    "1,696"
+   ],
+   [
+    "xAI",
+    "Grok",
+    "100",
+    "9,005",
+    "53,840",
+    "3,004"
+   ],
+   [
+    "DeepSeek",
+    "DeepSeek",
+    "101",
+    "9,262",
+    "36,020",
+    "1,730"
+   ]
+  ]
+ },
+ "Table 2: ": {
+  "caption": "Table 2: invitro details across different models.",
+  "rows": [
+   [
+    "Company",
+    "Model",
+    "API",
+    "Release Date",
+    "Know. Cutoff"
+   ],
+   [
+    "OpenAI",
+    "GPT-5.3-chat",
+    "Responses API",
+    "Mar 2026",
+    "Aug 2025"
+   ],
+   [
+    "Anthropic",
+    "Claude Sonnet 4.6",
+    "Messages API",
+    "Feb 2026",
+    "Aug 2025"
+   ],
+   [
+    "xAI",
+    "Grok-4.3",
+    "OpenAI-compatible Responses API",
+    "May 2026",
+    "Dec 2025"
+   ],
+   [
+    "DeepSeek",
+    "DeepSeek-v4-flash",
+    "Anthropic-compatible Messages API",
+    "Apr 2026",
+    "Unknown"
+   ]
+  ]
+ },
+ "Table 3: ": {
+  "caption": "Table 3: Web calling decisions and quality of responses on querying the same 1000 samples in invitro setting across models under different Web-calling modes. F, C, and R denote factuality, completeness, and relevance. Values are reported as mean scores, with 95% bootstrap confidence intervals shown in parentheses.",
+  "rows": [
+   [
+    "Model",
+    "# Web Calling Samples",
+    "Web-calling Samples",
+    "Web-calling Samples in No-Web Mode",
+    "No Web-calling Samples"
+   ],
+   [
+    "F",
+    "C",
+    "R",
+    "F",
+    "C",
+    "R",
+    "F",
+    "C",
+    "R"
+   ],
+   [
+    "GPT-5.3-chat",
+    "140",
+    "3.50 (3.31, 3.69)",
+    "3.52 (3.34, 3.71)",
+    "4.06 (3.90, 4.21)",
+    "2.81 (2.61, 3.01)",
+    "2.56 (2.39, 2.74)",
+    "3.26 (3.06, 3.46)",
+    "3.97 (3.90, 4.03)",
+    "4.08 (4.02, 4.15)",
+    "4.54 (4.49, 4.59)"
+   ],
+   [
+    "Claude Sonnet 4.6",
+    "825",
+    "3.29 (3.22, 3.35)",
+    "3.47 (3.40, 3.55)",
+    "3.72 (3.67, 3.78)",
+    "3.41 (3.33, 3.49)",
+    "3.30 (3.21, 3.39)",
+    "3.85 (3.77, 3.92)",
+    "4.36 (4.22, 4.50)",
+    "4.21 (4.04, 4.37)",
+    "4.45 (4.32, 4.57)"
+   ],
+   [
+    "Grok-4.3",
+    "766",
+    "3.81 (3.75, 3.87)",
+    "4.13 (4.07, 4.20)",
+    "4.24 (4.18, 4.29)",
+    "3.30 (3.22, 3.38)",
+    "3.57 (3.48, 3.65)",
+    "4.18 (4.11, 4.25)",
+    "4.42 (4.30, 4.53)",
+    "4.45 (4.32, 4.57)",
+    "4.61 (4.50, 4.71)"
+   ],
+   [
+    "DeepSeek-v4-flash",
+    "584",
+    "3.13 (3.04, 3.21)",
+    "3.50 (3.40, 3.59)",
+    "3.74 (3.66, 3.81)",
+    "2.50 (2.41, 2.59)",
+    "2.91 (2.81, 3.01)",
+    "3.48 (3.40, 3.56)",
+    "3.85 (3.75, 3.96)",
+    "4.07 (3.97, 4.17)",
+    "4.26 (4.17, 4.34)"
+   ]
+  ]
+ },
+ "Table 4: ": {
+  "caption": "Table 4: Effect of harness instructions and models\u2019 self decisions in web-calling decisions over the same 1000 samples. Both the factors play a major role with self decisions dominating.",
+  "rows": [
+   [
+    "",
+    "Developer Prompt Model"
+   ],
+   [
+    "Replay Model",
+    "GPT-5.3-chat",
+    "GPT-4.1-mini",
+    "o4-mini"
+   ],
+   [
+    "o4-mini",
+    "478",
+    "640",
+    "634"
+   ],
+   [
+    "GPT-4.1-mini",
+    "407",
+    "417",
+    "440"
+   ],
+   [
+    "GPT-5.3-chat",
+    "140",
+    "145",
+    "169"
+   ]
+  ]
+ },
+ "Table 5: ": {
+  "caption": "Table 5: Web-search querying and search results vary highly across platforms in invivo , for turns with available Web queries.",
+  "rows": [
+   [
+    "Platform",
+    "#Web Queries",
+    "Avg. #Web Queries /User Prompt (95% CI)",
+    "Avg. #URLs /Web Query (95% CI)",
+    "Avg. #URLs /User Prompt (95% CI)"
+   ],
+   [
+    "ChatGPT",
+    "48,226",
+    "3.07 (2.98\u20133.16)",
+    "14.06 (13.98\u201314.14)",
+    "43.24 (42.52\u201343.99)"
+   ],
+   [
+    "Claude",
+    "2,936",
+    "1.80 (1.72\u20131.88)",
+    "9.19 (9.12\u20139.25)",
+    "16.61 (15.94\u201317.31)"
+   ],
+   [
+    "Grok",
+    "12,371",
+    "4.55 (4.40\u20134.71)",
+    "8.95 (8.91\u20138.99)",
+    "40.68 (39.18\u201342.32)"
+   ],
+   [
+    "DeepSeek",
+    "4,092",
+    "2.63 (2.56\u20132.71)",
+    "5.46 (5.27\u20135.65)",
+    "14.37 (13.74\u201315.02)"
+   ]
+  ]
+ },
+ "Table 6: ": {
+  "caption": "Table 6: Citation rates (reported with 95% bootstrap confidence intervals) across platforms in invivo and models in invitro show high variability.",
+  "rows": [
+   [
+    "Category",
+    "Platform / Model",
+    "#Search Results URLs",
+    "#Cited URLs",
+    "#Cited Search Results",
+    "Citation Rate (95% CI)"
+   ],
+   [
+    "invivo",
+    "ChatGPT",
+    "1,196,238",
+    "168,510 (4.0)",
+    "159,580",
+    "13.3% (13.1,13.6)"
+   ],
+   [
+    "",
+    "Claude",
+    "27,162",
+    "5,668 (3.5)",
+    "5,409",
+    "19.9% (17.2,22.9)"
+   ],
+   [
+    "",
+    "Grok",
+    "110,684",
+    "1,950 (0.7)",
+    "1,943",
+    "1.8% (1.4,2.2)"
+   ],
+   [
+    "",
+    "DeepSeek",
+    "22,338",
+    "7,610 (4.9)",
+    "7,610",
+    "34.1% (31.6,36.7)"
+   ],
+   [
+    "invitro",
+    "GPT-5.3-chat",
+    "4,940",
+    "534 (3.8)",
+    "526",
+    "10.6% (9.3,12.0)"
+   ],
+   [
+    "",
+    "Claude Sonnet 4.6",
+    "17,086",
+    "6,790 (8.2)",
+    "6,790",
+    "39.7% (37.1,42.6)"
+   ],
+   [
+    "",
+    "Grok-4.3",
+    "17,090",
+    "4,406 (5.7)",
+    "4,364",
+    "25.5% (24.2,26.9)"
+   ],
+   [
+    "",
+    "DeepSeek-v4-flash",
+    "10,582",
+    "\u2013",
+    "\u2013",
+    "\u2013"
+   ]
+  ]
+ },
+ "Table 7: ": {
+  "caption": "Table 7: P-values from paired bootstrap significance tests comparing replay responses generated with and without Web search for prompts that autonomously invoked Web search.",
+  "rows": [
+   [
+    "Model",
+    "Factuality",
+    "Completeness",
+    "Relevance"
+   ],
+   [
+    "GPT-5.3-chat",
+    "< 10 \u2212 4",
+    "< 10 \u2212 4",
+    "< 10 \u2212 4"
+   ],
+   [
+    "Claude Sonnet 4.6",
+    "0.0038",
+    "< 10 \u2212 4",
+    "0.0015"
+   ],
+   [
+    "Grok-4.3",
+    "< 10 \u2212 4",
+    "< 10 \u2212 4",
+    "0.1470"
+   ],
+   [
+    "DeepSeek-v4-flash",
+    "< 10 \u2212 4",
+    "< 10 \u2212 4",
+    "< 10 \u2212 4"
+   ]
+  ]
+ },
+ "Table 8: ": {
+  "caption": "Table 8: Citation rates (reported with 95% bootstrap confidence intervals) across platforms in invivo and models in invitro shows high variability. Numbers in parentheses denote the average number of search results or cited URLs per response.",
+  "rows": [
+   [
+    "Category",
+    "Platform / Model",
+    "#Search Results URLs",
+    "#Cited URLs",
+    "#Cited Search Results",
+    "Citation Rate (95% CI)"
+   ],
+   [
+    "invivo",
+    "ChatGPT",
+    "1,196,238 (28.4)",
+    "168,510 (4.0)",
+    "159,580",
+    "13.3% (13.1,13.6)"
+   ],
+   [
+    "",
+    "Claude",
+    "27,162 (16.6)",
+    "5,668 (3.5)",
+    "5,409",
+    "19.9% (17.2,22.9)"
+   ],
+   [
+    "",
+    "Grok",
+    "110,684 (40.7)",
+    "1,950 (0.7)",
+    "1,943",
+    "1.8% (1.4,2.2)"
+   ],
+   [
+    "",
+    "DeepSeek",
+    "22,338 (14.4)",
+    "7,610 (4.9)",
+    "7,610",
+    "34.1% (31.6,36.7)"
+   ],
+   [
+    "invitro (all)",
+    "GPT-5.3-chat",
+    "4,940 (35.3)",
+    "534 (3.8)",
+    "526",
+    "10.6% (9.3,12.0)"
+   ],
+   [
+    "",
+    "Claude Sonnet 4.6",
+    "17,086 (20.7)",
+    "6,790 (8.2)",
+    "6,790",
+    "39.7% (37.1,42.6)"
+   ],
+   [
+    "",
+    "Grok-4.3",
+    "17,090 (22.3)",
+    "4,406 (5.7)",
+    "4,364",
+    "25.5% (24.2,26.9)"
+   ],
+   [
+    "",
+    "DeepSeek-v4-flash",
+    "10,582 (18.1)",
+    "\u2013",
+    "\u2013",
+    "\u2013"
+   ],
+   [
+    "invitro (common)",
+    "GPT-5.3-chat",
+    "4,702 (36.4)",
+    "509 (3.9)",
+    "501",
+    "10.7% (9.3,12.2)"
+   ],
+   [
+    "",
+    "Claude Sonnet 4.6",
+    "3,177 (24.6)",
+    "1,009 (7.8)",
+    "1,009",
+    "31.8% (26.1,39.3)"
+   ],
+   [
+    "",
+    "Grok-4.3",
+    "3,156 (24.4)",
+    "795 (6.2)",
+    "771",
+    "24.4% (21.4,27.8)"
+   ],
+   [
+    "",
+    "DeepSeek-v4-flash",
+    "2,271 (17.6)",
+    "\u2013",
+    "\u2013",
+    "\u2013"
+   ]
+  ]
+ },
+ "Table 9: ": {
+  "caption": "Table 9: Citation and grounding rates across deployed models within each platform in the invivo dataset. Citation rate denotes the fraction of search result URLs that are eventually cited, while grounding rate denotes the fraction of citations originating from search results.",
+  "rows": [
+   [
+    "Platform",
+    "Model",
+    "Citation Rate",
+    "Grounding Rate"
+   ],
+   [
+    "ChatGPT",
+    "gpt-4-1",
+    "18.6%",
+    "93.8%"
+   ],
+   [
+    "gpt-4o",
+    "17.5%",
+    "92.7%"
+   ],
+   [
+    "gpt-5",
+    "14.7%",
+    "98.5%"
+   ],
+   [
+    "gpt-5-mini",
+    "11.3%",
+    "91.6%"
+   ],
+   [
+    "gpt-5-2",
+    "7.8%",
+    "99.9%"
+   ],
+   [
+    "o3",
+    "9.5%",
+    "95.0%"
+   ],
+   [
+    "text-davinci-002-render-sha",
+    "20.0%",
+    "87.5%"
+   ],
+   [
+    "gpt-4-1-mini",
+    "12.5%",
+    "90.3%"
+   ],
+   [
+    "gpt-4o-mini",
+    "14.2%",
+    "88.8%"
+   ],
+   [
+    "gpt-5-instant",
+    "10.2%",
+    "100.0%"
+   ],
+   [
+    "gpt-5-thinking",
+    "9.4%",
+    "99.0%"
+   ],
+   [
+    "gpt-5-2-thinking",
+    "6.0%",
+    "97.5%"
+   ],
+   [
+    "Claude",
+    "\u2014",
+    "\u2014",
+    "\u2014"
+   ],
+   [
+    "Grok",
+    "grok-3",
+    "1.3%",
+    "99.49%"
+   ],
+   [
+    "",
+    "grok-4",
+    "4.1%",
+    "99.87%"
+   ],
+   [
+    "",
+    "grok-420",
+    "0.6%",
+    "100.0%"
+   ],
+   [
+    "DeepSeek",
+    "deepseek-chat",
+    "46.5%",
+    "100.0%"
+   ],
+   [
+    "",
+    "deepseek-reasoner",
+    "27.4%",
+    "100.0%"
+   ]
+  ]
+ },
+ "Table 10:": {
+  "caption": "Table 10: Average factuality scores of response claims grouped by the source of supporting evidence. Values are reported as mean with 95% bootstrap confidence intervals obtained by resampling responses.",
+  "rows": [
+   [
+    "Platform",
+    "Supporting Evidence",
+    "Avg. Factuality Score (95% CI)"
+   ],
+   [
+    "ChatGPT",
+    "Associated Citations",
+    "3.47 (3.36\u20133.59)"
+   ],
+   [
+    "Other Citations",
+    "3.35 (3.24\u20133.47)"
+   ],
+   [
+    "Search Results",
+    "3.33 (3.19\u20133.48)"
+   ],
+   [
+    "Parametric Knowledge",
+    "2.84 (2.71\u20132.97)"
+   ],
+   [
+    "Claude",
+    "Associated Citations",
+    "3.92 (3.56\u20134.30)"
+   ],
+   [
+    "Other Citations",
+    "3.53 (3.07\u20134.18)"
+   ],
+   [
+    "Search Results",
+    "3.64 (3.21\u20134.06)"
+   ],
+   [
+    "Parametric Knowledge",
+    "3.31 (2.51\u20134.20)"
+   ],
+   [
+    "Grok",
+    "Associated Citations",
+    "4.40 (4.21\u20134.58)"
+   ],
+   [
+    "Other Citations",
+    "4.35 (4.18\u20134.49)"
+   ],
+   [
+    "Search Results",
+    "4.26 (4.18\u20134.33)"
+   ],
+   [
+    "Parametric Knowledge",
+    "3.40 (3.25\u20133.52)"
+   ],
+   [
+    "DeepSeek",
+    "Associated Citations",
+    "4.17 (4.08\u20134.25)"
+   ],
+   [
+    "Other Citations",
+    "4.31 (4.21\u20134.40)"
+   ],
+   [
+    "Search Results",
+    "4.16 (3.95\u20134.37)"
+   ],
+   [
+    "Parametric Knowledge",
+    "3.92 (3.80\u20134.03)"
+   ]
+  ]
+ },
+ "Table 11:": {
+  "caption": "Table 11: Average factuality scores of response claims grouped by the supporting evidence source in the invitro replay experiments. Values are reported as mean with 95% bootstrap confidence intervals obtained by resampling responses.",
+  "rows": [
+   [
+    "Model",
+    "Supporting Evidence",
+    "Avg. Factuality Score (95% CI)"
+   ],
+   [
+    "GPT-5.3",
+    "Associated Citations",
+    "3.47 (3.28\u20133.65)"
+   ],
+   [
+    "Other Citations",
+    "3.07 (2.90\u20133.26)"
+   ],
+   [
+    "Search Results",
+    "2.88 (2.74\u20133.03)"
+   ],
+   [
+    "Parametric Knowledge",
+    "2.60 (2.39\u20132.79)"
+   ],
+   [
+    "Claude Sonnet 4.6",
+    "Associated Citations",
+    "3.00 (2.84\u20133.16)"
+   ],
+   [
+    "Other Citations",
+    "3.08 (2.90\u20133.26)"
+   ],
+   [
+    "Search Results",
+    "2.94 (2.73\u20133.16)"
+   ],
+   [
+    "Parametric Knowledge",
+    "2.66 (2.46\u20132.88)"
+   ],
+   [
+    "Grok-4.3",
+    "Associated Citations",
+    "3.41 (3.21\u20133.60)"
+   ],
+   [
+    "Other Citations",
+    "3.23 (3.07\u20133.38)"
+   ],
+   [
+    "Search Results",
+    "3.11 (2.85\u20133.37)"
+   ],
+   [
+    "Parametric Knowledge",
+    "2.86 (2.68\u20133.06)"
+   ]
+  ]
+ },
+ "Table 12:": {
+  "caption": "Table 12: invivo cited URL validity breakdown for different platforms by citation type. R denotes retrieved citations, while P denotes citations attributed to parametric knowledge. Valid URLs are reachable, Unk. indicates unverifiable URLs, Hall. indicates hallucinated URLs, and Dead indicates stale URLs.",
+  "rows": [
+   [
+    "Platform",
+    "Type",
+    "Valid",
+    "Unk.",
+    "Hall.",
+    "Dead",
+    "Total"
+   ],
+   [
+    "ChatGPT",
+    "R",
+    "137,217",
+    "16,607",
+    "3,190",
+    "2,566",
+    "159,580"
+   ],
+   [
+    "(85.99%)",
+    "(10.41%)",
+    "(2.00%)",
+    "(1.61%)",
+    ""
+   ],
+   [
+    "P",
+    "7,930",
+    "845",
+    "87",
+    "68",
+    "8,930"
+   ],
+   [
+    "(88.80%)",
+    "(9.46%)",
+    "(0.97%)",
+    "(0.76%)",
+    ""
+   ],
+   [
+    "Claude",
+    "R",
+    "4,781",
+    "491",
+    "60",
+    "77",
+    "5,409"
+   ],
+   [
+    "(88.39%)",
+    "(9.08%)",
+    "(1.11%)",
+    "(1.42%)",
+    ""
+   ],
+   [
+    "P",
+    "205",
+    "29",
+    "8",
+    "17",
+    "259"
+   ],
+   [
+    "(79.15%)",
+    "(11.20%)",
+    "(3.09%)",
+    "(6.56%)",
+    ""
+   ],
+   [
+    "Grok",
+    "R",
+    "1,784",
+    "149",
+    "5",
+    "5",
+    "1,943"
+   ],
+   [
+    "(91.82%)",
+    "(7.67%)",
+    "(0.26%)",
+    "(0.26%)",
+    ""
+   ],
+   [
+    "P",
+    "4",
+    "3",
+    "0",
+    "0",
+    "7"
+   ],
+   [
+    "(57.14%)",
+    "(42.86%)",
+    "(0.00%)",
+    "(0.00%)",
+    ""
+   ],
+   [
+    "DeepSeek",
+    "R",
+    "6,710",
+    "694",
+    "132",
+    "74",
+    "7,610"
+   ],
+   [
+    "(88.17%)",
+    "(9.12%)",
+    "(1.73%)",
+    "(0.97%)",
+    ""
+   ],
+   [
+    "P",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0"
+   ]
+  ]
+ },
+ "Table 13:": {
+  "caption": "Table 13: invitro cited URL validity breakdown for different platforms under the All and Common settings by citation type. R denotes retrieved citations, while P denotes citations attributed to parametric knowledge. Valid URLs are reachable, Unk. indicates unverifiable URLs, Hall. indicates hallucinated URLs, and Dead indicates stale or inaccessible URLs.",
+  "rows": [
+   [
+    "Platform",
+    "Type",
+    "Valid",
+    "Unk.",
+    "Hall.",
+    "Dead",
+    "Total"
+   ],
+   [
+    "ChatGPT (All)",
+    "R",
+    "460",
+    "62",
+    "1",
+    "3",
+    "526"
+   ],
+   [
+    "(87.45%)",
+    "(11.79%)",
+    "(0.19%)",
+    "(0.57%)",
+    ""
+   ],
+   [
+    "P",
+    "8",
+    "0",
+    "0",
+    "0",
+    "8"
+   ],
+   [
+    "(100.00%)",
+    "(0.00%)",
+    "(0.00%)",
+    "(0.00%)",
+    ""
+   ],
+   [
+    "Claude (All)",
+    "R",
+    "6,064",
+    "538",
+    "121",
+    "67",
+    "6,790"
+   ],
+   [
+    "(89.31%)",
+    "(7.92%)",
+    "(1.78%)",
+    "(0.99%)",
+    ""
+   ],
+   [
+    "P",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0"
+   ],
+   [
+    "(0.00%)",
+    "(0.00%)",
+    "(0.00%)",
+    "(0.00%)",
+    ""
+   ],
+   [
+    "Grok (All)",
+    "R",
+    "4,037",
+    "304",
+    "5",
+    "18",
+    "4,364"
+   ],
+   [
+    "(92.51%)",
+    "(6.97%)",
+    "(0.11%)",
+    "(0.41%)",
+    ""
+   ],
+   [
+    "P",
+    "37",
+    "3",
+    "1",
+    "1",
+    "42"
+   ],
+   [
+    "(88.10%)",
+    "(7.14%)",
+    "(2.38%)",
+    "(2.38%)",
+    ""
+   ],
+   [
+    "ChatGPT (Common)",
+    "R",
+    "435",
+    "62",
+    "1",
+    "3",
+    "501"
+   ],
+   [
+    "(86.83%)",
+    "(12.38%)",
+    "(0.20%)",
+    "(0.60%)",
+    ""
+   ],
+   [
+    "P",
+    "8",
+    "0",
+    "0",
+    "0",
+    "8"
+   ],
+   [
+    "(100.00%)",
+    "(0.00%)",
+    "(0.00%)",
+    "(0.00%)",
+    ""
+   ],
+   [
+    "Claude (Common)",
+    "R",
+    "870",
+    "108",
+    "22",
+    "9",
+    "1,009"
+   ],
+   [
+    "(86.22%)",
+    "(10.70%)",
+    "(2.18%)",
+    "(0.89%)",
+    ""
+   ],
+   [
+    "P",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0"
+   ],
+   [
+    "(0.00%)",
+    "(0.00%)",
+    "(0.00%)",
+    "(0.00%)",
+    ""
+   ],
+   [
+    "Grok (Common)",
+    "R",
+    "701",
+    "70",
+    "0",
+    "0",
+    "771"
+   ],
+   [
+    "(90.92%)",
+    "(9.08%)",
+    "(0.00%)",
+    "(0.00%)",
+    ""
+   ],
+   [
+    "P",
+    "21",
+    "2",
+    "0",
+    "1",
+    "24"
+   ],
+   [
+    "(87.50%)",
+    "(8.33%)",
+    "(0.00%)",
+    "(4.17%)",
+    ""
+   ]
+  ]
+ },
+ "Table 14:": {
+  "caption": "Table 14: Web-search querying and search results across model invitro .",
+  "rows": [
+   [
+    "Category",
+    "Model",
+    "#Web Queries",
+    "Avg. #Web Queries /User Prompt (95% CI)",
+    "Avg. #URLs /Web Query (95% CI)",
+    "Avg. #URLs /User Prompt (95% CI)"
+   ],
+   [
+    "invitro (all)",
+    "GPT-5.3",
+    "279",
+    "2.11 (2.04\u20132.20)",
+    "17.71 (17.27\u201318.14)",
+    "37.42 (36.14\u201338.71)"
+   ],
+   [
+    "",
+    "Claude Sonnet 4.6",
+    "2,000",
+    "2.42 (2.27\u20132.59)",
+    "8.54 (8.49\u20138.60)",
+    "20.71 (19.39\u201322.09)"
+   ],
+   [
+    "",
+    "Grok-4.3",
+    "2,885",
+    "3.80 (3.68\u20133.91)",
+    "5.92 (5.85\u20136.00)",
+    "22.49 (21.78\u201323.22)"
+   ],
+   [
+    "",
+    "DeepSeek V4 Flash",
+    "1,657",
+    "2.84 (2.67\u20133.01)",
+    "6.39 (6.23\u20136.55)",
+    "18.12 (17.22\u201319.04)"
+   ],
+   [
+    "invitro (common)",
+    "GPT-5.3",
+    "267",
+    "2.12 (2.04\u20132.21)",
+    "17.61 (17.17\u201318.05)",
+    "37.32 (36.01\u201338.60)"
+   ],
+   [
+    "",
+    "Claude Sonnet 4.6",
+    "368",
+    "2.85 (2.35\u20133.40)",
+    "8.63 (8.55\u20138.72)",
+    "24.63 (20.26\u201329.36)"
+   ],
+   [
+    "",
+    "Grok-4.3",
+    "518",
+    "4.14 (3.86\u20134.42)",
+    "6.09 (5.91\u20136.28)",
+    "25.25 (23.40\u201327.11)"
+   ],
+   [
+    "",
+    "DeepSeek V4 Flash",
+    "410",
+    "3.18 (2.79\u20133.57)",
+    "5.54 (5.21\u20135.86)",
+    "17.60 (15.70\u201319.63)"
+   ]
+  ]
+ },
+ "Table 15:": {
+  "caption": "Table 15: Human annotation agreement and judge validation across evaluation tasks. Human agreement denotes pairwise annotator agreement. Reliability corresponds to Fleiss\u2019 \u03ba \\kappa for categorical tasks and average pairwise quadratic weighted \u03ba \\kappa for replay evaluation metrics; for the latter, lower \u03ba \\kappa values can arise even when within-1 agreement is high if annotators use the ordinal scale with consistent offsets. Judge agreement measures agreement between the automated judge and aggregated human annotations.",
+  "rows": [
+   [
+    "Task",
+    "#Items",
+    "Aggregation",
+    "Human Agreement",
+    "Reliability",
+    "Judge Agreement"
+   ],
+   [
+    "Policy Trigger Identification",
+    "30",
+    "Majority",
+    "0.778",
+    "0.705",
+    "0.964"
+   ],
+   [
+    "Query Specificity (Temporal)",
+    "30",
+    "Median",
+    "0.956",
+    "0.686",
+    "0.967"
+   ],
+   [
+    "Query Specificity (Geographic)",
+    "30",
+    "Median",
+    "0.933",
+    "0.527",
+    "1.00"
+   ],
+   [
+    "Query Specificity (Entity)",
+    "30",
+    "Median",
+    "0.856",
+    "0.416",
+    "0.900"
+   ],
+   [
+    "Query Type Classification",
+    "30",
+    "Majority",
+    "0.778",
+    "0.566",
+    "0.929"
+   ],
+   [
+    "Query Reformulation Reason",
+    "46",
+    "Majority",
+    "0.825",
+    "0.590",
+    "0.881"
+   ],
+   [
+    "Replay Factuality",
+    "30",
+    "Median",
+    "0.867",
+    "0.005",
+    "0.667"
+   ],
+   [
+    "Replay Relevance",
+    "30",
+    "Median",
+    "0.833",
+    "0.223",
+    "0.767"
+   ],
+   [
+    "Replay Completeness",
+    "30",
+    "Median",
+    "0.833",
+    "0.332",
+    "0.733"
+   ],
+   [
+    "Response Entailment (NLI)",
+    "30",
+    "Majority",
+    "0.782",
+    "0.167",
+    "0.931"
+   ]
+  ]
+ }
+}

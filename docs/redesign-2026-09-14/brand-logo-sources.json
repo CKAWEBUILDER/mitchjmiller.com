@@ -1,0 +1,84 @@
+{
+  "recordedAt": "2026-09-14T23:25:40.995776+00:00",
+  "purpose": "Provenance for actual artwork used to identify evidence-backed professional associations. The source record makes no endorsement or permission claim.",
+  "brands": [
+    {
+      "name": "Apple",
+      "logo": "/images/brands/apple.svg",
+      "sourceUrl": "https://www.apple.com/",
+      "sourcePage": "https://www.apple.com/",
+      "width": 14,
+      "height": 44,
+      "viewBox": "0 0 14 44",
+      "method": "Exact extraction of the first SVG in the official globalnav-link-apple header link; SVG markup and path unchanged.",
+      "displayNote": "The original 14\u00d744 viewBox contains vertical navigation padding; size the image in CSS while preserving the source artwork.",
+      "bytes": 743,
+      "sha256": "173a4aceb67e416738f3af19eeda9de484cac388914881915dc94e4f6ce77687"
+    },
+    {
+      "name": "Stanford Health Care",
+      "logo": "/images/brands/stanford-health-care.svg",
+      "sourceUrl": "https://stanfordhealthcare.org/etc/clientlibs/shc/main/img/stanfordHealthcareLogo.svg",
+      "sourcePage": "https://stanfordhealthcare.org/",
+      "width": 244.9662,
+      "height": 37.7296,
+      "viewBox": "0 0 244.9662 37.7296",
+      "method": "Original official header image; downloaded bytes unchanged.",
+      "bytes": 19807,
+      "sha256": "b7fd4177dea9b69e483e976aedc897110b92aebe3e1db9a97cf6aff76eb34db4"
+    },
+    {
+      "name": "CommonSpirit Health",
+      "logo": "/images/brands/commonspirit-health.svg",
+      "sourceUrl": "https://www.commonspirit.org/content/dam/shared/en/logos/commonspirit-logo-1.svg",
+      "sourcePage": "https://www.commonspirit.org/",
+      "width": 200,
+      "height": 48,
+      "viewBox": "0 0 200 48",
+      "method": "Original official header image; downloaded bytes unchanged.",
+      "bytes": 11345,
+      "sha256": "06187cdfb074817d81b5c19053b1d6f2d0c4f206043bed3c29e2f5bb700ba40c"
+    },
+    {
+      "name": "Dignity Health",
+      "logo": "/images/brands/dignity-health.png",
+      "sourceUrl": "https://www.commonspirit.org/content/dam/shared/en/logos/diginity-health/DignityHealth_RGB.png",
+      "sourcePage": "https://www.commonspirit.org/dignity-health",
+      "width": 1534,
+      "height": 549,
+      "method": "Original Dignity Health mark in the official CommonSpirit Dignity Health page hero; downloaded bytes unchanged. The dignityhealth.org homepage redirects to this page.",
+      "bytes": 26089,
+      "sha256": "d4893ac35dcf8a2c85d3f9c999e9455a011f1ff38e27077e168b48faa0aa04fa"
+    },
+    {
+      "name": "SFC Surf School",
+      "logo": "/images/brands/sfc-surf-school.svg",
+      "sourceUrl": "https://sfcsurfschool.com/media/sfc-wave-mark.svg",
+      "sourcePage": "https://sfcsurfschool.com/",
+      "width": 290,
+      "height": 254,
+      "viewBox": "0 0 290 254",
+      "method": "Original official header wave mark; downloaded bytes unchanged.",
+      "displayNote": "This is the official wave symbol; the source header pairs it with text. No replacement or synthesized wordmark was created.",
+      "bytes": 1289,
+      "sha256": "468bd8ba0367aa954a98526c6bce93fda683c7a2ca8682532c793ff6569e090b"
+    }
+  ],
+  "unavailable": [
+    {
+      "name": "Clarity AI",
+      "reason": "Official homepage fetch returned HTTP 403; no alternate or fabricated artwork substituted."
+    },
+    {
+      "name": "Wpromote",
+      "reason": "Official homepage fetch returned HTTP 403; no alternate or fabricated artwork substituted."
+    }
+  ],
+  "validation": {
+    "svgXmlParsed": true,
+    "svgScripts": 0,
+    "svgExternalReferences": 0,
+    "pngSignatureAndDimensionsChecked": true,
+    "sourceBytesPreserved": true
+  }
+}

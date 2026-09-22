@@ -35,7 +35,7 @@ from the YouTube study-note pipeline (`~/Desktop/claude-code/youtube-library`).
 ## The loop
 ideate (read `trends-log.md`) → KW research (Semrush) → deep research → draft → infographic →
 Stop-hook quality gate → show Mitchell → publish site + LinkedIn (on approval) → append
-learnings to `trends-log.md` + update `AGENTS.md`.
+learnings to `trends-log.md` + update `OPERATING.md`.
 
 ## Publishing targets
 - **Site (Writing):** posts live in `../src/lib/data.ts` `blogPosts` (render supports rich

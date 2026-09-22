@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-14T19:10:49.729Z",
+  "generated": "2026-09-21T21:01:25.652Z",
   "base": "http://127.0.0.1:5189",
   "checks": 233,
   "passed": 233,
@@ -1186,7 +1186,7 @@
       "scope": "home",
       "check": "brand marquee animates (CSS only, duplicated track, aria-hidden copy, labelled section)",
       "pass": true,
-      "detail": "ag-marquee running, 24 items"
+      "detail": "ag-marquee running, 10 items"
     },
     {
       "scope": "home",
@@ -1202,9 +1202,9 @@
     },
     {
       "scope": "home",
-      "check": "primary nav order Services · Work · Lab · Writing · About",
+      "check": "primary nav order Services · Products · Work · Lab · Writing · About",
       "pass": true,
-      "detail": "Services · Work · Lab · Writing · About"
+      "detail": "Services · Products · Work · Lab · Writing · About"
     },
     {
       "scope": "home",
@@ -1228,7 +1228,7 @@
       "scope": "services",
       "check": "brand marquee animates (CSS only, duplicated track, aria-hidden copy, labelled section)",
       "pass": true,
-      "detail": "ag-marquee running, 24 items"
+      "detail": "ag-marquee running, 10 items"
     },
     {
       "scope": "services",
@@ -1244,9 +1244,9 @@
     },
     {
       "scope": "services",
-      "check": "primary nav order Services · Work · Lab · Writing · About",
+      "check": "primary nav order Services · Products · Work · Lab · Writing · About",
       "pass": true,
-      "detail": "Services · Work · Lab · Writing · About"
+      "detail": "Services · Products · Work · Lab · Writing · About"
     },
     {
       "scope": "services",
@@ -1270,7 +1270,7 @@
       "scope": "home@390",
       "check": "mobile menu opens with the full navigation and the contact button; no overflow",
       "pass": true,
-      "detail": "18 links, scrollWidth 390"
+      "detail": "22 links, scrollWidth 390"
     },
     {
       "scope": "home@390",

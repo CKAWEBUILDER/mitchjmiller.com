@@ -1,0 +1,107 @@
+[
+  {
+    "id": "navy-emerald",
+    "name": "Navy / Emerald",
+    "character": "Familiar, confident, direct.",
+    "description": "Keeps the current navy and green direction.",
+    "ink": "#0F2440",
+    "paper": "#FFFFFF",
+    "surface": "#F2F5F7",
+    "accent": "#14804A",
+    "muted": "#596675",
+    "contrast": {
+      "inkOnPaper": 15.59,
+      "paperOnInk": 15.59,
+      "inkOnSurface": 14.24,
+      "mutedOnPaper": 5.86,
+      "mutedOnSurface": 5.35,
+      "whiteOnAccent": 4.98,
+      "accentOnPaper": 4.98,
+      "accentAgainstInk": 3.13
+    }
+  },
+  {
+    "id": "forest-fern",
+    "name": "Forest / Fern",
+    "character": "Grounded and quietly distinctive.",
+    "description": "A green-led identity with softer neutral space.",
+    "ink": "#142A22",
+    "paper": "#FFFFFF",
+    "surface": "#F1F5F0",
+    "accent": "#39834D",
+    "muted": "#526456",
+    "contrast": {
+      "inkOnPaper": 15.17,
+      "paperOnInk": 15.17,
+      "inkOnSurface": 13.77,
+      "mutedOnPaper": 6.33,
+      "mutedOnSurface": 5.75,
+      "whiteOnAccent": 4.64,
+      "accentOnPaper": 4.64,
+      "accentAgainstInk": 3.27
+    }
+  },
+  {
+    "id": "indigo-iris",
+    "name": "Indigo / Iris",
+    "character": "Precise, thoughtful, technical.",
+    "description": "A restrained violet-blue alternative for agency and software.",
+    "ink": "#232342",
+    "paper": "#FFFFFF",
+    "surface": "#F3F3F8",
+    "accent": "#6268B9",
+    "muted": "#626277",
+    "contrast": {
+      "inkOnPaper": 15.1,
+      "paperOnInk": 15.1,
+      "inkOnSurface": 13.65,
+      "mutedOnPaper": 5.94,
+      "mutedOnSurface": 5.37,
+      "whiteOnAccent": 5.0,
+      "accentOnPaper": 5.0,
+      "accentAgainstInk": 3.02
+    }
+  },
+  {
+    "id": "ink-mineral",
+    "name": "Ink / Mineral",
+    "character": "Understated and architectural.",
+    "description": "Charcoal structure with a cool mineral-blue accent.",
+    "ink": "#20292F",
+    "paper": "#FFFFFF",
+    "surface": "#F1F5F6",
+    "accent": "#477B8E",
+    "muted": "#566871",
+    "contrast": {
+      "inkOnPaper": 14.79,
+      "paperOnInk": 14.79,
+      "inkOnSurface": 13.48,
+      "mutedOnPaper": 5.81,
+      "mutedOnSurface": 5.29,
+      "whiteOnAccent": 4.68,
+      "accentOnPaper": 4.68,
+      "accentAgainstInk": 3.16
+    }
+  },
+  {
+    "id": "olive-moss",
+    "name": "Olive / Moss",
+    "character": "Warm, considered, independent.",
+    "description": "Olive, ivory and moss for a more editorial presence.",
+    "ink": "#292D20",
+    "paper": "#FFFEFB",
+    "surface": "#F4F4EA",
+    "accent": "#707A3A",
+    "muted": "#616650",
+    "contrast": {
+      "inkOnPaper": 13.97,
+      "paperOnInk": 13.97,
+      "inkOnSurface": 12.73,
+      "mutedOnPaper": 5.91,
+      "mutedOnSurface": 5.38,
+      "whiteOnAccent": 4.63,
+      "accentOnPaper": 4.59,
+      "accentAgainstInk": 3.04
+    }
+  }
+]

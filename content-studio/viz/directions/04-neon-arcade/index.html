@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Neon Arcade — One Results Page, Layer by Layer</title>
+<style>
+/* ===========================================================================
+   NEON ARCADE — direction 04
+   Pure black ground, fully saturated neon, arcade-cabinet attract mode.
+   Self-contained: no external requests, system fonts only.
+   Sizes: ?size=1080x1350 | 1080x1080 | 640x800
+   =========================================================================== */
+
+:root{
+  --cyan:#00F0FF;      /* informational */
+  --magenta:#FF2D95;   /* commercial    */
+  --orange:#FF8A1E;    /* transactional */
+  --lime:#7CFF2A;      /* navigational  */
+  --yellow:#FFE600;    /* local         */
+  --violet:#C06CFF;    /* all queries   */
+  --ink:#FFFFFF;
+  --ink-2:#CBD8E6;
+  --ink-3:#8D9CB1;
+
+  --display:"Arial Black","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --body:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:"Menlo","Monaco","Courier New",monospace;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#000;overflow:hidden}
+body{display:block}
+
+#frame{
+  position:relative;transform-origin:0 0;background:#000;overflow:hidden;
+  color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased;
+  display:flex;flex-direction:column;padding:var(--pad);
+}
+/* scanline + corner bloom + vignette — all static, so they cost no GIF frames */
+#frame::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:2;
+  background:
+    repeating-linear-gradient(0deg,rgba(255,255,255,.030) 0 1px,transparent 1px 3px),
+    radial-gradient(110% 62% at 50% -4%,rgba(255,45,149,.13),transparent 64%),
+    radial-gradient(120% 70% at 50% 104%,rgba(0,240,255,.09),transparent 62%);
+}
+#frame::after{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:60;
+  box-shadow:inset 0 0 120px 0 rgba(0,0,0,.72);
+}
+#sweep{
+  position:absolute;left:0;right:0;height:5px;z-index:55;pointer-events:none;opacity:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.8),transparent);
+  box-shadow:0 0 24px 6px rgba(0,240,255,.6);
+}
+#bloom{
+  position:absolute;inset:0;z-index:58;pointer-events:none;opacity:0;
+  background:radial-gradient(72% 42% at 50% 20%,rgba(255,255,255,.95),rgba(177,75,255,.34) 46%,transparent 74%);
+}
+
+/* ---------------------------------------------------------------- titlebar */
+#titlebar{
+  position:relative;z-index:10;flex:0 0 auto;overflow:hidden;
+  border:var(--bw) solid var(--magenta);border-radius:var(--rad);padding:var(--tb-pad);
+  background:linear-gradient(175deg,rgba(255,45,149,.19),rgba(177,75,255,.05) 55%,transparent);
+  box-shadow:0 0 36px rgba(255,45,149,.46),inset 0 0 52px rgba(255,45,149,.15);
+}
+#kicker{
+  display:flex;justify-content:space-between;align-items:baseline;gap:14px;
+  font-family:var(--mono);font-size:var(--fs-kicker);font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--cyan);text-shadow:0 0 12px rgba(0,240,255,.9);
+  white-space:nowrap;
+}
+#kicker b{color:var(--yellow);text-shadow:0 0 12px rgba(255,230,0,.85);font-weight:700}
+
+#marquee{display:flex;align-items:center;gap:var(--marq-gap);margin-top:var(--gap-m)}
+#bignum{
+  flex:0 0 auto;font-family:var(--display);font-size:var(--fs-num);line-height:.9;
+  letter-spacing:-.035em;color:#fff;display:flex;align-items:baseline;white-space:nowrap;
+  text-shadow:0 0 2px #fff,0 0 13px var(--magenta),0 0 42px rgba(255,45,149,.92),0 0 96px rgba(192,108,255,.55);
+}
+#bignum .d{display:inline-block;width:.60em;text-align:center}
+#bignum .dot{display:inline-block;width:.26em;text-align:center}
+#bignum .pct{
+  display:inline-block;width:.78em;text-align:center;font-size:.6em;color:var(--magenta);
+  text-shadow:0 0 8px var(--magenta),0 0 32px rgba(255,45,149,.95);
+}
+#mtext{flex:1 1 auto;min-width:0}
+#headline{
+  font-family:var(--display);font-size:var(--fs-head);line-height:1.04;text-transform:uppercase;
+  color:#fff;text-shadow:0 0 16px rgba(0,240,255,.4);
+}
+#subline{
+  font-size:var(--fs-sub);line-height:1.3;color:var(--ink-2);margin-top:var(--gap-s);
+}
+#subline em{font-style:normal;color:var(--yellow);font-weight:700}
+#srcline{
+  font-family:var(--mono);font-size:var(--fs-src);letter-spacing:.05em;color:var(--ink-3);
+  text-transform:uppercase;margin-top:var(--gap-m);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+#legend{
+  display:flex;flex-wrap:nowrap;gap:var(--legend-gap);align-items:center;
+  margin-top:var(--gap-s);padding-top:var(--gap-s);border-top:1px solid rgba(255,255,255,.15);
+}
+.chip{
+  display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:var(--fs-chip);
+  font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);white-space:nowrap;
+}
+.chip i{width:var(--chip-d);height:var(--chip-d);border-radius:2px;display:block;background:currentColor}
+.chip.c-inf{color:var(--cyan)} .chip.c-com{color:var(--magenta)} .chip.c-tra{color:var(--orange)}
+.chip.c-nav{color:var(--lime)} .chip.c-loc{color:var(--yellow)} .chip.c-all{color:var(--violet)}
+.chip.c-nm{color:var(--ink-3)} .chip.c-nm i{background:none;border:1.5px dashed var(--ink-3)}
+.chip.c-conf{color:var(--ink-3);letter-spacing:.05em}
+
+/* ------------------------------------------------------------------- stack */
+#stackhead{
+  display:flex;align-items:center;gap:10px;flex:0 0 auto;position:relative;z-index:10;
+  font-family:var(--mono);font-size:var(--fs-chip);font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--lime);text-shadow:0 0 12px rgba(124,255,42,.7);
+  margin:var(--gap-m) 0 var(--gap-s);white-space:nowrap;
+}
+#stackhead:after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(124,255,42,.6),transparent)}
+
+#stack{position:relative;z-index:10;flex:1 1 auto;min-height:0;display:flex;flex-direction:column;gap:var(--band-gap)}
+
+.band{
+  position:relative;display:flex;align-items:stretch;gap:var(--band-ipad);
+  padding:var(--band-vpad) var(--band-ipad);
+  border:1.5px solid var(--c);border-left:var(--rail) solid var(--c);border-radius:var(--rad-s);
+  background:linear-gradient(90deg,color-mix(in srgb,var(--c) 17%,transparent),rgba(255,255,255,.012) 44%,transparent);
+  box-shadow:0 0 16px color-mix(in srgb,var(--c) 32%,transparent),inset 0 0 26px color-mix(in srgb,var(--c) 9%,transparent);
+  overflow:hidden;flex:1 1 0;min-height:0;
+}
+.band.wide{flex:var(--wide-flex) 1 0}
+.band.off{opacity:.15;filter:saturate(.22);box-shadow:none}
+.band.hot{box-shadow:0 0 42px color-mix(in srgb,var(--c) 88%,transparent),inset 0 0 66px color-mix(in srgb,var(--c) 36%,transparent)}
+.band.hot .b-title{color:#fff;text-shadow:0 0 10px #fff,0 0 28px var(--c)}
+
+.b-rail{flex:0 0 var(--rail-w);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
+.b-idx{font-family:var(--mono);font-size:var(--fs-idx);font-weight:700;color:var(--c);text-shadow:0 0 12px var(--c)}
+.b-rail svg{width:var(--ico);height:var(--ico);display:block;color:var(--c);filter:drop-shadow(0 0 5px var(--c))}
+.b-rail svg *{fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.b-rail svg .fl{fill:currentColor;stroke:none}
+
+.b-main{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:var(--b-gap)}
+.b-detail{font-size:var(--fs-bdetail);line-height:var(--lh-bdetail);color:var(--ink);font-weight:400}
+.b-detail b{font-weight:700;color:#fff}
+.b-title{
+  font-family:var(--display);font-size:1.3em;line-height:1;text-transform:uppercase;
+  letter-spacing:-.01em;color:var(--c);text-shadow:0 0 14px color-mix(in srgb,var(--c) 72%,transparent);
+}
+.b-title s{text-decoration:none;color:var(--c);opacity:.65;font-family:var(--body);font-weight:700}
+.b-tag{
+  font-family:var(--mono);font-size:var(--fs-btag);letter-spacing:.05em;color:var(--ink-3);
+  text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.b-tag .dot{color:var(--c)}
+.nm{
+  display:inline-block;border:1.2px dashed var(--ink-3);border-radius:3px;padding:0 5px;
+  color:var(--ink-3);font-family:var(--mono);font-size:.84em;letter-spacing:.04em;
+}
+
+.b-metric{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;padding-left:var(--band-ipad)}
+.b-metric .v{
+  font-family:var(--display);line-height:.9;letter-spacing:-.03em;color:#fff;white-space:nowrap;
+  text-shadow:0 0 5px #fff,0 0 20px var(--c),0 0 46px color-mix(in srgb,var(--c) 68%,transparent);
+}
+.b-metric .v.big{font-size:var(--fs-mbig)}
+.b-metric .v.med{font-size:var(--fs-mmed)}
+.b-metric .v.sml{font-size:var(--fs-msml)}
+.b-metric .u{
+  font-family:var(--mono);font-size:var(--fs-munit);letter-spacing:.07em;text-transform:uppercase;
+  color:var(--c);margin-top:3px;white-space:nowrap;
+}
+
+/* ------------------------------------------------- band 02: the bar readout */
+.bars{display:flex;flex-direction:column;gap:var(--bar-gap);width:100%;margin:2px 0}
+.bar{display:flex;align-items:center;gap:9px}
+.bar .lab{
+  flex:0 0 var(--bar-lab);font-family:var(--mono);font-size:var(--fs-barlab);font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--bc);text-shadow:0 0 9px var(--bc);white-space:nowrap;
+}
+.bar .track{flex:1 1 auto;height:var(--bar-h);background:rgba(255,255,255,.06);border-radius:2px;position:relative;overflow:hidden}
+.bar .fill{position:absolute;left:0;top:0;bottom:0;border-radius:2px;background:var(--bc);
+  box-shadow:0 0 12px var(--bc),0 0 26px color-mix(in srgb,var(--bc) 55%,transparent)}
+.bar .zero{position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--bc);box-shadow:0 0 10px var(--bc)}
+.bar .val{flex:0 0 var(--bar-val);text-align:right;font-family:var(--display);font-size:var(--fs-barval);
+  line-height:1;color:#fff;letter-spacing:-.02em;text-shadow:0 0 12px var(--bc)}
+.bar .who{flex:0 0 var(--bar-who);font-family:var(--mono);font-size:var(--fs-btag);letter-spacing:.04em;
+  color:var(--ink-3);text-transform:uppercase;white-space:nowrap}
+
+#footer{
+  flex:0 0 auto;position:relative;z-index:10;margin-top:var(--gap-s);
+  font-family:var(--mono);font-size:var(--fs-foot);letter-spacing:.02em;color:#5C6878;
+  line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+
+/* ================================================================ SIZE 4:5 */
+#frame[data-layout="portrait"]{
+  --pad:26px; --rad:14px; --rad-s:9px; --bw:2.5px; --tb-pad:16px 20px 13px;
+  --gap-s:8px; --gap-m:11px; --marq-gap:22px;
+  --fs-kicker:15px; --fs-num:130px; --fs-head:35px; --fs-sub:18.5px; --fs-src:12.5px;
+  --fs-chip:11.5px; --chip-d:10px; --legend-gap:12px;
+  --band-gap:6px; --band-vpad:7px; --band-ipad:12px; --rail:6px; --rail-w:40px;
+  --wide-flex:2.86;
+  --fs-idx:13.5px; --ico:19px; --b-gap:3px;
+  --fs-bdetail:16px; --lh-bdetail:1.24; --fs-btag:11.5px;
+  --fs-mbig:45px; --fs-mmed:37px; --fs-msml:27px; --fs-munit:11px;
+  --bar-gap:4px; --bar-h:11px; --bar-lab:128px; --bar-val:58px; --bar-who:126px;
+  --fs-barlab:12.5px; --fs-barval:18px;
+  --fs-foot:10.5px;
+}
+/* ================================================================ SIZE 1:1 */
+#frame[data-layout="square"]{
+  --pad:24px; --rad:13px; --rad-s:8px; --bw:2.5px; --tb-pad:14px 18px 11px;
+  --gap-s:7px; --gap-m:9px; --marq-gap:18px;
+  --fs-kicker:13.5px; --fs-num:106px; --fs-head:30px; --fs-sub:16.5px; --fs-src:11.5px;
+  --fs-chip:11px; --chip-d:9px; --legend-gap:10px;
+  --band-gap:6px; --band-vpad:7px; --band-ipad:10px; --rail:5px; --rail-w:34px;
+  --wide-flex:1;
+  --fs-idx:12px; --ico:17px; --b-gap:2px;
+  --fs-bdetail:14px; --lh-bdetail:1.23; --fs-btag:9.5px;
+  --fs-mbig:33px; --fs-mmed:28px; --fs-msml:21px; --fs-munit:9.5px;
+  --bar-gap:4px; --bar-h:10px; --bar-lab:auto; --bar-val:auto; --bar-who:auto;
+  --fs-barlab:11px; --fs-barval:19px;
+  --fs-foot:10px;
+}
+#frame[data-layout="square"] #stack{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:.78fr 1.34fr repeat(4,1fr) .78fr;gap:var(--band-gap)}
+/* first (AI Overview) and last (off the page) layers anchor the grid full-width,
+   which also keeps 11 cells landing on 7 rows with no empty cell. */
+#frame[data-layout="square"] .band:first-child,
+#frame[data-layout="square"] .band:last-child{grid-column:1 / -1}
+#frame[data-layout="square"] .band{flex:none;min-height:0}
+#frame[data-layout="square"] .band.wide{grid-column:1 / -1;flex:none;--sq-wide:1}
+#frame[data-layout="square"] .bars{flex-direction:row;gap:12px;align-items:stretch}
+#frame[data-layout="square"] .bar{flex:1 1 0;flex-direction:column;align-items:flex-start;gap:3px;min-width:0}
+#frame[data-layout="square"] .bar>*{flex:0 0 auto;width:100%}
+#frame[data-layout="square"] .bar .track{flex:0 0 var(--bar-h)}
+#frame[data-layout="square"] .bar .val{text-align:left}
+#frame[data-layout="square"] .bar .who{overflow:hidden;text-overflow:ellipsis}
+</style>
+</head>
+<body>
+<div id="frame"><div id="sweep"></div><div id="bloom"></div></div>
+
+<script>
+"use strict";
+/* ===========================================================================
+   DATA — every figure is transcribed from
+   content-studio/research/2026-09-14/search-intent/{data.json, shock-stats.md}.
+   Figures notes.md marks "do not use" or "verify before use" are excluded:
+   the fabricated Semrush 18.4B-query / 57.3% intent split, the Perplexity
+   citation densities, AI Mode 93% zero-click, the featured-snippet
+   15.41%→5.53% series, Datos ~30% navigational, seoClarity ~30% AIO
+   prevalence, the Tinuiti 13.05% / 0.59% brand-citation pair, and the
+   64.9% People Also Ask figure (404 URL, aggregator trail) excluded by the
+   ledger's 2026-09-15 correction and replaced with the 2020 Semrush study.
+   conf: "H" = high confidence in the ledger, "M" = medium.
+   =========================================================================== */
+
+const C = {inf:"var(--cyan)", com:"var(--magenta)", tra:"var(--orange)",
+           nav:"var(--lime)", loc:"var(--yellow)", all:"var(--violet)"};
+
+const ICON = {
+  aio:   '<path d="M3 5h18v11H3z"/><path d="M6 8.5h7M6 12h5"/><path d="M17.2 7.2l.9 2 2 .9-2 .9-.9 2-.9-2-2-.9 2-.9z" class="fl"/><path d="M8 19h8"/>',
+  trig:  '<path d="M4 20V9m5 11V4m5 16v-7m5 7V6"/><circle cx="9" cy="4" r="1.5" class="fl"/>',
+  ads:   '<path d="M3 5.5h18v9H3z"/><path d="M7.2 12.2l2-5 2 5m-3.4-1.7h2.8"/><path d="M14 7.4h2.5a1.5 1.5 0 010 3h-2.5zm0 3h2.7a1.5 1.5 0 010 3h-2.7z"/><path d="M6 18.5h12"/>',
+  adsaio:'<path d="M3 4.5h12v8H3z"/><path d="M9 11.5h12v8H9z"/><path d="M5.6 8.5h4.6"/><path d="M12.4 15.5h4.6"/>',
+  pin:   '<path d="M12 21s6.4-6.1 6.4-10.6A6.4 6.4 0 005.6 10.4C5.6 14.9 12 21 12 21z"/><circle cx="12" cy="10.3" r="2.3"/>',
+  one:   '<circle cx="12" cy="12" r="8.4"/><path d="M10.4 9.6L12.4 8.3V16"/><path d="M10.4 16h4"/>',
+  rows:  '<path d="M3.5 6h17M3.5 10h12M3.5 14h17M3.5 18h9"/>',
+  paa:   '<path d="M3.5 4.5h17v5h-17zm0 7h17v5h-17z"/><path d="M17.4 6.6l-1.6 1.7-1.6-1.7M17.4 13.6l-1.6 1.7-1.6-1.7"/><path d="M3.5 19.5h10"/>',
+  vs:    '<path d="M3 8l3.6 8L10.2 8"/><path d="M21 8h-3.4a1.8 1.8 0 000 3.6h1.5a1.8 1.8 0 010 3.6H15.4"/><path d="M12.8 4.6v14.8"/>',
+  shift: '<path d="M4 17.5h6.5V20M4 17.5l4-4"/><path d="M20 7.5h-6.5V5M20 7.5l-4 4"/><path d="M4 7.5h5m6 10h5"/>',
+  exit:  '<path d="M13.5 3.5h-9v17h9"/><path d="M10 12h10.5m0 0l-3.4-3.6M20.5 12l-3.4 3.6"/>'
+};
+
+const HEAD = {
+  kicker:"One Google results page, layer by layer",
+  mark:"Field map · 2026-09-15",
+  value:68.01,
+  headline:"of U.S. Google searches ended with no click",
+  sub:"Jan–Apr 2026, U.S. desktop + mobile web. It was <em>60.45%</em> in 2024 and <em>49%</em> in 2019.",
+  src:"SparkToro (Rand Fishkin) · Similarweb clickstream · published 2026-06-09 · excludes the Google mobile app"
+};
+
+const BANDS = [
+  { i:"01", c:C.all, ico:ICON.aio, title:"AI Overview",
+    metric:"−58%", msize:"big", unit:"position-1 CTR",
+    detail:"Position-1 organic CTR with an AI Overview on the page: <b>7.3% (Dec 2023) → 1.6% (Dec 2025)</b>, against a forecast 3.7% without one.",
+    tag:"Ahrefs · 300K keywords (GSC) · 2026-02-04", conf:"H" },
+
+  { i:"02", c:C.all, ico:ICON.trig, title:"Who triggers one", wide:true,
+    detail:"AI Overview trigger rate by search intent — three panels, not one method.",
+    bars:[
+      {lab:"Informational", v:36, bc:"var(--cyan)",    who:"Seer 2026"},
+      {lab:"Local",         v:15, bc:"var(--yellow)",  who:"Whitespark 2025"},
+      {lab:"Commercial",    v:8,  bc:"var(--magenta)", who:"Seer 2026"},
+      {lab:"Transactional", v:5,  bc:"var(--orange)",  who:"Seer 2026"},
+      {lab:"Navigational",  v:0,  bc:"var(--lime)",    who:"Authoritas 2024"}
+    ],
+    tag:"Seer Interactive · Whitespark · Authoritas", conf:"H" },
+
+  { i:"03", c:C.com, ico:ICON.ads, title:"Ads, top of page",
+    metric:"36%", msize:"big", unit:"paid click share",
+    detail:"Combined paid click share, U.S. headphones category, Jan 2026 — it was <b>16%</b> a year earlier. Organic fell 73% → 50%.",
+    tag:"Search Engine Land/Similarweb · 2026-02-18", conf:"H" },
+
+  { i:"04", c:C.all, ico:ICON.adsaio, title:"Ads inside the answer",
+    metric:"25.56%", msize:"med", unit:"of AIO pages · 2025",
+    detail:"AI-Overview pages that also carried Google Ads, Oct 2025 — up from <b>5.17%</b> in March 2025. Bottom-of-page placement dominates.",
+    tag:"Semrush · 10M+ keywords · 2026-02-02", conf:"H" },
+
+  { i:"05", c:C.loc, ico:ICON.pin, title:"Local pack",
+    metric:"93%", msize:"big", unit:"of local queries",
+    detail:"The least disrupted layer: <b>93%</b> of local-intent searches show a Local Pack, only <b>15%</b> show an AI Overview.",
+    tag:"Whitespark · 540 local queries · 2025-05-12", conf:"H" },
+
+  { i:"06", c:C.inf, ico:ICON.one, title:"Organic #1",
+    metric:"0.94%", msize:"med", unit:"present, not cited",
+    detail:"CTR when an AI Overview appears and you are <b>not</b> cited in it. Cited: <b>2.07%</b>. No AI Overview at all: <b>3.35%</b>.",
+    tag:"Seer · 2.43B impressions · 2026-04-24", conf:"H" },
+
+  { i:"07", c:C.inf, ico:ICON.rows, title:"Organic 2–10",
+    metric:"−39%", msize:"big", unit:"position-2 CTR, YoY",
+    detail:"Position 2 fell hardest of any rank, <b>20.83% → 12.60%</b> year over year. Positions 6–10 went the other way: <b>+30.63%</b>.",
+    tag:"GrowthSRC · 200K+ keywords · 2025", conf:"M" },
+
+  { i:"08", c:C.all, ico:ICON.paa, title:"People also ask",
+    metric:"49.37%", msize:"med", unit:"desktop SERPs · 2020",
+    detail:"Present on <b>49.37%</b> of desktop and <b>52.27%</b> of mobile results pages — the newest named study is a <b>2020</b> reading. By intent: <span class=\"nm\">not measured</span>.",
+    tag:"Semrush · 1M US desktop keywords · 2020-09-30", conf:"H" },
+
+  { i:"09", c:C.com, ico:ICON.vs, title:"The query shape",
+    metric:"95.4%", msize:"med", unit:"of “x vs y” queries",
+    detail:"Comparison queries trigger an AI Overview more often than any pattern measured: <b>267 of 280</b>. Question-format queries: <b>85.9%</b>.",
+    tag:"Seer · 280 comparison queries · 2026-04-24", conf:"H" },
+
+  { i:"10", c:C.all, ico:ICON.shift, title:"What the box is for",
+    metric:"91.3→57.1", msize:"sml", unit:"% informational",
+    detail:"Informational share of AI-Overview queries, Jan → Oct 2025. Commercial <b>8.15% → 18.57%</b>, transactional <b>1.98% → 13.94%</b>.",
+    tag:"Semrush · 10M+ keywords · 2026-02-02", conf:"H" },
+
+  { i:"11", c:C.all, ico:ICON.exit, title:"Off the page",
+    metric:"60→10", msize:"sml", unit:"% of ChatGPT cites",
+    detail:"Reddit's share of ChatGPT citations, <b>six weeks</b> after a Sept 2025 platform change. Wikipedia fell with it, ~55% → under 20%.",
+    tag:"Semrush · 230K prompts, 100M cites · 2025-11-10", conf:"H" }
+];
+
+const FOOT = "Sources: SparkToro/Similarweb · Ahrefs · Seer · Semrush · Whitespark · Search Engine Land · Authoritas · GrowthSRC — full ledger in the repo";
+
+/* =========================================================== size + layout */
+const Q = new URLSearchParams(location.search);
+const PRESET = {
+  "1080x1350":{w:1080,h:1350,layout:"portrait",lw:1080,lh:1350},
+  "1080x1080":{w:1080,h:1080,layout:"square",  lw:1080,lh:1080},
+  "640x800":  {w:640, h:800, layout:"portrait",lw:1080,lh:1350},
+  "540x675":  {w:540, h:675, layout:"portrait",lw:1080,lh:1350},
+  "540x540":  {w:540, h:540, layout:"square",  lw:1080,lh:1080}
+};
+const key = Q.get("size") || "1080x1350";
+const S = PRESET[key] || (() => {
+  const m = /^(\d+)x(\d+)$/.exec(key);
+  if (!m) return PRESET["1080x1350"];
+  const w = +m[1], h = +m[2], sq = Math.abs(w / h - 1) < 0.06;
+  return {w, h, layout: sq ? "square" : "portrait", lw:1080, lh: sq ? 1080 : 1350};
+})();
+
+const frame = document.getElementById("frame");
+frame.dataset.layout = S.layout;
+frame.style.width = S.lw + "px";
+frame.style.height = S.lh + "px";
+frame.style.transform = "scale(" + (S.w / S.lw) + ")";
+document.body.style.width = S.w + "px";
+document.body.style.height = S.h + "px";
+
+/* ================================================================== render */
+const el = (t, cls, html) => { const n = document.createElement(t); if (cls) n.className = cls; if (html != null) n.innerHTML = html; return n; };
+
+const tb = el("div"); tb.id = "titlebar";
+const kick = el("div", null, "<span>" + HEAD.kicker + "</span><b>" + HEAD.mark + "</b>"); kick.id = "kicker";
+const marq = el("div"); marq.id = "marquee";
+const big = el("div"); big.id = "bignum";
+const mtext = el("div"); mtext.id = "mtext";
+const head = el("div", null, HEAD.headline); head.id = "headline";
+const sub = el("div", null, HEAD.sub); sub.id = "subline";
+mtext.append(head, sub); marq.append(big, mtext);
+const src = el("div", null, HEAD.src); src.id = "srcline";
+const leg = el("div"); leg.id = "legend";
+leg.innerHTML =
+  '<span class="chip c-inf"><i></i>Informational</span>' +
+  '<span class="chip c-com"><i></i>Commercial</span>' +
+  '<span class="chip c-tra"><i></i>Transactional</span>' +
+  '<span class="chip c-nav"><i></i>Navigational</span>' +
+  '<span class="chip c-loc"><i></i>Local</span>' +
+  '<span class="chip c-all"><i></i>All queries</span>' +
+  '<span class="chip c-nm"><i></i>Not measured</span>' +
+  '<span class="chip c-conf">● High conf. &nbsp;◐ Medium</span>';
+tb.append(kick, marq, src, leg);
+
+/* headline digits live in fixed-width cells so the count-up cannot jitter */
+const cells = [];
+for (let k = 0; k < 5; k++){
+  const dot = k === 2;
+  const n = el("span", dot ? "dot" : "d", dot ? "." : "0");
+  big.appendChild(n); cells.push(n);
+}
+big.appendChild(el("span", "pct", "%"));
+const setNumber = v => { const s = v.toFixed(2).padStart(5, "0"); for (let k = 0; k < 5; k++) cells[k].textContent = s[k]; };
+
+const sh = el("div", null, "The stack · top of the results page → off it"); sh.id = "stackhead";
+const stack = el("div"); stack.id = "stack";
+const bandEls = [];
+
+for (const b of BANDS){
+  const n = el("div", "band" + (b.wide ? " wide" : "") + " off");
+  n.style.setProperty("--c", b.c);
+
+  const rail = el("div", "b-rail");
+  rail.appendChild(el("div", "b-idx", b.i));
+  rail.insertAdjacentHTML("beforeend", '<svg viewBox="0 0 24 24" aria-hidden="true">' + b.ico + "</svg>");
+
+  const main = el("div", "b-main");
+  // Title runs inline as the lead-in of the sentence: dense-poster convention,
+  // and it cannot be clipped out of a short band the way a stacked row can.
+  main.appendChild(el("div", "b-detail",
+    '<span class="b-title">' + b.title + ' <s>/</s></span> ' + b.detail));
+
+  if (b.bars){
+    const bars = el("div", "bars");
+    const MAX = 40;                     // scale ceiling for the trigger-rate bars
+    for (const r of b.bars){
+      const row = el("div", "bar"); row.style.setProperty("--bc", r.bc);
+      row.appendChild(el("div", "lab", r.lab));
+      const tr = el("div", "track");
+      if (r.v === 0) tr.appendChild(el("div", "zero"));
+      else { const f = el("div", "fill"); f.style.width = (r.v / MAX * 100) + "%"; tr.appendChild(f); }
+      row.append(tr, el("div", "val", r.v + "%"), el("div", "who", r.who));
+      bars.appendChild(row);
+    }
+    main.appendChild(bars);
+  }
+
+  main.appendChild(el("div", "b-tag",
+    '<span class="dot">' + (b.conf === "M" ? "◐" : "●") + "</span> " + b.tag));
+  n.append(rail, main);
+
+  if (b.metric){
+    const m = el("div", "b-metric");
+    m.appendChild(el("div", "v " + (b.msize || "med"), b.metric));
+    if (b.unit) m.appendChild(el("div", "u", b.unit));
+    n.appendChild(m);
+  }
+  stack.appendChild(n);
+  bandEls.push(n);
+}
+
+const foot = el("div", null, FOOT); foot.id = "footer";
+frame.append(tb, sh, stack, foot);
+
+/* =============================================================== animation */
+const sweep = document.getElementById("sweep");
+const bloom = document.getElementById("bloom");
+
+const DUR = 3.2;                          // seconds of timeline the GIF captures
+const T_START = 0.16, T_STEP = 0.172, T_HOT = 0.30;
+const T_NUM_A = 0.16, T_NUM_B = 2.26;
+const T_FLASH = 2.40, T_FLASH_L = 0.17;
+const SETTLED = 3.05;
+
+const easeOut = x => 1 - Math.pow(1 - x, 3);
+const cl01 = x => x < 0 ? 0 : x > 1 ? 1 : x;
+
+function render(t){
+  setNumber(HEAD.value * easeOut(cl01((t - T_NUM_A) / (T_NUM_B - T_NUM_A))));
+
+  for (let k = 0; k < bandEls.length; k++){
+    const on = T_START + k * T_STEP, n = bandEls[k], lit = t >= on;
+    n.classList.toggle("off", !lit);
+    n.classList.toggle("hot", lit && t < on + T_HOT);
+  }
+
+  const sp = (t - 0.08) / (T_NUM_B - 0.08);
+  if (sp >= 0 && sp <= 1){
+    sweep.style.opacity = String(0.9 * Math.sin(Math.PI * cl01(sp)) + 0.08);
+    sweep.style.top = Math.round(sp * S.lh) + "px";
+  } else sweep.style.opacity = "0";
+
+  const fp = (t - T_FLASH) / T_FLASH_L;
+  bloom.style.opacity = (fp >= 0 && fp <= 1) ? String(Math.sin(Math.PI * fp) * 0.85) : "0";
+  frame.dataset.t = t.toFixed(3);
+}
+
+const isStatic = Q.has("static") || Q.has("poster") || Q.get("anim") === "0";
+let raf = 0, t0 = 0;
+function loop(ts){ if (!t0) t0 = ts; render(((ts - t0) / 1000) % (DUR + 1.2)); raf = requestAnimationFrame(loop); }
+
+if (Q.has("t")) render(parseFloat(Q.get("t")));
+else if (isStatic) render(SETTLED);
+else raf = requestAnimationFrame(loop);
+
+/* ------------------------------------------ export hook (kit openViz contract) */
+window.VIZ = {
+  ready: Promise.resolve(true),
+  duration: DUR,
+  settled: SETTLED,
+  size: S,
+  seek(t){ if (raf){ cancelAnimationFrame(raf); raf = 0; } render(t); return t; },
+  play(){ if (!raf){ t0 = 0; raf = requestAnimationFrame(loop); } }
+};
+
+requestAnimationFrame(() => requestAnimationFrame(() => { document.documentElement.dataset.ready = "1"; }));
+</script>
+</body>
+</html>

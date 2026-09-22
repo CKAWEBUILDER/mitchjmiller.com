@@ -1,0 +1,227 @@
+[
+  {
+    "title": "Growth Engineer",
+    "definition": "A software engineer embedded in a growth or marketing team who writes code — experiments, A/B-test infrastructure, lifecycle automation, analytics instrumentation — to increase acquisition, activation, retention, and revenue.",
+    "definition_source": "Pragmatic Engineer, \"What is Growth Engineering?\" (Alexey Komissarouk interview), https://newsletter.pragmaticengineer.com/p/what-is-growth-engineering, 2025-03-20",
+    "postings": [
+      {"board": "SimplyHired", "query": "\"growth engineer\" (exact phrase, United States)", "count": 64, "url": "https://www.simplyhired.com/search?q=%22growth+engineer%22&l=United+States", "retrieved": "2026-09-14"},
+      {"board": "Built In", "query": "growth engineer", "count": 3, "url": "https://builtin.com/jobs?search=growth+engineer", "retrieved": "2026-09-14"},
+      {"board": "LinkedIn (guest search, loose keyword match — NOT exact-title)", "query": "growth engineer, United States", "count": "7,000+", "url": "https://www.linkedin.com/jobs/search?keywords=growth%20engineer&location=United%20States", "retrieved": "2026-09-14"}
+    ],
+    "salary": [
+      {"source": "ZipRecruiter (page slug: Growth-Engineer-Salary)", "low": 84000, "median": 101752, "high": 116500, "currency": "USD", "geo": "United States (national avg)", "url": "https://www.ziprecruiter.com/Salaries/Growth-Engineer-Salary", "date": "2026-07 (as shown on page)"},
+      {"source": "ZipRecruiter (page slug: Growth-Engineering — different taxonomy, same role family)", "low": 116500, "median": 146868, "high": 173000, "currency": "USD", "geo": "United States (national avg)", "url": "https://www.ziprecruiter.com/Jobs/Growth-Engineering", "date": "2026-08-31"},
+      {"source": "Glassdoor (n=38 self-reported salaries — small sample, treat as noisy)", "low": 269868, "median": 359824, "high": 503754, "currency": "USD", "geo": "United States", "url": "https://www.glassdoor.com/Salaries/growth-engineer-salary-SRCH_KO0,15.htm", "date": "2026-05"},
+      {"source": "GTME Pulse (Levels.fyi-based comparison)", "low": 130000, "median": 160000, "high": 240000, "currency": "USD", "geo": "United States", "url": "https://gtmepulse.com/salary/vs-growth-engineer/", "date": "2026 (undated page)"}
+    ],
+    "trend": [
+      {"claim": "Growth engineering \"was barely known a decade ago, but today, most scaleups and many publicly traded tech companies have dedicated growth teams.\" Discipline traced to Facebook's 2007 growth team under Chamath Palihapitiya; a fully-loaded growth team costs ~$1M/yr and needs $5M+ ARR to justify.", "source": "Pragmatic Engineer newsletter", "url": "https://newsletter.pragmaticengineer.com/p/what-is-growth-engineering", "date": "2025-03-20"},
+      {"claim": "Growth Engineer is listed as a specialization branch off general software engineering, alongside Product Growth Engineer, Growth Hacking Engineer, Analytics Growth Engineer, and Growth Operations Engineer as adjacent/senior paths.", "source": "Teal career-path guide", "url": "https://www.tealhq.com/career-paths/growth-engineer", "date": "2026 (undated)"}
+    ],
+    "employers": ["Everis (Mobile Software Engineer, Growth & Experimentation)", "Binance (Algorithm Engineer, Market Growth)", "Deep Blue Company (Growth Web Developer)"],
+    "stack": ["Python", "SQL", "A/B-testing infrastructure", "Google Analytics / Mixpanel", "marketing automation systems", "analytics event instrumentation", "martech integrations"],
+    "confidence": "medium",
+    "notes": "Salary sources disagree sharply: two different ZipRecruiter URL slugs for what looks like the same role return $101,752 vs $146,868 averages, and Glassdoor's $359,824 average (n=38) is 2.5-3.5x every other source — almost certainly a small-sample outlier skewed by senior/Big Tech equity-heavy comp, not a representative median. Report the $100K-$240K band; flag Glassdoor figure as an outlier, not the headline number."
+  },
+  {
+    "title": "Growth Operations Engineer",
+    "definition": "A systems-minded operator who builds and maintains the tooling, automations, and data infrastructure that keep a company's go-to-market engine — sales, marketing, customer success — fast, accurate, and scalable.",
+    "definition_source": "Growth.Talent role guide, https://www.growthtalent.org/guides/role/growth-operations, 2026",
+    "postings": [
+      {"board": "SimplyHired", "query": "\"growth operations engineer\" (exact phrase, United States)", "count": 0, "url": "https://www.simplyhired.com/search?q=%22growth+operations+engineer%22&l=United+States", "retrieved": "2026-09-14", "note": "Page explicitly states: \"We could not find any 'growth operations engineer' jobs in United States.\""},
+      {"board": "LinkedIn (guest search, loose keyword match — NOT exact-title)", "query": "growth operations engineer, United States", "count": "10,000+", "url": "https://www.linkedin.com/jobs/search?keywords=growth%20operations%20engineer&location=United%20States", "retrieved": "2026-09-14"},
+      {"board": "Built In (via web search, not directly board-counted)", "query": "growth operations engineer", "count": "1 confirmed listing (Peerspace)", "url": "https://builtin.com/job/growth-operations-specialist/3732548", "retrieved": "2026-09-14", "note": "Listing's own URL slug reads \"growth-operations-specialist\" though the on-page title reads \"Growth Operations Engineer\" — title/slug mismatch."}
+    ],
+    "salary": [
+      {"source": "Growth.Talent guide (role: Growth Operations Manager, closest tracked title)", "low": 90000, "median": 117500, "high": 180000, "currency": "USD", "geo": "United States", "url": "https://www.growthtalent.org/guides/role/growth-operations", "date": "2026"},
+      {"source": "ZipRecruiter (role: Growth Operations Manager, closest tracked title)", "low": 41000, "median": 63456, "high": 118500, "currency": "USD", "geo": "United States (national avg)", "url": "https://www.ziprecruiter.com/Salaries/Growth-Operations-Manager-Salary", "date": "2026-04"}
+    ],
+    "trend": [
+      {"claim": "Career-path guides place \"Head of Growth Ops\" and \"Head of RevOps\" as the two most common promotion paths out of this role, with senior people who reach Director/VP within 5 years typically developing engineering depth beyond no-code tools.", "source": "Growth.Talent role guide", "url": "https://www.growthtalent.org/guides/role/growth-operations", "date": "2026"}
+    ],
+    "employers": ["Peerspace", "Epoch Biodesign (Austin, TX)", "HYFIX Spatial Intelligence (Santa Clara, CA)", "Base Power Company"],
+    "stack": ["HubSpot/Salesforce", "SQL", "Segment/RudderStack", "workflow automation and no/low-code builders", "APIs", "basic full-stack app prototyping"],
+    "confidence": "low",
+    "notes": "This is the thinnest title in the set: exact-phrase postings are effectively zero on the one board that reports exact-phrase counts (SimplyHired), meaning the title barely exists as a standalone job-board search term — most real openings use \"Growth Operations Manager,\" \"RevOps,\" or \"Growth Engineer\" instead. The two salary sources for the closest proxy title (Growth Operations Manager) disagree by nearly 2x ($63K vs $117.5K median) — a real disagreement, not a typo; likely reflects ZipRecruiter's broader/junior-skewed sample vs Growth.Talent's SaaS-specific sample. Treat all numbers here as directional, not precise."
+  },
+  {
+    "title": "GTM Engineer (Go-to-Market Engineer)",
+    "definition": "A technical specialist who designs, builds, and maintains the systems that power a company's go-to-market motion — enrichment workflows, outbound sequences, lead routing, and the integrations that hold the GTM stack together — sitting at the intersection of sales, marketing, and product.",
+    "definition_source": "Cognism, \"What Is A Go-To-Market (GTM) Engineer?\", https://www.cognism.com/blog/gtm-engineer, 2025/2026",
+    "postings": [
+      {"board": "SimplyHired", "query": "\"GTM engineer\" (exact phrase, United States)", "count": 146, "url": "https://www.simplyhired.com/search?q=%22GTM+engineer%22&l=United+States", "retrieved": "2026-09-14"},
+      {"board": "Built In", "query": "GTM engineer", "count": "5 (page shows individual listings, no explicit total-count string)", "url": "https://builtin.com/jobs?search=GTM+engineer", "retrieved": "2026-09-14"},
+      {"board": "LinkedIn (guest search, loose keyword match — NOT exact-title)", "query": "GTM engineer, United States", "count": "11,000+", "url": "https://www.linkedin.com/jobs/search?keywords=GTM%20engineer&location=United%20States", "retrieved": "2026-09-14"}
+    ],
+    "salary": [
+      {"source": "Levels.fyi", "low": 110000, "median": 156000, "high": 397000, "currency": "USD", "geo": "United States", "url": "https://www.levels.fyi/t/gtm-engineer", "date": "2026-09-14 (page shows \"Last Updated 9/14/2026\")", "notes": "25th pct $110K, 75th pct $295K, 90th pct $397K — very wide spread."},
+      {"source": "Bloomberry, \"I analyzed 1000 GTM Engineering jobs\"", "low": null, "median": 127500, "high": 252000, "currency": "USD", "geo": "United States", "url": "https://bloomberry.com/blog/i-analyzed-1000-gtm-engineering-jobs-here-is-what-i-learned/", "date": "2025-10-03 (updated 2026-01-25)", "notes": "Median from job-posting text; top named-employer comp: Vercel $252K, OpenAI $250K, LILT AI $221.5K, Air $208.5K, Ramp $184K."}
+    ],
+    "trend": [
+      {"claim": "GTM engineering job postings jumped from over 1,400 in mid-2025 to more than 3,000 by January 2026; postings surged 205% year-over-year; GTM Engineering job growth is roughly 13x faster than the broader tech labor market.", "source": "Aggregated hiring-trend coverage (SyncGTM/Stacker/Apollo synthesis of GTME Pulse + Bloomberry data)", "url": "https://gtmepulse.com/insights/job-market-2026/", "date": "2026"},
+      {"claim": "1,000 GTM Engineering job postings analyzed; average years of experience required 4.11; SQL and Python each appear in 38% of postings.", "source": "Bloomberry", "url": "https://bloomberry.com/blog/i-analyzed-1000-gtm-engineering-jobs-here-is-what-i-learned/", "date": "2025-10-03, updated 2026-01-25"}
+    ],
+    "employers": ["Fireworks AI", "The Global Talent Co.", "Huzzle Ltd", "Vercel", "OpenAI", "LILT AI", "Air", "Ramp"],
+    "stack": ["Clay (most-cited tool)", "HubSpot (52% of postings)", "Outreach (49%)", "Salesforce (45%)", "Zapier (39%)", "Apollo (29%)", "n8n (28%)", "SQL (38%)", "Python (38%)", "visitor-identification tools (43% of companies)"],
+    "confidence": "high",
+    "notes": "Best-documented title in the set — multiple independent postings analyses (Bloomberry's 1,000-job study, GTME Pulse) converge on similar growth-rate claims, and the stack data is postings-derived, not vendor marketing. LinkedIn's \"11,000+\" is loose-match noise; treat SimplyHired's 146 as the more defensible floor for exact-title US postings."
+  },
+  {
+    "title": "RevOps Engineer / Revenue Operations Engineer",
+    "definition": "A hybrid engineering/operations role that designs, builds, and automates the systems powering the go-to-market engine — owning CRM architecture and data models so Sales, Marketing, and Operations run on one reliable, trustworthy pipeline.",
+    "definition_source": "DevOpsSchool, \"RevOps Engineer: Role Blueprint,\" https://www.devopsschool.com/blog/revops-engineer-role-blueprint-responsibilities-skills-kpis-and-career-path/, 2026",
+    "postings": [
+      {"board": "SimplyHired", "query": "\"revenue operations engineer\" (exact phrase, United States)", "count": 1, "url": "https://www.simplyhired.com/search?q=%22revenue+operations+engineer%22&l=United+States", "retrieved": "2026-09-14"},
+      {"board": "SimplyHired", "query": "\"revenue operations engineer\" OR \"revops engineer\" (United States)", "count": 3, "url": "https://www.simplyhired.com/search?q=%22revenue+operations+engineer%22+OR+%22revops+engineer%22&l=United+States", "retrieved": "2026-09-14"},
+      {"board": "LinkedIn (guest search, loose keyword match — NOT exact-title)", "query": "revenue operations engineer, United States", "count": "6,000+", "url": "https://www.linkedin.com/jobs/search?keywords=revenue%20operations%20engineer&location=United%20States", "retrieved": "2026-09-14"},
+      {"board": "ZipRecruiter (broad \"RevOps\" keyword, not exact \"engineer\" title)", "query": "RevOps", "count": "174,000+ (ZipRecruiter's own aggregate figure for the broad RevOps job family, per third-party citation)", "url": "https://www.ziprecruiter.com/Jobs/Revops", "retrieved": "2026-09-14", "note": "Cited via Fullcast's 2026 RevOps hiring guide, not independently confirmed by direct fetch of the ZipRecruiter page."}
+    ],
+    "salary": [
+      {"source": "ZipRecruiter (role: RevOps, broad)", "low": 85000, "median": 110000, "high": 124500, "currency": "USD", "geo": "United States", "url": "https://www.ziprecruiter.com/Salaries/Revops-Salary", "date": "2026-08"},
+      {"source": "Agents for Hire, \"Revenue Operations Engineer Salary in 2026\"", "low": 100000, "median": 125000, "high": 150000, "currency": "USD", "geo": "United States (mid-career)", "url": "https://agentsforhire.ai/blog/revenue-operations-engineer-salary-in-2026-why-rev-ops-costs-100-k-150-k", "date": "2026", "notes": "Same source notes company-size premium: $100K median OTE at 0-50 employees vs $162K at 1,000+ employees (62% premium); AI-fluent RevOps pros earn up to $60K more than generalists (~$200K vs $140K)."}
+    ],
+    "trend": [
+      {"claim": "RevOps job postings grew 127% year-over-year between Q1 2025 and Q1 2026, and RevOps headcount grew at 3.2x the rate of all other GTM roles combined in the 12 months ending March 2026.", "source": "CRM Today (\"RevOps Is Now the Fastest-Growing Role in B2B Tech\")", "url": "https://crmtoday.news/industry/revops-fastest-growing-role", "date": "2026", "confidence_flag": "medium — trade-publisher stat, not independently cross-checked against a primary jobs dataset"},
+      {"claim": "By the end of 2025, 75% of high-growth B2B organizations were projected to have a dedicated RevOps function in place.", "source": "GTM 8020, \"28 RevOps Statistics and Revenue Operations Trends\"", "url": "https://www.gtm8020.com/blog/revops-statistics-revenue-operations-trends", "date": "2026"}
+    ],
+    "employers": ["Duende (RevOps Engineer)", "Factorial (RevOps Engineer, via General Catalyst job board)", "Ve — \"the intent company\" (Revenue Operations & GTM Engineer, via RevPath)"],
+    "stack": ["Node.js", "Python", "APIs", "CRM ecosystem architecture (Salesforce/HubSpot)", "workflow automation", "AI/prompt engineering for ops tooling"],
+    "confidence": "medium",
+    "notes": "Exact-title \"RevOps Engineer\"/\"Revenue Operations Engineer\" postings are rare (1-3 on SimplyHired) — most real hiring happens under the broader \"RevOps\" or \"Revenue Operations [Manager/Analyst]\" umbrella, where ZipRecruiter's own count balloons to 174,000+. That gap between exact-title and umbrella-title counts is itself the finding. GTM-Engineer-vs-RevOps-Engineer boundary is explicitly contested in the source material (one glossary source frames GTM engineering as sitting *inside* the RevOps function; treat the two titles as overlapping, not cleanly distinct)."
+  },
+  {
+    "title": "Marketing Automation Engineer",
+    "definition": "An engineer who builds and maintains scalable, data-driven marketing automation programs — primarily inside enterprise CRM/marketing-cloud platforms — turning one-off campaigns into automated, repeatable workflows tied to CRM and analytics.",
+    "definition_source": "Synthesis of Artisan Talent and Hire Digital job-description templates, https://artisantalent.com/job-descriptions/marketing-automation-manager-job-description/ and https://hiredigital.com/job-descriptions/marketing-automation, 2026",
+    "postings": [
+      {"board": "SimplyHired", "query": "\"marketing automation engineer\" (exact phrase, United States)", "count": 6, "url": "https://www.simplyhired.com/search?q=%22marketing+automation+engineer%22&l=United+States", "retrieved": "2026-09-14"},
+      {"board": "Built In", "query": "marketing automation engineer", "count": 0, "url": "https://builtin.com/jobs?search=marketing+automation+engineer", "retrieved": "2026-09-14", "note": "Page states: \"No job results. To see more jobs, try:\""},
+      {"board": "LinkedIn (guest search, loose keyword match — NOT exact-title)", "query": "marketing automation engineer, United States", "count": "4,000+", "url": "https://www.linkedin.com/jobs/search?keywords=marketing%20automation%20engineer&location=United%20States", "retrieved": "2026-09-14"}
+    ],
+    "salary": [
+      {"source": "ZipRecruiter", "low": 86500, "median": 107126, "high": 123500, "currency": "USD", "geo": "United States", "url": "https://www.ziprecruiter.com/Salaries/Marketing-Automation-Engineer-Salary", "date": "2026-08"},
+      {"source": "Glassdoor", "low": 93960, "median": 116500, "high": 145859, "currency": "USD", "geo": "United States", "url": "https://www.glassdoor.com/Salaries/marketing-automation-engineer-salary-SRCH_KO0,29.htm", "date": "2026"}
+    ],
+    "trend": [
+      {"claim": "Marketing automation manager/engineer-adjacent postings saw roughly 10% year-over-year growth across 2025; marketing-automation skills specifically commanded a 36% salary premium, and 78% of marketing leaders said they pay more for candidates with AI skills.", "source": "Robert Half, \"2026 Marketing job market: In-demand roles and hiring trends\"", "url": "https://www.roberthalf.com/us/en/insights/research/data-reveals-which-marketing-and-creative-roles-are-in-highest-demand", "date": "2026"}
+    ],
+    "employers": ["HP (Vancouver, WA)", "Aon Corporation"],
+    "stack": ["Salesforce Marketing Cloud", "HubSpot", "Marketo (implied by category)", "CRM integration", "campaign workflow builders", "KPI/campaign-metrics dashboards"],
+    "confidence": "medium",
+    "notes": "Zero exact-title results on Built In and only 6 on SimplyHired — this is a niche title relative to \"Marketing Automation Manager\" or \"Specialist,\" which are far more commonly posted. The two salary sources agree reasonably well (within ~9%), which is unusual for this dataset and worth noting as a rare point of cross-source agreement."
+  },
+  {
+    "title": "Growth Marketing Manager",
+    "definition": "A marketer who finds, tests, and scales the channels that acquire and retain customers more efficiently, typically owning work across the funnel from first click to conversion — connecting strategy, experimentation, analytics, and revenue goals.",
+    "definition_source": "Synthesis from Growth Method, https://growthmethod.com/growth-marketing-manager/, 2026",
+    "postings": [
+      {"board": "SimplyHired", "query": "\"growth marketing manager\" (exact phrase, United States)", "count": 239, "url": "https://www.simplyhired.com/search?q=%22growth+marketing+manager%22&l=United+States", "retrieved": "2026-09-14"},
+      {"board": "Built In", "query": "growth marketing manager", "count": "9 individual listings visible, no explicit total-count string on page", "url": "https://builtin.com/jobs?search=growth+marketing+manager", "retrieved": "2026-09-14"},
+      {"board": "LinkedIn (guest search, loose keyword match — NOT exact-title)", "query": "growth marketing manager, United States", "count": "10,000+", "url": "https://www.linkedin.com/jobs/search?keywords=growth%20marketing%20manager&location=United%20States", "retrieved": "2026-09-14"}
+    ],
+    "salary": [
+      {"source": "Robert Half", "low": 91250, "median": 112250, "high": 133250, "currency": "USD", "geo": "United States (national)", "url": "https://www.roberthalf.com/us/en/job-details/growth-marketing-manager", "date": "2026"},
+      {"source": "Glassdoor", "low": 97837, "median": 130449, "high": 176771, "currency": "USD", "geo": "United States", "url": "https://www.glassdoor.com/Salaries/growth-marketing-manager-salary-SRCH_KO0,24.htm", "date": "2026"},
+      {"source": "ZipRecruiter", "low": 60000, "median": null, "high": 98000, "currency": "USD", "geo": "United States", "url": "https://www.ziprecruiter.com/Salaries/Growth-Marketing-Manager-Salary", "date": "2026-08", "notes": "90th percentile $125,000; no explicit median/average captured, only 25th/75th/90th percentiles."},
+      {"source": "Salary.com", "low": 98391, "median": 119945, "high": 140903, "currency": "USD", "geo": "United States", "url": "https://www.salary.com/research/salary/listing/growth-marketing-manager-salary", "date": "2026-08-01"}
+    ],
+    "trend": [
+      {"claim": "In New York, NY specifically, Growth Marketing Manager salaries range $124,556-$181,886 — significantly above the national Robert Half range, illustrating a strong metro pay premium for this title.", "source": "Robert Half (NY-specific page)", "url": "https://www.roberthalf.com/us/en/job-details/growth-marketing-manager/new-york-ny", "date": "2026"},
+      {"claim": "Marketing manager job postings overall were up 14% year-over-year in 2026 even as AI adoption in marketing hit 91%, though total marketing job postings remain down 27% from pre-pandemic levels — a bifurcated market where senior/strategic roles hold steady while execution-focused roles decline.", "source": "Aggregated marketing hiring-trend coverage (Kalungi/Robert Half synthesis)", "url": "https://www.kalungi.com/blog/ais-seismic-impact-on-marketing-careers", "date": "2026"}
+    ],
+    "employers": ["Optum", "GCash", "Bamboo Works", "Axios", "Coins.ph"],
+    "stack": ["Google Analytics/GA4", "CRM (HubSpot/Salesforce)", "A/B-testing suites", "SQL/Python for self-serve analysis", "BI tools", "attribution/analytics stack"],
+    "confidence": "high",
+    "notes": "Best salary agreement in the dataset in terms of source count (4 independent sources), though the range across them is still wide (~$91K-$177K depending on percentile/source) — normal for a widely-posted title with huge company-size and geography variance. This is the highest-volume title in the set by exact-phrase SimplyHired count (239)."
+  },
+  {
+    "title": "Data Engineer, Growth",
+    "definition": "A data engineer embedded on or serving a growth team, building the pipelines, event tracking, and analytics infrastructure (funnels, experimentation data, lifecycle triggers) that growth and product teams query to make acquisition/retention decisions — distinct from a general-purpose platform data engineer.",
+    "definition_source": "Synthesis; no single named-source definition found for this exact hybrid title. General data-engineer scope from Indeed's job-description template, https://www.indeed.com/hire/job-description/data-engineer, 2026, narrowed to \"growth\" context via the one confirmed live posting (Roblox, Senior Growth Data Engineer).",
+    "postings": [
+      {"board": "SimplyHired", "query": "\"growth data engineer\" (exact phrase, United States)", "count": 1, "url": "https://www.simplyhired.com/search?q=%22growth+data+engineer%22&l=United+States", "retrieved": "2026-09-14", "note": "The single result is a Senior Growth Data Engineer role at Roblox, San Mateo, CA."},
+      {"board": "LinkedIn (guest search, loose keyword match — NOT exact-title)", "query": "growth data engineer, United States", "count": "11,000+", "url": "https://www.linkedin.com/jobs/search?keywords=growth%20data%20engineer&location=United%20States", "retrieved": "2026-09-14"}
+    ],
+    "salary": [
+      {"source": "ZipRecruiter (general Data Engineer, national — no growth-specific aggregator found)", "low": 114500, "median": 129716, "high": 137500, "currency": "USD", "geo": "United States", "url": "https://www.ziprecruiter.com/Salaries/Data-Engineer-Salary", "date": "2026-07"},
+      {"source": "Levels.fyi (Airbnb Data Engineer specifically — Big Tech comp, not representative of typical market)", "low": null, "median": 460000, "high": 571000, "currency": "USD", "geo": "United States (Airbnb, total comp incl. equity)", "url": "https://www.levels.fyi/companies/airbnb/salaries/software-engineer/title/data-engineer", "date": "2026", "notes": "Included for contrast only — total comp at a top-tier public tech company, not a market median."}
+    ],
+    "trend": [
+      {"claim": "Data engineering roles grew roughly 23% year-over-year with an estimated 260,000 open US positions projected across 2025; average 2026 US data-engineer salary cited at $153,000 ($120,000-$197,000 range); the field is getting \"more specialized,\" with real-time/streaming (Kafka) skills the fastest-growing compensation segment.", "source": "JobsPikr, \"Data Engineer Demand Report 2026\"", "url": "https://www.jobspikr.com/blog/global-data-engineer-demand-2026/", "date": "2026"}
+    ],
+    "employers": ["Roblox (San Mateo, CA)"],
+    "stack": ["SQL", "Python", "dbt", "Airflow", "Snowflake/BigQuery-class warehouses", "event-tracking/CDP tools (e.g. Segment)", "experimentation data pipelines"],
+    "confidence": "low",
+    "notes": "This is effectively a whitespace title: almost no employer posts the literal string \"Data Engineer, Growth\" or \"Growth Data Engineer\" — the one confirmed live posting is at Roblox. Everything else here is the general Data Engineer market used as a proxy, which is an honest limitation, not a finding about growth-specific pay. Treat this title as an internal specialization inside larger data-engineering orgs rather than a standalone job-market category."
+  },
+  {
+    "title": "Director of SEO",
+    "definition": "The executive who sets vision, budget, and KPIs for an organization's organic-search function, operating inside a structured marketing org with peer directors and a defined revenue target — distinct from an SEO Manager by scope and reporting line, not by daily tactics.",
+    "definition_source": "SEOJobs.com, \"SEO Director: Salary and Job Description,\" https://www.seojobs.com/careers/seo-director/, 2026",
+    "postings": [
+      {"board": "SimplyHired", "query": "\"director of seo\" (exact phrase, United States)", "count": 19, "url": "https://www.simplyhired.com/search?q=%22director+of+seo%22&l=United+States", "retrieved": "2026-09-14"},
+      {"board": "SimplyHired", "query": "\"head of seo\" (exact phrase, United States)", "count": 2, "url": "https://www.simplyhired.com/search?q=%22head+of+seo%22&l=United+States", "retrieved": "2026-09-14"},
+      {"board": "Built In", "query": "director of seo", "count": 0, "url": "https://builtin.com/jobs?search=director+of+seo", "retrieved": "2026-09-14", "note": "Page states: \"No job results.\""},
+      {"board": "LinkedIn (guest search, loose keyword match — NOT exact-title)", "query": "director of seo, United States", "count": "3,000+", "url": "https://www.linkedin.com/jobs/search?keywords=director%20of%20seo&location=United%20States", "retrieved": "2026-09-14"},
+      {"board": "LinkedIn (guest, alternate phrasing)", "query": "\"head of seo\" jobs listing page", "count": 74, "url": "https://www.linkedin.com/jobs/head-of-seo-jobs", "retrieved": "2026-09-14", "note": "LinkedIn's own topic-page title read \"74 Head Of Seo jobs in United States (1 new)\" — much tighter and more credible than the generic guest-search \"X,000+\" figure for the same board."}
+    ],
+    "salary": [
+      {"source": "Salary aggregator synthesis (cited as of July 2025)", "low": 112320, "median": 124682, "high": 135526, "currency": "USD", "geo": "United States", "url": "https://www.salary.com/research/salary/posting/search-engine-optimization-seo-director-salary", "date": "2025-07"},
+      {"source": "Glassdoor", "low": null, "median": 175340, "high": 273771, "currency": "USD", "geo": "United States", "url": "https://www.glassdoor.com/Salaries/director-of-seo-salary-SRCH_KO0,15.htm", "date": "2026"},
+      {"source": "ZipRecruiter (posted-job range, not a payroll-data average)", "low": 102000, "median": null, "high": 130000, "currency": "USD", "geo": "United States", "url": "https://www.ziprecruiter.com/Jobs/Seo-Director", "date": "2026-09"}
+    ],
+    "trend": [
+      {"claim": "SEO hiring is tilting toward leadership: 59% of SEO job listings analyzed were classified as senior leadership roles (Director/VP/Head/Chief/Lead/Executive), based on a Semrush analysis of job listings referenced in third-party coverage.", "source": "ALM Corp / dev.to coverage of a Semrush job-listings analysis, \"SEO Job Market 2026: What 3,900 Job Listings Reveal\"", "url": "https://almcorp.com/blog/seo-job-market-2026/", "date": "2026"},
+      {"claim": "20.3% of SEO job ads now mention AI search, GEO or AEO skills as of June 2026, up from 12.2% in December 2025 (527 to 1,010 postings/month); postings mentioning AI-search skills carry a median salary of $117,500 vs $97,500 for those that don't — a 20.5% premium, across 13,779 US postings with advertised salaries.", "source": "SearchForHire, \"The Future of Search: 5 Experts and 328,650 Job Postings\" (328,650 marketing postings of 632,840 total collected July 2025-June 2026)", "url": "https://www.searchforhire.com/blog/the-future-of-search-5-experts-and-328650-job-postings-on-what-happens-next/", "date": "2026-07-15"}
+    ],
+    "employers": ["Mindvalley (Head of SEO)", "Credible (Director of SEO & Content)"],
+    "stack": ["Google Analytics (GA4)", "Google Search Console", "Semrush", "Ahrefs", "Screaming Frog", "Looker Studio", "BigQuery", "DeepCrawl"],
+    "confidence": "high",
+    "notes": "Director of SEO is a genuinely rare exact-title (19 on SimplyHired, 0 on Built In) compared to the broader \"SEO Manager\"/\"Head of SEO\" family. The SearchForHire study (328,650 postings, dated methodology) is the strongest single trend source in this entire dataset — primary, dated, large-n, and directly on-topic."
+  },
+  {
+    "title": "Head of AEO/GEO (AI Search Lead)",
+    "definition": "The executive who owns an organization's full search function — traditional SEO plus AI-answer-engine visibility (AEO/GEO) — setting the long-term roadmap, managing a team of specialists, owning budget, and reporting to senior marketing/executive leadership on how search visibility ties to pipeline and revenue.",
+    "definition_source": "Synthesis from Sloane Staffing, \"AEO/GEO Hiring in 2026,\" https://www.sloane-staffing.com/insights/aeo-geo-hiring-2026/, 2026-08-11",
+    "postings": [
+      {"board": "SimplyHired", "query": "\"AEO\" \"GEO\" (both terms present, not exact phrase, United States)", "count": 435, "url": "https://www.simplyhired.com/search?q=%22AEO%22+%22GEO%22&l=United+States", "retrieved": "2026-09-14", "note": "This is a broad co-occurrence count, not an exact \"Head of AEO\" title match — titles returned range from \"Director, SEO & AEO\" to \"Technical SEO Specialist,\" i.e. mostly IC/manager roles, not just leadership."},
+      {"board": "LinkedIn (guest search, loose keyword match — NOT exact-title)", "query": "head of AEO, United States", "count": "11,000+", "url": "https://www.linkedin.com/jobs/search?keywords=head%20of%20AEO&location=United%20States", "retrieved": "2026-09-14"},
+      {"board": "geojobs.ai (curated AEO/GEO-specific board, count not independently verified this session)", "query": "browse all listings", "count": "not captured — see notes.md gap", "url": "https://geojobs.ai/jobs/", "retrieved": "2026-09-14"}
+    ],
+    "salary": [
+      {"source": "Kaleigh Moore, \"AEO Job Openings in 2026\" (Experian posting example, manager-level)", "low": 100000, "median": 137000, "high": 174000, "currency": "USD", "geo": "United States", "url": "https://www.kaleighmoore.com/blog/2026/7/6/ai-search-jobs", "date": "2026-07-06"},
+      {"source": "Sloane Staffing, \"AEO/GEO Hiring in 2026\" (senior-enterprise band, content marketing w/ AI focus)", "low": 150000, "median": 180000, "high": 210000, "currency": "USD", "geo": "United States", "url": "https://www.sloane-staffing.com/insights/aeo-geo-hiring-2026/", "date": "2026-08-11"},
+      {"source": "Same two sources, specialist-level band for contrast (Odoo posting example)", "low": 75000, "median": 85000, "high": 95000, "currency": "USD", "geo": "United States", "url": "https://www.sloane-staffing.com/insights/aeo-geo-hiring-2026/", "date": "2026-08-11"}
+    ],
+    "trend": [
+      {"claim": "50+ unique AEO roles tracked across 50+ companies as of July 6, 2026, including Stripe, Amazon, Pfizer, LinkedIn, Victoria's Secret, eBay, Palo Alto Networks, HubSpot, and Anthropic — spanning finance, healthcare, retail, and enterprise tech, not just SaaS/marketing.", "source": "Kaleigh Moore", "url": "https://www.kaleighmoore.com/blog/2026/7/6/ai-search-jobs", "date": "2026-07-06"},
+      {"claim": "720 postings in the last 12 months carry AI-search/GEO/AEO discipline directly in the job title; 28% of those are leadership roles (Director/Head/VP/Principal/Lead) vs. 15% for standard SEO titles — companies are hiring leaders, not juniors, for this new discipline.", "source": "SearchForHire (328,650-posting study)", "url": "https://www.searchforhire.com/blog/the-future-of-search-5-experts-and-328650-job-postings-on-what-happens-next/", "date": "2026-07-15"},
+      {"claim": "94% of surveyed CMOs/digital leaders plan to increase AEO investment in 2026; 97% said AEO already had a positive impact in 2025; enterprises allocated an average 12% of digital budget to AEO/GEO in 2025.", "source": "Conductor survey of 250+ CMOs, cited via Sloane Staffing", "url": "https://www.sloane-staffing.com/insights/aeo-geo-hiring-2026/", "date": "2026-08-11"}
+    ],
+    "employers": ["Victoria's Secret (Director, AI & Organic Search — AEO, GEO, SEO)", "Experian (AEO & SEO Manager, Remote)", "Capital One (Senior Digital Marketing Associate — AEO, GEO and AI Search Lead)", "eBay (Director of Product, AEO & SEO)", "Milestone (VP/Head of Search & AI Visibility)", "J.Jill (Senior Manager of SEO & Generative Engine Optimization)", "Stripe, Amazon, Pfizer, LinkedIn, Palo Alto Networks, HubSpot, Anthropic (named among the 50+ companies tracked)"],
+    "stack": ["Ahrefs Brand Radar", "Semrush AI Visibility Toolkit", "Profound", "Otterly.AI", "Peec AI", "LLMrefs", "SE Ranking", "traditional SEO stack (GSC, GA4) retained alongside AI-visibility tools"],
+    "confidence": "medium",
+    "notes": "\"Title alone tells you almost nothing about scope\" for this category (direct quote from Sloane Staffing) — identical titles carry vastly different responsibilities across technical, content, off-site, and measurement functions, and the title itself is unstandardized (AEO Lead, GEO Manager, AI Search Lead, Director AI & Organic Search all describe overlapping work). This instability is itself the headline finding for this title. geojobs.ai is a purpose-built board for this niche but its live count wasn't successfully captured this session — flagged in notes.md as a gap worth a follow-up pass."
+  },
+  {
+    "title": "Growth Strategist",
+    "definition": "A cross-functional role responsible for identifying and executing strategies — market analysis, competitive benchmarking, revenue-growth frameworks — that drive sustainable business expansion, sitting at the intersection of marketing, product, and data analytics.",
+    "definition_source": "Teal career-path guide, https://www.tealhq.com/career-paths/growth-strategist, 2026",
+    "postings": [
+      {"board": "SimplyHired", "query": "\"growth strategist\" (exact phrase, United States)", "count": 108, "url": "https://www.simplyhired.com/search?q=%22growth+strategist%22&l=United+States", "retrieved": "2026-09-14"},
+      {"board": "Built In", "query": "growth strategist", "count": 1, "url": "https://builtin.com/jobs?search=growth+strategist", "retrieved": "2026-09-14", "note": "Single listing: BlackBox Strategies, senior-level, Professional Services/Consulting."},
+      {"board": "LinkedIn (guest search, loose keyword match — NOT exact-title)", "query": "growth strategist, United States", "count": "11,000+", "url": "https://www.linkedin.com/jobs/search?keywords=growth%20strategist&location=United%20States", "retrieved": "2026-09-14"}
+    ],
+    "salary": [
+      {"source": "ZipRecruiter", "low": 121500, "median": 139867, "high": 157000, "currency": "USD", "geo": "United States", "url": "https://www.ziprecruiter.com/Salaries/Growth-Strategist-Salary", "date": "2026-07"},
+      {"source": "Glassdoor", "low": 124166, "median": 165554, "high": 231776, "currency": "USD", "geo": "United States", "url": "https://www.glassdoor.com/Salaries/growth-strategist-salary-SRCH_KO0,17.htm", "date": "2026", "notes": "90th percentile reaches $302,964."}
+    ],
+    "trend": [
+      {"claim": "No title-specific \"Growth Strategist\" trend/surge article was found in this session (see notes.md gap). Best available context: 2026 hiring-outlook coverage names \"digital marketing strategists, content strategists, and demand generation managers\" as strong-demand roles for 2026, in a labor market otherwise described as \"cooling.\"", "source": "Robert Half, employment/hiring outlook coverage", "url": "https://www.roberthalf.com/us/en/insights/salary-hiring-trends/demand-for-skilled-talent", "date": "2026"}
+    ],
+    "employers": ["BlackBox Strategies"],
+    "stack": ["Google Analytics", "CRM (HubSpot/Salesforce)", "A/B-testing suites", "SQL/Python for self-serve analysis", "BI tools"],
+    "confidence": "medium",
+    "notes": "The 108 SimplyHired exact-phrase postings is a real, healthy-sized floor — but Built In returns just 1, and no dedicated 2025-2026 trend article specific to this title turned up despite several search attempts. This title reads as an established, steady-demand generalist role rather than an emerging/surging one — the opposite pattern from GTM Engineer or AEO/GEO leads."
+  }
+]

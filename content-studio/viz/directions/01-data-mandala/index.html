@@ -1,0 +1,529 @@
+<title>Data Mandala — Search Intent 2026</title>
+<style>
+  :root { color-scheme: light; }
+  html, body { margin: 0; padding: 0; background: #E7DECF; }
+  body { overflow: hidden; }
+  #stage { position: relative; margin: 0 auto; }
+  svg { display: block; }
+  text { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  .num { font-variant-numeric: tabular-nums; }
+</style>
+<div id="stage"><svg id="viz" xmlns="http://www.w3.org/2000/svg"></svg></div>
+<script type="module">
+/* ============================================================================
+   THE DATA MANDALA — search intent × the AI SERP
+   Self-contained: no network, no webfonts, no build step.
+   ?size=1080x1350 | 1080x1080 | 640x800     ?t=<seconds>     ?static=1
+   window.VIZ.seek(seconds) / .seekMs(ms) / .duration / .ready
+   ========================================================================== */
+
+/* ---------------------------------------------------------------- palette */
+const PAPER      = '#FFF6E9';
+const PAPER_DEEP = '#FDEBD3';
+const INK        = '#14100B';
+const INK_SOFT   = '#5B5147';
+const HOT        = '#FFE600';
+const NM         = '#9A8F81';   // "not measured"
+
+const INTENTS = [
+  { key:'informational', name:'INFORMATIONAL',            hue:'#00C2FF', icon:'ask',   ex:'“how to tie a tie”' },
+  { key:'commercial',    name:'COMMERCIAL INVESTIGATION', hue:'#A855F7', icon:'scale', ex:'“ahrefs vs semrush”' },
+  { key:'transactional', name:'TRANSACTIONAL',            hue:'#FF4D97', icon:'bag',   ex:'“buy nike air max 270”' },
+  { key:'navigational',  name:'NAVIGATIONAL',             hue:'#C6FF00', icon:'goto',  ex:'“chase bank login”' },
+  { key:'local',         name:'LOCAL',                    hue:'#FF9500', icon:'pin',   ex:'“plumber near me”' },
+];
+
+/* rings, inner → outer; cells indexed [ring][intent] */
+const RINGS = [
+  { mark:'①', glyph:'spark', title:'DOES AN AI ANSWER APPEAR?', sub:'AI Overview trigger rate · 0–36% · mixed panels', tint:0.13, bar:true, max:36 },
+  { mark:'②', glyph:'click', title:'WHO TAKES THE CLICK?',      sub:'click share · organic CTR',  tint:0.36 },
+  { mark:'③', glyph:'delta', title:'WHAT MOVED IN A YEAR',      sub:'2024–25 → 2026',             tint:0.52 },
+];
+
+const CELLS = [
+  [ // ①  AI Overview trigger rate
+    { v:36, val:'36%', long:'85.9% on “what / how / why”', short:'85.9% on “what/how/why”' },
+    { v:8,  val:'8%',  long:'but 95.4% on “X vs Y”',       short:'95.4% on “X vs Y”' },
+    { v:5,  val:'5%',  long:'lowest rate in the study',    short:'lowest rate measured' },
+    { v:0,  val:'0%',  long:'0 of 10,000 kw, Dec 2024',    short:'0 of 10,000 kw, Dec 2024' },
+    { v:15, val:'15%', long:'vs 92% informational',        short:'vs 92% informational' },
+  ],
+  [ // ②  who takes the click
+    { val:'0.94%', long:'organic CTR when an AI Overview cites someone else', short:'AI Overview cites someone else' },
+    { val:'36%',   long:'paid click share, US headphones — 16% a year ago',  short:'paid share — 16% a year ago' },
+    { val:'2.15%', long:'organic CTR under an AI Overview — −48% in a year', short:'under an AI Overview, −48%' },
+    { val:'n/m',   long:'no intent-segmented CTR study in this ledger',      short:'no intent-segmented study', nm:true },
+    { val:'93%',   long:'local-intent searches still show a Local Pack',     short:'still show a Local Pack' },
+  ],
+  [ // ③  what moved
+    { val:'−34pt', long:'informational share of AI Overview queries: 91.3% → 57.1%',   short:'AI Overview mix: 91.3% → 57.1%' },
+    { val:'+71%',  long:'growth in commercial SERPs carrying an AI Overview, 6 months', short:'commercial SERPs with an AIO, 6 mo' },
+    { val:'−5%',   long:'transactional AI Overview share fell over the same 6 months',  short:'fell over the same 6 months' },
+    { val:'12×',   long:'navigational share of AI Overview queries: 0.84% → 10.33%',    short:'AI Overview mix: 0.84% → 10.33%' },
+    { val:'n/m',   long:'one 2025 snapshot only — no trend series published',           short:'one snapshot, no trend', nm:true },
+  ],
+];
+
+const SOURCE_LINE =
+  'Published — Seer Interactive 5.47M queries Apr 2026 · Semrush 10M kw Feb 2026 + 600K kw Jul 2026 · SparkToro × Similarweb Jun 2026 · ' +
+  'Ahrefs 300K kw Feb 2026 · Whitespark 540 queries May 2025 · Authoritas 10K kw Jan 2025 · n/m = not measured in this ledger';
+
+/* ---------------------------------------------------------------- icons (24×24) */
+const ICON = {
+  ask:   ['M8.3 9.0a3.7 3.7 0 1 1 3.7 3.8v2.0','M12 18.3h.01'],
+  scale: ['M12 4.2v15.0','M6.2 7.4h11.6','M8.2 19.2h7.6','M6.2 7.4 3.2 13.4h6z','M17.8 7.4l-3 6h6z'],
+  bag:   ['M6.6 8.2h10.8l1.0 11.2H5.6z','M9.1 8.2a2.9 2.9 0 0 1 5.8 0'],
+  goto:  ['M3.6 12h11.2','M11.2 7.6 15.8 12l-4.6 4.4','M19.4 4.2v15.6'],
+  pin:   ['M12 20.8s6.0-6.0 6.0-10.0A6.0 6.0 0 0 0 6 10.8c0 4.0 6 10.0 6 10.0z','M12 10.5h.01'],
+  spark: ['M12 3.0 14.0 9.0 20.0 11.0 14.0 13.0 12 19.0 10.0 13.0 4.0 11.0 10.0 9.0z'],
+  click: ['M6.0 4.2 18.4 11.4l-5.3 1.2-1.6 5.3z'],
+  delta: ['M12 5.0 17.6 14.2H6.4z','M7.2 18.4h9.6'],
+};
+const ICON_FILLED = { spark:true, click:true };
+
+/* ---------------------------------------------------------------- helpers */
+const NS = 'http://www.w3.org/2000/svg';
+const el = (n, a = {}, parent) => {
+  const e = document.createElementNS(NS, n);
+  for (const k in a) if (a[k] !== undefined && a[k] !== null) e.setAttribute(k, a[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+};
+const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
+const lerp = (a, b, t) => a + (b - a) * t;
+const easeOutExpo = t => (t >= 1 ? 1 : 1 - Math.pow(2, -9 * t));
+const easeOutBack = t => { const c = 1.9; return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); };
+const easeInOut = t => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+const win = (t, a, b) => clamp((t - a) / (b - a), 0, 1);
+
+const hex2rgb = h => [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)];
+const rgb2hex = c => '#' + c.map(v => Math.round(clamp(v, 0, 255)).toString(16).padStart(2, '0')).join('');
+const tint  = (hue, a, over = PAPER) => {
+  const A = hex2rgb(hue), B = hex2rgb(over);
+  return rgb2hex([0, 1, 2].map(i => lerp(B[i], A[i], a)));
+};
+const shade = (hue, a) => rgb2hex(hex2rgb(hue).map(v => v * (1 - a)));
+
+/* angle: degrees clockwise from 12 o'clock */
+const pt = (cx, cy, r, deg) => {
+  const rad = (deg - 90) * Math.PI / 180;
+  return [cx + r * Math.cos(rad), cy + r * Math.sin(rad)];
+};
+const f = n => Math.round(n * 100) / 100;
+
+function sectorPath(cx, cy, r0, r1, a0, a1) {
+  if (a1 - a0 <= 0.0001) return 'M0 0';
+  const big = (a1 - a0) > 180 ? 1 : 0;
+  const [x0, y0] = pt(cx, cy, r1, a0), [x1, y1] = pt(cx, cy, r1, a1);
+  const [x2, y2] = pt(cx, cy, r0, a1), [x3, y3] = pt(cx, cy, r0, a0);
+  return `M${f(x0)} ${f(y0)}A${f(r1)} ${f(r1)} 0 ${big} 1 ${f(x1)} ${f(y1)}` +
+         `L${f(x2)} ${f(y2)}A${f(r0)} ${f(r0)} 0 ${big} 0 ${f(x3)} ${f(y3)}Z`;
+}
+function arcPath(cx, cy, r, a0, a1, reversed) {
+  const A = reversed ? a1 : a0, B = reversed ? a0 : a1;
+  const [x0, y0] = pt(cx, cy, r, A), [x1, y1] = pt(cx, cy, r, B);
+  const big = Math.abs(B - A) > 180 ? 1 : 0;
+  return `M${f(x0)} ${f(y0)}A${f(r)} ${f(r)} 0 ${big} ${reversed ? 0 : 1} ${f(x1)} ${f(y1)}`;
+}
+
+/* ---------------------------------------------------------------- size */
+const Q = new URLSearchParams(location.search);
+const parseSize = s => { const m = /^(\d{2,5})\s*[x×]\s*(\d{2,5})$/.exec((s || '').trim()); return m ? [+m[1], +m[2]] : null; };
+const [W, H] = parseSize(Q.get('size')) || [1080, 1350];
+const S  = W / 1080;
+const px = n => n * S;
+
+const stage = document.getElementById('stage');
+stage.style.width = W + 'px'; stage.style.height = H + 'px';
+const svg = document.getElementById('viz');
+svg.setAttribute('width', W); svg.setAttribute('height', H);
+svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+
+/* ---------------------------------------------------------------- layout */
+const M      = Math.round(px(34));
+const BAR_H  = Math.round(px(202));
+const KEY_H  = Math.round(px(62));
+const FOOT_H = Math.round(px(104));
+const CX = W / 2;
+const areaTop = BAR_H + KEY_H, areaBot = H - FOOT_H;
+const R  = Math.floor(Math.min((areaBot - areaTop) / 2, (W - 2 * M) / 2));
+const CY = Math.round(areaTop + (areaBot - areaTop) / 2);
+const TIGHT = R < 420;
+
+const rr = k => R * k;
+const HUB = rr(0.232), G0 = rr(0.012), GAP = rr(0.0443), BD = rr(0.1833);
+const BANDS = [];
+let cursor = HUB + G0;
+for (let i = 0; i < 3; i++) { BANDS.push({ i: cursor, o: cursor + BD }); cursor += BD + GAP; }
+const CROWN = { i: cursor, o: R };
+const GUT = 1.15;                       // degrees of gutter each side of a sector
+const MEDR = BD / 2 - px(4.5);          // medallion radius
+
+/* ---------------------------------------------------------------- scaffold */
+const defs = el('defs', {}, svg);
+const grad = el('radialGradient', { id: 'bloom', cx: '50%', cy: '50%', r: '50%' }, defs);
+el('stop', { offset: '0%',  'stop-color': PAPER_DEEP }, grad);
+el('stop', { offset: '58%', 'stop-color': PAPER }, grad);
+el('stop', { offset: '100%','stop-color': PAPER }, grad);
+
+el('rect', { x: 0, y: 0, width: W, height: H, fill: PAPER }, svg);
+el('circle', { cx: CX, cy: CY, r: R * 1.18, fill: 'url(#bloom)' }, svg);
+
+const gStatic = el('g', {}, svg);   // phyllotaxis grain
+const gBands  = el('g', {}, svg);
+const gBars   = el('g', {}, svg);
+const gSpin   = el('g', {}, svg);   // K-fold ticks; turns exactly 360/K per loop
+const gRings  = el('g', {}, svg);
+const gSpokes = el('g', {}, svg);
+const gMeds   = el('g', {}, svg);
+const gLabels = el('g', {}, svg);
+const gCrown  = el('g', {}, svg);
+const gHub    = el('g', {}, svg);
+const gChrome = el('g', {}, svg);
+
+/* ---------------------------------------------------------------- text utils */
+function txt(parent, s, a) { const t = el('text', a, parent); t.textContent = s; return t; }
+function fit(t, maxW, minSize) {
+  let size = parseFloat(t.getAttribute('font-size')), guard = 60;
+  while (guard-- > 0 && t.getComputedTextLength() > maxW && size > (minSize || 6)) {
+    size *= 0.95; t.setAttribute('font-size', f(size));
+  }
+  return size;
+}
+function arcLabel(parent, s, { r, a0, a1, size, fill, weight = 650, spacing = 0, id, nm }) {
+  const mid = ((a0 + a1) / 2 + 360) % 360;
+  const rev = mid > 90 && mid < 270;                  // bottom half: reverse so text stays upright
+  const rad = s2 => (rev ? r + s2 * 0.82 : r);
+  const p = el('path', { id, d: arcPath(CX, CY, rad(size), a0, a1, rev), fill: 'none' }, defs);
+  const t = el('text', {
+    'font-size': f(size), 'font-weight': weight, fill, 'letter-spacing': f(spacing),
+    'text-anchor': 'middle', 'font-style': nm ? 'italic' : null,
+  }, parent);
+  const tp = el('textPath', { href: '#' + id, startOffset: '50%' }, t);
+  tp.textContent = s;
+  let s2 = size, guard = 60;
+  while (guard-- > 0 && t.getComputedTextLength() > p.getTotalLength() * 0.95 && s2 > 5) {
+    s2 *= 0.955;
+    t.setAttribute('font-size', f(s2));
+    if (rev) p.setAttribute('d', arcPath(CX, CY, rad(s2), a0, a1, true));
+  }
+  return t;
+}
+function icon(parent, name, x, y, size, color, sw) {
+  const g = el('g', { transform: `translate(${f(x - size / 2)} ${f(y - size / 2)}) scale(${f(size / 24)})` }, parent);
+  for (const d of ICON[name]) {
+    el('path', {
+      d, fill: ICON_FILLED[name] ? color : 'none', stroke: color,
+      'stroke-width': (sw || 2.15), 'stroke-linecap': 'round', 'stroke-linejoin': 'round',
+    }, g);
+  }
+  return g;
+}
+
+/* ============================================================== ORNAMENT */
+const K = 10;                                   // fold symmetry = the loop divisor
+function tickRing(parent, r, count, len, w, color, op) {
+  const g = el('g', { opacity: op }, parent);
+  for (let i = 0; i < count; i++) {
+    const a = (360 / count) * i;
+    const [x0, y0] = pt(CX, CY, r - len / 2, a), [x1, y1] = pt(CX, CY, r + len / 2, a);
+    el('line', { x1: f(x0), y1: f(y0), x2: f(x1), y2: f(y1), stroke: color, 'stroke-width': f(w), 'stroke-linecap': 'round' }, g);
+  }
+}
+BANDS.forEach((B, i) => tickRing(gSpin, B.i + BD * 0.10, K * (4 + i), BD * 0.12, px(1.5), INK, 0.30));
+tickRing(gSpin, CROWN.o - rr(0.016), K * 9, rr(0.016), px(1.15), shade(INK, -0.1), 0.34);
+
+(function grain() {
+  const n = 620, golden = Math.PI * (3 - Math.sqrt(5));
+  const g = el('g', { opacity: 0.34 }, gStatic);
+  for (let i = 0; i < n; i++) {
+    const rad = Math.sqrt(i / n) * CROWN.i;
+    if (rad < HUB * 1.1) continue;
+    const a = (i * golden * 180 / Math.PI) % 360;
+    const [x, y] = pt(CX, CY, rad, a);
+    const idx = Math.floor((((a + 36) % 360) / 72)) % 5;
+    el('circle', { cx: f(x), cy: f(y), r: f(px(1.0) + (i % 3) * px(0.3)), fill: shade(INTENTS[idx].hue, 0.16) }, g);
+  }
+})();
+
+/* ============================================================== CELLS */
+const art = [];
+
+INTENTS.forEach((it, ii) => {
+  const A = ii * 72, a0 = A - 36 + GUT, a1 = A + 36 - GUT;
+
+  RINGS.forEach((ring, ri) => {
+    const B = BANDS[ri], cell = CELLS[ri][ii];
+
+    const band = el('path', {
+      d: sectorPath(CX, CY, B.i, B.o, a0, a1),
+      fill: cell.nm ? tint(NM, ring.tint * 0.48) : tint(shade(it.hue, 0.10), ring.tint),
+      stroke: shade(it.hue, 0.30), 'stroke-width': f(px(0.9)), 'stroke-opacity': 0.32,
+    }, gBands);
+
+    /* petal ornament — 3 lobes per sector, 15-fold around the wheel */
+    const pg = el('g', { opacity: 0.55 }, gBands);
+    for (let k = 0; k < 3; k++) {
+      const c = a0 + (a1 - a0) * (k + 0.5) / 3, w = (a1 - a0) / 3 * 0.46;
+      const [tx, ty] = pt(CX, CY, B.o - BD * 0.07, c);
+      const [bx, by] = pt(CX, CY, B.i + BD * 0.09, c);
+      const [lx, ly] = pt(CX, CY, (B.i + B.o) / 2, c - w);
+      const [rx, ry] = pt(CX, CY, (B.i + B.o) / 2, c + w);
+      el('path', {
+        d: `M${f(bx)} ${f(by)}Q${f(lx)} ${f(ly)} ${f(tx)} ${f(ty)}Q${f(rx)} ${f(ry)} ${f(bx)} ${f(by)}Z`,
+        fill: 'none', stroke: shade(cell.nm ? NM : it.hue, 0.36), 'stroke-width': f(px(1.15)), 'stroke-opacity': 0.58,
+      }, pg);
+    }
+
+    /* ① is the encoded ring: blade length = the trigger rate, linear, max 36% */
+    let bar = null, cap = null;
+    if (ring.bar) {
+      bar = el('path', { d: 'M0 0', fill: it.hue, stroke: shade(it.hue, 0.34), 'stroke-width': f(px(1.1)) }, gBars);
+      cap = el('path', { d: 'M0 0', fill: 'none', stroke: INK, 'stroke-width': f(px(2.6)), 'stroke-opacity': 0.9 }, gBars);
+      bar.dataset.frac = (cell.v || 0) / ring.max;
+    }
+
+    /* inscription: curved label riding the gap just outside the band */
+    const lab = arcLabel(gLabels, TIGHT ? cell.short : cell.long, {
+      r: B.o + rr(0.013), a0: a0 + 1.4, a1: a1 - 1.4,
+      size: px(14.2), fill: cell.nm ? '#6E6457' : INK, weight: 650, spacing: px(0.1),
+      id: `lab-${ri}-${ii}`, nm: cell.nm,
+    });
+
+    /* medallion */
+    const [mx, my] = pt(CX, CY, (B.i + B.o) / 2, A);
+    const g = el('g', { transform: `translate(${f(mx)} ${f(my)})` }, gMeds);
+    const gs = el('g', {}, g);
+    el('circle', { r: f(MEDR + px(3.6)), fill: shade(cell.nm ? NM : it.hue, 0.05), opacity: 0.28 }, gs);
+    el('circle', {
+      r: f(MEDR), fill: PAPER, stroke: cell.nm ? NM : shade(it.hue, 0.14), 'stroke-width': f(px(3.2)),
+      'stroke-dasharray': cell.nm ? `${f(px(5))} ${f(px(4))}` : null,
+    }, gs);
+    const badR = MEDR * 0.30;
+    const bg = el('g', { transform: `translate(0 ${f(-MEDR * 0.44)})` }, gs);
+    el('circle', { r: f(badR), fill: cell.nm ? '#E7DFD3' : it.hue, stroke: shade(it.hue, 0.2), 'stroke-width': f(px(1.1)) }, bg);
+    icon(bg, ri === 0 ? it.icon : ring.glyph, 0, 0, badR * 1.32, INK, 2.5);
+    const vt = txt(gs, cell.val, {
+      x: 0, y: f(MEDR * 0.53), 'text-anchor': 'middle', class: 'num',
+      'font-size': f(MEDR * 0.80), 'font-weight': 800, 'letter-spacing': f(-px(1.1)),
+      fill: cell.nm ? '#7A7062' : INK, 'font-style': cell.nm ? 'italic' : null,
+    });
+    fit(vt, MEDR * 1.58, px(9));
+
+    art.push({ ri, ii, band, pg, bar, cap, lab, med: g, scale: gs, a0, a1, B });
+  });
+
+  /* crown: saturated rim carrying the intent name */
+  const crown = el('path', {
+    d: sectorPath(CX, CY, CROWN.i, CROWN.o, a0, a1),
+    fill: it.hue, stroke: shade(it.hue, 0.34), 'stroke-width': f(px(1.2)),
+  }, gCrown);
+  const cname = arcLabel(gCrown, it.name, {
+    r: CROWN.i + (CROWN.o - CROWN.i) * 0.70, a0: a0 + 2.4, a1: a1 - 2.4,
+    size: px(20), fill: INK, weight: 800, spacing: px(1.8), id: `crown-${ii}`,
+  });
+  art.push({ crownOnly: true, ii, band: crown, lab: cname, a0, a1 });
+
+  /* spoke divider + boss */
+  const sa = A + 36;
+  const [sx0, sy0] = pt(CX, CY, HUB + px(2), sa), [sx1, sy1] = pt(CX, CY, CROWN.o, sa);
+  el('line', { x1: f(sx0), y1: f(sy0), x2: f(sx1), y2: f(sy1), stroke: INK, 'stroke-width': f(px(2.2)), 'stroke-opacity': 0.85 }, gSpokes);
+  const [dx, dy] = pt(CX, CY, CROWN.i, sa);
+  el('circle', { cx: f(dx), cy: f(dy), r: f(px(5.4)), fill: PAPER, stroke: INK, 'stroke-width': f(px(2)) }, gSpokes);
+});
+
+/* boundary circles */
+const bounds = [HUB, ...BANDS.flatMap(B => [B.i, B.o]), CROWN.i, CROWN.o];
+bounds.forEach((r, i) => el('circle', {
+  cx: CX, cy: CY, r: f(r), fill: 'none', stroke: INK,
+  'stroke-width': f(px(i === bounds.length - 1 ? 3.2 : 1.4)),
+  'stroke-opacity': i === bounds.length - 1 ? 0.95 : 0.45,
+}, gRings));
+
+/* ============================================================== HUB */
+const hub = (() => {
+  el('circle', { cx: CX, cy: CY, r: f(HUB), fill: PAPER }, gHub);
+  const ros = el('g', { opacity: 0.55 }, gHub);
+  for (let k = 0; k < K; k++) {
+    const a = (360 / K) * k;
+    const [tx, ty] = pt(CX, CY, HUB * 0.95, a);
+    const [lx, ly] = pt(CX, CY, HUB * 0.54, a - 17);
+    const [rx, ry] = pt(CX, CY, HUB * 0.54, a + 17);
+    el('path', {
+      d: `M${f(CX)} ${f(CY)}Q${f(lx)} ${f(ly)} ${f(tx)} ${f(ty)}Q${f(rx)} ${f(ry)} ${f(CX)} ${f(CY)}Z`,
+      fill: 'none', stroke: '#DBCFBA', 'stroke-width': f(px(1.1)),
+    }, ros);
+  }
+  /* gauge: the arc is 58% of the circle — the number is the arc */
+  const gw = px(13), gr = HUB - gw / 2 - px(2.5);
+  el('circle', { cx: CX, cy: CY, r: f(gr), fill: 'none', stroke: '#EFE2C8', 'stroke-width': f(gw) }, gHub);
+  const sweep  = el('path', { d: 'M0 0', fill: 'none', stroke: HOT, 'stroke-width': f(gw) }, gHub);
+  const sweep2 = el('path', { d: 'M0 0', fill: 'none', stroke: INK, 'stroke-width': f(px(1.6)), opacity: 0.55 }, gHub);
+  const core = gr - gw / 2 - px(2);
+  el('circle', { cx: CX, cy: CY, r: f(core), fill: PAPER, stroke: INK, 'stroke-width': f(px(1.4)), 'stroke-opacity': 0.45 }, gHub);
+
+  /* every hub line is fitted to the chord of the core disc at its own height */
+  const chord = y => 2 * Math.sqrt(Math.max(1, core * core - y * y)) * 0.93;
+  const big = txt(gHub, '−0%', {
+    x: CX, y: f(CY - core * 0.10), 'text-anchor': 'middle', class: 'num',
+    'font-size': f(px(58)), 'font-weight': 800, 'letter-spacing': f(-px(3)), fill: INK,
+  });
+  fit(big, chord(core * 0.46), px(20));
+  ['position-one organic CTR', 'when an AI Overview appears'].forEach((s, i) => {
+    const y = core * 0.20 + px(15.6) * i;
+    fit(txt(gHub, s, {
+      x: CX, y: f(CY + y), 'text-anchor': 'middle', 'font-size': f(px(13.2)), 'font-weight': 650, fill: INK,
+    }), chord(y), px(8));
+  });
+  const sy = core * 0.20 + px(15.6) * 2 + px(4);
+  fit(txt(gHub, 'AHREFS · 300K KEYWORDS · 2026', {
+    x: CX, y: f(CY + sy), 'text-anchor': 'middle', class: 'mono',
+    'font-size': f(px(8.8)), 'font-weight': 600, fill: INK_SOFT, 'letter-spacing': f(px(0.3)),
+  }), chord(sy + px(3)), px(5.5));
+  return { sweep, sweep2, big, gr };
+})();
+
+/* ============================================================== CHROME */
+el('rect', { x: 0, y: 0, width: W, height: BAR_H, fill: INK }, gChrome);
+el('rect', { x: 0, y: BAR_H - px(7), width: W, height: px(7), fill: HOT }, gChrome);
+
+txt(gChrome, 'SEARCH INTENT × THE AI SERP · A DATA MANDALA · SEPTEMBER 2026', {
+  x: M, y: f(px(41)), 'font-size': f(px(13)), 'font-weight': 800, fill: HOT, 'letter-spacing': f(px(2.5)),
+});
+const headA = el('text', {
+  x: M, y: f(px(99)), 'font-size': f(px(56)), 'font-weight': 800, fill: PAPER,
+  'letter-spacing': f(-px(2)), class: 'num',
+}, gChrome);
+const headNum = el('tspan', { fill: HOT }, headA); headNum.textContent = '0.00%';
+const headRest = el('tspan', {}, headA); headRest.textContent = ' of U.S. Google searches';
+txt(gChrome, 'now end with no click at all.', {
+  x: M, y: f(px(155)), 'font-size': f(px(56)), 'font-weight': 800, fill: PAPER, 'letter-spacing': f(-px(2)),
+});
+txt(gChrome, 'This wheel maps where the attention goes instead — five intents, three rings.', {
+  x: M, y: f(px(182)), 'font-size': f(px(16.5)), 'font-weight': 600, fill: '#C9BFAF',
+});
+
+(function keyStrip() {
+  const y = BAR_H + KEY_H / 2, colW = (W - 2 * M) / 3;
+  RINGS.forEach((ring, i) => {
+    const x = M + colW * i;
+    el('rect', {
+      x: f(x), y: f(BAR_H + px(9)), width: f(colW - px(11)), height: f(KEY_H - px(18)), rx: f(px(5)),
+      fill: tint(INK, 0.05 + 0.055 * i), stroke: INK, 'stroke-width': f(px(1.2)), 'stroke-opacity': 0.45,
+    }, gChrome);
+    const bx = x + px(21);
+    el('circle', { cx: f(bx), cy: f(y), r: f(px(12.5)), fill: INK }, gChrome);
+    icon(gChrome, ring.glyph, bx, y, px(15), HOT, 2.3);
+    const cap = colW - px(45);
+    fit(txt(gChrome, `${ring.mark}  ${ring.title}`, {
+      x: f(bx + px(20)), y: f(y - px(2)), 'font-size': f(px(13.4)), 'font-weight': 800, fill: INK, 'letter-spacing': f(px(0.4)),
+    }), cap, px(8));
+    fit(txt(gChrome, ring.sub, {
+      x: f(bx + px(20)), y: f(y + px(13)), 'font-size': f(px(11)), 'font-weight': 600, fill: INK_SOFT,
+    }), cap, px(7));
+  });
+})();
+
+(function foot() {
+  const y = H - FOOT_H + px(32), colW = (W - 2 * M) / 5;
+  INTENTS.forEach((it, i) => {
+    const x = M + colW * i;
+    el('rect', { x: f(x), y: f(y - px(18)), width: f(px(21)), height: f(px(21)), rx: f(px(3)), fill: it.hue, stroke: INK, 'stroke-width': f(px(1.2)) }, gChrome);
+    icon(gChrome, it.icon, x + px(10.5), y - px(7.5), px(14), INK, 2.5);
+    fit(txt(gChrome, it.name, {
+      x: f(x + px(28)), y: f(y - px(6)), 'font-size': f(px(11.6)), 'font-weight': 800, fill: INK, 'letter-spacing': f(px(0.4)),
+    }), colW - px(34), px(7.5));
+    fit(txt(gChrome, it.ex, {
+      x: f(x + px(28)), y: f(y + px(9)), 'font-size': f(px(10.4)), 'font-weight': 500, fill: INK_SOFT, class: 'mono',
+    }), colW - px(34), px(7));
+  });
+  el('line', { x1: M, y1: f(H - px(41)), x2: W - M, y2: f(H - px(41)), stroke: INK, 'stroke-width': f(px(1)), 'stroke-opacity': 0.22 }, gChrome);
+  fit(txt(gChrome, SOURCE_LINE, { x: M, y: f(H - px(24)), 'font-size': f(px(10)), 'font-weight': 500, fill: INK_SOFT }),
+      W - 2 * M - px(140), px(6));
+  txt(gChrome, 'mitchjmiller.com', {
+    x: W - M, y: f(H - px(24)), 'text-anchor': 'end', 'font-size': f(px(10.4)), 'font-weight': 800, fill: INK, 'letter-spacing': f(px(0.5)),
+  });
+})();
+
+/* ============================================================== TIMELINE */
+const DUR  = 4.4;
+const WIN  = {
+  crown: [0.14, 0.80], ring3: [0.58, 1.30], ring2: [1.12, 1.84], ring1: [1.66, 2.42],
+  hub:   [2.00, 2.74], roll: [1.50, 2.72], hold: 3.90,
+};
+const RINGWIN = [WIN.ring1, WIN.ring2, WIN.ring3];
+const STAG = 0.085;
+const fmt2 = v => v.toFixed(2).padStart(5, ' ');
+
+function reveal(t, w, idx) {
+  const up = easeInOut(win(t, w[0] + idx * STAG, w[1] + idx * STAG * 0.4));
+  if (t <= WIN.hold) return up;
+  return Math.min(up, 1 - easeInOut(win(t, WIN.hold, DUR)));
+}
+
+function render(t) {
+  t = clamp(t, 0, DUR);
+  gSpin.setAttribute('transform', `rotate(${f((360 / K) * (t / DUR))} ${f(CX)} ${f(CY)})`);
+  gStatic.setAttribute('opacity', f(0.10 + 0.90 * reveal(t, WIN.ring2, 0)));
+  gRings.setAttribute('opacity', f(0.25 + 0.75 * reveal(t, WIN.crown, 0)));
+  gSpokes.setAttribute('opacity', f(0.22 + 0.78 * reveal(t, WIN.crown, 0)));
+
+  for (const c of art) {
+    const k = reveal(t, c.crownOnly ? WIN.crown : RINGWIN[c.ri], c.ii);
+    const a1 = c.a0 + (c.a1 - c.a0) * k;
+
+    if (c.crownOnly) {
+      c.band.setAttribute('d', sectorPath(CX, CY, CROWN.i, CROWN.o, c.a0, a1));
+      c.lab.setAttribute('opacity', f(easeOutExpo(clamp((k - 0.55) / 0.45, 0, 1))));
+      continue;
+    }
+    c.band.setAttribute('d', sectorPath(CX, CY, c.B.i, c.B.o, c.a0, a1));
+    c.pg.setAttribute('opacity', f(0.55 * easeOutExpo(clamp((k - 0.35) / 0.65, 0, 1))));
+    c.lab.setAttribute('opacity', f(easeOutExpo(clamp((k - 0.62) / 0.38, 0, 1))));
+
+    if (c.bar) {
+      const grow = easeOutExpo(clamp((k - 0.15) / 0.85, 0, 1)) * (+c.bar.dataset.frac);
+      c.bar.setAttribute('d', grow <= 0.002 ? 'M0 0' : sectorPath(CX, CY, c.B.i, c.B.i + BD * grow, c.a0, c.a1));
+      c.cap.setAttribute('d', grow <= 0.002 ? 'M0 0' : arcPath(CX, CY, c.B.i + BD * grow, c.a0, c.a1, false));
+    }
+    const mk = clamp((k - 0.52) / 0.48, 0, 1);
+    c.med.setAttribute('opacity', mk > 0 ? 1 : 0);
+    c.scale.setAttribute('transform', `scale(${f(mk <= 0 ? 0.001 : lerp(0.66, 1, easeOutBack(mk)))})`);
+  }
+
+  const hk = reveal(t, WIN.hub, 0);
+  const deg = 360 * 0.58 * easeOutExpo(hk);
+  const d = deg < 0.4 ? 'M0 0' : arcPath(CX, CY, hub.gr, 0, deg, false);
+  hub.sweep.setAttribute('d', d); hub.sweep2.setAttribute('d', d);
+  hub.big.textContent = '−' + String(Math.round(58 * easeOutExpo(hk))).padStart(2, ' ') + '%';
+  gHub.setAttribute('opacity', f(0.12 + 0.88 * Math.min(1, hk * 3)));
+
+  let rk = easeOutExpo(win(t, WIN.roll[0], WIN.roll[1]));
+  if (t > WIN.hold) rk = 1 - easeInOut(win(t, WIN.hold, DUR));
+  headNum.textContent = fmt2(68.01 * rk) + '%';
+}
+
+/* ---------------------------------------------------------------- driver */
+let raf = 0;
+const stop = () => { if (raf) cancelAnimationFrame(raf); raf = 0; };
+function play() {
+  stop();
+  const t0 = performance.now();
+  const step = now => { render(((now - t0) / 1000) % DUR); raf = requestAnimationFrame(step); };
+  raf = requestAnimationFrame(step);
+}
+const tParam = Q.get('t');
+const isStatic = Q.has('static') || Q.has('poster') || tParam !== null ||
+  matchMedia('(prefers-reduced-motion: reduce)').matches;
+render(tParam !== null ? parseFloat(tParam) : (isStatic ? 3.2 : 0));
+if (!isStatic) play();
+
+window.VIZ = {
+  ready: Promise.resolve(true), duration: DUR, settled: 3.2, size: [W, H],
+  seek: s => { stop(); render(+s); },
+  seekMs: v => { stop(); render(+v / 1000); },
+  play, stop,
+};
+document.documentElement.dataset.ready = '1';
+</script>

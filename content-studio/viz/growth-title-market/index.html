@@ -1,0 +1,3233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ten job titles, two right answers — living infographic</title>
+<meta name="description" content="Ten growth, SEO and AI-search job titles counted twice on the same day: exact-phrase postings against loose keyword counts, and the lowest against the highest published pay. Every number carries its source and date.">
+<!--
+  LIVING INFOGRAPHIC — TEMPLATE
+  Self-contained. No external requests. Works from file://.
+
+  Replace only the two JSON blocks below (#viz-data, and optionally #viz-palettes).
+  Everything else is the kit. See README.md and SPEC.md in this folder.
+
+  URL parameters (all optional):
+    ?static=1            freeze at the settled state (poster capture)
+    ?poster=1            poster layout, fills the viewport exactly (implies static)
+    ?gif=1               GIF layout: seamless backdrop loop + honesty strip
+    ?frame=N&frames=M    deterministic frame N of M over the reveal timeline
+    ?t=1.8               deterministic absolute time in seconds
+    ?palette=aurora|ember|verdant
+    ?seed=20260914
+    ?vertical=<title id>   director-of-seo, head-of-aeo, gtm-engineer, growth-engineer,
+                           growth-marketing-manager, growth-strategist, revops-engineer,
+                           marketing-automation-engineer, growth-ops-engineer, growth-data-engineer
+    ?intent=jobs|pay|signals
+    ?motion=reduce       force the reduced-motion path
+
+  Export API (window.VIZ):
+    await VIZ.ready            resolves once first paint is done
+    VIZ.duration               reveal timeline length, seconds
+    await VIZ.seek(seconds)    render deterministically at that time
+    await VIZ.frame(n, total)  render deterministically at frame n of total
+    VIZ.setState({palette, seed, vertical, intent})
+    VIZ.snapshot()             current state + settled values (JSON-safe)
+-->
+<style>
+/* ---------------------------------------------------------------- tokens */
+:root{
+  color-scheme:dark;
+  --ground:#0A1A30; --panel:#12294A; --panel-2:#0E2240; --line:#2B4670;
+  --text:#EAF2FA; --muted:#A8C0D8;
+  --a1:#5BF0F5; --a2:#C6FF4F; --a3:#FF7AB6; --a4:#FFC53D; --a5:#B9A2FF;
+  --pos:var(--a2); --neg:var(--a3);
+  --font:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,"Apple Color Emoji",sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  --r:10px; --wrap:1160px;
+  --gut:clamp(16px,3.2vw,40px);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --dur:.28s;
+}
+@media (prefers-reduced-motion:reduce){:root{--dur:0s}}
+html[data-motion="reduced"]{--dur:0s}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--ground); color:var(--text); font-family:var(--font);
+  font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+h1,h2,h3,p,figure,ul,ol{margin:0}
+button,select,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:is(button,select,summary,a,[tabindex]):focus-visible{outline:3px solid var(--a1);outline-offset:3px;border-radius:4px}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ---------------------------------------------------------------- frame */
+.viz{position:relative;isolation:isolate;min-height:100svh;overflow:hidden}
+#bg{position:absolute;inset:0;width:100%;height:100%;z-index:-2;display:block}
+.viz::after{ /* vignette keeps text contrast constant over the generative field */
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(115% 82% at 50% 36%,
+    transparent 0%,
+    color-mix(in srgb,var(--ground) 22%,transparent) 46%,
+    color-mix(in srgb,var(--ground) 62%,transparent) 78%,
+    color-mix(in srgb,var(--ground) 88%,transparent) 100%);
+}
+.shell{width:min(var(--wrap),100%);margin-inline:auto;padding:clamp(22px,4vw,54px) var(--gut) clamp(28px,5vw,64px);position:relative}
+
+/* ---------------------------------------------------------------- header */
+/* The generative field is loud on purpose; type gets its own scrim so the
+   measured contrast ratios hold wherever the mandala happens to land. */
+.shell>header{position:relative;isolation:isolate}
+.shell>header::before{content:"";position:absolute;inset:-30px -44px -26px -44px;z-index:-1;border-radius:20px;
+  background:radial-gradient(95% 125% at 16% 46%,
+    color-mix(in srgb,var(--ground) 94%,transparent) 0%,
+    color-mix(in srgb,var(--ground) 88%,transparent) 44%,
+    color-mix(in srgb,var(--ground) 46%,transparent) 76%,
+    transparent 100%)}
+.kick{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:14px}
+.eyebrow{font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--a1)}
+.badge{font-size:.63rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid var(--a4);color:var(--a4);border-radius:999px;padding:3px 9px;line-height:1.4}
+/* Evidence quality is stated, not implied: colour repeats what the word says. */
+#conf-badge[data-level="high"]{border-color:var(--a2);color:var(--a2)}
+#conf-badge[data-level="medium"]{border-color:var(--a4);color:var(--a4)}
+#conf-badge[data-level="low"]{border-color:var(--a3);color:var(--a3)}
+#caution-badge{border-color:var(--a3);color:var(--a3)}
+#conf-note b{color:var(--text)}
+h1{font-size:clamp(1.85rem,4.4vw,3.15rem);line-height:1.05;letter-spacing:-.03em;font-weight:800;text-wrap:balance;max-width:20ch}
+h1 .lit{color:var(--a2)}
+.deck{margin-top:14px;max-width:62ch;color:var(--muted);font-size:clamp(.95rem,1.2vw,1.06rem)}
+
+/* ------------------------------------------------------------- the ask */
+.ask{margin-top:clamp(22px,3.4vw,38px);border:1px solid var(--line);border-radius:var(--r);
+  background:color-mix(in srgb,var(--panel) 95%,transparent);backdrop-filter:blur(8px);padding:clamp(14px,2.2vw,22px);
+  box-shadow:0 24px 60px color-mix(in srgb,var(--ground) 70%,transparent)}
+.ask-line{font-size:clamp(1.05rem,2.1vw,1.5rem);line-height:1.45;font-weight:600;letter-spacing:-.015em;text-wrap:pretty}
+.tok{
+  display:inline-flex;align-items:center;gap:.4em;position:relative;
+  background:var(--panel-2);border:1px solid var(--a1);color:var(--a1);
+  border-radius:999px;padding:.12em .75em .18em;margin-inline:.12em;
+  font:inherit;font-weight:700;appearance:none;-webkit-appearance:none;
+  min-height:38px;line-height:1.25;cursor:pointer;
+  transition:background var(--dur) var(--ease-out),color var(--dur) var(--ease-out);
+}
+.tok:hover{background:var(--a1);color:var(--ground)}
+.tok option{background:var(--panel);color:var(--text)}
+.ask-hint{margin-top:10px;font-size:.8rem;color:var(--muted)}
+.nb{white-space:nowrap}
+.prompts{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.prompt{
+  border:1px solid var(--line);background:transparent;color:var(--text);
+  border-radius:999px;padding:9px 15px;font-size:.86rem;font-weight:600;min-height:40px;
+  text-align:left;transition:border-color var(--dur) var(--ease-out),background var(--dur) var(--ease-out),transform var(--dur) var(--ease-out);
+}
+.prompt:hover{border-color:var(--a2);background:color-mix(in srgb,var(--a2) 12%,transparent)}
+.prompt[aria-pressed="true"]{border-color:var(--a2);background:color-mix(in srgb,var(--a2) 18%,transparent);color:var(--a2)}
+.prompt .go{color:var(--a2);font-weight:800}
+.replay{border:1px solid var(--a2);background:var(--a2);color:var(--ground);border-radius:999px;
+  padding:9px 17px;font-size:.86rem;font-weight:800;min-height:40px}
+.replay:hover{filter:brightness(1.08)}
+
+/* progress of the reveal — Zeigarnik cue, not a fake loader */
+.rail{position:relative;height:3px;margin-top:16px;background:color-mix(in srgb,var(--line) 70%,transparent);border-radius:2px;overflow:hidden}
+.rail i{position:absolute;inset:0 auto 0 0;width:0;background:linear-gradient(90deg,var(--a1),var(--a2));border-radius:2px}
+
+/* ---------------------------------------------------------------- stage */
+.stage{display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(10px,1.6vw,20px);align-items:stretch;margin-top:clamp(20px,3vw,34px)}
+.col{border:1px solid var(--line);border-radius:var(--r);padding:clamp(14px,2vw,22px);
+  background:linear-gradient(180deg,color-mix(in srgb,var(--panel) 96%,transparent),color-mix(in srgb,var(--panel-2) 97%,transparent));
+  box-shadow:0 24px 60px color-mix(in srgb,var(--ground) 70%,transparent);
+  display:flex;flex-direction:column;gap:10px;min-width:0}
+.col[data-side="cited"]{border-color:color-mix(in srgb,var(--a2) 55%,var(--line))}
+.col[data-side="absent"]{border-color:color-mix(in srgb,var(--a3) 45%,var(--line))}
+.col-head{display:grid;gap:2px;align-content:start}
+.col-name{font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.col[data-side="cited"] .col-name{color:var(--a2)}
+.col[data-side="absent"] .col-name{color:var(--a3)}
+.col-sub{font-size:.76rem;color:var(--muted)}
+.hero{display:flex;align-items:flex-end;gap:.18em;font-variant-numeric:tabular-nums;
+  font-size:clamp(2.7rem,7.6vw,4.9rem);font-weight:800;letter-spacing:-.045em;line-height:.92}
+.hero .u{font-size:.36em;font-weight:700;letter-spacing:-.01em;padding-bottom:.42em;color:var(--muted)}
+.col[data-side="cited"] .hero{color:var(--a2)}
+.col[data-side="absent"] .hero{color:var(--a3)}
+.hero-label{font-size:.88rem;color:var(--text);font-weight:600}
+.gauge{margin-top:2px}
+.gauge svg{display:block;width:100%;height:auto;max-height:88px}
+.delta{align-self:center;display:flex;flex-direction:column;align-items:center;gap:6px;
+  padding:0 clamp(2px,1vw,10px);min-width:86px;text-align:center;position:relative;isolation:isolate}
+.delta::before{content:"";position:absolute;inset:-18px -10px;z-index:-1;border-radius:16px;
+  background:radial-gradient(72% 62% at 50% 50%,
+    color-mix(in srgb,var(--ground) 90%,transparent) 0%,
+    color-mix(in srgb,var(--ground) 62%,transparent) 62%,
+    transparent 100%)}
+.delta-x{font-variant-numeric:tabular-nums;font-size:clamp(1.15rem,2.8vw,1.85rem);font-weight:800;letter-spacing:-.03em;color:var(--a4);white-space:nowrap}
+.delta-l{font-size:.64rem;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.delta-arrow{font-size:1.1rem;color:var(--a4);line-height:1}
+
+/* ---------------------------------------------------------------- ledger */
+.ledger{margin-top:clamp(16px,2.4vw,26px);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+  background:color-mix(in srgb,var(--panel-2) 96%,transparent);
+  box-shadow:0 24px 60px color-mix(in srgb,var(--ground) 70%,transparent)}
+.row{display:grid;grid-template-columns:minmax(0,1.35fr) 84px minmax(0,1.5fr) 84px 74px;gap:clamp(6px,1vw,14px);
+  align-items:center;padding:clamp(10px,1.5vw,15px) clamp(12px,1.8vw,18px);border-top:1px solid color-mix(in srgb,var(--line) 62%,transparent)}
+.row:first-child{border-top:0}
+.row-label{font-size:.87rem;font-weight:600;min-width:0}
+.row-note{display:block;font-size:.72rem;color:var(--muted);font-weight:400;margin-top:2px}
+.val{font-variant-numeric:tabular-nums;font-size:clamp(1rem,1.9vw,1.28rem);font-weight:800;letter-spacing:-.025em;white-space:nowrap}
+.val.absent{color:var(--a3);text-align:right}
+.val.cited{color:var(--a2);text-align:left}
+.bars{display:grid;gap:4px;min-width:0}
+.bar{height:9px;border-radius:5px;background:color-mix(in srgb,var(--line) 55%,transparent);overflow:hidden;position:relative}
+.bar i{position:absolute;inset:0 auto 0 0;width:0;border-radius:5px;display:block}
+.bar.absent i{background:linear-gradient(90deg,color-mix(in srgb,var(--a3) 55%,transparent),var(--a3))}
+.bar.cited i{background:linear-gradient(90deg,color-mix(in srgb,var(--a2) 55%,transparent),var(--a2))}
+.row-delta{font-variant-numeric:tabular-nums;font-size:.86rem;font-weight:800;text-align:right;white-space:nowrap}
+.row-delta[data-dir="good"]{color:var(--a2)}
+.row-delta[data-dir="bad"]{color:var(--a3)}
+
+/* source markers */
+.src{display:inline-block;vertical-align:super;margin-left:.28em;font-size:.58em;font-weight:800;letter-spacing:.04em;
+  border:1px solid color-mix(in srgb,var(--muted) 60%,transparent);color:var(--muted);background:transparent;
+  border-radius:4px;padding:0 3px;line-height:1.5;min-height:0}
+.src:hover{color:var(--a4);border-color:var(--a4)}
+#pop{position:absolute;z-index:40;max-width:min(320px,80vw);background:var(--panel);border:1px solid var(--a4);
+  border-radius:8px;padding:10px 12px;font-size:.78rem;line-height:1.5;color:var(--text);
+  box-shadow:0 18px 40px rgba(0,0,0,.45)}
+#pop[hidden]{display:none}
+#pop b{display:block;color:var(--a4);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+#pop .as{display:block;color:var(--muted);margin-top:5px;font-family:var(--mono);font-size:.72rem}
+
+/* ---------------------------------------------------------------- serp */
+.serp{margin-top:clamp(16px,2.4vw,26px);border:1px solid var(--line);border-radius:var(--r);padding:clamp(14px,2vw,20px);
+  background:color-mix(in srgb,var(--panel) 95%,transparent);
+  box-shadow:0 24px 60px color-mix(in srgb,var(--ground) 70%,transparent)}
+.serp-head{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:baseline;justify-content:space-between;margin-bottom:12px}
+.serp-title{font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--a5)}
+.serp-q{font-family:var(--mono);font-size:.85rem;color:var(--text);background:var(--panel-2);border:1px solid var(--line);
+  border-radius:6px;padding:5px 9px;display:inline-block;max-width:100%;overflow-wrap:anywhere}
+.serp-body{display:grid;gap:clamp(12px,2vw,26px)}
+@media (min-width:900px){.serp-body{grid-template-columns:minmax(0,1fr) minmax(200px,28ch)}}
+.serp-rows{display:grid;gap:7px;align-content:start}
+.serp-note{font-size:.86rem;line-height:1.65;color:var(--text);border-left:3px solid var(--a5);padding-left:12px;align-self:center}
+
+.sr-row{display:grid;grid-template-columns:104px minmax(0,1fr);gap:10px;align-items:center;
+  border-left:3px solid var(--line);padding:7px 0 7px 10px;font-size:.84rem}
+.sr-row[data-kind="answer"]{border-left-color:var(--a5)}
+.sr-row[data-kind="citation"]{border-left-color:var(--a2)}
+.sr-row[data-kind="organic"]{border-left-color:var(--a1)}
+.sr-row[data-kind="pack"]{border-left-color:var(--a4)}
+.sr-row[data-kind="ad"]{border-left-color:var(--a3)}
+.sr-kind{font-size:.63rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.sr-text{min-width:0;overflow-wrap:anywhere}
+.sr-text em{font-style:normal;color:var(--a2);font-weight:700}
+
+/* ------------------------------------------------- evidence-lane kinds */
+.sr-row[data-kind="floor"]{border-left-color:var(--a2)}
+.sr-row[data-kind="ceiling"]{border-left-color:var(--a3)}
+.sr-row[data-kind="second"]{border-left-color:var(--a1)}
+.sr-row[data-kind="source"]{border-left-color:var(--a1)}
+.sr-row[data-kind="signal"]{border-left-color:var(--a5)}
+.sr-row[data-kind="named"]{border-left-color:var(--a2)}
+.sr-row[data-kind="stack"]{border-left-color:var(--a1)}
+.sr-row[data-kind="caveat"]{border-left-color:var(--a4)}
+.sr-row[data-kind="method"]{border-left-color:var(--a4)}
+.sr-text b{font-weight:800;color:var(--text)}
+.sr-when{display:block;font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-top:2px;overflow-wrap:anywhere}
+
+/* ------------------------------------------------------------- rank lane */
+/* The comparison lane: all ten titles ordered by a metric the reader picks.
+   Each row is a button, so the ranking is also a way to change the selection. */
+.rank{margin-top:clamp(16px,2.4vw,26px);border:1px solid var(--line);border-radius:var(--r);padding:clamp(14px,2vw,20px);
+  background:color-mix(in srgb,var(--panel-2) 96%,transparent);
+  box-shadow:0 24px 60px color-mix(in srgb,var(--ground) 70%,transparent)}
+.rank-head{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:baseline;justify-content:space-between;margin-bottom:12px}
+.rank-title{font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--a1)}
+.rank-tabs{display:flex;flex-wrap:wrap;gap:6px}
+.rk-tab{border:1px solid var(--line);background:transparent;color:var(--text);border-radius:999px;
+  padding:7px 13px;font-size:.8rem;font-weight:600;min-height:38px;
+  transition:border-color var(--dur) var(--ease-out),background var(--dur) var(--ease-out)}
+.rk-tab:hover{border-color:var(--a1);background:color-mix(in srgb,var(--a1) 12%,transparent)}
+.rk-tab[aria-pressed="true"]{border-color:var(--a1);background:color-mix(in srgb,var(--a1) 18%,transparent);color:var(--a1)}
+.rank-rows{display:grid;gap:4px}
+.rk{display:grid;grid-template-columns:minmax(0,22ch) minmax(0,1fr) 11ch;gap:10px;align-items:center;width:100%;
+  text-align:left;padding:5px 8px;border-radius:6px;border:1px solid transparent;background:transparent;min-height:38px}
+.rk:hover{border-color:color-mix(in srgb,var(--a1) 45%,transparent)}
+.rk[aria-pressed="true"]{border-color:color-mix(in srgb,var(--a1) 60%,transparent);background:color-mix(in srgb,var(--a1) 10%,transparent)}
+.rk-name{font-size:.8rem;font-weight:600;min-width:0;overflow-wrap:anywhere;color:var(--text)}
+.rk[data-thin="true"] .rk-name{color:var(--a3)}
+.rk-flag{display:inline-block;margin-left:.4em;font-size:.6rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--a4);border:1px solid color-mix(in srgb,var(--a4) 60%,transparent);border-radius:4px;padding:0 4px;white-space:nowrap}
+.rk-track{position:relative;height:10px;border-radius:5px;background:color-mix(in srgb,var(--line) 55%,transparent);overflow:hidden}
+.rk-track i{position:absolute;top:0;bottom:0;border-radius:5px;display:block;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--a1) 55%,transparent),var(--a1))}
+.rk[data-flagged="true"] .rk-track i{background:linear-gradient(90deg,color-mix(in srgb,var(--a4) 45%,transparent),var(--a4))}
+.rk-val{font-variant-numeric:tabular-nums;font-size:.82rem;font-weight:800;text-align:right;white-space:nowrap;color:var(--text)}
+.rk-val.none{color:var(--muted);font-weight:600}
+.rank-note{margin-top:10px;font-size:.76rem;line-height:1.6;color:var(--muted);border-left:3px solid var(--a1);padding-left:12px}
+
+/* ---------------------------------------------------------------- footer */
+.foot{margin-top:clamp(18px,2.6vw,30px);display:grid;gap:14px;position:relative;isolation:isolate}
+.foot::before{content:"";position:absolute;inset:-16px -26px -22px -26px;z-index:-1;border-radius:16px;
+  background:linear-gradient(0deg,
+    color-mix(in srgb,var(--ground) 94%,transparent) 0%,
+    color-mix(in srgb,var(--ground) 90%,transparent) 55%,
+    color-mix(in srgb,var(--ground) 34%,transparent) 100%)}
+.sources{border:1px solid var(--line);border-radius:var(--r);background:color-mix(in srgb,var(--panel-2) 95%,transparent)}
+.sources>summary{cursor:pointer;list-style:none;padding:12px 16px;font-size:.82rem;font-weight:700;display:flex;gap:10px;align-items:center}
+.sources>summary::-webkit-details-marker{display:none}
+.sources>summary::before{content:"▸";color:var(--a4);font-size:.9rem;transition:transform var(--dur) var(--ease-out)}
+.sources[open]>summary::before{transform:rotate(90deg)}
+.sources-body{padding:0 16px 14px;display:grid;gap:9px}
+.s-item{display:grid;grid-template-columns:44px minmax(0,1fr);gap:10px;font-size:.8rem;line-height:1.5;
+  padding:9px 10px;border-radius:8px;border:1px solid transparent}
+.s-item.hl{border-color:var(--a4);background:color-mix(in srgb,var(--a4) 10%,transparent)}
+.s-id{font-family:var(--mono);font-size:.72rem;font-weight:800;color:var(--a4)}
+.s-meta{display:block;color:var(--muted);font-family:var(--mono);font-size:.72rem;margin-top:3px;overflow-wrap:anywhere}
+.s-when{display:block;color:var(--a4);font-family:var(--mono);font-size:.72rem;margin-top:2px}
+.s-item a{color:var(--a1)}
+.src-line{display:none;font-size:.78rem;line-height:1.5;color:var(--muted);font-family:var(--mono)}
+html[data-mode~="gif"] .src-line{display:block}
+.honesty{font-size:.76rem;line-height:1.6;color:var(--muted);border-left:3px solid var(--a4);padding-left:12px}
+.honesty b{color:var(--a4)}
+.by{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-between;font-size:.74rem;color:var(--muted);
+  border-top:1px solid color-mix(in srgb,var(--line) 60%,transparent);padding-top:12px}
+
+/* ---------------------------------------------------------------- narrow */
+/* Narrow-viewport layout. Scoped away from poster/gif, whose export viewports
+   are narrow by definition but must keep the side-by-side composition. */
+@media (max-width:860px){
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .stage{grid-template-columns:1fr;gap:12px}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .delta{flex-direction:row;gap:10px;min-width:0;padding:2px 0}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .delta-arrow{transform:rotate(90deg)}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .row{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"label label" "cited absent" "bars bars" "d d";gap:6px 10px}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .row-label{grid-area:label}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .val.cited{grid-area:cited;text-align:left}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .val.absent{grid-area:absent;text-align:right}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .bars{grid-area:bars}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .row-delta{grid-area:d;text-align:left}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .sr-row{grid-template-columns:1fr;gap:3px}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .rk{grid-template-columns:minmax(0,1fr) 10ch;grid-template-areas:"n v" "t t";gap:4px 8px}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .rk-name{grid-area:n}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .rk-val{grid-area:v}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .rk-track{grid-area:t}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .tok{max-width:100%}
+}
+
+/* ---------------------------------------------------------------- poster */
+html[data-mode~="poster"] body{overflow:hidden}
+html[data-mode~="poster"] .viz{height:100svh;min-height:0}
+html[data-mode~="poster"] .shell{height:100%;display:flex;flex-direction:column;gap:clamp(10px,1.4vh,20px);
+  padding:clamp(28px,4vh,56px) clamp(28px,4vw,56px);width:100%;max-width:none}
+html[data-mode~="poster"] .ask,
+html[data-mode~="poster"] .prompts,
+html[data-mode~="poster"] .rail,
+html[data-mode~="poster"] .replay{display:none}
+html[data-mode~="poster"] .sources{border:0;background:transparent}
+html[data-mode~="poster"] .sources>summary{display:none}
+html[data-mode~="poster"] .sources-body,html[data-mode~="gif"] .sources-body{display:grid}
+html[data-mode~="poster"] .sources-body{padding:0;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:6px}
+html[data-mode~="poster"] .s-item{padding:0;border:0;font-size:calc(.64rem*var(--fit,1));grid-template-columns:40px minmax(0,1fr)}
+/* On a still the drawer must be complete, so it is dense: the date sits on the
+   label line rather than taking a line of its own. */
+html[data-mode~="poster"] .s-when{display:inline;margin-left:.45em}
+html[data-mode~="poster"] .sources-body{gap:4px}
+html[data-mode~="poster"] .rank-note{margin-top:6px}
+/* The byline is the last thing in the frame; these three give fitStill the
+   room it needs to keep the whole footer on the poster. */
+html[data-mode~="poster"] .foot{gap:calc(10px*var(--fit,1))}
+html[data-mode~="poster"] .honesty{font-size:calc(.7rem*var(--fit,1));line-height:1.55}
+html[data-mode~="poster"] .by{padding-top:calc(9px*var(--fit,1))}
+html[data-mode~="poster"] h1{font-size:clamp(2.2rem,4.4vh,3.6rem);max-width:26ch}
+html[data-mode~="poster"] .hero{font-size:clamp(3rem,9vh,6rem)}
+html[data-mode~="poster"] .stage{margin-top:0}
+html[data-mode~="poster"] .foot{margin-top:auto}
+/* --fit is driven by fitStill(): the layout shrinks until it fits the frame,
+   so swapping in a longer dataset can never clip a row off the poster. */
+html[data-mode~="poster"] .shell,html[data-mode~="gif"] .shell{gap:calc(clamp(8px,1.4vh,20px)*var(--fit,1))}
+/* Sections must keep their natural height so overflow is real and fitStill()
+   can see it — flex-shrink would silently clip a ledger row instead. */
+html[data-mode~="poster"] .shell>*,html[data-mode~="gif"] .shell>*{flex:0 0 auto}
+html[data-mode~="poster"] .col,html[data-mode~="gif"] .col{padding:calc(clamp(12px,2vh,22px)*var(--fit,1))}
+html[data-mode~="poster"] .row,html[data-mode~="gif"] .row{padding-block:calc(clamp(8px,1.5vh,15px)*var(--fit,1))}
+html[data-mode~="poster"] .hero,html[data-mode~="gif"] .hero{font-size:calc(clamp(2.4rem,8.6vh,5.6rem)*var(--fit,1))}
+html[data-mode~="poster"] h1,html[data-mode~="gif"] h1{font-size:calc(clamp(1.5rem,4.3vh,3.4rem)*var(--fit,1))}
+html[data-mode~="poster"] .val{font-size:calc(1.22rem*var(--fit,1))}
+html[data-mode~="poster"] .row-label{font-size:calc(.88rem*var(--fit,1))}
+html[data-mode~="gif"] .val{font-size:calc(1.5rem*var(--fit,1))}
+html[data-mode~="gif"] .row-label{font-size:calc(1rem*var(--fit,1))}
+html[data-mode~="gif"] .row{padding-block:calc(13px*var(--fit,1))}
+html[data-mode~="gif"] .bar{height:11px}
+html[data-mode~="gif"] .col-name{font-size:.9rem}
+html[data-mode~="poster"] .delta-x,html[data-mode~="gif"] .delta-x{font-size:calc(1.9rem*var(--fit,1))}
+html[data-mode~="poster"] .delta-arrow,html[data-mode~="gif"] .delta-arrow{font-size:calc(1.5rem*var(--fit,1))}
+html[data-mode~="gif"] .col-sub,html[data-mode~="gif"] .hero-label{font-size:.85rem}
+html[data-mode~="poster"] .poster-q{font-size:calc(clamp(.95rem,2.1vh,1.35rem)*var(--fit,1))}
+html[data-mode~="poster"] .poster-q{display:block}
+.poster-q{display:none;font-size:clamp(1rem,2.1vh,1.35rem);font-weight:700;color:var(--a1);letter-spacing:-.01em}
+/* The drawer must carry dates on a still, but not three lines of method prose. */
+html[data-mode~="poster"] .s-meta{display:none}
+html[data-mode~="poster"] .serp{display:none}
+html[data-mode~="poster"] .rank-tabs{display:none}
+html[data-mode~="poster"] .rk{min-height:0;padding-block:calc(3px*var(--fit,1))}
+html[data-mode~="poster"] .rk-name,html[data-mode~="poster"] .rk-val{font-size:calc(.78rem*var(--fit,1))}
+html[data-mode~="gif"] .rank{display:none}
+
+/* square posters (1:1 and wider): drop the SERP strip and tighten the ledger */
+@media (min-aspect-ratio:9/10){
+  html[data-mode~="poster"] .rank{display:none}
+  html[data-mode~="poster"] .deck{display:none}
+  html[data-mode~="poster"] .s-meta{display:none}
+  html[data-mode~="poster"] .row-note{display:none}
+}
+
+/* ---------------------------------------------------------------- gif */
+html[data-mode~="gif"] body{overflow:hidden}
+html[data-mode~="gif"] .viz{height:100svh;min-height:0}
+html[data-mode~="gif"] .shell{height:100%;display:flex;flex-direction:column;gap:clamp(8px,1.2vh,16px);
+  padding:clamp(20px,3.2vh,34px) clamp(20px,3.2vw,34px) 0;width:100%;max-width:none}
+html[data-mode~="gif"] .ask,html[data-mode~="gif"] .prompts,html[data-mode~="gif"] .replay,
+html[data-mode~="gif"] .serp,html[data-mode~="gif"] .sources,html[data-mode~="gif"] .deck{display:none}
+html[data-mode~="gif"] .poster-q{display:block}
+html[data-mode~="gif"] h1{font-size:clamp(1.6rem,3.6vh,2.5rem);max-width:24ch}
+html[data-mode~="gif"] .hero{font-size:clamp(2.6rem,8.2vh,5rem)}
+html[data-mode~="gif"] .stage{margin-top:0}
+html[data-mode~="gif"] .ledger{margin-top:0}
+html[data-mode~="gif"] .foot{margin-top:auto}
+html[data-mode~="gif"] .ledger .row:nth-child(n+5){display:none}
+html[data-mode~="gif"] .row{grid-template-columns:minmax(0,1.3fr) 76px minmax(0,1.4fr) 76px}
+html[data-mode~="gif"] .row-delta,html[data-mode~="gif"] .row-note,html[data-mode~="gif"] .gauge{display:none}
+html[data-mode~="gif"] .honesty,html[data-mode~="gif"] .by,html[data-mode~="gif"] .sources{display:none}
+/* Two lines, always: the two hero numerals must share a baseline in a still. */
+html[data-mode~="poster"] .col-sub,html[data-mode~="gif"] .col-sub{
+  min-height:3.15em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+/* The footer scrim must not add scroll height inside a fixed-size frame. */
+html[data-mode~="poster"] .foot::before,html[data-mode~="gif"] .foot::before{inset:-16px -26px 0 -26px}
+html[data-mode~="gif"] .strip{display:flex}
+.strip{display:none;align-items:center;gap:10px;margin:0 calc(-1*clamp(20px,3.2vw,34px));
+  padding:10px clamp(20px,3.2vw,34px);background:var(--a4);color:#12100a;font-size:.78rem;font-weight:800;line-height:1.35}
+.strip span{font-weight:600}
+
+@media print{
+  body{background:#fff}
+  .ask,.prompts,.replay,.rail{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- =====================================================================
+     PALETTES — 3 vivid sets that hold up inside the site's navy/green page.
+     Contrast numbers are verified by `node export/contrast.mjs`.
+     ===================================================================== -->
+<script type="application/json" id="viz-palettes">
+[
+  {
+    "id": "aurora",
+    "name": "Aurora",
+    "character": "Cool electric. Default. Sits closest to the site's navy.",
+    "ground": "#0A1A30", "panel": "#12294A", "panel2": "#0E2240", "line": "#2B4670",
+    "text": "#EAF2FA", "muted": "#A8C0D8",
+    "accents": ["#5BF0F5", "#C6FF4F", "#FF7AB6", "#FFC53D", "#B9A2FF"]
+  },
+  {
+    "id": "ember",
+    "name": "Ember",
+    "character": "Warm and hot. Use when the story is a cost, a loss, or a deadline.",
+    "ground": "#190B24", "panel": "#2A1138", "panel2": "#210E2E", "line": "#47205C",
+    "text": "#FFF1E8", "muted": "#E3B9C8",
+    "accents": ["#FF8A4C", "#FFD400", "#FF7AB6", "#4DF39A", "#B9A2FF"]
+  },
+  {
+    "id": "verdant",
+    "name": "Verdant",
+    "character": "Green-led, site-native. Safest when the artifact sits next to the green CTA.",
+    "ground": "#06251B", "panel": "#0C3B2A", "panel2": "#083023", "line": "#17614A",
+    "text": "#ECFDF3", "muted": "#A6D9BE",
+    "accents": ["#4DF39A", "#C6FF4F", "#35D6E8", "#FFB020", "#FF7AB6"]
+  }
+]
+</script>
+
+<!-- =====================================================================
+     DATA — replace this block. Everything the artifact renders comes from here.
+     Every value carries a source id; every source id is listed in `sources`.
+     `sample: true` turns on the SAMPLE badge and the sample honesty line.
+     ===================================================================== -->
+<script type="application/json" id="viz-data">
+{
+  "meta": {
+    "sample": false,
+    "seed": 20260914,
+    "palette": "aurora",
+    "eyebrow": "Living infographic · Job-title market · 14 September 2026",
+    "title": "Ten job titles. Every number here has {lit}two right answers{/lit}.",
+    "deck": "One US market, counted twice on the same day. The floor is what a board returns for the exact phrase. The ceiling is what a loose keyword search claims, or the most generous figure any salary source publishes. Pick a title, pick a question, and read the distance between them.",
+    "askPrefix": "What happens to",
+    "askMiddle": "when you ask",
+    "askSuffix": "?",
+    "columns": {
+      "cited": {
+        "name": "The floor",
+        "sub": "Strictest count. Lowest published figure."
+      },
+      "absent": {
+        "name": "The ceiling",
+        "sub": "Loosest count. Highest published figure."
+      }
+    },
+    "hero": {
+      "jobs": "postings",
+      "pay": "pay_med"
+    },
+    "deltaLabel": "apart",
+    "byline": "Mitchell Miller · mitchjmiller.com",
+    "liveUrl": "mitchjmiller.com/viz/growth-title-market/",
+    "method": "<b>How these numbers were counted.</b> The floor is an exact-phrase search run on 14 September 2026; a zero is a real zero. The ceiling for postings is LinkedIn’s public guest search for the same words, which reports rounded placeholders such as 11,000+ and does not match on title, so every gap shown is a lower bound rather than a measurement. Pay figures are the lowest and highest published by any source for that title: nothing is averaged, because the disagreement is the finding. Titles marked <b>thin data</b> have almost no exact-title postings, and their pay figures are proxies from an adjacent title. No Google Trends data appears anywhere on this artifact: the page would not load.",
+    "gifNote": "Rudimentary GIF of a living artifact.",
+    "gifNoteSub": "The living version switches all ten titles, opens every board count and pay source, and dates each one: mitchjmiller.com/viz/growth-title-market/"
+  },
+  "dimensions": {
+    "vertical": {
+      "label": "job title",
+      "options": [
+        {
+          "id": "director-of-seo",
+          "label": "Director of SEO",
+          "plain": "Director of SEO",
+          "confidence": "high"
+        },
+        {
+          "id": "head-of-aeo",
+          "label": "Head of AEO / GEO",
+          "plain": "Head of AEO / GEO",
+          "confidence": "medium",
+          "caution": "The floor for this title is a mentions count, not a title match: postings where AEO and GEO both appear anywhere. It is excluded from the postings ranking.",
+          "floorSub": "Mentions count, not a title match. Not comparable with the other floors."
+        },
+        {
+          "id": "gtm-engineer",
+          "label": "GTM Engineer",
+          "plain": "GTM Engineer",
+          "confidence": "high"
+        },
+        {
+          "id": "growth-engineer",
+          "label": "Growth Engineer",
+          "plain": "Growth Engineer",
+          "confidence": "medium"
+        },
+        {
+          "id": "growth-marketing-manager",
+          "label": "Growth Marketing Manager",
+          "plain": "Growth Marketing Manager",
+          "confidence": "high"
+        },
+        {
+          "id": "growth-strategist",
+          "label": "Growth Strategist",
+          "plain": "Growth Strategist",
+          "confidence": "medium"
+        },
+        {
+          "id": "revops-engineer",
+          "label": "RevOps Engineer",
+          "plain": "RevOps Engineer",
+          "confidence": "medium"
+        },
+        {
+          "id": "marketing-automation-engineer",
+          "label": "Marketing Automation Engineer",
+          "plain": "Marketing Automation Engineer",
+          "confidence": "medium"
+        },
+        {
+          "id": "growth-ops-engineer",
+          "label": "Growth Operations Engineer · thin",
+          "plain": "Growth Operations Engineer",
+          "confidence": "low"
+        },
+        {
+          "id": "growth-data-engineer",
+          "label": "Data Engineer, Growth · thin",
+          "plain": "Data Engineer, Growth",
+          "confidence": "low"
+        }
+      ]
+    },
+    "intent": {
+      "label": "question",
+      "options": [
+        {
+          "id": "jobs",
+          "label": "how many jobs exist"
+        },
+        {
+          "id": "pay",
+          "label": "what it pays"
+        }
+      ]
+    }
+  },
+  "confidence": {
+    "high": {
+      "label": "Well documented",
+      "note": "Multiple dated sources that agree in direction, or one large primary study."
+    },
+    "medium": {
+      "label": "Mixed evidence",
+      "note": "Sources exist but disagree on magnitude, or the title is too new to be standardised."
+    },
+    "low": {
+      "label": "Thin data",
+      "note": "Almost no exact-title postings exist. Pay figures are proxies from an adjacent title."
+    }
+  },
+  "prompts": [
+    {
+      "label": "Which title returns zero postings?",
+      "set": {
+        "vertical": "growth-ops-engineer",
+        "intent": "jobs"
+      }
+    },
+    {
+      "label": "Where do two salary sources disagree by 3.5×?",
+      "set": {
+        "vertical": "growth-engineer",
+        "intent": "pay"
+      }
+    },
+    {
+      "label": "What happens to pay when the title says AI search?",
+      "set": {
+        "vertical": "head-of-aeo",
+        "intent": "pay"
+      }
+    },
+    {
+      "label": "Which title is actually growing, with a date on it?",
+      "set": {
+        "vertical": "gtm-engineer",
+        "intent": "jobs"
+      }
+    },
+    {
+      "label": "What does Director of SEO really return?",
+      "set": {
+        "vertical": "director-of-seo",
+        "intent": "jobs"
+      }
+    }
+  ],
+  "metrics": {
+    "jobs": [
+      {
+        "id": "postings",
+        "label": "US postings found on 14 Sep 2026",
+        "note": "Exact phrase on SimplyHired against LinkedIn’s loose keyword search for the same words. Only the floor is an exact-title count.",
+        "unit": "",
+        "unitB": "+",
+        "decimals": 0,
+        "better": "higher",
+        "source": "s-sh"
+      }
+    ],
+    "pay": [
+      {
+        "id": "pay_med",
+        "label": "Median pay, as published",
+        "note": "Lowest and highest median any source publishes for this title. Not averaged.",
+        "unit": "$",
+        "prefix": true,
+        "decimals": 0,
+        "better": "higher",
+        "source": "s-zip"
+      },
+      {
+        "id": "pay_top",
+        "label": "Top of the range, as published",
+        "note": "The two sources disagree about the ceiling as well as the middle.",
+        "unit": "$",
+        "prefix": true,
+        "decimals": 0,
+        "better": "higher",
+        "source": "s-zip"
+      },
+      {
+        "id": "pay_band",
+        "label": "The whole published band, end to end",
+        "note": "Lowest figure anyone publishes to the highest figure anyone publishes.",
+        "unit": "$",
+        "prefix": true,
+        "decimals": 0,
+        "better": "higher",
+        "source": "s-zip"
+      }
+    ]
+  },
+  "values": {
+    "director-of-seo": {
+      "jobs": {
+        "postings": [
+          19,
+          3000
+        ],
+        "pay_med": [
+          124682,
+          175340
+        ],
+        "pay_top": [
+          130000,
+          273771
+        ],
+        "pay_band": [
+          102000,
+          273771
+        ]
+      },
+      "pay": {
+        "postings": [
+          19,
+          3000
+        ],
+        "pay_med": [
+          124682,
+          175340
+        ],
+        "pay_top": [
+          130000,
+          273771
+        ],
+        "pay_band": [
+          102000,
+          273771
+        ]
+      }
+    },
+    "head-of-aeo": {
+      "jobs": {
+        "postings": [
+          435,
+          11000
+        ],
+        "pay_med": [
+          85000,
+          180000
+        ],
+        "pay_top": [
+          95000,
+          210000
+        ],
+        "pay_band": [
+          75000,
+          210000
+        ]
+      },
+      "pay": {
+        "postings": [
+          435,
+          11000
+        ],
+        "pay_med": [
+          85000,
+          180000
+        ],
+        "pay_top": [
+          95000,
+          210000
+        ],
+        "pay_band": [
+          75000,
+          210000
+        ]
+      }
+    },
+    "gtm-engineer": {
+      "jobs": {
+        "postings": [
+          146,
+          11000
+        ],
+        "pay_med": [
+          127500,
+          156000
+        ],
+        "pay_top": [
+          252000,
+          397000
+        ],
+        "pay_band": [
+          110000,
+          397000
+        ]
+      },
+      "pay": {
+        "postings": [
+          146,
+          11000
+        ],
+        "pay_med": [
+          127500,
+          156000
+        ],
+        "pay_top": [
+          252000,
+          397000
+        ],
+        "pay_band": [
+          110000,
+          397000
+        ]
+      }
+    },
+    "growth-engineer": {
+      "jobs": {
+        "postings": [
+          64,
+          7000
+        ],
+        "pay_med": [
+          101752,
+          359824
+        ],
+        "pay_top": [
+          116500,
+          503754
+        ],
+        "pay_band": [
+          84000,
+          503754
+        ]
+      },
+      "pay": {
+        "postings": [
+          64,
+          7000
+        ],
+        "pay_med": [
+          101752,
+          359824
+        ],
+        "pay_top": [
+          116500,
+          503754
+        ],
+        "pay_band": [
+          84000,
+          503754
+        ]
+      }
+    },
+    "growth-marketing-manager": {
+      "jobs": {
+        "postings": [
+          239,
+          10000
+        ],
+        "pay_med": [
+          112250,
+          130449
+        ],
+        "pay_top": [
+          98000,
+          176771
+        ],
+        "pay_band": [
+          60000,
+          176771
+        ]
+      },
+      "pay": {
+        "postings": [
+          239,
+          10000
+        ],
+        "pay_med": [
+          112250,
+          130449
+        ],
+        "pay_top": [
+          98000,
+          176771
+        ],
+        "pay_band": [
+          60000,
+          176771
+        ]
+      }
+    },
+    "growth-strategist": {
+      "jobs": {
+        "postings": [
+          108,
+          11000
+        ],
+        "pay_med": [
+          139867,
+          165554
+        ],
+        "pay_top": [
+          157000,
+          231776
+        ],
+        "pay_band": [
+          121500,
+          231776
+        ]
+      },
+      "pay": {
+        "postings": [
+          108,
+          11000
+        ],
+        "pay_med": [
+          139867,
+          165554
+        ],
+        "pay_top": [
+          157000,
+          231776
+        ],
+        "pay_band": [
+          121500,
+          231776
+        ]
+      }
+    },
+    "revops-engineer": {
+      "jobs": {
+        "postings": [
+          1,
+          6000
+        ],
+        "pay_med": [
+          110000,
+          125000
+        ],
+        "pay_top": [
+          124500,
+          150000
+        ],
+        "pay_band": [
+          85000,
+          150000
+        ]
+      },
+      "pay": {
+        "postings": [
+          1,
+          6000
+        ],
+        "pay_med": [
+          110000,
+          125000
+        ],
+        "pay_top": [
+          124500,
+          150000
+        ],
+        "pay_band": [
+          85000,
+          150000
+        ]
+      }
+    },
+    "marketing-automation-engineer": {
+      "jobs": {
+        "postings": [
+          6,
+          4000
+        ],
+        "pay_med": [
+          107126,
+          116500
+        ],
+        "pay_top": [
+          123500,
+          145859
+        ],
+        "pay_band": [
+          86500,
+          145859
+        ]
+      },
+      "pay": {
+        "postings": [
+          6,
+          4000
+        ],
+        "pay_med": [
+          107126,
+          116500
+        ],
+        "pay_top": [
+          123500,
+          145859
+        ],
+        "pay_band": [
+          86500,
+          145859
+        ]
+      }
+    },
+    "growth-ops-engineer": {
+      "jobs": {
+        "postings": [
+          0,
+          10000
+        ],
+        "pay_med": [
+          63456,
+          117500
+        ],
+        "pay_top": [
+          118500,
+          180000
+        ],
+        "pay_band": [
+          41000,
+          180000
+        ]
+      },
+      "pay": {
+        "postings": [
+          0,
+          10000
+        ],
+        "pay_med": [
+          63456,
+          117500
+        ],
+        "pay_top": [
+          118500,
+          180000
+        ],
+        "pay_band": [
+          41000,
+          180000
+        ]
+      }
+    },
+    "growth-data-engineer": {
+      "jobs": {
+        "postings": [
+          1,
+          11000
+        ],
+        "pay_med": [
+          129716,
+          460000
+        ],
+        "pay_top": [
+          137500,
+          571000
+        ],
+        "pay_band": [
+          114500,
+          571000
+        ]
+      },
+      "pay": {
+        "postings": [
+          1,
+          11000
+        ],
+        "pay_med": [
+          129716,
+          460000
+        ],
+        "pay_top": [
+          137500,
+          571000
+        ],
+        "pay_band": [
+          114500,
+          571000
+        ]
+      }
+    }
+  },
+  "cellSources": {
+    "director-of-seo": {
+      "postings": [
+        "s-sh",
+        "s-li"
+      ],
+      "pay_med": [
+        "s-sal",
+        "s-gd"
+      ],
+      "pay_top": [
+        "s-zip",
+        "s-gd"
+      ],
+      "pay_band": [
+        "s-zip",
+        "s-gd"
+      ]
+    },
+    "head-of-aeo": {
+      "postings": [
+        "s-sh",
+        "s-li"
+      ],
+      "pay_med": [
+        "s-sloane",
+        "s-sloane"
+      ],
+      "pay_top": [
+        "s-sloane",
+        "s-sloane"
+      ],
+      "pay_band": [
+        "s-sloane",
+        "s-sloane"
+      ]
+    },
+    "gtm-engineer": {
+      "postings": [
+        "s-sh",
+        "s-li"
+      ],
+      "pay_med": [
+        "s-bloom",
+        "s-lev"
+      ],
+      "pay_top": [
+        "s-bloom",
+        "s-lev"
+      ],
+      "pay_band": [
+        "s-lev",
+        "s-lev"
+      ]
+    },
+    "growth-engineer": {
+      "postings": [
+        "s-sh",
+        "s-li"
+      ],
+      "pay_med": [
+        "s-zip",
+        "s-gd"
+      ],
+      "pay_top": [
+        "s-zip",
+        "s-gd"
+      ],
+      "pay_band": [
+        "s-zip",
+        "s-gd"
+      ]
+    },
+    "growth-marketing-manager": {
+      "postings": [
+        "s-sh",
+        "s-li"
+      ],
+      "pay_med": [
+        "s-rh",
+        "s-gd"
+      ],
+      "pay_top": [
+        "s-zip",
+        "s-gd"
+      ],
+      "pay_band": [
+        "s-zip",
+        "s-gd"
+      ]
+    },
+    "growth-strategist": {
+      "postings": [
+        "s-sh",
+        "s-li"
+      ],
+      "pay_med": [
+        "s-zip",
+        "s-gd"
+      ],
+      "pay_top": [
+        "s-zip",
+        "s-gd"
+      ],
+      "pay_band": [
+        "s-zip",
+        "s-gd"
+      ]
+    },
+    "revops-engineer": {
+      "postings": [
+        "s-sh",
+        "s-li"
+      ],
+      "pay_med": [
+        "s-zip",
+        "s-afh"
+      ],
+      "pay_top": [
+        "s-zip",
+        "s-afh"
+      ],
+      "pay_band": [
+        "s-zip",
+        "s-afh"
+      ]
+    },
+    "marketing-automation-engineer": {
+      "postings": [
+        "s-sh",
+        "s-li"
+      ],
+      "pay_med": [
+        "s-zip",
+        "s-gd"
+      ],
+      "pay_top": [
+        "s-zip",
+        "s-gd"
+      ],
+      "pay_band": [
+        "s-zip",
+        "s-gd"
+      ]
+    },
+    "growth-ops-engineer": {
+      "postings": [
+        "s-sh",
+        "s-li"
+      ],
+      "pay_med": [
+        "s-zip",
+        "s-gtal"
+      ],
+      "pay_top": [
+        "s-zip",
+        "s-gtal"
+      ],
+      "pay_band": [
+        "s-zip",
+        "s-gtal"
+      ]
+    },
+    "growth-data-engineer": {
+      "postings": [
+        "s-sh",
+        "s-li"
+      ],
+      "pay_med": [
+        "s-zip",
+        "s-lev"
+      ],
+      "pay_top": [
+        "s-zip",
+        "s-lev"
+      ],
+      "pay_band": [
+        "s-zip",
+        "s-lev"
+      ]
+    }
+  },
+  "serp": {
+    "director-of-seo": {
+      "jobs": {
+        "head": "Every board count, how it was counted, and what else is dated",
+        "query": "\"director of seo\" (exact phrase, United States) · retrieved 2026-09-14",
+        "note": "Nineteen exact-phrase postings in the whole United States, and zero on Built In. The title is 158 times rarer than the LinkedIn number for the same words implies.",
+        "rows": [
+          {
+            "kind": "floor",
+            "text": "<b>19</b> — SimplyHired, \"director of seo\" (exact phrase, United States)"
+          },
+          {
+            "kind": "ceiling",
+            "text": "<b>3,000+</b> — LinkedIn public guest search, director of seo, United States. Rounded, loose keyword match."
+          },
+          {
+            "kind": "second",
+            "text": "<b>0</b> — Built In, director of seo"
+          },
+          {
+            "kind": "second",
+            "text": "<b>74</b> — LinkedIn topic page, head of seo jobs in United States. Tighter and more credible than the same board’s guest-search figure."
+          },
+          {
+            "kind": "signal",
+            "text": "SEO hiring is tilting toward leadership: 59% of SEO job listings analyzed were classified as senior leadership roles (Director/VP/Head/Chief/Lead/Executive), based on a Semrush analysis o… <span class=\"sr-when\">ALM Corp / dev.to coverage of a Semrush job-listings analysis, \"SEO Job Market 2026: What 3,900 Job Listings Reveal\" · 2026</span>"
+          },
+          {
+            "kind": "signal",
+            "text": "20.3% of SEO job ads now mention AI search, GEO or AEO skills as of June 2026, up from 12.2% in December 2025 (527 to 1,010 postings/month); <span class=\"sr-when\">SearchForHire, \"The Future of Search: 5 Experts and 328,650 Job Postings\" (328,650 marketing postings of 632,840 total collected July 2025-June 2026) · 2026-07-15</span>"
+          },
+          {
+            "kind": "caveat",
+            "text": "No dated year-over-year posting figure exists for this title. What does exist is a share: 12.2% of SEO ads named AI search, GEO or AEO in December 2025, 20.3% by June 2026."
+          },
+          {
+            "kind": "named",
+            "text": "<b>Hiring under this title:</b> Mindvalley (Head of SEO), Credible (Director of SEO &amp; Content)"
+          },
+          {
+            "kind": "stack",
+            "text": "<b>Stack named in postings:</b> Google Analytics (GA4), Google Search Console, Semrush, Ahrefs, Screaming Frog, Looker Studio, BigQuery"
+          }
+        ]
+      },
+      "pay": {
+        "head": "Every published pay figure, side by side, and what else is dated",
+        "query": "3 published sources · 2025-07 to 2026-09 · no average taken",
+        "note": "Two sources publish a median and they are 50,658 apart. Neither is wrong; they are counting different populations under one label.",
+        "rows": [
+          {
+            "kind": "source",
+            "text": "<b>Salary.com</b> — $112,320 / $124,682 / $135,526 <span class=\"sr-when\">2025-07</span>"
+          },
+          {
+            "kind": "source",
+            "text": "<b>Glassdoor</b> — $175,340 / $273,771 <span class=\"sr-when\">2026</span>"
+          },
+          {
+            "kind": "source",
+            "text": "<b>ZipRecruiter</b> — $102,000 / $130,000 <span class=\"sr-when\">2026-09</span>"
+          },
+          {
+            "kind": "method",
+            "text": "Low / median / high as published. Nothing here is averaged across sources."
+          },
+          {
+            "kind": "signal",
+            "text": "SEO hiring is tilting toward leadership: 59% of SEO job listings analyzed were classified as senior leadership roles (Director/VP/Head/Chief/Lead/Executive), based on a Semrush analysis o… <span class=\"sr-when\">ALM Corp / dev.to coverage of a Semrush job-listings analysis, \"SEO Job Market 2026: What 3,900 Job Listings Reveal\" · 2026</span>"
+          },
+          {
+            "kind": "signal",
+            "text": "20.3% of SEO job ads now mention AI search, GEO or AEO skills as of June 2026, up from 12.2% in December 2025 (527 to 1,010 postings/month); <span class=\"sr-when\">SearchForHire, \"The Future of Search: 5 Experts and 328,650 Job Postings\" (328,650 marketing postings of 632,840 total collected July 2025-June 2026) · 2026-07-15</span>"
+          },
+          {
+            "kind": "caveat",
+            "text": "No dated year-over-year posting figure exists for this title. What does exist is a share: 12.2% of SEO ads named AI search, GEO or AEO in December 2025, 20.3% by June 2026."
+          },
+          {
+            "kind": "named",
+            "text": "<b>Hiring under this title:</b> Mindvalley (Head of SEO), Credible (Director of SEO &amp; Content)"
+          },
+          {
+            "kind": "stack",
+            "text": "<b>Stack named in postings:</b> Google Analytics (GA4), Google Search Console, Semrush, Ahrefs, Screaming Frog, Looker Studio, BigQuery"
+          }
+        ]
+      }
+    },
+    "head-of-aeo": {
+      "jobs": {
+        "head": "Every board count, how it was counted, and what else is dated",
+        "query": "\"AEO\" \"GEO\" (both terms present, not exact phrase, United States) · retrieved 2026-09-14",
+        "note": "The 435 is not a title count: it counts postings where AEO and GEO both appear anywhere. It is excluded from the ranking below for that reason, and it belongs beside the other floors only as a mentions figure.",
+        "rows": [
+          {
+            "kind": "floor",
+            "text": "<b>435</b> — SimplyHired, \"AEO\" \"GEO\" (both terms present, not exact phrase, United States)"
+          },
+          {
+            "kind": "ceiling",
+            "text": "<b>11,000+</b> — LinkedIn public guest search, head of AEO, United States. Rounded, loose keyword match."
+          },
+          {
+            "kind": "caveat",
+            "text": "This is a broad co-occurrence count, not an exact \"Head of AEO\" title match — titles returned range from \"Director, SEO &amp; AEO\" to \"Technical SEO Specialist,\" i.e. mostly IC/manager roles, not just leadership."
+          },
+          {
+            "kind": "caveat",
+            "text": "The floor here is a co-occurrence count for AEO and GEO anywhere in the posting, not an exact-title match."
+          },
+          {
+            "kind": "signal",
+            "text": "50+ unique AEO roles tracked across 50+ companies as of July 6, 2026, including Stripe, Amazon, Pfizer, LinkedIn, Victoria's Secret, eBay, Palo Alto Networks, HubSpot, and Anthropic — spa… <span class=\"sr-when\">Kaleigh Moore · 2026-07-06</span>"
+          },
+          {
+            "kind": "signal",
+            "text": "720 postings in the last 12 months carry AI-search/GEO/AEO discipline directly in the job title; <span class=\"sr-when\">SearchForHire (328,650-posting study) · 2026-07-15</span>"
+          },
+          {
+            "kind": "caveat",
+            "text": "No year-over-year figure. The dated measurement is a stock, not a rate: 720 postings in twelve months carry AI search, GEO or AEO in the job title."
+          },
+          {
+            "kind": "named",
+            "text": "<b>Hiring under this title:</b> Victoria's Secret (Director, AI &amp; Organic Search — AEO, GEO, SEO), Experian (AEO &amp; SEO Manager, Remote), Capital One (Senior Digital Marketing Associate — AEO, GEO and AI Search Lead), eBay (Director of Product, AEO &amp; SEO), Milestone (VP/Head of Search &amp; AI Visibility), J.Jill (Senior Manager of SEO &amp; Generative Engine Optimization)"
+          },
+          {
+            "kind": "stack",
+            "text": "<b>Stack named in postings:</b> Ahrefs Brand Radar, Semrush AI Visibility Toolkit, Profound, Otterly.AI, Peec AI, LLMrefs, SE Ranking"
+          }
+        ]
+      },
+      "pay": {
+        "head": "Every published pay figure, side by side, and what else is dated",
+        "query": "3 published sources · 2026-07-06 to 2026-08-11 · no average taken",
+        "note": "This spread is seniority, not disagreement. 85,000 is a specialist posting and 180,000 a senior enterprise band, published by the same recruiter on the same day.",
+        "rows": [
+          {
+            "kind": "source",
+            "text": "<b>Kaleigh Moore</b> — $100,000 / $137,000 / $174,000 <span class=\"sr-when\">2026-07-06</span>"
+          },
+          {
+            "kind": "source",
+            "text": "<b>Sloane Staffing</b> — $150,000 / $180,000 / $210,000 <span class=\"sr-when\">2026-08-11</span>"
+          },
+          {
+            "kind": "source",
+            "text": "<b>Sloane Staffing</b> — $75,000 / $85,000 / $95,000 <span class=\"sr-when\">2026-08-11</span>"
+          },
+          {
+            "kind": "caveat",
+            "text": "These are different seniority bands from two publishers, so the spread is scope rather than disagreement."
+          },
+          {
+            "kind": "method",
+            "text": "Low / median / high as published. Nothing here is averaged across sources."
+          },
+          {
+            "kind": "signal",
+            "text": "50+ unique AEO roles tracked across 50+ companies as of July 6, 2026, including Stripe, Amazon, Pfizer, LinkedIn, Victoria's Secret, eBay, Palo Alto Networks, HubSpot, and Anthropic — spa… <span class=\"sr-when\">Kaleigh Moore · 2026-07-06</span>"
+          },
+          {
+            "kind": "signal",
+            "text": "720 postings in the last 12 months carry AI-search/GEO/AEO discipline directly in the job title; <span class=\"sr-when\">SearchForHire (328,650-posting study) · 2026-07-15</span>"
+          },
+          {
+            "kind": "caveat",
+            "text": "No year-over-year figure. The dated measurement is a stock, not a rate: 720 postings in twelve months carry AI search, GEO or AEO in the job title."
+          },
+          {
+            "kind": "named",
+            "text": "<b>Hiring under this title:</b> Victoria's Secret (Director, AI &amp; Organic Search — AEO, GEO, SEO), Experian (AEO &amp; SEO Manager, Remote), Capital One (Senior Digital Marketing Associate — AEO, GEO and AI Search Lead), eBay (Director of Product, AEO &amp; SEO), Milestone (VP/Head of Search &amp; AI Visibility), J.Jill (Senior Manager of SEO &amp; Generative Engine Optimization)"
+          },
+          {
+            "kind": "stack",
+            "text": "<b>Stack named in postings:</b> Ahrefs Brand Radar, Semrush AI Visibility Toolkit, Profound, Otterly.AI, Peec AI, LLMrefs, SE Ranking"
+          }
+        ]
+      }
+    },
+    "gtm-engineer": {
+      "jobs": {
+        "head": "Every board count, how it was counted, and what else is dated",
+        "query": "\"GTM engineer\" (exact phrase, United States) · retrieved 2026-09-14",
+        "note": "The best-documented title in the set. 146 literal postings, and a thousand-posting study behind the definition, so the floor here means something.",
+        "rows": [
+          {
+            "kind": "floor",
+            "text": "<b>146</b> — SimplyHired, \"GTM engineer\" (exact phrase, United States)"
+          },
+          {
+            "kind": "ceiling",
+            "text": "<b>11,000+</b> — LinkedIn public guest search, GTM engineer, United States. Rounded, loose keyword match."
+          },
+          {
+            "kind": "second",
+            "text": "<b>5 (page shows individual listings, no explicit total-count string)</b> — Built In, GTM engineer"
+          },
+          {
+            "kind": "signal",
+            "text": "“GTM Engineer job postings grew 205% year-over-year from 2024 to 2025.” “As of March 2026, there are more than 3,000 open GTM Engineer roles across major job boards.” <span class=\"sr-when\">GTME Pulse, March 2026 · quoted from the live page, re-checked 2026-09-14</span>"
+          },
+          {
+            "kind": "signal",
+            "text": "1,000 GTM Engineering postings analysed: average experience required 4.11 years, SQL and Python each in 38% of postings, Clay the most-cited tool. <span class=\"sr-when\">Bloomberry · 2025-10-03, updated 2026-01-25</span>"
+          },
+          {
+            "kind": "named",
+            "text": "<b>Hiring under this title:</b> Fireworks AI, The Global Talent Co., Huzzle Ltd, Vercel, OpenAI, LILT AI"
+          },
+          {
+            "kind": "stack",
+            "text": "<b>Stack named in postings:</b> Clay (most-cited tool), HubSpot (52% of postings), Outreach (49%), Salesforce (45%), Zapier (39%), Apollo (29%), n8n (28%)"
+          }
+        ]
+      },
+      "pay": {
+        "head": "Every published pay figure, side by side, and what else is dated",
+        "query": "2 published sources · 2025-10-03 to 2026-09-14 · no average taken",
+        "note": "The two sources are 28,500 apart at the median and 145,000 apart at the top, because one measures posting text and the other measures verified total compensation with equity.",
+        "rows": [
+          {
+            "kind": "source",
+            "text": "<b>Levels.fyi</b> — $110,000 / $156,000 / $397,000 <span class=\"sr-when\">2026-09-14</span>"
+          },
+          {
+            "kind": "source",
+            "text": "<b>Bloomberry</b> — $127,500 / $252,000 <span class=\"sr-when\">2025-10-03</span>"
+          },
+          {
+            "kind": "method",
+            "text": "Low / median / high as published. Nothing here is averaged across sources."
+          },
+          {
+            "kind": "signal",
+            "text": "“GTM Engineer job postings grew 205% year-over-year from 2024 to 2025.” “As of March 2026, there are more than 3,000 open GTM Engineer roles across major job boards.” <span class=\"sr-when\">GTME Pulse, March 2026 · quoted from the live page, re-checked 2026-09-14</span>"
+          },
+          {
+            "kind": "signal",
+            "text": "1,000 GTM Engineering postings analysed: average experience required 4.11 years, SQL and Python each in 38% of postings, Clay the most-cited tool. <span class=\"sr-when\">Bloomberry · 2025-10-03, updated 2026-01-25</span>"
+          },
+          {
+            "kind": "named",
+            "text": "<b>Hiring under this title:</b> Fireworks AI, The Global Talent Co., Huzzle Ltd, Vercel, OpenAI, LILT AI"
+          },
+          {
+            "kind": "stack",
+            "text": "<b>Stack named in postings:</b> Clay (most-cited tool), HubSpot (52% of postings), Outreach (49%), Salesforce (45%), Zapier (39%), Apollo (29%), n8n (28%)"
+          }
+        ]
+      }
+    },
+    "growth-engineer": {
+      "jobs": {
+        "head": "Every board count, how it was counted, and what else is dated",
+        "query": "\"growth engineer\" (exact phrase, United States) · retrieved 2026-09-14",
+        "note": "Sixty-four literal postings, three on Built In. A well-known title with a small exact-phrase footprint.",
+        "rows": [
+          {
+            "kind": "floor",
+            "text": "<b>64</b> — SimplyHired, \"growth engineer\" (exact phrase, United States)"
+          },
+          {
+            "kind": "ceiling",
+            "text": "<b>7,000+</b> — LinkedIn public guest search, growth engineer, United States. Rounded, loose keyword match."
+          },
+          {
+            "kind": "second",
+            "text": "<b>3</b> — Built In, growth engineer"
+          },
+          {
+            "kind": "signal",
+            "text": "Growth engineering \"was barely known a decade ago, but today, most scaleups and many publicly traded tech companies have dedicated growth teams.\" Discipline traced to Facebook's 2007 grow… <span class=\"sr-when\">Pragmatic Engineer newsletter · 2025-03-20</span>"
+          },
+          {
+            "kind": "signal",
+            "text": "Growth Engineer is listed as a specialization branch off general software engineering, alongside Product Growth Engineer, Growth Hacking Engineer, Analytics Growth Engineer, and Growth Op… <span class=\"sr-when\">Teal career-path guide · 2026 (undated)</span>"
+          },
+          {
+            "kind": "caveat",
+            "text": "No dated year-over-year posting figure for this title. The discipline itself is documented back to Facebook’s 2007 growth team."
+          },
+          {
+            "kind": "named",
+            "text": "<b>Hiring under this title:</b> Everis (Mobile Software Engineer, Growth &amp; Experimentation), Binance (Algorithm Engineer, Market Growth), Deep Blue Company (Growth Web Developer)"
+          },
+          {
+            "kind": "stack",
+            "text": "<b>Stack named in postings:</b> Python, SQL, A/B-testing infrastructure, Google Analytics / Mixpanel, marketing automation systems, analytics event instrumentation, martech integrations"
+          }
+        ]
+      },
+      "pay": {
+        "head": "Every published pay figure, side by side, and what else is dated",
+        "query": "4 published sources · 2026 to 2026-08-31 · no average taken",
+        "note": "3.5 times between the lowest and highest published median. Glassdoor’s average rests on 38 self-reported salaries; ZipRecruiter returns two different averages from two of its own URL slugs.",
+        "rows": [
+          {
+            "kind": "source",
+            "text": "<b>ZipRecruiter</b> — $84,000 / $101,752 / $116,500 <span class=\"sr-when\">2026-07</span>"
+          },
+          {
+            "kind": "source",
+            "text": "<b>ZipRecruiter</b> — $116,500 / $146,868 / $173,000 <span class=\"sr-when\">2026-08-31</span>"
+          },
+          {
+            "kind": "source",
+            "text": "<b>Glassdoor</b> — $269,868 / $359,824 / $503,754 <span class=\"sr-when\">2026-05</span>"
+          },
+          {
+            "kind": "source",
+            "text": "<b>GTME Pulse</b> — $130,000 / $160,000 / $240,000 <span class=\"sr-when\">2026</span>"
+          },
+          {
+            "kind": "method",
+            "text": "Low / median / high as published. Nothing here is averaged across sources."
+          },
+          {
+            "kind": "signal",
+            "text": "Growth engineering \"was barely known a decade ago, but today, most scaleups and many publicly traded tech companies have dedicated growth teams.\" Discipline traced to Facebook's 2007 grow… <span class=\"sr-when\">Pragmatic Engineer newsletter · 2025-03-20</span>"
+          },
+          {
+            "kind": "signal",
+            "text": "Growth Engineer is listed as a specialization branch off general software engineering, alongside Product Growth Engineer, Growth Hacking Engineer, Analytics Growth Engineer, and Growth Op… <span class=\"sr-when\">Teal career-path guide · 2026 (undated)</span>"
+          },
+          {
+            "kind": "caveat",
+            "text": "No dated year-over-year posting figure for this title. The discipline itself is documented back to Facebook’s 2007 growth team."
+          },
+          {
+            "kind": "named",
+            "text": "<b>Hiring under this title:</b> Everis (Mobile Software Engineer, Growth &amp; Experimentation), Binance (Algorithm Engineer, Market Growth), Deep Blue Company (Growth Web Developer)"
+          },
+          {
+            "kind": "stack",
+            "text": "<b>Stack named in postings:</b> Python, SQL, A/B-testing infrastructure, Google Analytics / Mixpanel, marketing automation systems, analytics event instrumentation, martech integrations"
+          }
+        ]
+      }
+    },
+    "growth-marketing-manager": {
+      "jobs": {
+        "head": "Every board count, how it was counted, and what else is dated",
+        "query": "\"growth marketing manager\" (exact phrase, United States) · retrieved 2026-09-14",
+        "note": "The highest literal count in the set: 239 exact-phrase postings. This is what a genuinely standard title looks like.",
+        "rows": [
+          {
+            "kind": "floor",
+            "text": "<b>239</b> — SimplyHired, \"growth marketing manager\" (exact phrase, United States)"
+          },
+          {
+            "kind": "ceiling",
+            "text": "<b>10,000+</b> — LinkedIn public guest search, growth marketing manager, United States. Rounded, loose keyword match."
+          },
+          {
+            "kind": "second",
+            "text": "<b>9 individual listings visible, no explicit total-count string on page</b> — Built In, growth marketing manager"
+          },
+          {
+            "kind": "signal",
+            "text": "In New York, NY specifically, Growth Marketing Manager salaries range $124,556-$181,886 — significantly above the national Robert Half range, illustrating a strong metro pay premium for t… <span class=\"sr-when\">Robert Half (NY-specific page) · 2026</span>"
+          },
+          {
+            "kind": "signal",
+            "text": "Marketing manager job postings overall were up 14% year-over-year in 2026 even as AI adoption in marketing hit 91%, though total marketing job postings remain down 27% from pre-pandemic l… <span class=\"sr-when\">Aggregated marketing hiring-trend coverage (Kalungi/Robert Half synthesis) · 2026</span>"
+          },
+          {
+            "kind": "named",
+            "text": "<b>Hiring under this title:</b> Optum, GCash, Bamboo Works, Axios, Coins.ph"
+          },
+          {
+            "kind": "stack",
+            "text": "<b>Stack named in postings:</b> Google Analytics/GA4, CRM (HubSpot/Salesforce), A/B-testing suites, SQL/Python for self-serve analysis, BI tools, attribution/analytics stack"
+          }
+        ]
+      },
+      "pay": {
+        "head": "Every published pay figure, side by side, and what else is dated",
+        "query": "4 published sources · 2026 to 2026-08-01 · no average taken",
+        "note": "Four independent sources, and they agree more closely than any other title here: 18,199 between the lowest and highest published median.",
+        "rows": [
+          {
+            "kind": "source",
+            "text": "<b>Robert Half</b> — $91,250 / $112,250 / $133,250 <span class=\"sr-when\">2026</span>"
+          },
+          {
+            "kind": "source",
+            "text": "<b>Glassdoor</b> — $97,837 / $130,449 / $176,771 <span class=\"sr-when\">2026</span>"
+          },
+          {
+            "kind": "source",
+            "text": "<b>ZipRecruiter</b> — $60,000 / $98,000 <span class=\"sr-when\">2026-08</span>"
+          },
+          {
+            "kind": "source",
+            "text": "<b>Salary.com</b> — $98,391 / $119,945 / $140,903 <span class=\"sr-when\">2026-08-01</span>"
+          },
+          {
+            "kind": "method",
+            "text": "Low / median / high as published. Nothing here is averaged across sources."
+          },
+          {
+            "kind": "signal",
+            "text": "In New York, NY specifically, Growth Marketing Manager salaries range $124,556-$181,886 — significantly above the national Robert Half range, illustrating a strong metro pay premium for t… <span class=\"sr-when\">Robert Half (NY-specific page) · 2026</span>"
+          },
+          {
+            "kind": "signal",
+            "text": "Marketing manager job postings overall were up 14% year-over-year in 2026 even as AI adoption in marketing hit 91%, though total marketing job postings remain down 27% from pre-pandemic l… <span class=\"sr-when\">Aggregated marketing hiring-trend coverage (Kalungi/Robert Half synthesis) · 2026</span>"
+          },
+          {
+            "kind": "named",
+            "text": "<b>Hiring under this title:</b> Optum, GCash, Bamboo Works, Axios, Coins.ph"
+          },
+          {
+            "kind": "stack",
+            "text": "<b>Stack named in postings:</b> Google Analytics/GA4, CRM (HubSpot/Salesforce), A/B-testing suites, SQL/Python for self-serve analysis, BI tools, attribution/analytics stack"
+          }
+        ]
+      }
+    },
+    "growth-strategist": {
+      "jobs": {
+        "head": "Every board count, how it was counted, and what else is dated",
+        "query": "\"growth strategist\" (exact phrase, United States) · retrieved 2026-09-14",
+        "note": "A healthy 108 exact-phrase postings, but only one listing on Built In. Steady demand, not a surge.",
+        "rows": [
+          {
+            "kind": "floor",
+            "text": "<b>108</b> — SimplyHired, \"growth strategist\" (exact phrase, United States)"
+          },
+          {
+            "kind": "ceiling",
+            "text": "<b>11,000+</b> — LinkedIn public guest search, growth strategist, United States. Rounded, loose keyword match."
+          },
+          {
+            "kind": "second",
+            "text": "<b>1</b> — Built In, growth strategist"
+          },
+          {
+            "kind": "signal",
+            "text": "No title-specific \"Growth Strategist\" trend/surge article was found in this session (see notes.md gap). <span class=\"sr-when\">Robert Half, employment/hiring outlook coverage · 2026</span>"
+          },
+          {
+            "kind": "caveat",
+            "text": "No title-specific trend article was found in this research session. Strategist roles appear in 2026 demand coverage only as a category."
+          },
+          {
+            "kind": "named",
+            "text": "<b>Hiring under this title:</b> BlackBox Strategies"
+          },
+          {
+            "kind": "stack",
+            "text": "<b>Stack named in postings:</b> Google Analytics, CRM (HubSpot/Salesforce), A/B-testing suites, SQL/Python for self-serve analysis, BI tools"
+          }
+        ]
+      },
+      "pay": {
+        "head": "Every published pay figure, side by side, and what else is dated",
+        "query": "2 published sources · 2026 to 2026-07 · no average taken",
+        "note": "Two sources, 25,687 apart at the median, and Glassdoor’s 90th percentile reaches 302,964. The top of this title is far above its middle.",
+        "rows": [
+          {
+            "kind": "source",
+            "text": "<b>ZipRecruiter</b> — $121,500 / $139,867 / $157,000 <span class=\"sr-when\">2026-07</span>"
+          },
+          {
+            "kind": "source",
+            "text": "<b>Glassdoor</b> — $124,166 / $165,554 / $231,776 <span class=\"sr-when\">2026</span>"
+          },
+          {
+            "kind": "method",
+            "text": "Low / median / high as published. Nothing here is averaged across sources."
+          },
+          {
+            "kind": "signal",
+            "text": "No title-specific \"Growth Strategist\" trend/surge article was found in this session (see notes.md gap). <span class=\"sr-when\">Robert Half, employment/hiring outlook coverage · 2026</span>"
+          },
+          {
+            "kind": "caveat",
+            "text": "No title-specific trend article was found in this research session. Strategist roles appear in 2026 demand coverage only as a category."
+          },
+          {
+            "kind": "named",
+            "text": "<b>Hiring under this title:</b> BlackBox Strategies"
+          },
+          {
+            "kind": "stack",
+            "text": "<b>Stack named in postings:</b> Google Analytics, CRM (HubSpot/Salesforce), A/B-testing suites, SQL/Python for self-serve analysis, BI tools"
+          }
+        ]
+      }
+    },
+    "revops-engineer": {
+      "jobs": {
+        "head": "Every board count, how it was counted, and what else is dated",
+        "query": "\"revenue operations engineer\" (exact phrase, United States) · retrieved 2026-09-14",
+        "note": "One exact-phrase posting. Three if RevOps Engineer is allowed as an alternate spelling. The umbrella term is where the hiring actually happens.",
+        "rows": [
+          {
+            "kind": "floor",
+            "text": "<b>1</b> — SimplyHired, \"revenue operations engineer\" (exact phrase, United States)"
+          },
+          {
+            "kind": "ceiling",
+            "text": "<b>6,000+</b> — LinkedIn public guest search, revenue operations engineer, United States. Rounded, loose keyword match."
+          },
+          {
+            "kind": "second",
+            "text": "<b>3</b> — SimplyHired, revenue operations engineer OR revops engineer"
+          },
+          {
+            "kind": "signal",
+            "text": "By the end of 2025, 75% of high-growth B2B organisations were projected to have a dedicated RevOps function in place. <span class=\"sr-when\">GTM 8020 · 2026</span>"
+          },
+          {
+            "kind": "caveat",
+            "text": "No growth figure is shown. A 127% year-over-year claim is in circulation; it traces to one trade article (CRM Today, 27 June 2026), which attributes it to a LinkedIn workforce report with no link and no methodology. The underlying dataset could not be reached on 14 Sep 2026, so the figure is withdrawn from this artifact rather than shown with a caveat."
+          },
+          {
+            "kind": "named",
+            "text": "<b>Hiring under this title:</b> Duende (RevOps Engineer), Factorial (RevOps Engineer, via General Catalyst job board), Ve — \"the intent company\" (Revenue Operations &amp; GTM Engineer, via RevPath)"
+          },
+          {
+            "kind": "stack",
+            "text": "<b>Stack named in postings:</b> Node.js, Python, APIs, CRM ecosystem architecture (Salesforce/HubSpot), workflow automation, AI/prompt engineering for ops tooling"
+          }
+        ]
+      },
+      "pay": {
+        "head": "Every published pay figure, side by side, and what else is dated",
+        "query": "2 published sources · 2026 to 2026-08 · no average taken",
+        "note": "Both sources measure the RevOps family rather than the engineer title, and they land 15,000 apart at the median. Unusually close, because neither is measuring the rare thing.",
+        "rows": [
+          {
+            "kind": "source",
+            "text": "<b>ZipRecruiter</b> — $85,000 / $110,000 / $124,500 <span class=\"sr-when\">2026-08</span>"
+          },
+          {
+            "kind": "source",
+            "text": "<b>Agents for Hire</b> — $100,000 / $125,000 / $150,000 <span class=\"sr-when\">2026</span>"
+          },
+          {
+            "kind": "caveat",
+            "text": "Both figures measure the broader RevOps family, not the engineer title."
+          },
+          {
+            "kind": "method",
+            "text": "Low / median / high as published. Nothing here is averaged across sources."
+          },
+          {
+            "kind": "signal",
+            "text": "By the end of 2025, 75% of high-growth B2B organisations were projected to have a dedicated RevOps function in place. <span class=\"sr-when\">GTM 8020 · 2026</span>"
+          },
+          {
+            "kind": "caveat",
+            "text": "No growth figure is shown. A 127% year-over-year claim is in circulation; it traces to one trade article (CRM Today, 27 June 2026), which attributes it to a LinkedIn workforce report with no link and no methodology. The underlying dataset could not be reached on 14 Sep 2026, so the figure is withdrawn from this artifact rather than shown with a caveat."
+          },
+          {
+            "kind": "named",
+            "text": "<b>Hiring under this title:</b> Duende (RevOps Engineer), Factorial (RevOps Engineer, via General Catalyst job board), Ve — \"the intent company\" (Revenue Operations &amp; GTM Engineer, via RevPath)"
+          },
+          {
+            "kind": "stack",
+            "text": "<b>Stack named in postings:</b> Node.js, Python, APIs, CRM ecosystem architecture (Salesforce/HubSpot), workflow automation, AI/prompt engineering for ops tooling"
+          }
+        ]
+      }
+    },
+    "marketing-automation-engineer": {
+      "jobs": {
+        "head": "Every board count, how it was counted, and what else is dated",
+        "query": "\"marketing automation engineer\" (exact phrase, United States) · retrieved 2026-09-14",
+        "note": "Six exact-phrase postings and zero on Built In. The work is common; this spelling of it is not. Manager and Specialist are where it gets posted.",
+        "rows": [
+          {
+            "kind": "floor",
+            "text": "<b>6</b> — SimplyHired, \"marketing automation engineer\" (exact phrase, United States)"
+          },
+          {
+            "kind": "ceiling",
+            "text": "<b>4,000+</b> — LinkedIn public guest search, marketing automation engineer, United States. Rounded, loose keyword match."
+          },
+          {
+            "kind": "second",
+            "text": "<b>0</b> — Built In, marketing automation engineer"
+          },
+          {
+            "kind": "signal",
+            "text": "Marketing automation manager/engineer-adjacent postings saw roughly 10% year-over-year growth across 2025; <span class=\"sr-when\">Robert Half, \"2026 Marketing job market: In-demand roles and hiring trends\" · 2026</span>"
+          },
+          {
+            "kind": "named",
+            "text": "<b>Hiring under this title:</b> HP (Vancouver, WA), Aon Corporation"
+          },
+          {
+            "kind": "stack",
+            "text": "<b>Stack named in postings:</b> Salesforce Marketing Cloud, HubSpot, Marketo (implied by category), CRM integration, campaign workflow builders, KPI/campaign-metrics dashboards"
+          }
+        ]
+      },
+      "pay": {
+        "head": "Every published pay figure, side by side, and what else is dated",
+        "query": "2 published sources · 2026 to 2026-08 · no average taken",
+        "note": "The rarest thing in this dataset: two salary sources that agree. 9,374 apart at the median, under 10%.",
+        "rows": [
+          {
+            "kind": "source",
+            "text": "<b>ZipRecruiter</b> — $86,500 / $107,126 / $123,500 <span class=\"sr-when\">2026-08</span>"
+          },
+          {
+            "kind": "source",
+            "text": "<b>Glassdoor</b> — $93,960 / $116,500 / $145,859 <span class=\"sr-when\">2026</span>"
+          },
+          {
+            "kind": "method",
+            "text": "Low / median / high as published. Nothing here is averaged across sources."
+          },
+          {
+            "kind": "signal",
+            "text": "Marketing automation manager/engineer-adjacent postings saw roughly 10% year-over-year growth across 2025; <span class=\"sr-when\">Robert Half, \"2026 Marketing job market: In-demand roles and hiring trends\" · 2026</span>"
+          },
+          {
+            "kind": "named",
+            "text": "<b>Hiring under this title:</b> HP (Vancouver, WA), Aon Corporation"
+          },
+          {
+            "kind": "stack",
+            "text": "<b>Stack named in postings:</b> Salesforce Marketing Cloud, HubSpot, Marketo (implied by category), CRM integration, campaign workflow builders, KPI/campaign-metrics dashboards"
+          }
+        ]
+      }
+    },
+    "growth-ops-engineer": {
+      "jobs": {
+        "head": "Every board count, how it was counted, and what else is dated",
+        "query": "\"growth operations engineer\" (exact phrase, United States) · retrieved 2026-09-14",
+        "note": "Zero. SimplyHired returns the sentence in full: we could not find any growth operations engineer jobs in United States. LinkedIn shows 10,000+ for the same words on the same day.",
+        "rows": [
+          {
+            "kind": "floor",
+            "text": "<b>0</b> — SimplyHired, \"growth operations engineer\" (exact phrase, United States)"
+          },
+          {
+            "kind": "ceiling",
+            "text": "<b>10,000+</b> — LinkedIn public guest search, growth operations engineer, United States. Rounded, loose keyword match."
+          },
+          {
+            "kind": "second",
+            "text": "<b>1 confirmed listing (Peerspace)</b> — Built In, growth operations engineer"
+          },
+          {
+            "kind": "caveat",
+            "text": "Page explicitly states: \"We could not find any 'growth operations engineer' jobs in United States.\""
+          },
+          {
+            "kind": "signal",
+            "text": "Career-path guides place \"Head of Growth Ops\" and \"Head of RevOps\" as the two most common promotion paths out of this role, with senior people who reach Director/VP within 5 years typical… <span class=\"sr-when\">Growth.Talent role guide · 2026</span>"
+          },
+          {
+            "kind": "caveat",
+            "text": "No postings trend exists for a title with no postings. Career-path guides place Head of Growth Ops and Head of RevOps as the usual next step."
+          },
+          {
+            "kind": "named",
+            "text": "<b>Hiring under this title:</b> Peerspace, Epoch Biodesign (Austin, TX), HYFIX Spatial Intelligence (Santa Clara, CA), Base Power Company"
+          },
+          {
+            "kind": "stack",
+            "text": "<b>Stack named in postings:</b> HubSpot/Salesforce, SQL, Segment/RudderStack, workflow automation and no/low-code builders, APIs, basic full-stack app prototyping"
+          }
+        ]
+      },
+      "pay": {
+        "head": "Every published pay figure, side by side, and what else is dated",
+        "query": "2 published sources · 2026 to 2026-04 · no average taken",
+        "note": "Neither figure is for this title. Both are Growth Operations Manager, the closest thing anyone tracks, and they are almost twice apart at the median.",
+        "rows": [
+          {
+            "kind": "source",
+            "text": "<b>Growth.Talent</b> — $90,000 / $117,500 / $180,000 <span class=\"sr-when\">2026</span>"
+          },
+          {
+            "kind": "source",
+            "text": "<b>ZipRecruiter</b> — $41,000 / $63,456 / $118,500 <span class=\"sr-when\">2026-04</span>"
+          },
+          {
+            "kind": "caveat",
+            "text": "Both figures are proxies from an adjacent title. No pay data exists for this exact title."
+          },
+          {
+            "kind": "method",
+            "text": "Low / median / high as published. Nothing here is averaged across sources."
+          },
+          {
+            "kind": "signal",
+            "text": "Career-path guides place \"Head of Growth Ops\" and \"Head of RevOps\" as the two most common promotion paths out of this role, with senior people who reach Director/VP within 5 years typical… <span class=\"sr-when\">Growth.Talent role guide · 2026</span>"
+          },
+          {
+            "kind": "caveat",
+            "text": "No postings trend exists for a title with no postings. Career-path guides place Head of Growth Ops and Head of RevOps as the usual next step."
+          },
+          {
+            "kind": "named",
+            "text": "<b>Hiring under this title:</b> Peerspace, Epoch Biodesign (Austin, TX), HYFIX Spatial Intelligence (Santa Clara, CA), Base Power Company"
+          },
+          {
+            "kind": "stack",
+            "text": "<b>Stack named in postings:</b> HubSpot/Salesforce, SQL, Segment/RudderStack, workflow automation and no/low-code builders, APIs, basic full-stack app prototyping"
+          }
+        ]
+      }
+    },
+    "growth-data-engineer": {
+      "jobs": {
+        "head": "Every board count, how it was counted, and what else is dated",
+        "query": "\"growth data engineer\" (exact phrase, United States) · retrieved 2026-09-14",
+        "note": "One posting in the country, a Senior Growth Data Engineer at Roblox. LinkedIn claims 11,000+ for the same three words: the widest measurable gap in the set.",
+        "rows": [
+          {
+            "kind": "floor",
+            "text": "<b>1</b> — SimplyHired, \"growth data engineer\" (exact phrase, United States)"
+          },
+          {
+            "kind": "ceiling",
+            "text": "<b>11,000+</b> — LinkedIn public guest search, growth data engineer, United States. Rounded, loose keyword match."
+          },
+          {
+            "kind": "caveat",
+            "text": "The single result is a Senior Growth Data Engineer role at Roblox, San Mateo, CA."
+          },
+          {
+            "kind": "signal",
+            "text": "Data engineering roles grew roughly 23% year-over-year with an estimated 260,000 open US positions projected across 2025; <span class=\"sr-when\">JobsPikr, \"Data Engineer Demand Report 2026\" · 2026</span>"
+          },
+          {
+            "kind": "named",
+            "text": "<b>Hiring under this title:</b> Roblox (San Mateo, CA)"
+          },
+          {
+            "kind": "stack",
+            "text": "<b>Stack named in postings:</b> SQL, Python, dbt, Airflow, Snowflake/BigQuery-class warehouses, event-tracking/CDP tools (e.g. Segment), experimentation data pipelines"
+          }
+        ]
+      },
+      "pay": {
+        "head": "Every published pay figure, side by side, and what else is dated",
+        "query": "2 published sources · 2026 to 2026-07 · no average taken",
+        "note": "Neither number is growth-specific. One is the general data-engineer market, the other is one company’s total compensation with equity. Shown to expose the proxy, not to price the job.",
+        "rows": [
+          {
+            "kind": "source",
+            "text": "<b>ZipRecruiter</b> — $114,500 / $129,716 / $137,500 <span class=\"sr-when\">2026-07</span>"
+          },
+          {
+            "kind": "source",
+            "text": "<b>Levels.fyi</b> — $460,000 / $571,000 <span class=\"sr-when\">2026</span>"
+          },
+          {
+            "kind": "caveat",
+            "text": "Both figures are proxies from an adjacent title. No pay data exists for this exact title."
+          },
+          {
+            "kind": "method",
+            "text": "Low / median / high as published. Nothing here is averaged across sources."
+          },
+          {
+            "kind": "signal",
+            "text": "Data engineering roles grew roughly 23% year-over-year with an estimated 260,000 open US positions projected across 2025; <span class=\"sr-when\">JobsPikr, \"Data Engineer Demand Report 2026\" · 2026</span>"
+          },
+          {
+            "kind": "named",
+            "text": "<b>Hiring under this title:</b> Roblox (San Mateo, CA)"
+          },
+          {
+            "kind": "stack",
+            "text": "<b>Stack named in postings:</b> SQL, Python, dbt, Airflow, Snowflake/BigQuery-class warehouses, event-tracking/CDP tools (e.g. Segment), experimentation data pipelines"
+          }
+        ]
+      }
+    }
+  },
+  "rank": {
+    "title": "Rank all ten titles by",
+    "metrics": [
+      {
+        "id": "postings",
+        "label": "Postings that exist",
+        "unit": "",
+        "decimals": 0,
+        "source": "s-sh",
+        "note": "Exact-phrase US postings on SimplyHired, 14 Sep 2026. A zero is a real zero."
+      },
+      {
+        "id": "pay_med",
+        "label": "Median pay, published range",
+        "unit": "$",
+        "prefix": true,
+        "decimals": 0,
+        "range": true,
+        "source": "s-zip",
+        "note": "Each bar spans the lowest to the highest median published for that title. Sorted by the high end. Bars marked proxy use an adjacent title; bands means two seniority levels, not a disagreement."
+      },
+      {
+        "id": "momentum",
+        "label": "Year-over-year growth",
+        "unit": "%",
+        "decimals": 0,
+        "source": "s-gtme",
+        "note": "Only one title in this set has a dated growth rate measured on the title itself and quotable from its live source. Six have none at all, and three of the rest are category figures, marked proxy. A RevOps figure in circulation was withdrawn: it traces to one trade article with no reachable dataset."
+      },
+      {
+        "id": "gap",
+        "label": "Gap between the two counts",
+        "unit": "×",
+        "decimals": 1,
+        "source": "s-li",
+        "note": "LinkedIn’s rounded keyword count divided by the exact-phrase count. Because the LinkedIn figure is a rounded ceiling, each ratio is a lower bound."
+      }
+    ],
+    "values": {
+      "director-of-seo": {
+        "postings": 19,
+        "pay_med": [
+          124682,
+          175340
+        ],
+        "gap": 158,
+        "momentum": null
+      },
+      "head-of-aeo": {
+        "postings": 435,
+        "pay_med": [
+          85000,
+          180000
+        ],
+        "gap": 25.3,
+        "momentum": null
+      },
+      "gtm-engineer": {
+        "postings": 146,
+        "pay_med": [
+          127500,
+          156000
+        ],
+        "gap": 75.3,
+        "momentum": 205
+      },
+      "growth-engineer": {
+        "postings": 64,
+        "pay_med": [
+          101752,
+          359824
+        ],
+        "gap": 109,
+        "momentum": null
+      },
+      "growth-marketing-manager": {
+        "postings": 239,
+        "pay_med": [
+          112250,
+          130449
+        ],
+        "gap": 41.8,
+        "momentum": 14
+      },
+      "growth-strategist": {
+        "postings": 108,
+        "pay_med": [
+          139867,
+          165554
+        ],
+        "gap": 102,
+        "momentum": null
+      },
+      "revops-engineer": {
+        "postings": 1,
+        "pay_med": [
+          110000,
+          125000
+        ],
+        "gap": 6000,
+        "momentum": null
+      },
+      "marketing-automation-engineer": {
+        "postings": 6,
+        "pay_med": [
+          107126,
+          116500
+        ],
+        "gap": 667,
+        "momentum": 10
+      },
+      "growth-ops-engineer": {
+        "postings": 0,
+        "pay_med": [
+          63456,
+          117500
+        ],
+        "gap": null,
+        "momentum": null
+      },
+      "growth-data-engineer": {
+        "postings": 1,
+        "pay_med": [
+          129716,
+          460000
+        ],
+        "gap": 11000,
+        "momentum": 23
+      }
+    },
+    "flags": {
+      "director-of-seo": {
+        "postings": "",
+        "pay_med": "",
+        "gap": "",
+        "momentum": "none"
+      },
+      "head-of-aeo": {
+        "postings": "mentions",
+        "pay_med": "bands",
+        "gap": "mentions",
+        "momentum": "none"
+      },
+      "gtm-engineer": {
+        "postings": "",
+        "pay_med": "",
+        "gap": "",
+        "momentum": ""
+      },
+      "growth-engineer": {
+        "postings": "",
+        "pay_med": "",
+        "gap": "",
+        "momentum": "none"
+      },
+      "growth-marketing-manager": {
+        "postings": "",
+        "pay_med": "",
+        "gap": "",
+        "momentum": "proxy"
+      },
+      "growth-strategist": {
+        "postings": "",
+        "pay_med": "",
+        "gap": "",
+        "momentum": "none"
+      },
+      "revops-engineer": {
+        "postings": "",
+        "pay_med": "proxy",
+        "gap": "",
+        "momentum": "none"
+      },
+      "marketing-automation-engineer": {
+        "postings": "",
+        "pay_med": "",
+        "gap": "",
+        "momentum": "proxy"
+      },
+      "growth-ops-engineer": {
+        "postings": "zero",
+        "pay_med": "proxy",
+        "gap": "nofloor",
+        "momentum": "none"
+      },
+      "growth-data-engineer": {
+        "postings": "",
+        "pay_med": "proxy",
+        "gap": "",
+        "momentum": "proxy"
+      }
+    },
+    "exclude": {
+      "head-of-aeo": {
+        "postings": true,
+        "gap": true
+      }
+    },
+    "flagText": {
+      "proxy": "proxy",
+      "bands": "bands",
+      "family": "family",
+      "none": "no dated figure",
+      "zero": "zero",
+      "nofloor": "no floor",
+      "mentions": "mentions, not titles"
+    }
+  },
+  "sources": [
+    {
+      "id": "s-sh",
+      "label": "SimplyHired — exact-phrase US job search",
+      "asOf": "2026-09-14",
+      "url": "https://www.simplyhired.com/",
+      "detail": "Quoted phrase, location United States. Returns a literal count, including zero. This is the floor figure for every postings row."
+    },
+    {
+      "id": "s-li",
+      "label": "LinkedIn — public guest job search (loose keyword match)",
+      "asOf": "2026-09-14",
+      "url": "https://www.linkedin.com/jobs/",
+      "detail": "Not an exact-title count. Reports rounded ceilings such as 11,000+ for terms with near-zero exact-phrase results, so it is treated as a placeholder, not a measurement."
+    },
+    {
+      "id": "s-bi",
+      "label": "Built In — keyword job search",
+      "asOf": "2026-09-14",
+      "url": "https://builtin.com/jobs",
+      "detail": "Tech-company board. Used as a second literal count; several titles return zero here."
+    },
+    {
+      "id": "s-zip",
+      "label": "ZipRecruiter — salary pages",
+      "asOf": "2026-08",
+      "url": "https://www.ziprecruiter.com/Salaries/",
+      "detail": "National averages by title slug. Two different slugs for the same growth-engineer role return different averages; both are kept."
+    },
+    {
+      "id": "s-gd",
+      "label": "Glassdoor — salary pages",
+      "asOf": "2026-05",
+      "url": "https://www.glassdoor.com/Salaries/",
+      "detail": "Self-reported pay. The growth-engineer page is n=38, which is why it sits three times above every other source."
+    },
+    {
+      "id": "s-lev",
+      "label": "Levels.fyi — title pages",
+      "asOf": "2026-09-14",
+      "url": "https://www.levels.fyi/t/gtm-engineer",
+      "detail": "Verified total compensation including equity. GTM Engineer page shows 25th 110,000, 75th 295,000, 90th 397,000."
+    },
+    {
+      "id": "s-sal",
+      "label": "Salary.com — posted-salary research",
+      "asOf": "2026-08-01",
+      "url": "https://www.salary.com/",
+      "detail": "Posting-derived ranges. The SEO-director figure on this source is dated July 2025."
+    },
+    {
+      "id": "s-rh",
+      "label": "Robert Half — 2026 salary guide and job pages",
+      "asOf": "2026",
+      "url": "https://www.roberthalf.com/us/en/insights/research/data-reveals-which-marketing-and-creative-roles-are-in-highest-demand",
+      "detail": "Staffing-firm placement data for marketing roles, plus the 2026 marketing hiring outlook."
+    },
+    {
+      "id": "s-gtal",
+      "label": "Growth.Talent — role guide",
+      "asOf": "2026",
+      "url": "https://www.growthtalent.org/guides/role/growth-operations",
+      "detail": "SaaS/growth-specific band for Growth Operations Manager, used as the closest tracked proxy title."
+    },
+    {
+      "id": "s-afh",
+      "label": "Agents for Hire — Revenue Operations Engineer salary, 2026",
+      "asOf": "2026",
+      "url": "https://agentsforhire.ai/blog/revenue-operations-engineer-salary-in-2026-why-rev-ops-costs-100-k-150-k",
+      "detail": "Mid-career band, plus a company-size premium: 100,000 median OTE under 50 employees against 162,000 at 1,000+."
+    },
+    {
+      "id": "s-bloom",
+      "label": "Bloomberry — 1,000 GTM Engineering job postings analysed",
+      "asOf": "2026-01-25",
+      "url": "https://bloomberry.com/blog/i-analyzed-1000-gtm-engineering-jobs-here-is-what-i-learned/",
+      "detail": "Published 2025-10-03, updated 2026-01-25. Median from posting text; top named comp Vercel 252,000, OpenAI 250,000. SQL and Python each in 38% of postings."
+    },
+    {
+      "id": "s-gtme",
+      "label": "GTME Pulse — job-market analysis and Levels.fyi comparison",
+      "asOf": "2026-03",
+      "url": "https://gtmepulse.com/insights/job-market-2026/",
+      "detail": "Rome Thorndike, March 2026. Quoted as the page reads: postings grew 205% year over year from 2024 to 2025, and more than 3,000 GTM Engineer roles were open across major job boards as of March 2026. Re-checked against the live page on 14 September 2026."
+    },
+    {
+      "id": "s-km",
+      "label": "Kaleigh Moore — AEO Job Openings in 2026",
+      "asOf": "2026-07-06",
+      "url": "https://www.kaleighmoore.com/blog/2026/7/6/ai-search-jobs",
+      "detail": "50+ named companies tracked with a dedicated AEO or AI-search role, with one manager-level posted band from Experian."
+    },
+    {
+      "id": "s-sloane",
+      "label": "Sloane Staffing — AEO/GEO Hiring in 2026",
+      "asOf": "2026-08-11",
+      "url": "https://www.sloane-staffing.com/insights/aeo-geo-hiring-2026/",
+      "detail": "Recruiter bands at specialist and senior-enterprise level, and the Conductor survey of 250+ CMOs it cites."
+    },
+    {
+      "id": "s-sfh",
+      "label": "SearchForHire — 328,650 marketing job postings analysed",
+      "asOf": "2026-07-15",
+      "url": "https://www.searchforhire.com/blog/the-future-of-search-5-experts-and-328650-job-postings-on-what-happens-next/",
+      "detail": "328,650 marketing postings of 632,840 collected July 2025 to June 2026. Largest and most methodologically transparent study in this set."
+    },
+    {
+      "id": "s-crmt",
+      "label": "CRM Today — RevOps hiring write-up",
+      "asOf": "2026",
+      "url": "https://crmtoday.news/industry/revops-fastest-growing-role",
+      "detail": "Trade publisher, Marcus Veld, 27 June 2026. Its 127% year-over-year claim is cited here only as the claim that was withdrawn: it attributes the figure to a LinkedIn workforce report with no link and no methodology, and that dataset could not be reached."
+    },
+    {
+      "id": "s-jpikr",
+      "label": "JobsPikr — Data Engineer Demand Report 2026",
+      "asOf": "2026",
+      "url": "https://www.jobspikr.com/blog/global-data-engineer-demand-2026/",
+      "detail": "Growth figure covers data engineering as a whole, not the growth specialisation, so it is marked as a proxy."
+    },
+    {
+      "id": "s-alm",
+      "label": "ALM Corp, citing a Semrush analysis of 3,900 SEO job listings",
+      "asOf": "2026",
+      "url": "https://almcorp.com/blog/seo-job-market-2026/",
+      "detail": "Read from public third-party coverage of Semrush’s published analysis, not pulled from the Semrush API."
+    },
+    {
+      "id": "s-peng",
+      "label": "The Pragmatic Engineer — What is Growth Engineering?",
+      "asOf": "2025-03-20",
+      "url": "https://newsletter.pragmaticengineer.com/p/what-is-growth-engineering",
+      "detail": "Named primary interview. A fully-loaded growth team costs about 1,000,000 a year and needs 5,000,000+ ARR to justify."
+    },
+    {
+      "id": "s-gtm8020",
+      "label": "GTM 8020 — 28 RevOps statistics",
+      "asOf": "2026",
+      "url": "https://www.gtm8020.com/blog/revops-statistics-revenue-operations-trends",
+      "detail": "Projection that 75% of high-growth B2B organisations would have a dedicated RevOps function by end of 2025."
+    },
+    {
+      "id": "s-kalungi",
+      "label": "Kalungi — AI’s impact on marketing careers",
+      "asOf": "2026",
+      "url": "https://www.kalungi.com/blog/ais-seismic-impact-on-marketing-careers",
+      "detail": "Marketing-manager postings up 14% year over year while total marketing postings sit 27% below pre-pandemic levels."
+    }
+  ]
+}
+</script>
+
+<div class="viz" id="viz">
+  <canvas id="bg" aria-hidden="true"></canvas>
+
+  <div class="shell">
+    <header>
+      <div class="kick">
+        <span class="eyebrow" id="eyebrow"></span>
+        <span class="badge" id="sample-badge" hidden>Sample data</span>
+        <span class="badge" id="conf-badge" hidden></span>
+        <span class="badge" id="caution-badge" hidden></span>
+      </div>
+      <h1 id="title"></h1>
+      <p class="deck" id="deck"></p>
+      <p class="poster-q" id="poster-q"></p>
+    </header>
+
+    <!-- The question is the control. -->
+    <section class="ask" aria-labelledby="ask-h">
+      <h2 class="sr" id="ask-h">Change the comparison</h2>
+      <p class="ask-line" id="ask-line">
+        <span id="ask-a"></span>
+        <select class="tok" id="sel-vertical" aria-label="Industry vertical"></select>
+        <span id="ask-b"></span>
+        <span class="nb"><select class="tok" id="sel-intent" aria-label="The question being asked"></select><span id="ask-c"></span></span>
+      </p>
+      <p class="ask-hint">Change the title and every number re-animates. Change the question and the numbers change with it — posting counts, or every published pay figure — along with the evidence lane below. The dated signals sit under both. <span id="conf-note"></span></p>
+      <div class="prompts" id="prompts" role="group" aria-label="Question prompts"></div>
+      <div class="rail" aria-hidden="true"><i id="rail-fill"></i></div>
+    </section>
+
+    <!-- Selector-driven side-by-side comparison. -->
+    <section class="stage" aria-labelledby="stage-h">
+      <h2 class="sr" id="stage-h">Side-by-side comparison</h2>
+      <article class="col" data-side="cited">
+        <div class="col-head"><span class="col-name" id="cited-name"></span><span class="col-sub" id="cited-sub"></span></div>
+        <p class="hero"><span id="hero-cited">0</span><span class="u" id="hero-cited-u"></span></p>
+        <p class="hero-label" id="hero-label-cited"></p>
+        <div class="gauge" id="gauge-cited"></div>
+      </article>
+      <div class="delta">
+        <span class="delta-arrow" aria-hidden="true">→</span>
+        <span class="delta-x" id="delta-x">—</span>
+        <span class="delta-l" id="delta-l">difference</span>
+      </div>
+      <article class="col" data-side="absent">
+        <div class="col-head"><span class="col-name" id="absent-name"></span><span class="col-sub" id="absent-sub"></span></div>
+        <p class="hero"><span id="hero-absent">0</span><span class="u" id="hero-absent-u"></span></p>
+        <p class="hero-label" id="hero-label-absent"></p>
+        <div class="gauge" id="gauge-absent"></div>
+      </article>
+    </section>
+
+    <section class="ledger" id="ledger" aria-labelledby="ledger-h">
+      <h2 class="sr" id="ledger-h">The rest of the measurements</h2>
+    </section>
+
+    <!-- Comparison lane: every title ranked by a metric the reader picks. -->
+    <section class="rank" id="rank" aria-labelledby="rank-h">
+      <div class="rank-head">
+        <h2 class="rank-title" id="rank-h">Rank all ten titles by</h2>
+        <div class="rank-tabs" id="rank-tabs" role="group" aria-label="Choose the ranking metric"></div>
+      </div>
+      <div class="rank-rows" id="rank-rows"></div>
+      <p class="rank-note" id="rank-note"></p>
+    </section>
+
+    <section class="serp" id="serp" aria-labelledby="serp-h">
+      <div class="serp-head">
+        <h2 class="serp-title" id="serp-h">What the result surface looks like at this intent</h2>
+        <code class="serp-q" id="serp-q"></code>
+      </div>
+      <div class="serp-body">
+        <div class="serp-rows" id="serp-rows"></div>
+        <p class="serp-note" id="serp-note"></p>
+      </div>
+    </section>
+
+    <div class="foot">
+      <details class="sources" id="sources">
+        <summary>Sources &amp; dates for every number on this artifact</summary>
+        <div class="sources-body" id="sources-body"></div>
+      </details>
+      <p class="src-line" id="src-line"></p>
+      <p class="honesty" id="honesty"></p>
+      <p class="by"><span id="by-left"></span><span id="by-right"></span></p>
+      <div class="strip" id="strip"></div>
+    </div>
+  </div>
+
+  <div id="pop" hidden role="tooltip"></div>
+  <p class="sr" id="live" role="status" aria-live="polite" aria-atomic="true"></p>
+</div>
+
+<script>
+'use strict';
+(function () {
+/* ============================================================== plumbing */
+const $ = id => document.getElementById(id);
+const q = new URLSearchParams(location.search);
+const DATA = JSON.parse($('viz-data').textContent);
+const PALETTES = JSON.parse($('viz-palettes').textContent);
+const root = document.documentElement;
+
+const MODE = {
+  poster: q.get('poster') === '1',
+  gif: q.get('gif') === '1',
+  static: q.get('static') === '1' || q.get('poster') === '1' || q.has('frame') || q.has('t'),
+};
+root.dataset.mode = [MODE.poster && 'poster', MODE.gif && 'gif', MODE.static && 'static'].filter(Boolean).join(' ');
+
+const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+let reduced = q.get('motion') === 'reduce' || mq.matches;
+const setMotionFlag = () => { root.dataset.motion = reduced ? 'reduced' : 'full'; };
+setMotionFlag();
+
+/* Deterministic PRNG — the same seed always yields the same mandala. */
+const mulberry32 = a => () => { a |= 0; a = a + 0x6D2B79F5 | 0;
+  let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+  return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+const easeOutExpo = t => (t >= 1 ? 1 : 1 - Math.pow(2, -10 * t));
+const easeOutBack = t => { const c = 1.70158, s = c + 1; return 1 + s * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); };
+const easeInOut = t => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+
+/* ============================================================ the clock
+   One master clock drives every moving thing, so `seek(t)` is reproducible.
+   Timeline (seconds):
+     0.00–0.34  anticipation  — labels settle, columns compress slightly
+     0.34–2.15  counters roll — staggered, easeOutExpo
+     2.15–2.60  payoff        — delta badge overshoots in
+     2.60–4.60  hold / drift  — backdrop only
+*/
+const T = { anticipate: 0.34, rollStart: 0.34, rollEnd: 2.15, payoff: 2.15, payoffEnd: 2.60, total: 4.60 };
+const clock = { t: 0, playing: false, raf: 0, origin: 0 };
+// Length of one seamless backdrop revolution in GIF mode. The exporter passes
+// ?loop=<clip seconds> so the mandala turns exactly 1/K of a revolution.
+const LOOP = Number(q.get('loop')) > 0 ? Number(q.get('loop')) : T.total;
+
+/* ============================================================== state */
+const firstOf = d => DATA.dimensions[d].options[0].id;
+const state = {
+  vertical: q.get('vertical') || firstOf('vertical'),
+  intent: q.get('intent') || firstOf('intent'),
+  palette: q.get('palette') || DATA.meta.palette || PALETTES[0].id,
+  seed: Number(q.get('seed') || DATA.meta.seed || 1),
+};
+if (!DATA.values[state.vertical]) state.vertical = firstOf('vertical');
+if (!DATA.values[state.vertical][state.intent]) state.intent = firstOf('intent');
+
+/* The question is a measurement, not a filter. A posting count and a salary
+   band are different numbers, not one number seen from two angles, so each
+   question carries its own hero metric and its own ledger rows. */
+const metricsFor = lens => (Array.isArray(DATA.metrics) ? DATA.metrics : (DATA.metrics[lens] || []));
+const ALL_METRICS = Array.isArray(DATA.metrics) ? DATA.metrics : Object.values(DATA.metrics).flat();
+const metricById = Object.fromEntries(ALL_METRICS.map(m => [m.id, m]));
+const sourceById = Object.fromEntries(DATA.sources.map(s => [s.id, s]));
+const heroIdFor = lens => ((DATA.meta.hero && typeof DATA.meta.hero === 'object')
+  ? DATA.meta.hero[lens] : DATA.meta.hero) || (metricsFor(lens)[0] || {}).id;
+const heroId = () => heroIdFor(state.intent);
+const othersFor = lens => metricsFor(lens).filter(m => m.id !== heroIdFor(lens));
+const pair = id => DATA.values[state.vertical][state.intent][id] || [0, 0];   // [cited, absent]
+const labelOf = (dim, id) => { const o = DATA.dimensions[dim].options.find(x => x.id === id) || {}; return o.plain || o.label || id; };
+
+const fmt = (m, v) => {
+  const n = Number(v).toFixed(m.decimals);
+  const withCommas = m.decimals === 0 ? Number(n).toLocaleString('en-US') : n;
+  return m.prefix ? `${m.unit}${withCommas}` : withCommas;
+};
+const unitSuffix = m => (m.prefix ? '' : m.unit);
+/* The ceiling column can need its own suffix: LinkedIn publishes "11,000+",
+   a rounded placeholder, and printing it as 11,000 would overstate precision. */
+const unitSuffixB = m => (m.unitB != null ? m.unitB : unitSuffix(m));
+
+/* Which sources back this metric for the title on screen. Pay sources differ by
+   title — the lowest and highest published figure rarely come from one place. */
+const cellSrc = id => {
+  const per = (DATA.cellSources || {})[state.vertical] || {};
+  const ids = per[id];
+  return (Array.isArray(ids) && ids.length) ? ids : [metricById[id].source];
+};
+
+/* A foreign or stale dimension id — an old deep link, or a generic probe from
+   the kit's verifier — advances to the next option instead of doing nothing.
+   A control that silently ignores an instruction reads as broken. */
+const resolveDim = (dim, id) => {
+  const opts = DATA.dimensions[dim].options.map(o => o.id);
+  if (opts.includes(id)) return id;
+  const i = opts.indexOf(state[dim]);
+  return opts[(i + 1) % opts.length];
+};
+
+/* ============================================================ palette */
+function applyPalette(id) {
+  const p = PALETTES.find(x => x.id === id) || PALETTES[0];
+  state.palette = p.id;
+  const s = root.style;
+  s.setProperty('--ground', p.ground); s.setProperty('--panel', p.panel);
+  s.setProperty('--panel-2', p.panel2); s.setProperty('--line', p.line);
+  s.setProperty('--text', p.text); s.setProperty('--muted', p.muted);
+  p.accents.forEach((a, i) => s.setProperty(`--a${i + 1}`, a));
+  return p;
+}
+let PAL = applyPalette(state.palette);
+
+/* ==================================================== generative backdrop
+   Deterministic mandala: k-fold radial symmetry, recursively spawned petals
+   (the fractal part), a golden-angle dot lattice, and concentric tick rings.
+   Everything is a pure function of (seed, t) — no randomness at draw time.
+*/
+const K = 12;                       // fold symmetry; also the GIF loop divisor
+const cv = $('bg'), cx = cv.getContext('2d', { alpha: false });
+let specCache = null, specSeed = null, viewW = 0, viewH = 0, dpr = 1;
+
+function buildSpec(seed) {
+  const r = mulberry32(seed >>> 0);
+  const rings = [];
+  const n = 6 + Math.floor(r() * 2);                       // 6–7 concentric petal rings
+  for (let i = 0; i < n; i++) {
+    rings.push({
+      radius: 0.11 + i * (0.098 + r() * 0.028),
+      petals: i < 2 ? K : K * 2,                           // denser outer rings, always K-fold
+      len: 0.052 + r() * 0.072,
+      wide: 0.28 + r() * 0.46,
+      depth: i < 3 ? 3 : 2,                                // recursion: the fractal part
+      accent: Math.floor(r() * 5),
+      dir: i % 2 ? 1 : -1,
+      speed: 0.09 + r() * 0.15,
+      phase: r() * Math.PI * 2,
+      alpha: 0.26 + r() * 0.22,
+      fill: 0.035 + r() * 0.045,
+      width: 0.9 + r() * 1.4,
+    });
+  }
+  const dots = [];
+  const GA = Math.PI * (3 - Math.sqrt(5));
+  const count = 460;
+  for (let i = 0; i < count; i++) {
+    dots.push({ a: i * GA, r: Math.sqrt(i / count), s: 0.6 + r() * 1.9, accent: Math.floor(r() * 5), al: 0.18 + r() * 0.34 });
+  }
+  const spokes = { count: K * 2, accent: Math.floor(r() * 5), alpha: 0.11 + r() * 0.07 };
+  const core = { accent: Math.floor(r() * 5), petals: K, len: 0.085 + r() * 0.03, alpha: 0.42 + r() * 0.2 };
+  return { rings, dots, spokes, core, tick: 0.30 + r() * 0.3 };
+}
+const spec = seed => {
+  if (specSeed !== seed) { specCache = buildSpec(seed); specSeed = seed; }
+  return specCache;
+};
+
+function petal(g, len, wide, depth, w, fillAlpha) {
+  g.beginPath();
+  g.moveTo(0, 0);
+  g.bezierCurveTo(wide * len, -len * 0.42, wide * len, -len * 0.82, 0, -len);
+  g.bezierCurveTo(-wide * len, -len * 0.82, -wide * len, -len * 0.42, 0, 0);
+  if (fillAlpha) {
+    const a = g.globalAlpha;
+    g.globalAlpha = fillAlpha;
+    g.fillStyle = g.strokeStyle;
+    g.fill();
+    g.globalAlpha = a;
+  }
+  g.lineWidth = w;
+  g.stroke();
+  if (depth > 0) {
+    const child = len * 0.47;
+    for (const sign of [-1, 1]) {
+      g.save();
+      g.translate(0, -len * 0.92);
+      g.rotate(sign * 0.62);
+      petal(g, child, wide * 0.92, depth - 1, Math.max(0.4, w * 0.72), fillAlpha && fillAlpha * 0.7);
+      g.restore();
+    }
+  }
+}
+
+function drawBackdrop(t) {
+  const w = cv.width, h = cv.height;
+  if (!w || !h) return;
+  const g = cx;
+  g.setTransform(1, 0, 0, 1, 0, 0);
+  g.fillStyle = PAL.ground;
+  g.fillRect(0, 0, w, h);
+
+  // The mandala is a disc, not a wash: its radius follows the short side so it
+  // stays a coherent object on a tall blog page and on a square poster alike.
+  const fixedAspect = MODE.gif || MODE.poster;
+  const cxx = w * 0.5;
+  const cyy = fixedAspect ? h * 0.46 : Math.min(h * 0.30, w * 0.42);
+  const R = fixedAspect ? Math.min(w, h * 0.92) * 0.82 : w * 0.62;
+
+  // soft ground bloom
+  const grd = g.createRadialGradient(cxx, cyy, 0, cxx, cyy, R * 1.25);
+  grd.addColorStop(0, PAL.panel);
+  grd.addColorStop(0.62, PAL.ground);
+  grd.addColorStop(1, PAL.ground);
+  g.globalAlpha = 0.95; g.fillStyle = grd; g.fillRect(0, 0, w, h); g.globalAlpha = 1;
+
+  const S = spec(state.seed);
+  // Posters and GIFs are mostly opaque panel, so the field is pushed harder there.
+  const FIELD = (MODE.poster || MODE.gif) ? 1.3 : 1;
+  // In GIF mode the mandala turns exactly one K-th of a revolution over the
+  // clip length, so the loop is seamless against the K-fold symmetry.
+  const turn = MODE.gif ? (t / LOOP) * (Math.PI * 2 / K) : t;
+  const breathe = 1 + Math.sin(t * 0.55 + 0.6) * 0.012;
+
+  g.globalCompositeOperation = 'lighter';
+  g.translate(cxx, cyy);
+
+  // radial spokes — the mandala's skeleton
+  g.globalAlpha = Math.min(0.5, S.spokes.alpha * FIELD); g.strokeStyle = PAL.accents[S.spokes.accent]; g.lineWidth = 1 * dpr;
+  for (let i = 0; i < S.spokes.count; i++) {
+    const a = turn * 0.08 + (i / S.spokes.count) * Math.PI * 2;
+    g.beginPath();
+    g.moveTo(Math.cos(a) * R * 0.10, Math.sin(a) * R * 0.10);
+    g.lineTo(Math.cos(a) * R * 0.98 * breathe, Math.sin(a) * R * 0.98 * breathe);
+    g.stroke();
+  }
+
+  // phyllotaxis dot lattice
+  for (const d of S.dots) {
+    const rr = d.r * R * 0.96 * breathe;
+    const a = d.a + turn * 0.35;
+    g.globalAlpha = Math.min(0.95, d.al * 0.7 * FIELD);
+    g.fillStyle = PAL.accents[d.accent];
+    g.beginPath();
+    g.arc(Math.cos(a) * rr, Math.sin(a) * rr, d.s * dpr, 0, Math.PI * 2);
+    g.fill();
+  }
+
+  // recursive petal rings, K-fold symmetric
+  for (const ring of S.rings) {
+    const rr = ring.radius * R * breathe;
+    const rot = ring.phase + turn * ring.speed * ring.dir * (MODE.gif ? K : 1);
+    g.strokeStyle = PAL.accents[ring.accent];
+    g.globalAlpha = Math.min(0.9, ring.alpha * FIELD);
+    for (let i = 0; i < ring.petals; i++) {
+      const a = rot + (i / ring.petals) * Math.PI * 2;
+      g.save();
+      g.rotate(a);
+      g.translate(0, -rr);
+      petal(g, ring.len * R * breathe, ring.wide, ring.depth, ring.width * dpr, ring.fill);
+      g.restore();
+    }
+  }
+
+  // centre rosette — the anchor the eye lands on
+  g.strokeStyle = PAL.accents[S.core.accent]; g.globalAlpha = Math.min(0.9, S.core.alpha * FIELD);
+  for (let i = 0; i < S.core.petals; i++) {
+    const a = -turn * 0.45 + (i / S.core.petals) * Math.PI * 2;
+    g.save(); g.rotate(a); g.translate(0, -R * 0.055);
+    petal(g, S.core.len * R * breathe, 0.5, 1, 1.4 * dpr, 0.07);
+    g.restore();
+  }
+
+  // concentric tick rings
+  g.globalAlpha = Math.min(0.5, 0.28 * FIELD); g.strokeStyle = PAL.accents[0]; g.lineWidth = 1.2 * dpr;
+  for (let ri = 1; ri <= 3; ri++) {
+    const rr = R * (0.24 + ri * 0.21) * breathe;
+    const ticks = K * (ri + 2);
+    for (let i = 0; i < ticks; i++) {
+      const a = turn * 0.2 * (ri % 2 ? 1 : -1) + (i / ticks) * Math.PI * 2;
+      const len = S.tick * 16 * dpr;
+      g.beginPath();
+      g.moveTo(Math.cos(a) * rr, Math.sin(a) * rr);
+      g.lineTo(Math.cos(a) * (rr + len), Math.sin(a) * (rr + len));
+      g.stroke();
+    }
+  }
+
+  g.setTransform(1, 0, 0, 1, 0, 0);
+  g.globalCompositeOperation = 'source-over';
+  g.globalAlpha = 1;
+}
+
+/* Shrink a still until it fits its frame exactly — no clipped rows, whatever
+   the author's data length. Pure layout, runs once per render, no animation. */
+function fitStill() {
+  if (!MODE.poster && !MODE.gif) return;
+  const shell = document.querySelector('.shell');
+  let k = 1;
+  root.style.setProperty('--fit', '1');
+  for (let i = 0; i < 26 && shell.scrollHeight > shell.clientHeight + 2; i++) {
+    k = Math.max(0.6, k - 0.025);
+    root.style.setProperty('--fit', k.toFixed(3));
+  }
+  return k;
+}
+
+function sizeCanvas() {
+  const rect = document.getElementById('viz').getBoundingClientRect();
+  viewW = Math.max(1, Math.round(rect.width));
+  viewH = Math.max(1, Math.round(rect.height));
+  // Cap the backdrop's pixel budget: it is a soft glow, so upscaling is free.
+  const longest = Math.max(viewW, viewH);
+  dpr = clamp(Math.min(window.devicePixelRatio || 1, 2) * Math.min(1, 1600 / longest), 0.5, 2);
+  cv.width = Math.round(viewW * dpr);
+  cv.height = Math.round(viewH * dpr);
+}
+
+/* ==================================================== static UI wiring */
+function text(id, v) { const el = $(id); if (el) el.textContent = v; }
+
+function buildChrome() {
+  const m = DATA.meta;
+  text('eyebrow', m.eyebrow || '');
+  $('sample-badge').hidden = !m.sample;
+  const t = String(m.title || '');
+  $('title').innerHTML = t.replace(/\{lit\}([\s\S]*?)\{\/lit\}/g, (_, s) => `<span class="lit">${esc(s)}</span>`).replace(/\{lit\}|\{\/lit\}/g, '');
+  text('deck', m.deck || '');
+  text('ask-a', m.askPrefix || 'What happens in'); text('ask-b', m.askMiddle || 'when'); text('ask-c', m.askSuffix || '?');
+  text('cited-name', m.columns.cited.name); text('cited-sub', m.columns.cited.sub);
+  text('absent-name', m.columns.absent.name); text('absent-sub', m.columns.absent.sub);
+  // Hero labels and units belong to the question, so renderStatic() sets them.
+  text('by-left', m.byline || ''); text('by-right', m.liveUrl || '');
+  $('honesty').innerHTML = m.sample
+    ? '<b>Honesty note.</b> Every figure on this artifact is <b>SAMPLE</b> data shipped with the template to demonstrate the mechanics. Nothing here is a measurement. Replace the <code>#viz-data</code> block with your own numbers and sources before publishing.'
+    : (m.method || '<b>Honesty note.</b> Every figure carries a source and a date. Hover or tap the marker beside a number, or open the sources drawer above.');
+  const asOf = DATA.sources.map(x => x.asOf).sort().slice(-1)[0] || '';
+  $('src-line').textContent = `Sources: ${DATA.sources.map(x => x.id.replace(/^s-/, '').toUpperCase()).join(' · ')}`
+    + (asOf ? ` · as of ${asOf}` : '') + (m.sample ? ' · SAMPLE data' : '');
+  $('strip').innerHTML = `<b>${esc(m.gifNote || 'Rudimentary GIF of a living artifact.')}</b><span>${esc(m.gifNoteSub || '')}</span>`;
+
+  for (const [dim, sel] of [['vertical', $('sel-vertical')], ['intent', $('sel-intent')]]) {
+    sel.innerHTML = DATA.dimensions[dim].options.map(o => `<option value="${esc(o.id)}">${esc(o.label)}</option>`).join('');
+    sel.value = state[dim];
+    sel.addEventListener('change', () => { state[dim] = sel.value; onStateChange(); });
+  }
+
+  $('prompts').innerHTML = DATA.prompts
+    .map((p, i) => `<button class="prompt" type="button" data-i="${i}" aria-pressed="false">${esc(p.label)} <span class="go" aria-hidden="true">→</span></button>`)
+    .join('') + '<button class="replay" type="button" id="replay">Replay ↻</button>';
+  $('prompts').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    if (b.id === 'replay') { play(); return; }
+    const p = DATA.prompts[Number(b.dataset.i)];
+    Object.assign(state, p.set);
+    $('sel-vertical').value = state.vertical; $('sel-intent').value = state.intent;
+    onStateChange();
+  });
+
+  buildLedger();
+
+  $('sources-body').innerHTML = DATA.sources.map(s => `
+    <div class="s-item" id="src-${esc(s.id)}">
+      <span class="s-id">${esc(s.id.replace(/^s-/, '').toUpperCase())}</span>
+      <span>${esc(s.label)}${s.url ? ` — <a href="${esc(s.url)}" rel="nofollow noreferrer">source</a>` : ''}
+        <span class="s-when">as of ${esc(s.asOf)}</span>
+        <span class="s-meta">${esc(s.detail || '')}</span></span>
+    </div>`).join('');
+
+  buildRank();
+}
+
+/* The ledger is rebuilt when the question changes. A question with nothing
+   below its hero hides the panel rather than drawing an empty box. */
+let ledgerLens = null;
+function buildLedger() {
+  if (ledgerLens === state.intent) return;
+  ledgerLens = state.intent;
+  const led = $('ledger');
+  led.querySelectorAll('.row').forEach(n => n.remove());
+  const rows = othersFor(state.intent);
+  led.hidden = rows.length === 0;
+  led.insertAdjacentHTML('beforeend', rows.map(m2 => `
+    <div class="row" data-metric="${esc(m2.id)}">
+      <div class="row-label">${esc(m2.label)}<span class="row-note">${esc(m2.note || '')}</span></div>
+      <div class="val cited" data-v="cited">—</div>
+      <div class="bars">
+        <div class="bar cited"><i data-bar="cited"></i></div>
+        <div class="bar absent"><i data-bar="absent"></i></div>
+      </div>
+      <div class="val absent" data-v="absent">—</div>
+      <div class="row-delta" data-delta>—</div>
+    </div>`).join(''));
+}
+
+/* ------------------------------------------------------- the rank lane */
+let rankMetric = ((DATA.rank || {}).metrics || [{}])[0].id;
+
+function buildRank() {
+  const R = DATA.rank;
+  if (!R) { $('rank').hidden = true; return; }
+  text('rank-h', R.title || 'Rank all ten titles by');
+  $('rank-tabs').innerHTML = R.metrics
+    .map(m => `<button class="rk-tab" type="button" data-rm="${esc(m.id)}" aria-pressed="false">${esc(m.label)}</button>`)
+    .join('');
+  $('rank-tabs').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    rankMetric = b.dataset.rm; renderRank();
+  });
+  $('rank-rows').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b || !b.dataset.t) return;
+    state.vertical = b.dataset.t;
+    $('sel-vertical').value = state.vertical;
+    onStateChange();
+  });
+}
+
+const rankFmt = (m, v) => {
+  if (v == null) return '—';
+  const n = (m.decimals === 0 || Math.abs(v) >= 100)
+    ? Math.round(v).toLocaleString('en-US')
+    : Number(v).toFixed(m.decimals == null ? 1 : m.decimals);
+  return m.prefix ? `${m.unit}${n}` : `${n}${m.unit}`;
+};
+
+function renderRank() {
+  const R = DATA.rank; if (!R) return;
+  const m = R.metrics.find(x => x.id === rankMetric) || R.metrics[0];
+  rankMetric = m.id;
+  document.querySelectorAll('.rk-tab').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.rm === m.id)));
+
+  const rows = DATA.dimensions.vertical.options.map(o => {
+    const raw = (R.values[o.id] || {})[m.id];
+    const lo = Array.isArray(raw) ? raw[0] : 0;
+    let hi = Array.isArray(raw) ? raw[1] : raw;
+    // A figure that is not the same kind of measurement cannot hold a rank
+    // position against ones that are. It is shown out of the order, not deleted.
+    const out = !!((R.exclude || {})[o.id] || {})[m.id];
+    if (out) hi = null;
+    return { o, lo, hi: hi == null ? null : hi, out, flag: ((R.flags[o.id] || {})[m.id] || '') };
+  }).sort((a, b) => (b.hi == null ? -Infinity : b.hi) - (a.hi == null ? -Infinity : a.hi));
+
+  const max = Math.max(...rows.map(r => r.hi || 0), 1);
+  $('rank-rows').innerHTML = rows.map(r => {
+    const left = m.range ? (r.lo / max) * 100 : 0;
+    const width = (r.hi == null || r.hi === 0) ? 0 : Math.max(((r.hi - (m.range ? r.lo : 0)) / max) * 100, 1.1);
+    const flagTxt = r.flag ? ((R.flagText || {})[r.flag] || r.flag) : '';
+    const val = r.hi == null ? '—' : (m.range ? `${rankFmt(m, r.lo)}–${rankFmt(m, r.hi)}` : rankFmt(m, r.hi));
+    return `<button class="rk" type="button" data-t="${esc(r.o.id)}" aria-pressed="${r.o.id === state.vertical}"
+        data-thin="${r.o.confidence === 'low'}" data-flagged="${!!r.flag}">
+      <span class="rk-name">${esc(r.o.plain || r.o.label)}`
+      + (r.o.confidence === 'low' ? '<span class="rk-flag">thin data</span>' : '')
+      + (flagTxt ? `<span class="rk-flag">${esc(flagTxt)}</span>` : '')
+      + `</span>
+      <span class="rk-track" aria-hidden="true"><i style="left:${left.toFixed(2)}%;width:${width.toFixed(2)}%"></i></span>
+      <span class="rk-val${r.hi == null ? ' none' : ''}">${esc(val)}</span>
+    </button>`;
+  }).join('');
+  $('rank-note').innerHTML = esc(m.note || '') + (m.source ? marker(m.source) : '');
+}
+
+/* --------------------------------------------- evidence quality, stated */
+function renderConfidence() {
+  const opt = DATA.dimensions.vertical.options.find(o => o.id === state.vertical) || {};
+  const lvl = opt.confidence || 'medium';
+  const c = (DATA.confidence || {})[lvl] || {};
+  const b = $('conf-badge');
+  b.hidden = false;
+  b.dataset.level = lvl;
+  b.textContent = c.label || lvl;
+  b.setAttribute('aria-label', `Evidence for this title: ${c.label || lvl}. ${c.note || ''}`);
+  // A per-title caveat that changes how its headline number should be read gets
+  // its own badge, next to the number, not a footnote at the bottom.
+  const cb = $('caution-badge');
+  cb.hidden = !opt.caution;
+  cb.textContent = opt.caution ? 'Read this floor with care' : '';
+  if (opt.caution) cb.setAttribute('aria-label', opt.caution);
+  $('conf-note').innerHTML = `<b>${esc(c.label || lvl)}:</b> ${esc(c.note || '')}`
+    + (opt.caution ? ` <b>Caution:</b> ${esc(opt.caution)}` : '');
+}
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+
+/* ----------------------------------------------- source markers + popover */
+function marker(sourceId) {
+  const s = sourceById[sourceId];
+  if (!s) return '';
+  const short = sourceId.replace(/^s-/, '').toUpperCase();
+  return `<button class="src" type="button" data-src="${esc(sourceId)}" aria-label="Source for this number: ${esc(s.label)}, as of ${esc(s.asOf)}">${esc(short)}</button>`;
+}
+const pop = $('pop');
+function showPop(btn) {
+  const s = sourceById[btn.dataset.src]; if (!s) return;
+  pop.innerHTML = `<b>Source · as of ${esc(s.asOf)}</b>${esc(s.label)}<span class="as">${esc(s.detail || '')}</span>`;
+  pop.hidden = false;
+  const r = btn.getBoundingClientRect(), host = $('viz').getBoundingClientRect();
+  const w = pop.offsetWidth;
+  pop.style.left = `${clamp(r.left - host.left + r.width / 2 - w / 2, 8, host.width - w - 8)}px`;
+  pop.style.top = `${r.bottom - host.top + 8}px`;
+}
+const hidePop = () => { pop.hidden = true; };
+document.addEventListener('pointerover', e => { const b = e.target.closest?.('.src'); if (b) showPop(b); else if (!e.target.closest?.('#pop')) hidePop(); });
+document.addEventListener('focusin', e => { const b = e.target.closest?.('.src'); if (b) showPop(b); else hidePop(); });
+document.addEventListener('click', e => {
+  const b = e.target.closest?.('.src'); if (!b) return;
+  const d = $('sources'); d.open = true;
+  document.querySelectorAll('.s-item.hl').forEach(n => n.classList.remove('hl'));
+  const row = $(`src-${b.dataset.src}`); if (row) { row.classList.add('hl'); row.scrollIntoView({ block: 'nearest' }); }
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') hidePop(); });
+
+/* ------------------------------------------------------------- gauges */
+function gauge(el, frac, color) {
+  const w = 240, h = 74, pad = 6, r = 60;
+  const a0 = Math.PI, a1 = Math.PI * 2;
+  const a = a0 + (a1 - a0) * clamp(frac, 0, 1);
+  const cxp = w / 2, cyp = h - pad;
+  const pt = ang => `${(cxp + Math.cos(ang) * r).toFixed(2)},${(cyp + Math.sin(ang) * r).toFixed(2)}`;
+  el.innerHTML = `<svg viewBox="0 0 ${w} ${h}" role="img" aria-hidden="true" focusable="false">
+    <path d="M ${pt(a0)} A ${r} ${r} 0 0 1 ${pt(a1)}" fill="none" stroke="${PAL.line}" stroke-width="9" stroke-linecap="round"/>
+    <path d="M ${pt(a0)} A ${r} ${r} 0 ${frac > 0.5 ? 1 : 0} 1 ${pt(a)}" fill="none" stroke="${color}" stroke-width="9" stroke-linecap="round" opacity="${frac <= 0.001 ? 0 : 1}"/>
+  </svg>`;
+}
+
+/* ------------------------------------------------------------ rendering */
+let settled = null;
+
+function renderStatic() {
+  // Everything that does not animate: labels, SERP strip, source markers.
+  buildLedger();
+  // A title whose floor is a different kind of measurement relabels the column
+  // it sits in, so the correction is on the number rather than beside it.
+  const vOpt = DATA.dimensions.vertical.options.find(o => o.id === state.vertical) || {};
+  text('cited-sub', vOpt.floorSub || DATA.meta.columns.cited.sub);
+  const hero = metricById[heroId()];
+  text('hero-label-cited', hero.label); text('hero-label-absent', hero.label);
+  text('hero-cited-u', unitSuffix(hero)); text('hero-absent-u', unitSuffixB(hero));
+  $('poster-q').textContent = (DATA.meta.askPrefix || '') + ' ' + labelOf('vertical', state.vertical)
+    + ' ' + (DATA.meta.askMiddle || '') + ' ' + labelOf('intent', state.intent) + (DATA.meta.askSuffix || '?');
+
+  const heroMarks = cellSrc(heroId()).map(marker).join('');
+  $('hero-label-cited').innerHTML = esc(hero.label) + heroMarks;
+  $('hero-label-absent').innerHTML = esc(hero.label) + heroMarks;
+
+  for (const row of $('ledger').querySelectorAll('.row')) {
+    const m = metricById[row.dataset.metric];
+    row.querySelector('.row-label').innerHTML =
+      `${esc(m.label)}${cellSrc(m.id).map(marker).join('')}<span class="row-note">${esc(m.note || '')}</span>`;
+  }
+
+  renderConfidence();
+  renderRank();
+
+  const s = (DATA.serp[state.vertical] || {})[state.intent];
+  if (s) {
+    if (s.head) text('serp-h', s.head);
+    $('serp-q').textContent = s.query;
+    $('serp-note').textContent = s.note || '';
+    $('serp-rows').innerHTML = s.rows.map(r => `
+      <div class="sr-row" data-kind="${esc(r.kind)}">
+        <span class="sr-kind">${esc(r.kind)}</span>
+        <span class="sr-text">${r.text}</span>
+      </div>`).join('');
+  }
+
+  const dims = `${labelOf('vertical', state.vertical)} · ${labelOf('intent', state.intent)}`;
+  $('delta-l').textContent = DATA.meta.deltaLabel || 'difference';
+  document.title = `${String(DATA.meta.title || '').replace(/\{\/?lit\}/g, '')} — ${dims}`;
+}
+
+function renderFrame(t) {
+  drawBackdrop(t);
+
+  const hero = metricById[heroId()];
+  const [hc, ha] = pair(heroId());
+  const others = othersFor(state.intent);
+
+  // Progress rail — an honest progress cue, not a fake loader.
+  $('rail-fill').style.width = `${clamp(t / T.payoffEnd, 0, 1) * 100}%`;
+
+  // Anticipation: a short compression before the numbers move at all.
+  const antic = clamp(t / T.anticipate, 0, 1);
+  const lift = (1 - easeInOut(antic)) * 10;
+  for (const col of document.querySelectorAll('.col')) col.style.transform = `translateY(${lift.toFixed(2)}px)`;
+
+  // Counter roll-ups, staggered.
+  const rollOf = (i, n) => {
+    const span = T.rollEnd - T.rollStart;
+    const stagger = Math.min(0.16, span / (n + 3));
+    const s0 = T.rollStart + i * stagger;
+    const s1 = T.rollEnd;
+    return easeOutExpo(clamp((t - s0) / Math.max(0.001, s1 - s0), 0, 1));
+  };
+
+  const hp = rollOf(0, others.length + 1);
+  $('hero-cited').textContent = fmt(hero, hc * hp);
+  $('hero-absent').textContent = fmt(hero, ha * hp);
+  const gmax = Math.max(hc, ha) || 1;
+  gauge($('gauge-cited'), (hc * hp) / gmax, PAL.accents[1]);
+  gauge($('gauge-absent'), (ha * hp) / gmax, PAL.accents[2]);
+
+  others.forEach((m, i) => {
+    const p = rollOf(i + 1, others.length + 1);
+    const [c, a] = pair(m.id);
+    const row = $('ledger').querySelector(`.row[data-metric="${m.id}"]`);
+    if (!row) return;
+    row.querySelector('[data-v="cited"]').textContent = fmt(m, c * p) + unitSuffix(m);
+    row.querySelector('[data-v="absent"]').textContent = fmt(m, a * p) + unitSuffixB(m);
+    const mx = Math.max(c, a) || 1;
+    row.querySelector('[data-bar="cited"]').style.width = `${(c * p / mx) * 100}%`;
+    row.querySelector('[data-bar="absent"]').style.width = `${(a * p / mx) * 100}%`;
+    const dEl = row.querySelector('[data-delta]');
+    if (p > 0.995) {
+      const { txt, dir } = deltaOf(m, c, a);
+      dEl.textContent = txt; dEl.dataset.dir = dir;
+    } else { dEl.textContent = '—'; dEl.dataset.dir = ''; }
+  });
+
+  // Payoff: the headline difference overshoots in after the counters land.
+  const pay = clamp((t - T.payoff) / (T.payoffEnd - T.payoff), 0, 1);
+  const dx = $('delta-x');
+  if (pay <= 0) { dx.textContent = '—'; dx.style.transform = 'scale(1)'; dx.style.opacity = '.35'; }
+  else {
+    const { txt } = deltaOf(hero, hc, ha);
+    dx.textContent = txt;
+    const k = reduced ? 1 : easeOutBack(pay);
+    dx.style.transform = `scale(${(0.72 + 0.28 * k).toFixed(3)})`;
+    dx.style.opacity = String(clamp(pay * 2, 0, 1));
+  }
+}
+
+/* The two columns here are two readings of one market, not a good one and a bad
+   one, so the badge prints the distance between them and stays uncoloured.
+   A real zero has no ratio: it prints both numbers rather than an invented one. */
+function deltaOf(m, cited, absent) {
+  if (!cited || !absent) {
+    return { txt: `${fmt(m, cited)}${unitSuffix(m)} vs ${fmt(m, absent)}${unitSuffixB(m)}`, dir: '' };
+  }
+  const x = Math.max(cited, absent) / Math.min(cited, absent);
+  const txt = x >= 10 ? `${Math.round(x).toLocaleString('en-US')}×` : `${x.toFixed(1)}×`;
+  return { txt, dir: '' };
+}
+
+function announce() {
+  const hero = metricById[heroId()];
+  const [c, a] = pair(heroId());
+  const { txt } = deltaOf(hero, c, a);
+  settled = { vertical: state.vertical, intent: state.intent, hero: hero.id, cited: c, absent: a, ratio: txt };
+  const conf = (DATA.dimensions.vertical.options.find(o => o.id === state.vertical) || {}).confidence;
+  $('live').textContent =
+    `${labelOf('vertical', state.vertical)}, asking ${labelOf('intent', state.intent)}. `
+    + `${hero.label}: floor ${fmt(hero, c)}${unitSuffix(hero)}, ceiling ${fmt(hero, a)}${unitSuffixB(hero)} — ${txt}. `
+    + `Evidence for this title: ${((DATA.confidence || {})[conf] || {}).label || conf}.`;
+}
+
+/* --------------------------------------------------------------- driving */
+function stop() { if (clock.raf) cancelAnimationFrame(clock.raf); clock.raf = 0; clock.playing = false; }
+
+function play() {
+  stop();
+  if (MODE.static) { clock.t = T.total; renderFrame(clock.t); announce(); return; }
+  if (reduced) { clock.t = T.payoffEnd; renderFrame(clock.t); announce(); return; }
+  clock.playing = true;
+  clock.origin = performance.now();
+  let announced = false;
+  const tick = now => {
+    clock.t = (now - clock.origin) / 1000;
+    renderFrame(clock.t);
+    if (!announced && clock.t >= T.payoffEnd) { announced = true; announce(); }
+    if (clock.t < T.total) clock.raf = requestAnimationFrame(tick);
+    else { clock.playing = false; clock.raf = 0; idle(); }
+  };
+  clock.raf = requestAnimationFrame(tick);
+}
+
+/* After the reveal lands, only the backdrop keeps drifting. */
+function idle() {
+  if (reduced || MODE.static) return;
+  const t0 = performance.now(), base = clock.t;
+  const tick = now => {
+    clock.t = base + (now - t0) / 1000;
+    drawBackdrop(clock.t);
+    clock.raf = requestAnimationFrame(tick);
+  };
+  clock.raf = requestAnimationFrame(tick);
+}
+
+function onStateChange() {
+  renderStatic();
+  const url = new URL(location.href);
+  url.searchParams.set('vertical', state.vertical);
+  url.searchParams.set('intent', state.intent);
+  if (location.protocol !== 'file:') history.replaceState(null, '', url);
+  document.querySelectorAll('.prompt').forEach(b => {
+    const set = DATA.prompts[Number(b.dataset.i)].set;
+    b.setAttribute('aria-pressed', String(Object.entries(set).every(([k, v]) => state[k] === v)));
+  });
+  play();
+}
+
+/* ------------------------------------------------------------ resizing */
+let rt = 0;
+const onResize = () => {
+  clearTimeout(rt);
+  rt = setTimeout(() => { fitStill(); sizeCanvas(); drawBackdrop(clock.t); }, 60);
+};
+window.addEventListener('resize', onResize);
+mq.addEventListener?.('change', e => {
+  if (q.get('motion') === 'reduce') return;
+  reduced = e.matches; setMotionFlag();
+  stop(); renderFrame(reduced || MODE.static ? T.total : clock.t); if (reduced) announce();
+});
+
+/* ========================================================== export API */
+const nextPaint = () => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+
+const VIZ = {
+  duration: T.total,
+  timeline: { ...T },
+  fold: K,
+  get state() { return { ...state }; },
+  palettes: PALETTES.map(p => p.id),
+  async seek(seconds) {
+    stop();
+    clock.t = Number(seconds) || 0;
+    renderFrame(clock.t);
+    if (clock.t >= T.payoffEnd) announce();
+    await nextPaint();
+    return clock.t;
+  },
+  async frame(n, total) {
+    const t = (Number(n) / Math.max(1, Number(total))) * T.total;
+    return VIZ.seek(t);
+  },
+  async setState(next = {}) {
+    if (next.palette) PAL = applyPalette(next.palette);
+    if (next.seed != null) state.seed = Number(next.seed);
+    if (next.vertical) state.vertical = resolveDim('vertical', next.vertical);
+    if (next.intent) state.intent = resolveDim('intent', next.intent);
+    const sv = $('sel-vertical'), si = $('sel-intent');
+    if (sv) sv.value = state.vertical; if (si) si.value = state.intent;
+    renderStatic();
+    fitStill(); sizeCanvas();
+    stop(); renderFrame(clock.t = T.total); announce();
+    await nextPaint();
+    return VIZ.snapshot();
+  },
+  snapshot() { return { state: { ...state }, mode: root.dataset.mode, motion: root.dataset.motion, settled, t: clock.t }; },
+  stop,
+  play,
+};
+window.VIZ = VIZ;
+
+/* ================================================================ boot */
+buildChrome();
+if (MODE.poster || MODE.gif) $('sources').open = true;   // stills must carry their sources visibly
+renderStatic();
+fitStill();
+sizeCanvas();
+
+VIZ.ready = (async () => {
+  if (q.has('frame')) await VIZ.frame(Number(q.get('frame')), Number(q.get('frames') || 1));
+  else if (q.has('t')) await VIZ.seek(Number(q.get('t')));
+  else if (MODE.static) { clock.t = T.total; renderFrame(clock.t); announce(); await nextPaint(); }
+  else { play(); await nextPaint(); }
+  if (MODE.static) announce();
+  // Fit once more after the first real render: counters and source markers only
+  // reach their final width here, and a still must never clip a row.
+  if (fitStill() !== 1) { sizeCanvas(); renderFrame(clock.t); await nextPaint(); }
+  root.dataset.ready = '1';
+  return VIZ.snapshot();
+})();
+})();
+</script>
+</body>
+</html>

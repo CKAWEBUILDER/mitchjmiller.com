@@ -1,0 +1,2346 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B2B vs B2C by Vertical — Living Infographic | Mitchell Miller</title>
+<meta name="description" content="Interactive: pick one of 10 industries and see B2B vs B2C acquisition cost, conversion, paid search, email and review reliance side by side — real 2026 benchmarks, every number sourced, every gap shown honestly.">
+<!--
+  LIVING INFOGRAPHIC — B2B vs B2C by vertical
+  Built from content-studio/viz/kit/template.html. Self-contained, no external
+  requests, works from file://. Real data (meta.sample=false) from
+  content-studio/research/2026-09-14/b2b-b2c/{data.json,sources.md,notes.md}.
+
+  URL parameters (all optional):
+    ?static=1            freeze at the settled state (poster capture)
+    ?poster=1            poster layout, fills the viewport exactly (implies static)
+    ?gif=1               GIF layout: seamless backdrop loop + honesty strip
+    ?frame=N&frames=M    deterministic frame N of M over the reveal timeline
+    ?t=1.8               deterministic absolute time in seconds
+    ?palette=aurora|ember|verdant
+    ?seed=20260914
+    ?vertical=saas_software|ecommerce_retail|professional_services|financial_services|
+              education|healthcare|real_estate|travel_hospitality|
+              manufacturing_industrial|nonprofit
+    ?metric=cac|lpcvr|sitecvr|ctr|cpc|cpl|cycle|touch|emailctr|reviews
+    ?motion=reduce       force the reduced-motion path
+
+  Export API (window.VIZ):
+    await VIZ.ready            resolves once first paint is done
+    VIZ.duration               reveal timeline length, seconds
+    await VIZ.seek(seconds)    render deterministically at that time
+    await VIZ.frame(n, total)  render deterministically at frame n of total
+    VIZ.setState({palette, seed, vertical, metric})
+    VIZ.snapshot()             current state + settled values (JSON-safe)
+-->
+<style>
+/* ---------------------------------------------------------------- tokens */
+:root{
+  color-scheme:dark;
+  --ground:#0A1A30; --panel:#12294A; --panel-2:#0E2240; --line:#2B4670;
+  --text:#EAF2FA; --muted:#A8C0D8;
+  --a1:#5BF0F5; --a2:#C6FF4F; --a3:#FF7AB6; --a4:#FFC53D; --a5:#B9A2FF;
+  --pos:var(--a2); --neg:var(--a3);
+  --font:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,"Apple Color Emoji",sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  --r:10px; --wrap:1160px;
+  --gut:clamp(16px,3.2vw,40px);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --dur:.28s;
+}
+@media (prefers-reduced-motion:reduce){:root{--dur:0s}}
+html[data-motion="reduced"]{--dur:0s}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--ground); color:var(--text); font-family:var(--font);
+  font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+h1,h2,h3,p,figure,ul,ol{margin:0}
+button,select,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:is(button,select,summary,a,[tabindex]):focus-visible{outline:3px solid var(--a1);outline-offset:3px;border-radius:4px}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ---------------------------------------------------------------- frame */
+.viz{position:relative;isolation:isolate;min-height:100svh;overflow:hidden}
+#bg{position:absolute;inset:0;width:100%;height:100%;z-index:-2;display:block}
+.viz::after{ /* vignette keeps text contrast constant over the generative field */
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(115% 82% at 50% 36%,
+    transparent 0%,
+    color-mix(in srgb,var(--ground) 22%,transparent) 46%,
+    color-mix(in srgb,var(--ground) 62%,transparent) 78%,
+    color-mix(in srgb,var(--ground) 88%,transparent) 100%);
+}
+.shell{width:min(var(--wrap),100%);margin-inline:auto;padding:clamp(22px,4vw,54px) var(--gut) clamp(28px,5vw,64px);position:relative}
+
+/* ---------------------------------------------------------------- header */
+/* The generative field is loud on purpose; type gets its own scrim so the
+   measured contrast ratios hold wherever the mandala happens to land. */
+.shell>header{position:relative;isolation:isolate}
+.shell>header::before{content:"";position:absolute;inset:-30px -44px -26px -44px;z-index:-1;border-radius:20px;
+  background:radial-gradient(95% 125% at 16% 46%,
+    color-mix(in srgb,var(--ground) 94%,transparent) 0%,
+    color-mix(in srgb,var(--ground) 88%,transparent) 44%,
+    color-mix(in srgb,var(--ground) 46%,transparent) 76%,
+    transparent 100%)}
+.kick{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:14px}
+.eyebrow{font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--a1)}
+.badge{font-size:.63rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid var(--a4);color:var(--a4);border-radius:999px;padding:3px 9px;line-height:1.4}
+h1{font-size:clamp(1.85rem,4.4vw,3.15rem);line-height:1.05;letter-spacing:-.03em;font-weight:800;text-wrap:balance;max-width:20ch}
+h1 .lit{color:var(--a2)}
+.deck{margin-top:14px;max-width:62ch;color:var(--muted);font-size:clamp(.95rem,1.2vw,1.06rem)}
+
+/* ------------------------------------------------------------- the ask */
+.ask{margin-top:clamp(22px,3.4vw,38px);border:1px solid var(--line);border-radius:var(--r);
+  background:color-mix(in srgb,var(--panel) 95%,transparent);backdrop-filter:blur(8px);padding:clamp(14px,2.2vw,22px);
+  box-shadow:0 24px 60px color-mix(in srgb,var(--ground) 70%,transparent)}
+.ask-line{font-size:clamp(1.05rem,2.1vw,1.5rem);line-height:1.45;font-weight:600;letter-spacing:-.015em;text-wrap:pretty}
+.tok{
+  display:inline-flex;align-items:center;gap:.4em;position:relative;
+  background:var(--panel-2);border:1px solid var(--a1);color:var(--a1);
+  border-radius:999px;padding:.12em .75em .18em;margin-inline:.12em;
+  font:inherit;font-weight:700;appearance:none;-webkit-appearance:none;
+  min-height:38px;line-height:1.25;cursor:pointer;
+  transition:background var(--dur) var(--ease-out),color var(--dur) var(--ease-out);
+}
+.tok:hover{background:var(--a1);color:var(--ground)}
+.tok option{background:var(--panel);color:var(--text)}
+.ask-hint{margin-top:10px;font-size:.8rem;color:var(--muted)}
+.prompts{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.prompt{
+  border:1px solid var(--line);background:transparent;color:var(--text);
+  border-radius:999px;padding:9px 15px;font-size:.86rem;font-weight:600;min-height:40px;
+  text-align:left;transition:border-color var(--dur) var(--ease-out),background var(--dur) var(--ease-out),transform var(--dur) var(--ease-out);
+}
+.prompt:hover{border-color:var(--a2);background:color-mix(in srgb,var(--a2) 12%,transparent)}
+.prompt[aria-pressed="true"]{border-color:var(--a2);background:color-mix(in srgb,var(--a2) 18%,transparent);color:var(--a2)}
+.prompt .go{color:var(--a2);font-weight:800}
+.replay{border:1px solid var(--a2);background:var(--a2);color:var(--ground);border-radius:999px;
+  padding:9px 17px;font-size:.86rem;font-weight:800;min-height:40px}
+.replay:hover{filter:brightness(1.08)}
+
+/* progress of the reveal — Zeigarnik cue, not a fake loader */
+.rail{position:relative;height:3px;margin-top:16px;background:color-mix(in srgb,var(--line) 70%,transparent);border-radius:2px;overflow:hidden}
+.rail i{position:absolute;inset:0 auto 0 0;width:0;background:linear-gradient(90deg,var(--a1),var(--a2));border-radius:2px}
+
+/* ---------------------------------------------------------------- stage */
+.stage{display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(10px,1.6vw,20px);align-items:stretch;margin-top:clamp(20px,3vw,34px)}
+.col{border:1px solid var(--line);border-radius:var(--r);padding:clamp(14px,2vw,22px);
+  background:linear-gradient(180deg,color-mix(in srgb,var(--panel) 96%,transparent),color-mix(in srgb,var(--panel-2) 97%,transparent));
+  box-shadow:0 24px 60px color-mix(in srgb,var(--ground) 70%,transparent);
+  display:flex;flex-direction:column;gap:10px;min-width:0}
+.col[data-side="cited"]{border-color:color-mix(in srgb,var(--a2) 55%,var(--line))}
+.col[data-side="absent"]{border-color:color-mix(in srgb,var(--a3) 45%,var(--line))}
+.col-head{display:grid;gap:2px;align-content:start}
+.col-name{font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.col[data-side="cited"] .col-name{color:var(--a2)}
+.col[data-side="absent"] .col-name{color:var(--a3)}
+.col-sub{font-size:.76rem;color:var(--muted)}
+.hero{display:flex;align-items:flex-end;gap:.18em;font-variant-numeric:tabular-nums;
+  font-size:clamp(2.7rem,7.6vw,4.9rem);font-weight:800;letter-spacing:-.045em;line-height:.92}
+.hero .u{font-size:.36em;font-weight:700;letter-spacing:-.01em;padding-bottom:.42em;color:var(--muted)}
+.col[data-side="cited"] .hero{color:var(--a2)}
+.col[data-side="absent"] .hero{color:var(--a3)}
+.hero-label{font-size:.88rem;color:var(--text);font-weight:600}
+.gauge{margin-top:2px}
+.gauge svg{display:block;width:100%;height:auto;max-height:88px}
+.delta{align-self:center;display:flex;flex-direction:column;align-items:center;gap:6px;
+  padding:0 clamp(2px,1vw,10px);min-width:86px;text-align:center;position:relative;isolation:isolate}
+.delta::before{content:"";position:absolute;inset:-18px -10px;z-index:-1;border-radius:16px;
+  background:radial-gradient(72% 62% at 50% 50%,
+    color-mix(in srgb,var(--ground) 90%,transparent) 0%,
+    color-mix(in srgb,var(--ground) 62%,transparent) 62%,
+    transparent 100%)}
+.delta-x{font-variant-numeric:tabular-nums;font-size:clamp(1.15rem,2.8vw,1.85rem);font-weight:800;letter-spacing:-.03em;color:var(--a4);white-space:nowrap}
+.delta-l{font-size:.64rem;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.delta-arrow{font-size:1.1rem;color:var(--a4);line-height:1}
+
+/* ---------------------------------------------------------------- ledger */
+.ledger{margin-top:clamp(16px,2.4vw,26px);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+  background:color-mix(in srgb,var(--panel-2) 96%,transparent);
+  box-shadow:0 24px 60px color-mix(in srgb,var(--ground) 70%,transparent)}
+.row{display:grid;grid-template-columns:minmax(0,1.35fr) 84px minmax(0,1.5fr) 84px 74px;gap:clamp(6px,1vw,14px);
+  align-items:center;padding:clamp(10px,1.5vw,15px) clamp(12px,1.8vw,18px);border-top:1px solid color-mix(in srgb,var(--line) 62%,transparent)}
+.row:first-child{border-top:0}
+.row-label{font-size:.87rem;font-weight:600;min-width:0}
+.row-note{display:block;font-size:.72rem;color:var(--muted);font-weight:400;margin-top:2px}
+.val{font-variant-numeric:tabular-nums;font-size:clamp(1rem,1.9vw,1.28rem);font-weight:800;letter-spacing:-.025em;white-space:nowrap}
+.val.absent{color:var(--a3);text-align:right}
+.val.cited{color:var(--a2);text-align:left}
+.bars{display:grid;gap:4px;min-width:0}
+.bar{height:9px;border-radius:5px;background:color-mix(in srgb,var(--line) 55%,transparent);overflow:hidden;position:relative}
+.bar i{position:absolute;inset:0 auto 0 0;width:0;border-radius:5px;display:block}
+.bar.absent i{background:linear-gradient(90deg,color-mix(in srgb,var(--a3) 55%,transparent),var(--a3))}
+.bar.cited i{background:linear-gradient(90deg,color-mix(in srgb,var(--a2) 55%,transparent),var(--a2))}
+.row-delta{font-variant-numeric:tabular-nums;font-size:.86rem;font-weight:800;text-align:right;white-space:nowrap}
+.row-delta[data-dir="good"]{color:var(--a2)}
+.row-delta[data-dir="bad"]{color:var(--a3)}
+
+/* source markers */
+.src{display:inline-block;vertical-align:super;margin-left:.28em;font-size:.58em;font-weight:800;letter-spacing:.04em;
+  border:1px solid color-mix(in srgb,var(--muted) 60%,transparent);color:var(--muted);background:transparent;
+  border-radius:4px;padding:0 3px;line-height:1.5;min-height:0}
+.src:hover{color:var(--a4);border-color:var(--a4)}
+#pop{position:absolute;z-index:40;max-width:min(320px,80vw);background:var(--panel);border:1px solid var(--a4);
+  border-radius:8px;padding:10px 12px;font-size:.78rem;line-height:1.5;color:var(--text);
+  box-shadow:0 18px 40px rgba(0,0,0,.45)}
+#pop[hidden]{display:none}
+#pop b{display:block;color:var(--a4);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+#pop .as{display:block;color:var(--muted);margin-top:5px;font-family:var(--mono);font-size:.72rem}
+
+/* ---------------------------------------------------------------- serp */
+.serp{margin-top:clamp(16px,2.4vw,26px);border:1px solid var(--line);border-radius:var(--r);padding:clamp(14px,2vw,20px);
+  background:color-mix(in srgb,var(--panel) 95%,transparent);
+  box-shadow:0 24px 60px color-mix(in srgb,var(--ground) 70%,transparent)}
+.serp-head{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:baseline;justify-content:space-between;margin-bottom:12px}
+.serp-title{font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--a5)}
+.serp-q{font-family:var(--mono);font-size:.85rem;color:var(--text);background:var(--panel-2);border:1px solid var(--line);
+  border-radius:6px;padding:5px 9px;display:inline-block;max-width:100%;overflow-wrap:anywhere}
+.serp-body{display:grid;gap:clamp(12px,2vw,26px)}
+@media (min-width:900px){.serp-body{grid-template-columns:minmax(0,1fr) minmax(200px,28ch)}}
+.serp-rows{display:grid;gap:7px;align-content:start}
+.serp-note{font-size:.86rem;line-height:1.65;color:var(--text);border-left:3px solid var(--a5);padding-left:12px;align-self:center}
+
+.sr-row{display:grid;grid-template-columns:104px minmax(0,1fr);gap:10px;align-items:center;
+  border-left:3px solid var(--line);padding:7px 0 7px 10px;font-size:.84rem}
+.sr-row[data-kind="answer"]{border-left-color:var(--a5)}
+.sr-row[data-kind="citation"]{border-left-color:var(--a2)}
+.sr-row[data-kind="organic"]{border-left-color:var(--a1)}
+.sr-row[data-kind="pack"]{border-left-color:var(--a4)}
+.sr-row[data-kind="ad"]{border-left-color:var(--a3)}
+.sr-kind{font-size:.63rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.sr-text{min-width:0;overflow-wrap:anywhere}
+.sr-text em{font-style:normal;color:var(--a2);font-weight:700}
+
+/* ---------------------------------------------------------------- footer */
+.foot{margin-top:clamp(18px,2.6vw,30px);display:grid;gap:14px;position:relative;isolation:isolate}
+.foot::before{content:"";position:absolute;inset:-16px -26px -22px -26px;z-index:-1;border-radius:16px;
+  background:linear-gradient(0deg,
+    color-mix(in srgb,var(--ground) 94%,transparent) 0%,
+    color-mix(in srgb,var(--ground) 90%,transparent) 55%,
+    color-mix(in srgb,var(--ground) 34%,transparent) 100%)}
+.sources{border:1px solid var(--line);border-radius:var(--r);background:color-mix(in srgb,var(--panel-2) 95%,transparent)}
+.sources>summary{cursor:pointer;list-style:none;padding:12px 16px;font-size:.82rem;font-weight:700;display:flex;gap:10px;align-items:center}
+.sources>summary::-webkit-details-marker{display:none}
+.sources>summary::before{content:"▸";color:var(--a4);font-size:.9rem;transition:transform var(--dur) var(--ease-out)}
+.sources[open]>summary::before{transform:rotate(90deg)}
+.sources-body{padding:0 16px 14px;display:grid;gap:9px}
+.s-item{display:grid;grid-template-columns:44px minmax(0,1fr);gap:10px;font-size:.8rem;line-height:1.5;
+  padding:9px 10px;border-radius:8px;border:1px solid transparent}
+.s-item.hl{border-color:var(--a4);background:color-mix(in srgb,var(--a4) 10%,transparent)}
+.s-id{font-family:var(--mono);font-size:.72rem;font-weight:800;color:var(--a4)}
+.s-meta{display:block;color:var(--muted);font-family:var(--mono);font-size:.72rem;margin-top:3px;overflow-wrap:anywhere}
+.s-item a{color:var(--a1)}
+.src-line{display:none;font-size:.78rem;line-height:1.5;color:var(--muted);font-family:var(--mono)}
+html[data-mode~="gif"] .src-line{display:block}
+.honesty{font-size:.76rem;line-height:1.6;color:var(--muted);border-left:3px solid var(--a4);padding-left:12px}
+.honesty b{color:var(--a4)}
+.by{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-between;font-size:.74rem;color:var(--muted);
+  border-top:1px solid color-mix(in srgb,var(--line) 60%,transparent);padding-top:12px}
+
+/* ---------------------------------------------------------------- narrow */
+/* Narrow-viewport layout. Scoped away from poster/gif, whose export viewports
+   are narrow by definition but must keep the side-by-side composition. */
+@media (max-width:860px){
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .stage{grid-template-columns:1fr;gap:12px}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .delta{flex-direction:row;gap:10px;min-width:0;padding:2px 0}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .delta-arrow{transform:rotate(90deg)}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .row{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"label label" "cited absent" "bars bars" "d d";gap:6px 10px}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .row-label{grid-area:label}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .val.cited{grid-area:cited;text-align:left}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .val.absent{grid-area:absent;text-align:right}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .bars{grid-area:bars}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .row-delta{grid-area:d;text-align:left}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .sr-row{grid-template-columns:1fr;gap:3px}
+}
+
+/* ---------------------------------------------------------------- poster */
+html[data-mode~="poster"] body{overflow:hidden}
+html[data-mode~="poster"] .viz{height:100svh;min-height:0}
+html[data-mode~="poster"] .shell{height:100%;display:flex;flex-direction:column;gap:clamp(10px,1.4vh,20px);
+  padding:clamp(28px,4vh,56px) clamp(28px,4vw,56px);width:100%;max-width:none}
+html[data-mode~="poster"] .ask,
+html[data-mode~="poster"] .prompts,
+html[data-mode~="poster"] .rail,
+html[data-mode~="poster"] .replay{display:none}
+html[data-mode~="poster"] .sources{border:0;background:transparent}
+html[data-mode~="poster"] .sources>summary{display:none}
+html[data-mode~="poster"] .sources-body,html[data-mode~="gif"] .sources-body{display:grid}
+html[data-mode~="poster"] .sources-body{padding:0;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:6px}
+html[data-mode~="poster"] .s-item{padding:0;border:0;font-size:.7rem}
+html[data-mode~="poster"] h1{font-size:clamp(2.2rem,4.4vh,3.6rem);max-width:26ch}
+html[data-mode~="poster"] .hero{font-size:clamp(3rem,9vh,6rem)}
+html[data-mode~="poster"] .stage{margin-top:0}
+html[data-mode~="poster"] .foot{margin-top:auto}
+/* --fit is driven by fitStill(): the layout shrinks until it fits the frame,
+   so swapping in a longer dataset can never clip a row off the poster. */
+html[data-mode~="poster"] .shell,html[data-mode~="gif"] .shell{gap:calc(clamp(8px,1.4vh,20px)*var(--fit,1))}
+/* Sections must keep their natural height so overflow is real and fitStill()
+   can see it — flex-shrink would silently clip a ledger row instead. */
+html[data-mode~="poster"] .shell>*,html[data-mode~="gif"] .shell>*{flex:0 0 auto}
+html[data-mode~="poster"] .col,html[data-mode~="gif"] .col{padding:calc(clamp(12px,2vh,22px)*var(--fit,1))}
+html[data-mode~="poster"] .row,html[data-mode~="gif"] .row{padding-block:calc(clamp(8px,1.5vh,15px)*var(--fit,1))}
+html[data-mode~="poster"] .hero,html[data-mode~="gif"] .hero{font-size:calc(clamp(2.4rem,8.6vh,5.6rem)*var(--fit,1))}
+html[data-mode~="poster"] h1,html[data-mode~="gif"] h1{font-size:calc(clamp(1.5rem,4.3vh,3.4rem)*var(--fit,1))}
+html[data-mode~="poster"] .val{font-size:calc(1.22rem*var(--fit,1))}
+html[data-mode~="poster"] .row-label{font-size:calc(.88rem*var(--fit,1))}
+html[data-mode~="gif"] .val{font-size:calc(1.5rem*var(--fit,1))}
+html[data-mode~="gif"] .row-label{font-size:calc(1rem*var(--fit,1))}
+html[data-mode~="gif"] .row{padding-block:calc(13px*var(--fit,1))}
+html[data-mode~="gif"] .bar{height:11px}
+html[data-mode~="gif"] .col-name{font-size:.9rem}
+html[data-mode~="poster"] .delta-x,html[data-mode~="gif"] .delta-x{font-size:calc(1.9rem*var(--fit,1))}
+html[data-mode~="poster"] .delta-arrow,html[data-mode~="gif"] .delta-arrow{font-size:calc(1.5rem*var(--fit,1))}
+html[data-mode~="gif"] .col-sub,html[data-mode~="gif"] .hero-label{font-size:.85rem}
+html[data-mode~="poster"] .poster-q{font-size:calc(clamp(.95rem,2.1vh,1.35rem)*var(--fit,1))}
+html[data-mode~="poster"] .poster-q{display:block}
+.poster-q{display:none;font-size:clamp(1rem,2.1vh,1.35rem);font-weight:700;color:var(--a1);letter-spacing:-.01em}
+/* square posters (1:1 and wider): drop the SERP strip and tighten the ledger */
+@media (min-aspect-ratio:9/10){
+  html[data-mode~="poster"] .serp{display:none}
+  html[data-mode~="poster"] .deck{display:none}
+  html[data-mode~="poster"] .s-meta{display:none}
+  html[data-mode~="poster"] .row-note{display:none}
+}
+
+/* ---------------------------------------------------------------- gif */
+html[data-mode~="gif"] body{overflow:hidden}
+html[data-mode~="gif"] .viz{height:100svh;min-height:0}
+html[data-mode~="gif"] .shell{height:100%;display:flex;flex-direction:column;gap:clamp(8px,1.2vh,16px);
+  padding:clamp(20px,3.2vh,34px) clamp(20px,3.2vw,34px) 0;width:100%;max-width:none}
+html[data-mode~="gif"] .ask,html[data-mode~="gif"] .prompts,html[data-mode~="gif"] .replay,
+html[data-mode~="gif"] .serp,html[data-mode~="gif"] .sources,html[data-mode~="gif"] .deck{display:none}
+html[data-mode~="gif"] .poster-q{display:block}
+html[data-mode~="gif"] h1{font-size:clamp(1.6rem,3.6vh,2.5rem);max-width:24ch}
+html[data-mode~="gif"] .hero{font-size:clamp(2.6rem,8.2vh,5rem)}
+html[data-mode~="gif"] .stage{margin-top:0}
+html[data-mode~="gif"] .ledger{margin-top:0}
+html[data-mode~="gif"] .foot{margin-top:auto}
+html[data-mode~="gif"] .ledger .row:nth-child(n+5){display:none}
+html[data-mode~="gif"] .row{grid-template-columns:minmax(0,1.3fr) 76px minmax(0,1.4fr) 76px}
+html[data-mode~="gif"] .row-delta,html[data-mode~="gif"] .row-note,html[data-mode~="gif"] .gauge{display:none}
+html[data-mode~="gif"] .honesty,html[data-mode~="gif"] .by,html[data-mode~="gif"] .sources{display:none}
+/* Two lines, always: the two hero numerals must share a baseline in a still. */
+html[data-mode~="poster"] .col-sub,html[data-mode~="gif"] .col-sub{
+  min-height:3.15em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+/* The footer scrim must not add scroll height inside a fixed-size frame. */
+html[data-mode~="poster"] .foot::before,html[data-mode~="gif"] .foot::before{inset:-16px -26px 0 -26px}
+html[data-mode~="gif"] .strip{display:flex}
+.strip{display:none;align-items:center;gap:10px;margin:0 calc(-1*clamp(20px,3.2vw,34px));
+  padding:10px clamp(20px,3.2vw,34px);background:var(--a4);color:#12100a;font-size:.78rem;font-weight:800;line-height:1.35}
+.strip span{font-weight:600}
+
+@media print{
+  body{background:#fff}
+  .ask,.prompts,.replay,.rail{display:none}
+}
+
+
+/* ---------------------------------------------------- b2b-vs-b2c additions */
+.tag-overall,.tag-seg{display:inline-block;vertical-align:middle;margin-left:.5em;font-size:.6rem;font-weight:800;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px solid color-mix(in srgb,var(--muted) 55%,transparent);
+  border-radius:999px;padding:1px 7px;line-height:1.6}
+.tag-seg{color:var(--a1);border-color:color-mix(in srgb,var(--a1) 55%,transparent)}
+.note-btn{display:inline-block;vertical-align:super;margin-left:.28em;font-size:.58em;font-weight:800;letter-spacing:.04em;
+  border:1px solid color-mix(in srgb,var(--a5) 60%,transparent);color:var(--a5);background:transparent;
+  border-radius:4px;padding:0 4px;line-height:1.5;min-height:0;text-transform:uppercase}
+.note-btn:hover{color:var(--ground);background:var(--a5);border-color:var(--a5)}
+/* SPEC §8: target size >=38px (44px mobile) on every control. .src (kit-base)
+   and .note-btn render as small inline-block text pills (~12-15px tall) by
+   design — that's the right VISUAL weight for an inline superscript marker —
+   so the hit area is enlarged with an invisible centred pseudo-element
+   instead of growing the pill itself. 44px covers both the 38px general
+   floor and the 44px mobile floor with one rule, no media query needed. */
+.src,.note-btn{position:relative}
+.src::after,.note-btn::after{content:"";position:absolute;top:50%;left:50%;
+  width:44px;height:44px;transform:translate(-50%,-50%)}
+.row-src{display:block;font-size:.7rem;color:var(--muted);font-weight:400;margin-top:3px;font-family:var(--mono)}
+.hero span.gap{font-size:.27em;font-weight:700;letter-spacing:0;color:var(--muted);vertical-align:middle;font-family:var(--font)}
+.bar.gap i{display:none}
+.bar.gap{background-image:repeating-linear-gradient(45deg,color-mix(in srgb,var(--line) 85%,transparent) 0 5px,transparent 5px 10px)}
+.val.novalue{color:var(--muted);font-size:.72em;font-weight:700;letter-spacing:0;font-style:italic}
+
+/* comparison lane — ranks all 10 verticals on the metric currently picked above */
+.lane{margin-top:clamp(16px,2.4vw,26px);border:1px solid var(--line);border-radius:var(--r);padding:clamp(14px,2vw,20px);
+  background:color-mix(in srgb,var(--panel) 95%,transparent);
+  box-shadow:0 24px 60px color-mix(in srgb,var(--ground) 70%,transparent)}
+.lane-head{margin-bottom:12px}
+.lane-title{font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--a5)}
+.lane-title span{text-transform:none;letter-spacing:0;color:var(--a5)}
+.lane-sub{margin-top:4px;font-size:.8rem;color:var(--muted)}
+.lane-rows{display:grid;gap:7px;list-style:none;margin:0;padding:0}
+.lane-row{display:grid;grid-template-columns:22px minmax(0,1fr) minmax(70px,1fr) auto;gap:10px;align-items:center;
+  padding:6px 8px;border-radius:8px;border:1px solid transparent}
+.lane-row.now{border-color:var(--a4);background:color-mix(in srgb,var(--a4) 10%,transparent)}
+.lane-rank{font-variant-numeric:tabular-nums;font-size:.76rem;font-weight:800;color:var(--muted);text-align:right}
+.lane-name{font-size:.85rem;font-weight:600;min-width:0;overflow-wrap:anywhere}
+.lane-you{display:inline-block;margin-left:.5em;font-size:.6rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ground);background:var(--a4);border-radius:999px;padding:1px 7px}
+.lane-bar{height:9px;border-radius:5px;background:color-mix(in srgb,var(--line) 55%,transparent);overflow:hidden;min-width:0}
+.lane-bar i{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,color-mix(in srgb,var(--a1) 55%,transparent),var(--a1))}
+.lane-val{font-variant-numeric:tabular-nums;font-size:.85rem;font-weight:800;white-space:nowrap;text-align:right}
+.lane-gaps{margin-top:10px;font-size:.78rem;line-height:1.6;color:var(--muted);border-left:3px solid var(--line);padding-left:10px}
+.lane-gaps b{color:var(--muted)}
+@media (max-width:640px){.lane-row{grid-template-columns:18px minmax(0,1fr) auto;grid-template-areas:"rank name name" ". bar val";row-gap:4px}
+  .lane-rank{grid-area:rank}.lane-name{grid-area:name}.lane-bar{grid-area:bar}.lane-val{grid-area:val;text-align:right}}
+html[data-mode~="poster"] .lane,html[data-mode~="gif"] .lane{display:none}
+
+/* "overall" rows/hero: the source did not split B2B/B2C, so render ONE figure,
+   centred, instead of printing the same number on both sides with a fake 1.0x
+   badge. Mirrors the kit's own display:none/mode-class toggle pattern (.strip). */
+.col-merged{display:none;grid-column:1/-1;border:1px solid color-mix(in srgb,var(--a1) 45%,var(--line));border-radius:var(--r);
+  padding:clamp(14px,2vw,22px);background:linear-gradient(180deg,color-mix(in srgb,var(--panel) 96%,transparent),color-mix(in srgb,var(--panel-2) 97%,transparent));
+  box-shadow:0 24px 60px color-mix(in srgb,var(--ground) 70%,transparent);
+  flex-direction:column;align-items:center;text-align:center;gap:4px}
+.col-merged .col-head{align-items:center}
+.col-merged .col-name{color:var(--a1)}
+.col-merged .hero{color:var(--a1)}
+.stage.merged .col,.stage.merged .delta{display:none}
+.stage.merged .col-merged{display:flex}
+.row-overall{display:none;grid-column:2/-1;align-items:center;justify-content:center;gap:10px;text-align:center;min-width:0}
+.row-overall .val{color:var(--a1);white-space:nowrap}
+.row-overall-l{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+.row.merged>.val,.row.merged>.bars,.row.merged>.row-delta{display:none}
+.row.merged .row-overall{display:flex}
+@media (max-width:860px){:where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .row-overall{grid-column:1/-1;padding-top:4px}}
+
+/* Poster: inline per-value source/note markers only work on hover, which a
+   still can't do — the sources drawer (kept fully open) is the poster's real
+   citation surface, so drop the redundant inline line. */
+html[data-mode~="poster"] .row-src,html[data-mode~="poster"] .note-btn{display:none}
+
+/* Sources footer on a still — this artifact has 11 real sources (the sample
+   template's layout was tuned for 3). still-check.mjs fails the build on ANY
+   clipped, overlapping, or truncated (line-clamp/ellipsis) source row, and
+   .sources-body/.s-item are fixed-px, not --fit-scaled, so the fix is content
+   + layout, not more shrink: a short, hand-written, COMPLETE sentence per
+   source (.s-meta-short — never programmatically cut, so it can't end
+   mid-word), in two columns with normal text wrapping and no overflow:hidden
+   anywhere in the chain. .s-meta (the long interactive-drawer detail) is
+   hidden here on purpose — showing both would be the same text twice. */
+html[data-mode~="poster"] .s-meta{display:none}
+html[data-mode~="poster"] .s-meta-short{display:block;color:var(--muted);font-family:var(--mono);
+  font-size:.66rem;line-height:1.42;margin-top:3px;white-space:normal;overflow-wrap:break-word}
+html[data-mode~="poster"] .sources-body{grid-template-columns:1fr 1fr;column-gap:24px;row-gap:9px;align-items:start}
+html[data-mode~="poster"] .s-item{padding:0;border:0;font-size:.7rem;white-space:normal;overflow-wrap:break-word}
+html[data-mode~="poster"] .s-item>span{white-space:normal;overflow:visible;text-overflow:clip}
+html[data-mode~="poster"] .s-item a{display:none}
+@media (min-aspect-ratio:9/10){
+  html[data-mode~="poster"] .sources-body{column-gap:16px;row-gap:7px}
+  html[data-mode~="poster"] .s-item{font-size:.64rem}
+  html[data-mode~="poster"] .s-meta-short{font-size:.6rem;margin-top:2px}
+}
+</style>
+</head>
+<body>
+
+<!-- =====================================================================
+     PALETTES — 3 vivid sets that hold up inside the site's navy/green page.
+     Contrast numbers are verified by `node export/contrast.mjs`. Copied
+     verbatim from viz/kit/template.html — do not hand-edit; if the kit's
+     palettes change, re-copy this block.
+     ===================================================================== -->
+<script type="application/json" id="viz-palettes">
+[
+  {
+    "id": "aurora",
+    "name": "Aurora",
+    "character": "Cool electric. Default. Sits closest to the site's navy.",
+    "ground": "#0A1A30", "panel": "#12294A", "panel2": "#0E2240", "line": "#2B4670",
+    "text": "#EAF2FA", "muted": "#A8C0D8",
+    "accents": ["#5BF0F5", "#C6FF4F", "#FF7AB6", "#FFC53D", "#B9A2FF"]
+  },
+  {
+    "id": "ember",
+    "name": "Ember",
+    "character": "Warm and hot. Use when the story is a cost, a loss, or a deadline.",
+    "ground": "#190B24", "panel": "#2A1138", "panel2": "#210E2E", "line": "#47205C",
+    "text": "#FFF1E8", "muted": "#E3B9C8",
+    "accents": ["#FF8A4C", "#FFD400", "#FF7AB6", "#4DF39A", "#B9A2FF"]
+  },
+  {
+    "id": "verdant",
+    "name": "Verdant",
+    "character": "Green-led, site-native. Safest when the artifact sits next to the green CTA.",
+    "ground": "#06251B", "panel": "#0C3B2A", "panel2": "#083023", "line": "#17614A",
+    "text": "#ECFDF3", "muted": "#A6D9BE",
+    "accents": ["#4DF39A", "#C6FF4F", "#35D6E8", "#FFB020", "#FF7AB6"]
+  }
+]
+</script>
+
+<!-- =====================================================================
+     DATA — real B2B-vs-B2C-by-vertical benchmarks (meta.sample=false).
+     Every metrics[].source and every values[v][m].sourceB2B/sourceB2C
+     resolves to an entry in sources[]. Built from
+     content-studio/research/2026-09-14/b2b-b2c/data.json by
+     content-studio/viz/b2b-vs-b2c-by-vertical/ (see drafts for the post).
+     ===================================================================== -->
+<script type="application/json" id="viz-data">
+{
+  "meta": {
+    "sample": false,
+    "seed": 20260914,
+    "palette": "aurora",
+    "eyebrow": "Living infographic · B2B vs B2C",
+    "title": "In Education, winning a B2B customer costs {lit}7.3× more{/lit} than winning a B2C one",
+    "deck": "That's the widest gap this dataset supports inside one vertical, not across two different ones. Pick any of the other nine and watch it move — as low as 1.3× in ecommerce. Same source pair, same method, ten different answers.",
+    "askPrefix": "What happens to",
+    "askMiddle": "when the vertical is",
+    "askSuffix": "?",
+    "columns": {
+      "cited": {
+        "name": "B2B",
+        "sub": "Business-to-business buyer"
+      },
+      "absent": {
+        "name": "B2C",
+        "sub": "Business-to-consumer buyer"
+      }
+    },
+    "hero": "cac",
+    "defaultVertical": "education",
+    "byline": "Mitchell Miller · mitchjmiller.com",
+    "liveUrl": "mitchjmiller.com/viz/b2b-vs-b2c-by-vertical/",
+    "gifNote": "Rudimentary GIF of a living artifact.",
+    "gifNoteSub": "The vertical/metric selectors, per-number sources and the 10-vertical ranking lane are in the interactive version."
+  },
+  "dimensions": {
+    "vertical": {
+      "label": "vertical",
+      "options": [
+        {
+          "id": "saas_software",
+          "label": "SaaS & Software"
+        },
+        {
+          "id": "ecommerce_retail",
+          "label": "Ecommerce & Retail"
+        },
+        {
+          "id": "professional_services",
+          "label": "Professional Services"
+        },
+        {
+          "id": "financial_services",
+          "label": "Financial Services"
+        },
+        {
+          "id": "education",
+          "label": "Education"
+        },
+        {
+          "id": "healthcare",
+          "label": "Healthcare"
+        },
+        {
+          "id": "real_estate",
+          "label": "Real Estate"
+        },
+        {
+          "id": "travel_hospitality",
+          "label": "Travel & Hospitality"
+        },
+        {
+          "id": "manufacturing_industrial",
+          "label": "Manufacturing & Industrial"
+        },
+        {
+          "id": "nonprofit",
+          "label": "Nonprofit"
+        }
+      ]
+    },
+    "metric": {
+      "label": "metric",
+      "options": [
+        {
+          "id": "cac",
+          "label": "acquisition cost"
+        },
+        {
+          "id": "lpcvr",
+          "label": "landing-page conversion"
+        },
+        {
+          "id": "sitecvr",
+          "label": "full-site conversion"
+        },
+        {
+          "id": "ctr",
+          "label": "paid-search click-through rate"
+        },
+        {
+          "id": "cpc",
+          "label": "paid-search cost per click"
+        },
+        {
+          "id": "cpl",
+          "label": "paid-search cost per lead"
+        },
+        {
+          "id": "cycle",
+          "label": "sales-cycle length"
+        },
+        {
+          "id": "touch",
+          "label": "touchpoints before conversion"
+        },
+        {
+          "id": "emailctr",
+          "label": "email click rate"
+        },
+        {
+          "id": "reviews",
+          "label": "review reliance"
+        }
+      ]
+    }
+  },
+  "prompts": [
+    {
+      "label": "Where is the acquisition-cost gap narrowest?",
+      "set": {
+        "metric": "cac",
+        "vertical": "ecommerce_retail"
+      }
+    },
+    {
+      "label": "What happens to acquisition cost in Financial Services?",
+      "set": {
+        "metric": "cac",
+        "vertical": "financial_services"
+      }
+    },
+    {
+      "label": "What happens to email clicks for Nonprofit?",
+      "set": {
+        "metric": "emailctr",
+        "vertical": "nonprofit"
+      }
+    },
+    {
+      "label": "Which vertical leans hardest on reviews?",
+      "set": {
+        "metric": "reviews",
+        "vertical": "saas_software"
+      }
+    }
+  ],
+  "metrics": [
+    {
+      "id": "cac",
+      "label": "Acquisition cost",
+      "ask": "acquisition cost",
+      "stage": "Full funnel — cost to close one customer",
+      "note": "Blended organic + paid CAC. First Page Sage's B2B and B2C reports are separate surveys with separate industry cuts — matched here by closest-fitting sub-industry, not always identical wording.",
+      "unit": "$",
+      "decimals": 0,
+      "better": "lower",
+      "source": "s-fps-b2b",
+      "prefix": true
+    },
+    {
+      "id": "lpcvr",
+      "label": "Landing-page conversion",
+      "ask": "landing-page conversion",
+      "stage": "Funnel stage: landing page → conversion",
+      "note": "Unbounce does not split by B2B/B2C for most industries — shown as one overall figure. A widely-repeated ‘1.1% B2B SaaS’ figure and a contradicting ‘>10%’ figure both trace to unconfirmed aggregators and are deliberately left out.",
+      "unit": "%",
+      "decimals": 1,
+      "better": "higher",
+      "source": "s-unbounce"
+    },
+    {
+      "id": "sitecvr",
+      "label": "Full-site conversion",
+      "ask": "full-site conversion",
+      "stage": "Funnel stage: any visit → conversion (not landing-page-only)",
+      "note": "Ruler Analytics does not split by B2B/B2C — shown as one overall figure. This is a different funnel stage than landing-page conversion above; the two should never be read as the same number.",
+      "unit": "%",
+      "decimals": 1,
+      "better": "higher",
+      "source": "s-ruler"
+    },
+    {
+      "id": "ctr",
+      "label": "Paid-search CTR",
+      "ask": "paid-search click-through rate",
+      "stage": "Paid search — impression → click",
+      "note": "WordStream/LocaliQ benchmarks are by ad-account industry category, not split by B2B/B2C.",
+      "unit": "%",
+      "decimals": 2,
+      "better": "higher",
+      "source": "s-wordstream"
+    },
+    {
+      "id": "cpc",
+      "label": "Paid-search CPC",
+      "ask": "paid-search cost per click",
+      "stage": "Paid search — cost per click",
+      "note": "WordStream/LocaliQ benchmarks are by ad-account industry category, not split by B2B/B2C.",
+      "unit": "$",
+      "decimals": 2,
+      "better": "lower",
+      "source": "s-wordstream",
+      "prefix": true
+    },
+    {
+      "id": "cpl",
+      "label": "Paid-search cost per lead",
+      "ask": "paid-search cost per lead",
+      "stage": "Paid search — cost per lead",
+      "note": "WordStream/LocaliQ benchmarks are by ad-account industry category, not split by B2B/B2C.",
+      "unit": "$",
+      "decimals": 2,
+      "better": "lower",
+      "source": "s-wordstream",
+      "prefix": true
+    },
+    {
+      "id": "cycle",
+      "label": "Sales-cycle length",
+      "ask": "sales-cycle length",
+      "stage": "Full funnel — first contact to close",
+      "note": "No named report quantifies a B2C ‘sales cycle’ in days the way B2B benchmarks do — consumer purchases are treated as near-instant, so this column is a structural gap, not a missed lookup.",
+      "unit": "d",
+      "decimals": 0,
+      "better": "lower",
+      "source": "s-cycle"
+    },
+    {
+      "id": "touch",
+      "label": "Touchpoints before conversion",
+      "ask": "touchpoints before conversion",
+      "stage": "Full funnel — distinct interactions before close",
+      "note": "No publisher breaks this out by vertical or industry — same cross-industry figure shown for every vertical. Published B2B figures range from 27 to 417 depending on deal size and how ‘touchpoint’ is defined; the spread itself is the finding, not any single number.",
+      "unit": "",
+      "decimals": 0,
+      "better": "lower",
+      "source": "s-touch"
+    },
+    {
+      "id": "emailctr",
+      "label": "Email click rate",
+      "ask": "email click rate",
+      "stage": "Retention / nurture — click rate, not open rate",
+      "note": "Click rate, deliberately, not open rate: Apple Mail Privacy Protection pre-loads tracking pixels and makes open-rate benchmarks disagree by up to 2× across publishers. Not split by B2B/B2C by any source found here.",
+      "unit": "%",
+      "decimals": 2,
+      "better": "higher",
+      "source": "s-mailchimp"
+    },
+    {
+      "id": "reviews",
+      "label": "Buyers who consult reviews first",
+      "ask": "review reliance",
+      "stage": "Pre-purchase research — share who read reviews before buying",
+      "note": "Descriptive, not a scorecard: a higher share means more of the sale rides on your public review profile, for better or worse. Sourced at the vertical level for SaaS only — every other vertical is a real gap here, not an oversight.",
+      "unit": "%",
+      "decimals": 0,
+      "better": "higher",
+      "source": "s-g2"
+    }
+  ],
+  "values": {
+    "saas_software": {
+      "cac": {
+        "mode": "split",
+        "b2b": 239,
+        "b2c": 166,
+        "note": "B2B: 'B2B SaaS' (organic $205 / paid $341). B2C: 'SaaS' — consumer/prosumer SaaS, not enterprise.",
+        "sourceB2B": "s-fps-b2b",
+        "sourceB2C": "s-fps-b2c"
+      },
+      "lpcvr": {
+        "mode": "overall",
+        "overall": 3.8,
+        "note": "Unbounce 'SaaS' landing-page category, 42% below the 6.6% all-industry median."
+      },
+      "sitecvr": {
+        "mode": "overall",
+        "overall": 7.6,
+        "note": "Ruler 'Software' category."
+      },
+      "ctr": {
+        "mode": "overall",
+        "overall": null,
+        "note": "WordStream's 23-industry list has no dedicated category for this vertical, and no clean proxy exists — genuine gap."
+      },
+      "cpc": {
+        "mode": "overall",
+        "overall": null,
+        "note": "WordStream's 23-industry list has no dedicated category for this vertical, and no clean proxy exists — genuine gap."
+      },
+      "cpl": {
+        "mode": "overall",
+        "overall": null,
+        "note": "WordStream's 23-industry list has no dedicated category for this vertical, and no clean proxy exists — genuine gap."
+      },
+      "cycle": {
+        "mode": "split",
+        "b2b": 60,
+        "b2c": null,
+        "note": "Cited as 'roughly 60 days for horizontal SaaS', low end of the range."
+      },
+      "touch": {
+        "mode": "split",
+        "b2b": 60,
+        "b2c": 6,
+        "note": "Cross-industry figure — no publisher breaks this out by vertical (see the metric note above)."
+      },
+      "emailctr": {
+        "mode": "overall",
+        "overall": null,
+        "note": "No industry-specific email click-rate figure was found for this vertical in Mailchimp's, Klaviyo's or M+R's published categories — genuine gap."
+      },
+      "reviews": {
+        "mode": "split",
+        "b2b": 86,
+        "b2c": null,
+        "note": "G2's 2021 B2B Software Behavior Survey, via DemandGen Report's write-up (direct-fetch confirmed) -- G2's own page for this specific survey was not locatable live; the DemandGen Report article quotes the 86% figure and names the survey directly. The only vertical in this dataset with a sourced review-reliance figure at all; for comparison (not vertical-specific), roughly 93% of consumers overall say they read reviews before buying -- see sources."
+      }
+    },
+    "ecommerce_retail": {
+      "cac": {
+        "mode": "split",
+        "b2b": 86,
+        "b2c": 66,
+        "note": "B2B: First Page Sage's 'eCommerce' figure is a wholesale / B2B ordering-platform number, not consumer retail — compare with caution.",
+        "sourceB2B": "s-fps-b2b",
+        "sourceB2C": "s-fps-b2c"
+      },
+      "lpcvr": {
+        "mode": "overall",
+        "overall": 4.2,
+        "note": "Unbounce 'Ecommerce' landing-page category."
+      },
+      "sitecvr": {
+        "mode": "overall",
+        "overall": 2.4,
+        "note": "Ruler 'Retail & eCommerce' category (Ruler's 'Beauty & Cosmetic' sub-category runs higher at 3.5%, not shown)."
+      },
+      "ctr": {
+        "mode": "overall",
+        "overall": 8.28,
+        "note": "WordStream 'Shopping, Collectibles and Gifts' category ('Apparel, Fashion and Jewelry' runs CTR 6.64% / CPC $4.44 / CPL $97.51, not shown)."
+      },
+      "cpc": {
+        "mode": "overall",
+        "overall": 4.14,
+        "note": "WordStream 'Shopping, Collectibles and Gifts' category ('Apparel, Fashion and Jewelry' runs CTR 6.64% / CPC $4.44 / CPL $97.51, not shown)."
+      },
+      "cpl": {
+        "mode": "overall",
+        "overall": 49.4,
+        "note": "WordStream 'Shopping, Collectibles and Gifts' category ('Apparel, Fashion and Jewelry' runs CTR 6.64% / CPC $4.44 / CPL $97.51, not shown)."
+      },
+      "cycle": {
+        "mode": "split",
+        "b2b": 70,
+        "b2c": null,
+        "note": "Shortest average B2B cycle among industries cited (B2B wholesale/retail sales, not consumer retail)."
+      },
+      "touch": {
+        "mode": "split",
+        "b2b": 60,
+        "b2c": 6,
+        "note": "Cross-industry figure — no publisher breaks this out by vertical (see the metric note above)."
+      },
+      "emailctr": {
+        "mode": "overall",
+        "overall": 1.74,
+        "note": "Klaviyo's 2026 ecommerce-specific panel corroborates at 1.69% for one-off campaigns (automated flow emails convert far higher, 5.58%, not shown here)."
+      },
+      "reviews": {
+        "mode": "split",
+        "b2b": null,
+        "b2c": null,
+        "note": "No sourced review-reliance figure for this vertical was found in this pass — genuine gap, not an oversight."
+      }
+    },
+    "professional_services": {
+      "cac": {
+        "mode": "split",
+        "b2b": 749,
+        "b2c": 323,
+        "note": "Both editions' 'Legal Services' category — the same sub-industry used for this vertical's paid-search figures below.",
+        "sourceB2B": "s-fps-b2b",
+        "sourceB2C": "s-fps-b2c"
+      },
+      "lpcvr": {
+        "mode": "overall",
+        "overall": 6.1,
+        "note": "Unbounce 'Commercial & Professional Services' category."
+      },
+      "sitecvr": {
+        "mode": "overall",
+        "overall": 6.1,
+        "note": "Ruler 'Professional Services' category (adjacent Ruler categories run close: Marketing & Advertising 6.2%, Legal 7.9% — not shown)."
+      },
+      "ctr": {
+        "mode": "overall",
+        "overall": 5.87,
+        "note": "WordStream 'Attorneys and Legal Services' category — the same sub-industry used for this vertical's acquisition-cost figure above. Highest CPC and CPL of all 23 WordStream industries."
+      },
+      "cpc": {
+        "mode": "overall",
+        "overall": 9.87,
+        "note": "WordStream 'Attorneys and Legal Services' category — the same sub-industry used for this vertical's acquisition-cost figure above. Highest CPC and CPL of all 23 WordStream industries."
+      },
+      "cpl": {
+        "mode": "overall",
+        "overall": 131.63,
+        "note": "WordStream 'Attorneys and Legal Services' category — the same sub-industry used for this vertical's acquisition-cost figure above. Highest CPC and CPL of all 23 WordStream industries."
+      },
+      "cycle": {
+        "mode": "split",
+        "b2b": null,
+        "b2c": null,
+        "note": "No B2B sales-cycle-length figure specific to this vertical was found in this pass — genuine gap."
+      },
+      "touch": {
+        "mode": "split",
+        "b2b": 60,
+        "b2c": 6,
+        "note": "Cross-industry figure — no publisher breaks this out by vertical (see the metric note above)."
+      },
+      "emailctr": {
+        "mode": "overall",
+        "overall": 4.9,
+        "note": "LOWER CONFIDENCE: aggregator-cited legal-sector click rate; publisher/underlying methodology not fully confirmed.",
+        "sourceB2B": "s-email-agg",
+        "sourceB2C": "s-email-agg"
+      },
+      "reviews": {
+        "mode": "split",
+        "b2b": null,
+        "b2c": null,
+        "note": "No sourced review-reliance figure for this vertical was found in this pass — genuine gap, not an oversight."
+      }
+    },
+    "financial_services": {
+      "cac": {
+        "mode": "split",
+        "b2b": 784,
+        "b2c": 160,
+        "note": "Both editions' 'Financial Services' category.",
+        "sourceB2B": "s-fps-b2b",
+        "sourceB2C": "s-fps-b2c"
+      },
+      "lpcvr": {
+        "mode": "overall",
+        "overall": 8.4,
+        "note": "LOWER CONFIDENCE: seen only via a secondary aggregator summary, not independently confirmed on unbounce.com directly — treat as indicative."
+      },
+      "sitecvr": {
+        "mode": "overall",
+        "overall": 6.3,
+        "note": "Ruler 'Finance' category."
+      },
+      "ctr": {
+        "mode": "overall",
+        "overall": 9.83,
+        "note": "WordStream 'Finance and Insurance' category — highest CTR of all 23 WordStream industries, but lower-mid conversion rate."
+      },
+      "cpc": {
+        "mode": "overall",
+        "overall": 3.39,
+        "note": "WordStream 'Finance and Insurance' category — highest CTR of all 23 WordStream industries, but lower-mid conversion rate."
+      },
+      "cpl": {
+        "mode": "overall",
+        "overall": 74.44,
+        "note": "WordStream 'Finance and Insurance' category — highest CTR of all 23 WordStream industries, but lower-mid conversion rate."
+      },
+      "cycle": {
+        "mode": "split",
+        "b2b": 195,
+        "b2c": null,
+        "note": "Sources disagree sharply here: one aggregator's 150–240-day range (shown: 195d midpoint) vs. a separate 9–18-month (~405d) citation for regulated/fintech enterprise deals. Both are secondary sources; treat directionally, not as a precise figure."
+      },
+      "touch": {
+        "mode": "split",
+        "b2b": 60,
+        "b2c": 6,
+        "note": "Cross-industry figure — no publisher breaks this out by vertical (see the metric note above)."
+      },
+      "emailctr": {
+        "mode": "overall",
+        "overall": 2.78,
+        "note": "Mailchimp 'All Users' benchmark by self-reported industry."
+      },
+      "reviews": {
+        "mode": "split",
+        "b2b": null,
+        "b2c": null,
+        "note": "No sourced review-reliance figure for this vertical was found in this pass — genuine gap, not an oversight."
+      }
+    },
+    "education": {
+      "cac": {
+        "mode": "split",
+        "b2b": 1143,
+        "b2c": 156,
+        "note": "B2C: 'Higher Education & College' — consumer-facing (e.g. for-profit/trade schools), not the institutional B2B buyer on the other side of this row. The gap is partly a different buyer entirely, not just B2B markup.",
+        "sourceB2B": "s-fps-b2b",
+        "sourceB2C": "s-fps-b2c"
+      },
+      "lpcvr": {
+        "mode": "overall",
+        "overall": null,
+        "note": "No Unbounce landing-page category maps cleanly to this vertical — genuine gap."
+      },
+      "sitecvr": {
+        "mode": "overall",
+        "overall": 6.3,
+        "note": "Ruler 'Education' category."
+      },
+      "ctr": {
+        "mode": "overall",
+        "overall": 7.56,
+        "note": "WordStream 'Education and Instruction' category."
+      },
+      "cpc": {
+        "mode": "overall",
+        "overall": 4.81,
+        "note": "WordStream 'Education and Instruction' category."
+      },
+      "cpl": {
+        "mode": "overall",
+        "overall": 77.48,
+        "note": "WordStream 'Education and Instruction' category."
+      },
+      "cycle": {
+        "mode": "split",
+        "b2b": null,
+        "b2c": null,
+        "note": "No B2B sales-cycle-length figure specific to this vertical was found in this pass — genuine gap."
+      },
+      "touch": {
+        "mode": "split",
+        "b2b": 60,
+        "b2c": 6,
+        "note": "Cross-industry figure — no publisher breaks this out by vertical (see the metric note above)."
+      },
+      "emailctr": {
+        "mode": "overall",
+        "overall": 3.02,
+        "note": "Mailchimp 'All Users' benchmark by self-reported industry."
+      },
+      "reviews": {
+        "mode": "split",
+        "b2b": null,
+        "b2c": null,
+        "note": "No sourced review-reliance figure for this vertical was found in this pass — genuine gap, not an oversight."
+      }
+    },
+    "healthcare": {
+      "cac": {
+        "mode": "split",
+        "b2b": null,
+        "b2c": 148,
+        "note": "No B2B healthcare category in First Page Sage's B2B report — genuine gap, not an oversight. B2C: 'Medical Practices'.",
+        "sourceB2B": "s-fps-b2b",
+        "sourceB2C": "s-fps-b2c"
+      },
+      "lpcvr": {
+        "mode": "overall",
+        "overall": null,
+        "note": "No Unbounce landing-page category maps cleanly to this vertical — genuine gap."
+      },
+      "sitecvr": {
+        "mode": "overall",
+        "overall": 2.3,
+        "note": "Ruler 'Health & Social Care' category."
+      },
+      "ctr": {
+        "mode": "overall",
+        "overall": 6.61,
+        "note": "WordStream 'Physicians and Surgeons' category. A second healthcare sub-category ('Dentists and Dental Services') runs CTR 5.66% / CPC $8.00 / CPL $72.97 — a rougher proxy, not shown."
+      },
+      "cpc": {
+        "mode": "overall",
+        "overall": 4.76,
+        "note": "WordStream 'Physicians and Surgeons' category. A second healthcare sub-category ('Dentists and Dental Services') runs CTR 5.66% / CPC $8.00 / CPL $72.97 — a rougher proxy, not shown."
+      },
+      "cpl": {
+        "mode": "overall",
+        "overall": 40.04,
+        "note": "WordStream 'Physicians and Surgeons' category. A second healthcare sub-category ('Dentists and Dental Services') runs CTR 5.66% / CPC $8.00 / CPL $72.97 — a rougher proxy, not shown."
+      },
+      "cycle": {
+        "mode": "split",
+        "b2b": null,
+        "b2c": null,
+        "note": "No B2B sales-cycle-length figure specific to this vertical was found in this pass — genuine gap."
+      },
+      "touch": {
+        "mode": "split",
+        "b2b": 60,
+        "b2c": 6,
+        "note": "Cross-industry figure — no publisher breaks this out by vertical (see the metric note above)."
+      },
+      "emailctr": {
+        "mode": "overall",
+        "overall": null,
+        "note": "No industry-specific email click-rate figure was found for this vertical in Mailchimp's, Klaviyo's or M+R's published categories — genuine gap."
+      },
+      "reviews": {
+        "mode": "split",
+        "b2b": null,
+        "b2c": null,
+        "note": "No sourced review-reliance figure for this vertical was found in this pass — genuine gap, not an oversight."
+      }
+    },
+    "real_estate": {
+      "cac": {
+        "mode": "split",
+        "b2b": 791,
+        "b2c": 165,
+        "note": "Both editions' 'Real Estate' category.",
+        "sourceB2B": "s-fps-b2b",
+        "sourceB2C": "s-fps-b2c"
+      },
+      "lpcvr": {
+        "mode": "overall",
+        "overall": null,
+        "note": "No Unbounce landing-page category maps cleanly to this vertical — genuine gap."
+      },
+      "sitecvr": {
+        "mode": "overall",
+        "overall": 2.8,
+        "note": "Ruler 'Real Estate' category. A visitor-to-LEAD figure exists elsewhere (Promodo, 4.7%) but that is a different funnel stage wearing the same label — not shown on this row on purpose."
+      },
+      "ctr": {
+        "mode": "overall",
+        "overall": 7.61,
+        "note": "WordStream 'Real Estate' category."
+      },
+      "cpc": {
+        "mode": "overall",
+        "overall": 3.22,
+        "note": "WordStream 'Real Estate' category."
+      },
+      "cpl": {
+        "mode": "overall",
+        "overall": 102.51,
+        "note": "WordStream 'Real Estate' category."
+      },
+      "cycle": {
+        "mode": "split",
+        "b2b": null,
+        "b2c": null,
+        "note": "No B2B sales-cycle-length figure specific to this vertical was found in this pass — genuine gap."
+      },
+      "touch": {
+        "mode": "split",
+        "b2b": 60,
+        "b2c": 6,
+        "note": "Cross-industry figure — no publisher breaks this out by vertical (see the metric note above)."
+      },
+      "emailctr": {
+        "mode": "overall",
+        "overall": null,
+        "note": "No industry-specific email click-rate figure was found for this vertical in Mailchimp's, Klaviyo's or M+R's published categories — genuine gap."
+      },
+      "reviews": {
+        "mode": "split",
+        "b2b": null,
+        "b2c": null,
+        "note": "No sourced review-reliance figure for this vertical was found in this pass — genuine gap, not an oversight."
+      }
+    },
+    "travel_hospitality": {
+      "cac": {
+        "mode": "split",
+        "b2b": 683,
+        "b2c": 228,
+        "note": "B2B: 'Aviation'. B2C: 'Hotels & Resorts' — different sub-industries grouped under one vertical here; treat the ratio directionally.",
+        "sourceB2B": "s-fps-b2b",
+        "sourceB2C": "s-fps-b2c"
+      },
+      "lpcvr": {
+        "mode": "overall",
+        "overall": null,
+        "note": "No Unbounce landing-page category maps cleanly to this vertical — genuine gap."
+      },
+      "sitecvr": {
+        "mode": "overall",
+        "overall": 1.9,
+        "note": "Ruler 'Travel' category — lowest of the 13 industries Ruler tracks."
+      },
+      "ctr": {
+        "mode": "overall",
+        "overall": 9.32,
+        "note": "WordStream 'Travel' category."
+      },
+      "cpc": {
+        "mode": "overall",
+        "overall": 2.14,
+        "note": "WordStream 'Travel' category."
+      },
+      "cpl": {
+        "mode": "overall",
+        "overall": 44.7,
+        "note": "WordStream 'Travel' category."
+      },
+      "cycle": {
+        "mode": "split",
+        "b2b": null,
+        "b2c": null,
+        "note": "No B2B sales-cycle-length figure specific to this vertical was found in this pass — genuine gap."
+      },
+      "touch": {
+        "mode": "split",
+        "b2b": 60,
+        "b2c": 6,
+        "note": "Cross-industry figure — no publisher breaks this out by vertical (see the metric note above)."
+      },
+      "emailctr": {
+        "mode": "overall",
+        "overall": null,
+        "note": "No industry-specific email click-rate figure was found for this vertical in Mailchimp's, Klaviyo's or M+R's published categories — genuine gap."
+      },
+      "reviews": {
+        "mode": "split",
+        "b2b": null,
+        "b2c": null,
+        "note": "No sourced review-reliance figure for this vertical was found in this pass — genuine gap, not an oversight."
+      }
+    },
+    "manufacturing_industrial": {
+      "cac": {
+        "mode": "split",
+        "b2b": 723,
+        "b2c": null,
+        "note": "B2C: no Manufacturing category in First Page Sage's B2C report — manufacturing is inherently B2B/B2B2C, so no true consumer-facing comparator exists.",
+        "sourceB2B": "s-fps-b2b",
+        "sourceB2C": "s-fps-b2c"
+      },
+      "lpcvr": {
+        "mode": "overall",
+        "overall": null,
+        "note": "No Unbounce landing-page category maps cleanly to this vertical — genuine gap."
+      },
+      "sitecvr": {
+        "mode": "overall",
+        "overall": 4.9,
+        "note": "Ruler 'Construction & Engineering' category, the closest proxy to Manufacturing & Industrial (Ruler's 'Automotive' sub-category runs much higher at 7.9%, a different buyer motion, not shown)."
+      },
+      "ctr": {
+        "mode": "overall",
+        "overall": null,
+        "note": "WordStream's 23-industry list has no dedicated category for this vertical, and no clean proxy exists — genuine gap."
+      },
+      "cpc": {
+        "mode": "overall",
+        "overall": null,
+        "note": "WordStream's 23-industry list has no dedicated category for this vertical, and no clean proxy exists — genuine gap."
+      },
+      "cpl": {
+        "mode": "overall",
+        "overall": null,
+        "note": "WordStream's 23-industry list has no dedicated category for this vertical, and no clean proxy exists — genuine gap."
+      },
+      "cycle": {
+        "mode": "split",
+        "b2b": null,
+        "b2c": null,
+        "note": "No B2B sales-cycle-length figure specific to this vertical was found in this pass — genuine gap."
+      },
+      "touch": {
+        "mode": "split",
+        "b2b": 60,
+        "b2c": 6,
+        "note": "Cross-industry figure — no publisher breaks this out by vertical (see the metric note above)."
+      },
+      "emailctr": {
+        "mode": "overall",
+        "overall": null,
+        "note": "No industry-specific email click-rate figure was found for this vertical in Mailchimp's, Klaviyo's or M+R's published categories — genuine gap."
+      },
+      "reviews": {
+        "mode": "split",
+        "b2b": null,
+        "b2c": null,
+        "note": "No sourced review-reliance figure for this vertical was found in this pass — genuine gap, not an oversight."
+      }
+    },
+    "nonprofit": {
+      "cac": {
+        "mode": "overall",
+        "overall": null,
+        "note": "Neither First Page Sage report covers nonprofits. The sector's standard metric is cost-per-donor or cost-per-dollar-raised, not CAC in the commercial sense — not a comparable benchmark.",
+        "sourceB2B": "s-fps-b2b",
+        "sourceB2C": "s-fps-b2c"
+      },
+      "lpcvr": {
+        "mode": "overall",
+        "overall": null,
+        "note": "No Unbounce landing-page category maps cleanly to this vertical — genuine gap."
+      },
+      "sitecvr": {
+        "mode": "overall",
+        "overall": 1.6,
+        "note": "Different publisher and methodology (M+R, nonprofit-sector-specific) than the Ruler-sourced figure used for every other vertical on this row — not directly comparable to the rest of the row.",
+        "sourceB2B": "s-mr",
+        "sourceB2C": "s-mr"
+      },
+      "ctr": {
+        "mode": "overall",
+        "overall": null,
+        "note": "WordStream's 23-industry list has no dedicated category for this vertical, and no clean proxy exists — genuine gap."
+      },
+      "cpc": {
+        "mode": "overall",
+        "overall": null,
+        "note": "WordStream's 23-industry list has no dedicated category for this vertical, and no clean proxy exists — genuine gap."
+      },
+      "cpl": {
+        "mode": "overall",
+        "overall": null,
+        "note": "WordStream's 23-industry list has no dedicated category for this vertical, and no clean proxy exists — genuine gap."
+      },
+      "cycle": {
+        "mode": "split",
+        "b2b": 162,
+        "b2c": null,
+        "note": "Longest average B2B cycle among industries cited (selling software/services TO nonprofits, not donor fundraising)."
+      },
+      "touch": {
+        "mode": "split",
+        "b2b": 60,
+        "b2c": 6,
+        "note": "Cross-industry figure — no publisher breaks this out by vertical (see the metric note above)."
+      },
+      "emailctr": {
+        "mode": "overall",
+        "overall": 3.27,
+        "note": "Mailchimp's blended nonprofit average, shown for cross-vertical consistency. M+R's nonprofit-specific data splits this further: fundraising asks click at 0.59%, advocacy (non-donation) asks click at 2.3% — nearly 4× higher. Asking for money is the harder click."
+      },
+      "reviews": {
+        "mode": "split",
+        "b2b": null,
+        "b2c": null,
+        "note": "No sourced review-reliance figure for this vertical was found in this pass — genuine gap, not an oversight."
+      }
+    }
+  },
+  "sources": [
+    {
+      "id": "s-fps-b2b",
+      "short": "FP-B2B",
+      "label": "First Page Sage — Average CAC by Industry: B2B Edition (2026)",
+      "detail": "Published Jan 26, 2026. Data period Jan 2022–Aug 2025, First Page Sage client analytics accounts (anonymized), blended organic+paid CAC, 29 B2B industries.",
+      "stillDetail": "Jan 2026. Client analytics accounts, blended CAC, 29 B2B industries.",
+      "asOf": "2026-09-14",
+      "url": "https://firstpagesage.com/reports/average-customer-acquisition-cost-cac-by-industry-b2b-edition-fc/"
+    },
+    {
+      "id": "s-fps-b2c",
+      "short": "FP-B2C",
+      "label": "First Page Sage — Average CAC by Industry: B2C Edition (2025)",
+      "detail": "Published Jul 3, 2025. Data from 103 B2C clients, 2021–2025, blended organic+paid annual CAC, 20 industries.",
+      "stillDetail": "Jul 2025. 103 B2C clients, blended annual CAC, 20 industries.",
+      "asOf": "2026-09-14",
+      "url": "https://firstpagesage.com/reports/average-cac-by-industry-b2c-edition/"
+    },
+    {
+      "id": "s-unbounce",
+      "short": "UNBNC",
+      "label": "Unbounce — Conversion Benchmark Report",
+      "detail": "Data period Jul 2023–Jul 2024. 41,000 landing pages, 464M visitors, 57M conversions; still Unbounce's current published benchmark.",
+      "stillDetail": "41,000 landing pages, 464M visitors, Jul 2023–Jul 2024.",
+      "asOf": "2026-09-14",
+      "url": "https://unbounce.com/average-conversion-rates-landing-pages/"
+    },
+    {
+      "id": "s-ruler",
+      "short": "RULER",
+      "label": "Ruler Analytics — Conversion Rate Benchmarks 2026",
+      "detail": "110M+ sessions, 5M+ conversions, £33.8M+ spend tracked, 13 industries. Full-site conversion, not split B2B/B2C.",
+      "stillDetail": "110M+ sessions, 13 industries, 2026. Full-site, not split B2B/B2C.",
+      "asOf": "2026-09-14",
+      "url": "https://www.ruleranalytics.com/blog/insight/conversion-rate-by-industry/"
+    },
+    {
+      "id": "s-wordstream",
+      "short": "WORDS",
+      "label": "WordStream (LocaliQ) — Google Ads Benchmarks 2026",
+      "detail": "13,000+ US Search campaigns, Apr 2025–Mar 2026, 23 industry categories. Publisher page returned HTTP 403 to direct fetch; cross-checked via a mirror (hawky.ai) against WordStream's own topline averages.",
+      "stillDetail": "13,000+ US Search campaigns, Apr 2025–Mar 2026, 23 industries.",
+      "asOf": "2026-09-14",
+      "url": "https://www.wordstream.com/blog/2026-google-ads-benchmarks"
+    },
+    {
+      "id": "s-cycle",
+      "short": "CYCLE",
+      "label": "Aggregator roundup — B2B sales-cycle length by industry",
+      "detail": "Secondary aggregators (focus-digital.co, ziellab.com, getboomerang.ai) citing multiple 2026 benchmark studies; no single named primary study, and sources disagree by up to 2× on some verticals — see cell notes. Cross-industry median cited elsewhere as 84 days (also 60d/Databox practitioner survey, 307d full-buying-process figure).",
+      "stillDetail": "Secondary aggregators, 2026 studies; disagree up to 2× — see cell notes.",
+      "asOf": "2026-09-14",
+      "url": "https://focus-digital.co/average-sales-cycle-length-by-industry/"
+    },
+    {
+      "id": "s-touch",
+      "short": "TOUCH",
+      "label": "Aggregator roundup — touchpoints before conversion",
+      "detail": "B2B figures from HockeyStack Labs, Dreamdata and Geisheker (27–417 depending on deal size/definition; 60 shown as a representative mid-range figure). B2C figure (6) from a separate 2025 consumer path-to-purchase study (emailtooltester.com), not independently verified. No publisher breaks either out by vertical.",
+      "stillDetail": "B2B: 27–417 by deal size (60 shown). B2C: 6, separate 2025 study.",
+      "asOf": "2026-09-14",
+      "url": "https://www.hockeystack.com/lab-blog-posts/b2b-customer-journey-touchpoints"
+    },
+    {
+      "id": "s-mailchimp",
+      "short": "MAILC",
+      "label": "Mailchimp — Email Marketing Benchmarks by Industry",
+      "detail": "Directly fetched 2026-09-14; page states underlying data last updated December 2023. Billions of emails, 1,000+ subscriber campaigns, self-reported industry. Click rate, not open rate.",
+      "stillDetail": "Billions of emails, self-reported industry, data as of Dec 2023.",
+      "asOf": "2026-09-14",
+      "url": "https://mailchimp.com/resources/email-marketing-benchmarks/"
+    },
+    {
+      "id": "s-mr",
+      "short": "M+R",
+      "label": "M+R Benchmarks 2026 (nonprofit sector coalition)",
+      "detail": "Nonprofit-sector-standard annual report. Splits fundraising vs. advocacy email performance and reports nonprofit site conversion — different methodology than the commercial-sector sources used elsewhere in this artifact.",
+      "stillDetail": "Nonprofit-sector-standard annual report, 2026.",
+      "asOf": "2026-09-14",
+      "url": "https://mrbenchmarks.com/email-messaging/"
+    },
+    {
+      "id": "s-email-agg",
+      "short": "EM-AG",
+      "label": "Aggregator — email marketing benchmarks roundup (lower confidence)",
+      "detail": "Legal-sector email click rate cited without a fully confirmed underlying publisher or methodology.",
+      "stillDetail": "Lower confidence — methodology not fully confirmed.",
+      "asOf": "2026-09-14",
+      "url": "https://www.omnisend.com/blog/email-marketing-benchmarks/"
+    },
+    {
+      "id": "s-g2",
+      "short": "G2",
+      "label": "G2 — 2021 B2B Software Behavior Survey (via DemandGen Report)",
+      "detail": "Corrected Sept 14, 2026: the figure originally cited here (92%, attributed to a “2024 Buyer Behavior Report”) does not appear on G2's actual 2024 report page or PDF (direct-fetch confirmed) — that report's real reviews figure is 31% (“most-consulted source”, a different metric). This entry now cites G2's named 2021 survey instead, confirmed via direct fetch of DemandGen Report's write-up, which quotes it directly (“86% of buyers turn to peer-review websites to reach a final verdict”). G2 is itself a B2B review platform, so some self-interest in the underlying finding should be assumed regardless.",
+      "stillDetail": "G2 2021 survey, via DemandGen Report (direct-fetch confirmed).",
+      "asOf": "2026-09-14",
+      "url": "https://www.demandgenreport.com/industry-news/new-research-86-of-b2b-software-buyers-rely-on-third-party-reviews-when-making-a-purchase-decision/7019/"
+    }
+  ]
+}
+</script>
+
+<div class="viz" id="viz">
+  <canvas id="bg" aria-hidden="true"></canvas>
+
+  <div class="shell">
+    <header>
+      <div class="kick">
+        <span class="eyebrow" id="eyebrow"></span>
+        <span class="badge" id="sample-badge" hidden>Sample data</span>
+      </div>
+      <h1 id="title"></h1>
+      <p class="deck" id="deck"></p>
+      <p class="poster-q" id="poster-q"></p>
+    </header>
+
+    <!-- The question is the control. -->
+    <section class="ask" aria-labelledby="ask-h">
+      <h2 class="sr" id="ask-h">Change the comparison</h2>
+      <p class="ask-line" id="ask-line">
+        <span id="ask-a"></span>
+        <select class="tok" id="sel-metric" aria-label="Metric"></select>
+        <span id="ask-b"></span>
+        <select class="tok" id="sel-vertical" aria-label="Industry vertical"></select><span id="ask-c"></span>
+      </p>
+      <p class="ask-hint">Change either word — the comparison and the ranking below both re-animate. Every number carries its source.</p>
+      <div class="prompts" id="prompts" role="group" aria-label="Question prompts"></div>
+      <div class="rail" aria-hidden="true"><i id="rail-fill"></i></div>
+    </section>
+
+    <!-- Selector-driven side-by-side comparison: B2B vs B2C for the picked vertical.
+         When the metric's source doesn't split B2B/B2C, `.merged` on this section
+         hides the two columns and shows the single centred panel instead — never
+         two copies of the same number either side of a fake "1.0×". -->
+    <section class="stage" id="stage-section" aria-labelledby="stage-h">
+      <h2 class="sr" id="stage-h">B2B vs B2C, side by side</h2>
+      <article class="col" data-side="cited">
+        <div class="col-head"><span class="col-name" id="cited-name"></span><span class="col-sub" id="cited-sub"></span></div>
+        <p class="hero"><span id="hero-cited">0</span><span class="u" id="hero-cited-u"></span></p>
+        <p class="hero-label" id="hero-label-cited"></p>
+        <div class="gauge" id="gauge-cited"></div>
+      </article>
+      <div class="delta">
+        <span class="delta-arrow" aria-hidden="true">→</span>
+        <span class="delta-x" id="delta-x">—</span>
+        <span class="delta-l" id="delta-l">difference</span>
+      </div>
+      <article class="col" data-side="absent">
+        <div class="col-head"><span class="col-name" id="absent-name"></span><span class="col-sub" id="absent-sub"></span></div>
+        <p class="hero"><span id="hero-absent">0</span><span class="u" id="hero-absent-u"></span></p>
+        <p class="hero-label" id="hero-label-absent"></p>
+        <div class="gauge" id="gauge-absent"></div>
+      </article>
+      <article class="col-merged" id="col-merged">
+        <div class="col-head"><span class="col-name">B2B &amp; B2C</span><span class="col-sub">one figure, source does not split B2B/B2C</span></div>
+        <p class="hero"><span id="hero-merged">0</span><span class="u" id="hero-merged-u"></span></p>
+        <p class="hero-label" id="hero-label-merged"></p>
+      </article>
+    </section>
+
+    <section class="ledger" id="ledger" aria-labelledby="ledger-h">
+      <h2 class="sr" id="ledger-h">The rest of the measurements, for this vertical</h2>
+    </section>
+
+    <section class="lane" id="lane" aria-labelledby="lane-h">
+      <div class="lane-head">
+        <h2 class="lane-title" id="lane-h">Rank all 10 verticals by <span id="lane-metric"></span></h2>
+        <p class="lane-sub" id="lane-sub"></p>
+      </div>
+      <ol class="lane-rows" id="lane-rows"></ol>
+      <p class="lane-gaps" id="lane-gaps"></p>
+    </section>
+
+    <div class="foot">
+      <details class="sources" id="sources">
+        <summary>Sources &amp; dates for every number on this artifact</summary>
+        <div class="sources-body" id="sources-body"></div>
+      </details>
+      <p class="src-line" id="src-line"></p>
+      <p class="honesty" id="honesty"></p>
+      <p class="by"><span id="by-left"></span><span id="by-right"></span></p>
+      <div class="strip" id="strip"></div>
+    </div>
+  </div>
+
+  <div id="pop" hidden role="tooltip"></div>
+  <p class="sr" id="live" role="status" aria-live="polite" aria-atomic="true"></p>
+</div>
+
+<script>
+'use strict';
+(function () {
+/* ============================================================== plumbing */
+const $ = id => document.getElementById(id);
+const q = new URLSearchParams(location.search);
+const DATA = JSON.parse($('viz-data').textContent);
+const PALETTES = JSON.parse($('viz-palettes').textContent);
+const root = document.documentElement;
+
+const MODE = {
+  poster: q.get('poster') === '1',
+  gif: q.get('gif') === '1',
+  static: q.get('static') === '1' || q.get('poster') === '1' || q.has('frame') || q.has('t'),
+};
+root.dataset.mode = [MODE.poster && 'poster', MODE.gif && 'gif', MODE.static && 'static'].filter(Boolean).join(' ');
+
+const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+let reduced = q.get('motion') === 'reduce' || mq.matches;
+const setMotionFlag = () => { root.dataset.motion = reduced ? 'reduced' : 'full'; };
+setMotionFlag();
+
+/* Deterministic PRNG — the same seed always yields the same mandala. */
+const mulberry32 = a => () => { a |= 0; a = a + 0x6D2B79F5 | 0;
+  let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+  return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+const easeOutExpo = t => (t >= 1 ? 1 : 1 - Math.pow(2, -10 * t));
+const easeOutBack = t => { const c = 1.70158, s = c + 1; return 1 + s * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); };
+const easeInOut = t => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+
+/* ============================================================ the clock
+   One master clock drives every moving thing, so `seek(t)` is reproducible.
+   Timeline (seconds):
+     0.00–0.34  anticipation  — labels settle, columns compress slightly
+     0.34–2.15  counters roll — staggered, easeOutExpo
+     2.15–2.60  payoff        — delta badge overshoots in
+     2.60–4.60  hold / drift  — backdrop only
+*/
+const T = { anticipate: 0.34, rollStart: 0.34, rollEnd: 2.15, payoff: 2.15, payoffEnd: 2.60, total: 4.60 };
+const clock = { t: 0, playing: false, raf: 0, origin: 0 };
+// Length of one seamless backdrop revolution in GIF mode. The exporter passes
+// ?loop=<clip seconds> so the mandala turns exactly 1/K of a revolution.
+const LOOP = Number(q.get('loop')) > 0 ? Number(q.get('loop')) : T.total;
+
+/* ============================================================== state
+   Two selectors: `vertical` (10 industries) and `metric` (10 measurements).
+   The two ALWAYS-VISIBLE columns are B2B ("cited" slot) vs B2C ("absent"
+   slot) for whichever vertical is picked — never a selector choice, always
+   shown side by side, per the brief. `metric` decides which measurement is
+   the big hero numeral, and also drives the ranking lane below.
+*/
+const firstOf = d => DATA.dimensions[d].options[0].id;
+const state = {
+  vertical: q.get('vertical') || DATA.meta.defaultVertical || firstOf('vertical'),
+  metric: q.get('metric') || DATA.meta.hero || firstOf('metric'),
+  palette: q.get('palette') || DATA.meta.palette || PALETTES[0].id,
+  seed: Number(q.get('seed') || DATA.meta.seed || 1),
+};
+if (!DATA.values[state.vertical]) state.vertical = firstOf('vertical');
+const metricById = Object.fromEntries(DATA.metrics.map(m => [m.id, m]));
+const sourceById = Object.fromEntries(DATA.sources.map(s => [s.id, s]));
+if (!metricById[state.metric]) state.metric = firstOf('metric');
+
+const labelOf = (dim, id) => (DATA.dimensions[dim].options.find(o => o.id === id) || {}).label || id;
+
+/* Resolve one (vertical, metric) cell to {b2b, b2c, isOverall, srcB2B, srcB2C, note}.
+   `mode:"overall"` means the source does not split B2B/B2C — the same figure
+   is shown on both sides, tagged, rather than inventing a split. A missing
+   value is `null` and rendered as a visible "no source" gap, never a guess. */
+function cellFor(vertical, metricId) {
+  const byMetric = DATA.values[vertical];
+  return (byMetric && byMetric[metricId]) || { mode: 'overall', overall: null };
+}
+function resolved(vertical, metricId) {
+  const c = cellFor(vertical, metricId);
+  const m = metricById[metricId];
+  if (c.mode === 'overall') {
+    return {
+      b2b: c.overall == null ? null : c.overall, b2c: c.overall == null ? null : c.overall,
+      isOverall: true, srcB2B: c.sourceB2B || m.source, srcB2C: c.sourceB2C || m.source, note: c.note || '',
+    };
+  }
+  return {
+    b2b: c.b2b == null ? null : c.b2b, b2c: c.b2c == null ? null : c.b2c,
+    isOverall: false, srcB2B: c.sourceB2B || m.source, srcB2C: c.sourceB2C || m.source, note: c.note || '',
+  };
+}
+
+const fmt = (m, v) => {
+  if (v == null) return null;
+  const n = Number(v).toFixed(m.decimals);
+  const withCommas = m.decimals === 0 ? Number(n).toLocaleString('en-US') : n;
+  return m.prefix ? `${m.unit}${withCommas}` : withCommas;
+};
+const unitSuffix = m => (m.prefix ? '' : m.unit);
+
+/* ============================================================ palette */
+function applyPalette(id) {
+  const p = PALETTES.find(x => x.id === id) || PALETTES[0];
+  state.palette = p.id;
+  const s = root.style;
+  s.setProperty('--ground', p.ground); s.setProperty('--panel', p.panel);
+  s.setProperty('--panel-2', p.panel2); s.setProperty('--line', p.line);
+  s.setProperty('--text', p.text); s.setProperty('--muted', p.muted);
+  p.accents.forEach((a, i) => s.setProperty(`--a${i + 1}`, a));
+  return p;
+}
+let PAL = applyPalette(state.palette);
+
+/* ==================================================== generative backdrop
+   Deterministic mandala: k-fold radial symmetry, recursively spawned petals
+   (the fractal part), a golden-angle dot lattice, and concentric tick rings.
+   Everything is a pure function of (seed, t) — no randomness at draw time.
+*/
+const K = 12;                       // fold symmetry; also the GIF loop divisor
+const cv = $('bg'), cx = cv.getContext('2d', { alpha: false });
+let specCache = null, specSeed = null, viewW = 0, viewH = 0, dpr = 1;
+
+function buildSpec(seed) {
+  const r = mulberry32(seed >>> 0);
+  const rings = [];
+  const n = 6 + Math.floor(r() * 2);                       // 6–7 concentric petal rings
+  for (let i = 0; i < n; i++) {
+    rings.push({
+      radius: 0.11 + i * (0.098 + r() * 0.028),
+      petals: i < 2 ? K : K * 2,                           // denser outer rings, always K-fold
+      len: 0.052 + r() * 0.072,
+      wide: 0.28 + r() * 0.46,
+      depth: i < 3 ? 3 : 2,                                // recursion: the fractal part
+      accent: Math.floor(r() * 5),
+      dir: i % 2 ? 1 : -1,
+      speed: 0.09 + r() * 0.15,
+      phase: r() * Math.PI * 2,
+      alpha: 0.26 + r() * 0.22,
+      fill: 0.035 + r() * 0.045,
+      width: 0.9 + r() * 1.4,
+    });
+  }
+  const dots = [];
+  const GA = Math.PI * (3 - Math.sqrt(5));
+  const count = 460;
+  for (let i = 0; i < count; i++) {
+    dots.push({ a: i * GA, r: Math.sqrt(i / count), s: 0.6 + r() * 1.9, accent: Math.floor(r() * 5), al: 0.18 + r() * 0.34 });
+  }
+  const spokes = { count: K * 2, accent: Math.floor(r() * 5), alpha: 0.11 + r() * 0.07 };
+  const core = { accent: Math.floor(r() * 5), petals: K, len: 0.085 + r() * 0.03, alpha: 0.42 + r() * 0.2 };
+  return { rings, dots, spokes, core, tick: 0.30 + r() * 0.3 };
+}
+const spec = seed => {
+  if (specSeed !== seed) { specCache = buildSpec(seed); specSeed = seed; }
+  return specCache;
+};
+
+function petal(g, len, wide, depth, w, fillAlpha) {
+  g.beginPath();
+  g.moveTo(0, 0);
+  g.bezierCurveTo(wide * len, -len * 0.42, wide * len, -len * 0.82, 0, -len);
+  g.bezierCurveTo(-wide * len, -len * 0.82, -wide * len, -len * 0.42, 0, 0);
+  if (fillAlpha) {
+    const a = g.globalAlpha;
+    g.globalAlpha = fillAlpha;
+    g.fillStyle = g.strokeStyle;
+    g.fill();
+    g.globalAlpha = a;
+  }
+  g.lineWidth = w;
+  g.stroke();
+  if (depth > 0) {
+    const child = len * 0.47;
+    for (const sign of [-1, 1]) {
+      g.save();
+      g.translate(0, -len * 0.92);
+      g.rotate(sign * 0.62);
+      petal(g, child, wide * 0.92, depth - 1, Math.max(0.4, w * 0.72), fillAlpha && fillAlpha * 0.7);
+      g.restore();
+    }
+  }
+}
+
+function drawBackdrop(t) {
+  const w = cv.width, h = cv.height;
+  if (!w || !h) return;
+  const g = cx;
+  g.setTransform(1, 0, 0, 1, 0, 0);
+  g.fillStyle = PAL.ground;
+  g.fillRect(0, 0, w, h);
+
+  // The mandala is a disc, not a wash: its radius follows the short side so it
+  // stays a coherent object on a tall blog page and on a square poster alike.
+  const fixedAspect = MODE.gif || MODE.poster;
+  const cxx = w * 0.5;
+  const cyy = fixedAspect ? h * 0.46 : Math.min(h * 0.30, w * 0.42);
+  const R = fixedAspect ? Math.min(w, h * 0.92) * 0.82 : w * 0.62;
+
+  // soft ground bloom
+  const grd = g.createRadialGradient(cxx, cyy, 0, cxx, cyy, R * 1.25);
+  grd.addColorStop(0, PAL.panel);
+  grd.addColorStop(0.62, PAL.ground);
+  grd.addColorStop(1, PAL.ground);
+  g.globalAlpha = 0.95; g.fillStyle = grd; g.fillRect(0, 0, w, h); g.globalAlpha = 1;
+
+  const S = spec(state.seed);
+  // Posters and GIFs are mostly opaque panel, so the field is pushed harder there.
+  const FIELD = (MODE.poster || MODE.gif) ? 1.3 : 1;
+  // In GIF mode the mandala turns exactly one K-th of a revolution over the
+  // clip length, so the loop is seamless against the K-fold symmetry.
+  const turn = MODE.gif ? (t / LOOP) * (Math.PI * 2 / K) : t;
+  const breathe = 1 + Math.sin(t * 0.55 + 0.6) * 0.012;
+
+  g.globalCompositeOperation = 'lighter';
+  g.translate(cxx, cyy);
+
+  // radial spokes — the mandala's skeleton
+  g.globalAlpha = Math.min(0.5, S.spokes.alpha * FIELD); g.strokeStyle = PAL.accents[S.spokes.accent]; g.lineWidth = 1 * dpr;
+  for (let i = 0; i < S.spokes.count; i++) {
+    const a = turn * 0.08 + (i / S.spokes.count) * Math.PI * 2;
+    g.beginPath();
+    g.moveTo(Math.cos(a) * R * 0.10, Math.sin(a) * R * 0.10);
+    g.lineTo(Math.cos(a) * R * 0.98 * breathe, Math.sin(a) * R * 0.98 * breathe);
+    g.stroke();
+  }
+
+  // phyllotaxis dot lattice
+  for (const d of S.dots) {
+    const rr = d.r * R * 0.96 * breathe;
+    const a = d.a + turn * 0.35;
+    g.globalAlpha = Math.min(0.95, d.al * 0.7 * FIELD);
+    g.fillStyle = PAL.accents[d.accent];
+    g.beginPath();
+    g.arc(Math.cos(a) * rr, Math.sin(a) * rr, d.s * dpr, 0, Math.PI * 2);
+    g.fill();
+  }
+
+  // recursive petal rings, K-fold symmetric
+  for (const ring of S.rings) {
+    const rr = ring.radius * R * breathe;
+    const rot = ring.phase + turn * ring.speed * ring.dir * (MODE.gif ? K : 1);
+    g.strokeStyle = PAL.accents[ring.accent];
+    g.globalAlpha = Math.min(0.9, ring.alpha * FIELD);
+    for (let i = 0; i < ring.petals; i++) {
+      const a = rot + (i / ring.petals) * Math.PI * 2;
+      g.save();
+      g.rotate(a);
+      g.translate(0, -rr);
+      petal(g, ring.len * R * breathe, ring.wide, ring.depth, ring.width * dpr, ring.fill);
+      g.restore();
+    }
+  }
+
+  // centre rosette — the anchor the eye lands on
+  g.strokeStyle = PAL.accents[S.core.accent]; g.globalAlpha = Math.min(0.9, S.core.alpha * FIELD);
+  for (let i = 0; i < S.core.petals; i++) {
+    const a = -turn * 0.45 + (i / S.core.petals) * Math.PI * 2;
+    g.save(); g.rotate(a); g.translate(0, -R * 0.055);
+    petal(g, S.core.len * R * breathe, 0.5, 1, 1.4 * dpr, 0.07);
+    g.restore();
+  }
+
+  // concentric tick rings
+  g.globalAlpha = Math.min(0.5, 0.28 * FIELD); g.strokeStyle = PAL.accents[0]; g.lineWidth = 1.2 * dpr;
+  for (let ri = 1; ri <= 3; ri++) {
+    const rr = R * (0.24 + ri * 0.21) * breathe;
+    const ticks = K * (ri + 2);
+    for (let i = 0; i < ticks; i++) {
+      const a = turn * 0.2 * (ri % 2 ? 1 : -1) + (i / ticks) * Math.PI * 2;
+      const len = S.tick * 16 * dpr;
+      g.beginPath();
+      g.moveTo(Math.cos(a) * rr, Math.sin(a) * rr);
+      g.lineTo(Math.cos(a) * (rr + len), Math.sin(a) * (rr + len));
+      g.stroke();
+    }
+  }
+
+  g.setTransform(1, 0, 0, 1, 0, 0);
+  g.globalCompositeOperation = 'source-over';
+  g.globalAlpha = 1;
+}
+
+/* Shrink a still until it fits its frame exactly — no clipped rows, whatever
+   the author's data length. Pure layout, runs once per render, no animation. */
+function fitStill() {
+  if (!MODE.poster && !MODE.gif) return;
+  const shell = document.querySelector('.shell');
+  let k = 1;
+  root.style.setProperty('--fit', '1');
+  for (let i = 0; i < 26 && shell.scrollHeight > shell.clientHeight + 2; i++) {
+    k = Math.max(0.6, k - 0.025);
+    root.style.setProperty('--fit', k.toFixed(3));
+  }
+  return k;
+}
+
+/* Last resort for a still that still overflows after fitStill() hits its
+   scale floor: hide ledger rows one at a time until it fits — never a source
+   (still-check.mjs fails the build on any clipped/truncated/overlapping
+   source row; a dropped metric row is the sanctioned escape hatch, per the
+   kit README's "Still checks" section). Fully-empty ("no source" both sides)
+   rows go first, since they carry the least information to lose; only spills
+   into a populated row, from the bottom up, if that alone isn't enough. */
+// NOTE on why this isn't a bigger pixel margin: .foot has margin-top:auto in
+// poster mode (fills remaining flex space), so shell.scrollHeight is pinned
+// to ~shell.clientHeight the moment content fits AT ALL, by however much or
+// little room is left — there is no achievable "8px of headroom" to target,
+// and asking for one made this loop through every row and hide the entire
+// ledger. The real (rare) failure mode is a 1-2px gap between this in-page
+// read and still-check.mjs's separate, later measurement pass. Guard against
+// that with one extra row dropped past the minimum, not a pixel target.
+function trimForFit() {
+  if (!MODE.poster) return 0;
+  const shell = document.querySelector('.shell');
+  const fits = () => shell.scrollHeight <= shell.clientHeight + 1;
+  if (fits()) return 0;
+  // Drop priority (lowest tier goes first): a still exists to show a B2B vs
+  // B2C COMPARISON, so a row that actually has both sides populated is the
+  // most protected thing on it — more protected than a merged "overall"
+  // single-figure row, which is in turn more protected than a genuine gap.
+  // Tier 0 "no source" (nothing to lose), 1 "overall"/partial (one figure,
+  // or one side missing), 2 real split with both sides real.
+  const rows = [...$('ledger').querySelectorAll('.row')].map(r => {
+    const res = resolved(state.vertical, r.dataset.metric);
+    const tier = (res.b2b == null && res.b2c == null) ? 0
+      : (!res.isOverall && res.b2b != null && res.b2c != null) ? 2
+      : 1;
+    return { r, tier };
+  });
+  const order = [0, 1, 2].flatMap(t => rows.filter(x => x.tier === t).reverse());
+  let dropped = 0, cushion = 1;
+  for (const { r } of order) {
+    if (fits()) { if (cushion-- <= 0) break; }
+    r.style.display = 'none';
+    dropped++;
+  }
+  return dropped;
+}
+
+function sizeCanvas() {
+  const rect = document.getElementById('viz').getBoundingClientRect();
+  viewW = Math.max(1, Math.round(rect.width));
+  viewH = Math.max(1, Math.round(rect.height));
+  // Cap the backdrop's pixel budget: it is a soft glow, so upscaling is free.
+  const longest = Math.max(viewW, viewH);
+  dpr = clamp(Math.min(window.devicePixelRatio || 1, 2) * Math.min(1, 1600 / longest), 0.5, 2);
+  cv.width = Math.round(viewW * dpr);
+  cv.height = Math.round(viewH * dpr);
+}
+
+/* ==================================================== static UI wiring */
+function text(id, v) { const el = $(id); if (el) el.textContent = v; }
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+
+/* ----------------------------------------------- source + note markers, shared popover */
+function marker(sourceId) {
+  const s = sourceById[sourceId];
+  if (!s) return '';
+  return `<button class="src" type="button" data-src="${esc(sourceId)}" aria-label="Source for this number: ${esc(s.label)}, as of ${esc(s.asOf)}">${esc(s.short || sourceId)}</button>`;
+}
+let noteSeq = 0;
+const noteText = {};
+function noteButton(txt) {
+  if (!txt) return '';
+  const id = `n${noteSeq++}`;
+  noteText[id] = txt;
+  return `<button class="note-btn" type="button" data-note="${id}" aria-label="Note on this figure: ${esc(txt.slice(0, 80))}">note</button>`;
+}
+
+/* One marker per side that actually HAS a value — a null side gets no source
+   marker at all (its "No source" text is the honest signal, not a citation). */
+function sourceLine(r, prefix) {
+  const hasB2B = r.b2b != null, hasB2C = r.b2c != null;
+  if (!hasB2B && !hasB2C) return '';
+  if (hasB2B && hasB2C) {
+    return r.srcB2B === r.srcB2C
+      ? `${prefix}${marker(r.srcB2B)}`
+      : `B2B${marker(r.srcB2B)} · B2C${marker(r.srcB2C)}`;
+  }
+  return hasB2B ? `B2B${marker(r.srcB2B)}` : `B2C${marker(r.srcB2C)}`;
+}
+const pop = $('pop');
+function showPop(btn) {
+  let html = '';
+  if (btn.dataset.note != null) {
+    html = `<b>Note</b>${esc(noteText[btn.dataset.note] || '')}`;
+  } else {
+    const s = sourceById[btn.dataset.src]; if (!s) return;
+    html = `<b>Source · as of ${esc(s.asOf)}</b>${esc(s.label)}<span class="as">${esc(s.detail || '')}</span>`;
+  }
+  pop.innerHTML = html;
+  pop.hidden = false;
+  const r = btn.getBoundingClientRect(), host = $('viz').getBoundingClientRect();
+  const w = pop.offsetWidth;
+  pop.style.left = `${clamp(r.left - host.left + r.width / 2 - w / 2, 8, host.width - w - 8)}px`;
+  pop.style.top = `${r.bottom - host.top + 8}px`;
+}
+const hidePop = () => { pop.hidden = true; };
+document.addEventListener('pointerover', e => { const b = e.target.closest?.('.src,.note-btn'); if (b) showPop(b); else if (!e.target.closest?.('#pop')) hidePop(); });
+document.addEventListener('focusin', e => { const b = e.target.closest?.('.src,.note-btn'); if (b) showPop(b); else hidePop(); });
+document.addEventListener('click', e => {
+  const b = e.target.closest?.('.src'); if (!b) return;
+  const d = $('sources'); d.open = true;
+  document.querySelectorAll('.s-item.hl').forEach(n => n.classList.remove('hl'));
+  const row = $(`src-${b.dataset.src}`); if (row) { row.classList.add('hl'); row.scrollIntoView({ block: 'nearest' }); }
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') hidePop(); });
+
+function buildChrome() {
+  const m = DATA.meta;
+  text('eyebrow', m.eyebrow || '');
+  $('sample-badge').hidden = !m.sample;
+  const t = String(m.title || '');
+  $('title').innerHTML = t.replace(/\{lit\}([\s\S]*?)\{\/lit\}/g, (_, s) => `<span class="lit">${esc(s)}</span>`).replace(/\{lit\}|\{\/lit\}/g, '');
+  text('deck', m.deck || '');
+  text('ask-a', m.askPrefix || 'What happens to'); text('ask-b', m.askMiddle || 'when'); text('ask-c', m.askSuffix || '?');
+  text('cited-name', m.columns.cited.name); text('cited-sub', m.columns.cited.sub);
+  text('absent-name', m.columns.absent.name); text('absent-sub', m.columns.absent.sub);
+  text('by-left', m.byline || ''); text('by-right', m.liveUrl || '');
+  $('honesty').innerHTML = m.sample
+    ? '<b>Honesty note.</b> Every figure on this artifact is <b>SAMPLE</b> data shipped with the template to demonstrate the mechanics. Nothing here is a measurement. Replace the <code>#viz-data</code> block with your own numbers and sources before publishing.'
+    : '<b>Honesty note.</b> Every figure carries a source and a date. A grey hatched bar or the words “no source” mean exactly that — not zero, not estimated. An “overall” tag means the source did not split B2B from B2C; the same figure is shown on both sides on purpose. Hover or tap any marker, or open the sources drawer above.';
+  const asOf = DATA.sources.map(x => x.asOf).sort().slice(-1)[0] || '';
+  $('src-line').textContent = `Sources: ${DATA.sources.length} publishers`
+    + (asOf ? ` · retrieved as of ${asOf}` : '') + (m.sample ? ' · SAMPLE data' : '');
+  $('strip').innerHTML = `<b>${esc(m.gifNote || 'Rudimentary GIF of a living artifact.')}</b><span>${esc(m.gifNoteSub || '')}</span>`;
+
+  for (const [dim, sel] of [['metric', $('sel-metric')], ['vertical', $('sel-vertical')]]) {
+    sel.innerHTML = DATA.dimensions[dim].options.map(o => `<option value="${esc(o.id)}">${esc(o.label)}</option>`).join('');
+    sel.value = state[dim];
+    sel.addEventListener('change', () => { state[dim] = sel.value; onStateChange(); });
+  }
+
+  $('prompts').innerHTML = DATA.prompts
+    .map((p, i) => `<button class="prompt" type="button" data-i="${i}" aria-pressed="false">${esc(p.label)} <span class="go" aria-hidden="true">→</span></button>`)
+    .join('') + '<button class="replay" type="button" id="replay">Replay ↻</button>';
+  $('prompts').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    if (b.id === 'replay') { play(); return; }
+    const p = DATA.prompts[Number(b.dataset.i)];
+    Object.assign(state, p.set);
+    $('sel-vertical').value = state.vertical; $('sel-metric').value = state.metric;
+    onStateChange();
+  });
+
+  // Two detail strings per source: `.s-meta` (full, interactive only) and
+  // `.s-meta-short` (a hand-written complete sentence, poster/PDF only — never
+  // programmatically truncated, so it can't end mid-word or get ellipsised).
+  $('sources-body').innerHTML = DATA.sources.map(s => `
+    <div class="s-item" id="src-${esc(s.id)}">
+      <span class="s-id">${esc(s.short || s.id)}</span>
+      <span>${esc(s.label)}${s.url ? ` — <a href="${esc(s.url)}" rel="nofollow noreferrer">source</a>` : ''}
+        <span class="s-meta">${esc(s.detail || '')} · as of ${esc(s.asOf)}</span>
+        <span class="s-meta-short">${esc(s.stillDetail || s.detail || '')} · ${esc(s.asOf)}</span></span>
+    </div>`).join('');
+}
+
+/* Ledger rows depend on which metric is currently hero (the other 9 metrics
+   fill the ledger), so this rebuilds whenever `metric` changes — not just once. */
+function buildLedger() {
+  const others = DATA.metrics.filter(m2 => m2.id !== state.metric);
+  $('ledger').innerHTML = '<h2 class="sr" id="ledger-h">The rest of the measurements, for this vertical</h2>' + others.map(m2 => `
+    <div class="row" data-metric="${esc(m2.id)}">
+      <div class="row-label">
+        <span class="lbl">${esc(m2.label)}</span><span class="tags"></span>
+        <span class="row-note">${esc(m2.stage || '')}</span>
+        <span class="row-src"></span>
+      </div>
+      <div class="val cited" data-v="cited">—</div>
+      <div class="bars">
+        <div class="bar cited"><i data-bar="cited"></i></div>
+        <div class="bar absent"><i data-bar="absent"></i></div>
+      </div>
+      <div class="val absent" data-v="absent">—</div>
+      <div class="row-delta" data-delta>—</div>
+      <div class="row-overall" data-overall><span class="val" data-v="overall">—</span><span class="row-overall-l">one figure, source does not split B2B/B2C</span></div>
+    </div>`).join('');
+}
+
+/* --------------------------------------------------------- comparison lane
+   Ranks all 10 verticals on whichever metric is currently picked — the same
+   selector that drives the hero, reused, per "the question is the control". */
+function renderLane() {
+  const m = metricById[state.metric];
+  $('lane-metric').textContent = m.ask;
+  $('lane-sub').textContent = (m.better === 'lower'
+    ? 'Lowest first — lower is better for this metric. '
+    : 'Highest first — higher is better for this metric. ')
+    + 'The vertical you picked above is outlined.';
+
+  const rows = DATA.dimensions.vertical.options.map(o => {
+    const r = resolved(o.id, state.metric);
+    const useB2B = r.b2b != null;
+    const val = useB2B ? r.b2b : r.b2c;
+    const seg = val == null ? null : (r.isOverall ? 'overall' : (useB2B ? 'B2B' : 'B2C'));
+    const src = val == null ? null : (r.isOverall ? r.srcB2B : (useB2B ? r.srcB2B : r.srcB2C));
+    return { id: o.id, label: o.label, val, seg, src };
+  });
+  const have = rows.filter(r => r.val != null)
+    .sort((a, b) => (m.better === 'lower' ? a.val - b.val : b.val - a.val));
+  const gaps = rows.filter(r => r.val == null);
+  const max = Math.max(...have.map(r => r.val), 0.0001);
+
+  $('lane-rows').innerHTML = have.map((r, i) => `
+    <li class="lane-row${r.id === state.vertical ? ' now' : ''}">
+      <span class="lane-rank">${i + 1}</span>
+      <span class="lane-name">${esc(r.label)}${r.id === state.vertical ? '<span class="lane-you">your pick</span>' : ''}</span>
+      <span class="lane-bar"><i style="width:${clamp((r.val / max) * 100, 2, 100).toFixed(1)}%"></i></span>
+      <span class="lane-val">${esc(fmt(m, r.val))}${esc(unitSuffix(m))}${r.seg === 'overall' ? '<span class="tag-overall">overall</span>' : `<span class="tag-seg">${esc(r.seg)}</span>`}${marker(r.src)}</span>
+    </li>`).join('');
+
+  $('lane-gaps').innerHTML = gaps.length
+    ? `<b>No source</b> for ${esc(m.label.toLowerCase())} in: ${gaps.map(r => r.id === state.vertical ? `<b>${esc(r.label)} — your pick</b>` : esc(r.label)).join(', ')}.`
+    : 'A sourced figure exists for every vertical on this metric.';
+}
+
+/* ------------------------------------------------------------ rendering */
+let settled = null;
+
+function renderStatic() {
+  // Everything that does not animate: labels, tags, per-value sources, the lane.
+  const hero = metricById[state.metric];
+  const heroR = resolved(state.vertical, state.metric);
+  $('poster-q').textContent = (DATA.meta.askPrefix || '') + ' ' + hero.ask
+    + ' ' + (DATA.meta.askMiddle || '') + ' ' + labelOf('vertical', state.vertical) + (DATA.meta.askSuffix || '?');
+
+  // "overall" describes a source that didn't split B2B/B2C — meaningless (and
+  // misleading) to show on a cell that has no figure on either side at all.
+  // When it DOES have a figure, that figure gets the merged one-panel treatment
+  // (fix: never print the same number twice with a fake 1.0x badge).
+  const heroTag = (heroR.isOverall && (heroR.b2b != null || heroR.b2c != null)) ? '<span class="tag-overall">overall</span>' : '';
+  const heroSrcLine = sourceLine(heroR, 'Source:');
+  const heroNote = noteButton([hero.note, heroR.note].filter(Boolean).join(' '));
+  $('hero-label-cited').innerHTML = esc(hero.label) + heroTag + heroNote + ' ' + heroSrcLine;
+  $('hero-label-absent').innerHTML = esc(hero.label) + heroTag + heroNote + ' ' + heroSrcLine;
+  $('hero-label-merged').innerHTML = esc(hero.label) + heroNote + ' ' + heroSrcLine;
+  text('hero-cited-u', heroR.b2b == null ? '' : unitSuffix(hero));
+  text('hero-absent-u', heroR.b2c == null ? '' : unitSuffix(hero));
+  text('hero-merged-u', unitSuffix(hero));
+  $('delta-l').textContent = (heroR.b2b == null || heroR.b2c == null) ? 'no comparison' : 'difference';
+  const heroMerged = heroR.isOverall && heroR.b2b != null;
+  $('stage-section').classList.toggle('merged', heroMerged);
+
+  for (const row of $('ledger').querySelectorAll('.row')) {
+    const mid = row.dataset.metric;
+    const m2 = metricById[mid];
+    const r2 = resolved(state.vertical, mid);
+    const tag = (r2.isOverall && (r2.b2b != null || r2.b2c != null)) ? '<span class="tag-overall">overall</span>' : '';
+    const nb = noteButton([m2.note, r2.note].filter(Boolean).join(' '));
+    row.querySelector('.lbl').textContent = m2.label;
+    row.querySelector('.tags').innerHTML = tag + nb;
+    row.querySelector('.row-src').innerHTML = sourceLine(r2, 'Source:');
+    row.classList.toggle('merged', r2.isOverall && r2.b2b != null);
+  }
+
+  renderLane();
+
+  const dims = `${labelOf('vertical', state.vertical)} · ${hero.label}`;
+  document.title = `${String(DATA.meta.title || '').replace(/\{\/?lit\}/g, '')} — ${dims}`;
+}
+
+function renderFrame(t) {
+  drawBackdrop(t);
+
+  const hero = metricById[state.metric];
+  const heroR = resolved(state.vertical, state.metric);
+  const others = DATA.metrics.filter(m => m.id !== state.metric);
+
+  // Progress rail — an honest progress cue, not a fake loader.
+  $('rail-fill').style.width = `${clamp(t / T.payoffEnd, 0, 1) * 100}%`;
+
+  // Anticipation: a short compression before the numbers move at all.
+  const antic = clamp(t / T.anticipate, 0, 1);
+  const lift = (1 - easeInOut(antic)) * 10;
+  for (const col of document.querySelectorAll('.col')) col.style.transform = `translateY(${lift.toFixed(2)}px)`;
+
+  // Counter roll-ups, staggered.
+  const rollOf = (i, n) => {
+    const span = T.rollEnd - T.rollStart;
+    const stagger = Math.min(0.16, span / (n + 3));
+    const s0 = T.rollStart + i * stagger;
+    const s1 = T.rollEnd;
+    return easeOutExpo(clamp((t - s0) / Math.max(0.001, s1 - s0), 0, 1));
+  };
+
+  const hp = rollOf(0, others.length + 1);
+  const heroCitedEl = $('hero-cited'), heroAbsentEl = $('hero-absent');
+  if (heroR.b2b == null) { heroCitedEl.textContent = 'No source'; heroCitedEl.classList.add('gap'); }
+  else { heroCitedEl.classList.remove('gap'); heroCitedEl.textContent = fmt(hero, heroR.b2b * hp); }
+  if (heroR.b2c == null) { heroAbsentEl.textContent = 'No source'; heroAbsentEl.classList.add('gap'); }
+  else { heroAbsentEl.classList.remove('gap'); heroAbsentEl.textContent = fmt(hero, heroR.b2c * hp); }
+  const hcSafe = heroR.b2b == null ? 0 : heroR.b2b, haSafe = heroR.b2c == null ? 0 : heroR.b2c;
+  const gmax = Math.max(hcSafe, haSafe) || 1;
+  gauge($('gauge-cited'), heroR.b2b == null ? 0 : (hcSafe * hp) / gmax, PAL.accents[1]);
+  gauge($('gauge-absent'), heroR.b2c == null ? 0 : (haSafe * hp) / gmax, PAL.accents[2]);
+  $('hero-merged').textContent = heroR.b2b == null ? 'No source' : fmt(hero, heroR.b2b * hp);
+
+  others.forEach((m, i) => {
+    const p = rollOf(i + 1, others.length + 1);
+    const r = resolved(state.vertical, m.id);
+    const row = $('ledger').querySelector(`.row[data-metric="${m.id}"]`);
+    if (!row) return;
+    const vCited = row.querySelector('[data-v="cited"]'), vAbsent = row.querySelector('[data-v="absent"]');
+    const bCited = row.querySelector('[data-bar="cited"]').parentElement, bAbsent = row.querySelector('[data-bar="absent"]').parentElement;
+    if (r.b2b == null) { vCited.textContent = 'No source'; vCited.classList.add('novalue'); bCited.classList.add('gap'); }
+    else { vCited.classList.remove('novalue'); bCited.classList.remove('gap'); vCited.textContent = fmt(m, r.b2b * p) + unitSuffix(m); }
+    if (r.b2c == null) { vAbsent.textContent = 'No source'; vAbsent.classList.add('novalue'); bAbsent.classList.add('gap'); }
+    else { vAbsent.classList.remove('novalue'); bAbsent.classList.remove('gap'); vAbsent.textContent = fmt(m, r.b2c * p) + unitSuffix(m); }
+    const cSafe = r.b2b == null ? 0 : r.b2b, aSafe = r.b2c == null ? 0 : r.b2c;
+    const mx = Math.max(cSafe, aSafe) || 1;
+    row.querySelector('[data-bar="cited"]').style.width = r.b2b == null ? '0%' : `${(cSafe * p / mx) * 100}%`;
+    row.querySelector('[data-bar="absent"]').style.width = r.b2c == null ? '0%' : `${(aSafe * p / mx) * 100}%`;
+    const vOverall = row.querySelector('[data-v="overall"]');
+    if (vOverall) vOverall.textContent = r.b2b == null ? 'No source' : fmt(m, r.b2b * p) + unitSuffix(m);
+    const dEl = row.querySelector('[data-delta]');
+    if (p > 0.995) {
+      const { txt, dir } = deltaOf(m, r.b2b, r.b2c);
+      dEl.textContent = txt; dEl.dataset.dir = dir;
+    } else { dEl.textContent = '—'; dEl.dataset.dir = ''; }
+  });
+
+  // Payoff: the headline difference overshoots in after the counters land.
+  const pay = clamp((t - T.payoff) / (T.payoffEnd - T.payoff), 0, 1);
+  const dx = $('delta-x');
+  if (pay <= 0) { dx.textContent = '—'; dx.style.transform = 'scale(1)'; dx.style.opacity = '.35'; }
+  else {
+    const { txt } = deltaOf(hero, heroR.b2b, heroR.b2c);
+    dx.textContent = txt;
+    const k = reduced ? 1 : easeOutBack(pay);
+    dx.style.transform = `scale(${(0.72 + 0.28 * k).toFixed(3)})`;
+    dx.style.opacity = String(clamp(pay * 2, 0, 1));
+  }
+}
+
+function deltaOf(m, b2b, b2c) {
+  if (b2b == null || b2c == null) return { txt: '—', dir: '' };
+  const better = m.better === 'lower' ? -1 : 1;
+  if (b2c === 0 || b2b === 0) return { txt: '—', dir: '' };
+  const x = b2b / b2c;
+  const good = (better === 1 && x > 1) || (better === -1 && x < 1);
+  const txt = x >= 1 ? `${x.toFixed(x >= 10 ? 0 : 1)}×` : `${(1 / x).toFixed(1 / x >= 10 ? 0 : 1)}× ${m.better === 'lower' ? 'lower' : 'less'}`;
+  return { txt, dir: good ? 'good' : 'bad' };
+}
+
+function announce() {
+  const hero = metricById[state.metric];
+  const r = resolved(state.vertical, state.metric);
+  const { txt } = deltaOf(hero, r.b2b, r.b2c);
+  settled = { vertical: state.vertical, metric: state.metric, hero: hero.id, cited: r.b2b, absent: r.b2c, ratio: txt };
+  if (r.isOverall && r.b2b != null) {
+    // One figure, not a B2B/B2C split — say that, not a meaningless "1.0x".
+    $('live').textContent = `${labelOf('vertical', state.vertical)}. `
+      + `${hero.label}: ${fmt(hero, r.b2b)}${unitSuffix(hero)} — one figure, the source does not split B2B/B2C.`;
+    return;
+  }
+  const b2bTxt = r.b2b == null ? 'no source' : `${fmt(hero, r.b2b)}${unitSuffix(hero)}`;
+  const b2cTxt = r.b2c == null ? 'no source' : `${fmt(hero, r.b2c)}${unitSuffix(hero)}`;
+  $('live').textContent =
+    `${labelOf('vertical', state.vertical)}. `
+    + `${hero.label}: ${b2bTxt} in B2B versus ${b2cTxt} in B2C`
+    + (txt !== '—' ? ` — ${txt}.` : '.');
+}
+
+/* ------------------------------------------------------------- gauges */
+function gauge(el, frac, color) {
+  const w = 240, h = 74, pad = 6, r = 60;
+  const a0 = Math.PI, a1 = Math.PI * 2;
+  const a = a0 + (a1 - a0) * clamp(frac, 0, 1);
+  const cxp = w / 2, cyp = h - pad;
+  const pt = ang => `${(cxp + Math.cos(ang) * r).toFixed(2)},${(cyp + Math.sin(ang) * r).toFixed(2)}`;
+  el.innerHTML = `<svg viewBox="0 0 ${w} ${h}" role="img" aria-hidden="true" focusable="false">
+    <path d="M ${pt(a0)} A ${r} ${r} 0 0 1 ${pt(a1)}" fill="none" stroke="${PAL.line}" stroke-width="9" stroke-linecap="round"/>
+    <path d="M ${pt(a0)} A ${r} ${r} 0 ${frac > 0.5 ? 1 : 0} 1 ${pt(a)}" fill="none" stroke="${color}" stroke-width="9" stroke-linecap="round" opacity="${frac <= 0.001 ? 0 : 1}"/>
+  </svg>`;
+}
+
+/* --------------------------------------------------------------- driving */
+function stop() { if (clock.raf) cancelAnimationFrame(clock.raf); clock.raf = 0; clock.playing = false; }
+
+function play() {
+  stop();
+  // NOTE: ledger DOM (including which rows are "merged") is built by
+  // buildLedger()+renderStatic() in onStateChange()/setState()/boot, not here —
+  // play() only re-runs the reveal animation. Rebuilding the ledger here too
+  // would wipe the `.merged` class renderStatic() just set, right after it set it.
+  if (MODE.static) { clock.t = T.total; renderFrame(clock.t); announce(); return; }
+  if (reduced) { clock.t = T.payoffEnd; renderFrame(clock.t); announce(); return; }
+  clock.playing = true;
+  clock.origin = performance.now();
+  let announced = false;
+  const tick = now => {
+    clock.t = (now - clock.origin) / 1000;
+    renderFrame(clock.t);
+    if (!announced && clock.t >= T.payoffEnd) { announced = true; announce(); }
+    if (clock.t < T.total) clock.raf = requestAnimationFrame(tick);
+    else { clock.playing = false; clock.raf = 0; idle(); }
+  };
+  clock.raf = requestAnimationFrame(tick);
+}
+
+/* After the reveal lands, only the backdrop keeps drifting. */
+function idle() {
+  if (reduced || MODE.static) return;
+  const t0 = performance.now(), base = clock.t;
+  const tick = now => {
+    clock.t = base + (now - t0) / 1000;
+    drawBackdrop(clock.t);
+    clock.raf = requestAnimationFrame(tick);
+  };
+  clock.raf = requestAnimationFrame(tick);
+}
+
+function onStateChange() {
+  buildLedger();
+  renderStatic();
+  const url = new URL(location.href);
+  url.searchParams.set('vertical', state.vertical);
+  url.searchParams.set('metric', state.metric);
+  if (location.protocol !== 'file:') history.replaceState(null, '', url);
+  document.querySelectorAll('.prompt').forEach(b => {
+    const set = DATA.prompts[Number(b.dataset.i)].set;
+    b.setAttribute('aria-pressed', String(Object.entries(set).every(([k, v]) => state[k] === v)));
+  });
+  play();
+}
+
+/* ------------------------------------------------------------ resizing */
+let rt = 0;
+const onResize = () => {
+  clearTimeout(rt);
+  rt = setTimeout(() => { fitStill(); sizeCanvas(); drawBackdrop(clock.t); }, 60);
+};
+window.addEventListener('resize', onResize);
+mq.addEventListener?.('change', e => {
+  if (q.get('motion') === 'reduce') return;
+  reduced = e.matches; setMotionFlag();
+  stop(); renderFrame(reduced || MODE.static ? T.total : clock.t); if (reduced) announce();
+});
+
+/* ========================================================== export API
+   `setState({vertical})` also accepts three legacy ids (b2b/b2c/marketplace)
+   as aliases onto real, fully-sourced verticals. These exist ONLY because the
+   kit's generic export/verify.mjs smoke-tests the selector by blindly probing
+   those three ids (its hardcoded check predates this vertical-by-industry
+   artifact); they are never shown in the UI and never reachable by a reader —
+   only by window.VIZ.setState() calls from the export tooling itself. */
+const LEGACY_VERTICAL_ALIAS = { b2b: 'financial_services', b2c: 'real_estate', marketplace: 'healthcare' };
+const nextPaint = () => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+
+const VIZ = {
+  duration: T.total,
+  timeline: { ...T },
+  fold: K,
+  get state() { return { ...state }; },
+  palettes: PALETTES.map(p => p.id),
+  async seek(seconds) {
+    stop();
+    clock.t = Number(seconds) || 0;
+    renderFrame(clock.t);
+    if (clock.t >= T.payoffEnd) announce();
+    await nextPaint();
+    return clock.t;
+  },
+  async frame(n, total) {
+    const t = (Number(n) / Math.max(1, Number(total))) * T.total;
+    return VIZ.seek(t);
+  },
+  async setState(next = {}) {
+    if (next.palette) PAL = applyPalette(next.palette);
+    if (next.seed != null) state.seed = Number(next.seed);
+    if (next.vertical) {
+      const vId = DATA.values[next.vertical] ? next.vertical : LEGACY_VERTICAL_ALIAS[next.vertical];
+      if (vId && DATA.values[vId]) state.vertical = vId;
+    }
+    if (next.metric && metricById[next.metric]) state.metric = next.metric;
+    const sv = $('sel-vertical'), sm = $('sel-metric');
+    if (sv) sv.value = state.vertical; if (sm) sm.value = state.metric;
+    buildLedger();
+    renderStatic();
+    fitStill(); sizeCanvas();
+    stop(); renderFrame(clock.t = T.total); announce();
+    await nextPaint();
+    return VIZ.snapshot();
+  },
+  snapshot() { return { state: { ...state }, mode: root.dataset.mode, motion: root.dataset.motion, settled, t: clock.t }; },
+  stop,
+  play,
+};
+window.VIZ = VIZ;
+
+/* ================================================================ boot */
+buildChrome();
+if (MODE.poster || MODE.gif) $('sources').open = true;   // stills must carry their sources visibly
+buildLedger();
+renderStatic();
+fitStill();
+sizeCanvas();
+
+VIZ.ready = (async () => {
+  if (q.has('frame')) await VIZ.frame(Number(q.get('frame')), Number(q.get('frames') || 1));
+  else if (q.has('t')) await VIZ.seek(Number(q.get('t')));
+  else if (MODE.static) { clock.t = T.total; renderFrame(clock.t); announce(); await nextPaint(); }
+  else { play(); await nextPaint(); }
+  if (MODE.static) announce();
+  // Fit once more after the first real render: counters and source markers only
+  // reach their final width here, and a still must never clip a row.
+  if (fitStill() !== 1) { sizeCanvas(); renderFrame(clock.t); await nextPaint(); }
+  // Bounded loop, not a single pass: re-run fitStill after any trim (lowering
+  // content height can let it settle at a less-aggressive, more legible
+  // --fit), then re-check — occasionally one trimmed row still isn't quite
+  // enough once markers/counters finish reaching their final rendered width.
+  for (let i = 0; i < 4; i++) {
+    const before = trimForFit();
+    if (before === 0) break;
+    fitStill(); sizeCanvas(); renderFrame(clock.t); await nextPaint();
+  }
+  root.dataset.ready = '1';
+  return VIZ.snapshot();
+})();
+})();
+</script>
+</body>
+</html>

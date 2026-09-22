@@ -1,0 +1,695 @@
+<!doctype html>
+<html lang="en" data-ready="0">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Fractal Stack — one results page, three depths</title>
+<style>
+  :root{
+    --paper:#FFF6E9;
+    --ink:#15100C;
+    --ink-soft:#4A3F33;
+    --rule:#0F0B08;
+    --yellow:#FFE500;
+    --s:1;
+    --pad:44px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;background:#C9C0B0;}
+  body{
+    display:flex;align-items:center;justify-content:center;
+    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    font-variant-numeric:tabular-nums;
+    overflow:hidden;
+  }
+  #frame{position:relative;overflow:hidden;}
+  #poster{
+    position:absolute;top:0;left:0;transform-origin:0 0;
+    background:var(--paper);color:var(--ink);
+    display:flex;flex-direction:column;overflow:hidden;
+  }
+
+  /* ---------------------------------------------------------- title bar */
+  #titlebar{
+    background:var(--yellow);color:var(--ink);
+    border-bottom:calc(6px * var(--s)) solid var(--rule);
+    padding:calc(16px * var(--s)) var(--pad) calc(14px * var(--s));
+    display:flex;gap:calc(16px * var(--s));align-items:center;flex:none;
+    overflow:hidden;
+  }
+  #titletext{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;justify-content:center;}
+  .eyebrow{
+    font-size:calc(16px * var(--s));font-weight:800;letter-spacing:.125em;
+    text-transform:uppercase;margin-bottom:calc(8px * var(--s));line-height:1.15;
+  }
+  #h1{font-size:calc(60px * var(--s));line-height:.98;font-weight:900;letter-spacing:-.036em;}
+  #h1 .lit{background:var(--ink);color:var(--yellow);padding:0 calc(8px * var(--s));display:inline-block;}
+  #deck{
+    margin-top:calc(10px * var(--s));font-size:calc(20px * var(--s));line-height:1.25;
+    font-weight:650;
+  }
+  #rosette{flex:none;align-self:center;}
+
+  /* ------------------------------------------------------------- legend */
+  #legend{
+    flex:none;display:flex;align-items:center;gap:calc(12px * var(--s));
+    padding:calc(6px * var(--s)) var(--pad);
+    border-bottom:calc(2px * var(--s)) solid var(--rule);
+    background:var(--paper);overflow:hidden;
+  }
+  .lgroup{display:flex;align-items:center;gap:calc(10px * var(--s));flex-wrap:nowrap;}
+  .lchip{display:flex;align-items:center;gap:calc(5px * var(--s));}
+  .lswatch{width:calc(15px * var(--s));height:calc(15px * var(--s));border:calc(2px * var(--s)) solid var(--rule);flex:none;}
+  .lchip span{font-size:calc(14px * var(--s));font-weight:800;letter-spacing:.015em;text-transform:uppercase;white-space:nowrap;}
+  #legendnote{
+    margin-left:auto;font-size:calc(13px * var(--s));font-weight:700;color:var(--ink-soft);
+    text-align:right;line-height:1.2;white-space:nowrap;
+  }
+
+  /* -------------------------------------------------------------- stack */
+  #stack{position:relative;flex:1 1 auto;min-height:0;padding:0 var(--pad);display:flex;flex-direction:column;}
+  #wires{position:absolute;inset:0;pointer-events:none;overflow:visible;}
+  .band{display:flex;flex:none;}
+  #band3{flex:1 1 auto;flex-direction:column;min-height:0;}
+  .brow{display:flex;min-height:0;}
+  .wiregap{flex:none;}
+
+  /* --------------------------------------------------------------- cell */
+  .cell{
+    position:relative;flex:1 1 0;min-width:0;display:flex;flex-direction:column;
+    border:calc(3px * var(--s)) solid var(--rule);
+    background:var(--tint);overflow:hidden;transform-origin:50% 0;
+  }
+  .cell.wide{flex:2 1 0;}
+  .strip{
+    flex:none;display:flex;align-items:center;gap:calc(7px * var(--s));
+    background:var(--fam);color:var(--on);
+    padding:calc(3px * var(--s)) calc(9px * var(--s));
+    border-bottom:calc(3px * var(--s)) solid var(--rule);overflow:hidden;
+  }
+  .depth{display:flex;gap:calc(3px * var(--s));flex:none;}
+  .depth i{width:calc(8px * var(--s));height:calc(8px * var(--s));background:var(--on);display:block;}
+  .kicker{
+    font-size:calc(12.5px * var(--s));font-weight:900;letter-spacing:.09em;text-transform:uppercase;
+    white-space:nowrap;line-height:1.5;
+  }
+  .lvl{margin-left:auto;font-size:calc(12.5px * var(--s));font-weight:900;letter-spacing:.08em;opacity:.8;white-space:nowrap;}
+  .body{
+    flex:1 1 auto;min-height:0;display:flex;flex-direction:column;
+    padding:calc(8px * var(--s)) calc(10px * var(--s));gap:calc(5px * var(--s));
+  }
+  .head{display:flex;align-items:center;gap:calc(8px * var(--s));flex:none;}
+  .ico{flex:none;display:block;}
+  .ico svg{display:block;}
+  .cname{font-weight:900;letter-spacing:-.02em;line-height:1.06;flex:1 1 auto;min-width:0;}
+  .metric{display:flex;align-items:baseline;gap:calc(7px * var(--s));flex:none;}
+  .num{font-weight:900;letter-spacing:-.045em;line-height:1;white-space:nowrap;flex:none;}
+  .arrow{font-weight:900;opacity:.65;flex:none;}
+  .mlabel{
+    font-size:calc(13.5px * var(--s));font-weight:800;text-transform:uppercase;letter-spacing:.055em;
+    color:var(--ink-soft);line-height:1.15;flex:1 1 auto;min-width:0;
+  }
+  .bar{
+    flex:none;height:calc(14px * var(--s));border:calc(2.5px * var(--s)) solid var(--rule);
+    background:var(--track);position:relative;overflow:hidden;
+  }
+  .fill{position:absolute;left:0;top:0;bottom:0;background:var(--fam);width:0;}
+  .fill.ghost{background:repeating-linear-gradient(135deg,var(--fam) 0 4px,transparent 4px 10px);}
+  .line{line-height:1.24;font-weight:600;color:var(--ink);flex:0 1 auto;min-height:0;overflow:hidden;}
+  .line b{font-weight:900;}
+  .src{
+    margin-top:auto;flex:none;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:calc(11.5px * var(--s));font-weight:600;color:var(--ink-soft);
+    letter-spacing:-.015em;white-space:nowrap;line-height:1.3;
+  }
+
+  /* level-1 root cell runs horizontal */
+  #rootcell .body{flex-direction:row;align-items:center;gap:calc(18px * var(--s));}
+  #rootcell .leftcol{flex:none;display:flex;flex-direction:column;gap:calc(4px * var(--s));max-width:46%;}
+  #rootcell .rightcol{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:calc(6px * var(--s));}
+  #rootcell .src{margin-top:0;}
+
+  /* ------------------------------------------------------------- footer */
+  #foot{
+    flex:none;background:var(--ink);color:var(--paper);
+    padding:calc(8px * var(--s)) var(--pad);
+    display:flex;align-items:center;gap:calc(16px * var(--s));
+    border-top:calc(4px * var(--s)) solid var(--rule);overflow:hidden;
+  }
+  #srcline{
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:calc(12px * var(--s));line-height:1.35;font-weight:500;flex:1 1 auto;min-width:0;
+    letter-spacing:-.015em;
+  }
+  #byline{
+    flex:none;font-size:calc(14px * var(--s));font-weight:900;letter-spacing:.03em;
+    text-transform:uppercase;color:var(--yellow);text-align:right;line-height:1.25;white-space:nowrap;
+  }
+</style>
+</head>
+<body>
+<div id="frame"><div id="poster"></div></div>
+
+<script>
+/* =====================================================================
+   THE FRACTAL STACK — search results by intent · direction 02
+   Self-contained, no network. Deterministic clock: window.VIZ.seek(t).
+
+   Every figure comes from
+     content-studio/research/2026-09-14/search-intent/{data.json, shock-stats.md, sources.md}
+   Figures that notes.md excludes or flags (the fabricated "18.4bn queries"
+   Semrush claim, the Perplexity citation-density pair, the medium-confidence
+   featured-snippet series, the unconfirmed 93% AI-Mode zero-click, the
+   secondary-only Datos navigational share, the low-confidence Tinuiti gap)
+   are deliberately absent.
+   ===================================================================== */
+
+const PARAMS = new URLSearchParams(location.search);
+
+/* ------------------------------------------------------------- palette */
+const PAPER = '#FFF6E9', INK = '#15100C';
+const FAM = {
+  root:  { c:'#15100C', name:'Whole page' },
+  info:  { c:'#1B3BEF', name:'Informational' },
+  comm:  { c:'#E0006C', name:'Commercial' },
+  trans: { c:'#FF6B00', name:'Transactional' },
+  nav:   { c:'#7A22D8', name:'Navigational' },
+  local: { c:'#00A05A', name:'Local' },
+  none:  { c:'#8A7F70', name:'Not measured' },
+};
+const hex2rgb = h => [1,3,5].map(i => parseInt(h.slice(i,i+2),16));
+const rgb2hex = a => '#' + a.map(v => Math.round(Math.max(0,Math.min(255,v))).toString(16).padStart(2,'0')).join('').toUpperCase();
+const mix = (a,b,t) => rgb2hex(hex2rgb(a).map((v,i) => v*(1-t) + hex2rgb(b)[i]*t));
+const lum = h => { const s = hex2rgb(h).map(v => { v/=255; return v<=0.03928 ? v/12.92 : Math.pow((v+0.055)/1.055,2.4); }); return 0.2126*s[0]+0.7152*s[1]+0.0722*s[2]; };
+const ratio = (a,b) => { const [x,y] = [lum(a),lum(b)].sort((m,n)=>n-m); return (x+0.05)/(y+0.05); };
+const onColor = c => ratio('#FFFFFF',c) >= ratio(INK,c) ? '#FFFFFF' : INK;
+
+/* ---------------------------------------------------------------- data */
+const DATA = {
+  eyebrow: 'US Google search · one results page, three depths · measured 2025–2026',
+  h1: ['68.01% of US Google searches', 'end with {lit}no click{/lit}'],
+  deck: 'The page subdivides into five intents; each intent subdivides into what was measured. Every percentage below level 1 is a rate within its own intent, not a share of all search.',
+  deckSq: 'Five intents, each subdividing into what was measured. Every percentage below level 1 is a rate within its own intent, not a share of all search.',
+
+  root: {
+    fam:'root', level:1, lvl:'Level 1',
+    kicker:'The whole results page',
+    name:'All US Google searches',
+    icon:'root',
+    value:{ kind:'single', to:68.01, dec:2, suffix:'%' },
+    mlabel:'ended with no click',
+    bar:68.01,
+    line:'<b>31.99%</b> still sent a click. Two years earlier the no-click share was <b>60.45%</b> — 7.56 points added in 24 months.',
+    lineSq:'<b>31.99%</b> still sent a click. It was <b>60.45%</b> two years earlier.',
+    src:'SparkToro / Similarweb · Jan–Apr 2026 · pub 2026-06-09',
+  },
+
+  /* level 2 — AI Overview trigger rate, by intent */
+  intents: [
+    { fam:'info', level:2, kicker:'AI Overview', name:'Informational', icon:'info',
+      value:{kind:'single',to:36,dec:0,suffix:'%'}, mlabel:'of these<br>queries', bar:36,
+      line:'Highest of the intents Seer measures.', lineSq:'Highest intent Seer measures.',
+      src:'Seer · 2026-04-24' },
+    { fam:'comm', level:2, kicker:'AI Overview', name:'Commercial', icon:'comm',
+      value:{kind:'single',to:8,dec:0,suffix:'%'}, mlabel:'of these<br>queries', bar:8,
+      line:'Query format moves this far more than intent.', lineSq:'Format moves this, not intent.',
+      src:'Seer · 2026-04-24' },
+    { fam:'trans', level:2, kicker:'AI Overview', name:'Transactional', icon:'trans',
+      value:{kind:'single',to:5,dec:0,suffix:'%'}, mlabel:'of these<br>queries', bar:5,
+      line:'Just under 1 in 20 buy-ready searches.', lineSq:'Under 1 in 20 buy-ready.',
+      src:'Seer · 2026-04-24' },
+    { fam:'nav', level:2, kicker:'AI Overview', name:'Navigational', icon:'nav',
+      value:{kind:'single',to:0,dec:0,suffix:'%'}, mlabel:'of these<br>queries', bar:0,
+      line:'Zero in Dec 2024. Not zero any more.', lineSq:'Zero in Dec 2024. Not now.',
+      src:'Authoritas · 2025-01' },
+    { fam:'local', level:2, kicker:'AI Overview', name:'Local', icon:'local',
+      value:{kind:'single',to:15,dec:0,suffix:'%'}, mlabel:'of these<br>queries', bar:15,
+      line:'Least-affected intent measured anywhere.', lineSq:'Least-affected intent found.',
+      src:'Whitespark · 2025-05-12' },
+  ],
+
+  /* level 3 — eight measured cells; parent = index into intents, −1 = root */
+  cells: [
+    { fam:'info', level:3, parent:0, kicker:'Question format', name:'“What / how / why”', icon:'info',
+      value:{kind:'single',to:85.9,dec:1,suffix:'%'}, mlabel:'trigger an AIO', bar:85.9,
+      line:'1,214 of 1,413 question queries — 2.4× the 36% informational average.',
+      lineSq:'1,214 of 1,413 question queries.',
+      src:'Seer · 2026-04-24' },
+
+    { fam:'info', level:3, parent:0, kicker:'Cited, or invisible', name:'Organic CTR', icon:'ctr',
+      value:{kind:'single',to:0.94,dec:2,suffix:'%'}, mlabel:'present, not cited', bar:28.06,
+      line:'<b>3.35%</b> no AIO · <b>2.07%</b> cited in one · <b>0.94%</b> present but not cited.',
+      lineSq:'<b>3.35%</b> no AIO · <b>2.07%</b> cited · <b>0.94%</b> not cited.',
+      src:'Seer · 2026-04-24' },
+
+    { fam:'comm', level:3, parent:1, kicker:'Format beats intent', name:'“X vs Y”', icon:'comm',
+      value:{kind:'single',to:95.4,dec:1,suffix:'%'}, mlabel:'trigger an AIO', bar:95.4,
+      line:'267 of 280 comparison queries — the highest rate in this ledger.',
+      lineSq:'267 of 280 comparison queries.',
+      src:'Seer · 2026-04-24' },
+
+    { fam:'trans', level:3, parent:2, kicker:'Opposite directions', name:'Commercial vs transactional', icon:'trans',
+      value:{kind:'pair',a:{to:71,dec:0,prefix:'+',suffix:'%'},sep:'/',b:{to:-5,dec:0,suffix:'%'}}, mlabel:'6-month change', bar:71,
+      line:'Share of SERPs carrying an AI Overview, Nov 2025 → Apr 2026.',
+      lineSq:'AIO share of SERPs, Nov 25 → Apr 26.',
+      src:'Semrush · 2026-07-02' },
+
+    { fam:'nav', level:3, parent:3, kicker:'Zero did not hold', name:'Navigational share', icon:'nav',
+      value:{kind:'pair',a:{to:0.84,dec:2,suffix:'%'},sep:'→',b:{to:10.33,dec:2,suffix:'%'}}, mlabel:'of AIO SERPs', bar:10.33,
+      line:'Navigational queries as a share of AI-Overview SERPs, Oct 2024 → Oct 2025.',
+      lineSq:'Share of AIO SERPs, Oct 24 → Oct 25.',
+      src:'Semrush · 2026-02-02' },
+
+    { fam:'local', level:3, parent:4, kicker:'The pack holds', name:'Local Pack presence', icon:'local',
+      value:{kind:'single',to:93,dec:0,suffix:'%'}, mlabel:'of local queries', bar:93,
+      line:'93% still show a Local Pack against 15% showing an AI Overview — same 540 queries.',
+      lineSq:'93% show a Local Pack; 15% an AIO.',
+      src:'Whitespark · 2025-05-12' },
+
+    { fam:'comm', level:3, parent:1, wide:true, kicker:'Where the click went instead', name:'Paid click share · US headphones queries', icon:'paid',
+      value:{kind:'pair',a:{to:16,dec:0,suffix:'%'},sep:'→',b:{to:36,dec:0,suffix:'%'}}, mlabel:'Jan 2025 → Jan 2026', bar:36,
+      line:'Paid took 20 points of click share in twelve months while classic organic fell <b>73% → 50%</b>. Every category tested lost 11–23 points of organic share.',
+      lineSq:'Paid took 20 points of click share in a year; classic organic fell <b>73% → 50%</b>.',
+      src:'Search Engine Land / Aleyda Solis · Similarweb data · 2026-02-18' },
+
+    { fam:'none', level:3, parent:-1, wide:true, kicker:'The hole in the ledger', name:'Share of all queries, by intent', icon:'none',
+      value:{kind:'text',text:'NOT MEASURED'}, mlabel:'no 2026 partition exists', bar:0, ghost:true,
+      line:'No 2025–26 study partitions US queries by intent; the last clean split is from 2008. Every share above is a trigger rate <b>within</b> an intent, never a share <b>of</b> all search.',
+      lineSq:'No 2025–26 study partitions US queries by intent. Every share above is a rate <b>within</b> an intent.',
+      src:'Absence confirmed in research notes · 2026-09-14' },
+  ],
+
+  srcline: 'SparkToro/Similarweb 2026-06-09 · Seer Interactive 2026-04-24 (5.47M queries) · Semrush 2026-02-02 &amp; 2026-07-02 · Whitespark 2025-05-12 · Authoritas 2025-01 · Search Engine Land / Aleyda Solis 2026-02-18.',
+  byline: 'Mitchell Miller|mitchjmiller.com',
+};
+
+/* --------------------------------------------------------------- icons */
+const ICONS = {
+  root: s => `<rect x="2" y="2" width="${s-4}" height="${s-4}"/><line x1="${s/2}" y1="2" x2="${s/2}" y2="${s-2}"/><line x1="2" y1="${s/2}" x2="${s-2}" y2="${s/2}"/><rect x="${s/2+3}" y="${s/2+3}" width="${s/2-5}" height="${s/2-5}" fill="currentColor" stroke="none"/>`,
+  info: s => `<rect x="2" y="2" width="${s-4}" height="${s-4}"/><path d="M${s*0.33} ${s*0.36}a${s*0.17} ${s*0.17} 0 1 1 ${s*0.17} ${s*0.2}v${s*0.07}"/><rect x="${s*0.455}" y="${s*0.7}" width="${s*0.1}" height="${s*0.1}" fill="currentColor" stroke="none"/>`,
+  comm: s => `<rect x="2" y="2" width="${s-4}" height="${s-4}"/><rect x="${s*0.22}" y="${s*0.42}" width="${s*0.17}" height="${s*0.36}" fill="currentColor" stroke="none"/><rect x="${s*0.61}" y="${s*0.24}" width="${s*0.17}" height="${s*0.54}" fill="currentColor" stroke="none"/>`,
+  trans: s => `<rect x="2" y="2" width="${s-4}" height="${s-4}"/><path d="M${s*0.2} ${s*0.28}h${s*0.12}l${s*0.1} ${s*0.34}h${s*0.34}l${s*0.1} -${s*0.24}h-${s*0.46}"/><circle cx="${s*0.42}" cy="${s*0.74}" r="${s*0.055}" fill="currentColor" stroke="none"/><circle cx="${s*0.66}" cy="${s*0.74}" r="${s*0.055}" fill="currentColor" stroke="none"/>`,
+  nav: s => `<rect x="2" y="2" width="${s-4}" height="${s-4}"/><line x1="${s*0.2}" y1="${s*0.5}" x2="${s*0.62}" y2="${s*0.5}"/><path d="M${s*0.48} ${s*0.34}l${s*0.16} ${s*0.16}l-${s*0.16} ${s*0.16}"/><line x1="${s*0.76}" y1="${s*0.24}" x2="${s*0.76}" y2="${s*0.76}"/>`,
+  local: s => `<rect x="2" y="2" width="${s-4}" height="${s-4}"/><path d="M${s*0.5} ${s*0.8}c0 0 -${s*0.2} -${s*0.24} -${s*0.2} -${s*0.36}a${s*0.2} ${s*0.2} 0 1 1 ${s*0.4} 0c0 ${s*0.12} -${s*0.2} ${s*0.36} -${s*0.2} ${s*0.36}z"/><circle cx="${s*0.5}" cy="${s*0.43}" r="${s*0.06}" fill="currentColor" stroke="none"/>`,
+  ctr: s => `<rect x="2" y="2" width="${s-4}" height="${s-4}"/><path d="M${s*0.2} ${s*0.3}L${s*0.44} ${s*0.55}L${s*0.58} ${s*0.44}L${s*0.8} ${s*0.72}"/><path d="M${s*0.8} ${s*0.52}v${s*0.2}h-${s*0.2}"/>`,
+  paid: s => `<rect x="2" y="2" width="${s-4}" height="${s-4}"/><rect x="${s*0.2}" y="${s*0.22}" width="${s*0.6}" height="${s*0.18}" fill="currentColor" stroke="none"/><line x1="${s*0.2}" y1="${s*0.56}" x2="${s*0.8}" y2="${s*0.56}"/><line x1="${s*0.2}" y1="${s*0.73}" x2="${s*0.62}" y2="${s*0.73}"/>`,
+  none: s => `<rect x="2" y="2" width="${s-4}" height="${s-4}" stroke-dasharray="${s*0.1} ${s*0.08}"/><line x1="${s*0.28}" y1="${s*0.5}" x2="${s*0.72}" y2="${s*0.5}"/>`,
+};
+const icon = (kind, px, sw=2.2) =>
+  `<svg width="${px}" height="${px}" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="${sw}" stroke-linecap="square" stroke-linejoin="miter">${ICONS[kind](34)}</svg>`;
+
+/* ------------------------------------------------ mandala / fractal key
+   12-fold symmetry; every petal recursively spawns two children at 0.47
+   scale for three levels. Pure geometry, no randomness, so a frame export
+   is reproducible. Drawn solid in ink on the title bar — the poster's
+   signature mark, not a watermark hiding behind the type.                */
+function rosette(px){
+  const R = 50, K = 12, parts = [];
+  (function seed(){
+    function petal(cx, cy, r, ang, depth){
+      const x = cx + Math.cos(ang)*r, y = cy + Math.sin(ang)*r, w = r*0.30;
+      const nx = -Math.sin(ang)*w, ny = Math.cos(ang)*w;
+      parts.push(`<path d="M${cx.toFixed(2)} ${cy.toFixed(2)} Q${(cx+nx+(x-cx)*0.5).toFixed(2)} ${(cy+ny+(y-cy)*0.5).toFixed(2)} ${x.toFixed(2)} ${y.toFixed(2)} Q${(cx-nx+(x-cx)*0.5).toFixed(2)} ${(cy-ny+(y-cy)*0.5).toFixed(2)} ${cx.toFixed(2)} ${cy.toFixed(2)} Z" stroke-width="${(1.6/(depth+1)).toFixed(2)}"/>`);
+      if (depth < 2){ petal(x,y,r*0.47,ang-0.72,depth+1); petal(x,y,r*0.47,ang+0.72,depth+1); }
+    }
+    for (let k=0;k<K;k++) petal(0,0,R*0.62,(k/K)*Math.PI*2,0);
+  })();
+  const spokes = Array.from({length:K},(_,k)=>{
+    const a = (k/K)*Math.PI*2 + Math.PI/K;
+    return `<line x1="0" y1="0" x2="${(Math.cos(a)*R*0.94).toFixed(2)}" y2="${(Math.sin(a)*R*0.94).toFixed(2)}" stroke-width="0.9"/>`;
+  }).join('');
+  return `<svg id="rosette" width="${px}" height="${px}" viewBox="-54 -54 108 108" fill="none" stroke="currentColor" aria-hidden="true">
+    <g id="rosette-spin">${spokes}${parts.join('')}<circle r="${R*0.94}" stroke-width="2.6"/><circle r="${R*0.2}" stroke-width="1.6"/><circle r="${R*0.07}" fill="currentColor" stroke="none"/></g></svg>`;
+}
+
+/* ------------------------------------------------------------- geometry */
+const SIZES = {
+  '1080x1350': { W:1080, H:1350, s:1,    pad:44, title:236, legend:46, b1:134, wire:30, b2:206, rows:[198,198,180], foot:56, gap:14, short:false,
+                 num:{root:48,l2:38,l3:32,pair:27}, name:{root:26,l2:21,l3:20}, line:{root:17.5,l2:15,l3:17} },
+  '1080x1080': { W:1080, H:1080, s:0.9,  pad:38, title:176, legend:42, b1:110, wire:16, b2:170, rows:[154,154,140], foot:50, gap:11,  short:true,
+                 num:{root:42,l2:33,l3:28,pair:24}, name:{root:23,l2:19,l3:18}, line:{root:16,l2:14,l3:15.5} },
+};
+function pickSize(){
+  const raw = (PARAMS.get('size') || '1080x1350').toLowerCase().trim();
+  if (raw === 'square' || raw === '1:1' || raw === '1080') return '1080x1080';
+  if (raw === 'portrait' || raw === '4:5') return '1080x1350';
+  return SIZES[raw] ? raw : '1080x1350';
+}
+const SIZE_KEY = pickSize();
+const L = SIZES[SIZE_KEY];
+const pick = (a, b) => (L.short && b) ? b : a;
+
+/* ---------------------------------------------------------------- build */
+function fmt(spec, p){
+  const v = spec.to * p;
+  const body = Math.abs(v).toFixed(spec.dec);
+  const sign = spec.prefix ? spec.prefix : (spec.to < 0 ? '−' : '');
+  return `${sign}${body}${spec.suffix || ''}`;
+}
+
+function cellHTML(d, id, numPx, namePx, linePx){
+  const fam = FAM[d.fam].c;
+  const tint = mix(fam, PAPER, d.level === 1 ? 0.80 : d.level === 2 ? 0.85 : 0.905);
+  const track = mix(fam, PAPER, 0.955);
+  const on = onColor(fam);
+  const isRoot = d.level === 1;
+  const iconPx = Math.round((isRoot ? 32 : d.level === 2 ? 27 : 24) * L.s);
+  const depth = Array.from({length:d.level}, () => '<i></i>').join('');
+  const pairPx = L.num.pair;
+
+  let num;
+  if (d.value.kind === 'text')
+    num = `<span class="num" data-kind="text" style="font-size:${Math.round(numPx*0.6)}px">${d.value.text}</span>`;
+  else if (d.value.kind === 'pair')
+    num = `<span class="num" data-kind="a" style="font-size:${pairPx}px">0</span>`
+        + `<span class="arrow" style="font-size:${Math.round(pairPx*0.8)}px">${d.value.sep}</span>`
+        + `<span class="num" data-kind="b" style="font-size:${pairPx}px">0</span>`;
+  else
+    num = `<span class="num" data-kind="single" style="font-size:${numPx}px">0</span>`;
+
+  const headHTML = `<div class="head"><span class="ico">${icon(d.icon, iconPx)}</span><span class="cname" style="font-size:${namePx}px">${d.name}</span></div>`;
+  const metricHTML = `<div class="metric">${num}<span class="mlabel">${d.mlabel}</span></div>`;
+  const barHTML = `<div class="bar"><span class="fill${d.ghost ? ' ghost' : ''}"></span></div>`;
+  const lineHTML = `<p class="line" style="font-size:${linePx}px">${pick(d.line, d.lineSq)}</p>`;
+  const srcHTML = `<div class="src">${d.src}</div>`;
+
+  const body = isRoot
+    ? `<div class="body">
+         <div class="leftcol">${headHTML}${metricHTML}</div>
+         <div class="rightcol">${barHTML}${lineHTML}${srcHTML}</div>
+       </div>`
+    : `<div class="body">${headHTML}${metricHTML}${barHTML}${lineHTML}${srcHTML}</div>`;
+
+  return `<article class="cell${d.wide ? ' wide' : ''}" id="${id}" style="--fam:${fam};--tint:${tint};--track:${track};--on:${on}">
+      <div class="strip"><span class="depth">${depth}</span><span class="kicker">${d.kicker}</span>${d.lvl ? `<span class="lvl">${d.lvl}</span>` : ''}</div>
+      ${body}
+    </article>`;
+}
+
+function build(){
+  const poster = document.getElementById('poster');
+  const frame = document.getElementById('frame');
+  const root = document.documentElement;
+  root.style.setProperty('--s', L.s);
+  root.style.setProperty('--pad', `${L.pad}px`);
+  poster.style.width = frame.style.width = L.W + 'px';
+  poster.style.height = frame.style.height = L.H + 'px';
+
+  const h1 = DATA.h1.map(l => l.replace(/\{lit\}(.*?)\{\/lit\}/g,'<span class="lit">$1</span>')).join('<br>');
+  const chips = ['root','info','comm','trans','nav','local','none'].map(k =>
+    `<span class="lchip"><span class="lswatch" style="background:${FAM[k].c}"></span><span>${FAM[k].name}</span></span>`).join('');
+
+  poster.innerHTML = `
+    <header id="titlebar">
+      <div id="titletext">
+        <div class="eyebrow">${DATA.eyebrow}</div>
+        <h1 id="h1">${h1}</h1>
+        <p id="deck">${pick(DATA.deck, DATA.deckSq)}</p>
+      </div>
+      ${rosette(Math.round(L.title * 0.66))}
+    </header>
+
+    <div id="legend">
+      <div class="lgroup">${chips}</div>
+      <div id="legendnote">▮ filled bar = the share that cell names<br>tint lightens as the stack goes deeper · ▪▪▪ = depth</div>
+    </div>
+
+    <main id="stack">
+      <svg id="wires"></svg>
+      <section class="band" id="band1">${cellHTML(DATA.root,'rootcell',L.num.root,L.name.root,L.line.root)}</section>
+      <div class="wiregap"></div>
+      <section class="band" id="band2">${DATA.intents.map((d,i)=>cellHTML(d,'i'+i,L.num.l2,L.name.l2,L.line.l2)).join('')}</section>
+      <div class="wiregap"></div>
+      <section class="band" id="band3">
+        <div class="brow">${DATA.cells.slice(0,3).map((d,i)=>cellHTML(d,'c'+i,L.num.l3,L.name.l3,L.line.l3)).join('')}</div>
+        <div class="brow">${DATA.cells.slice(3,6).map((d,i)=>cellHTML(d,'c'+(i+3),L.num.l3,L.name.l3,L.line.l3)).join('')}</div>
+        <div class="brow">${DATA.cells.slice(6,8).map((d,i)=>cellHTML(d,'c'+(i+6),L.num.l3,L.name.l3,L.line.l3)).join('')}</div>
+      </section>
+    </main>
+
+    <footer id="foot">
+      <div id="srcline"><b>Sources</b> — ${DATA.srcline}</div>
+      <div id="byline">${DATA.byline.split('|').join('<br>')}</div>
+    </footer>`;
+
+  const gap = L.gap + 'px';
+  document.getElementById('titlebar').style.height = L.title + 'px';
+  document.getElementById('legend').style.height = L.legend + 'px';
+  document.getElementById('band1').style.height = L.b1 + 'px';
+  document.getElementById('band2').style.height = L.b2 + 'px';
+  document.getElementById('band2').style.gap = gap;
+  document.getElementById('band3').style.gap = gap;
+  document.getElementById('foot').style.minHeight = L.foot + 'px';
+  document.getElementById('stack').style.paddingTop = Math.round(10 * L.s) + 'px';
+  document.querySelectorAll('.wiregap').forEach(w => { w.style.height = L.wire + 'px'; });
+  document.querySelectorAll('#band3 .brow').forEach((r,i) => {
+    r.style.gap = gap;
+    r.style.flex = `1 1 ${L.rows[i]}px`;
+    r.style.minHeight = Math.round(L.rows[i]*0.8) + 'px';
+  });
+}
+
+/* ------------------------------------------- fit: prove nothing is clipped */
+function clipped(el){
+  const cs = getComputedStyle(el);
+  if (cs.overflow === 'visible' && cs.overflowX === 'visible' && cs.overflowY === 'visible') return false;
+  return el.scrollHeight > el.clientHeight + 1 || el.scrollWidth > el.clientWidth + 1;
+}
+function fitCells(){
+  const stuck = [];
+  document.querySelectorAll('.cell').forEach(cell => {
+    const line = cell.querySelector('.line');
+    const src  = cell.querySelector('.src');
+    const name = cell.querySelector('.cname');
+    const mlab = cell.querySelector('.mlabel');
+    const over = () => clipped(cell) || (line && clipped(line)) || (src && clipped(src)) || (name && clipped(name));
+    let guard = 160;
+    while (over() && guard--) {
+      let moved = false;
+      for (const [el, floor] of [[line, 0.62], [mlab, 0.80], [src, 0.78], [name, 0.74]]) {
+        if (!el) continue;
+        const base = parseFloat(el.dataset.base || (el.dataset.base = getComputedStyle(el).fontSize));
+        let fs = parseFloat(getComputedStyle(el).fontSize);
+        if (fs > base * floor) { el.style.fontSize = (fs - 0.5) + 'px'; el.style.lineHeight = '1.2'; moved = true; }
+      }
+      if (!moved) break;
+    }
+    if (over()) stuck.push(cell.id);
+  });
+
+  const tb = document.getElementById('titlebar'), tt = document.getElementById('titletext'), h1 = document.getElementById('h1');
+  let hs = parseFloat(getComputedStyle(h1).fontSize), g = 60;
+  while (tt.scrollHeight > tb.clientHeight - 30*L.s && hs > 28 && g--) { hs -= 1; h1.style.fontSize = hs + 'px'; }
+
+  for (const id of ['legend','foot']) {
+    const el = document.getElementById(id);
+    let guard = 40;
+    while (clipped(el) && guard--) {
+      el.querySelectorAll('#legendnote, .lchip span, #srcline, #byline').forEach(t => {
+        t.style.fontSize = (parseFloat(getComputedStyle(t).fontSize) - 0.4) + 'px';
+      });
+    }
+    if (clipped(el)) stuck.push(id);
+  }
+  return stuck;
+}
+
+/* ------------------------------------------------------- wires (fractal)
+   Drawn from each parent's bottom edge to each child's top edge, measured
+   after layout — the subdivision is literal, not decorative.              */
+const WIRES = [];
+function buildWires(){
+  const stack = document.getElementById('stack');
+  const svg = document.getElementById('wires');
+  const S = stack.getBoundingClientRect();
+  svg.setAttribute('viewBox', `0 0 ${S.width} ${S.height}`);
+  svg.setAttribute('width', S.width); svg.setAttribute('height', S.height);
+  svg.innerHTML = ''; WIRES.length = 0;
+
+  const box = el => { const r = el.getBoundingClientRect(); return { x:r.left-S.left, y:r.top-S.top, w:r.width, h:r.height }; };
+  const rootBox = box(document.getElementById('rootcell'));
+  const intentBoxes = DATA.intents.map((_,i) => box(document.getElementById('i'+i)));
+  const cellBoxes = DATA.cells.map((_,i) => box(document.getElementById('c'+i)));
+  const rowOf = i => i < 3 ? 0 : i < 6 ? 1 : 2;
+  const rows = [[0,1,2],[3,4,5],[6,7]].map(ids => ids.map(i => cellBoxes[i]));
+  const obstacles = [rootBox, ...intentBoxes, ...cellBoxes];
+
+  /* vertical channels a wire may descend through: the two outer margins plus
+     every gutter between adjacent cells. A channel is usable for a span if no
+     cell occupies it over that span — so a wire never disappears behind a cell. */
+  const channels = [13*L.s, S.width - 13*L.s];
+  [intentBoxes, ...rows].forEach(r => {
+    for (let i = 0; i < r.length - 1; i++) channels.push((r[i].x + r[i].w + r[i+1].x) / 2);
+  });
+  const freeAt = (x, yTop, yBot) => !obstacles.some(b =>
+    x > b.x - 5*L.s && x < b.x + b.w + 5*L.s && b.y < yBot - 2 && b.y + b.h > yTop + 2);
+  const channelFor = (x, yTop, yBot) => {
+    const ok = channels.filter(c => freeAt(c, yTop, yBot));
+    if (!ok.length) return x;
+    return ok.reduce((best,c) => Math.abs(c-x) < Math.abs(best-x) ? c : best, ok[0]);
+  };
+
+  const band2Top = Math.min(...intentBoxes.map(b => b.y));
+  const band2Bot = Math.max(...intentBoxes.map(b => b.y + b.h));
+  const busRoot = (rootBox.y + rootBox.h + band2Top) / 2;                 // between L1 and L2
+  const busRow = r => (r === 0 ? (band2Bot + rows[0][0].y) / 2
+                               : (rows[r-1][0].y + rows[r-1][0].h + rows[r][0].y) / 2);
+
+  const wire = (d, colour, group) => {
+    const p = document.createElementNS('http://www.w3.org/2000/svg','path');
+    p.setAttribute('d', d); p.setAttribute('fill','none'); p.setAttribute('stroke', colour);
+    p.setAttribute('stroke-width', String(3.5*L.s)); p.setAttribute('stroke-linecap','butt');
+    svg.appendChild(p);
+    const len = p.getTotalLength();
+    p.style.strokeDasharray = len; p.style.strokeDashoffset = len;
+    return { el:p, len, group };
+  };
+  const node = (x, y, colour) => {
+    const r = document.createElementNS('http://www.w3.org/2000/svg','rect');
+    r.setAttribute('x', x - 5.5*L.s); r.setAttribute('y', y - 5.5*L.s);
+    r.setAttribute('width', 11*L.s); r.setAttribute('height', 11*L.s);
+    r.setAttribute('fill', colour); r.style.opacity = '0';
+    svg.appendChild(r); return r;
+  };
+
+  /* L1 → L2: a clean fan */
+  DATA.intents.forEach((d,i) => {
+    const c = FAM[d.fam].c, b = intentBoxes[i];
+    const x1 = rootBox.x + rootBox.w/2 + (i-2)*9*L.s, x2 = b.x + b.w/2;
+    const w = wire(`M${x1} ${rootBox.y+rootBox.h} V${busRoot} H${x2} V${b.y}`, c, 1);
+    w.dot = node(x2, b.y, c); WIRES.push(w);
+  });
+
+  /* L2 → L3: same elbow grammar, routed down a free channel when the child is
+     not in the row immediately below its parent. */
+  const used = {};
+  DATA.cells.forEach((d,i) => {
+    const c = FAM[d.fam].c, b = cellBoxes[i], r = rowOf(i);
+    const from = d.parent >= 0 ? intentBoxes[d.parent] : rootBox;
+    const k = d.parent; used[k] = (used[k] || 0) + 1;
+    const x1 = from.x + from.w/2 + (used[k]-1.5)*10*L.s;
+    const y1 = from.y + from.h;
+    const x2 = b.x + b.w/2, y2 = b.y;
+    const startBus = d.parent >= 0 ? busRow(0) : busRoot;
+    let path;
+    if (r === 0 && d.parent >= 0) {
+      path = `M${x1} ${y1} V${startBus} H${x2} V${y2}`;
+    } else {
+      const ch = channelFor(x2, startBus, busRow(r)) + (i % 2 ? 4*L.s : -4*L.s);
+      path = `M${x1} ${y1} V${startBus} H${ch} V${busRow(r)} H${x2} V${y2}`;
+    }
+    const w = wire(path, c, 2);
+    w.dot = node(x2, y2, c); WIRES.push(w);
+  });
+}
+
+/* ------------------------------------------------------------- timeline */
+const T = {
+  /* anticipation → progressive reveal → payoff → hold.
+     The stack is complete at ~2.95 s, then holds for 1.25 s before the loop. */
+  root:   { in:[0.08,0.48], fill:[0.26,0.95] },
+  wires1: [0.72,1.10],
+  intent: { in0:0.88, step:0.075, dur:0.36, fill0:1.02, fillDur:0.55 },
+  wires2: [1.70,2.08],
+  cell:   { in0:1.88, step:0.062, dur:0.34, fill0:2.00, fillDur:0.52 },
+  end: 4.20,
+};
+const DURATION = T.end;
+const clamp01 = v => v < 0 ? 0 : v > 1 ? 1 : v;
+const span = (t,a,b) => clamp01((t-a)/(b-a));
+const easeOutExpo = p => p >= 1 ? 1 : 1 - Math.pow(2,-9*p);
+const easeOutBack = p => { const c = 1.35, q = p - 1; return 1 + (c+1)*q*q*q + c*q*q; };
+const easeInOut = p => p < 0.5 ? 2*p*p : 1 - Math.pow(-2*p+2,2)/2;
+
+function applyCell(el, spec, pIn, pFill){
+  const lift = (1 - easeOutBack(pIn)) * 15 * L.s;
+  el.style.opacity = String(clamp01(pIn * 1.4));
+  el.style.transform = `translateY(${lift.toFixed(2)}px)`;
+  const e = easeOutExpo(pFill);
+  const fill = el.querySelector('.fill');
+  if (fill) fill.style.width = `${(Math.max(0,Math.min(100,spec.bar)) * e).toFixed(2)}%`;
+  el.querySelectorAll('.num').forEach(n => {
+    const k = n.dataset.kind;
+    if (k === 'text') { n.style.opacity = String(e); return; }
+    if (k === 'single') n.textContent = fmt(spec.value, e);
+    if (k === 'a') n.textContent = fmt(spec.value.a, e);
+    if (k === 'b') n.textContent = fmt(spec.value.b, e);
+  });
+}
+
+const LOOP = Number(PARAMS.get('loop') || 0) || DURATION;
+function seek(t){
+  t = Math.max(0, Math.min(DURATION, t));
+  applyCell(document.getElementById('rootcell'), DATA.root,
+    easeInOut(span(t, T.root.in[0], T.root.in[1])), span(t, T.root.fill[0], T.root.fill[1]));
+  DATA.intents.forEach((d,i) => {
+    const a = T.intent.in0 + i*T.intent.step, f = T.intent.fill0 + i*T.intent.step;
+    applyCell(document.getElementById('i'+i), d, easeInOut(span(t,a,a+T.intent.dur)), span(t,f,f+T.intent.fillDur));
+  });
+  DATA.cells.forEach((d,i) => {
+    const a = T.cell.in0 + i*T.cell.step, f = T.cell.fill0 + i*T.cell.step;
+    applyCell(document.getElementById('c'+i), d, easeInOut(span(t,a,a+T.cell.dur)), span(t,f,f+T.cell.fillDur));
+  });
+  WIRES.forEach(w => {
+    const [a,b] = w.group === 1 ? T.wires1 : T.wires2;
+    const p = easeOutExpo(span(t,a,b));
+    w.el.style.strokeDashoffset = String(w.len * (1-p));
+    w.dot.style.opacity = p > 0.96 ? '1' : '0';
+  });
+  const spin = document.getElementById('rosette-spin');
+  if (spin) spin.setAttribute('transform', `rotate(${((t/LOOP)*30).toFixed(3)})`);
+}
+
+/* ----------------------------------------------------------------- boot */
+let readyResolve;
+const ready = new Promise(r => { readyResolve = r; });
+window.VIZ = {
+  ready, duration: DURATION, size: SIZE_KEY, timeline: T, seek,
+  frame(n, total){ seek((n/total) * (Number(PARAMS.get('clip')) || DURATION)); },
+  fitNotes: [],
+};
+
+function scaleToViewport(){
+  const frame = document.getElementById('frame'), poster = document.getElementById('poster');
+  const k = Math.min(window.innerWidth / L.W, window.innerHeight / L.H);
+  poster.style.transform = `scale(${k})`;
+  frame.style.width = (L.W*k) + 'px';
+  frame.style.height = (L.H*k) + 'px';
+}
+
+function boot(){
+  build();
+  seek(DURATION);               // fit against final counter text, not "0"
+  window.VIZ.fitNotes = fitCells();
+  buildWires();
+  scaleToViewport();
+
+  const reduce = PARAMS.get('motion') === 'reduce' || matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isStatic = PARAMS.has('static') || PARAMS.has('poster') || PARAMS.has('frame') || PARAMS.has('t') || reduce;
+
+  if (PARAMS.has('frame')) window.VIZ.frame(Number(PARAMS.get('frame')), Number(PARAMS.get('frames') || 40));
+  else if (PARAMS.has('t')) seek(Number(PARAMS.get('t')));
+  else seek(DURATION);
+
+  if (!isStatic) {
+    const t0 = performance.now();
+    const tick = () => {
+      const t = ((performance.now() - t0)/1000) % (DURATION + 0.9);
+      seek(Math.min(t, DURATION));
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  document.documentElement.dataset.ready = '1';
+  readyResolve(true);
+}
+
+addEventListener('resize', scaleToViewport);
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+else boot();
+</script>
+</body>
+</html>

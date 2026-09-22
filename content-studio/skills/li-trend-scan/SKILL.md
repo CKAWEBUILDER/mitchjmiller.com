@@ -23,4 +23,4 @@ Turn "what's the field talking about" into a durable, compounding advantage.
 
 ## Cadence
 - Run before ideating a new post, and as a standalone weekly scan.
-- Over time, note which of Mitchell's own posts landed (in AGENTS.md learnings) to bias future picks.
+- Over time, note which of Mitchell's own posts landed (in OPERATING.md learnings) to bias future picks.

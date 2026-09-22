@@ -54,7 +54,7 @@ hype = [w for w in ("revolutionary", "game-changer", "game changer", "everyone e
 if missing:
     reason = ("Content Studio quality gate — this draft isn't ready to finish.\n"
               "Missing required elements:\n- " + "\n- ".join(missing) +
-              "\nAdd them to " + draft_path + " (see AGENTS.md). "
+              "\nAdd them to " + draft_path + " (see OPERATING.md). "
               "When the post is genuinely done and approved, clear .active-draft.")
     if hype:
         reason += "\nAlso soften hype/sycophancy: " + ", ".join(hype)

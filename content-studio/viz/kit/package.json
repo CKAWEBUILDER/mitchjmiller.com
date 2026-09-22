@@ -1,0 +1,18 @@
+{
+  "name": "living-infographic-kit",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Local-only deps for the living-infographic export pipeline. Kept out of the site's root package.json on purpose.",
+  "scripts": {
+    "export": "node export/run-all.mjs",
+    "poster": "node export/poster.mjs",
+    "gif": "node export/gif.mjs",
+    "verify": "node export/verify.mjs",
+    "contrast": "node export/contrast.mjs"
+  },
+  "dependencies": {
+    "gifenc": "^1.0.3",
+    "pngjs": "^7.0.0"
+  }
+}

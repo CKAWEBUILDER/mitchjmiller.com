@@ -29,7 +29,7 @@ description: Ship an approved post to mitchjmiller.com (Writing) and LinkedIn. S
    PNG (or build a carousel from multiple PNGs), add the share CTA + a link to the full post.
    Password manager handles login; never handle the password text.
 3. Confirm the post preview matches, then publish. Capture the live URL.
-4. Add the LinkedIn URL + first-day engagement note to `../AGENTS.md` learnings.
+4. Add the LinkedIn URL + first-day engagement note to `../OPERATING.md` learnings.
 
 ## Never
 - Never auto-post to LinkedIn without a per-post OK. Never enter credentials manually.

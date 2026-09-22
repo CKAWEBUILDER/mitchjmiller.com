@@ -1,0 +1,45 @@
+# Research Notes — Gaps, Blocks, Disagreements
+2026-09-14. Read this alongside data.json before building any visual — several of the "counts" here are methodologically loose and need a caveat in any chart, not a bare number.
+
+## 1. LinkedIn's public guest-search counts are not trustworthy as exact-title numbers
+Every single LinkedIn guest-search URL tested (10 of 10 titles) returned either a suspiciously round "X,000+" figure or, in a couple of cases, a much smaller and more specific number from a different page type (LinkedIn's own topic pages, e.g. "74 Head Of Seo jobs"). The round numbers do not track title rarity at all:
+- "Growth Data Engineer" (essentially a whitespace title — 1 real posting found) → LinkedIn shows "11,000+"
+- "Head of AEO" (an unstandardized, emerging title) → LinkedIn shows "11,000+"
+- "Growth Operations Engineer" (0 exact-phrase results elsewhere) → LinkedIn shows "10,000+"
+This strongly suggests LinkedIn's guest search is doing broad token/synonym matching (matching "growth," "data," "engineer" separately, or capping display at a round ceiling) rather than counting exact-title postings. **Do not present LinkedIn's guest-search numbers as "job openings" in the final piece without this caveat** — they're included in data.json for transparency (per the assignment's board-diversity requirement) but are flagged "loose" in every entry. The gap between LinkedIn's loose count and SimplyHired's exact-phrase count for the same title is, if anything, more interesting than either number alone (see shock-stats.md #1, #7, and the closing meta-stat).
+
+## 2. LinkedIn people/company search, and any count requiring login, was skipped entirely
+Per the assignment brief and per task boundaries (no sign-ups/logins), I did not attempt LinkedIn's authenticated job search, Sales Navigator, or people-search — only the public "/jobs/search" and "/jobs/[topic]-jobs" guest pages, which render without a login wall for the first screen (a sign-in modal appears only when scrolling past ~25 results). Any count requiring login is a hard skip, as instructed.
+
+## 3. Indeed, Glassdoor job-search pages, ZipRecruiter job-search pages, and Wellfound's role page all blocked automated fetches (HTTP 403)
+These are bot-detection blocks (not login walls) that occurred on WebFetch, not WebSearch. I substituted:
+- Indeed → skipped entirely for postings counts. A WebSearch query did surface an Indeed-hosted page whose own title claimed "Now Hiring: 399,000 Growth Engineer Jobs" / a separate result said "395,041" — **I deliberately did not use this number anywhere in data.json or shock-stats.md.** Indeed's programmatically-generated SEO landing pages are well known to show inflated, broad-match, or stale counts unrelated to the literal query, and I could not verify it by loading the actual page (403). Treat it as noise, not a data point.
+- ZipRecruiter/Glassdoor job-search pages → substituted their separate salary pages (which sometimes rendered via WebSearch snippet extraction even when direct WebFetch also 403'd) and SimplyHired/Built In/LinkedIn for postings counts instead.
+- Wellfound → both the static role page and the query-param search 403'd or returned an unfiltered generic remote-jobs count (11,640, not title-specific). No usable Wellfound number exists in this dataset for any of the 10 titles — a real gap. Wellfound likely requires JS execution or a session cookie that a static fetch can't provide.
+
+## 4. Google Jobs and Google Trends did not render
+- A direct fetch of a Google Jobs search URL (`ibp=htl;jobs`) returned no jobs widget — Google's job carousel is JS-rendered client-side and isn't present in server-delivered HTML, so a static-fetch tool cannot see it. WebSearch itself (which is closer to Google's index) doesn't surface a literal "job count" figure either — it returns organic result snippets, not the Jobs widget's internal counter.
+- Google Trends (`trends.google.com/trends/explore`) returned HTTP 429 (rate-limited) on the one attempt made. Per the assignment ("Google Trends relative interest if a public page loads") — it didn't load, so no Trends data is included anywhere in this research. This is a full gap across all 10 titles, not just some.
+
+## 5. geojobs.ai (curated AEO/GEO board) was found but not fully mined
+This is a purpose-built job board specifically for AEO/GEO/AI-search roles (https://geojobs.ai/jobs/) — potentially the single best niche source for the "Head of AEO/GEO" title. I identified it via WebSearch but did not get a clean fetch of its live posting count within the time-box. **Flagging as the highest-value follow-up** if more research time is allocated to this piece.
+
+## 6. "Data Engineer, Growth" and "Growth Operations Engineer" are close to whitespace titles
+Both cleared the assignment's "≥3 sourced numbers" bar, but honestly: almost nobody posts jobs under these exact strings.
+- "Growth Data Engineer" / "Data Engineer, Growth": 1 confirmed live posting found anywhere (Roblox, Senior Growth Data Engineer, San Mateo CA). All salary figures for this title in data.json are the *general* Data Engineer market used as an explicit proxy — not growth-specific pay data, because none exists as a distinct, trackable category.
+- "Growth Operations Engineer": 0 exact-phrase results on SimplyHired (the one board that gave a real exact-phrase zero). The closest live listings use adjacent titles ("Growth Operations Specialist," "Growth Operations Manager," "RevOps"). This is worth stating plainly in the post rather than papering over with proxy numbers: **these two titles are more "job description language a company might use internally" than "titles people are actually hired under."**
+
+## 7. Disagreements between sources (do not silently average these — the spread is the story)
+- **Growth Engineer salary**: ZipRecruiter shows two different figures depending on which of its own URL slugs you land on ($101,752 vs. $146,868 average) for what reads as the same role; Glassdoor's figure ($359,824 avg, n=38) is 2.4x-3.5x higher than either ZipRecruiter number. GTME Pulse/Levels.fyi-based comparison lands in between ($160K median). No clean single "the salary" exists for this title.
+- **Growth Operations Manager salary** (used as the closest proxy for Growth Operations Engineer): Growth.Talent's guide says $90K-$180K (mid-level $100K-$145K); ZipRecruiter says average $63,456 with a $41K-$118.5K range — nearly 2x apart at the median. Likely explanation: ZipRecruiter's sample skews toward a broader, more junior "operations manager" population; Growth.Talent's is SaaS/growth-specific. Neither is wrong, they're measuring different populations under the same label.
+- **RevOps postings scale**: exact-title "RevOps Engineer"/"Revenue Operations Engineer" postings are single digits on SimplyHired, but ZipRecruiter's own umbrella "RevOps" search is cited elsewhere (Fullcast) at 174,000+ — a ~50,000x gap that's purely a function of how narrow vs. broad the search term is. This is the most extreme version of the board-count-methodology problem in the whole dataset.
+- **RevOps YoY growth claims conflict on magnitude**: Bloomberry-adjacent coverage puts GTM Engineer growth at 205% YoY; CRM Today puts RevOps growth at 127% YoY over a near-identical period. These are different roles so not a direct contradiction, but both numbers come from similarly-styled trade-publisher writeups rather than a shared primary dataset, and neither publisher discloses full methodology — treat both as directional, not precise.
+- **SEO leadership-tilt stats broadly agree**: ALM Corp's "59% of SEO listings are senior leadership" (citing a Semrush analysis) and SearchForHire's "28% of new AI-search titles are leadership vs. 15% for standard SEO titles" are consistent in direction (leadership titles overrepresented / rising) even though they're not the same metric — worth pairing in the post as corroborating, not identical, evidence.
+
+## 8. Confidence-level key used in data.json
+- **high**: ≥2 independent, dated, methodology-disclosed sources that materially agree, or a single large-n primary study (e.g., SearchForHire's 328,650-posting study).
+- **medium**: sources exist but disagree substantially, rely on trade-blog synthesis without disclosed methodology, or the title itself is too new/unstandardized for clean comparison (e.g., AEO/GEO titles).
+- **low**: title is close to whitespace in the job market (near-zero exact-phrase postings), and/or numbers are proxies from an adjacent title/occupation rather than the title itself.
+
+## 9. Scope discipline honored
+No git commands run. No files touched outside `content-studio/research/2026-09-14/titles/`. No Semrush MCP calls (Semrush numbers that appear in this research — e.g., the "59% leadership roles" stat — were read from public third-party articles citing Semrush's own published analysis, not pulled via the MCP tool). No logins, sign-ups, purchases, or posting/messaging actions were attempted. No builds or servers were started.

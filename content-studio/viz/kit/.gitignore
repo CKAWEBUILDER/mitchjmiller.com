@@ -1,0 +1,8 @@
+# Local-only deps for the export pipeline (see package.json — deliberately not in the site root).
+node_modules/
+
+# Export binaries are reproducible in ~15 s with `npm run export`; the JSON
+# records next to them (manifest.json, verify/verify.json) are the evidence and stay tracked.
+exports/**/*.png
+exports/**/*.gif
+exports/**/*.pdf

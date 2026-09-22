@@ -21,3 +21,16 @@ __pycache__/
 .release-candidate/
 
 /node_modules
+
+# design-sync
+ds-dist/
+.ds-sync/
+ds-bundle/
+.design-sync/.cache/
+.design-sync/learnings/
+.design-sync/node_modules
+src/ds/ds.css
+
+# content-studio: regenerable infographic exports (rebuild: cd content-studio/viz/kit && npm run export)
+content-studio/viz/**/exports/
+content-studio/viz/kit/node_modules/

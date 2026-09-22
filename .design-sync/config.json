@@ -1,0 +1,57 @@
+{
+  "shape": "package",
+  "pkg": "mitchjmiller-com",
+  "globalName": "M2DS",
+  "buildCmd": "node scripts/build-ds-css.mjs && npx tsc -p tsconfig.ds.json",
+  "srcDir": "src/ds",
+  "tsconfig": "tsconfig.ds.json",
+  "cssEntry": "src/ds/ds.css",
+  "guidelinesGlob": [],
+  "provider": {
+    "component": "AgencyRoot",
+    "props": {
+      "page": "default"
+    }
+  },
+  "overrides": {
+    "AgencyRoot": {
+      "cardMode": "column"
+    },
+    "Hero": {
+      "cardMode": "column"
+    },
+    "SiteHeader": {
+      "cardMode": "column"
+    },
+    "SiteFooter": {
+      "cardMode": "column"
+    },
+    "CTABand": {
+      "cardMode": "column"
+    },
+    "LifecycleStrip": {
+      "cardMode": "column"
+    },
+    "BrandMarquee": {
+      "cardMode": "column"
+    },
+    "Stage": {
+      "cardMode": "column"
+    },
+    "Section": {
+      "cardMode": "column"
+    },
+    "Split": {
+      "cardMode": "column"
+    },
+    "ProcessSteps": {
+      "cardMode": "column"
+    },
+    "Grid": {
+      "cardMode": "column"
+    },
+    "WorkCard": {
+      "cardMode": "column"
+    }
+  }
+}

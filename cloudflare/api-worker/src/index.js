@@ -2,19 +2,28 @@
  * mitchjmiller-api — contact/lead intake for mitchjmiller.com.
  *
  * Routes
- *   GET  /health   → { ok: true, service, time }
- *   POST /contact  → validates, verifies Turnstile, rate-limits (5/IP/hour via KV), inserts into D1
- *   OPTIONS *      → CORS preflight for allowlisted origins
+ *   GET  /health          → { ok: true, service, time }
+ *   POST /contact         → validates, verifies Turnstile, rate-limits (5/IP/hour via KV), inserts into D1
+ *   POST /checkout        → offer slug (server-side price allowlist) → 303 to Stripe-hosted Checkout; 20/IP/hour
+ *   POST /stripe/webhook  → Stripe-Signature verified, recorded once per event id, payments upserted (src/stripe.js)
+ *   OPTIONS *             → CORS preflight for allowlisted origins
  *
- * Bindings: LEADS (D1), RATE (KV). Vars: ALLOWED_ORIGINS. Secrets: TURNSTILE_SECRET, IP_SALT.
+ * Bindings: LEADS (D1), RATE (KV). Vars: ALLOWED_ORIGINS, STRIPE_PRICES, STRIPE_AUTOMATIC_TAX, CHECKOUT_SUCCESS_URL,
+ * CHECKOUT_CANCEL_URL. Secrets: TURNSTILE_SECRET, IP_SALT, STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET.
+ * Stripe contract and runbook: docs/stripe/README.md.
  * Accepts application/json, application/x-www-form-urlencoded or multipart/form-data. The body is read through a
  * byte-counting stream reader and rejected with 413 past 16,384 bytes regardless of Content-Length; every field is
  * capped server-side in validate().
  * Form contract is documented in docs/cloudflare/README.md.
  */
 
-const LIMITS = { name: 120, email: 254, topic: 120, message: 4000, source_url: 512, token: 2048, body: 16384 };
+import { createCheckoutSession, verifyWebhookSignature, paymentFromEvent } from './stripe.js';
+
+const LIMITS = { name: 120, email: 254, topic: 120, message: 4000, source_url: 512, token: 2048, body: 16384, offer: 64, ref: 64, webhook: 262144 };
 const RATE_LIMIT = 5;
+const CHECKOUT_RATE_LIMIT = 20;
+const OFFER_RE = /^[a-z0-9][a-z0-9-]{0,63}$/;
+const REF_RE = /^[A-Za-z0-9_-]{1,64}$/;
 const RATE_WINDOW_S = 3600;
 const TURNSTILE_VERIFY = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -41,6 +50,20 @@ export default {
           return json({ ok: false, error: 'origin_not_allowed' }, 403, cors);
         }
         return await handleContact(request, env, cors);
+      }
+      if (url.pathname === '/checkout') {
+        if (request.method !== 'POST') {
+          return json({ ok: false, error: 'method_not_allowed' }, 405, { ...cors, Allow: 'POST, OPTIONS' });
+        }
+        if (origin && !cors['Access-Control-Allow-Origin']) {
+          return json({ ok: false, error: 'origin_not_allowed' }, 403, cors);
+        }
+        return await handleCheckout(request, env, cors);
+      }
+      if (url.pathname === '/stripe/webhook') {
+        // Server-to-server from Stripe: no browser origin or CORS; authenticity comes from the signature, not the caller.
+        if (request.method !== 'POST') return json({ ok: false, error: 'method_not_allowed' }, 405, { Allow: 'POST' });
+        return await handleStripeWebhook(request, env);
       }
       return json({ ok: false, error: 'not_found' }, 404, cors);
     } catch (err) {
@@ -103,6 +126,131 @@ async function handleContact(request, env, cors) {
     .run();
 
   return json({ ok: true, id }, 200, cors);
+}
+
+/**
+ * POST /checkout — form or JSON { offer, email?, ref? } → 303 to Stripe-hosted Checkout, or 200 { url } when the client sends
+ * Accept: application/json. `offer` must be a key of the STRIPE_PRICES var; the amount is never taken from the request.
+ */
+async function handleCheckout(request, env, cors) {
+  const declared = Number(request.headers.get('Content-Length') || 0);
+  if (declared > LIMITS.body) return json({ ok: false, error: 'payload_too_large' }, 413, cors);
+  const rawType = request.headers.get('Content-Type') || '';
+  if (!supportedType(rawType.toLowerCase())) return json({ ok: false, error: 'unsupported_media_type' }, 415, cors);
+  const body = await readBodyBounded(request, LIMITS.body);
+  if (body === null) return json({ ok: false, error: 'payload_too_large' }, 413, cors);
+  const fields = await parseFields(rawType, body);
+
+  const str = (v, max) => (typeof v === 'string' ? v.trim().slice(0, max + 1) : '');
+  const offer = str(fields.offer, LIMITS.offer);
+  const email = str(fields.email, LIMITS.email);
+  const ref = str(fields.ref, LIMITS.ref);
+  const errors = {};
+  if (!OFFER_RE.test(offer)) errors.offer = 'required';
+  if (email && (email.length > LIMITS.email || !EMAIL_RE.test(email))) errors.email = 'invalid';
+  if (ref && !REF_RE.test(ref)) errors.ref = 'invalid';
+  if (Object.keys(errors).length) return json({ ok: false, error: 'validation', fields: errors }, 400, cors);
+
+  const priceId = parsePrices(env.STRIPE_PRICES)[offer];
+  if (!priceId) return json({ ok: false, error: 'unknown_offer' }, 404, cors);
+  if (!env.STRIPE_SECRET_KEY || !env.IP_SALT || !env.CHECKOUT_SUCCESS_URL || !env.CHECKOUT_CANCEL_URL) {
+    console.error('missing STRIPE_SECRET_KEY / IP_SALT secret or CHECKOUT_*_URL var');
+    return json({ ok: false, error: 'not_configured' }, 503, cors);
+  }
+
+  const ip = request.headers.get('CF-Connecting-IP') || '0.0.0.0';
+  const ipHash = (await sha256Hex(`${env.IP_SALT}|${ip}`)).slice(0, 32);
+  const limited = await rateLimit(env.RATE, `co:${ipHash}`, CHECKOUT_RATE_LIMIT);
+  if (limited) {
+    return json({ ok: false, error: 'rate_limited', retry_after_s: limited }, 429, { ...cors, 'Retry-After': String(limited) });
+  }
+
+  const res = await createCheckoutSession(env, {
+    priceId,
+    offer,
+    email: email || undefined,
+    clientReferenceId: ref || undefined,
+    successUrl: env.CHECKOUT_SUCCESS_URL,
+    cancelUrl: env.CHECKOUT_CANCEL_URL,
+  });
+  if (!res.ok || !res.body || typeof res.body.url !== 'string') {
+    const e = (res.body && res.body.error) || {};
+    console.error('stripe checkout.sessions.create failed', res.status, e.type, e.code, e.message);
+    return json({ ok: false, error: 'stripe_error', code: e.code || null }, 502, cors);
+  }
+  if ((request.headers.get('Accept') || '').includes('application/json')) {
+    return json({ ok: true, url: res.body.url, id: res.body.id }, 200, cors);
+  }
+  return new Response(null, { status: 303, headers: { ...cors, Location: res.body.url, 'Cache-Control': 'no-store' } });
+}
+
+/** STRIPE_PRICES var: JSON object { "<offer-slug>": "price_…" }. Anything else counts as an empty catalog. */
+function parsePrices(raw) {
+  try {
+    const parsed = JSON.parse(raw || '{}');
+    return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+/**
+ * POST /stripe/webhook — verify Stripe-Signature over the raw body, record the event once (stripe_events primary key), then
+ * upsert the payment row. Any thrown error becomes a 500 from the outer handler, and Stripe retries the delivery.
+ */
+async function handleStripeWebhook(request, env) {
+  if (!env.STRIPE_WEBHOOK_SECRET) {
+    console.error('missing STRIPE_WEBHOOK_SECRET secret');
+    return json({ ok: false, error: 'not_configured' }, 503);
+  }
+  const bytes = await readBodyBounded(request, LIMITS.webhook);
+  if (bytes === null) return json({ ok: false, error: 'payload_too_large' }, 413);
+  const payload = new TextDecoder().decode(bytes);
+  const verified = await verifyWebhookSignature(payload, request.headers.get('Stripe-Signature'), env.STRIPE_WEBHOOK_SECRET);
+  if (!verified) return json({ ok: false, error: 'bad_signature' }, 400);
+
+  let event = null;
+  try {
+    event = JSON.parse(payload);
+  } catch {
+    event = null;
+  }
+  if (!event || typeof event.id !== 'string' || typeof event.type !== 'string') return json({ ok: false, error: 'bad_event' }, 400);
+
+  const objectId = event.data && event.data.object && typeof event.data.object.id === 'string' ? event.data.object.id : null;
+  const inserted = await env.LEADS.prepare('INSERT OR IGNORE INTO stripe_events (id, type, created, object_id, received_at) VALUES (?,?,?,?,?)')
+    .bind(event.id, event.type, Number(event.created) || 0, objectId, new Date().toISOString())
+    .run();
+  if (!inserted.meta || inserted.meta.changes === 0) return json({ ok: true, duplicate: true }, 200);
+
+  const payment = paymentFromEvent(event);
+  if (payment) {
+    await env.LEADS.prepare(
+      `INSERT INTO payments (id, kind, status, amount_total, currency, customer_id, customer_email, offer, invoice_id, event_id, event_type, updated_at)
+       VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
+       ON CONFLICT(id) DO UPDATE SET status = excluded.status, amount_total = excluded.amount_total, currency = excluded.currency,
+         customer_id = excluded.customer_id, customer_email = excluded.customer_email, invoice_id = excluded.invoice_id,
+         event_id = excluded.event_id, event_type = excluded.event_type, updated_at = excluded.updated_at
+       WHERE excluded.updated_at >= payments.updated_at`,
+    )
+      .bind(
+        payment.id,
+        payment.kind,
+        payment.status,
+        payment.amount_total,
+        payment.currency,
+        payment.customer_id,
+        payment.customer_email,
+        payment.offer,
+        payment.invoice_id,
+        payment.event_id,
+        payment.event_type,
+        payment.updated_at,
+      )
+      .run();
+    console.log('stripe payment', payment.kind, payment.id, payment.status, payment.amount_total, payment.currency);
+  }
+  return json({ ok: true }, 200);
 }
 
 function supportedType(type) {
@@ -197,7 +345,7 @@ function validate(fields) {
 }
 
 /** Fixed-window counter in KV. Returns seconds until reset when over the limit, else 0. */
-async function rateLimit(kv, key) {
+async function rateLimit(kv, key, limit = RATE_LIMIT) {
   const now = Math.floor(Date.now() / 1000);
   let state = null;
   try {
@@ -208,7 +356,7 @@ async function rateLimit(kv, key) {
   if (!state || typeof state.resetAt !== 'number' || state.resetAt <= now) {
     state = { count: 0, resetAt: now + RATE_WINDOW_S };
   }
-  if (state.count >= RATE_LIMIT) return Math.max(state.resetAt - now, 1);
+  if (state.count >= limit) return Math.max(state.resetAt - now, 1);
   state.count += 1;
   await kv.put(key, JSON.stringify(state), { expiration: state.resetAt + 60 });
   return 0;

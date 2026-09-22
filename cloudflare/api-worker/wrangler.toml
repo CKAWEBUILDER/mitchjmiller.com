@@ -1,7 +1,8 @@
 # mitchjmiller-api — contact/lead intake Worker for mitchjmiller.com
 # Deploy from the repo root:
 #   npm_config_cache=.npm-cache npx -y wrangler deploy --config cloudflare/api-worker/wrangler.toml
-# Secrets (set once, never committed): TURNSTILE_SECRET, IP_SALT
+# Secrets (set once, never committed): TURNSTILE_SECRET, IP_SALT, STRIPE_SECRET_KEY (restricted key, rk_…),
+# STRIPE_WEBHOOK_SECRET (whsec_… for /stripe/webhook). Stripe runbook: docs/stripe/README.md
 #   npm_config_cache=.npm-cache npx -y wrangler secret put IP_SALT --config cloudflare/api-worker/wrangler.toml
 name = "mitchjmiller-api"
 main = "src/index.js"
@@ -14,6 +15,13 @@ enabled = true
 [vars]
 # Comma-separated browser origins allowed to call POST /contact.
 ALLOWED_ORIGINS = "https://mj2.pro,https://www.mj2.pro,https://mitchjmiller.com,https://www.mitchjmiller.com,https://mitchjmiller-com.pages.dev,http://127.0.0.1:5187,http://127.0.0.1:5188"
+# Stripe. Server-side allowlist of offers a visitor may pay for: {"<offer-slug>": "price_…"} (docs/stripe/README.md §2).
+STRIPE_PRICES = "{}"
+# Flip to "true" only after Tax Settings show an active registration (docs/stripe/README.md §6); otherwise Stripe
+# silently collects no tax while the code looks like tax is on.
+STRIPE_AUTOMATIC_TAX = "false"
+CHECKOUT_SUCCESS_URL = "https://mj2.pro/contact/?checkout=success&session_id={CHECKOUT_SESSION_ID}"
+CHECKOUT_CANCEL_URL = "https://mj2.pro/services/"
 
 [[d1_databases]]
 binding = "LEADS"

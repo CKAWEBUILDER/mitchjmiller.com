@@ -1,0 +1,7 @@
+# Local secrets for `wrangler dev --config cloudflare/api-worker/wrangler.toml`. Copy to .dev.vars (gitignored). Sandbox keys only.
+STRIPE_SECRET_KEY=rk_test_replace_me
+# From `stripe listen --forward-to http://127.0.0.1:8787/stripe/webhook` (printed on start)
+STRIPE_WEBHOOK_SECRET=whsec_replace_me
+# Cloudflare's documented always-passes Turnstile test secret
+TURNSTILE_SECRET=1x0000000000000000000000000000000AA
+IP_SALT=local-dev-salt

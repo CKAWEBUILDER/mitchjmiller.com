@@ -99,9 +99,10 @@ warm white/pale gray for breathing room, editorial typography, and restrained mo
 - [x] Existing agency redesign and uncommitted user work preserved.
 - [x] Approved tree/template map recorded.
 - [x] Canonical URL, CNAME, sitemap, robots, portal link and contact-origin source updates started.
-- [ ] Run typecheck, staging build, parity, agency, crawl and browser QA.
-- [ ] Commit and push accepted source changes to GitHub.
-- [ ] Publish the new release and configure old-domain forwarding.
+- [x] Run typecheck, release build, parity, agency, crawl and browser QA. Exact release results: typecheck/build PASS; parity 57/57; agency 59/59; crawl 844/844; browser 233/233.
+- [x] Commit and push accepted source changes to GitHub. Source is on `main` at `bb32728`; the approved redesign branch is on `claude/agency-redesign` at `1e6ed24`.
+- [x] Publish the new release artifact to `gh-pages` at `0b9073d` with `CNAME` set to `mj2.pro`.
+- [ ] Activate DNS and configure old-domain forwarding. `mj2.pro` is still returning Porkbun parking records; `mitchjmiller.com` currently returns GitHub Pages 404 until its registrar forwarding is updated.
 - [ ] Activate `clients.mj2.pro` and verify the demo workspace.
 - [ ] Verify GSC sitemap, GA4 realtime and contact origin.
 - [ ] Update personal LinkedIn and create the M² business page.

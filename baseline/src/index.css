@@ -1,4 +1,10 @@
 @import "tailwindcss";
+/* Keep non-site source out of Tailwind's auto-detected scan: the design-system
+   mirror and the content studio match utility-like words and add dead CSS. */
+@source not "../../src/ds";
+@source not "../../.design-sync";
+@source not "../../content-studio";
+@source not "../../docs";
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
 

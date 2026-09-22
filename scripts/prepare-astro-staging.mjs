@@ -16,6 +16,7 @@ if(release){
  cpSync(resolve('public/files'),resolve(output,'files'),{recursive:true});
 }else{
  mkdirSync(resolve(output,'review-assets'),{recursive:true});
+ if(existsSync(resolve('public/review-assets/brand-options'))) cpSync(resolve('public/review-assets/brand-options'),resolve(output,'review-assets/brand-options'),{recursive:true});
  cpSync(resolve('public/files'),resolve(output,'review-assets/files'),{recursive:true});
  cpSync(resolve('baseline/public/files'),resolve(output,'files'),{recursive:true});
 }

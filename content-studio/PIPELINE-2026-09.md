@@ -1,6 +1,6 @@
 # Content Pipeline — Sept 2026
 
-Built from Mitchell's topic dump (2026-08-31) + a read of the existing blog + a scan of what he reposts on LinkedIn. Follows `CLAUDE.md` house rules and the `AGENTS.md` quality gate.
+Built from Mitchell's topic dump (2026-08-31) + a read of the existing blog + a scan of what he reposts on LinkedIn. Follows `CLAUDE.md` house rules and the `OPERATING.md` quality gate.
 
 ---
 

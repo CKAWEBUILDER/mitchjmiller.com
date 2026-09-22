@@ -1,3 +1,7 @@
+## Latest refinement
+
+The centered layout, succinct copy, real brand carousel and M²/palette options supersede the earlier design decisions below. See [current refinement](refinement.md) for exact state, sources, validation and the next step.
+
 ## Completed refinement and Claude review
 
 Private staging deployment SUCCEEDED September 14, 2026: https://mitch-portfolio-html-staging.clearkayakrentalsoah.chatgpt.site

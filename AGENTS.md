@@ -10,7 +10,7 @@ Read `PROJECT.md`, then `handoffs/parity-design-2026-09-11.md`, then the applica
 - Active persistent migration checkout: `/Users/mitchellmiler/Documents/mitchjmiller-html-migration`.
 - Original checkout `/Users/mitchellmiler/Documents/mitchjmiller.com` contains unpublished user drafts. Preserve it; do not reset, clean, overwrite or publish those drafts.
 - The September review checkout under `/private/tmp/mitchjmiller-overhaul-20260910` is a historical preview/reference, not the durable handoff location.
-- Verify the current branch, working tree and remote before edits or pushes. Current implementation branch is `codex/html-parity-design-20260911`; a subsequent implementation branch should use `codex/` and be recorded in PROJECT.md.
+- Verify the current branch, working tree and remote before edits or pushes. Current implementation branch is `claude/agency-redesign`; continue in this single canonical checkout. Record any later branch change in PROJECT.md.
 - GitHub source comes before host deployment. Push accepted source before publishing any host. One agent owns production release; do not run competing deployment workflows.
 
 ## Product contract
@@ -42,3 +42,9 @@ Read `PROJECT.md`, then `handoffs/parity-design-2026-09-11.md`, then the applica
 - Save time and usage: read the records, use the cheapest sufficient tools, consolidate missing-information questions, and keep updates short and concrete.
 - At each milestone, update PROJECT.md and the applicable handoff/task record with completed work, evidence, exact next action, unresolved blockers and outstanding approval. Commit and push documentation with accepted changes.
 - Close only task-created resources no longer needed. Preserve user tabs and active review previews. Never discard unsaved work.
+
+## One record set — September 14 standing instruction
+
+Keep exactly one AGENTS.md and one PROJECT.md, both at this checkout root. Do not create worktrees, subfolder copies or parallel record sets. Focused guidance belongs in ordinary documents linked here or from PROJECT.md. The content studio's existing playbook is preserved in [content-studio/OPERATING.md](content-studio/OPERATING.md); it is subordinate to this root contract and the user's current authorization.
+
+The September 14 design vision and implementation decisions are summarized in [refinement record](docs/redesign-2026-09-14/refinement.md). The original user message is preserved privately in Career Coach; do not publish that raw conversation.

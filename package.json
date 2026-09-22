@@ -3,6 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "types": "./ds-dist/index.d.ts",
+  "module": "./ds-dist/index.js",
   "scripts": {
     "dev": "node scripts/prepare-astro-staging.mjs && astro dev --host 127.0.0.1 --port 5191",
     "build": "node scripts/prepare-astro-staging.mjs && astro build && node scripts/finalize-parity.mjs && node scripts/verify-parity.mjs && node scripts/verify-agency.mjs",

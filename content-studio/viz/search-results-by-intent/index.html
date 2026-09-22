@@ -1,0 +1,1770 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Search results by intent — living infographic</title>
+<meta name="description" content="Pick a search intent and watch the results page redraw to the measured rates: AI Overview presence, zero-click share, organic CTR and share of searches, each with its study and date. Interactive, sourced, and honest about what nobody has measured.">
+<!--
+  SEARCH RESULTS BY INTENT — a living infographic
+  Built from content-studio/viz/kit/template.html (see that folder's SPEC.md and
+  README.md). The kit itself is untouched; this is a copy with its own data and
+  its own two lanes.
+
+  Self-contained. No external requests. Works from file://.
+
+  What it shows
+    lane 1  the selected intent: does a generated answer sit above the results,
+            every measure that exists for that intent, and a stylised (never
+            captured) result surface whose block widths are the measured
+            presence rates
+    lane 2  one measure the reader picks, compared across all five intents —
+            including the intents no study has measured, which are shown as
+            gaps rather than filled in
+
+  Data: content-studio/research/2026-09-14/search-intent/{data.json,sources.md,notes.md}
+  Every number carries a source id that resolves to the sources drawer, and
+  every source carries a date. Panels disagree on AI Overview rates; where they
+  do, the disagreement is printed beside the number instead of averaged away.
+
+  URL parameters (all optional):
+    ?static=1            freeze at the settled state (poster capture)
+    ?poster=1            poster layout, fills the viewport exactly (implies static)
+    ?gif=1               GIF layout: seamless backdrop loop + honesty strip
+    ?frame=N&frames=M    deterministic frame N of M over the reveal timeline
+    ?t=1.8               deterministic absolute time in seconds
+    ?palette=aurora|ember|verdant
+    ?seed=20260914
+    ?vertical=informational|navigational|commercial|transactional|local   (the intent)
+    ?intent=aio|ctr|zero|share|growth                                     (the measure)
+    ?motion=reduce       force the reduced-motion path
+
+  Export API (window.VIZ):
+    await VIZ.ready            resolves once first paint is done
+    VIZ.duration               reveal timeline length, seconds
+    await VIZ.seek(seconds)    render deterministically at that time
+    await VIZ.frame(n, total)  render deterministically at frame n of total
+    VIZ.setState({palette, seed, vertical, intent})
+    VIZ.snapshot()             current state + settled values (JSON-safe)
+-->
+<style>
+/* ---------------------------------------------------------------- tokens */
+:root{
+  color-scheme:dark;
+  --ground:#0A1A30; --panel:#12294A; --panel-2:#0E2240; --line:#2B4670;
+  --text:#EAF2FA; --muted:#A8C0D8;
+  --a1:#5BF0F5; --a2:#C6FF4F; --a3:#FF7AB6; --a4:#FFC53D; --a5:#B9A2FF;
+  --pos:var(--a2); --neg:var(--a3);
+  --font:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,"Apple Color Emoji",sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  --r:10px; --wrap:1160px;
+  --gut:clamp(16px,3.2vw,40px);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --dur:.28s;
+}
+@media (prefers-reduced-motion:reduce){:root{--dur:0s}}
+html[data-motion="reduced"]{--dur:0s}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--ground); color:var(--text); font-family:var(--font);
+  font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+h1,h2,h3,p,figure,ul,ol{margin:0}
+button,select,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:is(button,select,summary,a,[tabindex]):focus-visible{outline:3px solid var(--a1);outline-offset:3px;border-radius:4px}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ---------------------------------------------------------------- frame */
+.viz{position:relative;isolation:isolate;min-height:100svh;overflow:hidden}
+#bg{position:absolute;inset:0;width:100%;height:100%;z-index:-2;display:block}
+.viz::after{ /* vignette keeps text contrast constant over the generative field */
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(115% 82% at 50% 36%,
+    transparent 0%,
+    color-mix(in srgb,var(--ground) 22%,transparent) 46%,
+    color-mix(in srgb,var(--ground) 62%,transparent) 78%,
+    color-mix(in srgb,var(--ground) 88%,transparent) 100%);
+}
+.shell{width:min(var(--wrap),100%);margin-inline:auto;padding:clamp(22px,4vw,54px) var(--gut) clamp(28px,5vw,64px);position:relative}
+
+/* ---------------------------------------------------------------- header */
+/* The generative field is loud on purpose; type gets its own scrim so the
+   measured contrast ratios hold wherever the mandala happens to land. */
+.shell>header{position:relative;isolation:isolate}
+.shell>header::before{content:"";position:absolute;inset:-30px -44px -26px -44px;z-index:-1;border-radius:20px;
+  background:radial-gradient(95% 125% at 16% 46%,
+    color-mix(in srgb,var(--ground) 94%,transparent) 0%,
+    color-mix(in srgb,var(--ground) 88%,transparent) 44%,
+    color-mix(in srgb,var(--ground) 46%,transparent) 76%,
+    transparent 100%)}
+.kick{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:14px}
+.eyebrow{font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--a1)}
+.badge{font-size:.63rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid var(--a4);color:var(--a4);border-radius:999px;padding:3px 9px;line-height:1.4}
+h1{font-size:clamp(1.85rem,4.4vw,3.15rem);line-height:1.05;letter-spacing:-.03em;font-weight:800;text-wrap:balance;max-width:20ch}
+h1 .lit{color:var(--a2)}
+.deck{margin-top:14px;max-width:62ch;color:var(--muted);font-size:clamp(.95rem,1.2vw,1.06rem)}
+
+/* ------------------------------------------------------------- the ask */
+.ask{margin-top:clamp(22px,3.4vw,38px);border:1px solid var(--line);border-radius:var(--r);
+  background:color-mix(in srgb,var(--panel) 95%,transparent);backdrop-filter:blur(8px);padding:clamp(14px,2.2vw,22px);
+  box-shadow:0 24px 60px color-mix(in srgb,var(--ground) 70%,transparent)}
+.ask-line{font-size:clamp(1.05rem,2.1vw,1.5rem);line-height:1.45;font-weight:600;letter-spacing:-.015em;text-wrap:pretty}
+.tok{
+  display:inline-flex;align-items:center;gap:.4em;position:relative;
+  background:var(--panel-2);border:1px solid var(--a1);color:var(--a1);
+  border-radius:999px;padding:.12em .75em .18em;margin-inline:.12em;
+  font:inherit;font-weight:700;appearance:none;-webkit-appearance:none;
+  min-height:38px;line-height:1.25;cursor:pointer;
+  transition:background var(--dur) var(--ease-out),color var(--dur) var(--ease-out);
+}
+.tok:hover{background:var(--a1);color:var(--ground)}
+.tok option{background:var(--panel);color:var(--text)}
+.ask-hint{margin-top:10px;font-size:.8rem;color:var(--muted)}
+.prompts{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.prompt{
+  border:1px solid var(--line);background:transparent;color:var(--text);
+  border-radius:999px;padding:9px 15px;font-size:.86rem;font-weight:600;min-height:40px;
+  text-align:left;transition:border-color var(--dur) var(--ease-out),background var(--dur) var(--ease-out),transform var(--dur) var(--ease-out);
+}
+.prompt:hover{border-color:var(--a2);background:color-mix(in srgb,var(--a2) 12%,transparent)}
+.prompt[aria-pressed="true"]{border-color:var(--a2);background:color-mix(in srgb,var(--a2) 18%,transparent);color:var(--a2)}
+.prompt .go{color:var(--a2);font-weight:800}
+.replay{border:1px solid var(--a2);background:var(--a2);color:var(--ground);border-radius:999px;
+  padding:9px 17px;font-size:.86rem;font-weight:800;min-height:40px}
+.replay:hover{filter:brightness(1.08)}
+
+/* progress of the reveal — Zeigarnik cue, not a fake loader */
+.rail{position:relative;height:3px;margin-top:16px;background:color-mix(in srgb,var(--line) 70%,transparent);border-radius:2px;overflow:hidden}
+.rail i{position:absolute;inset:0 auto 0 0;width:0;background:linear-gradient(90deg,var(--a1),var(--a2));border-radius:2px}
+
+/* ---------------------------------------------------------------- stage */
+.stage{display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(10px,1.6vw,20px);align-items:stretch;margin-top:clamp(20px,3vw,34px)}
+.col{border:1px solid var(--line);border-radius:var(--r);padding:clamp(14px,2vw,22px);
+  background:linear-gradient(180deg,color-mix(in srgb,var(--panel) 96%,transparent),color-mix(in srgb,var(--panel-2) 97%,transparent));
+  box-shadow:0 24px 60px color-mix(in srgb,var(--ground) 70%,transparent);
+  display:flex;flex-direction:column;gap:10px;min-width:0}
+.col[data-side="cited"]{border-color:color-mix(in srgb,var(--a2) 55%,var(--line))}
+.col[data-side="absent"]{border-color:color-mix(in srgb,var(--a3) 45%,var(--line))}
+.col-head{display:grid;gap:2px;align-content:start}
+.col-name{font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.col[data-side="cited"] .col-name{color:var(--a2)}
+.col[data-side="absent"] .col-name{color:var(--a3)}
+.col-sub{font-size:.76rem;color:var(--muted)}
+.hero{display:flex;align-items:flex-end;gap:.18em;font-variant-numeric:tabular-nums;
+  font-size:clamp(2.7rem,7.6vw,4.9rem);font-weight:800;letter-spacing:-.045em;line-height:.92}
+.hero .u{font-size:.36em;font-weight:700;letter-spacing:-.01em;padding-bottom:.42em;color:var(--muted)}
+.col[data-side="cited"] .hero{color:var(--a2)}
+.col[data-side="absent"] .hero{color:var(--a3)}
+.hero-label{font-size:.88rem;color:var(--text);font-weight:600}
+.gauge{margin-top:2px}
+.gauge svg{display:block;width:100%;height:auto;max-height:88px}
+.delta{align-self:center;display:flex;flex-direction:column;align-items:center;gap:6px;
+  padding:0 clamp(2px,1vw,10px);min-width:86px;text-align:center;position:relative;isolation:isolate}
+.delta::before{content:"";position:absolute;inset:-18px -10px;z-index:-1;border-radius:16px;
+  background:radial-gradient(72% 62% at 50% 50%,
+    color-mix(in srgb,var(--ground) 90%,transparent) 0%,
+    color-mix(in srgb,var(--ground) 62%,transparent) 62%,
+    transparent 100%)}
+.delta-x{font-variant-numeric:tabular-nums;font-size:clamp(1.15rem,2.8vw,1.85rem);font-weight:800;letter-spacing:-.03em;color:var(--a4);white-space:nowrap}
+.delta-l{font-size:.64rem;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.delta-arrow{font-size:1.1rem;color:var(--a4);line-height:1}
+
+/* ---------------------------------------------------------------- ledger */
+.ledger{margin-top:clamp(16px,2.4vw,26px);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+  background:color-mix(in srgb,var(--panel-2) 96%,transparent);
+  box-shadow:0 24px 60px color-mix(in srgb,var(--ground) 70%,transparent)}
+.row{display:grid;grid-template-columns:minmax(0,1.35fr) 84px minmax(0,1.5fr) 84px 74px;gap:clamp(6px,1vw,14px);
+  align-items:center;padding:clamp(10px,1.5vw,15px) clamp(12px,1.8vw,18px);border-top:1px solid color-mix(in srgb,var(--line) 62%,transparent)}
+.row:first-child{border-top:0}
+.row-label{font-size:.87rem;font-weight:600;min-width:0}
+.row-note{display:block;font-size:.72rem;color:var(--muted);font-weight:400;margin-top:2px}
+.val{font-variant-numeric:tabular-nums;font-size:clamp(1rem,1.9vw,1.28rem);font-weight:800;letter-spacing:-.025em;white-space:nowrap}
+.val.absent{color:var(--a3);text-align:right}
+.val.cited{color:var(--a2);text-align:left}
+.bars{display:grid;gap:4px;min-width:0}
+.bar{height:9px;border-radius:5px;background:color-mix(in srgb,var(--line) 55%,transparent);overflow:hidden;position:relative}
+.bar i{position:absolute;inset:0 auto 0 0;width:0;border-radius:5px;display:block}
+.bar.absent i{background:linear-gradient(90deg,color-mix(in srgb,var(--a3) 55%,transparent),var(--a3))}
+.bar.cited i{background:linear-gradient(90deg,color-mix(in srgb,var(--a2) 55%,transparent),var(--a2))}
+.row-delta{font-variant-numeric:tabular-nums;font-size:.86rem;font-weight:800;text-align:right;white-space:nowrap}
+.row-delta[data-dir="good"]{color:var(--a2)}
+.row-delta[data-dir="bad"]{color:var(--a3)}
+
+/* source markers */
+.src{display:inline-block;vertical-align:super;margin-left:.28em;font-size:.58em;font-weight:800;letter-spacing:.04em;
+  border:1px solid color-mix(in srgb,var(--muted) 60%,transparent);color:var(--muted);background:transparent;
+  border-radius:4px;padding:0 3px;line-height:1.5;min-height:0}
+.src:hover{color:var(--a4);border-color:var(--a4)}
+#pop{position:absolute;z-index:40;max-width:min(320px,80vw);background:var(--panel);border:1px solid var(--a4);
+  border-radius:8px;padding:10px 12px;font-size:.78rem;line-height:1.5;color:var(--text);
+  box-shadow:0 18px 40px rgba(0,0,0,.45)}
+#pop[hidden]{display:none}
+#pop b{display:block;color:var(--a4);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+#pop .as{display:block;color:var(--muted);margin-top:5px;font-family:var(--mono);font-size:.72rem}
+
+/* ---------------------------------------------------------------- serp */
+.serp{margin-top:clamp(16px,2.4vw,26px);border:1px solid var(--line);border-radius:var(--r);padding:clamp(14px,2vw,20px);
+  background:color-mix(in srgb,var(--panel) 95%,transparent);
+  box-shadow:0 24px 60px color-mix(in srgb,var(--ground) 70%,transparent)}
+.serp-head{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:baseline;justify-content:space-between;margin-bottom:12px}
+.serp-title{font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--a5)}
+.serp-q{font-family:var(--mono);font-size:.85rem;color:var(--text);background:var(--panel-2);border:1px solid var(--line);
+  border-radius:6px;padding:5px 9px;display:inline-block;max-width:100%;overflow-wrap:anywhere}
+.serp-body{display:grid;gap:clamp(12px,2vw,26px)}
+@media (min-width:900px){.serp-body{grid-template-columns:minmax(0,1fr) minmax(200px,28ch)}}
+.serp-rows{display:grid;gap:7px;align-content:start}
+.serp-note{font-size:.86rem;line-height:1.65;color:var(--text);border-left:3px solid var(--a5);padding-left:12px;align-self:center}
+
+.sr-row{display:grid;grid-template-columns:104px minmax(0,1fr);gap:10px;align-items:center;
+  border-left:3px solid var(--line);padding:7px 0 7px 10px;font-size:.84rem}
+.sr-row[data-kind="answer"]{border-left-color:var(--a5)}
+.sr-row[data-kind="citation"]{border-left-color:var(--a2)}
+.sr-row[data-kind="organic"]{border-left-color:var(--a1)}
+.sr-row[data-kind="pack"]{border-left-color:var(--a4)}
+.sr-row[data-kind="ad"]{border-left-color:var(--a3)}
+.sr-kind{font-size:.63rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.sr-text{min-width:0;overflow-wrap:anywhere}
+.sr-text em{font-style:normal;color:var(--a2);font-weight:700}
+
+/* ---------------------------------------------------------------- footer */
+.foot{margin-top:clamp(18px,2.6vw,30px);display:grid;gap:14px;position:relative;isolation:isolate}
+.foot::before{content:"";position:absolute;inset:-16px -26px -22px -26px;z-index:-1;border-radius:16px;
+  background:linear-gradient(0deg,
+    color-mix(in srgb,var(--ground) 94%,transparent) 0%,
+    color-mix(in srgb,var(--ground) 90%,transparent) 55%,
+    color-mix(in srgb,var(--ground) 34%,transparent) 100%)}
+.sources{border:1px solid var(--line);border-radius:var(--r);background:color-mix(in srgb,var(--panel-2) 95%,transparent)}
+.sources>summary{cursor:pointer;list-style:none;padding:12px 16px;font-size:.82rem;font-weight:700;display:flex;gap:10px;align-items:center}
+.sources>summary::-webkit-details-marker{display:none}
+.sources>summary::before{content:"▸";color:var(--a4);font-size:.9rem;transition:transform var(--dur) var(--ease-out)}
+.sources[open]>summary::before{transform:rotate(90deg)}
+.sources-body{padding:0 16px 14px;display:grid;gap:9px}
+.s-item{display:grid;grid-template-columns:44px minmax(0,1fr);gap:10px;font-size:.8rem;line-height:1.5;
+  padding:9px 10px;border-radius:8px;border:1px solid transparent}
+.s-item.hl{border-color:var(--a4);background:color-mix(in srgb,var(--a4) 10%,transparent)}
+.s-id{font-family:var(--mono);font-size:.72rem;font-weight:800;color:var(--a4)}
+.s-meta{display:block;color:var(--muted);font-family:var(--mono);font-size:.72rem;margin-top:3px;overflow-wrap:anywhere}
+.s-item a{color:var(--a1)}
+.src-line{display:none;font-size:.78rem;line-height:1.5;color:var(--muted);font-family:var(--mono)}
+html[data-mode~="gif"] .src-line{display:block}
+.honesty{font-size:.76rem;line-height:1.6;color:var(--muted);border-left:3px solid var(--a4);padding-left:12px}
+.honesty b{color:var(--a4)}
+.by{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-between;font-size:.74rem;color:var(--muted);
+  border-top:1px solid color-mix(in srgb,var(--line) 60%,transparent);padding-top:12px}
+
+/* ---------------------------------------------------------------- narrow */
+/* Narrow-viewport layout. Scoped away from poster/gif, whose export viewports
+   are narrow by definition but must keep the side-by-side composition. */
+@media (max-width:860px){
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .stage{grid-template-columns:1fr;gap:12px}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .delta{flex-direction:row;gap:10px;min-width:0;padding:2px 0}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .delta-arrow{transform:rotate(90deg)}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .row{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"label label" "cited absent" "bars bars" "d d";gap:6px 10px}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .row-label{grid-area:label}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .val.cited{grid-area:cited;text-align:left}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .val.absent{grid-area:absent;text-align:right}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .bars{grid-area:bars}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .row-delta{grid-area:d;text-align:left}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .sr-row{grid-template-columns:1fr;gap:3px}
+}
+
+/* ---------------------------------------------------------------- poster */
+html[data-mode~="poster"] body{overflow:hidden}
+html[data-mode~="poster"] .viz{height:100svh;min-height:0}
+html[data-mode~="poster"] .shell{height:100%;display:flex;flex-direction:column;gap:clamp(10px,1.4vh,20px);
+  padding:clamp(28px,4vh,56px) clamp(28px,4vw,56px);width:100%;max-width:none}
+html[data-mode~="poster"] .ask,
+html[data-mode~="poster"] .prompts,
+html[data-mode~="poster"] .rail,
+html[data-mode~="poster"] .replay{display:none}
+html[data-mode~="poster"] .sources{border:0;background:transparent}
+html[data-mode~="poster"] .sources>summary{display:none}
+html[data-mode~="poster"] .sources-body,html[data-mode~="gif"] .sources-body{display:grid}
+html[data-mode~="poster"] .sources-body{padding:0;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:6px}
+html[data-mode~="poster"] .s-item{padding:0;border:0;font-size:.7rem}
+html[data-mode~="poster"] h1{font-size:clamp(2.2rem,4.4vh,3.6rem);max-width:26ch}
+html[data-mode~="poster"] .hero{font-size:clamp(3rem,9vh,6rem)}
+html[data-mode~="poster"] .stage{margin-top:0}
+html[data-mode~="poster"] .foot{margin-top:auto}
+/* --fit is driven by fitStill(): the layout shrinks until it fits the frame,
+   so swapping in a longer dataset can never clip a row off the poster. */
+html[data-mode~="poster"] .shell,html[data-mode~="gif"] .shell{gap:calc(clamp(8px,1.4vh,20px)*var(--fit,1))}
+/* Sections must keep their natural height so overflow is real and fitStill()
+   can see it — flex-shrink would silently clip a ledger row instead. */
+html[data-mode~="poster"] .shell>*,html[data-mode~="gif"] .shell>*{flex:0 0 auto}
+html[data-mode~="poster"] .col,html[data-mode~="gif"] .col{padding:calc(clamp(12px,2vh,22px)*var(--fit,1))}
+html[data-mode~="poster"] .row,html[data-mode~="gif"] .row{padding-block:calc(clamp(8px,1.5vh,15px)*var(--fit,1))}
+html[data-mode~="poster"] .hero,html[data-mode~="gif"] .hero{font-size:calc(clamp(2.4rem,8.6vh,5.6rem)*var(--fit,1))}
+html[data-mode~="poster"] h1,html[data-mode~="gif"] h1{font-size:calc(clamp(1.5rem,4.3vh,3.4rem)*var(--fit,1))}
+html[data-mode~="poster"] .val{font-size:calc(1.22rem*var(--fit,1))}
+html[data-mode~="poster"] .row-label{font-size:calc(.88rem*var(--fit,1))}
+html[data-mode~="gif"] .val{font-size:calc(1.5rem*var(--fit,1))}
+html[data-mode~="gif"] .row-label{font-size:calc(1rem*var(--fit,1))}
+html[data-mode~="gif"] .row{padding-block:calc(13px*var(--fit,1))}
+html[data-mode~="gif"] .bar{height:11px}
+html[data-mode~="gif"] .col-name{font-size:.9rem}
+html[data-mode~="poster"] .delta-x,html[data-mode~="gif"] .delta-x{font-size:calc(1.9rem*var(--fit,1))}
+html[data-mode~="poster"] .delta-arrow,html[data-mode~="gif"] .delta-arrow{font-size:calc(1.5rem*var(--fit,1))}
+html[data-mode~="gif"] .col-sub,html[data-mode~="gif"] .hero-label{font-size:.85rem}
+html[data-mode~="poster"] .poster-q{font-size:calc(clamp(.95rem,2.1vh,1.35rem)*var(--fit,1))}
+html[data-mode~="poster"] .poster-q{display:block}
+.poster-q{display:none;font-size:clamp(1rem,2.1vh,1.35rem);font-weight:700;color:var(--a1);letter-spacing:-.01em}
+/* square posters (1:1 and wider): drop the SERP strip and tighten the ledger */
+@media (min-aspect-ratio:9/10){
+  html[data-mode~="poster"] .serp{display:none}
+  html[data-mode~="poster"] .deck{display:none}
+  html[data-mode~="poster"] .s-meta{display:none}
+  html[data-mode~="poster"] .row-note{display:none}
+}
+
+/* ---------------------------------------------------------------- gif */
+html[data-mode~="gif"] body{overflow:hidden}
+html[data-mode~="gif"] .viz{height:100svh;min-height:0}
+html[data-mode~="gif"] .shell{height:100%;display:flex;flex-direction:column;gap:clamp(8px,1.2vh,16px);
+  padding:clamp(20px,3.2vh,34px) clamp(20px,3.2vw,34px) 0;width:100%;max-width:none}
+html[data-mode~="gif"] .ask,html[data-mode~="gif"] .prompts,html[data-mode~="gif"] .replay,
+html[data-mode~="gif"] .serp,html[data-mode~="gif"] .sources,html[data-mode~="gif"] .deck{display:none}
+html[data-mode~="gif"] .poster-q{display:block}
+html[data-mode~="gif"] h1{font-size:clamp(1.6rem,3.6vh,2.5rem);max-width:24ch}
+html[data-mode~="gif"] .hero{font-size:clamp(2.6rem,8.2vh,5rem)}
+html[data-mode~="gif"] .stage{margin-top:0}
+html[data-mode~="gif"] .ledger{margin-top:0}
+html[data-mode~="gif"] .foot{margin-top:auto}
+html[data-mode~="gif"] .ledger .row:nth-child(n+5){display:none}
+html[data-mode~="gif"] .row{grid-template-columns:minmax(0,1.3fr) 76px minmax(0,1.4fr) 76px}
+html[data-mode~="gif"] .row-delta,html[data-mode~="gif"] .row-note,html[data-mode~="gif"] .gauge{display:none}
+html[data-mode~="gif"] .honesty,html[data-mode~="gif"] .by,html[data-mode~="gif"] .sources{display:none}
+/* Two lines, always: the two hero numerals must share a baseline in a still. */
+html[data-mode~="poster"] .col-sub,html[data-mode~="gif"] .col-sub{
+  min-height:3.15em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+/* The footer scrim must not add scroll height inside a fixed-size frame. */
+html[data-mode~="poster"] .foot::before,html[data-mode~="gif"] .foot::before{inset:-16px -26px 0 -26px}
+html[data-mode~="gif"] .strip{display:flex}
+.strip{display:none;align-items:center;gap:10px;margin:0 calc(-1*clamp(20px,3.2vw,34px));
+  padding:10px clamp(20px,3.2vw,34px);background:var(--a4);color:#12100a;font-size:.78rem;font-weight:800;line-height:1.35}
+.strip span{font-weight:600}
+
+@media print{
+  body{background:#fff}
+  .ask,.prompts,.replay,.rail{display:none}
+}
+
+/* ==================================================================
+   SEARCH RESULTS BY INTENT — additions on top of the kit's language.
+   Only palette tokens are used for colour, so the measured contrast
+   ratios in SPEC.md §2 still hold for everything below.
+   ================================================================== */
+
+/* ---------------------------------------------- measure ledger (one intent) */
+/* The kit's .row is a two-column pair. Here each measure has ONE value per
+   intent, plus the scope it was measured at — and an explicit empty state,
+   because "no study measured this" is the finding, not a blank. */
+.mrow{display:grid;grid-template-columns:minmax(0,1.55fr) 104px minmax(0,1fr) 116px;
+  gap:clamp(8px,1.2vw,16px);align-items:center;
+  padding:clamp(10px,1.5vw,15px) clamp(12px,1.8vw,18px);
+  border-top:1px solid color-mix(in srgb,var(--line) 62%,transparent)}
+.mrow:first-child{border-top:0}
+.mrow[data-state="none"]{background:color-mix(in srgb,var(--a3) 6%,transparent)}
+.m-label{font-size:.87rem;font-weight:600;min-width:0}
+.m-note{display:block;font-size:.72rem;color:var(--muted);font-weight:400;margin-top:3px;line-height:1.5}
+.m-val{font-variant-numeric:tabular-nums;font-size:clamp(1rem,1.9vw,1.28rem);font-weight:800;
+  letter-spacing:-.025em;white-space:nowrap;text-align:right;color:var(--a1)}
+.mrow[data-tone="bad"] .m-val{color:var(--a3)}
+.mrow[data-tone="good"] .m-val{color:var(--a2)}
+.mrow[data-state="none"] .m-val{font-size:.72rem;font-weight:800;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--a3);white-space:normal;line-height:1.35}
+.m-bar{height:9px;border-radius:5px;background:color-mix(in srgb,var(--line) 55%,transparent);
+  overflow:hidden;position:relative}
+.m-bar i{position:absolute;inset:0 auto 0 0;width:0;border-radius:5px;display:block;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--a1) 45%,transparent),var(--a1))}
+.mrow[data-tone="bad"] .m-bar i{background:linear-gradient(90deg,color-mix(in srgb,var(--a3) 45%,transparent),var(--a3))}
+.mrow[data-tone="good"] .m-bar i{background:linear-gradient(90deg,color-mix(in srgb,var(--a2) 45%,transparent),var(--a2))}
+.mrow[data-state="none"] .m-bar{background:repeating-linear-gradient(135deg,
+  color-mix(in srgb,var(--line) 55%,transparent) 0 6px,transparent 6px 12px)}
+.m-scope{font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  text-align:right;color:var(--muted);line-height:1.4}
+.m-scope[data-kind="intent"]{color:var(--a2)}
+.m-scope[data-kind="all"]{color:var(--a4)}
+.m-scope[data-kind="none"]{color:var(--a3)}
+.m-alt{display:block;font-size:.71rem;color:var(--a4);margin-top:4px;line-height:1.5}
+
+/* --------------------------------------------- the stylised result surface */
+.serp-qwrap{display:inline-flex;flex-wrap:wrap;gap:6px 10px;align-items:center;min-width:0}
+.qflag{font-size:.6rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid currentColor;border-radius:999px;padding:3px 9px;line-height:1.35}
+.qflag[data-status="live"]{color:var(--a2)}
+.qflag[data-status="study"]{color:var(--a4)}
+.serp-body{align-items:start}
+.serp-side{display:grid;gap:12px;align-content:start}
+.serp-method{font-size:.74rem;line-height:1.6;color:var(--muted);font-family:var(--mono);
+  border-left:3px solid var(--line);padding-left:12px;overflow-wrap:anywhere}
+.comp{display:grid;gap:8px;align-content:start;min-width:0}
+.cb{display:grid;grid-template-columns:132px minmax(0,1fr) 84px;gap:4px 10px;align-items:center;
+  grid-template-areas:"name track rate" "detail detail detail";
+  border-left:3px solid var(--line);padding:9px 0 10px 11px;min-width:0}
+.cb-name{grid-area:name}
+.cb-track{grid-area:track}
+.cb-rate{grid-area:rate}
+.cb-detail{grid-area:detail;font-size:.71rem;line-height:1.55;color:var(--muted);margin-top:3px}
+.cb[data-kind="answer"]{border-left-color:var(--a5)}
+.cb[data-kind="paa"]{border-left-color:var(--a1)}
+.cb[data-kind="snippet"]{border-left-color:var(--a4)}
+.cb[data-kind="pack"]{border-left-color:var(--a4)}
+.cb[data-kind="ad"]{border-left-color:var(--a3)}
+.cb[data-kind="organic"]{border-left-color:var(--a2)}
+.cb[data-state="none"]{opacity:.9}
+.cb-name{font-size:.71rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--text)}
+.cb-sub{display:block;font-size:.66rem;font-weight:700;letter-spacing:.08em;margin-top:3px;color:var(--muted)}
+.cb-sub[data-kind="intent"]{color:var(--a2)}
+.cb-sub[data-kind="all"]{color:var(--a4)}
+.cb-sub[data-kind="none"]{color:var(--a3)}
+.cb-track{height:15px;border-radius:8px;position:relative;overflow:hidden;min-width:0;
+  background:color-mix(in srgb,var(--line) 48%,transparent)}
+.cb-track i{position:absolute;inset:0 auto 0 0;width:0;display:block;border-radius:8px}
+.cb[data-kind="answer"] .cb-track i{background:linear-gradient(90deg,color-mix(in srgb,var(--a5) 52%,transparent),var(--a5))}
+.cb[data-kind="paa"] .cb-track i{background:linear-gradient(90deg,color-mix(in srgb,var(--a1) 52%,transparent),var(--a1))}
+.cb[data-kind="snippet"] .cb-track i,
+.cb[data-kind="pack"] .cb-track i{background:linear-gradient(90deg,color-mix(in srgb,var(--a4) 52%,transparent),var(--a4))}
+.cb[data-kind="ad"] .cb-track i{background:linear-gradient(90deg,color-mix(in srgb,var(--a3) 52%,transparent),var(--a3))}
+.cb[data-kind="organic"] .cb-track i{background:linear-gradient(90deg,color-mix(in srgb,var(--a2) 52%,transparent),var(--a2))}
+.cb[data-state="none"] .cb-track{background:repeating-linear-gradient(135deg,
+  color-mix(in srgb,var(--line) 60%,transparent) 0 6px,transparent 6px 12px)}
+.cb-rate{font-variant-numeric:tabular-nums;font-weight:800;font-size:.92rem;text-align:right;
+  white-space:nowrap;letter-spacing:-.02em}
+.cb[data-state="none"] .cb-rate{font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--a3);white-space:normal;line-height:1.3}
+.cb[data-focus="true"]{background:color-mix(in srgb,var(--a1) 9%,transparent);
+  border-radius:0 8px 8px 0;padding-right:10px}
+.cb-focus{display:inline-block;margin-left:.5em;vertical-align:middle;font-size:.56rem;font-weight:800;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--a1);border-radius:999px;padding:1px 7px;
+  border:1px solid color-mix(in srgb,var(--a1) 60%,transparent)}
+.comp-legend{margin-top:12px;font-size:.72rem;color:var(--muted);line-height:1.55}
+
+/* --------------------------------------------- lane 2: one measure, five intents */
+.lane{margin-top:clamp(16px,2.4vw,26px);border:1px solid var(--line);border-radius:var(--r);
+  padding:clamp(14px,2vw,20px);background:color-mix(in srgb,var(--panel-2) 96%,transparent);
+  box-shadow:0 24px 60px color-mix(in srgb,var(--ground) 70%,transparent)}
+.lane-head{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;justify-content:space-between;margin-bottom:12px}
+.lane-title{font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--a1)}
+.lane-sub{font-size:.8rem;color:var(--muted)}
+.lane-rows{display:grid;gap:6px}
+.lrow{display:grid;grid-template-columns:168px minmax(0,1fr) 104px;gap:clamp(8px,1.4vw,16px);
+  align-items:center;padding:7px 8px;border-radius:8px;min-width:0}
+.lrow[data-current="true"]{background:color-mix(in srgb,var(--a1) 12%,transparent);
+  outline:1px solid color-mix(in srgb,var(--a1) 45%,transparent)}
+.l-name{font-size:.84rem;font-weight:700;min-width:0;overflow-wrap:anywhere}
+.lrow[data-current="true"] .l-name{color:var(--a1)}
+.l-here{font-size:.6rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--a1);margin-left:.5em}
+.l-track{height:13px;border-radius:7px;position:relative;overflow:hidden;min-width:0;
+  background:color-mix(in srgb,var(--line) 48%,transparent)}
+.l-track i{position:absolute;inset:0 auto 0 0;width:0;display:block;border-radius:7px;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--a1) 48%,transparent),var(--a1))}
+.lrow[data-tone="bad"] .l-track i{background:linear-gradient(90deg,color-mix(in srgb,var(--a3) 48%,transparent),var(--a3))}
+.lrow[data-tone="good"] .l-track i{background:linear-gradient(90deg,color-mix(in srgb,var(--a2) 48%,transparent),var(--a2))}
+.lrow[data-state="none"] .l-track{background:repeating-linear-gradient(135deg,
+  color-mix(in srgb,var(--line) 60%,transparent) 0 6px,transparent 6px 12px)}
+.l-val{font-variant-numeric:tabular-nums;font-weight:800;font-size:1rem;text-align:right;
+  white-space:nowrap;letter-spacing:-.025em;color:var(--a1)}
+.lrow[data-tone="bad"] .l-val{color:var(--a3)}
+.lrow[data-tone="good"] .l-val{color:var(--a2)}
+.lrow[data-state="none"] .l-val{font-size:.62rem;font-weight:800;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--a3);white-space:normal;line-height:1.3}
+.lane-note{margin-top:12px;font-size:.8rem;line-height:1.65;color:var(--text);
+  border-left:3px solid var(--a1);padding-left:12px}
+
+/* ---------------------------------------------------------------- narrow */
+@media (max-width:860px){
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .mrow{
+    grid-template-columns:minmax(0,1fr) auto;
+    grid-template-areas:"label label" "bar bar" "val scope";gap:8px 10px}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .m-label{grid-area:label}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .m-bar{grid-area:bar}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .m-val{grid-area:val;text-align:left}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .m-scope{grid-area:scope}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .cb{
+    grid-template-columns:minmax(0,1fr) 84px;
+    grid-template-areas:"name rate" "track track" "detail detail";gap:6px 10px}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .lrow{
+    grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"name val" "track track";gap:6px 10px}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .l-name{grid-area:name}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .l-val{grid-area:val}
+  :where(html:not([data-mode~="poster"]):not([data-mode~="gif"])) .l-track{grid-area:track}
+}
+
+/* ------------------------------------------------------- stills: poster/gif */
+/* The compare lane is an interaction — it says "pick a measure". A still cannot
+   be picked from, so it is dropped rather than shipped inert. */
+html[data-mode~="poster"] .lane,
+html[data-mode~="gif"] .lane{display:none}
+html[data-mode~="gif"] .comp-legend,html[data-mode~="poster"] .comp-legend{display:none}
+html[data-mode~="gif"] .cb-detail,html[data-mode~="poster"] .cb-detail{display:none}
+/* A still is one state: the hero already names the measure, so the pointer at the
+   composition block is interaction feedback with nothing left to point at. */
+html[data-mode~="gif"] .cb-focus,html[data-mode~="poster"] .cb-focus{display:none}
+html[data-mode~="poster"] .sources-body{grid-template-columns:repeat(auto-fit,minmax(196px,1fr))}
+html[data-mode~="poster"] .serp-method{display:none}
+/* The 4:5 poster carries headline → pair → ledger → result surface → sources.
+   The deck and the side commentary are reading copy; a still that keeps them
+   pushes its own sources off the frame, and the sources are non-negotiable. */
+html[data-mode~="poster"] .deck{display:none}
+html[data-mode~="poster"] .serp-side{display:none}
+/* A still must carry every source's name and date on its face. The methodology
+   paragraph is what gets cut, never the attribution or the date. */
+.s-date{display:block;color:var(--muted);font-family:var(--mono);font-size:.72rem;margin-top:3px}
+html[data-mode~="poster"] .s-meta{display:none}
+html[data-mode~="poster"] .s-date{font-size:calc(.68rem*var(--fit,1));margin-top:2px}
+html[data-mode~="poster"] .foot{gap:calc(10px*var(--fit,1))}
+html[data-mode~="poster"] .sources-body{gap:calc(6px*var(--fit,1))}
+html[data-mode~="poster"] .honesty{font-size:calc(.74rem*var(--fit,1));line-height:1.5}
+html[data-mode~="poster"] .by{font-size:calc(.72rem*var(--fit,1));padding-top:calc(9px*var(--fit,1))}
+html[data-mode~="poster"] .serp-body{grid-template-columns:minmax(0,1fr)}
+html[data-mode~="poster"] .m-note{font-size:calc(.72rem*var(--fit,1));line-height:1.45}
+html[data-mode~="poster"] .m-alt{font-size:calc(.71rem*var(--fit,1));line-height:1.45}
+html[data-mode~="poster"] .cb-name{font-size:calc(.71rem*var(--fit,1))}
+html[data-mode~="poster"] .cb-rate{font-size:calc(.92rem*var(--fit,1))}
+html[data-mode~="poster"] .cb{padding-block:calc(7px*var(--fit,1))}
+html[data-mode~="poster"] .mrow{padding-block:calc(clamp(8px,1.5vh,15px)*var(--fit,1))}
+html[data-mode~="poster"] .m-val{font-size:calc(1.22rem*var(--fit,1))}
+html[data-mode~="poster"] .m-label{font-size:calc(.88rem*var(--fit,1))}
+html[data-mode~="gif"] .m-val{font-size:calc(1.5rem*var(--fit,1))}
+html[data-mode~="gif"] .m-label{font-size:calc(1rem*var(--fit,1))}
+html[data-mode~="gif"] .mrow{padding-block:calc(13px*var(--fit,1));
+  grid-template-columns:minmax(0,1.5fr) 110px minmax(0,1fr)}
+html[data-mode~="gif"] .m-note,html[data-mode~="gif"] .m-scope,html[data-mode~="gif"] .m-alt{display:none}
+/* The GIF frame holds the hero pair plus the first two measures. (The ledger
+   section's visually-hidden <h2> is child 1, so n+4 leaves two .mrow rows.)
+   Losing rows beats clipping the amber honesty strip, and the strip says
+   where the rest of them are. */
+html[data-mode~="gif"] .ledger .mrow:nth-child(n+4){display:none}
+html[data-mode~="poster"] .comp{gap:calc(6px*var(--fit,1))}
+html[data-mode~="gif"] .serp{display:none}
+@media (min-aspect-ratio:9/10){
+  html[data-mode~="poster"] .m-note{display:none}
+  html[data-mode~="poster"] .m-alt{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- =====================================================================
+     PALETTES — 3 vivid sets that hold up inside the site's navy/green page.
+     Contrast numbers are verified by `node export/contrast.mjs`.
+     ===================================================================== -->
+<script type="application/json" id="viz-palettes">
+[
+  {
+    "id": "aurora",
+    "name": "Aurora",
+    "character": "Cool electric. Default. Sits closest to the site's navy.",
+    "ground": "#0A1A30", "panel": "#12294A", "panel2": "#0E2240", "line": "#2B4670",
+    "text": "#EAF2FA", "muted": "#A8C0D8",
+    "accents": ["#5BF0F5", "#C6FF4F", "#FF7AB6", "#FFC53D", "#B9A2FF"]
+  },
+  {
+    "id": "ember",
+    "name": "Ember",
+    "character": "Warm and hot. Use when the story is a cost, a loss, or a deadline.",
+    "ground": "#190B24", "panel": "#2A1138", "panel2": "#210E2E", "line": "#47205C",
+    "text": "#FFF1E8", "muted": "#E3B9C8",
+    "accents": ["#FF8A4C", "#FFD400", "#FF7AB6", "#4DF39A", "#B9A2FF"]
+  },
+  {
+    "id": "verdant",
+    "name": "Verdant",
+    "character": "Green-led, site-native. Safest when the artifact sits next to the green CTA.",
+    "ground": "#06251B", "panel": "#0C3B2A", "panel2": "#083023", "line": "#17614A",
+    "text": "#ECFDF3", "muted": "#A6D9BE",
+    "accents": ["#4DF39A", "#C6FF4F", "#35D6E8", "#FFB020", "#FF7AB6"]
+  }
+]
+</script>
+<!-- =====================================================================
+     DATA — every number here is a real, published measurement.
+     Each cell carries its own source id and, where panels disagree, the
+     alternative readings. A cell with "v": null is a real gap in the public
+     research, not a rounding: the artifact says "not measured" rather than
+     guessing. Source ids resolve to `sources` below.
+     ===================================================================== -->
+<script type="application/json" id="viz-data">
+{
+  "meta": {
+    "sample": false,
+    "seed": 20260914,
+    "palette": "aurora",
+    "eyebrow": "Living infographic · AI search",
+    "title": "Same search box, five different pages. {lit}68.01% of US Google searches now end with no click at all.{/lit}",
+    "deck": "Five intents, five compositions, five click economies. Pick an intent and the page redraws to the measured rates. Every block carries the study and the date it came from — and where a study never measured that intent, the artifact says so instead of filling the gap.",
+    "askPrefix": "What happens to the results page when the intent is",
+    "askMiddle": "— and how do all five intents compare on",
+    "askSuffix": "?",
+    "columns": {
+      "cited": { "name": "No AI Overview", "sub": "The page still leads with links you can rank for" },
+      "absent": { "name": "AI Overview on top", "sub": "A generated answer sits above the results" }
+    },
+    "deltaLabel": "more often no AI answer",
+    "byline": "Mitchell Miller · mitchjmiller.com",
+    "liveUrl": "mitchjmiller.com/viz/search-results-by-intent/",
+    "srcLine": "Seer · Semrush · Whitespark · SparkToro · Ahrefs · Authoritas · retrieved 2026-09-14",
+    "gifNote": "Rudimentary GIF of a living artifact.",
+    "gifNoteSub": "The intent selector, the measure picker, the per-intent result page and every source are in the interactive version.",
+    "honesty": "<b>Honesty note.</b> Every figure carries a source and a date — hover or tap a marker, or open the drawer above. AI Overview rates are panel-dependent and the studies here disagree: where they do, the disagreement is printed next to the number rather than averaged away. Blank cells are gaps in the public research, not zeroes."
+  },
+
+  "dimensions": {
+    "vertical": {
+      "label": "intent",
+      "options": [
+        { "id": "informational", "label": "informational" },
+        { "id": "navigational",  "label": "navigational" },
+        { "id": "commercial",    "label": "commercial investigation" },
+        { "id": "transactional", "label": "transactional" },
+        { "id": "local",         "label": "local" }
+      ]
+    },
+    "intent": {
+      "label": "measure",
+      "options": [
+        { "id": "aio",    "label": "AI Overview presence" },
+        { "id": "ctr",    "label": "organic click-through" },
+        { "id": "zero",   "label": "zero-click share" },
+        { "id": "share",  "label": "share of all searches" },
+        { "id": "growth", "label": "AI Overview growth" }
+      ]
+    }
+  },
+
+  "prompts": [
+    { "label": "What happens to clicks when an AI Overview appears?", "set": { "vertical": "informational", "intent": "ctr" } },
+    { "label": "Which intent does the answer box still skip?",        "set": { "vertical": "transactional", "intent": "aio" } },
+    { "label": "Where does the map pack still take the click?",       "set": { "vertical": "local",         "intent": "aio" } },
+    { "label": "Which intent nobody has measured this decade?",       "set": { "vertical": "commercial",    "intent": "share" } },
+    { "label": "Where is the answer box growing fastest?",            "set": { "vertical": "commercial",    "intent": "growth" } }
+  ],
+
+  "measures": [
+    { "id": "aio", "label": "AI Overview on the results page", "pick": "AI Overview presence",
+      "note": "Share of searches at this intent where a generated answer sits above the results.",
+      "unit": "%", "decimals": 0, "tone": "bad", "scope": "by intent", "max": 100, "focus": "answer",
+      "hero": { "mode": "split", "label": "Share of searches at this intent",
+                "cited":  { "name": "No AI Overview",     "sub": "The page still leads with links you can rank for" },
+                "absent": { "name": "AI Overview on top", "sub": "A generated answer sits above the results" },
+                "deltaCited": "more often no AI answer", "deltaAbsent": "more often an AI answer" } },
+    { "id": "ctr", "label": "Organic CTR when an AI Overview appears and you are not cited", "pick": "organic click-through",
+      "note": "Average organic clicks per impression, measured against the same keywords without a generated answer.",
+      "unit": "%", "decimals": 2, "tone": "bad", "scope": "partly by intent", "max": 4, "focus": "answer",
+      "hero": { "mode": "ref", "label": "Organic clicks per impression",
+                "cited":  { "name": "No AI Overview",      "sub": "Same keywords, no generated answer on the page" },
+                "absent": { "name": "Present, not cited",  "sub": "An AI Overview is there and you are not in it" },
+                "deltaCited": "higher with no AI Overview", "deltaAbsent": "higher under the AI Overview" } },
+    { "id": "zero", "label": "US Google searches that end with no click", "pick": "zero-click share",
+      "note": "One number for all searches. No study found segments zero-click behaviour by intent.",
+      "unit": "%", "decimals": 2, "tone": "bad", "scope": "all queries", "max": 100, "focus": "organic",
+      "hero": { "mode": "split", "label": "Of every 100 US Google searches",
+                "cited":  { "name": "Sends a click",       "sub": "The search ends on somebody else's page" },
+                "absent": { "name": "Ends with no click",  "sub": "Answered, abandoned or refined in place" },
+                "deltaCited": "more often a click", "deltaAbsent": "more often no click" } },
+    { "id": "share", "label": "Share of all searches, last full-sample intent split", "pick": "share of all searches",
+      "note": "The 80/10/10 split the industry still quotes was measured in 2008, on 1.5M queries, before mobile.",
+      "unit": "%", "decimals": 0, "tone": "neutral", "scope": "2008 baseline", "max": 100,
+      "hero": { "mode": "share", "label": "Share of all searches, on the 2008 split",
+                "cited":  { "name": "This intent",         "sub": "Its share of all searches in the last full-sample study" },
+                "absent": { "name": "Every other intent",  "sub": "The rest of the same 2008 sample" },
+                "deltaCited": "more than all other intents", "deltaAbsent": "less than all other intents" } },
+    { "id": "growth", "label": "Change in AI Overview presence, Nov 2025 → Apr 2026", "pick": "AI Overview growth",
+      "note": "Relative change in the share of this intent's result pages carrying an AI Overview.",
+      "unit": "%", "decimals": 0, "tone": "bad", "scope": "by intent", "signed": true, "max": 80, "focus": "answer",
+      "hero": { "mode": "index", "label": "AI Overview presence, indexed to November 2025", "unit": "", "decimals": 0,
+                "cited":  { "name": "November 2025", "sub": "Start of the measured window, set to 100" },
+                "absent": { "name": "April 2026",    "sub": "Same panel, same keywords, six months later" },
+                "deltaCited": "fewer AI Overviews by April", "deltaAbsent": "more AI Overviews by April" } }
+  ],
+
+  "values": {
+    "informational": {
+      "aio":    { "v": 36, "dp": 0, "src": "s-seer",
+                  "note": "Seer's panel. Panels disagree hard on this one.",
+                  "alt": [ { "v": 92, "unit": "%", "src": "s-whitespark", "label": "Whitespark, informational queries inside local verticals" },
+                           { "v": 69.8, "unit": "%", "src": "s-authoritas", "label": "Authoritas, informational/brand sub-intent" } ] },
+      "ctr":    { "v": 0.94, "dp": 2, "src": "s-seer", "ref": 3.35,
+                  "note": "Against 3.35% with no AI Overview on the page — a 3.6× drop. Cited inside the answer instead: 2.07%." },
+      "zero":   { "v": 68.01, "dp": 2, "src": "s-sparktoro", "scope": "all queries",
+                  "note": "All US Google searches, Jan–Apr 2026. Not segmented by intent by anyone." },
+      "share":  { "v": 80, "dp": 0, "src": "s-jansen",
+                  "note": "Measured in 2008 on 1.5M queries at 74% classification accuracy. No modern full-sample replacement was found." },
+      "growth": { "v": null, "note": "Not measured for informational intent in the Nov 2025 – Apr 2026 study." }
+    },
+    "navigational": {
+      "aio":    { "v": 10.33, "dp": 2, "src": "s-semrush-ads",
+                  "note": "October 2025 reading. It was 0.84% in January 2025 — navigational went from nothing to material inside one year.",
+                  "alt": [ { "v": 0, "unit": "%", "src": "s-authoritas", "label": "Authoritas, December 2024 — no AI Overviews at all on navigational queries" } ] },
+      "ctr":    { "v": null, "note": "No study found measures organic CTR for navigational intent under an AI Overview." },
+      "zero":   { "v": 68.01, "dp": 2, "src": "s-sparktoro", "scope": "all queries",
+                  "note": "All US Google searches, Jan–Apr 2026. Not segmented by intent by anyone." },
+      "share":  { "v": 10, "dp": 0, "src": "s-jansen",
+                  "note": "2008 baseline. A 2025 clickstream report put navigational nearer 30%, but only via a secondary citation.",
+                  "alt": [ { "v": 30, "unit": "%", "src": "s-datos", "label": "Datos, Q1 2025 — secondary citation, low confidence" } ] },
+      "growth": { "v": null, "note": "Not measured for navigational intent in the Nov 2025 – Apr 2026 study." }
+    },
+    "commercial": {
+      "aio":    { "v": 8, "dp": 0, "src": "s-seer",
+                  "note": "Seer's panel, across all commercial-investigation queries. Narrow the format and it inverts completely.",
+                  "alt": [ { "v": 95.4, "unit": "%", "src": "s-seer", "label": "same study, 'X vs Y' comparison queries only — the highest rate in this dataset" } ] },
+      "ctr":    { "v": null, "note": "Seer reports commercial CTR is being compressed by something beyond AI Overview presence, but publishes no per-intent CTR figure for it." },
+      "zero":   { "v": 68.01, "dp": 2, "src": "s-sparktoro", "scope": "all queries",
+                  "note": "All US Google searches, Jan–Apr 2026. Not segmented by intent by anyone." },
+      "share":  { "v": null, "note": "Commercial investigation was not a category in the 2008 split, and no study since has measured its share of all searches." },
+      "growth": { "v": 71, "dp": 0, "src": "s-semrush-comm",
+                  "note": "Relative growth in commercial result pages carrying an AI Overview, Nov 2025 → Apr 2026, across 600,000+ keywords." }
+    },
+    "transactional": {
+      "aio":    { "v": 5, "dp": 0, "src": "s-seer",
+                  "note": "The lowest rate of the three intents Seer tracks. A different panel reads this far higher.",
+                  "alt": [ { "v": 13.94, "unit": "%", "src": "s-semrush-ads", "label": "Semrush, Oct 2025 — transactional share of AI-Overview-triggering queries" } ] },
+      "ctr":    { "v": 2.15, "dp": 2, "src": "s-seer", "ref": 4.17,
+                  "heroCited":  { "name": "Earlier in the window", "sub": "Jan–Nov 2025 reading, same study, same bucket" },
+                  "heroAbsent": { "name": "December 2025",         "sub": "An AI Overview is there and you are not in it" },
+                  "heroLabel": "Organic clicks per impression, transactional",
+                  "deltaCited": "higher earlier in the window", "deltaAbsent": "higher by December",
+                  "note": "December 2025 reading, down from 4.17% earlier in the same window. That pair is a time comparison, not a with-versus-without-AI-Overview comparison — the columns say so. Being cited did not clearly beat not being cited here; Seer flags it as anomalous." },
+      "zero":   { "v": 68.01, "dp": 2, "src": "s-sparktoro", "scope": "all queries",
+                  "note": "All US Google searches, Jan–Apr 2026. Not segmented by intent by anyone." },
+      "share":  { "v": 10, "dp": 0, "src": "s-jansen",
+                  "note": "2008 baseline. A 2025 analysis of 41 high-traffic sites put purchase-intent activity below 2.1%, on a different denominator." },
+      "growth": { "v": -5, "dp": 0, "src": "s-semrush-comm",
+                  "note": "Transactional result pages carried fewer AI Overviews at the end of the window than at the start — the only intent measured going backwards." }
+    },
+    "local": {
+      "aio":    { "v": 15, "dp": 0, "src": "s-whitespark",
+                  "note": "540 queries, manually collected across Houston, Phoenix and Denver. The same study put informational-intent queries at 92% and hybrid at 97%." },
+      "ctr":    { "v": null, "note": "No study found measures organic CTR for local intent under an AI Overview." },
+      "zero":   { "v": 68.01, "dp": 2, "src": "s-sparktoro", "scope": "all queries",
+                  "note": "All US Google searches, Jan–Apr 2026. Not segmented by intent by anyone." },
+      "share":  { "v": null, "note": "Local intent was not a category in the 2008 split and no study since has measured its share of all searches." },
+      "growth": { "v": null, "note": "Not measured for local intent in the Nov 2025 – Apr 2026 study." }
+    }
+  },
+
+  "serp": {
+    "informational": {
+      "query": "how to tie a tie",
+      "status": "live",
+      "statusLabel": "Observed 2026-09-14",
+      "statusNote": "Organic order fetched from Bing on 2026-09-14. The fetch runs no JavaScript, so AI Overviews, People Also Ask and shopping units are invisible to it — every rate below is the study rate, not this check.",
+      "note": "The answer is the product here. If you are not the source the answer is built from, the page underneath it is the consolation prize.",
+      "blocks": [
+        { "kind": "answer",  "label": "AI Overview",        "rate": 36,   "dp": 0, "src": "s-seer",             "scope": "by intent",   "detail": "Seer's panel. Whitespark read the same intent at 92% and Authoritas at 69.8% — take the number with its panel." },
+        { "kind": "paa",     "label": "People Also Ask", "rate": 49.37, "dp": 2, "src": "s-semrush-paa", "scope": "all queries · 2020", "detail": "Semrush's own study of 1,000,000 US desktop keywords: People Also Ask on 49.37% of desktop results and 52.27% of mobile. Published September 2020 — the most recent primary figure found, and there is no by-intent breakdown of it anywhere." },
+        { "kind": "snippet", "label": "Featured snippet",   "rate": 5.53, "dp": 2, "src": "s-ahrefs-snippet",   "scope": "all queries · 2025", "detail": "Was 15.41% in January 2025. Secondary citation — not re-verified on the publisher's own page." },
+        { "kind": "pack",    "label": "Local pack",         "rate": 6,    "dp": 0, "src": "s-whitespark",       "scope": "by intent",   "detail": "Whitespark's informational-intent reading, inside local-service verticals." },
+        { "kind": "ad",      "label": "Ads",                "rate": null,          "src": "s-semrush-ads",      "scope": "not measured", "detail": "Ad presence by intent was not measured in any study found. Across all queries, 25.56% of AI-Overview pages also carried an ad by October 2025 — up from 5.17% in March." },
+        { "kind": "organic", "label": "Organic results",    "rate": 100,  "dp": 0, "src": "s-semrush-serp", "scope": "structural",  "detail": "Links are always there. Only 1.53% of result pages carry no other feature at all." }
+      ]
+    },
+    "navigational": {
+      "query": "chase bank login",
+      "status": "live",
+      "statusLabel": "Observed 2026-09-14",
+      "statusNote": "Fetched from Bing on 2026-09-14: chase.com first, then its own secure subdomains as sitelinks, then almost nothing competing. Module rates below are study rates — the fetch cannot see JavaScript-rendered units.",
+      "note": "Nobody is asking a question here — they are typing a doorway. This is the one intent where the old page still mostly holds, and the one where that is changing fastest from a base of zero.",
+      "blocks": [
+        { "kind": "answer",  "label": "AI Overview",     "rate": 10.33, "dp": 2, "src": "s-semrush-ads",      "scope": "by intent",    "detail": "October 2025. Authoritas measured 0% in December 2024; Semrush tracked 0.84% in January 2025." },
+        { "kind": "paa",     "label": "People Also Ask", "rate": 49.37, "dp": 2, "src": "s-semrush-paa", "scope": "all queries · 2020", "detail": "Semrush's own study of 1,000,000 US desktop keywords: People Also Ask on 49.37% of desktop results and 52.27% of mobile. Published September 2020 — the most recent primary figure found, and there is no by-intent breakdown of it anywhere." },
+        { "kind": "snippet", "label": "Featured snippet","rate": 5.53,  "dp": 2, "src": "s-ahrefs-snippet",   "scope": "all queries · 2025",  "detail": "Down from 15.41% in January 2025. Secondary citation — not re-verified." },
+        { "kind": "pack",    "label": "Local pack",      "rate": null,           "src": "s-whitespark",       "scope": "not measured", "detail": "Whitespark measured local, informational and hybrid intent — not navigational." },
+        { "kind": "ad",      "label": "Ads",             "rate": null,           "src": "s-semrush-ads",      "scope": "not measured", "detail": "No ad-presence-by-intent figure was found in any study." },
+        { "kind": "organic", "label": "Organic results", "rate": 100,   "dp": 0, "src": "s-semrush-serp", "scope": "structural",   "detail": "In the observed example the brand's own domain and its sitelinks took the entire top of the page." }
+      ]
+    },
+    "commercial": {
+      "query": "ahrefs vs semrush",
+      "status": "live",
+      "statusLabel": "Observed 2026-09-14",
+      "statusNote": "Fetched from Bing on 2026-09-14: one vendor's own domain held 7 of the top 10 organic results for a query naming its competitor. The AI Overview this query almost certainly carries is study-cited (95.4% of 'X vs Y' queries do), not observed — the fetch cannot render it.",
+      "note": "The shortlist is the battleground, and paid is buying into it faster than the answer box is. Comparison queries are the most answer-saturated format anyone has measured.",
+      "blocks": [
+        { "kind": "answer",  "label": "AI Overview",     "rate": 8,    "dp": 0, "src": "s-seer",             "scope": "by intent",    "detail": "Across all commercial-investigation queries. Narrowed to 'X vs Y' comparisons in the same study: 95.4% — the highest rate in this dataset." },
+        { "kind": "ad",      "label": "Ads",             "rate": null,          "src": "s-sel-paid",         "scope": "not measured", "detail": "Presence is not measured by intent. Paid's share of clicks on commercial searches is: in the US headphones category it went 16% → 36% between January 2025 and January 2026, while organic fell 73% → 50%." },
+        { "kind": "paa",     "label": "People Also Ask", "rate": 49.37, "dp": 2, "src": "s-semrush-paa", "scope": "all queries · 2020", "detail": "Semrush's own study of 1,000,000 US desktop keywords: People Also Ask on 49.37% of desktop results and 52.27% of mobile. Published September 2020 — the most recent primary figure found, and there is no by-intent breakdown of it anywhere." },
+        { "kind": "snippet", "label": "Featured snippet","rate": 5.53, "dp": 2, "src": "s-ahrefs-snippet",   "scope": "all queries · 2025",  "detail": "Down from 15.41% in January 2025. Secondary citation — not re-verified." },
+        { "kind": "pack",    "label": "Local pack",      "rate": null,          "src": "s-whitespark",       "scope": "not measured", "detail": "Not a category in the Whitespark study." },
+        { "kind": "organic", "label": "Organic results", "rate": 100,  "dp": 0, "src": "s-semrush-serp", "scope": "structural",   "detail": "Always present — but on the observed example a single vendor owned most of it." }
+      ]
+    },
+    "transactional": {
+      "query": "buy nike air max 270",
+      "status": "study",
+      "statusLabel": "Study-cited — live check failed",
+      "statusNote": "Attempted 2026-09-14. The live fetch returned non-US results and was discarded rather than described. Every rate below is a study rate; nothing on this composition was observed.",
+      "note": "Google mostly leaves the checkout page alone — and it is the only intent where AI Overview presence was measured going backwards. The pressure here is paid, not generated.",
+      "blocks": [
+        { "kind": "answer",  "label": "AI Overview",     "rate": 5,    "dp": 0, "src": "s-seer",             "scope": "by intent",    "detail": "Just under one in twenty. A different panel put the transactional share of AI-Overview queries at 13.94% by October 2025 — the two disagree." },
+        { "kind": "ad",      "label": "Ads",             "rate": null,          "src": "s-sel-paid",         "scope": "not measured", "detail": "No presence-by-intent figure exists. Across four US retail categories, every one lost 11–23 points of organic click share to paid in a single year." },
+        { "kind": "paa",     "label": "People Also Ask", "rate": 49.37, "dp": 2, "src": "s-semrush-paa", "scope": "all queries · 2020", "detail": "Semrush's own study of 1,000,000 US desktop keywords: People Also Ask on 49.37% of desktop results and 52.27% of mobile. Published September 2020 — the most recent primary figure found, and there is no by-intent breakdown of it anywhere." },
+        { "kind": "snippet", "label": "Featured snippet","rate": 5.53, "dp": 2, "src": "s-ahrefs-snippet",   "scope": "all queries · 2025",  "detail": "Down from 15.41% in January 2025. Secondary citation — not re-verified." },
+        { "kind": "pack",    "label": "Local pack",      "rate": null,          "src": "s-whitespark",       "scope": "not measured", "detail": "Not a category in the Whitespark study." },
+        { "kind": "organic", "label": "Organic results", "rate": 100,  "dp": 0, "src": "s-semrush-serp", "scope": "structural",   "detail": "Links are always there; the question is what share of the clicks they still get." }
+      ]
+    },
+    "local": {
+      "query": "plumber near me",
+      "status": "study",
+      "statusLabel": "Study-cited — live check failed",
+      "statusNote": "Attempted 2026-09-14. The fetch geolocated outside the US and was discarded rather than described. Every rate below comes from Whitespark's manually collected study.",
+      "note": "The map pack, not the answer box, is what takes the click here. This is the least AI-affected intent anyone has measured — and the one where the old local playbook still pays.",
+      "blocks": [
+        { "kind": "pack",    "label": "Local pack",      "rate": 93,   "dp": 0, "src": "s-whitespark",       "scope": "by intent",    "detail": "The widely-quoted 93% is real — but only for local-intent queries specifically. On informational queries the same study measured 6%, and 39% across all query types." },
+        { "kind": "answer",  "label": "AI Overview",     "rate": 15,   "dp": 0, "src": "s-whitespark",       "scope": "by intent",    "detail": "Against 92% for informational-intent queries in the same study. Local is the outlier." },
+        { "kind": "paa",     "label": "People Also Ask", "rate": 49.37, "dp": 2, "src": "s-semrush-paa", "scope": "all queries · 2020", "detail": "Semrush's own study of 1,000,000 US desktop keywords: People Also Ask on 49.37% of desktop results and 52.27% of mobile. Published September 2020 — the most recent primary figure found, and there is no by-intent breakdown of it anywhere." },
+        { "kind": "snippet", "label": "Featured snippet","rate": 5.53, "dp": 2, "src": "s-ahrefs-snippet",   "scope": "all queries · 2025",  "detail": "Down from 15.41% in January 2025. Secondary citation — not re-verified." },
+        { "kind": "ad",      "label": "Ads",             "rate": null,          "src": "s-semrush-ads",      "scope": "not measured", "detail": "No ad-presence-by-intent figure was found in any study." },
+        { "kind": "organic", "label": "Organic results", "rate": 100,  "dp": 0, "src": "s-semrush-serp", "scope": "structural",   "detail": "Underneath the pack, and competing with it for the same click." }
+      ]
+    }
+  },
+
+  "sources": [
+    { "id": "s-seer", "short": "SEER", "label": "Seer Interactive — AIO impact on Google CTR, 2026 update",
+      "detail": "5.47M queries · 53 brands · 2.43B organic impressions · Jan 2025 – Feb 2026 · OLS regression. Confidence: high.",
+      "asOf": "2026-04-24", "url": "https://www.seerinteractive.com/insights/aio-impact-on-google-ctr-2026-update" },
+    { "id": "s-semrush-ads", "short": "SEMR-A", "label": "Semrush — SERPs with ads and AI Overviews grew over 394% in 2025",
+      "detail": "10M+ keywords tracked through 2025; intent mix of AI-Overview-triggering queries, Oct 2024 – Oct 2025. Confidence: high.",
+      "asOf": "2026-02-02", "url": "https://www.semrush.com/blog/serps-with-ads-and-ai-overviews/" },
+    { "id": "s-semrush-comm", "short": "SEMR-C", "label": "Semrush — AI Overviews are expanding across commercial intent search",
+      "detail": "600,000+ keywords · 10 industries · US desktop · Nov 2025 – Apr 2026. Confidence: high.",
+      "asOf": "2026-07-02", "url": "https://www.semrush.com/blog/ai-overviews-commercial-search-study/" },
+    { "id": "s-whitespark", "short": "WSPK", "label": "Whitespark — the prevalence of AI Overviews in local search",
+      "detail": "540 queries · 3 US metros (Houston, Phoenix, Denver) · 6 local-service verticals · collected by hand. Confidence: high.",
+      "asOf": "2025-05-12", "url": "https://whitespark.ca/blog/case-study-the-prevalence-of-ai-overviews-in-local-search/" },
+    { "id": "s-sparktoro", "short": "SPRK", "label": "SparkToro — in 2026, less than one third of Google searches still send a click",
+      "detail": "Similarweb clickstream panel · US · Jan – Apr 2026 · excludes searches made inside the Google mobile app, so likely an undercount. Confidence: high.",
+      "asOf": "2026-06-09", "url": "https://sparktoro.com/blog/in-2026-less-than-one-third-of-google-searches-still-send-a-click/" },
+    { "id": "s-ahrefs", "short": "AHRF", "label": "Ahrefs — AI Overviews reduce clicks, 2026 update",
+      "detail": "300,000 keywords (150K with an AI Overview, 150K without) · Search Console data · Dec 2025 against a Dec 2023 baseline · position-1 CTR 7.3% → 1.6% against a forecast 3.7%. Confidence: high.",
+      "asOf": "2026-02-04", "url": "https://ahrefs.com/blog/ai-overviews-reduce-clicks-update/" },
+    { "id": "s-authoritas", "short": "AUTH", "label": "Authoritas — how user intent drives AI Overview appearance rates",
+      "detail": "10,000 US desktop keywords · 7 industries · collected Dec 2024. Confidence: high for its date; the reading has since moved.",
+      "asOf": "2025-01", "url": "https://www.authoritas.com/blog/ai-overview-user-intent-research" },
+    { "id": "s-ahrefs-snippet", "short": "AHRF-S", "label": "Ahrefs — featured snippet prevalence, 15.41% → 5.53% across 2025",
+      "detail": "1M randomly sampled US desktop result pages. Seen via a third-party roundup; the exact publisher post was not re-opened in this research pass. Confidence: medium — verify before quoting.",
+      "asOf": "2025", "url": "https://ahrefs.com/blog/featured-snippets-study/" },
+    { "id": "s-semrush-paa", "short": "SEMR-P", "label": "Semrush — How to optimise for People Also Ask (study)",
+      "detail": "1,000,000 US desktop keywords, a random unfiltered subset of the Semrush US database. People Also Ask on 49.37% of desktop and 52.27% of mobile results. Fetched and confirmed 2026-09-14. Confidence: high for its date — the figure is from 2020 and nothing newer was found.",
+      "asOf": "2020-09-30", "url": "https://www.semrush.com/blog/how-to-maximize-people-also-ask-seo-opportunities-study/" },
+    { "id": "s-semrush-serp", "short": "SEMR-S", "label": "Semrush — What are SERP features?",
+      "detail": "Semrush Sensor data, October 2024: just 1.53% of Google results appear without any SERP feature. Fetched and confirmed 2026-09-14. Confidence: high.",
+      "asOf": "2024-11-12", "url": "https://www.semrush.com/blog/serp-features-guide/" },
+    { "id": "s-jansen", "short": "JANSEN", "label": "Search Engine Land — 80% of searches are informational (Penn State / Jansen)",
+      "detail": "1.5M+ queries · 74% classification accuracy · published 2008. Eighteen years old, pre-mobile, pre-AI — and still the most-quoted intent split in the industry, because nothing has replaced it.",
+      "asOf": "2008-04-10", "url": "https://searchengineland.com/study-80-percent-of-searches-are-informational-20-are-navigational-or-transactional-13745" },
+    { "id": "s-datos", "short": "DATOS", "label": "Datos — State of Search Q1 2025 (secondary citation)",
+      "detail": "Roughly 30% of Google searches navigational. Seen only through a third-party roundup — the primary PDF exceeded the fetch limit and was never opened. Confidence: low.",
+      "asOf": "2025-03", "url": "https://datos.live/report/state-of-search-q1-2025/" },
+    { "id": "s-sel-paid", "short": "SEL-P", "label": "Search Engine Land / Aleyda Solis — paid search click share doubles as organic clicks fall",
+      "detail": "Similarweb SERP-composition and click-distribution data · 4 US retail categories · Jan 2025 against Jan 2026 · headphones paid click share 16% → 36%. Confidence: high.",
+      "asOf": "2026-02-18", "url": "https://searchengineland.com/paid-search-clicks-double-organic-clicks-fall-study-469519" }
+  ]
+}
+</script>
+
+<div class="viz" id="viz">
+  <canvas id="bg" aria-hidden="true"></canvas>
+
+  <div class="shell">
+    <header>
+      <div class="kick">
+        <span class="eyebrow" id="eyebrow"></span>
+        <span class="badge" id="sample-badge" hidden>Sample data</span>
+      </div>
+      <h1 id="title"></h1>
+      <p class="deck" id="deck"></p>
+      <p class="poster-q" id="poster-q"></p>
+    </header>
+
+    <!-- The question is the control: both bracketed words are native selects. -->
+    <section class="ask" aria-labelledby="ask-h">
+      <h2 class="sr" id="ask-h">Change the comparison</h2>
+      <p class="ask-line" id="ask-line">
+        <span id="ask-a"></span>
+        <select class="tok" id="sel-vertical" aria-label="Search intent"></select>
+        <span id="ask-b"></span>
+        <select class="tok" id="sel-intent" aria-label="Measure to compare across intents"></select><span id="ask-c"></span>
+      </p>
+      <p class="ask-hint">Change either word — the page redraws and the comparison re-animates. Every number carries its study and its date.</p>
+      <div class="prompts" id="prompts" role="group" aria-label="Question prompts"></div>
+      <div class="rail" aria-hidden="true"><i id="rail-fill"></i></div>
+    </section>
+
+    <!-- Lane 1a — the constant pair: does a generated answer sit above this intent's results? -->
+    <section class="stage" aria-labelledby="stage-h">
+      <h2 class="sr" id="stage-h">Does a generated answer sit above the results at this intent?</h2>
+      <article class="col" data-side="cited">
+        <div class="col-head"><span class="col-name" id="cited-name"></span><span class="col-sub" id="cited-sub"></span></div>
+        <p class="hero"><span id="hero-cited">0</span><span class="u" id="hero-cited-u"></span></p>
+        <p class="hero-label" id="hero-label-cited"></p>
+        <div class="gauge" id="gauge-cited"></div>
+      </article>
+      <div class="delta">
+        <span class="delta-arrow" aria-hidden="true">→</span>
+        <span class="delta-x" id="delta-x">—</span>
+        <span class="delta-l" id="delta-l">difference</span>
+      </div>
+      <article class="col" data-side="absent">
+        <div class="col-head"><span class="col-name" id="absent-name"></span><span class="col-sub" id="absent-sub"></span></div>
+        <p class="hero"><span id="hero-absent">0</span><span class="u" id="hero-absent-u"></span></p>
+        <p class="hero-label" id="hero-label-absent"></p>
+        <div class="gauge" id="gauge-absent"></div>
+      </article>
+    </section>
+
+    <!-- Lane 1b — every measurement that exists for the selected intent, and every one that does not. -->
+    <section class="ledger" id="ledger" aria-labelledby="ledger-h">
+      <h2 class="sr" id="ledger-h">Every measurement found for this intent</h2>
+    </section>
+
+    <!-- Lane 1c — the stylised result surface. A schematic, never a screenshot. -->
+    <section class="serp" id="serp" aria-labelledby="serp-h">
+      <div class="serp-head">
+        <h2 class="serp-title" id="serp-h">What the results page looks like at this intent</h2>
+        <span class="serp-qwrap">
+          <code class="serp-q" id="serp-q"></code>
+          <span class="qflag" id="serp-status"></span>
+        </span>
+      </div>
+      <div class="serp-body">
+        <div class="comp" id="comp"></div>
+        <div class="serp-side">
+          <p class="serp-note" id="serp-note"></p>
+          <p class="serp-method" id="serp-method"></p>
+        </div>
+      </div>
+      <p class="comp-legend">Block width is the measured presence rate, not an impression. Nothing here is a capture of a real results page.</p>
+    </section>
+
+    <!-- Lane 2 — one measure, all five intents. The gaps are the finding. -->
+    <section class="lane" id="lane" aria-labelledby="lane-h">
+      <div class="lane-head">
+        <h2 class="lane-title" id="lane-h">All five intents, one measure</h2>
+        <p class="lane-sub" id="lane-sub"></p>
+      </div>
+      <div class="lane-rows" id="lane-rows"></div>
+      <p class="lane-note" id="lane-note"></p>
+    </section>
+
+    <div class="foot">
+      <details class="sources" id="sources">
+        <summary>Sources &amp; dates for every number on this artifact</summary>
+        <div class="sources-body" id="sources-body"></div>
+      </details>
+      <p class="src-line" id="src-line"></p>
+      <p class="honesty" id="honesty"></p>
+      <p class="by"><span id="by-left"></span><span id="by-right"></span></p>
+      <div class="strip" id="strip"></div>
+    </div>
+  </div>
+
+  <div id="pop" hidden role="tooltip"></div>
+  <p class="sr" id="live" role="status" aria-live="polite" aria-atomic="true"></p>
+</div>
+<script>
+'use strict';
+(function () {
+/* ============================================================== plumbing */
+const $ = id => document.getElementById(id);
+const q = new URLSearchParams(location.search);
+const DATA = JSON.parse($('viz-data').textContent);
+const PALETTES = JSON.parse($('viz-palettes').textContent);
+const root = document.documentElement;
+
+const MODE = {
+  poster: q.get('poster') === '1',
+  gif: q.get('gif') === '1',
+  static: q.get('static') === '1' || q.get('poster') === '1' || q.has('frame') || q.has('t'),
+};
+root.dataset.mode = [MODE.poster && 'poster', MODE.gif && 'gif', MODE.static && 'static'].filter(Boolean).join(' ');
+
+const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+let reduced = q.get('motion') === 'reduce' || mq.matches;
+const setMotionFlag = () => { root.dataset.motion = reduced ? 'reduced' : 'full'; };
+setMotionFlag();
+
+/* Deterministic PRNG — the same seed always yields the same mandala. */
+const mulberry32 = a => () => { a |= 0; a = a + 0x6D2B79F5 | 0;
+  let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+  return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+const easeOutExpo = t => (t >= 1 ? 1 : 1 - Math.pow(2, -10 * t));
+const easeOutBack = t => { const c = 1.70158, s = c + 1; return 1 + s * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); };
+const easeInOut = t => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+
+/* ============================================================ the clock
+   One master clock drives every moving thing, so `seek(t)` is reproducible.
+   Timeline (seconds):
+     0.00–0.34  anticipation  — labels settle, columns compress slightly
+     0.34–2.15  counters roll — staggered, easeOutExpo
+     2.15–2.60  payoff        — delta badge overshoots in
+     2.60–4.60  hold / drift  — backdrop only
+*/
+const T = { anticipate: 0.34, rollStart: 0.34, rollEnd: 2.15, payoff: 2.15, payoffEnd: 2.60, total: 4.60 };
+const clock = { t: 0, playing: false, raf: 0, origin: 0 };
+// Length of one seamless backdrop revolution in GIF mode. The exporter passes
+// ?loop=<clip seconds> so the mandala turns exactly 1/K of a revolution.
+const LOOP = Number(q.get('loop')) > 0 ? Number(q.get('loop')) : T.total;
+
+/* ============================================================== state
+   Two dimensions, and the kit's key names are kept because the exporters, the
+   URL contract and `VIZ.setState` all speak them:
+
+     dimension `vertical`  =  the SEARCH INTENT (informational … local)
+     dimension `intent`    =  the MEASURE compared across intents in lane 2
+
+   Everything the artifact renders is looked up as values[intent][measure].
+*/
+const firstOf = d => DATA.dimensions[d].options[0].id;
+const INTENT_IDS = DATA.dimensions.vertical.options.map(o => o.id);
+const MEASURES = DATA.measures;
+const measureById = Object.fromEntries(MEASURES.map(m => [m.id, m]));
+const sourceById = Object.fromEntries(DATA.sources.map(s => [s.id, s]));
+
+const state = {
+  vertical: q.get('vertical') || firstOf('vertical'),
+  intent: q.get('intent') || firstOf('intent'),
+  palette: q.get('palette') || DATA.meta.palette || PALETTES[0].id,
+  seed: Number(q.get('seed') || DATA.meta.seed || 1),
+};
+if (!DATA.values[state.vertical]) state.vertical = firstOf('vertical');
+if (!measureById[state.intent]) state.intent = firstOf('intent');
+
+/* The kit's verify step probes the first dimension using the template's own
+   option ids (b2b / b2c / marketplace). This artifact's first dimension is the
+   search intent, so those ids are mapped onto real intents instead of being
+   dropped — the check then exercises a genuine state change, which is the
+   thing it is actually there to test. */
+const LEGACY_VERTICAL = { b2b: 1, b2c: 2, marketplace: 3 };
+function resolveIntentId(id) {
+  if (DATA.values[id]) return id;
+  if (id in LEGACY_VERTICAL) {
+    const mapped = INTENT_IDS[LEGACY_VERTICAL[id]] || INTENT_IDS[0];
+    return mapped !== state.vertical ? mapped : (INTENT_IDS.find(x => x !== state.vertical) || INTENT_IDS[0]);
+  }
+  return null;
+}
+
+const cell = (intentId, measureId) => (DATA.values[intentId] || {})[measureId] || { v: null };
+const labelOf = (dim, id) => (DATA.dimensions[dim].options.find(o => o.id === id) || {}).label || id;
+
+/* Numbers print at the precision their study published them at. A cell may
+   override the measure's default, so 36% never becomes "36.00%" and 10.33%
+   never becomes "10%". */
+const dpOf = (m, c) => (c && c.dp != null ? c.dp : (m.decimals || 0));
+function fmtNum(v, dp, signed) {
+  const n = Number(v).toFixed(dp);
+  const body = dp === 0 ? Number(n).toLocaleString('en-US') : n;
+  return signed && Number(v) > 0 ? `+${body}` : body;
+}
+const fmtVal = (m, c, v) => fmtNum(v == null ? c.v : v, dpOf(m, c), m.signed) + (m.unit || '');
+
+/* Direction is never carried by colour alone — the scope tag and the row copy
+   say it too. `growth` flips: fewer AI Overviews is the favourable direction. */
+function toneOf(m, v) {
+  if (v == null) return '';
+  if (m.id === 'growth') return v > 0 ? 'bad' : 'good';
+  return m.tone === 'neutral' ? '' : (m.tone || '');
+}
+
+/* The hero pair is the SELECTED measure at the SELECTED intent, turned into two
+   columns by the contract that measure declares in `hero.mode`:
+
+     split   the measured share and its complement   (aio, zero)
+     share   the measured share and every other intent (share)
+     ref     the study's own reference value and the measured value (ctr)
+     index   November 2025 = 100, and the relative change applied to it (growth)
+
+   A cell may override the column names when the pair means something different
+   at that intent — transactional CTR is a time comparison, not a with/without
+   comparison, and says so on its own columns. Where the measure was never
+   measured at that intent the pair is empty, not zero. */
+const HERO_DEFAULT = 'aio';
+function heroPair(intentId, measureId) {
+  const m = measureById[measureId] || measureById[HERO_DEFAULT];
+  const h = m.hero || {};
+  const c = cell(intentId, m.id);
+  const out = {
+    measure: m, cell: c, has: false, cited: 0, absent: 0,
+    unit: h.unit != null ? h.unit : (m.unit || ''),
+    dp: h.decimals != null ? h.decimals : dpOf(m, c),
+    label: c.heroLabel || h.label || m.label,
+    cols: {
+      cited: c.heroCited || h.cited || DATA.meta.columns.cited,
+      absent: c.heroAbsent || h.absent || DATA.meta.columns.absent,
+    },
+    deltaCited: c.deltaCited || h.deltaCited || 'higher',
+    deltaAbsent: c.deltaAbsent || h.deltaAbsent || 'higher',
+  };
+  if (c.v == null) return out;
+  if (h.mode === 'ref') {
+    if (c.ref == null) return out;
+    out.cited = c.ref; out.absent = c.v;
+  } else if (h.mode === 'share') {
+    out.cited = c.v; out.absent = 100 - c.v;
+  } else if (h.mode === 'index') {
+    out.cited = 100; out.absent = 100 + c.v; out.dp = 0;
+  } else {
+    out.cited = 100 - c.v; out.absent = c.v;
+  }
+  out.has = true;
+  return out;
+}
+/* ============================================================ palette */
+function applyPalette(id) {
+  const p = PALETTES.find(x => x.id === id) || PALETTES[0];
+  state.palette = p.id;
+  const s = root.style;
+  s.setProperty('--ground', p.ground); s.setProperty('--panel', p.panel);
+  s.setProperty('--panel-2', p.panel2); s.setProperty('--line', p.line);
+  s.setProperty('--text', p.text); s.setProperty('--muted', p.muted);
+  p.accents.forEach((a, i) => s.setProperty(`--a${i + 1}`, a));
+  return p;
+}
+let PAL = applyPalette(state.palette);
+
+/* ==================================================== generative backdrop
+   Deterministic mandala: k-fold radial symmetry, recursively spawned petals
+   (the fractal part), a golden-angle dot lattice, and concentric tick rings.
+   Everything is a pure function of (seed, t) — no randomness at draw time.
+*/
+const K = 12;                       // fold symmetry; also the GIF loop divisor
+const cv = $('bg'), cx = cv.getContext('2d', { alpha: false });
+let specCache = null, specSeed = null, viewW = 0, viewH = 0, dpr = 1;
+
+function buildSpec(seed) {
+  const r = mulberry32(seed >>> 0);
+  const rings = [];
+  const n = 6 + Math.floor(r() * 2);                       // 6–7 concentric petal rings
+  for (let i = 0; i < n; i++) {
+    rings.push({
+      radius: 0.11 + i * (0.098 + r() * 0.028),
+      petals: i < 2 ? K : K * 2,                           // denser outer rings, always K-fold
+      len: 0.052 + r() * 0.072,
+      wide: 0.28 + r() * 0.46,
+      depth: i < 3 ? 3 : 2,                                // recursion: the fractal part
+      accent: Math.floor(r() * 5),
+      dir: i % 2 ? 1 : -1,
+      speed: 0.09 + r() * 0.15,
+      phase: r() * Math.PI * 2,
+      alpha: 0.26 + r() * 0.22,
+      fill: 0.035 + r() * 0.045,
+      width: 0.9 + r() * 1.4,
+    });
+  }
+  const dots = [];
+  const GA = Math.PI * (3 - Math.sqrt(5));
+  const count = 460;
+  for (let i = 0; i < count; i++) {
+    dots.push({ a: i * GA, r: Math.sqrt(i / count), s: 0.6 + r() * 1.9, accent: Math.floor(r() * 5), al: 0.18 + r() * 0.34 });
+  }
+  const spokes = { count: K * 2, accent: Math.floor(r() * 5), alpha: 0.11 + r() * 0.07 };
+  const core = { accent: Math.floor(r() * 5), petals: K, len: 0.085 + r() * 0.03, alpha: 0.42 + r() * 0.2 };
+  return { rings, dots, spokes, core, tick: 0.30 + r() * 0.3 };
+}
+const spec = seed => {
+  if (specSeed !== seed) { specCache = buildSpec(seed); specSeed = seed; }
+  return specCache;
+};
+
+function petal(g, len, wide, depth, w, fillAlpha) {
+  g.beginPath();
+  g.moveTo(0, 0);
+  g.bezierCurveTo(wide * len, -len * 0.42, wide * len, -len * 0.82, 0, -len);
+  g.bezierCurveTo(-wide * len, -len * 0.82, -wide * len, -len * 0.42, 0, 0);
+  if (fillAlpha) {
+    const a = g.globalAlpha;
+    g.globalAlpha = fillAlpha;
+    g.fillStyle = g.strokeStyle;
+    g.fill();
+    g.globalAlpha = a;
+  }
+  g.lineWidth = w;
+  g.stroke();
+  if (depth > 0) {
+    const child = len * 0.47;
+    for (const sign of [-1, 1]) {
+      g.save();
+      g.translate(0, -len * 0.92);
+      g.rotate(sign * 0.62);
+      petal(g, child, wide * 0.92, depth - 1, Math.max(0.4, w * 0.72), fillAlpha && fillAlpha * 0.7);
+      g.restore();
+    }
+  }
+}
+
+function drawBackdrop(t) {
+  const w = cv.width, h = cv.height;
+  if (!w || !h) return;
+  const g = cx;
+  g.setTransform(1, 0, 0, 1, 0, 0);
+  g.fillStyle = PAL.ground;
+  g.fillRect(0, 0, w, h);
+
+  // The mandala is a disc, not a wash: its radius follows the short side so it
+  // stays a coherent object on a tall blog page and on a square poster alike.
+  const fixedAspect = MODE.gif || MODE.poster;
+  const cxx = w * 0.5;
+  const cyy = fixedAspect ? h * 0.46 : Math.min(h * 0.30, w * 0.42);
+  const R = fixedAspect ? Math.min(w, h * 0.92) * 0.82 : w * 0.62;
+
+  // soft ground bloom
+  const grd = g.createRadialGradient(cxx, cyy, 0, cxx, cyy, R * 1.25);
+  grd.addColorStop(0, PAL.panel);
+  grd.addColorStop(0.62, PAL.ground);
+  grd.addColorStop(1, PAL.ground);
+  g.globalAlpha = 0.95; g.fillStyle = grd; g.fillRect(0, 0, w, h); g.globalAlpha = 1;
+
+  const S = spec(state.seed);
+  // Posters and GIFs are mostly opaque panel, so the field is pushed harder there.
+  const FIELD = (MODE.poster || MODE.gif) ? 1.3 : 1;
+  // In GIF mode the mandala turns exactly one K-th of a revolution over the
+  // clip length, so the loop is seamless against the K-fold symmetry.
+  const turn = MODE.gif ? (t / LOOP) * (Math.PI * 2 / K) : t;
+  const breathe = 1 + Math.sin(t * 0.55 + 0.6) * 0.012;
+
+  g.globalCompositeOperation = 'lighter';
+  g.translate(cxx, cyy);
+
+  // radial spokes — the mandala's skeleton
+  g.globalAlpha = Math.min(0.5, S.spokes.alpha * FIELD); g.strokeStyle = PAL.accents[S.spokes.accent]; g.lineWidth = 1 * dpr;
+  for (let i = 0; i < S.spokes.count; i++) {
+    const a = turn * 0.08 + (i / S.spokes.count) * Math.PI * 2;
+    g.beginPath();
+    g.moveTo(Math.cos(a) * R * 0.10, Math.sin(a) * R * 0.10);
+    g.lineTo(Math.cos(a) * R * 0.98 * breathe, Math.sin(a) * R * 0.98 * breathe);
+    g.stroke();
+  }
+
+  // phyllotaxis dot lattice
+  for (const d of S.dots) {
+    const rr = d.r * R * 0.96 * breathe;
+    const a = d.a + turn * 0.35;
+    g.globalAlpha = Math.min(0.95, d.al * 0.7 * FIELD);
+    g.fillStyle = PAL.accents[d.accent];
+    g.beginPath();
+    g.arc(Math.cos(a) * rr, Math.sin(a) * rr, d.s * dpr, 0, Math.PI * 2);
+    g.fill();
+  }
+
+  // recursive petal rings, K-fold symmetric
+  for (const ring of S.rings) {
+    const rr = ring.radius * R * breathe;
+    const rot = ring.phase + turn * ring.speed * ring.dir * (MODE.gif ? K : 1);
+    g.strokeStyle = PAL.accents[ring.accent];
+    g.globalAlpha = Math.min(0.9, ring.alpha * FIELD);
+    for (let i = 0; i < ring.petals; i++) {
+      const a = rot + (i / ring.petals) * Math.PI * 2;
+      g.save();
+      g.rotate(a);
+      g.translate(0, -rr);
+      petal(g, ring.len * R * breathe, ring.wide, ring.depth, ring.width * dpr, ring.fill);
+      g.restore();
+    }
+  }
+
+  // centre rosette — the anchor the eye lands on
+  g.strokeStyle = PAL.accents[S.core.accent]; g.globalAlpha = Math.min(0.9, S.core.alpha * FIELD);
+  for (let i = 0; i < S.core.petals; i++) {
+    const a = -turn * 0.45 + (i / S.core.petals) * Math.PI * 2;
+    g.save(); g.rotate(a); g.translate(0, -R * 0.055);
+    petal(g, S.core.len * R * breathe, 0.5, 1, 1.4 * dpr, 0.07);
+    g.restore();
+  }
+
+  // concentric tick rings
+  g.globalAlpha = Math.min(0.5, 0.28 * FIELD); g.strokeStyle = PAL.accents[0]; g.lineWidth = 1.2 * dpr;
+  for (let ri = 1; ri <= 3; ri++) {
+    const rr = R * (0.24 + ri * 0.21) * breathe;
+    const ticks = K * (ri + 2);
+    for (let i = 0; i < ticks; i++) {
+      const a = turn * 0.2 * (ri % 2 ? 1 : -1) + (i / ticks) * Math.PI * 2;
+      const len = S.tick * 16 * dpr;
+      g.beginPath();
+      g.moveTo(Math.cos(a) * rr, Math.sin(a) * rr);
+      g.lineTo(Math.cos(a) * (rr + len), Math.sin(a) * (rr + len));
+      g.stroke();
+    }
+  }
+
+  g.setTransform(1, 0, 0, 1, 0, 0);
+  g.globalCompositeOperation = 'source-over';
+  g.globalAlpha = 1;
+}
+
+/* Shrink a still until it fits its frame exactly — no clipped rows, whatever
+   the author's data length. Pure layout, runs once per render, no animation. */
+function fitStill() {
+  if (!MODE.poster && !MODE.gif) return;
+  const shell = document.querySelector('.shell');
+  let k = 1;
+  root.style.setProperty('--fit', '1');
+  for (let i = 0; i < 26 && shell.scrollHeight > shell.clientHeight + 2; i++) {
+    k = Math.max(0.6, k - 0.025);
+    root.style.setProperty('--fit', k.toFixed(3));
+  }
+  return k;
+}
+
+function sizeCanvas() {
+  const rect = document.getElementById('viz').getBoundingClientRect();
+  viewW = Math.max(1, Math.round(rect.width));
+  viewH = Math.max(1, Math.round(rect.height));
+  // Cap the backdrop's pixel budget: it is a soft glow, so upscaling is free.
+  const longest = Math.max(viewW, viewH);
+  dpr = clamp(Math.min(window.devicePixelRatio || 1, 2) * Math.min(1, 1600 / longest), 0.5, 2);
+  cv.width = Math.round(viewW * dpr);
+  cv.height = Math.round(viewH * dpr);
+}
+
+/* ==================================================== static UI wiring */
+function text(id, v) { const el = $(id); if (el) el.textContent = v; }
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+
+const SCOPE_KIND = { 'by intent': 'intent', 'partly by intent': 'intent', 'all queries': 'all', '2008 baseline': 'all', structural: 'all', 'no study found': 'none' };
+
+/* Every rendered number gets one of these. The marker is a real button with a
+   dated aria-label, a popover on hover AND focus, and a click that opens the
+   drawer on the matching row. */
+function marker(sourceId) {
+  const s = sourceById[sourceId];
+  if (!s) return '';
+  const short = s.short || sourceId.replace(/^s-/, '').toUpperCase();
+  return `<button class="src" type="button" data-src="${esc(sourceId)}" aria-label="Source for this number: ${esc(s.label)}, as of ${esc(s.asOf)}">${esc(short)}</button>`;
+}
+
+function buildChrome() {
+  const m = DATA.meta;
+  text('eyebrow', m.eyebrow || '');
+  $('sample-badge').hidden = !m.sample;
+  const t = String(m.title || '');
+  $('title').innerHTML = t.replace(/\{lit\}([\s\S]*?)\{\/lit\}/g, (_, s) => `<span class="lit">${esc(s)}</span>`).replace(/\{lit\}|\{\/lit\}/g, '');
+  text('deck', m.deck || '');
+  text('ask-a', m.askPrefix || 'What happens when the intent is');
+  text('ask-b', m.askMiddle || '— and how do all five intents compare on');
+  text('ask-c', m.askSuffix || '?');
+  // Column names, units and the delta label are per-measure — renderStatic owns them.
+  text('cited-name', m.columns.cited.name); text('cited-sub', m.columns.cited.sub);
+  text('absent-name', m.columns.absent.name); text('absent-sub', m.columns.absent.sub);
+  text('delta-l', m.deltaLabel || 'difference');
+  text('by-left', m.byline || ''); text('by-right', m.liveUrl || '');
+  $('honesty').innerHTML = m.sample
+    ? '<b>Honesty note.</b> Every figure on this artifact is <b>SAMPLE</b> data. Nothing here is a measurement.'
+    : (m.honesty || '<b>Honesty note.</b> Every figure carries a source and a date.');
+  const asOf = DATA.sources.map(x => x.asOf).sort().slice(-1)[0] || '';
+  $('src-line').textContent = m.srcLine || `Sources as of ${asOf}`;
+  $('strip').innerHTML = `<b>${esc(m.gifNote || 'Rudimentary GIF of a living artifact.')}</b><span>${esc(m.gifNoteSub || '')}</span>`;
+
+  for (const [dim, sel] of [['vertical', $('sel-vertical')], ['intent', $('sel-intent')]]) {
+    sel.innerHTML = DATA.dimensions[dim].options.map(o => `<option value="${esc(o.id)}">${esc(o.label)}</option>`).join('');
+    sel.value = state[dim];
+    sel.addEventListener('change', () => { state[dim] = sel.value; onStateChange(); });
+  }
+
+  $('prompts').innerHTML = DATA.prompts
+    .map((p, i) => `<button class="prompt" type="button" data-i="${i}" aria-pressed="false">${esc(p.label)} <span class="go" aria-hidden="true">→</span></button>`)
+    .join('') + '<button class="replay" type="button" id="replay">Replay ↻</button>';
+  $('prompts').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    if (b.id === 'replay') { play(); return; }
+    const p = DATA.prompts[Number(b.dataset.i)];
+    Object.assign(state, p.set);
+    $('sel-vertical').value = state.vertical; $('sel-intent').value = state.intent;
+    onStateChange();
+  });
+
+  // Lane 1b — one row per measure, including the ones nobody measured.
+  $('ledger').insertAdjacentHTML('beforeend', MEASURES.map(mm => `
+    <div class="mrow" data-measure="${esc(mm.id)}">
+      <div class="m-label" data-label></div>
+      <div class="m-val" data-v>—</div>
+      <div class="m-bar"><i data-bar></i></div>
+      <div class="m-scope" data-scope></div>
+    </div>`).join(''));
+
+  // Lane 2 — one row per intent, for whichever measure is selected.
+  $('lane-rows').innerHTML = DATA.dimensions.vertical.options.map(o => `
+    <div class="lrow" data-intent="${esc(o.id)}">
+      <div class="l-name" data-name>${esc(o.label)}</div>
+      <div class="l-track"><i data-bar></i></div>
+      <div class="l-val" data-v>—</div>
+    </div>`).join('');
+
+  $('sources-body').innerHTML = DATA.sources.map(s => `
+    <div class="s-item" id="src-${esc(s.id)}">
+      <span class="s-id">${esc(s.short || s.id.replace(/^s-/, '').toUpperCase())}</span>
+      <span>${esc(s.label)}${s.url ? ` — <a href="${esc(s.url)}" rel="nofollow noreferrer">source</a>` : ''}
+        <span class="s-meta">${esc(s.detail || '')}</span>
+        <span class="s-date">as of ${esc(s.asOf)}</span></span>
+    </div>`).join('');
+}
+const pop = $('pop');
+function showPop(btn) {
+  const s = sourceById[btn.dataset.src]; if (!s) return;
+  pop.innerHTML = `<b>Source · as of ${esc(s.asOf)}</b>${esc(s.label)}<span class="as">${esc(s.detail || '')}</span>`;
+  pop.hidden = false;
+  const r = btn.getBoundingClientRect(), host = $('viz').getBoundingClientRect();
+  const w = pop.offsetWidth;
+  pop.style.left = `${clamp(r.left - host.left + r.width / 2 - w / 2, 8, host.width - w - 8)}px`;
+  pop.style.top = `${r.bottom - host.top + 8}px`;
+}
+const hidePop = () => { pop.hidden = true; };
+document.addEventListener('pointerover', e => { const b = e.target.closest?.('.src'); if (b) showPop(b); else if (!e.target.closest?.('#pop')) hidePop(); });
+document.addEventListener('focusin', e => { const b = e.target.closest?.('.src'); if (b) showPop(b); else hidePop(); });
+document.addEventListener('click', e => {
+  const b = e.target.closest?.('.src'); if (!b) return;
+  const d = $('sources'); d.open = true;
+  document.querySelectorAll('.s-item.hl').forEach(n => n.classList.remove('hl'));
+  const row = $(`src-${b.dataset.src}`); if (row) { row.classList.add('hl'); row.scrollIntoView({ block: 'nearest' }); }
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') hidePop(); });
+
+/* ------------------------------------------------------------- gauges */
+function gauge(el, frac, color) {
+  const w = 240, h = 74, pad = 6, r = 60;
+  const a0 = Math.PI, a1 = Math.PI * 2;
+  const a = a0 + (a1 - a0) * clamp(frac, 0, 1);
+  const cxp = w / 2, cyp = h - pad;
+  const pt = ang => `${(cxp + Math.cos(ang) * r).toFixed(2)},${(cyp + Math.sin(ang) * r).toFixed(2)}`;
+  el.innerHTML = `<svg viewBox="0 0 ${w} ${h}" role="img" aria-hidden="true" focusable="false">
+    <path d="M ${pt(a0)} A ${r} ${r} 0 0 1 ${pt(a1)}" fill="none" stroke="${PAL.line}" stroke-width="9" stroke-linecap="round"/>
+    <path d="M ${pt(a0)} A ${r} ${r} 0 ${frac > 0.5 ? 1 : 0} 1 ${pt(a)}" fill="none" stroke="${color}" stroke-width="9" stroke-linecap="round" opacity="${frac <= 0.001 ? 0 : 1}"/>
+  </svg>`;
+}
+
+/* ------------------------------------------------------------ rendering */
+let settled = null;
+
+/* Published precision, inferred from the number itself: 69.8 prints as 69.8,
+   13.94 as 13.94, 92 as 92. No number is given decimals its study never had. */
+const autoDp = v => { const s = String(v); const i = s.indexOf('.'); return i < 0 ? 0 : s.length - i - 1; };
+
+function renderStatic() {
+  // Everything that does not animate: labels, the result surface, the markers.
+  const intentLabel = labelOf('vertical', state.vertical);
+  const mm = measureById[state.intent];
+  const hp = heroPair(state.vertical, state.intent);
+
+  $('poster-q').textContent = `${DATA.meta.askPrefix || ''} ${intentLabel}${DATA.meta.askSuffix || '?'}`;
+
+  // The hero pair belongs to the selected measure: its columns, its unit, its label.
+  text('cited-name', hp.cols.cited.name); text('cited-sub', hp.cols.cited.sub);
+  text('absent-name', hp.cols.absent.name); text('absent-sub', hp.cols.absent.sub);
+  text('hero-cited-u', hp.has ? hp.unit : ''); text('hero-absent-u', hp.has ? hp.unit : '');
+  text('delta-l', deltaOf(hp).label);
+  const heroMark = hp.has ? marker(hp.cell.src) : '';
+  const heroLabel = hp.has ? hp.label : `${mm.label} — not measured at this intent`;
+  $('hero-label-cited').innerHTML = esc(heroLabel) + heroMark;
+  $('hero-label-absent').innerHTML = esc(heroLabel) + heroMark;
+
+  /* ---- lane 1b: every measure for this intent, gaps included ---- */
+  for (const row of $('ledger').querySelectorAll('.mrow')) {
+    const m2 = measureById[row.dataset.measure];
+    const c = cell(state.vertical, m2.id);
+    const has = c.v != null;
+    row.dataset.state = has ? 'value' : 'none';
+    row.dataset.tone = toneOf(m2, c.v);
+    const scope = has ? (c.scope || m2.scope || '') : 'no study found';
+    const sc = row.querySelector('[data-scope]');
+    sc.textContent = scope;
+    sc.dataset.kind = SCOPE_KIND[scope] || 'all';
+    const alt = (c.alt || [])
+      .map(a => `${esc(a.label)}: <b>${esc(fmtNum(a.v, autoDp(a.v)))}${esc(a.unit || '')}</b>${marker(a.src)}`)
+      .join(' · ');
+    row.querySelector('[data-label]').innerHTML =
+      esc(m2.label) + (has ? marker(c.src) : '')
+      + `<span class="m-note">${esc(c.note || m2.note || '')}</span>`
+      + (alt ? `<span class="m-alt">Other panels read it differently — ${alt}</span>` : '');
+  }
+
+  /* ---- lane 1c: the stylised result surface. Schematic, never a capture ---- */
+  const sp = DATA.serp[state.vertical] || { blocks: [] };
+  $('serp-q').textContent = sp.query || '';
+  const flag = $('serp-status');
+  flag.textContent = sp.statusLabel || '';
+  flag.dataset.status = sp.status || 'study';
+  $('serp-note').textContent = sp.note || '';
+  $('serp-method').textContent = sp.statusNote || '';
+  const focusKind = mm.focus || '';
+  $('comp').innerHTML = (sp.blocks || []).map(b => {
+    const has = b.rate != null;
+    const scope = has ? (b.scope || '') : 'no study found';
+    const kind = SCOPE_KIND[scope] || 'all';
+    const w = has ? clamp(b.rate / 100, 0, 1) * 100 : 0;
+    const rate = has ? `${fmtNum(b.rate, b.dp == null ? autoDp(b.rate) : b.dp)}%` : 'not measured';
+    const focused = !!focusKind && b.kind === focusKind;
+    return `<div class="cb" data-kind="${esc(b.kind)}" data-state="${has ? 'value' : 'none'}" data-focus="${focused}">
+      <div class="cb-name">${esc(b.label)}${marker(b.src)}${focused ? '<span class="cb-focus">the measure above</span>' : ''}<span class="cb-sub" data-kind="${kind}">${esc(scope)}</span></div>
+      <div class="cb-track"><i data-bar data-w="${w.toFixed(2)}"></i></div>
+      <div class="cb-rate">${esc(rate)}</div>
+      <div class="cb-detail">${esc(b.detail || '')}</div>
+    </div>`;
+  }).join('');
+
+  /* ---- lane 2: one measure, all five intents ---- */
+  let measured = 0;
+  for (const row of $('lane-rows').querySelectorAll('.lrow')) {
+    const id = row.dataset.intent;
+    const c = cell(id, mm.id);
+    const has = c.v != null;
+    if (has) measured++;
+    row.dataset.state = has ? 'value' : 'none';
+    row.dataset.tone = toneOf(mm, c.v);
+    row.dataset.current = String(id === state.vertical);
+    row.querySelector('[data-name]').innerHTML = esc(labelOf('vertical', id))
+      + (has ? marker(c.src) : '')
+      + (id === state.vertical ? '<span class="l-here">selected</span>' : '');
+  }
+  $('lane-sub').textContent = mm.label;
+  $('lane-note').textContent = `${mm.note || ''} Measured for ${measured} of the five intents — `
+    + (measured === 5
+      ? 'the only measure in this artifact with full coverage.'
+      : 'the empty rows are gaps in the published research, not zeroes.');
+
+  document.title = `${String(DATA.meta.title || '').replace(/\{\/?lit\}/g, '')} — ${intentLabel}`;
+}
+
+function renderFrame(t) {
+  drawBackdrop(t);
+
+  const mm = measureById[state.intent];
+  const hp = heroPair(state.vertical, state.intent);
+  const steps = MEASURES.length + 2;      // hero · each measure · the surface + lane
+
+  // Progress rail — an honest cue tracking the real clock, not a fake loader.
+  $('rail-fill').style.width = `${clamp(t / T.payoffEnd, 0, 1) * 100}%`;
+
+  // Anticipation: a short lift before any number moves at all.
+  const antic = clamp(t / T.anticipate, 0, 1);
+  const lift = (1 - easeInOut(antic)) * 10;
+  for (const col of document.querySelectorAll('.col')) col.style.transform = `translateY(${lift.toFixed(2)}px)`;
+
+  const rollOf = i => {
+    const span = T.rollEnd - T.rollStart;
+    const stagger = Math.min(0.16, span / (steps + 3));
+    const s0 = T.rollStart + i * stagger;
+    return easeOutExpo(clamp((t - s0) / Math.max(0.001, T.rollEnd - s0), 0, 1));
+  };
+
+  // Hero pair — the selected measure. Gauges are scaled to the pair's own max,
+  // linearly, so the arc never exaggerates the gap (SPEC §10.6).
+  const p0 = rollOf(0);
+  if (!hp.has) {
+    $('hero-cited').textContent = '—'; $('hero-absent').textContent = '—';
+    gauge($('gauge-cited'), 0, PAL.accents[1]);
+    gauge($('gauge-absent'), 0, PAL.accents[2]);
+  } else {
+    const gmax = Math.max(hp.cited, hp.absent) || 1;
+    $('hero-cited').textContent = fmtNum(hp.cited * p0, hp.dp);
+    $('hero-absent').textContent = fmtNum(hp.absent * p0, hp.dp);
+    gauge($('gauge-cited'), (hp.cited * p0) / gmax, PAL.accents[1]);
+    gauge($('gauge-absent'), (hp.absent * p0) / gmax, PAL.accents[2]);
+  }
+
+  MEASURES.forEach((m2, i) => {
+    const p = rollOf(i + 1);
+    const c = cell(state.vertical, m2.id);
+    const row = $('ledger').querySelector(`.mrow[data-measure="${m2.id}"]`);
+    if (!row) return;
+    const vEl = row.querySelector('[data-v]'), bEl = row.querySelector('[data-bar]');
+    if (c.v == null) { vEl.textContent = 'not measured'; bEl.style.width = '0%'; return; }
+    vEl.textContent = fmtVal(m2, c, c.v * p);
+    bEl.style.width = `${clamp(Math.abs(c.v * p) / (m2.max || 100), 0, 1) * 100}%`;
+  });
+
+  // The result surface and the cross-intent lane land together, last.
+  const lp = rollOf(MEASURES.length + 1);
+  for (const i of $('comp').querySelectorAll('[data-bar]')) {
+    i.style.width = `${(Number(i.dataset.w || 0) * lp).toFixed(2)}%`;
+  }
+  const scale = INTENT_IDS.map(id => cell(id, mm.id).v).filter(v => v != null).map(Math.abs);
+  const lmax = scale.length ? Math.max(...scale) : (mm.max || 100);
+  for (const row of $('lane-rows').querySelectorAll('.lrow')) {
+    const c = cell(row.dataset.intent, mm.id);
+    const vEl = row.querySelector('[data-v]'), bEl = row.querySelector('[data-bar]');
+    if (c.v == null) { vEl.textContent = 'not measured'; bEl.style.width = '0%'; continue; }
+    vEl.textContent = fmtVal(mm, c, c.v * lp);
+    bEl.style.width = `${clamp(Math.abs(c.v * lp) / (lmax || 1), 0, 1) * 100}%`;
+  }
+
+  // Payoff: the headline ratio overshoots in once the counters have landed.
+  const pay = clamp((t - T.payoff) / (T.payoffEnd - T.payoff), 0, 1);
+  const dx = $('delta-x');
+  if (pay <= 0) { dx.textContent = '—'; dx.style.transform = 'scale(1)'; dx.style.opacity = '.35'; }
+  else {
+    dx.textContent = deltaOf(hp).txt;
+    const k = reduced ? 1 : easeOutBack(pay);
+    dx.style.transform = `scale(${(0.72 + 0.28 * k).toFixed(3)})`;
+    dx.style.opacity = String(clamp(pay * 2, 0, 1));
+  }
+}
+
+/* Ratio is printed as computed — always larger over smaller — and the label
+   under it names which column is the larger one, so colour is never the only
+   channel and the badge never silently flips meaning between measures. */
+function deltaOf(hp) {
+  if (!hp.has || !hp.cited || !hp.absent) return { txt: 'no data', dir: '', label: 'not measured at this intent' };
+  const citedWins = hp.cited >= hp.absent;
+  const x = Math.max(hp.cited, hp.absent) / Math.min(hp.cited, hp.absent);
+  return {
+    txt: `${x.toFixed(x >= 10 ? 0 : 1)}×`,
+    dir: citedWins ? 'good' : 'bad',
+    label: citedWins ? hp.deltaCited : hp.deltaAbsent,
+  };
+}
+
+function announce() {
+  const mm = measureById[state.intent];
+  const hp = heroPair(state.vertical, state.intent);
+  const d = deltaOf(hp);
+  const s = sourceById[hp.cell.src];
+  settled = {
+    vertical: state.vertical, intent: state.intent, measure: mm.id,
+    cited: hp.has ? hp.cited : null, absent: hp.has ? hp.absent : null, ratio: d.txt,
+  };
+  const head = `${labelOf('vertical', state.vertical)} intent. ${mm.label}. `;
+  $('live').textContent = hp.has
+    ? head
+      + `${hp.cols.cited.name}: ${fmtNum(hp.cited, hp.dp)}${hp.unit}. `
+      + `${hp.cols.absent.name}: ${fmtNum(hp.absent, hp.dp)}${hp.unit}. `
+      + `${d.txt} ${d.label}. `
+      + (s ? `Source: ${s.label}, as of ${s.asOf}. ` : '')
+      + `Second lane: all five intents compared on the same measure.`
+    : head
+      + `No study found measures this at this intent, so the comparison is left empty rather than estimated. `
+      + `${hp.cell.note || ''} Second lane: all five intents compared on the same measure.`;
+}
+/* --------------------------------------------------------------- driving */
+function stop() { if (clock.raf) cancelAnimationFrame(clock.raf); clock.raf = 0; clock.playing = false; }
+
+function play() {
+  stop();
+  if (MODE.static) { clock.t = T.total; renderFrame(clock.t); announce(); return; }
+  if (reduced) { clock.t = T.payoffEnd; renderFrame(clock.t); announce(); return; }
+  clock.playing = true;
+  clock.origin = performance.now();
+  let announced = false;
+  const tick = now => {
+    clock.t = (now - clock.origin) / 1000;
+    renderFrame(clock.t);
+    if (!announced && clock.t >= T.payoffEnd) { announced = true; announce(); }
+    if (clock.t < T.total) clock.raf = requestAnimationFrame(tick);
+    else { clock.playing = false; clock.raf = 0; idle(); }
+  };
+  clock.raf = requestAnimationFrame(tick);
+}
+
+/* After the reveal lands, only the backdrop keeps drifting. */
+function idle() {
+  if (reduced || MODE.static) return;
+  const t0 = performance.now(), base = clock.t;
+  const tick = now => {
+    clock.t = base + (now - t0) / 1000;
+    drawBackdrop(clock.t);
+    clock.raf = requestAnimationFrame(tick);
+  };
+  clock.raf = requestAnimationFrame(tick);
+}
+
+function onStateChange() {
+  renderStatic();
+  const url = new URL(location.href);
+  url.searchParams.set('vertical', state.vertical);
+  url.searchParams.set('intent', state.intent);
+  if (location.protocol !== 'file:') history.replaceState(null, '', url);
+  document.querySelectorAll('.prompt').forEach(b => {
+    const set = DATA.prompts[Number(b.dataset.i)].set;
+    b.setAttribute('aria-pressed', String(Object.entries(set).every(([k, v]) => state[k] === v)));
+  });
+  // The result surface changes height with the intent, so the still fit and the
+  // backdrop budget are recomputed before the reveal re-runs.
+  fitStill(); sizeCanvas();
+  play();
+}
+/* ------------------------------------------------------------ resizing */
+let rt = 0;
+const onResize = () => {
+  clearTimeout(rt);
+  rt = setTimeout(() => { fitStill(); sizeCanvas(); drawBackdrop(clock.t); }, 60);
+};
+window.addEventListener('resize', onResize);
+mq.addEventListener?.('change', e => {
+  if (q.get('motion') === 'reduce') return;
+  reduced = e.matches; setMotionFlag();
+  stop(); renderFrame(reduced || MODE.static ? T.total : clock.t); if (reduced) announce();
+});
+
+/* ========================================================== export API */
+const nextPaint = () => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+
+const VIZ = {
+  duration: T.total,
+  timeline: { ...T },
+  fold: K,
+  get state() { return { ...state }; },
+  palettes: PALETTES.map(p => p.id),
+  intents: [...INTENT_IDS],
+  measures: MEASURES.map(m => m.id),
+  async seek(seconds) {
+    stop();
+    clock.t = Number(seconds) || 0;
+    renderFrame(clock.t);
+    if (clock.t >= T.payoffEnd) announce();
+    await nextPaint();
+    return clock.t;
+  },
+  async frame(n, total) {
+    const t = (Number(n) / Math.max(1, Number(total))) * T.total;
+    return VIZ.seek(t);
+  },
+  async setState(next = {}) {
+    if (next.palette) PAL = applyPalette(next.palette);
+    if (next.seed != null) state.seed = Number(next.seed);
+    if (next.vertical) { const id = resolveIntentId(next.vertical); if (id) state.vertical = id; }
+    if (next.intent && measureById[next.intent]) state.intent = next.intent;
+    const sv = $('sel-vertical'), si = $('sel-intent');
+    if (sv) sv.value = state.vertical; if (si) si.value = state.intent;
+    renderStatic();
+    fitStill(); sizeCanvas();
+    stop(); renderFrame(clock.t = T.total); announce();
+    await nextPaint();
+    return VIZ.snapshot();
+  },
+  snapshot() { return { state: { ...state }, mode: root.dataset.mode, motion: root.dataset.motion, settled, t: clock.t }; },
+  stop,
+  play,
+};
+window.VIZ = VIZ;
+/* ================================================================ boot */
+buildChrome();
+if (MODE.poster || MODE.gif) $('sources').open = true;   // stills must carry their sources visibly
+renderStatic();
+fitStill();
+sizeCanvas();
+
+VIZ.ready = (async () => {
+  if (q.has('frame')) await VIZ.frame(Number(q.get('frame')), Number(q.get('frames') || 1));
+  else if (q.has('t')) await VIZ.seek(Number(q.get('t')));
+  else if (MODE.static) { clock.t = T.total; renderFrame(clock.t); announce(); await nextPaint(); }
+  else { play(); await nextPaint(); }
+  if (MODE.static) announce();
+  // Fit once more after the first real render: counters and source markers only
+  // reach their final width here, and a still must never clip a row.
+  if (fitStill() !== 1) { sizeCanvas(); renderFrame(clock.t); await nextPaint(); }
+  root.dataset.ready = '1';
+  return VIZ.snapshot();
+})();
+})();
+</script>
+</body>
+</html>

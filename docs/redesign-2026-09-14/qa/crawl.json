@@ -1,10 +1,10 @@
 {
-  "generated": "2026-09-14T18:56:21.142Z",
+  "generated": "2026-09-21T20:58:10.315Z",
   "base": "http://127.0.0.1:5189",
   "dist": "/Users/mitchellmiler/Documents/mitchjmiller-html-migration/dist",
-  "routes": 62,
-  "checks": 831,
-  "passed": 831,
+  "routes": 63,
+  "checks": 844,
+  "passed": 844,
   "failed": 0,
   "failures": [],
   "results": [
@@ -18,31 +18,31 @@
       "scope": "/",
       "check": "exactly one h1",
       "pass": true,
-      "detail": "1 h1 · Search, growth and AI‑search systems for enterprises and growing businesses."
+      "detail": "1 h1 · Make the next move matter."
     },
     {
       "scope": "/",
       "check": "main text ≥ 300 chars (general)",
       "pass": true,
-      "detail": "9447 chars"
+      "detail": "5789 chars"
     },
     {
       "scope": "/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/"
+      "detail": "https://mj2.pro/"
     },
     {
       "scope": "/",
       "check": "meta description present",
       "pass": true,
-      "detail": "Search, growth and AI-search systems for enterprise and small business, built by principal"
+      "detail": "Research, digital strategy, experience design and engineering. Work with Mitchell Miller t"
     },
     {
       "scope": "/",
       "check": "title present",
       "pass": true,
-      "detail": "Mitchell Miller — Search, Growth & AI-Search Systems"
+      "detail": "Mitchell Miller — Digital Growth, Software & Consulting"
     },
     {
       "scope": "/",
@@ -60,7 +60,7 @@
       "scope": "/",
       "check": "images have alt attributes",
       "pass": true,
-      "detail": "7 images, 0 without alt"
+      "detail": "18 images, 0 without alt"
     },
     {
       "scope": "/",
@@ -102,7 +102,7 @@
       "scope": "/about/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/about/"
+      "detail": "https://mj2.pro/about/"
     },
     {
       "scope": "/about/",
@@ -174,7 +174,7 @@
       "scope": "/contact/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/contact/"
+      "detail": "https://mj2.pro/contact/"
     },
     {
       "scope": "/contact/",
@@ -246,7 +246,7 @@
       "scope": "/collab-ideas/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/collab-ideas/"
+      "detail": "https://mj2.pro/collab-ideas/"
     },
     {
       "scope": "/collab-ideas/",
@@ -318,7 +318,7 @@
       "scope": "/resume/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/resume/"
+      "detail": "https://mj2.pro/resume/"
     },
     {
       "scope": "/resume/",
@@ -390,7 +390,7 @@
       "scope": "/systems/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/systems/"
+      "detail": "https://mj2.pro/systems/"
     },
     {
       "scope": "/systems/",
@@ -462,7 +462,7 @@
       "scope": "/work/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/work/"
+      "detail": "https://mj2.pro/work/"
     },
     {
       "scope": "/work/",
@@ -534,7 +534,7 @@
       "scope": "/selected-builds/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/selected-builds/"
+      "detail": "https://mj2.pro/selected-builds/"
     },
     {
       "scope": "/selected-builds/",
@@ -606,7 +606,7 @@
       "scope": "/blog/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/blog/"
+      "detail": "https://mj2.pro/blog/"
     },
     {
       "scope": "/blog/",
@@ -678,7 +678,7 @@
       "scope": "/case-studies/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/case-studies/"
+      "detail": "https://mj2.pro/case-studies/"
     },
     {
       "scope": "/case-studies/",
@@ -750,7 +750,7 @@
       "scope": "/aeo-geo/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/aeo-geo/"
+      "detail": "https://mj2.pro/aeo-geo/"
     },
     {
       "scope": "/aeo-geo/",
@@ -822,7 +822,7 @@
       "scope": "/case-studies/apple-seasonal-search/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/case-studies/apple-seasonal-search/"
+      "detail": "https://mj2.pro/case-studies/apple-seasonal-search/"
     },
     {
       "scope": "/case-studies/apple-seasonal-search/",
@@ -894,7 +894,7 @@
       "scope": "/case-studies/apple-store-amr/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/case-studies/apple-store-amr/"
+      "detail": "https://mj2.pro/case-studies/apple-store-amr/"
     },
     {
       "scope": "/case-studies/apple-store-amr/",
@@ -966,7 +966,7 @@
       "scope": "/case-studies/apple-education-store/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/case-studies/apple-education-store/"
+      "detail": "https://mj2.pro/case-studies/apple-education-store/"
     },
     {
       "scope": "/case-studies/apple-education-store/",
@@ -1038,7 +1038,7 @@
       "scope": "/case-studies/stanford-myhealth-seo/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/case-studies/stanford-myhealth-seo/"
+      "detail": "https://mj2.pro/case-studies/stanford-myhealth-seo/"
     },
     {
       "scope": "/case-studies/stanford-myhealth-seo/",
@@ -1110,7 +1110,7 @@
       "scope": "/case-studies/commonspirit-locations-conversion-engine/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/case-studies/commonspirit-locations-conversion-engine/"
+      "detail": "https://mj2.pro/case-studies/commonspirit-locations-conversion-engine/"
     },
     {
       "scope": "/case-studies/commonspirit-locations-conversion-engine/",
@@ -1182,7 +1182,7 @@
       "scope": "/case-studies/commonspirit-network-consolidation/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/case-studies/commonspirit-network-consolidation/"
+      "detail": "https://mj2.pro/case-studies/commonspirit-network-consolidation/"
     },
     {
       "scope": "/case-studies/commonspirit-network-consolidation/",
@@ -1254,7 +1254,7 @@
       "scope": "/case-studies/commonspirit-medical-content-library/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/case-studies/commonspirit-medical-content-library/"
+      "detail": "https://mj2.pro/case-studies/commonspirit-medical-content-library/"
     },
     {
       "scope": "/case-studies/commonspirit-medical-content-library/",
@@ -1326,7 +1326,7 @@
       "scope": "/case-studies/aem-content-fragmentation-architecture/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/case-studies/aem-content-fragmentation-architecture/"
+      "detail": "https://mj2.pro/case-studies/aem-content-fragmentation-architecture/"
     },
     {
       "scope": "/case-studies/aem-content-fragmentation-architecture/",
@@ -1398,7 +1398,7 @@
       "scope": "/case-studies/yext-entity-data-foundation/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/case-studies/yext-entity-data-foundation/"
+      "detail": "https://mj2.pro/case-studies/yext-entity-data-foundation/"
     },
     {
       "scope": "/case-studies/yext-entity-data-foundation/",
@@ -1470,7 +1470,7 @@
       "scope": "/case-studies/claritypulse-ai-reporting/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/case-studies/claritypulse-ai-reporting/"
+      "detail": "https://mj2.pro/case-studies/claritypulse-ai-reporting/"
     },
     {
       "scope": "/case-studies/claritypulse-ai-reporting/",
@@ -1542,7 +1542,7 @@
       "scope": "/case-studies/searchforge-content-intelligence/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/case-studies/searchforge-content-intelligence/"
+      "detail": "https://mj2.pro/case-studies/searchforge-content-intelligence/"
     },
     {
       "scope": "/case-studies/searchforge-content-intelligence/",
@@ -1614,7 +1614,7 @@
       "scope": "/case-studies/actionthread-transcript-execution/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/case-studies/actionthread-transcript-execution/"
+      "detail": "https://mj2.pro/case-studies/actionthread-transcript-execution/"
     },
     {
       "scope": "/case-studies/actionthread-transcript-execution/",
@@ -1686,7 +1686,7 @@
       "scope": "/case-studies/aeo-visibility-infrastructure/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/case-studies/aeo-visibility-infrastructure/"
+      "detail": "https://mj2.pro/case-studies/aeo-visibility-infrastructure/"
     },
     {
       "scope": "/case-studies/aeo-visibility-infrastructure/",
@@ -1758,7 +1758,7 @@
       "scope": "/case-studies/domainsignal/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/case-studies/domainsignal/"
+      "detail": "https://mj2.pro/case-studies/domainsignal/"
     },
     {
       "scope": "/case-studies/domainsignal/",
@@ -1830,7 +1830,7 @@
       "scope": "/case-studies/date-night/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/case-studies/date-night/"
+      "detail": "https://mj2.pro/case-studies/date-night/"
     },
     {
       "scope": "/case-studies/date-night/",
@@ -1902,7 +1902,7 @@
       "scope": "/case-studies/vet-advocates-growth-system/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/case-studies/vet-advocates-growth-system/"
+      "detail": "https://mj2.pro/case-studies/vet-advocates-growth-system/"
     },
     {
       "scope": "/case-studies/vet-advocates-growth-system/",
@@ -1974,7 +1974,7 @@
       "scope": "/case-studies/sfc-surf-school/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/case-studies/sfc-surf-school/"
+      "detail": "https://mj2.pro/case-studies/sfc-surf-school/"
     },
     {
       "scope": "/case-studies/sfc-surf-school/",
@@ -2046,7 +2046,7 @@
       "scope": "/blog/gbp-2026-ai-grounding/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/blog/gbp-2026-ai-grounding/"
+      "detail": "https://mj2.pro/blog/gbp-2026-ai-grounding/"
     },
     {
       "scope": "/blog/gbp-2026-ai-grounding/",
@@ -2118,7 +2118,7 @@
       "scope": "/blog/multi-agent-billing-traps/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/blog/multi-agent-billing-traps/"
+      "detail": "https://mj2.pro/blog/multi-agent-billing-traps/"
     },
     {
       "scope": "/blog/multi-agent-billing-traps/",
@@ -2190,7 +2190,7 @@
       "scope": "/blog/intrepid-agency-spotlight/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/blog/intrepid-agency-spotlight/"
+      "detail": "https://mj2.pro/blog/intrepid-agency-spotlight/"
     },
     {
       "scope": "/blog/intrepid-agency-spotlight/",
@@ -2262,7 +2262,7 @@
       "scope": "/blog/mitchell-miller-journey/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/blog/mitchell-miller-journey/"
+      "detail": "https://mj2.pro/blog/mitchell-miller-journey/"
     },
     {
       "scope": "/blog/mitchell-miller-journey/",
@@ -2334,7 +2334,7 @@
       "scope": "/blog/traditional-seo-to-ai-search/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/blog/traditional-seo-to-ai-search/"
+      "detail": "https://mj2.pro/blog/traditional-seo-to-ai-search/"
     },
     {
       "scope": "/blog/traditional-seo-to-ai-search/",
@@ -2406,7 +2406,7 @@
       "scope": "/blog/aeo-geo-measurement-framework/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/blog/aeo-geo-measurement-framework/"
+      "detail": "https://mj2.pro/blog/aeo-geo-measurement-framework/"
     },
     {
       "scope": "/blog/aeo-geo-measurement-framework/",
@@ -2478,7 +2478,7 @@
       "scope": "/blog/entity-seo-for-ai-retrieval/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/blog/entity-seo-for-ai-retrieval/"
+      "detail": "https://mj2.pro/blog/entity-seo-for-ai-retrieval/"
     },
     {
       "scope": "/blog/entity-seo-for-ai-retrieval/",
@@ -2550,7 +2550,7 @@
       "scope": "/blog/enterprise-seo-business-cases/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/blog/enterprise-seo-business-cases/"
+      "detail": "https://mj2.pro/blog/enterprise-seo-business-cases/"
     },
     {
       "scope": "/blog/enterprise-seo-business-cases/",
@@ -2622,7 +2622,7 @@
       "scope": "/blog/studying/hermes-concepts-field-guide/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/blog/studying/hermes-concepts-field-guide/"
+      "detail": "https://mj2.pro/blog/studying/hermes-concepts-field-guide/"
     },
     {
       "scope": "/blog/studying/hermes-concepts-field-guide/",
@@ -2694,7 +2694,7 @@
       "scope": "/blog/studying/claude-watermark-seo/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/blog/studying/claude-watermark-seo/"
+      "detail": "https://mj2.pro/blog/studying/claude-watermark-seo/"
     },
     {
       "scope": "/blog/studying/claude-watermark-seo/",
@@ -2766,7 +2766,7 @@
       "scope": "/blog/studying/all-in-ai-money-stack/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/blog/studying/all-in-ai-money-stack/"
+      "detail": "https://mj2.pro/blog/studying/all-in-ai-money-stack/"
     },
     {
       "scope": "/blog/studying/all-in-ai-money-stack/",
@@ -2838,7 +2838,7 @@
       "scope": "/blog/studying/hermes-seo-agent/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/blog/studying/hermes-seo-agent/"
+      "detail": "https://mj2.pro/blog/studying/hermes-seo-agent/"
     },
     {
       "scope": "/blog/studying/hermes-seo-agent/",
@@ -2910,7 +2910,7 @@
       "scope": "/blog/studying/codex-obsolete-9-moves/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/blog/studying/codex-obsolete-9-moves/"
+      "detail": "https://mj2.pro/blog/studying/codex-obsolete-9-moves/"
     },
     {
       "scope": "/blog/studying/codex-obsolete-9-moves/",
@@ -2982,7 +2982,7 @@
       "scope": "/blog/studying/chatgpt-sites/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/blog/studying/chatgpt-sites/"
+      "detail": "https://mj2.pro/blog/studying/chatgpt-sites/"
     },
     {
       "scope": "/blog/studying/chatgpt-sites/",
@@ -3054,7 +3054,7 @@
       "scope": "/blog/studying/book-to-skill/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/blog/studying/book-to-skill/"
+      "detail": "https://mj2.pro/blog/studying/book-to-skill/"
     },
     {
       "scope": "/blog/studying/book-to-skill/",
@@ -3126,7 +3126,7 @@
       "scope": "/blog/studying/claude-code-6-new-rules/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/blog/studying/claude-code-6-new-rules/"
+      "detail": "https://mj2.pro/blog/studying/claude-code-6-new-rules/"
     },
     {
       "scope": "/blog/studying/claude-code-6-new-rules/",
@@ -3198,7 +3198,7 @@
       "scope": "/blog/studying/claude-code-make-money/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/blog/studying/claude-code-make-money/"
+      "detail": "https://mj2.pro/blog/studying/claude-code-make-money/"
     },
     {
       "scope": "/blog/studying/claude-code-make-money/",
@@ -3270,7 +3270,7 @@
       "scope": "/blog/studying/build-ai-agents-full-course/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/blog/studying/build-ai-agents-full-course/"
+      "detail": "https://mj2.pro/blog/studying/build-ai-agents-full-course/"
     },
     {
       "scope": "/blog/studying/build-ai-agents-full-course/",
@@ -3342,7 +3342,7 @@
       "scope": "/blog/studying/codex-voice-jarvis/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/blog/studying/codex-voice-jarvis/"
+      "detail": "https://mj2.pro/blog/studying/codex-voice-jarvis/"
     },
     {
       "scope": "/blog/studying/codex-voice-jarvis/",
@@ -3414,7 +3414,7 @@
       "scope": "/blog/studying/pi-coding-agent/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/blog/studying/pi-coding-agent/"
+      "detail": "https://mj2.pro/blog/studying/pi-coding-agent/"
     },
     {
       "scope": "/blog/studying/pi-coding-agent/",
@@ -3486,7 +3486,7 @@
       "scope": "/blog/studying/ships-100x-faster/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/blog/studying/ships-100x-faster/"
+      "detail": "https://mj2.pro/blog/studying/ships-100x-faster/"
     },
     {
       "scope": "/blog/studying/ships-100x-faster/",
@@ -3558,7 +3558,7 @@
       "scope": "/blog/studying/forget-loop-engineering/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/blog/studying/forget-loop-engineering/"
+      "detail": "https://mj2.pro/blog/studying/forget-loop-engineering/"
     },
     {
       "scope": "/blog/studying/forget-loop-engineering/",
@@ -3630,7 +3630,7 @@
       "scope": "/blog/studying/mark-cuban-ai-bubble/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/blog/studying/mark-cuban-ai-bubble/"
+      "detail": "https://mj2.pro/blog/studying/mark-cuban-ai-bubble/"
     },
     {
       "scope": "/blog/studying/mark-cuban-ai-bubble/",
@@ -3702,7 +3702,7 @@
       "scope": "/blog/studying/hormozi-build-this-instead/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/blog/studying/hormozi-build-this-instead/"
+      "detail": "https://mj2.pro/blog/studying/hormozi-build-this-instead/"
     },
     {
       "scope": "/blog/studying/hormozi-build-this-instead/",
@@ -3774,7 +3774,7 @@
       "scope": "/blog/studying/old-seo-collapsing/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/blog/studying/old-seo-collapsing/"
+      "detail": "https://mj2.pro/blog/studying/old-seo-collapsing/"
     },
     {
       "scope": "/blog/studying/old-seo-collapsing/",
@@ -3846,7 +3846,7 @@
       "scope": "/blog/studying/seo-2026-ai-era/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/blog/studying/seo-2026-ai-era/"
+      "detail": "https://mj2.pro/blog/studying/seo-2026-ai-era/"
     },
     {
       "scope": "/blog/studying/seo-2026-ai-era/",
@@ -3918,7 +3918,7 @@
       "scope": "/blog/studying/aeo-geo-aio/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/blog/studying/aeo-geo-aio/"
+      "detail": "https://mj2.pro/blog/studying/aeo-geo-aio/"
     },
     {
       "scope": "/blog/studying/aeo-geo-aio/",
@@ -3990,7 +3990,7 @@
       "scope": "/blog/studying/smith-chart-scariest-ee/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/blog/studying/smith-chart-scariest-ee/"
+      "detail": "https://mj2.pro/blog/studying/smith-chart-scariest-ee/"
     },
     {
       "scope": "/blog/studying/smith-chart-scariest-ee/",
@@ -4062,7 +4062,7 @@
       "scope": "/blog/studying/aeo-80-percent/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/blog/studying/aeo-80-percent/"
+      "detail": "https://mj2.pro/blog/studying/aeo-80-percent/"
     },
     {
       "scope": "/blog/studying/aeo-80-percent/",
@@ -4134,7 +4134,7 @@
       "scope": "/lab/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/lab/"
+      "detail": "https://mj2.pro/lab/"
     },
     {
       "scope": "/lab/",
@@ -4206,7 +4206,7 @@
       "scope": "/lab/population-workbench/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/lab/population-workbench/"
+      "detail": "https://mj2.pro/lab/population-workbench/"
     },
     {
       "scope": "/lab/population-workbench/",
@@ -4278,7 +4278,7 @@
       "scope": "/lab/population-workbench/methodology/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/lab/population-workbench/methodology/"
+      "detail": "https://mj2.pro/lab/population-workbench/methodology/"
     },
     {
       "scope": "/lab/population-workbench/methodology/",
@@ -4350,7 +4350,7 @@
       "scope": "/clients/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/clients/"
+      "detail": "https://mj2.pro/clients/"
     },
     {
       "scope": "/clients/",
@@ -4410,31 +4410,31 @@
       "scope": "/services/",
       "check": "exactly one h1",
       "pass": true,
-      "detail": "1 h1 · Search, growth and AI‑search systems — one connected practice."
+      "detail": "1 h1 · See the opportunity. Bring it to life."
     },
     {
       "scope": "/services/",
       "check": "main text ≥ 1500 chars (added)",
       "pass": true,
-      "detail": "9649 chars"
+      "detail": "4006 chars"
     },
     {
       "scope": "/services/",
       "check": "one correct canonical",
       "pass": true,
-      "detail": "https://mitchjmiller.com/services/"
+      "detail": "https://mj2.pro/services/"
     },
     {
       "scope": "/services/",
       "check": "meta description present",
       "pass": true,
-      "detail": "How engagements run, stage by stage — Understand, Design, Build, Grow — with evidence from"
+      "detail": "Research, digital strategy, UX and content design, front-end engineering, AI workflows and"
     },
     {
       "scope": "/services/",
       "check": "title present",
       "pass": true,
-      "detail": "Services — Search, Growth & AI-Search Systems"
+      "detail": "Digital Strategy, Design & Engineering — Mitchell Miller"
     },
     {
       "scope": "/services/",
@@ -4452,7 +4452,7 @@
       "scope": "/services/",
       "check": "images have alt attributes",
       "pass": true,
-      "detail": "1 images, 0 without alt"
+      "detail": "11 images, 0 without alt"
     },
     {
       "scope": "/services/",
@@ -4468,6 +4468,78 @@
     },
     {
       "scope": "/services/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/products/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/Users/mitchellmiler/Documents/mitchjmiller-html-migration/dist/products/index.html"
+    },
+    {
+      "scope": "/products/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Better decisions. Less busywork."
+    },
+    {
+      "scope": "/products/",
+      "check": "main text ≥ 800 chars (added)",
+      "pass": true,
+      "detail": "1871 chars"
+    },
+    {
+      "scope": "/products/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/products/"
+    },
+    {
+      "scope": "/products/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Explore software for analytics, domain research, content and everyday planning. Try the fr"
+    },
+    {
+      "scope": "/products/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Software & Tools — Mitchell Miller"
+    },
+    {
+      "scope": "/products/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/products/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/products/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "6 images, 0 without alt"
+    },
+    {
+      "scope": "/products/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/products/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/products/",
       "check": "agency shell (header, primary nav, green contact button, footer)",
       "pass": true,
       "detail": ""
@@ -4863,8 +4935,14 @@
       "detail": "status 200"
     },
     {
+      "scope": "/products/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
       "scope": "site",
-      "check": "internal links and assets resolve (223 unique paths)",
+      "check": "internal links and assets resolve (229 unique paths)",
       "pass": true,
       "detail": ""
     },
@@ -4936,19 +5014,19 @@
     },
     {
       "scope": "sitemap.xml",
-      "check": "lists exactly the 58 indexable URLs",
+      "check": "lists exactly the 59 indexable URLs",
       "pass": true,
-      "detail": "58 URLs"
+      "detail": "59 URLs"
     },
     {
       "scope": "robots.txt",
       "check": "allows all and declares the sitemap",
       "pass": true,
-      "detail": "User-agent: * / Allow: / / Sitemap: https://mitchjmiller.com/sitemap.xml / "
+      "detail": "User-agent: * / Allow: / / Sitemap: https://mj2.pro/sitemap.xml / "
     },
     {
       "scope": "CNAME",
-      "check": "contains mitchjmiller.com",
+      "check": "contains mj2.pro",
       "pass": true,
       "detail": ""
     },

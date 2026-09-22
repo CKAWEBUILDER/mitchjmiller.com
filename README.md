@@ -4,6 +4,10 @@ Read [PROJECT.md](PROJECT.md) for current source, review state, permissions and 
 
 Branch `claude/release-2026-09-12` is the verified public release candidate: the production-parity complete-HTML site (53 archived routes), the public lab and population workbench, the `/clients/` entrance, the contact form wired to the Cloudflare Worker, and the corrected September 10 resume PDFs. Publication to `gh-pages` is a separate, lead-owned step described in [RELEASE-READY.md](RELEASE-READY.md); QA evidence is in [docs/release-2026-09-12/qa-report.md](docs/release-2026-09-12/qa-report.md). The separate design candidate at `/design/` stays on the private review only. Earlier implementation evidence: [docs/implementation-2026-09-11/README.md](docs/implementation-2026-09-11/README.md).
 
+## Current design review
+
+The centered agency refinement is on `claude/agency-redesign` in the single canonical checkout. [Refinement record](docs/redesign-2026-09-14/refinement.md) documents the changes and validation. Private-stage routes `/`, `/services/`, `/review/`, and `/review/brand-options/` show the design and ten-logo/five-palette comparison. The older release descriptions below remain historical.
+
 ## Commands
 
 ```sh

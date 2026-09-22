@@ -1,0 +1,338 @@
+{
+  "meta": {
+    "compiled_date": "2026-09-14",
+    "topic": "Statistician vs Data Scientist (vs Growth Engineer / AI Engineer) — labor & practice stats for interactive industry-vertical comparison",
+    "reference_periods": {
+      "bls_ooh_edition": "OOH 2025 edition, page last-modified 2026-08-27, using May-2025 OEWS wage data and 2025-2035 employment projections",
+      "bls_oews_news_release": "USDL-26-0725, released 2026-05-15, 'May 2025' reference period (Table 1, national A01 results)"
+    },
+    "caveats": [
+      "BLS OOH employment figures and OEWS news-release employment figures differ slightly for the same occupation-year because they come from two related but separately-modeled BLS data products (OOH uses the Employment Projections program; the news release table is the raw OEWS survey estimate). Both are cited below, labeled by source.",
+      "Job-posting counts are live snapshots taken 2026-09-14 and will drift within hours; Indeed in particular shows rounded/bucketed counts in its page title, not exact live totals.",
+      "'Growth engineer' and 'AI engineer' have no official BLS SOC occupation code — no OOH/OEWS entry exists for either. All labor stats for them are proxied via adjacent SOC codes or sourced from job boards / industry surveys only."
+    ]
+  },
+  "roles": {
+    "statistician": {
+      "soc_code": "15-2041",
+      "bls_ooh_url": "https://www.bls.gov/ooh/math/mathematicians-and-statisticians.htm",
+      "median_pay_2025_usd": 105650,
+      "employment_2025_ooh": 31300,
+      "employment_2035_projected_ooh": 34700,
+      "employment_2025_oews_news_release": 29030,
+      "growth_pct_2025_2035": 11,
+      "growth_window": "2025-2035",
+      "combined_math_and_stats_category": {
+        "employment_2025": 33500,
+        "employment_2035_projected": 36900,
+        "growth_pct": 10,
+        "annual_openings": 2000
+      },
+      "typical_education": "Master's degree typical; some entry-level positions accept a bachelor's degree",
+      "work_experience_required": "None",
+      "on_the_job_training": "None",
+      "wage_percentiles_usd": {"p10": 64000, "p25": 82220, "median": 105650, "p75": 141490, "p90": 174050},
+      "oews_mean_hourly_usd": 55.63,
+      "oews_mean_annual_usd": 115700,
+      "oews_median_hourly_usd": 50.79,
+      "industry_employment_share_pct": [
+        {"industry": "Federal government", "share_pct": 16},
+        {"industry": "Research & development (physical, engineering, life sciences)", "share_pct": 15},
+        {"industry": "Healthcare and social assistance", "share_pct": 8},
+        {"industry": "Colleges, universities, professional schools (state)", "share_pct": 6},
+        {"industry": "Computer systems design and related services", "share_pct": 4}
+      ],
+      "pay_by_industry_usd_median_annual": [
+        {"industry": "Computer systems design and related services", "median_annual": 167180},
+        {"industry": "Federal government", "median_annual": 132620},
+        {"industry": "Research & development (physical, engineering, life sciences)", "median_annual": 130590},
+        {"industry": "Healthcare and social assistance", "median_annual": 100900},
+        {"industry": "Colleges, universities, professional schools (state)", "median_annual": 80680}
+      ],
+      "pay_by_industry_vertical_note": "Finance/insurance, retail, education(non-state), and manufacturing verticals were not among the top-5 industries BLS OOH surfaces for this occupation and were not independently retrievable within the time-box (see notes.md).",
+      "onet": {
+        "code": "15-2041.00",
+        "job_zone": "5 - Extensive Preparation",
+        "education_distribution_pct": {"masters": 62, "bachelors": 14, "doctoral": 10},
+        "bright_outlook": true,
+        "top_tools": ["IBM SPSS Statistics", "SAS", "Minitab", "MATLAB", "Python", "R", "C++", "Java", "SQL Server", "Apache Hadoop", "Amazon Redshift", "Tableau", "QlikView"],
+        "top_tasks": [
+          "Analyze and interpret statistical data to identify significant differences in relationships among sources of information",
+          "Evaluate the statistical methods and procedures used to obtain data to ensure validity, applicability, efficiency, and accuracy",
+          "Report results of statistical analyses, including information in the form of graphs, charts, and tables",
+          "Determine whether statistical methods are appropriate, based on user needs or research questions",
+          "Prepare data for processing by organizing information, checking for inaccuracies, and adjusting and weighting the raw data"
+        ]
+      }
+    },
+    "data_scientist": {
+      "soc_code": "15-2051",
+      "bls_ooh_url": "https://www.bls.gov/ooh/math/data-scientists.htm",
+      "median_pay_2025_usd": 120230,
+      "employment_2025_ooh": 275600,
+      "employment_2025_oews_news_release": 262440,
+      "growth_pct_2025_2035": 35,
+      "growth_window": "2025-2035",
+      "annual_openings": 24800,
+      "new_jobs_over_decade": 95400,
+      "typical_education": "Bachelor's degree typical; some employers prefer master's/doctoral",
+      "work_experience_required": "None",
+      "on_the_job_training": "None",
+      "wage_percentiles_usd": {"p10": 67240, "p25": 85660, "median": 120230, "p75": 158880, "p90": 199130},
+      "oews_mean_hourly_usd": 60.96,
+      "oews_mean_annual_usd": 126800,
+      "oews_median_hourly_usd": 57.80,
+      "industry_employment_share_pct": [
+        {"industry": "Publishing, broadcasting, and content providers", "share_pct": 12},
+        {"industry": "Insurance carriers and related activities", "share_pct": 10},
+        {"industry": "Computer systems design and related services", "share_pct": 10},
+        {"industry": "Management of companies and enterprises", "share_pct": 10},
+        {"industry": "Credit intermediation and related activities", "share_pct": 6}
+      ],
+      "pay_by_industry_usd_median_annual": [
+        {"industry": "Publishing, broadcasting, and content providers", "median_annual": 142240},
+        {"industry": "Computer systems design and related services", "median_annual": 132380},
+        {"industry": "Credit intermediation and related activities", "median_annual": 129490},
+        {"industry": "Management of companies and enterprises", "median_annual": 128050},
+        {"industry": "Insurance carriers and related activities", "median_annual": 108650}
+      ],
+      "pay_by_industry_vertical_note": "Healthcare, government, retail, education, and manufacturing verticals were not among the top-5 industries BLS OOH surfaces for this occupation and were not independently retrievable within the time-box (see notes.md).",
+      "onet": {
+        "code": "15-2051.00",
+        "job_zone": "4 - Considerable Preparation",
+        "education_distribution_pct": {"bachelors": 48, "masters": 44},
+        "bright_outlook": true,
+        "top_tools": ["IBM SPSS Statistics", "SAS", "TensorFlow", "MATLAB", "Apache Cassandra", "MongoDB", "PostgreSQL", "Elasticsearch", "AWS (EC2/Redshift/SageMaker)", "Microsoft Azure", "Google Cloud", "Python", "R", "Java", "Scala", "Docker", "Kubernetes", "Git", "Power BI", "Tableau", "Looker", "Apache Spark", "Snowflake", "Airflow"],
+        "top_tasks": [
+          "Analyze, manipulate, or process large sets of data using statistical software",
+          "Create visualizations to convey data analysis results",
+          "Test, validate, and reformulate models for accurate predictions",
+          "Deliver oral/written presentations of modeling and analysis results",
+          "Recommend data-driven solutions to stakeholders"
+        ]
+      }
+    },
+    "growth_engineer": {
+      "soc_code": null,
+      "bls_status": "No official BLS SOC occupation code and no OOH/OEWS entry exists. For visa/immigration SOC-mapping purposes, practitioners map 'growth engineer' ad hoc to Software Developers (15-1252) or Marketing Manager depending on duty split.",
+      "source_for_no_soc_code": "https://techbridgeinc.com/choosing-the-right-soc-code-for-tech-roles-a-guide-for-startups-and-immigration-attorneys/ ; https://en.wikipedia.org/wiki/Growth_hacking",
+      "definition": "A software engineer embedded within a Growth or Marketing team whose mission is to build technical systems that accelerate acquisition, activation, retention and revenue: A/B testing infrastructure, funnel/cohort instrumentation, feature-flag systems, lifecycle triggers, attribution, landing/signup/checkout flows.",
+      "definition_sources": ["https://www.productboard.com/blog/the-role-of-growth-engineering-at-productboard-key-skills-responsibilities-methodologies/", "https://www.tealhq.com/career-paths/growth-engineer", "https://climbtheladder.com/what-is-a-growth-engineer-role-responsibilities-and-skills/"],
+      "labor_stat_gap": true
+    },
+    "ai_engineer": {
+      "soc_code": null,
+      "bls_status": "No dedicated BLS SOC occupation code. Duties are typically absorbed into Computer and Information Research Scientists (15-1221), Data Scientists (15-2051), or Software Developers (15-1252) depending on the role's ML/research vs production-engineering balance.",
+      "labor_stat_gap": true,
+      "market_signal_note": "See job_postings.wellfound and job_postings.indeed — AI engineer posting volume is the highest of the four roles studied on every board checked."
+    }
+  },
+  "neighbors": {
+    "mathematicians": {
+      "soc_code": "15-2021",
+      "median_pay_2025_usd": 126710,
+      "employment_2025_ooh": 2200,
+      "employment_2025_oews_news_release": 2030,
+      "growth_pct_2025_2035": 1,
+      "oews_mean_hourly_usd": 62.15,
+      "oews_mean_annual_usd": 129260,
+      "oews_median_hourly_usd": 60.92
+    },
+    "computer_and_information_research_scientists": {
+      "soc_code": "15-1221",
+      "median_pay_2025_usd": 140300,
+      "employment_2025_ooh": 38600,
+      "employment_2025_oews_news_release": 37200,
+      "growth_pct_2025_2035": 22,
+      "annual_openings": 2900,
+      "new_jobs_over_decade": 8400,
+      "typical_education": "Master's degree typical",
+      "oews_mean_hourly_usd": 74.00,
+      "oews_mean_annual_usd": 153930,
+      "oews_median_hourly_usd": 67.45,
+      "growth_context": "BLS attributes growth to AI development, data-mining services, and cybersecurity demand.",
+      "bls_ooh_url": "https://www.bls.gov/ooh/computer-and-information-technology/computer-and-information-research-scientists.htm"
+    }
+  },
+  "job_postings_snapshot_2026_09_14": {
+    "indeed": {
+      "base_url_pattern": "https://www.indeed.com/jobs?q=%22{query}%22&l=",
+      "caveat": "Indeed's page <title> shows a rounded/bucketed count, not a live exact total; the title template also varies by query (sometimes omits the number entirely).",
+      "results": [
+        {"query": "statistician", "count_display": "1,000", "count_type": "rounded_bucket", "url": "https://www.indeed.com/jobs?q=%22statistician%22&l=", "page_title": "1,000 Statistician Jobs, Employment | Indeed", "timestamp": "2026-09-14"},
+        {"query": "data scientist", "count_display": null, "count_type": "not_shown", "url": "https://www.indeed.com/jobs?q=%22data+scientist%22&l=", "page_title": "Data Scientist Jobs, Employment | Indeed", "timestamp": "2026-09-14", "note": "No number rendered in title or heading; volume likely exceeds Indeed's display threshold."},
+        {"query": "growth engineer", "count_display": "50", "count_type": "rounded_bucket", "url": "https://www.indeed.com/jobs?q=%22growth+engineer%22&l=", "page_title": "50 Growth Engineer Jobs, Employment | Indeed", "timestamp": "2026-09-14"},
+        {"query": "AI engineer", "count_display": "3,000", "count_type": "rounded_bucket", "url": "https://www.indeed.com/jobs?q=%22AI+engineer%22&l=", "page_title": "Now Hiring: 3,000 Ai Engineer Jobs | Indeed", "timestamp": "2026-09-14"}
+      ]
+    },
+    "built_in": {
+      "base_url_pattern": "https://builtin.com/jobs?search={query}",
+      "caveat": "Counted exactly by paging through results (25 listings/page). This run's index skewed heavily toward Binance and APAC/Philippines postings for these specific queries — reflects current crawl composition, not a general read on the US startup market.",
+      "results": [
+        {"query": "statistician", "count_exact": 2, "url": "https://builtin.com/jobs?search=statistician", "timestamp": "2026-09-14"},
+        {"query": "data scientist", "count_exact": 32, "url": "https://builtin.com/jobs?search=data%20scientist", "timestamp": "2026-09-14", "pages": 2},
+        {"query": "growth engineer", "count_exact": 3, "url": "https://builtin.com/jobs?search=growth%20engineer", "timestamp": "2026-09-14"},
+        {"query": "AI engineer", "count_exact": 103, "url": "https://builtin.com/jobs?search=AI%20engineer", "timestamp": "2026-09-14", "pages": 5}
+      ]
+    },
+    "wellfound": {
+      "base_url_pattern": "https://wellfound.com/role/r/{slug}",
+      "caveat": "Wellfound's role pages default to a Remote-only filter and only exist for roles it recognizes as a distinct tag; 'statistician' and 'growth engineer' have no dedicated role page and fall back to the unfiltered ~11,640-listing firehose, so they are not usable counts.",
+      "results": [
+        {"query": "statistician", "count_exact": null, "url": "https://wellfound.com/role/r/statistician", "timestamp": "2026-09-14", "note": "No dedicated role page; redirected to unfiltered 'any roles' listing (11,640 total remote listings)."},
+        {"query": "data scientist", "count_exact": 161, "url": "https://wellfound.com/role/r/data-scientist", "timestamp": "2026-09-14", "scope": "remote-only"},
+        {"query": "growth engineer", "count_exact": null, "url": "https://wellfound.com/role/r/growth-engineer", "timestamp": "2026-09-14", "note": "No dedicated role page; redirected to unfiltered listing."},
+        {"query": "AI engineer", "count_exact": 1985, "url": "https://wellfound.com/role/r/ai-engineer", "timestamp": "2026-09-14", "scope": "remote-only"}
+      ]
+    }
+  },
+  "surveys": {
+    "stack_overflow_2025": {
+      "url": "https://survey.stackoverflow.co/2025/work",
+      "publisher": "Stack Overflow",
+      "date": "2025 (fielded; results published mid-2025, recap blog post 2025-08-01)",
+      "sample_size_total": 49000,
+      "sample_size_employment_data": 48178,
+      "global_median_annual_comp_usd": {
+        "data_scientist": 82910,
+        "data_engineer": 81210,
+        "ai_ml_engineer": 89427,
+        "engineering_manager": 130000,
+        "senior_executive": 139218,
+        "financial_analyst_engineer": 103757
+      },
+      "us_specific_median_annual_comp_usd_secondary_source": {
+        "source": "techrecruiting.io analysis of SO 2025 dataset",
+        "url": "https://techrecruiting.io/en/stack-overflow-developer-survey-2025-usa/",
+        "data_scientist_ml_specialist": 160000,
+        "engineering_manager": 200000,
+        "cloud_infrastructure_engineer": 165000,
+        "data_engineer": 150000,
+        "devops_specialist": 145000,
+        "note": "Roughly 2x the global SO figure for the same title — geography mix effect; see notes.md for discussion."
+      },
+      "language_usage_pct": {
+        "all_respondents": {"n": 31771, "pct_of_total": 64.8, "python": 57.9, "sql": 58.6, "r": 4.9},
+        "professional_developers": {"n": 24759, "pct_of_total": 50.5, "python": 54.8, "sql": 61.3, "r": 3.3}
+      },
+      "notable_quote": "After more than a decade of steady growth, Python's adoption has accelerated significantly. It saw a 7 percentage point increase from 2024 to 2025."
+    },
+    "kaggle_state_of_data_science": {
+      "latest_official_report_url": "https://www.kaggle.com/kaggle-survey-2022",
+      "latest_official_report_year": 2022,
+      "status": "Kaggle has not published an official 'State of Data Science and Machine Learning' report since 2022. A community-uploaded raw dataset labeled '2025 Kaggle Machine Learning and Data Science Survey' exists on Kaggle but is not an official Kaggle-authored report.",
+      "tool_usage_pct_secondary_source": {
+        "source": "Towards Data Science, 'Data Science Trends Based on 4 Years of Kaggle Surveys'",
+        "url": "https://towardsdatascience.com/data-science-trends-based-on-4-years-of-kaggle-surveys-60878d68551f/",
+        "python_pct": "~80%+",
+        "sql_pct": "~41%",
+        "r_pct": "~20%, declining trend"
+      }
+    },
+    "burtch_works_2025_ai_data_science_compensation": {
+      "url": "https://www.burtchworks.com/market-researchers-salary-report-2025/ai-and-data-science-2025compensationreport-compensation",
+      "publisher": "Burtch Works",
+      "date": "2025",
+      "sample_size": {"total": 866, "data_scientists": 724, "ai_professionals": 162, "window": "trailing 12 months"},
+      "data_science_mean_base_salary_usd_by_level": {
+        "IC1_0_3yr": 109545,
+        "IC1_prior_year_2024": 99217,
+        "IC2_4_8yr": 139837,
+        "IC3_9plus_yr": 158861,
+        "MG1_1_3_reports": 160869,
+        "MG2_4_15_reports": 192507,
+        "MG3_15plus_reports": 247000
+      },
+      "ai_vs_ds_premium_pct": "9-13% cash premium for AI professionals over Data Scientists at comparable levels, widest where scarce Gen-AI expertise adds most value",
+      "yoy_note": "Data Science saw statistically significant base-pay gains at IC-1/2 and MG-1/2; AI compensation showed no changes exceeding the 5% significance threshold."
+    },
+    "oreilly_2025_technology_trends": {
+      "url": "https://www.oreilly.com/radar/technology-trends-for-2025/",
+      "publisher": "O'Reilly",
+      "date": "January 2025",
+      "sample_basis": "2.8 million O'Reilly learning-platform users",
+      "yoy_pct_change_topic_interest": {
+        "prompt_engineering": 456,
+        "ai_principles": 386,
+        "generative_ai": 289,
+        "github_copilot": 471,
+        "gpt_specific": -13
+      },
+      "note": "This is a platform-usage trends report, not a compensation survey. O'Reilly's dedicated 'Data/AI Salary Survey' series appears discontinued after its 2021 edition (avg salary $146,000; modal band $100k-$150k, 34% of respondents)."
+    },
+    "levels_fyi": {
+      "url": "https://www.levels.fyi/t/data-scientist",
+      "publisher": "Levels.fyi",
+      "accessed": "2026-09-14",
+      "data_scientist_total_comp_usd": {"p25": 135000, "median": 180000, "p75": 252000},
+      "caveat": "Levels.fyi's sample skews toward large, stock-granting tech employers (Google, Meta, Microsoft, Atlassian all show $250K-$315K medians) and is not representative of the full labor market the way BLS OEWS is."
+    },
+    "pwc_2025_global_ai_jobs_barometer": {
+      "url": "https://www.pwc.com/gx/en/issues/artificial-intelligence/job-barometer/2025/report.pdf",
+      "press_release_url": "https://www.pwc.com/gx/en/news-room/press-releases/2025/ai-linked-to-a-fourfold-increase-in-productivity-growth.html",
+      "publisher": "PwC",
+      "date": "June 2025",
+      "sample_basis": "~1 billion job ads across six continents",
+      "ai_skills_wage_premium_pct": {"2025": 56, "prior_year": 25},
+      "productivity_growth_pct": {"2018_2022": 7, "2018_2024": 27, "framing": "nearly quadrupled in AI-exposed industries"},
+      "job_growth_pct": {"ai_skill_jobs_yoy": 7.5, "total_postings_yoy": -11.3},
+      "skills_change_velocity": "Skills required in AI-exposed jobs changing 66% faster than less-exposed jobs",
+      "fetch_note": "Direct WebFetch to pwc.com returned HTTP 403 twice; figures corroborated across four independent pwc.com regional subdomains (gx, us, id, hk) returned by search, so confidence remains high despite not reading the primary PDF directly."
+    }
+  },
+  "practice_differences": [
+    {
+      "dimension": "Core objective",
+      "statistician": "Inference: designing studies, quantifying uncertainty, choosing estimators, defending a result under scrutiny.",
+      "data_scientist": "Prediction: building and deploying predictive/ML models optimized for forecast accuracy.",
+      "source": "https://yardstick.team/compare-roles/what-is-the-difference-between-data-scientist-and-statistician"
+    },
+    {
+      "dimension": "Analytical posture",
+      "statistician": "Hypothesis-driven, scientific approach; tests specific pre-registered hypotheses.",
+      "data_scientist": "Exploratory approach to data analysis.",
+      "source": "https://www.indeed.com/career-advice/finding-a-job/data-scientist-vs-statistician"
+    },
+    {
+      "dimension": "Output type",
+      "statistician": "Models built to accurately describe the relationship between variables (explanatory).",
+      "data_scientist": "Models built to predict outcomes (predictive), typically shipped into production.",
+      "source": "https://yardstick.team/compare-roles/what-is-the-difference-between-data-scientist-and-statistician"
+    },
+    {
+      "dimension": "Data condition",
+      "statistician": "Usually provided with tidy, already-curated data.",
+      "data_scientist": "Spends significant time gathering and cleaning imperfect, messy raw data.",
+      "source": "https://yardstick.team/compare-roles/what-is-the-difference-between-data-scientist-and-statistician"
+    },
+    {
+      "dimension": "Primary tools",
+      "statistician": "SPSS, SAS, Minitab, MATLAB, design-of-experiments methods.",
+      "data_scientist": "TensorFlow, Spark, Docker, Kubernetes, cloud ML platforms (SageMaker, Azure ML, GCP), Airflow.",
+      "source": "O*NET OnLine 15-2041.00 and 15-2051.00, https://www.onetonline.org"
+    },
+    {
+      "dimension": "Education gate",
+      "statistician": "62% hold a master's degree as highest credential (O*NET).",
+      "data_scientist": "48% bachelor's / 44% master's split — a materially lower graduate-degree bar (O*NET).",
+      "source": "https://www.onetonline.org/link/summary/15-2041.00 ; https://www.onetonline.org/link/summary/15-2051.00"
+    },
+    {
+      "dimension": "Institutional home",
+      "statistician": "Concentrated in federal government (16%), scientific R&D (15%), healthcare (8%) — regulated/scientific institutions.",
+      "data_scientist": "Concentrated in publishing/media (12%), insurance (10%), computer systems design (10%), corporate management (10%) — commercial/tech-adjacent institutions.",
+      "source": "BLS Occupational Outlook Handbook, Work Environment sections (see roles.statistician / roles.data_scientist above)"
+    },
+    {
+      "dimension": "Occupational recognition",
+      "statistician_and_data_scientist": "Both hold a formal BLS SOC code, OOH page, and annual OEWS wage/employment estimate.",
+      "growth_engineer_and_ai_engineer": "Neither has a BLS SOC code or OOH/OEWS entry; both are defined only by industry practitioner sources and tracked only indirectly via job-board volume.",
+      "source": "https://www.bls.gov/soc/notices/2022/finding_soc_code.htm ; https://techbridgeinc.com/choosing-the-right-soc-code-for-tech-roles-a-guide-for-startups-and-immigration-attorneys/"
+    },
+    {
+      "dimension": "Growth engineer definition",
+      "description": "A software engineer embedded within a Growth/Marketing team; builds A/B-testing infrastructure, funnel/cohort instrumentation, feature-flag systems, lifecycle triggers and attribution — optimizes business metrics directly rather than performing inference or general-purpose prediction.",
+      "source": "https://www.productboard.com/blog/the-role-of-growth-engineering-at-productboard-key-skills-responsibilities-methodologies/"
+    }
+  ]
+}

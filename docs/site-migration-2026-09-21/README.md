@@ -102,7 +102,17 @@ warm white/pale gray for breathing room, editorial typography, and restrained mo
 - [x] Run typecheck, release build, parity, agency, crawl and browser QA. Exact release results: typecheck/build PASS; parity 57/57; agency 59/59; crawl 844/844; browser 233/233.
 - [x] Commit and push accepted source changes to GitHub. Source is on `main` at `bb32728`; the approved redesign branch is on `claude/agency-redesign` at `1e6ed24`.
 - [x] Publish the new release artifact to `gh-pages` at `0b9073d` with `CNAME` set to `mj2.pro`.
-- [ ] Activate DNS and configure old-domain forwarding. `mj2.pro` is still returning Porkbun parking records; `mitchjmiller.com` currently returns GitHub Pages 404 until its registrar forwarding is updated.
+- [ ] **Activate DNS and configure old-domain forwarding — blocked on Mitch, site is dark on both domains.** Checked Sep 22, 2026: the Porkbun DNS editor for `mj2.pro` holds **zero custom records**, so the 207.207.210.229/.107 answers are Porkbun default parking and `https://mj2.pro/` fails to connect. `mitchjmiller.com` still resolves to the GitHub Pages IPs but returns 404, because Pages now serves `mj2.pro` per the published `CNAME`. Agent DNS writes are refused by permission policy, so Mitch applies these at https://porkbun.com/account/dns/mj2.pro :
+
+  | Type | Host | Answer | TTL |
+  |---|---|---|---|
+  | A | *(blank)* | 185.199.108.153 | 600 |
+  | A | *(blank)* | 185.199.109.153 | 600 |
+  | A | *(blank)* | 185.199.110.153 | 600 |
+  | A | *(blank)* | 185.199.111.153 | 600 |
+  | CNAME | `www` | `ckawebuilder.github.io` | 600 |
+
+  Then set registrar URL forwarding for `mitchjmiller.com` → `https://mj2.pro` (path-preserving, 301). After propagation, confirm HTTPS in the repository's Pages settings (`Enforce HTTPS`) once the certificate is issued. Rollback: delete the added records — parking returns and nothing else is touched.
 - [ ] Activate `clients.mj2.pro` and verify the demo workspace.
 - [ ] Verify GSC sitemap, GA4 realtime and contact origin.
 - [ ] Update personal LinkedIn and create the M² business page.

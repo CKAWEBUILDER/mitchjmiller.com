@@ -14,6 +14,7 @@ Built 2026-09-11 (overnight Lane 3, Claude Code). Account `Clearkayakrentalsoahu
 | Pages project (site mirror) | `mitchjmiller-com`, production branch `main`, first deployment `c45f83f7` | https://mitchjmiller-com.pages.dev |
 | Pages custom domains | `mitchjmiller.com` (`4696733e-b53a-4ff6-9506-bc622504b745`), `www.mitchjmiller.com` (`8462f96d-8b3c-42e4-96b6-8f287a13cccc`) — status `pending` until the zone exists | — |
 | Private client portal | separate private repo `CKAWEBUILDER/mitchjmiller-clients`, Pages project `mitchjmiller-clients`, KV `CLIENT_PORTAL` `e956691cc50e4ff994c31ac0c4d7c04f` | https://mitchjmiller-clients.pages.dev |
+| Stripe (payments, invoicing, tax) | Worker routes `POST /checkout`, `POST /stripe/webhook`; D1 tables `stripe_events`, `payments`; secrets `STRIPE_SECRET_KEY` (restricted key), `STRIPE_WEBHOOK_SECRET`; vars `STRIPE_PRICES`, `STRIPE_AUTOMATIC_TAX`, `CHECKOUT_SUCCESS_URL`, `CHECKOUT_CANCEL_URL` — built 2026-09-22, not deployed | [docs/stripe/README.md](../stripe/README.md) |
 
 Wrangler: run `npm_config_cache=.npm-cache npx -y wrangler <cmd>` from the repo root (uses the existing OAuth session). Note: wrangler 4.131 delegates `pages project create` to Workers-with-assets by default; both projects were created with `--force` (classic Pages). Existing projects are never delegated, so no `--force` on later commands.
 

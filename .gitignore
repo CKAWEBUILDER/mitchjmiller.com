@@ -34,3 +34,6 @@ src/ds/ds.css
 # content-studio: regenerable infographic exports (rebuild: cd content-studio/viz/kit && npm run export)
 content-studio/viz/**/exports/
 content-studio/viz/kit/node_modules/
+
+# Local Worker secrets (wrangler dev); see cloudflare/api-worker/.dev.vars.example
+cloudflare/api-worker/.dev.vars

@@ -1,0 +1,7 @@
+#!/bin/sh
+# Blocks commits that stage a Stripe secret/restricted key or webhook signing secret (docs/stripe/README.md §1).
+# Enable once per clone:  git config core.hooksPath .githooks
+if git diff --cached -U0 --no-color | grep -E '^\+' | grep -E -q '\b(sk|rk)_(live|test)_[A-Za-z0-9]{8,}|\bwhsec_[A-Za-z0-9]{8,}'; then
+  echo "pre-commit: a Stripe key or webhook secret is staged. Keys belong in wrangler secrets or .dev.vars, never in the repo." >&2
+  exit 1
+fi

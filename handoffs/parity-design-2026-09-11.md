@@ -1,6 +1,6 @@
-# Current continuation — September 21 domain cutover
+# Current continuation — September 23 domain cutover
 
-Mitchell approved the `mj2.pro` public-domain cutover, the agency redesign, the public/private tree and the M² identity. Work continues in `/Users/mitchellmiler/Documents/mitchjmiller-html-migration` on `claude/agency-redesign`; preserve unrelated uncommitted content and screenshots. The implementation record is [docs/site-migration-2026-09-21/README.md](../docs/site-migration-2026-09-21/README.md). Next: finish domain/source updates, run the release QA, publish, activate the portal hostname, verify GSC/GA4/contact origin, and complete LinkedIn setup. Do not send Rio's invitation until his exact profile is resolved.
+Mitchell approved the `mj2.pro` public-domain cutover, the agency redesign, the public/private tree and the M² identity. Work continues in `/Users/mitchellmiler/Documents/mitchjmiller-html-migration` on `claude/agency-redesign`; preserve unrelated uncommitted content and screenshots. DNS and the new domain are live: HTTPS is enforced, both `mj2.pro` hosts pass, and the old domain's HTTP redirect preserves path/query. **Remaining cutover issue:** `https://mitchjmiller.com/...` times out at Namecheap forwarding; use an HTTPS-capable redirect service after checking existing DNS/email records. See the [site migration record](../docs/site-migration-2026-09-21/README.md). Then verify GSC/GA4/contact behavior and continue the separate portal and LinkedIn tasks. Do not send Rio's invitation until his exact profile is resolved.
 
 ## Previous continuation — September 14 refinement
 

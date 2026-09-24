@@ -42,3 +42,7 @@ Read `PROJECT.md`, then `handoffs/parity-design-2026-09-11.md`, then the applica
 - Save time and usage: read the records, use the cheapest sufficient tools, consolidate missing-information questions, and keep updates short and concrete.
 - At each milestone, update PROJECT.md and the applicable handoff/task record with completed work, evidence, exact next action, unresolved blockers and outstanding approval. Commit and push documentation with accepted changes.
 - Close only task-created resources no longer needed. Preserve user tabs and active review previews. Never discard unsaved work.
+
+## Site standards — September 24 standing instruction
+
+Every page and post follows [docs/site-standards.md](docs/site-standards.md): per-page share cards (`og:image` 1200×630 plus a `summary_large_image` Twitter card, never Mitch's photo), a hero per post that doubles as its share card, light and dark themes, English plus a Spanish pilot with hreflang and a language picker (suggest, never redirect), a WCAG 2.2 AA baseline and narrated audio for every post. Production builds from `main`; the first implementation is briefed in [handoffs/2026-09-24-site-standards-build.md](handoffs/2026-09-24-site-standards-build.md).

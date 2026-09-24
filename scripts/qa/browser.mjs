@@ -11,6 +11,10 @@
  * without errors; a Mermaid study diagram renders to SVG; the resume dialog opens
  * and closes; the contact form pre-fills ?topic=, and its submit handler shows
  * honest messages against a mocked Worker (200 ok, 400 validation, network failure).
+ * 2026-09-24 post: both living infographics load in same-origin frames that fit their content,
+ * a real click on a mandala sector opens its panel and "Read the section" lands the parent on
+ * #intent-<slug>, a journey territory does the same, the parent listener ignores foreign
+ * senders, off-site ?parent= values are ignored, JSON-LD parses, posters/GIFs are served.
  * Third-party hosts (fonts, GA4, Turnstile, LinkedIn) are blocked so no analytics
  * hits leave the machine and the run is hermetic.
  */
@@ -31,6 +35,8 @@ const pages = [
   ['note-hermes-mermaid', '/blog/studying/hermes-concepts-field-guide/'], ['lab', '/lab/'],
   ['workbench', '/lab/population-workbench/'], ['workbench-methodology', '/lab/population-workbench/methodology/'],
   ['resume', '/resume/'], ['contact', '/contact/'], ['clients', '/clients/'], ['404', '/no-such-page/'],
+  ['post-search-intent', '/blog/search-results-by-intent/'], ['note-pocock-ai-coding', '/blog/studying/pocock-ai-coding-workflow/'],
+  ['note-fde', '/blog/studying/fde-1m-ai-job/'], ['note-pocock-agentic', '/blog/studying/pocock-agentic-workflow/'],
 ];
 const viewports = [[1360, 900], [390, 844]];
 const results = [];
@@ -90,6 +96,89 @@ try {
       await page.screenshot({ path: join(shots, `${name}-${width}-fold.png`), fullPage: false });
       results.push({ scope: `${name}@${width}`, check: 'screenshot (full page + above the fold)', pass: true, detail: file.replace(`${process.cwd()}/`, '') });
       await page.close();
+    }
+  }
+
+  // 2026-09-24 post: living infographics in same-origin frames and the viz-intent jump contract.
+  {
+    const postPath = '/blog/search-results-by-intent/';
+    const slugs = ['informational', 'commercial', 'transactional', 'navigational', 'local'];
+    const landed = (page, slug) => page.waitForFunction(s => location.hash === `#intent-${s}` && Math.abs(document.getElementById(`intent-${s}`).getBoundingClientRect().top - 110) < 60, { timeout: 5000 }, slug).then(() => true).catch(() => false);
+    for (const [width, height] of viewports) {
+      const scope = `post-search-intent@${width}`;
+      const { page, errors } = await newPage();
+      await page.setViewport({ width, height, deviceScaleFactor: 1 });
+      await page.goto(`${base}${postPath}`, { waitUntil: 'networkidle0', timeout: 60000 });
+      await page.evaluate(async () => { for (const f of document.querySelectorAll('iframe')) { f.scrollIntoView(); await new Promise(r => setTimeout(r, 500)); } window.scrollTo(0, 0); });
+      const frameFor = part => page.frames().find(f => f.url().includes(part));
+      const mandala = frameFor('/viz/search-results-by-intent-mandala/'), journey = frameFor('/viz/search-results-by-intent-journey/');
+      const readyM = mandala ? await mandala.waitForFunction(() => window.VIZ && document.querySelectorAll('path.hit').length === 5, { timeout: 20000 }).then(() => true).catch(() => false) : false;
+      const readyJ = journey ? await journey.waitForFunction(() => document.documentElement.dataset.ready === '1' && document.querySelectorAll('a[aria-label^="Jump to the"]').length === 5, { timeout: 20000 }).then(() => true).catch(() => false) : false;
+      record(scope, 'both living infographics load in same-origin frames', readyM && readyJ, `mandala ${readyM}, journey ${readyJ}`);
+      await wait(600);
+      const fit = await page.evaluate(() => [...document.querySelectorAll('iframe')].map(f => ({ frame: Math.round(f.getBoundingClientRect().height), body: Math.ceil(f.contentDocument.body.getBoundingClientRect().height), sw: f.contentDocument.documentElement.scrollWidth, cw: f.contentDocument.documentElement.clientWidth })));
+      record(scope, 'frames fit their content with no horizontal overflow inside', fit.length === 2 && fit.every(f => Math.abs(f.frame - (f.body + 2)) <= 2 && f.sw <= f.cw), fit.map(f => `${f.frame}px for ${f.body}px, ${f.sw}/${f.cw}`).join(' · '));
+      // Real click on the "local" sector: find an on-screen point that hits the sector in the frame and the frame in the page.
+      const iframeM = await page.$('iframe[src^="/viz/search-results-by-intent-mandala/"]');
+      await page.evaluate(el => window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY - 100), iframeM);
+      await wait(300);
+      const box = await iframeM.boundingBox();
+      const point = await mandala.evaluate((ox, oy, vh) => {
+        const hit = document.querySelectorAll('path.hit')[4];
+        const r = hit.getBoundingClientRect();
+        for (let y = r.top + 4; y < r.bottom; y += 6) for (let x = r.left + 4; x < r.right; x += 6) {
+          if (oy + y > 110 && oy + y < vh - 10 && document.elementFromPoint(x, y) === hit) return { x, y };
+        }
+        return null;
+      }, box.x + 1, box.y + 1, height);
+      if (point) await page.mouse.click(box.x + 1 + point.x, box.y + 1 + point.y);
+      await wait(400);
+      const panel = await mandala.evaluate(() => { const p = document.getElementById('panel'); const j = p && p.querySelector('.jump'); return { open: Boolean(p && !p.hidden), href: j ? j.href : null, img: p && p.querySelector('.shot img, .shot svg') ? p.querySelector('.shot img, .shot svg').tagName : null, cap: p?.querySelector('.cap')?.textContent || '' }; });
+      record(scope, 'a real click on a mandala sector opens its panel', Boolean(point) && panel.open, point ? `clicked at ${Math.round(point.x)},${Math.round(point.y)} in frame` : 'no clickable point found');
+      record(scope, 'panel shows the labelled representative rendering and a same-origin jump link', panel.href === `${base}${postPath}#intent-local` && /Representative rendering/.test(panel.cap) && !/Captured/.test(panel.cap), `${panel.href} · ${panel.img} · ${panel.cap.slice(0, 70)}`);
+      if (panel.open) { const jump = await mandala.$('#panel .jump'); await jump.click(); }
+      record(scope, '“Read the local section” lands the parent on #intent-local below the sticky header', await landed(page, 'local'), await page.evaluate(() => `${location.hash} top=${Math.round(document.getElementById('intent-local').getBoundingClientRect().top)}`));
+      // Journey territory: real click on the transactional card.
+      const territory = await journey.$('a[aria-label="Jump to the TRANSACTIONAL section"]');
+      const tHref = territory ? await journey.evaluate(a => a.href.baseVal ?? a.getAttribute('href'), territory) : null;
+      if (territory) { await territory.scrollIntoView(); await wait(200); await territory.click(); }
+      record(scope, 'a journey territory click lands the parent on #intent-transactional', tHref === `${base}${postPath}#intent-transactional` && await landed(page, 'transactional'), `${tHref}`);
+      // Listener only: a message from an embedded frame scrolls; a message from the page itself or a malformed intent does not.
+      await page.evaluate(() => { window.scrollTo(0, 0); history.replaceState(null, '', location.pathname); });
+      await journey.evaluate(() => window.parent.postMessage({ type: 'viz-intent', intent: 'navigational' }, '*'));
+      const listened = await landed(page, 'navigational');
+      await page.evaluate(() => { window.scrollTo(0, 0); history.replaceState(null, '', location.pathname); window.postMessage({ type: 'viz-intent', intent: 'commercial' }, '*'); });
+      await journey.evaluate(() => window.parent.postMessage({ type: 'viz-intent', intent: '<img src=x>' }, '*'));
+      await wait(800);
+      const ignored = await page.evaluate(() => location.hash === '' && window.scrollY < 50);
+      record(scope, 'parent listener honors only its own /viz/ frames and valid intents', listened && ignored, `frame message landed ${listened}; foreign/malformed ignored ${ignored}`);
+      if (width === viewports[0][0]) {
+        const ld = await page.evaluate(() => [...document.querySelectorAll('script[type="application/ld+json"]')].map(s => { try { const d = JSON.parse(s.textContent); return (d['@graph'] || [d]).map(n => n['@type']); } catch { return ['INVALID']; } }).flat());
+        record('post-search-intent', 'JSON-LD parses: Article, BreadcrumbList and FAQPage', !ld.includes('INVALID') && ['Article', 'BreadcrumbList', 'FAQPage'].every(t => ld.includes(t)), ld.join(', '));
+        const assets = await page.evaluate(async () => Promise.all(['mandala', 'journey'].flatMap(v => ['anim-640x800.gif', 'poster-1080x1350.png', 'poster-1080x1080.png', 'poster-2160x2700.png'].map(async f => { const u = `/viz/search-results-by-intent-${v}/${f}`; const r = await fetch(u); return `${u} ${r.status} ${r.headers.get('content-type')}`; }))));
+        record('post-search-intent', 'GIFs and posters are served (200, image types)', assets.every(a => / 200 image\/(gif|png)$/.test(a)), assets.filter(a => !/ 200 image\//.test(a)).join(', ') || `${assets.length} files`);
+      }
+      record(scope, 'no console or page errors (post and frames)', errors.length === 0, errors.slice(0, 3).join(' | '));
+      await page.close();
+    }
+    // Full-screen versions: render, fit the viewport, and point "read the section" at the post; off-site ?parent= is ignored.
+    for (const [name, path] of [['viz-mandala', '/viz/search-results-by-intent-mandala/'], ['viz-journey', '/viz/search-results-by-intent-journey/']]) {
+      for (const [width, height] of viewports) {
+        const { page, errors } = await newPage();
+        await page.setViewport({ width, height, deviceScaleFactor: 1 });
+        const response = await page.goto(`${base}${path}?parent=https%3A%2F%2Fevil.example%2Fphish%2F`, { waitUntil: 'networkidle0', timeout: 60000 });
+        await page.waitForFunction(() => document.querySelector('svg#viz')?.childElementCount > 0, { timeout: 20000 }).catch(() => {});
+        await wait(500);
+        const links = name === 'viz-mandala'
+          ? await page.evaluate(s => { window.VIZ.selectIntent(s); return [document.querySelector('#panel .jump')?.href]; }, 'commercial')
+          : await page.evaluate(() => [...document.querySelectorAll('a[aria-label^="Jump to the"]')].map(a => a.href.baseVal ?? a.getAttribute('href')));
+        const m = await page.evaluate(() => ({ sw: document.documentElement.scrollWidth, iw: window.innerWidth, robots: document.querySelector('meta[name="robots"]')?.content }));
+        record(`${name}@${width}`, 'HTTP 200, renders, no horizontal overflow, noindex', response?.status() === 200 && m.sw <= m.iw && /noindex/.test(m.robots || ''), `status ${response?.status()}, ${m.sw}/${m.iw}, robots ${m.robots}`);
+        record(`${name}@${width}`, 'jump links target the post on this origin even with an off-site ?parent=', links.length > 0 && links.every(h => h && h.startsWith(`${base}${postPath}#intent-`)), links.slice(0, 2).join(', '));
+        record(`${name}@${width}`, 'no console or page errors', errors.length === 0, errors.slice(0, 3).join(' | '));
+        await page.screenshot({ path: join(shots, `${name}-${width}.png`), fullPage: true });
+        await page.close();
+      }
     }
   }
 

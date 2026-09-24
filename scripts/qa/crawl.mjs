@@ -9,7 +9,8 @@
  * Checks: HTTP 200, exactly one h1, main text length above a per-template threshold,
  * canonical present/correct, meta description present and unique, robots policy,
  * GA4 tag once per indexable page, internal links/assets resolve, images have alt,
- * the four PDFs serve 200 with the corrected hashes, unknown routes return the 404
+ * the four PDFs serve 200 with the corrected hashes, declared standalone embeds (manifest
+ * "embeds") serve 200 with their files and stay noindex, unknown routes return the 404
  * document, former missing routes now carry full content, sitemap/robots/CNAME/.nojekyll,
  * and no review/staging/draft output or source maps in the artifact.
  */
@@ -118,6 +119,20 @@ if (health.status === 200) {
     if (!ok) broken.push(`${pathname} → ${r.status}`);
   }
   record('site', `internal links and assets resolve (${internal.size} unique paths)`, broken.length === 0, broken.slice(0, 10).join(', '));
+  // Declared standalone embeds (living infographics iframed by a post) and the post's rendered images.
+  for (const embed of manifest.embeds || []) {
+    const r = await fetchStatus(`${base}${embed.path}`);
+    const html = r.body ? r.body.toString('utf8') : '';
+    record(embed.path, 'embed serves 200 as HTML, noindex, without analytics', r.status === 200 && /text\/html/.test(r.type) && /name="robots" content="noindex/.test(html) && !/googletagmanager/.test(html), `status ${r.status}`);
+    for (const name of embed.files) {
+      const f = await fetchStatus(`${base}${embed.path}${name}`);
+      const type = name.endsWith('.gif') ? 'image/gif' : 'image/png';
+      record(`${embed.path}${name}`, `serves 200 as ${type}`, f.status === 200 && f.type.startsWith(type) && f.body?.length > 50000, `status ${f.status}, ${f.type}, ${f.body?.length} bytes`);
+    }
+    const host = await fetchStatus(`${base}${embed.embeddedIn}`);
+    const hostHtml = host.body ? host.body.toString('utf8') : '';
+    record(embed.embeddedIn, `iframes ${embed.path} with the canonical ?parent=`, hostHtml.includes(`<iframe src="${embed.path}?parent=${encodeURIComponent(`${canonicalOrigin}${embed.embeddedIn}`)}"`), '');
+  }
   for (const pdf of releaseFiles.pdfs) {
     const r = await fetchStatus(`${base}${pdf.path}`);
     const hash = r.body ? sha256(r.body) : '';
@@ -151,13 +166,15 @@ record('404.html', 'present with public copy', existsSync(join(dist, '404.html')
 const allFiles = walk(dist);
 const htmlFiles = allFiles.filter(f => f.endsWith('.html'));
 const noindexHtml = htmlFiles.filter(f => /name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(readFileSync(f, 'utf8')) || /content=["'][^"']*noindex[^"']*["'][^>]*name=["']robots["']/i.test(readFileSync(f, 'utf8')));
-const allowedNoindex = new Set([join(dist, '404.html'), ...manifest.routes.filter(r => r.kind === 'placeholder').map(r => join(dist, r.path, 'index.html'))]);
+const embeds = manifest.embeds || [];
+const embedFiles = new Set(embeds.map(e => join(dist, e.path, 'index.html')));
+const allowedNoindex = new Set([join(dist, '404.html'), ...manifest.routes.filter(r => r.kind === 'placeholder').map(r => join(dist, r.path, 'index.html')), ...embedFiles]);
 const unexpectedNoindex = noindexHtml.filter(f => !allowedNoindex.has(f));
-record('artifact', 'noindex only on 404.html and the four retained Coming Soon placeholders', unexpectedNoindex.length === 0, `${noindexHtml.length} noindex documents: ${noindexHtml.map(f => f.slice(dist.length)).join(', ')}`);
+record('artifact', 'noindex only on 404.html, the four retained Coming Soon placeholders and the declared embeds', unexpectedNoindex.length === 0 && [...embedFiles].every(f => noindexHtml.includes(f)), `${noindexHtml.length} noindex documents: ${noindexHtml.map(f => f.slice(dist.length)).join(', ')}`);
 const stray = allFiles.filter(f => /\/(review|design|proof|themes|review-assets|artifacts)\//.test(f.slice(dist.length)) || /_headers$|_redirects$|\.map$/.test(f));
 record('artifact', 'no review/design/proof/theme/staging output or source maps', stray.length === 0, stray.slice(0, 8).map(f => f.slice(dist.length)).join(', '));
-const orphanHtml = htmlFiles.filter(f => f !== join(dist, '404.html') && !manifest.routes.some(r => join(dist, r.path, 'index.html') === f));
-record('artifact', 'every HTML document is a manifest route or 404.html', orphanHtml.length === 0, orphanHtml.map(f => f.slice(dist.length)).join(', '));
+const orphanHtml = htmlFiles.filter(f => f !== join(dist, '404.html') && !embedFiles.has(f) && !manifest.routes.some(r => join(dist, r.path, 'index.html') === f));
+record('artifact', 'every HTML document is a manifest route, a declared embed or 404.html', orphanHtml.length === 0, orphanHtml.map(f => f.slice(dist.length)).join(', '));
 const secretHits = allFiles.filter(f => /\.(html|js|css|json|txt|xml)$/.test(f)).filter(f => /(sk_live_|AKIA[0-9A-Z]{16}|-----BEGIN [A-Z ]*PRIVATE KEY-----|ghp_[A-Za-z0-9]{36})/.test(readFileSync(f, 'utf8')));
 record('artifact', 'no credential-shaped strings in text output', secretHits.length === 0, secretHits.map(f => f.slice(dist.length)).join(', '));
 const draftHits = htmlFiles.filter(f => /content-drafts|content-studio/.test(readFileSync(f, 'utf8')));

@@ -1,7 +1,6 @@
 import { Layout } from "@/components/layout";
 import { SEO } from "@/components/seo";
-import { visibleBlogPosts } from "@/lib/published";
-import { studyNotes } from "@/lib/study-notes";
+import { visibleBlogPosts, studyNotes } from "@/lib/published";
 import { studyNoteTeaser } from "@/lib/study-note-teaser";
 import { Link } from "@/components/native-link";
 

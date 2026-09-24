@@ -8,8 +8,7 @@
 import AgencyLayout from '../layouts/AgencyLayout.astro';
 import ParityPage, { parityRoutes, parityMetadata } from '../components/ParityPage';
 import { caseStudies } from '../../baseline/src/lib/data';
-import { visibleBlogPosts } from '../../baseline/src/lib/published';
-import { studyNotes } from '../../baseline/src/lib/study-notes';
+import { visibleBlogPosts, studyNotes } from '../../baseline/src/lib/published';
 import { site, personJsonLd, breadcrumbJsonLd, graph } from '../lib/agency';
 
 export function getStaticPaths() {
@@ -25,6 +24,8 @@ const monthIndex: Record<string, string> = { January: '01', February: '02', Marc
 const isoDate = (value?: string) => {
   if (!value) return undefined;
   if (/^\d{4}-\d{2}(-\d{2})?$/.test(value)) return value;
+  const day = value.match(/^([A-Z][a-z]+) (\d{1,2}), (\d{4})$/);
+  if (day && monthIndex[day[1]]) return `${day[3]}-${monthIndex[day[1]]}-${day[2].padStart(2, '0')}`;
   const match = value.match(/^([A-Z][a-z]+) (\d{4})$/);
   return match && monthIndex[match[1]] ? `${match[2]}-${monthIndex[match[1]]}` : undefined;
 };
@@ -36,7 +37,7 @@ if (path.startsWith('/blog/studying/')) {
     breadcrumbJsonLd([{ name: 'Home', href: '/' }, { name: 'Signals & Systems', href: '/blog/' }, { name: note.title, href: canonicalPath }])));
 } else if (path.startsWith('/blog/')) {
   const post = visibleBlogPosts.find(entry => `/blog/${entry.slug}` === path);
-  if (post && post.status !== 'draft') jsonLd.push(graph({ '@type': 'Article', headline: post.title, description: post.teaser, datePublished: isoDate(post.date), author: personJsonLd(), publisher, mainEntityOfPage: `${site.url}${canonicalPath}` },
+  if (post && post.status !== 'draft') jsonLd.push(graph({ '@type': 'Article', headline: post.title, description: (post as { metaDescription?: string }).metaDescription || post.teaser, datePublished: isoDate(post.date), author: personJsonLd(), publisher, mainEntityOfPage: `${site.url}${canonicalPath}` },
     breadcrumbJsonLd([{ name: 'Home', href: '/' }, { name: 'Signals & Systems', href: '/blog/' }, { name: post.title, href: canonicalPath }])));
 } else if (path.startsWith('/case-studies/')) {
   const study = caseStudies.find(entry => `/case-studies/${entry.slug}` === path);

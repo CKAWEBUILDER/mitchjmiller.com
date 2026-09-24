@@ -1,9 +1,8 @@
 import { Router } from "wouter";
 import type { ComponentType } from "react";
 import { caseStudies } from "../../baseline/src/lib/data";
-import { studyNotes } from "../../baseline/src/lib/study-notes";
 import { studyNoteTeaser } from "../../baseline/src/lib/study-note-teaser";
-import { visibleBlogPosts, excludedDraftSlugs, duplicateBlogSlugs } from "../../baseline/src/lib/published";
+import { visibleBlogPosts, excludedDraftSlugs, duplicateBlogSlugs, studyNotes } from "../../baseline/src/lib/published";
 import { headshot, portfolioImages } from "../../baseline/src/lib/images";
 import BlogPost from "../../baseline/src/pages/blog-post";
 import StudyNote from "../../baseline/src/pages/study-note";
@@ -55,7 +54,7 @@ export const parityRoutes: ParityRoute[] = [
   })),
   ...visibleBlogPosts.map(post => ({
     path: `/blog/${post.slug}`, title: `${post.title} | Signals & Systems`,
-    description: post.teaser, noindex: post.status === "draft", Component: BlogPost,
+    description: (post as { metaDescription?: string }).metaDescription || post.teaser, noindex: post.status === "draft", Component: BlogPost,
   })),
   ...studyNotes.map(note => ({
     path: `/blog/studying/${note.slug}`, title: `${note.title} | Studying — Mitchell Miller`,

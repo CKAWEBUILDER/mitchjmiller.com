@@ -3,7 +3,8 @@ import { resolve } from 'node:path';
 const output=resolve('.stage-assets');
 if(output!==resolve(process.cwd(),'.stage-assets')) throw new Error('Unexpected staging asset directory');
 rmSync(output,{recursive:true,force:true}); mkdirSync(output,{recursive:true});
-for(const name of ['images','files','artifacts','favicon.ico','favicon.png','favicon.svg','apple-touch-icon.png','opengraph.jpg','data/ca-pums-sample-2019.json','data/ca-pums-meta-2019.json','9b0893b8818bd5bce05d66051f2bc971.txt']){
+// 'viz': standalone living infographics embedded by posts (declared under "embeds" in the route manifest).
+for(const name of ['images','files','artifacts','viz','favicon.ico','favicon.png','favicon.svg','apple-touch-icon.png','opengraph.jpg','data/ca-pums-sample-2019.json','data/ca-pums-meta-2019.json','9b0893b8818bd5bce05d66051f2bc971.txt']){
  const source=resolve('public',name); if(existsSync(source)) cpSync(source,resolve(output,name),{recursive:true});
 }
 // Staging keeps the production download bytes at the public URLs; updated review

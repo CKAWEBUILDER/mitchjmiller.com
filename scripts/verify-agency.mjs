@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 /**
  * Agency redesign verifier (2026-09-14). Runs after scripts/verify-parity.mjs on the
- * built dist/: route count (58 published URLs incl. /services/), the agency shell on
- * every document except the byte-preserved standalone SFC report, template markers
+ * built dist/: route count (63 published URLs incl. /services/ and the 2026-09-24 post and
+ * study notes), the agency shell on every document except the byte-preserved standalone SFC
+ * report and the declared standalone embeds (section 7), template markers
  * (nav, green CTA, marquee fed by site/data/brands.json, footer columns), JSON-LD
  * (ProfessionalService + Person on home; Service + FAQPage on /services/; Article on
  * posts/notes; CreativeWork on cases), FAQ text parity with the JSON-LD, reduced-motion
@@ -35,19 +36,23 @@ const walk = dir => readdirSync(dir, { withFileTypes: true }).flatMap(entry => e
 const jsonLdOf = html => [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(match => { try { return JSON.parse(match[1]); } catch { return null; } });
 const typesOf = html => jsonLdOf(html).flatMap(doc => doc ? (doc['@graph'] || [doc]).map(node => node['@type']) : ['INVALID']);
 
-// 1. Routes: 58 published (53 archived public + lab, workbench, methodology, clients, services) + 4 placeholders.
+// 1. Routes: 63 published (53 archived public + lab, workbench, methodology, clients, services, products,
+//    and since 2026-09-24 one post and three study notes rendered from src/lib) + 4 placeholders.
 const eligible = manifest.routes.filter(route => route.kind !== 'placeholder').map(route => route.path);
-if (eligible.length !== 59) fail('manifest', `expected 59 published routes, found ${eligible.length}`);
+if (eligible.length !== 63) fail('manifest', `expected 63 published routes, found ${eligible.length}`);
 if (!manifest.routes.some(route => route.path === '/services/' && route.kind === 'added')) fail('manifest', '/services/ missing or not kind "added"');
 const sitemap = existsSync(join(dist, 'sitemap.xml')) ? [...read(join(dist, 'sitemap.xml')).matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]) : [];
-if (sitemap.length !== 59 || !sitemap.includes(`${canonicalOrigin}/services/`)) fail('sitemap', `expected 59 URLs including /services/, found ${sitemap.length}`);
+if (sitemap.length !== 63 || !sitemap.includes(`${canonicalOrigin}/services/`)) fail('sitemap', `expected 63 URLs including /services/, found ${sitemap.length}`);
 tick('routes');
 
 // 2. Shell on every document except the standalone SFC report (byte-preserved by parity rule).
 const standalone = new Set(['/case-studies/sfc-surf-school/']);
+// Standalone living infographics declared under "embeds" in the manifest; checked in section 7 instead.
+const embeds = manifest.embeds || [];
+const embedPaths = new Set(embeds.map(embed => embed.path));
 for (const file of walk(dist).filter(file => file.endsWith('.html'))) {
   const route = file === join(dist, '404.html') ? '/404.html' : `${file.slice(dist.length).replace(/index\.html$/, '')}`;
-  if (standalone.has(route)) continue;
+  if (standalone.has(route) || embedPaths.has(route)) continue;
   if (/^\/(review|design|proof|themes|review-assets|artifacts)\//.test(route)) continue; // review-only output, removed in release mode
   const html = read(file), pageBody = body(html);
   tick('shellDocuments');
@@ -144,8 +149,81 @@ const pairs = [
 const contrastReport = pairs.map(([label, fg, bg, minimum]) => { const ratio = Number(contrast(fg, bg).toFixed(2)); if (ratio < minimum) fail('contrast', `${label} ${fg} on ${bg} = ${ratio}:1 < ${minimum}:1`); return { label, fg, bg, ratio, minimum }; });
 if (tokens['ag-green'] !== '#14804a') fail('tokens', `green token changed to ${tokens['ag-green']}; re-verify contrast and update docs/redesign-2026-09-14/README.md`);
 
+// 7. Content published after the snapshot (2026-09-24): every /blog/ document is declared, added
+//    posts/notes carry Article JSON-LD, the post's FAQ JSON-LD mirrors the visible FAQ, its jump
+//    anchors, embeds, noscript posters and rendered images resolve, and every /viz/ document is a
+//    declared standalone embed (noindex, no analytics, no network, declared files present).
+const pngSize = bytes => bytes.subarray(0, 8).equals(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a])) ? [bytes.readUInt32BE(16), bytes.readUInt32BE(20)] : null;
+const routePaths = new Set(manifest.routes.map(route => route.path));
+const htmlUnder = dir => existsSync(join(dist, dir)) ? walk(join(dist, dir)).filter(file => file.endsWith('.html')).map(file => file.slice(dist.length).replace(/index\.html$/, '')) : [];
+for (const route of htmlUnder('blog')) if (!routePaths.has(route)) fail(route, 'blog document is not declared in the route manifest');
+for (const route of htmlUnder('viz')) if (!embedPaths.has(route)) fail(route, 'viz document is not a declared embed');
+for (const route of manifest.routes.filter(route => route.kind === 'added' && /^\/blog\/.+/.test(route.path))) {
+  const file = fileFor(route.path);
+  if (!file) { fail(route.path, 'missing document'); continue; }
+  const html = read(file);
+  const article = jsonLdOf(html).flatMap(doc => doc ? (doc['@graph'] || [doc]) : []).find(node => node['@type'] === 'Article');
+  if (!article) { fail(route.path, 'missing Article JSON-LD'); continue; }
+  if (article.headline !== route.title) fail(route.path, `Article headline ${article.headline} != ${route.title}`);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(article.datePublished || '')) fail(route.path, `Article datePublished not a full date: ${article.datePublished}`);
+  if (article.mainEntityOfPage !== `${canonicalOrigin}${route.path}`) fail(route.path, 'Article mainEntityOfPage is not the canonical URL');
+  tick('addedArticles');
+}
+for (const host of [...new Set(embeds.map(embed => embed.embeddedIn))]) {
+  const file = fileFor(host);
+  if (!file) { fail(host, 'embedding post missing'); continue; }
+  const html = read(file);
+  const prose = html.match(/<div class="prose[^"]*">([\s\S]*?)<\/div>\s*<\/article>/)?.[1] || '';
+  if (!prose) { fail(host, 'post body not found'); continue; }
+  if (/<!--|Draft notes|content-studio|mitchjmiller\.com|\[\[NEEDS|this session/i.test(prose)) fail(host, 'internal note, draft marker or retired host in the post body');
+  const faq = jsonLdOf(prose).find(doc => doc && doc['@type'] === 'FAQPage');
+  const questions = [...prose.matchAll(/<h3>([\s\S]*?)<\/h3>\s*<p>([\s\S]*?)<\/p>/g)].map(match => ({ q: text(match[1]), a: text(match[2]) }));
+  if (!faq || faq.mainEntity.length !== questions.length || questions.length < 3) fail(host, `FAQPage JSON-LD must mirror the ${questions.length} visible questions`);
+  else faq.mainEntity.forEach((item, index) => {
+    if (item.name !== questions[index].q) fail(host, `FAQ question ${index + 1} differs from the page: ${item.name}`);
+    if (text(item.acceptedAnswer.text) !== questions[index].a) fail(host, `FAQ answer ${index + 1} differs from the page`);
+    tick('postFaqQuestions');
+  });
+  for (const slug of ['informational', 'commercial', 'transactional', 'navigational', 'local']) if ((prose.match(new RegExp(`id="intent-${slug}"`, 'g')) || []).length !== 1) fail(host, `jump anchor #intent-${slug} missing or duplicated`);
+  for (const embed of embeds.filter(item => item.embeddedIn === host)) {
+    const src = `${embed.path}?parent=${encodeURIComponent(`${canonicalOrigin}${host}`)}`;
+    const frames = [...prose.matchAll(/<iframe\b[^>]*>/g)].map(match => match[0]).filter(tag => tag.includes(`src="${src}"`));
+    if (frames.length !== 1 || !/\stitle="[^"]+"/.test(frames[0] || '')) fail(host, `expected one titled iframe with src ${src}`);
+    if (!new RegExp(`<noscript>\\s*<img src="${embed.path}poster-1080x1350\\.png"[^>]*alt="[^"]{20,}"`).test(prose)) fail(host, `noscript poster fallback for ${embed.path} missing`);
+    if (!prose.includes(`<a href="${embed.path}">Open the full-screen version</a>`)) fail(host, `full-screen link to ${embed.path} missing`);
+    tick('postEmbeds');
+  }
+  for (const [, srcPath] of prose.matchAll(/<img src="(\/images\/blog\/[^"]+)"/g)) {
+    const bytes = existsSync(join(dist, srcPath)) ? readFileSync(join(dist, srcPath)) : null;
+    const size = bytes && pngSize(bytes);
+    if (!size || size[0] !== 1200) fail(host, `${srcPath} missing, not a PNG or not 1200 px wide`);
+    else tick('postImages');
+  }
+}
+for (const embed of embeds) {
+  const file = fileFor(embed.path);
+  if (!file) { fail(embed.path, 'declared embed missing'); continue; }
+  const html = read(file);
+  const robots = [...html.matchAll(/<meta\s+name="robots"\s+content="([^"]*)"/g)].map(match => match[1]);
+  if (robots.length !== 1 || !/noindex/.test(robots[0])) fail(embed.path, `embed must carry exactly one noindex robots tag (${robots.join(' | ')})`);
+  if (/googletagmanager|google-analytics|gtag\(/.test(html)) fail(embed.path, 'analytics in an embedded document');
+  if (/\b(?:src|href)=["']https?:\/\//i.test(html) || /\bfetch\(|XMLHttpRequest|@import|url\(\s*["']?https?:/i.test(html)) fail(embed.path, 'embed must be self-contained (no network)');
+  if (/content-studio|\.\.\/\.\.\/\.\.\/research|mitchjmiller\.com'/.test(html)) fail(embed.path, 'internal path or retired signature in the published copy');
+  if (!(html.match(/<title>[^<]+<\/title>/g) || []).length) fail(embed.path, 'missing title');
+  if (!/postMessage\(\{ type: 'viz-intent', intent: /.test(html)) fail(embed.path, 'viz-intent jump contract missing');
+  if (!/p\.location\.origin === location\.origin/.test(html) || !/u\.origin === location\.origin/.test(html)) fail(embed.path, 'jump fallback is not restricted to same-origin targets');
+  for (const name of embed.files) {
+    const path = join(dist, embed.path, name);
+    const bytes = existsSync(path) ? readFileSync(path) : null;
+    const magicOk = bytes && (name.endsWith('.png') ? pngSize(bytes) : bytes.subarray(0, 6).toString('latin1') === 'GIF89a');
+    if (!magicOk || bytes.length < 50000) fail(embed.path, `declared file ${name} missing, wrong type or unexpectedly small`);
+    else tick('embedFiles');
+  }
+  tick('embeds');
+}
+
 const report = { mode: release ? 'local-release-candidate' : 'private-staging', passed: failures.length === 0, publishedRoutes: eligible.length, sitemapUrls: sitemap.length, checks, tokens, contrast: contrastReport, failures };
 if (process.env.AGENCY_REPORT_PATH) writeFileSync(resolve(root, process.env.AGENCY_REPORT_PATH), `${JSON.stringify(report, null, 2)}\n`);
-console.log(`Agency verification ${report.passed ? 'passed' : 'FAILED'} (${report.mode}): ${eligible.length} published routes, ${sitemap.length} sitemap URLs, ${checks.shellDocuments || 0} documents in the agency shell, ${checks.marquees || 0} marquees, ${checks.faqQuestions || 0} FAQ questions mirrored in JSON-LD, ${checks.jsonLdDocuments || 0} documents with JSON-LD; contrast ${contrastReport.map(pair => `${pair.ratio}`).join('/')}.`);
+console.log(`Agency verification ${report.passed ? 'passed' : 'FAILED'} (${report.mode}): ${eligible.length} published routes, ${sitemap.length} sitemap URLs, ${checks.shellDocuments || 0} documents in the agency shell, ${checks.marquees || 0} marquees, ${checks.faqQuestions || 0} FAQ questions mirrored in JSON-LD, ${checks.jsonLdDocuments || 0} documents with JSON-LD, ${checks.addedArticles || 0} added posts/notes with Article JSON-LD, ${checks.embeds || 0} embeds (${checks.embedFiles || 0} files), post FAQ ${checks.postFaqQuestions || 0} mirrored, ${checks.postImages || 0} post images; contrast ${contrastReport.map(pair => `${pair.ratio}`).join('/')}.`);
 if (failures.length) console.error(failures.map(value => `  - ${value}`).join('\n'));
 process.exitCode = report.passed ? 0 : 1;

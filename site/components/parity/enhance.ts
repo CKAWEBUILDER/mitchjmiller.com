@@ -132,3 +132,42 @@ if (contactForm) {
     say(messages[out.error || ""] || `The message could not be sent (${out.error || "unknown error"}). Please email ${email}.`, "error");
   });
 }
+
+// Living infographics embedded in posts (iframes under /viz/) post {type: "viz-intent", intent}
+// when a reader asks to jump to that intent's section. Only same-origin messages from one of
+// this page's own /viz/ frames are honored; the frame's own target=_top link remains the fallback.
+const vizFrames = [...document.querySelectorAll<HTMLIFrameElement>('iframe[src^="/viz/"]')];
+if (vizFrames.length) {
+  window.addEventListener("message", event => {
+    if (event.origin !== window.location.origin) return;
+    if (!vizFrames.some(frame => frame.contentWindow === event.source)) return;
+    const data = event.data as { type?: unknown; intent?: unknown } | null;
+    if (!data || data.type !== "viz-intent" || typeof data.intent !== "string" || !/^[a-z-]{1,40}$/.test(data.intent)) return;
+    const target = document.getElementById(`intent-${data.intent}`);
+    if (!target) return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    target.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+    history.replaceState(null, "", `#intent-${data.intent}`);
+  });
+  // Fit each frame to its content (the static height="1200" is the no-script fallback) and follow
+  // later changes such as an opened panel or a narrower column. The observer is created in the
+  // frame's own realm; the content never depends on the frame height, so this cannot loop.
+  const fitted = new WeakSet<HTMLElement>();
+  const fitFrame = (frame: HTMLIFrameElement) => {
+    const view = frame.contentWindow as (Window & typeof globalThis) | null;
+    const body = frame.contentDocument?.body;
+    if (!view || !body || fitted.has(body)) return;
+    fitted.add(body);
+    const size = () => {
+      const height = Math.ceil(body.getBoundingClientRect().height);
+      if (height > 200) frame.style.height = `${height + 2}px`; // + the 1px top and bottom border
+    };
+    size();
+    new view.ResizeObserver(size).observe(body);
+  };
+  vizFrames.forEach(frame => {
+    frame.addEventListener("load", () => fitFrame(frame));
+    const doc = frame.contentDocument;
+    if (doc?.readyState === "complete" && doc.URL !== "about:blank") fitFrame(frame);
+  });
+}

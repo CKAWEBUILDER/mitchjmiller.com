@@ -21,5 +21,5 @@ for(const file of walk('dist').filter(p=>p.endsWith('.html'))){
 }
 writeFileSync('dist/sitemap.xml','<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+[...eligible].map(p=>`<url><loc>${canonicalOrigin}${p}</loc></url>`).join('')+'</urlset>');
 writeFileSync('dist/robots.txt',`User-agent: *\nAllow: /\nSitemap: ${canonicalOrigin}/sitemap.xml\n`);
-if(release){rmSync('dist/_headers',{force:true});writeFileSync('dist/CNAME','mj2.pro\n');writeFileSync('dist/.nojekyll','');}
+if(release){rmSync('dist/_headers',{force:true});writeFileSync('dist/CNAME','mj2.pro');/* byte-identical to the CNAME GitHub Pages wrote in gh-pages 3cdf29f (2026-09-23) */writeFileSync('dist/.nojekyll','');}
 console.log(`${release?'Local release candidate (not deployed)':'Private review'} finalized; ${eligible.size} published URLs (${manifest.routes.filter(r=>r.kind==='added').length} added in this release) and four preserved placeholders.`);

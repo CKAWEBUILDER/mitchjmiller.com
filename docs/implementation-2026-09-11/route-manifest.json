@@ -537,7 +537,85 @@
         "SearchForge",
         "ActionThread"
       ]
+    },
+    {
+      "path": "/blog/search-results-by-intent/",
+      "kind": "added",
+      "since": "post-2026-09-24",
+      "title": "Search Results by Intent: Five Pages and the Zero-Click Future SEOs Already Measured",
+      "minText": 1500,
+      "expected": [
+        "Search Results by Intent: Five Pages and the Zero-Click Future SEOs Already Measured",
+        "Informational \u2014 the cheapest answer to keep in-platform",
+        "Commercial investigation \u2014 the shortlist Google monetizes twice",
+        "Transactional \u2014 the one intent moving away from AI synthesis",
+        "Navigational \u2014 the intent that needed AI least, and got it anyway",
+        "Local \u2014 the intent Google never has to hand off",
+        "The route through all five",
+        "How often does an AI Overview appear, by search intent?",
+        "Representative rendering; real capture pending."
+      ],
+      "note": "Published 2026-09-24 (Mitch: \"publish now\"). Entry in src/lib/data.ts, rendered through baseline/src/lib/published.ts. Embeds the two living infographics declared under \"embeds\"."
+    },
+    {
+      "path": "/blog/studying/pocock-ai-coding-workflow/",
+      "kind": "added",
+      "since": "post-2026-09-24",
+      "title": "Matt Pocock's Full AI-Coding Workflow \u2014 Idea to Merge",
+      "minText": 1500,
+      "expected": [
+        "Matt Pocock's Full AI-Coding Workflow \u2014 Idea to Merge"
+      ],
+      "note": "Study note from src/lib/study-notes.ts (7068a03); absent from the 2026-09-21 build, restored 2026-09-24 (handoffs/study-notes-deploy-gap-2026-09-22.md)."
+    },
+    {
+      "path": "/blog/studying/fde-1m-ai-job/",
+      "kind": "added",
+      "since": "post-2026-09-24",
+      "title": "FDE: The $1M/Year AI Job, Explained",
+      "minText": 1500,
+      "expected": [
+        "FDE: The $1M/Year AI Job, Explained"
+      ],
+      "note": "Study note from src/lib/study-notes.ts (1701d2d); absent from the 2026-09-21 build, restored 2026-09-24 (handoffs/study-notes-deploy-gap-2026-09-22.md)."
+    },
+    {
+      "path": "/blog/studying/pocock-agentic-workflow/",
+      "kind": "added",
+      "since": "post-2026-09-24",
+      "title": "Matt Pocock's Agentic Engineering Workflow \u2014 Harness Over Model",
+      "minText": 1500,
+      "expected": [
+        "Matt Pocock's Agentic Engineering Workflow \u2014 Harness Over Model"
+      ],
+      "note": "Study note from src/lib/study-notes.ts (512be11); absent from the 2026-09-21 build, restored 2026-09-24 (handoffs/study-notes-deploy-gap-2026-09-22.md)."
     }
   ],
-  "note": "kind 'added' = routes introduced by the 2026-09-12 release (not in production snapshot 2745c7e): public lab page, population workbench (lane 2) and the client workspace entrance. They are indexable and in the sitemap; scripts/verify-parity.mjs checks them separately from the 57 archived routes. Agency redesign 2026-09-14: /services/ added (kind added); the home page is an Astro page in the agency shell; all other routes unchanged."
+  "embeds": [
+    {
+      "path": "/viz/search-results-by-intent-mandala/",
+      "embeddedIn": "/blog/search-results-by-intent/",
+      "title": "Data Mandala \u2014 Search Intent 2026",
+      "files": [
+        "poster-1080x1080.png",
+        "poster-1080x1350.png",
+        "poster-2160x2700.png",
+        "anim-640x800.gif"
+      ],
+      "note": "Standalone living infographic (no site shell, no analytics, noindex, follow; the post is the indexable page). Published copy of content-studio direction 01 with same-origin jump links, the /images/blog/serp-examples/ renderings and the mj2.pro signature."
+    },
+    {
+      "path": "/viz/search-results-by-intent-journey/",
+      "embeddedIn": "/blog/search-results-by-intent/",
+      "title": "The Journey Map \u2014 Search Results by Intent",
+      "files": [
+        "poster-1080x1080.png",
+        "poster-1080x1350.png",
+        "poster-2160x2700.png",
+        "anim-640x800.gif"
+      ],
+      "note": "Standalone living infographic (no site shell, no analytics, noindex, follow; the post is the indexable page). Published copy of content-studio direction 05 with same-origin jump links."
+    }
+  ],
+  "note": "kind 'added' = routes introduced by the 2026-09-12 release (not in production snapshot 2745c7e): public lab page, population workbench (lane 2) and the client workspace entrance. They are indexable and in the sitemap; scripts/verify-parity.mjs checks them separately from the 57 archived routes. Agency redesign 2026-09-14: /services/ added (kind added); the home page is an Astro page in the agency shell; all other routes unchanged. Post 2026-09-24: /blog/search-results-by-intent/ plus the three study notes the 2026-09-21 build omitted (kind added, rendered from src/lib via baseline/src/lib/published.ts); the post's two standalone living infographics are listed under \"embeds\" (noindex, outside the shell, checked by scripts/verify-agency.mjs and scripts/qa/crawl.mjs)."
 }

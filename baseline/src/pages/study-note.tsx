@@ -1,6 +1,6 @@
 import { Layout } from "@/components/layout";
 import { SEO } from "@/components/seo";
-import { studyNotes } from "@/lib/study-notes";
+import { studyNotes } from "@/lib/published";
 import { Link } from "@/components/native-link";
 import { useRoute } from "wouter";
 import { ArrowLeft, Youtube } from "lucide-react";

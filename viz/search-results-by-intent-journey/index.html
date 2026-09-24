@@ -1,0 +1,932 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Journey Map — Search Results by Intent</title>
+<style>
+  html, body { margin: 0; padding: 0; background: #FBF3E4; }
+  #stage { position: relative; overflow: hidden; }
+  svg { display: block; }
+  #prompt {
+    display: none; margin: 0; padding: 11px 16px; background: #17120F; color: #FFC53D;
+    font: 700 15px/1.3 'Avenir Next','Helvetica Neue',Helvetica,Arial,sans-serif; letter-spacing: .2px;
+  }
+  a:focus-visible { outline: 3px solid #17120F; outline-offset: 2px; }
+</style>
+<meta name="robots" content="noindex, follow"/></head>
+<body>
+<p id="prompt">Click a territory to jump to its section.</p>
+<div id="stage"><svg id="viz" xmlns="http://www.w3.org/2000/svg"></svg></div>
+<script>
+/* ============================================================================
+   THE JOURNEY MAP — a searcher's path across five intent territories.
+   Self-contained: no network requests, macOS system fonts only.
+
+   URL params
+     ?size=1080x1350 | 1080x1080 | 2160x2700 | 640x800 | portrait | square   (default portrait)
+     ?poster=1   freeze at the settled frame (also hides the "click a territory" prompt)
+     ?gif=1      static clock, exporter drives it (also hides the prompt)
+     ?static=1   no rAF; only window.VIZ.seek() moves the clock
+     ?t=2.4      seek to a time in seconds
+     ?parent=<post url>   same-origin base URL for each territory's fallback
+                 link (published copy: else the post on this origin)
+
+   Export hook
+     window.VIZ = { ready, duration, seek(t), frame(), selectIntent(slug) }
+     selectIntent highlights a territory and posts {type:'viz-intent', intent:slug}
+     to window.parent when embedded in an iframe. slug is one of: informational,
+     commercial, transactional, navigational, local.
+     document.documentElement.dataset.ready === '1' once the first paint is done.
+
+   Reduced motion
+     prefers-reduced-motion: reduce skips straight to the settled frame; the
+     live page otherwise plays one slowed draw on load, then holds (no loop).
+
+   Every figure is lifted verbatim from
+     the search-intent research ledger (data.json)
+   with the stat index noted in a comment. Nothing is derived or invented.
+   ========================================================================= */
+
+/* ------------------------------------------------------------------ params */
+const Q = new URLSearchParams(location.search);
+const rawSize = (Q.get('size') || '1080x1350').toLowerCase();
+const SIZE = (() => {
+  if (rawSize === 'portrait') return { w: 1080, h: 1350 };
+  if (rawSize === 'square') return { w: 1080, h: 1080 };
+  const m = rawSize.match(/^(\d+)\s*[x×]\s*(\d+)$/);
+  return m ? { w: +m[1], h: +m[2] } : { w: 1080, h: 1350 };
+})();
+const IS_SQUARE = Math.abs(SIZE.w / SIZE.h - 1) < 0.06;
+const FMT = IS_SQUARE ? 'square' : 'portrait';
+const SQ = FMT === 'square';
+const STATIC = Q.has('poster') || Q.has('gif') || Q.has('static');
+const INTERACTIVE = !Q.has('poster') && !Q.has('gif');
+if (INTERACTIVE) {
+  const pr = document.getElementById('prompt');
+  if (pr) pr.style.display = 'block';
+}
+
+/* ------------------------------------------------------------------ palette */
+const C = {
+  cream:  '#FBF3E4',
+  paper:  '#F4E7CD',
+  paper2: '#EFDFC0',
+  ink:    '#17120F',
+  muted:  '#6E6055',
+  rule:   '#D9C7A6',
+  ghost:  '#D2BE9B',
+  gold:   '#FFC53D',
+  flag:   '#E8441F',
+  road:   '#8C5A2B',
+  roadDark: '#6B4220',
+};
+const TC = {
+  informational: { deep: '#0E8F91', tint: '#DCF0EE' },
+  navigational:  { deep: '#6A3FD1', tint: '#E7DFFB' },
+  commercial:    { deep: '#CC1D63', tint: '#FBDDE9' },
+  transactional: { deep: '#B07000', tint: '#FBEACA' },
+  local:         { deep: '#217A45', tint: '#DCF0E1' },
+};
+
+const DISPLAY = "'Avenir Next Condensed','Arial Narrow',Impact,sans-serif";
+const BODY    = "'Avenir Next','Helvetica Neue',Helvetica,Arial,sans-serif";
+
+/* -------------------------------------------------------------------- copy */
+const TITLE = {
+  eyebrow: 'A MAP OF THE GOOGLE RESULTS PAGE, BY SEARCH INTENT  ·  U.S.  ·  2026',
+  head: 'MOST SEARCHES NEVER LEAVE GOOGLE',
+  sub: '68.01% ended with no click in Jan–Apr 2026, up from 60.45% in 2024. Five intents, five very different results pages.',
+};
+
+const START = { label: 'THE SEARCH BOX', sub: '5.47M queries · 53 brands · 2.43B impressions mapped' };
+
+const TERRITORIES = [
+  {
+    n: 1, key: 'informational', slot: 'L1', icon: 'book', name: 'INFORMATIONAL',
+    a: { fig: '36%',    roll: 36,   dec: 0, label: 'SHOW AN AI OVERVIEW',      detail: '85.9% when the query is a question' },   // [5] [11]
+    b: { fig: '0.94%',                      label: 'ORGANIC CTR IF NOT CITED', detail: '3.35% with no AI Overview on the page' },// [35] [33]
+    foot: '91.3% → 57.1% informational, Jan–Oct 2025',                                                                          // [16] [17]
+    src: 'Seer Interactive · Semrush',
+  },
+  {
+    n: 2, key: 'navigational', slot: 'R1', icon: 'arrow', name: 'NAVIGATIONAL',
+    a: { fig: '0%',     roll: 0,    dec: 0, label: 'AI OVERVIEWS, DEC 2024',   detail: '10,000 US desktop keywords, 7 verticals' }, // [8]
+    b: { fig: '10.33%',                     label: 'AI OVERVIEWS, OCT 2025',   detail: '“Take me to the site” gets an answer too' },// [17 note]
+    foot: 'Share of searches today: not measured',
+    src: 'Authoritas · Semrush',
+  },
+  {
+    n: 3, key: 'commercial', slot: 'L2', icon: 'versus', name: 'COMMERCIAL',
+    a: { fig: '95.4%',  roll: 95.4, dec: 1, label: 'OF “X VS Y” QUERIES',      detail: 'AI Overview on 267 of 280 comparisons' },   // [10]
+    b: { fig: '+71%',                       label: 'COMMERCIAL AIO GROWTH',    detail: 'Nov 2025 – Apr 2026, 600,000 keywords' },   // [18]
+    foot: 'Headphone paid clicks: 16% → 36%',                                                                                      // [40]
+    src: 'Seer · Semrush · Search Engine Land',
+  },
+  {
+    n: 4, key: 'transactional', slot: 'R2', icon: 'cart', name: 'TRANSACTIONAL',
+    a: { fig: '5%',     roll: 5,    dec: 0, label: 'SHOW AN AI OVERVIEW',      detail: 'Lowest rate of any intent measured' },      // [7]
+    b: { fig: '−5%',                        label: 'AIO SHARE, SAME 6 MONTHS', detail: 'Falling while commercial rose 71%' },       // [19]
+    foot: 'Shopping units by intent: not measured',
+    src: 'Seer Interactive · Semrush',
+  },
+  {
+    n: 5, key: 'local', slot: 'L3', icon: 'pin', name: 'LOCAL',
+    a: { fig: '93%',    roll: 93,   dec: 0, label: 'SHOW A LOCAL PACK',        detail: 'Only 6% of informational queries do' },     // [22]
+    b: { fig: '15%',                        label: 'SHOW AN AI OVERVIEW',      detail: 'Least AI-affected intent measured' },       // [12]
+    foot: '540 queries, 3 metros, hand-collected',
+    src: 'Whitespark',
+  },
+];
+
+const DEST = {
+  eyebrow: "JOURNEY'S END",
+  roll: 68.01, dec: 2, fig: '68.01%',
+  labelLines: ['of U.S. Google searches', 'ended with no click'],
+  detail: 'Jan–Apr 2026 · 60.45% in 2024 · only 1.53% of results pages are still ten plain blue links',  // [27] [28] [26]
+  detailShort: 'Jan–Apr 2026 · 60.45% in 2024 · 1.53% of pages are ten plain links',
+  src: 'SparkToro / Similarweb · Semrush',
+};
+
+const LEGEND = [
+  { icon: 'sparkle', label: 'AI OVERVIEW',      val: 'on 48% of SERPs · 30% on another panel', short: '48% of SERPs · 30% on another',  color: TC.informational.deep },  // [14] [15]
+  { icon: 'tag',     label: 'ADS ON AIO PAGES', val: '25.56% in Oct 2025, was 5.17%',          short: '25.56%, was 5.17%',              color: TC.commercial.deep },     // [20] [21]
+  { icon: 'links',   label: 'ORGANIC #1',       val: '−58% CTR when an AI Overview shows',     short: '−58% CTR under an AIO',          color: C.ink },                  // [37]
+  { icon: 'pin',     label: 'LOCAL PACK',       val: '93% of local-intent queries',            short: '93% of local queries',           color: TC.local.deep },          // [22]
+  { icon: 'paa',     label: 'PEOPLE ALSO ASK (2020)', val: '49.37% desktop · 52.27% mobile',   short: '49.37% desktop',                 color: TC.navigational.deep },   // [25 replacement: Semrush PAA study, 1,000,000 US desktop keywords, 2020-09-30. The 64.9% figure is EXCLUDED — 404 source.]
+  { icon: 'terra',   label: 'PAA · SHOPPING · AI CITES', val: 'by intent: not measured',       short: 'by intent: not measured',        color: C.muted },
+];
+
+const SOURCES = 'Sources: SparkToro/Similarweb · Seer · Semrush · Ahrefs · Authoritas · Whitespark · Search Engine Land. Studies 2020–2026, dated per cell. Ledger: research/2026-09-14/search-intent.';
+
+/* ------------------------------------------------------------------ layout */
+const M = SQ ? {
+  W: 1080, H: 1080,
+  title: 164, startY: 164, startH: 48,
+  colL: 84, colR: 548, colW: 448,
+  rows: [212, 458, 704], rowH: 226,
+  gut: [448, 694], bottomY: 952,
+  chanL: 54, chanR: 1026,
+  card: { headH: 44, pad: 18, bodyTop: 46, blockH: 62, gap: 4 },
+  legend: { y: 996, rowH: 34, cols: 3, lines: 1, capY: 982, ruleY: 990 },
+  srcY: 1074,
+  compass: 34,
+  f: { eyebrow: 17, head: 54, sub: 19, startLbl: 24, startSub: 16,
+       terName: 27, fig: 40, figLbl: 18, detail: 18, foot: 17, src: 14,
+       destEye: 17, destFig: 60, destLbl: 20, destDetail: 15,
+       legLbl: 18, legVal: 18, src2: 12 },
+} : {
+  W: 1080, H: 1350,
+  title: 214, startY: 214, startH: 58,
+  colL: 84, colR: 548, colW: 448,
+  rows: [272, 578, 884], rowH: 268,
+  gut: [559, 865], bottomY: 1176,
+  chanL: 54, chanR: 1026,
+  card: { headH: 48, pad: 18, bodyTop: 56, blockH: 70, gap: 8 },
+  legend: { y: 1226, rowH: 46, cols: 3, lines: 2, capY: 1208, ruleY: 1218 },
+  srcY: 1338,
+  compass: 38,
+  f: { eyebrow: 20, head: 70, sub: 23, startLbl: 27, startSub: 18,
+       terName: 32, fig: 46, figLbl: 20, detail: 21, foot: 19, src: 15,
+       destEye: 19, destFig: 76, destLbl: 23, destDetail: 17,
+       legLbl: 20, legVal: 19, src2: 13 },
+};
+
+/* ------------------------------------------------------------- svg helpers */
+const NS = 'http://www.w3.org/2000/svg';
+const svg = document.getElementById('viz');
+svg.setAttribute('viewBox', `0 0 ${M.W} ${M.H}`);
+svg.setAttribute('width', SIZE.w);
+svg.setAttribute('height', SIZE.h);
+svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+const stage = document.getElementById('stage');
+if (INTERACTIVE) {
+  /* Published copy: the live page scales to its frame (the post column is narrower than 1080 px);
+     poster and GIF exports keep the fixed canvas below. Text is fitted in SVG user units, so
+     scaling does not change the layout. */
+  stage.style.maxWidth = SIZE.w + 'px';
+  stage.style.margin = '0 auto';
+  svg.style.width = '100%';
+  svg.style.height = 'auto';
+  svg.style.aspectRatio = `${SIZE.w} / ${SIZE.h}`;
+} else {
+  stage.style.width = SIZE.w + 'px';
+  stage.style.height = SIZE.h + 'px';
+}
+
+function el(tag, attrs = {}, parent = null) {
+  const n = document.createElementNS(NS, tag);
+  for (const [k, v] of Object.entries(attrs)) if (v !== null && v !== undefined) n.setAttribute(k, v);
+  if (parent) parent.appendChild(n);
+  return n;
+}
+const G = (parent, attrs = {}) => el('g', attrs, parent);
+
+const hidden = el('g', { visibility: 'hidden' }, svg);
+const probe = el('text', {}, hidden);
+function measure(str, s) {
+  probe.setAttribute('font-family', s.family || BODY);
+  probe.setAttribute('font-size', s.size);
+  probe.setAttribute('font-weight', s.weight || 400);
+  probe.setAttribute('letter-spacing', s.spacing || 0);
+  probe.textContent = str;
+  return probe.getComputedTextLength();
+}
+function wrap(str, maxW, s) {
+  const words = String(str).split(/\s+/);
+  const out = []; let cur = '';
+  for (const w of words) {
+    const t = cur ? cur + ' ' + w : w;
+    if (cur && measure(t, s) > maxW) { out.push(cur); cur = w; } else cur = t;
+  }
+  if (cur) out.push(cur);
+  return out;
+}
+/* Two-line text with an orphaned last word re-wraps at a narrower measure so
+   the two lines come out roughly even. */
+function wrapBalanced(str, maxW, s) {
+  const lines = wrap(str, maxW, s);
+  if (lines.length !== 2 || measure(lines[1], s) >= maxW * 0.32) return lines;
+  for (const f of [0.74, 0.68, 0.62, 0.56]) {
+    const alt = wrap(str, maxW * f, s);
+    if (alt.length === 2 && measure(alt[1], s) >= maxW * 0.36) return alt;
+  }
+  return lines;
+}
+function fit(str, maxW, s, min = 10) {
+  let n = s.size;
+  while (n > min && measure(str, { ...s, size: n }) > maxW) n -= 0.5;
+  return n;
+}
+/* One text line. `box` = the rect it may occupy; the exporter asserts the
+   rendered bbox stays inside it and that no two boxes' glyphs collide. */
+function line(parent, str, x, y, s, box) {
+  const t = el('text', {
+    x, y,
+    'font-family': s.family || BODY,
+    'font-size': s.size,
+    'font-weight': s.weight || 400,
+    'letter-spacing': s.spacing || 0,
+    fill: s.fill || C.ink,
+    'text-anchor': s.anchor || 'start',
+  }, parent);
+  t.textContent = str;
+  if (box) t.setAttribute('data-box', box.map(v => Math.round(v)).join(','));
+  return t;
+}
+
+/* ------------------------------------------------------------------- icons */
+function icon(parent, kind, cx, cy, r, color) {
+  const g = G(parent, {});
+  const s = r / 12;
+  const P = d => el('path', { d, fill: color }, g);
+  const R = (x, y, w, h, rx) => el('rect', { x, y, width: w, height: h, rx, fill: color }, g);
+  switch (kind) {
+    case 'book':
+      R(cx - 11 * s, cy - 8 * s, 9.6 * s, 15 * s, 1.4 * s);
+      R(cx + 1.4 * s, cy - 8 * s, 9.6 * s, 15 * s, 1.4 * s);
+      R(cx - 0.9 * s, cy - 9.6 * s, 1.8 * s, 18 * s, 0.9 * s);
+      break;
+    case 'arrow':
+      P(`M${cx + 10 * s} ${cy - 10 * s} L${cx - 10 * s} ${cy + 10 * s} L${cx - 1 * s} ${cy + 1 * s} Z`);
+      P(`M${cx + 10 * s} ${cy - 10 * s} L${cx + 2 * s} ${cy + 9 * s} L${cx - 9 * s} ${cy - 2 * s} Z`);
+      break;
+    case 'versus':
+      el('circle', { cx: cx - 6 * s, cy: cy - 4 * s, r: 5 * s, fill: color }, g);
+      el('circle', { cx: cx + 6 * s, cy: cy + 2 * s, r: 5 * s, fill: color }, g);
+      R(cx - 11 * s, cy + 8 * s, 22 * s, 2.8 * s, 1.4 * s);
+      break;
+    case 'cart':
+      R(cx - 10 * s, cy - 7 * s, 20 * s, 10 * s, 1.8 * s);
+      R(cx - 13 * s, cy - 10.6 * s, 6.5 * s, 2.8 * s, 1.4 * s);
+      el('circle', { cx: cx - 5 * s, cy: cy + 8 * s, r: 2.8 * s, fill: color }, g);
+      el('circle', { cx: cx + 5 * s, cy: cy + 8 * s, r: 2.8 * s, fill: color }, g);
+      break;
+    case 'pin':
+      P(`M${cx} ${cy + 11 * s} C${cx - 9 * s} ${cy + 1 * s} ${cx - 9 * s} ${cy - 10 * s} ${cx} ${cy - 10 * s} C${cx + 9 * s} ${cy - 10 * s} ${cx + 9 * s} ${cy + 1 * s} ${cx} ${cy + 11 * s} Z`);
+      el('circle', { cx, cy: cy - 3 * s, r: 3.2 * s, fill: C.cream }, g);
+      break;
+    case 'flagpin':
+      R(cx - 1.4 * s, cy - 11 * s, 2.8 * s, 22 * s, 1.2 * s);
+      P(`M${cx + 1.4 * s} ${cy - 11 * s} L${cx + 12 * s} ${cy - 6.2 * s} L${cx + 1.4 * s} ${cy - 1.4 * s} Z`);
+      break;
+    case 'glass':
+      el('circle', { cx: cx - 1.6 * s, cy: cy - 1.6 * s, r: 7.2 * s, fill: 'none', stroke: color, 'stroke-width': 3 * s }, g);
+      el('rect', {
+        x: cx + 2.6 * s, y: cy + 2.6 * s, width: 3 * s, height: 10 * s, rx: 1.5 * s, fill: color,
+        transform: `rotate(-45 ${cx + 4.1 * s} ${cy + 4.1 * s})`,
+      }, g);
+      break;
+    case 'sparkle':
+      P(`M${cx} ${cy - 12 * s} Q${cx + 2.2 * s} ${cy - 2.2 * s} ${cx + 12 * s} ${cy} Q${cx + 2.2 * s} ${cy + 2.2 * s} ${cx} ${cy + 12 * s} Q${cx - 2.2 * s} ${cy + 2.2 * s} ${cx - 12 * s} ${cy} Q${cx - 2.2 * s} ${cy - 2.2 * s} ${cx} ${cy - 12 * s} Z`);
+      break;
+    case 'tag':
+      P(`M${cx - 11 * s} ${cy - 7.5 * s} H${cx + 3 * s} L${cx + 11 * s} ${cy} L${cx + 3 * s} ${cy + 7.5 * s} H${cx - 11 * s} Z`);
+      break;
+    case 'links':
+      [22, 17, 12].forEach((w, i) => R(cx - 11 * s, cy - 9 * s + i * 7.4 * s, w * s, 4.2 * s, 2.1 * s));
+      break;
+    case 'paa':
+      for (let i = 0; i < 3; i++) {
+        el('rect', {
+          x: cx - 11 * s, y: cy - 10 * s + i * 7.4 * s, width: 22 * s, height: 5 * s, rx: 2.5 * s,
+          fill: color, opacity: (1 - i * 0.24).toFixed(2),
+        }, g);
+      }
+      break;
+    case 'terra':
+      el('circle', { cx, cy, r: 9.6 * s, fill: 'none', stroke: color, 'stroke-width': 2.8 * s, 'stroke-dasharray': `${4 * s} ${3.6 * s}` }, g);
+      R(cx - 5.4 * s, cy - 1.6 * s, 10.8 * s, 3.2 * s, 1.6 * s);
+      break;
+  }
+  return g;
+}
+
+/* ----------------------------------------------------- mandala compass rose */
+function mandala(parent, cx, cy, r) {
+  const g = G(parent, {});
+  el('circle', { cx, cy, r, fill: C.ink }, g);
+  el('circle', { cx, cy, r: r * 0.94, fill: C.flag }, g);
+  for (let i = 0; i < 16; i++) {
+    const a = (i / 16) * Math.PI * 2 - Math.PI / 2;
+    const a1 = a - Math.PI / 30, a2 = a + Math.PI / 30;
+    const R1 = r * 0.9, r0 = r * 0.4;
+    const pt = (ang, rad) => `${(cx + Math.cos(ang) * rad).toFixed(1)} ${(cy + Math.sin(ang) * rad).toFixed(1)}`;
+    el('path', {
+      d: `M${pt(a1, r0)} L${pt(a, R1)} L${pt(a2, r0)} Z`,
+      fill: i % 2 ? C.gold : C.cream,
+      opacity: i % 2 ? 1 : 0.9,
+    }, g);
+  }
+  el('circle', { cx, cy, r: r * 0.44, fill: TC.informational.deep }, g);
+  el('circle', { cx, cy, r: r * 0.3, fill: C.gold }, g);
+  el('circle', { cx, cy, r: r * 0.15, fill: C.ink }, g);
+  return g;
+}
+
+/* ---------------------------------------------------------- road geometry */
+function roundedPolyline(pts, radius) {
+  let d = '';
+  for (let i = 0; i < pts.length; i++) {
+    const p = pts[i];
+    if (i === 0) { d += `M${p[0]} ${p[1]}`; continue; }
+    if (i === pts.length - 1) { d += ` L${p[0]} ${p[1]}`; continue; }
+    const prev = pts[i - 1], next = pts[i + 1];
+    const v1 = [p[0] - prev[0], p[1] - prev[1]], v2 = [next[0] - p[0], next[1] - p[1]];
+    const l1 = Math.hypot(v1[0], v1[1]), l2 = Math.hypot(v2[0], v2[1]);
+    const r = Math.min(radius, l1 / 2, l2 / 2);
+    const a = [p[0] - (v1[0] / l1) * r, p[1] - (v1[1] / l1) * r];
+    const b = [p[0] + (v2[0] / l2) * r, p[1] + (v2[1] / l2) * r];
+    d += ` L${a[0].toFixed(1)} ${a[1].toFixed(1)} Q${p[0]} ${p[1]} ${b[0].toFixed(1)} ${b[1].toFixed(1)}`;
+  }
+  return d;
+}
+
+/* ============================================================ build the map */
+const L = {
+  ground: G(svg), terrain: G(svg), ghost: G(svg), road: G(svg),
+  cards: G(svg), marks: G(svg), chrome: G(svg), fx: G(svg),
+};
+
+el('rect', { x: 0, y: 0, width: M.W, height: M.H, fill: C.cream }, L.ground);
+
+/* posterised terrain: flat blobs, contour rings, hatch ticks — deterministic */
+(function terrain() {
+  let seed = 20260915;
+  const rnd = () => (seed = (seed * 1664525 + 1013904223) % 4294967296) / 4294967296;
+  const top = M.title + 8, bot = M.legend.capY - 24;
+  for (let i = 0; i < 24; i++) {
+    const cx = 16 + rnd() * (M.W - 32), cy = top + rnd() * (bot - top), rr = 28 + rnd() * 64;
+    el('ellipse', {
+      cx: cx.toFixed(1), cy: cy.toFixed(1), rx: rr.toFixed(1), ry: (rr * (0.48 + rnd() * 0.42)).toFixed(1),
+      fill: rnd() > 0.5 ? C.paper : C.paper2,
+    }, L.terrain);
+  }
+  for (let i = 0; i < 13; i++) {
+    const cx = 16 + rnd() * (M.W - 32), cy = top + rnd() * (bot - top), rr = 40 + rnd() * 92;
+    el('circle', { cx: cx.toFixed(1), cy: cy.toFixed(1), r: rr.toFixed(1), fill: 'none', stroke: C.rule, 'stroke-width': 2, opacity: 0.55 }, L.terrain);
+    el('circle', { cx: cx.toFixed(1), cy: cy.toFixed(1), r: (rr * 0.64).toFixed(1), fill: 'none', stroke: C.rule, 'stroke-width': 2, opacity: 0.45 }, L.terrain);
+  }
+  for (let i = 0; i < 80; i++) {
+    const x = 16 + rnd() * (M.W - 32), y = top + rnd() * (bot - top);
+    el('rect', { x: x.toFixed(1), y: y.toFixed(1), width: 8, height: 2.6, rx: 1.3, fill: C.rule, opacity: 0.6 }, L.terrain);
+  }
+})();
+
+/* --------------------------------------------------------------- title bar */
+(function titleBar() {
+  const g = L.chrome;
+  el('rect', { x: 0, y: 0, width: M.W, height: M.title, fill: C.flag }, g);
+  for (let i = 0; i < 14; i++) {
+    el('rect', { x: M.W - 420 + i * 30, y: 0, width: 11, height: M.title - 9, fill: '#FFFFFF', opacity: 0.055 }, g);
+  }
+  el('rect', { x: 0, y: M.title - 9, width: M.W, height: 9, fill: C.gold }, g);
+
+  const padX = 40, wMax = M.W - padX * 2;
+  const eb = { size: M.f.eyebrow, weight: 700, family: BODY, spacing: 1.8 };
+  line(g, TITLE.eyebrow, padX, SQ ? 36 : 44,
+    { ...eb, size: fit(TITLE.eyebrow, wMax, eb, 14), fill: C.gold },
+    [padX, 8, wMax, SQ ? 32 : 40]);
+
+  const hs = { size: M.f.head, weight: 800, family: DISPLAY, spacing: -0.5 };
+  const hy = SQ ? 96 : 118;
+  line(g, TITLE.head, padX, hy,
+    { ...hs, size: fit(TITLE.head, wMax, hs, 34), fill: C.cream },
+    [padX, hy - M.f.head * 0.80, wMax, M.f.head * 1.04]);
+
+  const ss = { size: M.f.sub, weight: 500, family: BODY };
+  const subLines = wrapBalanced(TITLE.sub, wMax, ss);
+  const sy = SQ ? 124 : 156;
+  subLines.forEach((t, i) => {
+    const y = sy + i * (M.f.sub * 1.26);
+    line(g, t, padX, y, { ...ss, fill: '#FFE7D4' }, [padX, y - M.f.sub, wMax, M.f.sub * 1.3]);
+  });
+})();
+
+/* ------------------------------------------------- start marker + compass */
+const COMPASS = { x: M.W - M.compass - 34, y: M.startY + M.startH / 2, r: M.compass };
+(function startMarker() {
+  const g = L.chrome;
+  const y = M.startY + M.startH / 2;
+  const boxH = SQ ? 38 : 44;
+  const ls = { size: M.f.startLbl, weight: 800, family: DISPLAY, spacing: 1.3 };
+  const ss = { size: M.f.startSub, weight: 500, family: BODY };
+  const x0 = M.chanL + 30;
+  const w = measure(START.label, ls) + 76;
+  el('rect', { x: x0, y: y - boxH / 2, width: w, height: boxH, rx: boxH / 2, fill: C.ink }, g);
+  icon(g, 'glass', x0 + 27, y, 14, C.gold);
+  line(g, START.label, x0 + 50, y + M.f.startLbl * 0.34, { ...ls, fill: C.cream },
+    [x0 + 46, y - boxH / 2, w - 48, boxH]);
+  const subX = x0 + w + 16, subW = (COMPASS.x - COMPASS.r - 20) - subX;
+  line(g, START.sub, subX, y + M.f.startSub * 0.35,
+    { ...ss, size: fit(START.sub, subW, ss, 14), fill: C.muted }, [subX, y - 18, subW, 36]);
+  mandala(g, COMPASS.x, COMPASS.y, COMPASS.r);
+})();
+
+/* ------------------------------------------------------------------- cards */
+const SLOTS = {
+  L1: [M.colL, M.rows[0]], R1: [M.colR, M.rows[0]],
+  L2: [M.colL, M.rows[1]], R2: [M.colR, M.rows[1]],
+  L3: [M.colL, M.rows[2]], R3: [M.colR, M.rows[2]],
+};
+const rollers = [];
+const cardBoxes = {};
+
+/* ------------------------------------------------------- click / jump target
+   Inside an iframe embed, a click posts to the parent AND falls back to a
+   plain top-level link — whichever the host actually handles. */
+function parentUrl() {
+  /* Published copy (mj2.pro): the fallback link targets the embedding post itself when it is
+     same-origin (a same-document jump, query string kept), then a same-origin ?parent=, else the
+     post on this origin. Cross-origin values are ignored so the link cannot be pointed off-site. */
+  try {
+    const p = window.parent;
+    if (p && p !== window && p.location.origin === location.origin) return p.location.origin + p.location.pathname + p.location.search;
+  } catch (e) {}
+  try {
+    const raw = Q.get('parent');
+    if (raw) { const u = new URL(raw, location.href); if (u.origin === location.origin) return u.origin + u.pathname + u.search; }
+  } catch (e) {}
+  return new URL('/blog/search-results-by-intent/', location.href).href;
+}
+function hrefFor(slug) { return parentUrl() + '#intent-' + slug; }
+
+function card(t) {
+  const [x, y] = SLOTS[t.slot];
+  const w = M.colW, h = M.rowH, col = TC[t.key];
+  const a = el('a', { href: hrefFor(t.key), target: '_top', 'aria-label': `Jump to the ${t.name} section` }, L.cards);
+  a.setAttribute('data-territory', t.key);
+  const g = G(a);
+  el('rect', { x: x + 5, y: y + 6, width: w, height: h, rx: 22, fill: C.ink, opacity: 0.10 }, g);
+  el('rect', { x, y, width: w, height: h, rx: 22, fill: col.tint, stroke: col.deep, 'stroke-width': 3 }, g);
+
+  const cid = 'clip-' + t.key;
+  const cp = el('clipPath', { id: cid }, g);
+  el('rect', { x, y, width: w, height: h, rx: 22 }, cp);
+  const rings = G(g, { 'clip-path': `url(#${cid})`, opacity: 0.16 });
+  for (let i = 0; i < 5; i++) {
+    el('circle', { cx: x + w - 36, cy: y + h - 20, r: 44 + i * 36, fill: 'none', stroke: col.deep, 'stroke-width': 3 }, rings);
+  }
+
+  const hh = M.card.headH;
+  el('path', {
+    d: `M${x} ${y + hh} V${y + 22} A22 22 0 0 1 ${x + 22} ${y} H${x + w - 22} A22 22 0 0 1 ${x + w} ${y + 22} V${y + hh} Z`,
+    fill: col.deep,
+  }, g);
+
+  const ns = { size: M.f.terName, weight: 800, family: DISPLAY, spacing: 0.8 };
+  const nameW = w - 66 - 44;
+  line(g, t.name, x + 62, y + hh / 2 + M.f.terName * 0.35,
+    { ...ns, size: fit(t.name, nameW, ns, 18), fill: '#FFFFFF' }, [x + 58, y + 2, nameW + 4, hh - 4]);
+  icon(g, t.icon, x + w - 28, y + hh / 2, SQ ? 13 : 15, '#FFFFFF');
+
+  const disc = G(L.marks, { 'data-disc': t.n });
+  el('circle', { cx: x + 32, cy: y + hh / 2, r: SQ ? 21 : 23, fill: C.cream, stroke: col.deep, 'stroke-width': 4 }, disc);
+  const nt = el('text', {
+    x: x + 32, y: y + hh / 2 + (SQ ? 9 : 10), 'text-anchor': 'middle',
+    'font-family': DISPLAY, 'font-size': SQ ? 26 : 29, 'font-weight': 800, fill: col.deep,
+  }, disc);
+  nt.textContent = t.n;
+
+  const bx = x + M.card.pad, bw = w - M.card.pad * 2;
+  let by = y + M.card.bodyTop;
+
+  const block = (d, first) => {
+    const fs = { size: M.f.fig, weight: 800, family: DISPLAY, spacing: -0.5 };
+    const figY = by + M.f.fig * 0.80;
+    const figNode = line(g, d.fig, bx, figY, { ...fs, fill: col.deep }, [bx, by, bw, M.f.fig * 1.02]);
+    if (first && d.roll !== undefined) rollers.push({ node: figNode, to: d.roll, dec: d.dec, key: t.key });
+    const figW = measure(d.fig, fs);
+    const ls = { size: M.f.figLbl, weight: 700, family: BODY, spacing: 1.1 };
+    const lw = bw - figW - 12;
+    line(g, d.label, bx + figW + 12, figY - (SQ ? 2 : 3),
+      { ...ls, size: fit(d.label, lw, ls, 14), fill: C.ink }, [bx + figW + 10, by, lw + 2, M.f.fig * 1.02]);
+    const ds = { size: M.f.detail, weight: 500, family: BODY };
+    const dy = by + M.card.blockH - 6;
+    line(g, d.detail, bx, dy,
+      { ...ds, size: fit(d.detail, bw, ds, 14), fill: C.muted }, [bx, dy - M.f.detail * 0.82, bw, M.f.detail * 1.2]);
+    by += M.card.blockH;
+    el('rect', { x: bx, y: by + M.card.gap / 2 - 1, width: bw, height: 2, fill: col.deep, opacity: 0.3 }, g);
+    by += M.card.gap;
+  };
+  block(t.a, true);
+  block(t.b, false);
+
+  const nm = /not measured/i.test(t.foot);
+  const fs2 = { size: M.f.foot, weight: nm ? 800 : 600, family: BODY };
+  const fy = by + M.f.foot * 0.9;
+  line(g, t.foot, bx, fy, { ...fs2, size: fit(t.foot, bw, fs2, 14), fill: nm ? C.flag : C.ink },
+    [bx, fy - M.f.foot * 0.85, bw, M.f.foot * 1.2]);
+
+  const cs = { size: M.f.src, weight: 600, family: BODY, spacing: 0.7 };
+  const cy2 = y + h - (SQ ? 9 : 11);
+  line(g, t.src.toUpperCase(), x + w - M.card.pad, cy2,
+    { ...cs, size: fit(t.src.toUpperCase(), bw - 8, cs, 12), fill: col.deep, anchor: 'end' },
+    [x + 12, cy2 - M.f.src, w - 24, M.f.src * 1.25]);
+
+  const hi = el('rect', {
+    x: x - 3, y: y - 3, width: w + 6, height: h + 6, rx: 25, fill: 'none',
+    stroke: C.flag, 'stroke-width': 7, opacity: 0, 'pointer-events': 'none',
+  }, g);
+
+  cardBoxes[t.n] = { x, y, w, h, disc, col, a, highlight: hi, key: t.key };
+}
+TERRITORIES.forEach(card);
+
+/* --------------------------------------------------------- click to jump
+   Every territory is a real, keyboard-reachable <a>. A click — or a call to
+   window.VIZ.selectIntent(id) — highlights it and posts to the embedding
+   parent; the <a>'s own href/target=_top is the fallback if nothing is
+   listening (see hrefFor above). */
+function highlightTerritory(key) {
+  for (const n in cardBoxes) cardBoxes[n].highlight.setAttribute('opacity', cardBoxes[n].key === key ? 1 : 0);
+}
+function selectIntent(key) {
+  if (!TC[key]) return false;
+  highlightTerritory(key);
+  try {
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({ type: 'viz-intent', intent: key }, '*');
+    }
+  } catch (e) { /* cross-origin parent read blocked — postMessage itself still fires */ }
+  return true;
+}
+TERRITORIES.forEach(t => { cardBoxes[t.n].a.addEventListener('click', () => selectIntent(t.key)); });
+
+/* ------------------------------------------------------- destination card */
+let destRoller = null;
+(function destination() {
+  const [x, y] = SLOTS.R3, w = M.colW, h = M.rowH;
+  const g = G(L.cards);
+  el('rect', { x: x + 5, y: y + 6, width: w, height: h, rx: 22, fill: C.ink, opacity: 0.2 }, g);
+  el('rect', { x, y, width: w, height: h, rx: 22, fill: C.ink, stroke: C.gold, 'stroke-width': 4 }, g);
+  const cp = el('clipPath', { id: 'clip-dest' }, g);
+  el('rect', { x, y, width: w, height: h, rx: 22 }, cp);
+  const burst = G(g, { 'clip-path': 'url(#clip-dest)' });
+  const bx0 = x + w * 0.5, by0 = y + h * 0.42;
+  for (let i = 0; i < 24; i++) {
+    const a = (i / 24) * Math.PI * 2, a1 = a - 0.05, a2 = a + 0.05, R = 460;
+    el('path', {
+      d: `M${bx0} ${by0} L${(bx0 + Math.cos(a1) * R).toFixed(1)} ${(by0 + Math.sin(a1) * R).toFixed(1)} L${(bx0 + Math.cos(a2) * R).toFixed(1)} ${(by0 + Math.sin(a2) * R).toFixed(1)} Z`,
+      fill: C.gold, opacity: 0.1,
+    }, burst);
+  }
+  const pad = M.card.pad, bw = w - pad * 2;
+  const es = { size: M.f.destEye, weight: 800, family: BODY, spacing: 2.4 };
+  const ey = y + (SQ ? 30 : 36);
+  line(g, DEST.eyebrow, x + pad, ey, { ...es, fill: C.gold }, [x + pad, ey - M.f.destEye, bw - 44, M.f.destEye * 1.3]);
+  icon(g, 'flagpin', x + w - 34, ey - 6, SQ ? 13 : 15, C.gold);
+
+  const fs = { size: M.f.destFig, weight: 800, family: DISPLAY, spacing: -1 };
+  const figY = y + (SQ ? 86 : 110);
+  const figNode = line(g, DEST.fig, x + pad, figY, { ...fs, fill: C.gold },
+    [x + pad, figY - M.f.destFig * 0.80, bw, M.f.destFig * 1.04]);
+  destRoller = { node: figNode, to: DEST.roll, dec: DEST.dec };
+
+  const ls = { size: M.f.destLbl, weight: 600, family: BODY };
+  const lblLines = DEST.labelLines;
+  const ly0 = figY + (SQ ? 32 : 38);
+  lblLines.forEach((s, i) => {
+    const ly = ly0 + i * (M.f.destLbl * 1.24);
+    line(g, s, x + pad, ly, { ...ls, fill: C.cream }, [x + pad, ly - M.f.destLbl, bw, M.f.destLbl * 1.28]);
+  });
+  const ds = { size: M.f.destDetail, weight: 500, family: BODY };
+  const dTxt = SQ ? DEST.detailShort : DEST.detail;
+  const dLines = wrapBalanced(dTxt, bw, ds).slice(0, 2);
+  const dy0 = ly0 + lblLines.length * (M.f.destLbl * 1.24) + (SQ ? 8 : 12);
+  dLines.forEach((s, i) => {
+    const dy = dy0 + i * (M.f.destDetail * 1.3);
+    line(g, s, x + pad, dy, { ...ds, fill: '#CBBAA2' }, [x + pad, dy - M.f.destDetail, bw, M.f.destDetail * 1.32]);
+  });
+  const cs = { size: M.f.src, weight: 600, family: BODY, spacing: 0.7 };
+  const cy2 = y + h - (SQ ? 9 : 11);
+  line(g, DEST.src.toUpperCase(), x + w - pad, cy2,
+    { ...cs, size: fit(DEST.src.toUpperCase(), bw - 8, cs, 12), fill: C.gold, anchor: 'end' },
+    [x + 12, cy2 - M.f.src, w - 24, M.f.src * 1.25]);
+})();
+
+/* ------------------------------------------------------------------- roads
+   A straight serpentine: every row reads left-to-right in both the grid and
+   the route (1→2, 3→4, 5→end), matching plain reading order. A short dogleg
+   jog — down, across, down — carries the trail back to the left margin
+   between rows instead of doubling the row itself back on itself. Cards draw
+   after the road (see L above), so the sliver of each jog that passes behind
+   a card's top edge is simply hidden under it. */
+const JOG = 20;
+const ROUTE = [
+  [M.chanL, M.startY + M.startH / 2],
+  [M.chanL, M.gut[0]],
+  [M.chanR, M.gut[0]],
+  [M.chanR, M.gut[0] + JOG],
+  [M.chanL, M.gut[0] + JOG],
+  [M.chanL, M.gut[1]],
+  [M.chanR, M.gut[1]],
+  [M.chanR, M.gut[1] + JOG],
+  [M.chanL, M.gut[1] + JOG],
+  [M.chanL, M.bottomY],
+  [M.colR + M.colW / 2, M.bottomY],
+  [M.colR + M.colW / 2, M.rows[2] + M.rowH + 6],
+];
+const ROUTE_BASE = roundedPolyline(ROUTE, 26);
+
+/* Give the trail a gentle meander so it reads as a road, not a border.
+   The wobble tapers to nothing at the corners and the two ends. */
+const ROUTE_D = (function meander(d, amp = 9, wavelength = 165) {
+  const tmp = el('path', { d }, hidden);
+  const total = tmp.getTotalLength();
+  const nearest = (px, py) => {
+    let best = 0, bd = Infinity;
+    for (let i = 0; i <= 600; i++) {
+      const l = (i / 600) * total, q = tmp.getPointAtLength(l);
+      const dd = (q.x - px) ** 2 + (q.y - py) ** 2;
+      if (dd < bd) { bd = dd; best = l; }
+    }
+    return best;
+  };
+  const corners = ROUTE.slice(1, -1).map(pt => nearest(pt[0], pt[1]));
+  const N = Math.max(240, Math.round(total / 4));
+  const out = [];
+  for (let i = 0; i <= N; i++) {
+    const sL = (i / N) * total;
+    const p = tmp.getPointAtLength(sL);
+    const p0 = tmp.getPointAtLength(Math.max(0, sL - 2));
+    const p1 = tmp.getPointAtLength(Math.min(total, sL + 2));
+    const tx = p1.x - p0.x, ty = p1.y - p0.y, tl = Math.hypot(tx, ty) || 1;
+    let a = amp * Math.min(1, sL / 70) * Math.min(1, (total - sL) / 70);
+    for (const c of corners) { const dd = Math.abs(sL - c); if (dd < 48) a *= dd / 48; }
+    const off = a * Math.sin((sL / wavelength) * Math.PI * 2);
+    out.push([(p.x - (ty / tl) * off).toFixed(1), (p.y + (tx / tl) * off).toFixed(1)]);
+  }
+  tmp.remove();
+  return 'M' + out.map(q => `${q[0]} ${q[1]}`).join(' L');
+})(ROUTE_BASE);
+
+el('path', {
+  d: ROUTE_D, fill: 'none', stroke: C.ghost, 'stroke-width': 13,
+  'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-dasharray': '2 13',
+}, L.ghost);
+
+const roadBase = el('path', {
+  d: ROUTE_D, fill: 'none', stroke: C.road, 'stroke-width': 14,
+  'stroke-linecap': 'round', 'stroke-linejoin': 'round',
+}, L.road);
+const ROAD_LEN = roadBase.getTotalLength();
+
+const defs = el('defs', {}, svg);
+const mask = el('mask', { id: 'road-reveal', maskUnits: 'userSpaceOnUse', x: 0, y: 0, width: M.W, height: M.H }, defs);
+const revealPath = el('path', {
+  d: ROUTE_D, fill: 'none', stroke: '#fff', 'stroke-width': 26,
+  'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-dasharray': `0 ${ROAD_LEN + 20}`,
+}, mask);
+roadBase.setAttribute('mask', 'url(#road-reveal)');
+
+const roadCentre = el('path', {
+  d: ROUTE_D, fill: 'none', stroke: C.cream, 'stroke-width': 2.8,
+  'stroke-dasharray': '10 11', mask: 'url(#road-reveal)',
+}, L.road);
+
+/* direction chevrons — they make the doubling-back route unambiguous */
+const chevrons = G(L.road, { mask: 'url(#road-reveal)' });
+(function drawChevrons() {
+  const step = 120, w = 7.5, hgt = 9;
+  for (let d = 34; d < ROAD_LEN - 20; d += step) {
+    const p = roadBase.getPointAtLength(d);
+    const q = roadBase.getPointAtLength(Math.min(ROAD_LEN, d + 6));
+    const a = Math.atan2(q.y - p.y, q.x - p.x) * 180 / Math.PI;
+    el('path', {
+      d: `M${-hgt} ${-w} L${hgt * 0.7} 0 L${-hgt} ${w} L${-hgt * 0.35} 0 Z`,
+      fill: C.gold, transform: `translate(${p.x.toFixed(1)} ${p.y.toFixed(1)}) rotate(${a.toFixed(1)})`,
+    }, chevrons);
+  }
+})();
+
+const travel = G(L.fx);
+const travelRing = el('circle', { cx: ROUTE[0][0], cy: ROUTE[0][1], r: 15, fill: C.gold, opacity: 0.5 }, travel);
+const travelDot = el('circle', { cx: ROUTE[0][0], cy: ROUTE[0][1], r: 9.5, fill: C.flag, stroke: C.cream, 'stroke-width': 3 }, travel);
+
+function lengthAt(px, py) {
+  let best = 0, bestD = Infinity;
+  const N = 1000;
+  for (let i = 0; i <= N; i++) {
+    const l = (i / N) * ROAD_LEN;
+    const p = roadBase.getPointAtLength(l);
+    const d = (p.x - px) ** 2 + (p.y - py) ** 2;
+    if (d < bestD) { bestD = d; best = l; }
+  }
+  return best;
+}
+const MILE = TERRITORIES.map(t => {
+  const b = cardBoxes[t.n];
+  const row = t.slot.endsWith('1') ? 0 : t.slot.endsWith('2') ? 1 : 2;
+  const py = row === 0 ? M.gut[0] : row === 1 ? M.gut[1] : M.bottomY;
+  const px = b.x + b.w / 2;
+  const at = lengthAt(px, py);
+  const q = roadBase.getPointAtLength(at);
+  return { n: t.n, key: t.key, L: at, x: q.x, y: q.y, col: TC[t.key] };
+});
+MILE.forEach(m => {
+  const g = G(L.marks, { 'data-mile': m.n });
+  el('circle', { cx: m.x, cy: m.y, r: 14, fill: C.cream, stroke: C.roadDark, 'stroke-width': 4 }, g);
+  el('circle', { cx: m.x, cy: m.y, r: 7, fill: m.col.deep }, g);
+});
+
+/* ------------------------------------------------------------------ legend */
+(function legend() {
+  const g = L.chrome;
+  const x0 = 30, totalW = M.W - 60, gut = 21;
+  const colW = (totalW - gut * (M.legend.cols - 1)) / M.legend.cols;
+  const cap = { size: M.f.legLbl - 3, weight: 800, family: BODY, spacing: 2.2 };
+  line(g, 'MAP KEY — WHAT SITS ON THE RESULTS PAGE', x0, M.legend.capY,
+    { ...cap, fill: C.muted }, [x0, M.legend.capY - M.f.legLbl, totalW, M.f.legLbl * 1.3]);
+  el('rect', { x: x0, y: M.legend.ruleY, width: totalW, height: 2, fill: C.rule }, g);
+
+  LEGEND.forEach((it, i) => {
+    const c = i % M.legend.cols, r = Math.floor(i / M.legend.cols);
+    const x = x0 + c * (colW + gut), y = M.legend.y + r * M.legend.rowH;
+    icon(g, it.icon, x + 14, y + (M.legend.lines === 1 ? 14 : M.legend.rowH * 0.44), SQ ? 12 : 13, it.color);
+    const ls = { size: M.f.legLbl, weight: 800, family: BODY, spacing: 0.8 };
+    const vs = { size: M.f.legVal, weight: 500, family: BODY };
+    if (M.legend.lines === 1) {
+      const txt = it.label + ' · ' + it.short;
+      const tw = colW - 32;
+      line(g, txt, x + 32, y + 20, { ...vs, size: fit(txt, tw, { ...vs, weight: 600 }, 12), weight: 600, fill: it.color },
+        [x + 30, y + 2, tw + 2, 26]);
+    } else {
+      line(g, it.label, x + 32, y + 18, { ...ls, size: fit(it.label, colW - 34, ls, 14), fill: C.ink },
+        [x + 30, y, colW - 30, 24]);
+      line(g, it.val, x + 32, y + 39, { ...vs, size: fit(it.val, colW - 34, vs, 14), fill: it.color },
+        [x + 30, y + 24, colW - 30, 22]);
+    }
+  });
+})();
+
+/* ------------------------------------------------------------- source line */
+(function sourceLine() {
+  const s = { size: M.f.src2, weight: 500, family: BODY };
+  line(L.chrome, SOURCES, 30, M.srcY, { ...s, size: fit(SOURCES, M.W - 60, s, 12), fill: C.muted },
+    [30, M.srcY - M.f.src2, M.W - 60, M.f.src2 * 1.4]);
+})();
+
+/* =========================================================== the animation
+   The trail draws roughly 2x slower than a plain sweep and holds for a beat
+   as it crosses into each territory: a piecewise schedule of eased MOVE
+   segments and flat HOLD segments, built from the milestones' real positions
+   along the finished road (MILE, already in ascending-L / ascending-number
+   order by construction) so it stays correct regardless of route geometry. */
+const PAUSE = 0.7;                                       // held at each territory's entry
+const T = { start: 0.12, drawSpan: (3.35 - 0.12) * 2, destRoll: 0.62, tail: 0.28 };  // drawSpan: ~2x the v1 draw time
+const easeInOut = u => (u < 0.5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2);
+const easeOut = u => 1 - Math.pow(1 - u, 3);
+const clamp01 = v => Math.max(0, Math.min(1, v));
+
+const MILE_ORDER = MILE.slice().sort((a, b) => a.L - b.L);
+const SEGS = [];
+(function buildSchedule() {
+  let t = T.start, frac = 0;
+  for (const m of MILE_ORDER) {
+    const f = m.L / ROAD_LEN;
+    const dur = (f - frac) * T.drawSpan;
+    SEGS.push({ t0: t, t1: t + dur, f0: frac, f1: f, hold: false });
+    t += dur;
+    m.t = t;                        // the trail visibly reaches this territory here
+    SEGS.push({ t0: t, t1: t + PAUSE, f0: f, f1: f, hold: true });
+    t += PAUSE;
+    frac = f;
+  }
+  const dur = (1 - frac) * T.drawSpan;
+  SEGS.push({ t0: t, t1: t + dur, f0: frac, f1: 1, hold: false });
+  T.roadEnd = t + dur;
+})();
+const DURATION = T.roadEnd + T.destRoll + T.tail;
+
+function roadFrac(t) {
+  if (t <= T.start) return 0;
+  if (t >= T.roadEnd) return 1;
+  for (const s of SEGS) {
+    if (t > s.t1) continue;
+    if (s.hold) return s.f1;
+    const u = s.t1 > s.t0 ? (t - s.t0) / (s.t1 - s.t0) : 1;
+    return s.f0 + (s.f1 - s.f0) * easeInOut(clamp01(u));
+  }
+  return 1;
+}
+
+rollers.forEach(r => {
+  const m = MILE.find(x => x.key === r.key);
+  r.t0 = m ? m.t : 0;
+  r.t1 = r.t0 + 0.40;
+});
+const mileNodes = MILE.map(m => ({
+  m,
+  pip: L.marks.querySelector(`[data-mile="${m.n}"]`),
+  disc: L.marks.querySelector(`[data-disc="${m.n}"]`),
+}));
+
+function render(t) {
+  t = Math.max(0, Math.min(DURATION, t));
+  const shown = roadFrac(t) * ROAD_LEN;
+  revealPath.setAttribute('stroke-dasharray', `${shown.toFixed(1)} ${(ROAD_LEN + 20).toFixed(1)}`);
+
+  const p = roadBase.getPointAtLength(Math.max(0.01, shown));
+  travel.setAttribute('opacity', (t < 0.05 || shown >= ROAD_LEN) ? 0 : 1);
+  travelDot.setAttribute('cx', p.x.toFixed(1)); travelDot.setAttribute('cy', p.y.toFixed(1));
+  travelRing.setAttribute('cx', p.x.toFixed(1)); travelRing.setAttribute('cy', p.y.toFixed(1));
+  travelRing.setAttribute('r', (14 + 4.5 * Math.sin(t * 9)).toFixed(1));
+
+  for (const { m, pip, disc } of mileNodes) {
+    const since = t - m.t, on = since >= 0;
+    const k = on ? Math.min(1, since / 0.28) : 0;
+    const s = on ? 1 + 0.6 * (1 - easeOut(k)) : 0.001;
+    pip.setAttribute('transform', `translate(${m.x} ${m.y}) scale(${s.toFixed(3)}) translate(${-m.x} ${-m.y})`);
+    pip.setAttribute('opacity', on ? 1 : 0);
+    const b = cardBoxes[m.n];
+    const cx = b.x + 32, cy = b.y + M.card.headH / 2;
+    const ds = on ? 1 + 0.3 * (1 - easeOut(Math.min(1, since / 0.36))) : 1;
+    disc.setAttribute('transform', `translate(${cx} ${cy}) scale(${ds.toFixed(3)}) translate(${-cx} ${-cy})`);
+  }
+
+  /* A figure only exists once the trail has reached its territory — an
+     un-rolled counter must never read as a measured zero. */
+  for (const r of rollers) {
+    const k = clamp01((t - r.t0) / (r.t1 - r.t0));
+    r.node.setAttribute('opacity', t < r.t0 ? 0 : 1);
+    r.node.textContent = (r.to * easeOut(k)).toFixed(r.dec) + '%';
+  }
+  const dk = clamp01((t - T.roadEnd) / T.destRoll);
+  destRoller.node.setAttribute('opacity', t < T.roadEnd ? 0 : 1);
+  destRoller.node.textContent = (destRoller.to * easeOut(dk)).toFixed(destRoller.dec) + '%';
+}
+
+/* ------------------------------------------------------------- clock / API
+   Live page: one slowed draw, then it holds on the settled frame — it does
+   not auto-loop. Reduced-motion skips straight to the settled frame. */
+const REDUCED_MOTION = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+let clock = 0, raf = null, t0 = null;
+function loop(ts) {
+  if (t0 === null) t0 = ts;
+  clock = (ts - t0) / 1000;
+  if (clock >= DURATION) { clock = DURATION; render(DURATION); raf = null; return; }
+  render(clock);
+  raf = requestAnimationFrame(loop);
+}
+
+const initialT = Q.has('poster') ? DURATION
+  : Q.has('t') ? (parseFloat(Q.get('t')) || 0)
+  : REDUCED_MOTION ? DURATION
+  : 0;
+render(initialT);
+clock = initialT;
+if (!STATIC && !Q.has('t') && !REDUCED_MOTION) raf = requestAnimationFrame(loop);
+
+window.VIZ = {
+  ready: Promise.resolve(true),
+  duration: DURATION,
+  format: FMT,
+  size: SIZE,
+  seek(t) { if (raf) { cancelAnimationFrame(raf); raf = null; } render(t); return t; },
+  frame() { return clock; },
+  selectIntent,
+};
+document.documentElement.dataset.ready = '1';
+</script>
+</body>
+</html>

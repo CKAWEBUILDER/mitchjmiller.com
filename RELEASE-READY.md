@@ -1,3 +1,20 @@
+# RELEASE-READY — current procedure (mj2.pro, updated 2026-09-24)
+
+Production is the GitHub Pages legacy branch deploy from the `gh-pages` root, custom domain `mj2.pro` (HTTPS enforced), built from `main`. Last release: gh-pages `7844899` from `main` `4fcfd6f` (PROJECT.md "PUBLISHED — September 24, 2026"). The 2026-09-12 procedure further down is history; its `mitchjmiller.com` probes no longer apply (that host only forwards over HTTP).
+
+1. Start from a clean checkout of `origin/main` (a temporary clone if the canonical checkout carries other workers' changes). `git fetch origin`; note the `origin/gh-pages` head and stop if it moves before step 5.
+2. `npm ci` (`npm_config_cache=/private/tmp/claude-501/npm-cache npm ci` if `~/.npm` is unwritable), `npm run typecheck`, `npm run build:release-candidate` (runs verify-parity and verify-agency; route and sitemap counts are exact, so a new route means a manifest entry plus the new count).
+3. QA: `node scripts/qa/serve.mjs dist 5193 &`, `node scripts/qa/crawl.mjs --out docs/release-<date>/qa/crawl.json`, `node scripts/qa/browser.mjs --out docs/release-<date>/qa/browser.json --shots <scratch dir>`; stop the server.
+4. Commit by explicit path (never `git add -A` in this repo), push the branch, fast-forward `main` (never force), rebuild from the pushed commit and record `(cd dist && find . -type f | LC_ALL=C sort | xargs shasum -a 256) | shasum -a 256`.
+5. `git worktree add -b gh-pages <tmp>/deploy origin/gh-pages`; inside it `find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +` then `cp -R <repo>/dist/. .`. Confirm `CNAME` (`mj2.pro`, no trailing newline, byte-identical to Pages), `.nojekyll`, `404.html`, `sitemap.xml`, `robots.txt` and `9b0893b8818bd5bce05d66051f2bc971.txt`; the tree hash (`find . -path ./.git -prune -o -type f -print | LC_ALL=C sort | xargs shasum -a 256 | shasum -a 256`) must equal the artifact hash; `git diff --cached --name-status` must delete nothing outside hashed `_astro/` bundles. Commit `Release <date>: … (source <sha>, artifact <hash>)`, `git push origin gh-pages` (fast-forward), remove the worktree.
+6. Poll `gh api repos/CKAWEBUILDER/mitchjmiller.com/pages/builds/latest` until it reports `built` for the new commit, then probe `https://mj2.pro/`: changed routes 200 with one h1, the right canonical and robots; sitemap count; robots unchanged; a spot-check of prior routes; an unknown route returns 404.
+7. IndexNow: POST `{"host":"mj2.pro","key":"9b0893b8818bd5bce05d66051f2bc971","keyLocation":"https://mj2.pro/9b0893b8818bd5bce05d66051f2bc971.txt","urlList":[…]}` to `https://api.indexnow.org/indexnow` (200 or 202 expected). Google does not use IndexNow; Search Console is Mitch's.
+8. Record commits, gh-pages hash, artifact hash, probes and rollback in PROJECT.md and the handoff. Rollback: from a clean gh-pages worktree, `git revert --no-edit <gh-pages commit> && git push origin gh-pages`.
+
+---
+
+Historical record (2026-09-12), unchanged:
+
 # RELEASE-READY — mitchjmiller.com public release candidate 2026-09-12
 
 Prepared 2026-09-11 17:12 EDT by the Claude integration/QA worker. **PUBLISHED 2026-09-11 17:14 EDT as gh-pages `1b2d2a6`; probes passed (see PROJECT.md).** Originally: the lead (release owner) publishes after reading [docs/release-2026-09-12/qa-report.md](docs/release-2026-09-12/qa-report.md).

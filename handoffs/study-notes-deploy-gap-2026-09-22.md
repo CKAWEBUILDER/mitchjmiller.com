@@ -24,3 +24,7 @@ Likely cause: the astro build path (`prepare-astro-staging.mjs` → `astro build
 
 ## Note for whoever runs gen-study-notes.mjs
 It copies **all** frames from a note's `frames/` dir into `public/images/study/<slug>/` even when the note's HTML references none (SVG-only notes). I removed 184 unused frames for `pocock-ai-coding-workflow` before committing. If a future run re-copies them, delete `public/images/study/pocock-ai-coding-workflow/` before release, or guard the copy to referenced images only.
+
+## Resolved — 2026-09-24
+
+Root cause confirmed: the agency build renders notes from the archived `baseline/src/lib/study-notes.ts` (21 notes), while new notes are generated into `src/lib/study-notes.ts`. `baseline/src/lib/published.ts` now prepends notes that exist only in `src/lib/` (archived slugs are never replaced); the three routes are manifest kind `added`. Live on mj2.pro since gh-pages `7844899` (source `main` `4fcfd6f`): all 24 `/blog/studying/*` routes return 200 and are in the sitemap (63 URLs). A future note must also be declared in the route manifest; `scripts/verify-agency.mjs` fails the build otherwise. The 2026-09-22 availability gap is closed (mj2.pro serves since 2026-09-23); `https://mitchjmiller.com` HTTPS remains unresolved (see PROJECT.md).

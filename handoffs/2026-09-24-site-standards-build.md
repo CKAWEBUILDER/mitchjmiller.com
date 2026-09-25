@@ -41,3 +41,6 @@ After each deploy, update `main`'s PROJECT.md release section (what shipped, evi
 Blocked on Mitch (do not wait on these): the final M² logo file; his X handle for `twitter:site`; optionally a Premium system voice for better narration (System Settings → Accessibility → Spoken Content → Manage Voices), after which the narration script re-renders; a native-speaker spot check of the Spanish pages.
 
 Not in this run: other languages; real hero images or viz for existing posts (a content task, done per post under the blog-syndicate skill); the Meet the team page.
+
+## Completion — deploy 1 (2026-09-24 20:19 EDT, Claude Code build agent)
+Shipped as gh-pages `6edd43f` from `main` `3d2a026` (artifact `fcb3f68b675e5…`); full record, evidence and rollback in `main`'s PROJECT.md ("PUBLISHED — September 24, 2026 (20:19 EDT): site standards, deploy 1") and [docs/release-2026-09-24-standards/](../docs/release-2026-09-24-standards/). Share cards on all 70 documents (0 headshot share images live, was 39), themes, axe 0 serious/critical in both themes on every document, 5/5 posts narrated. Narration for later posts: `npm run narrate -- <slug>`. Blocked on Mitch: logo file, X handle, optional Premium voice, study-note narration scope. Deploy 2 (Spanish pilot) next.

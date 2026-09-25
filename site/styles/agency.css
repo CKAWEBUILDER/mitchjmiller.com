@@ -110,7 +110,7 @@ body.ag-body{margin:0;background:var(--ag-bg);color:var(--ag-text);font-family:v
 .ag-marquee-label{margin:0;font-size:.8rem;font-weight:600;color:var(--ag-muted);letter-spacing:.03em}
 .ag-marquee-key{margin:0;font-size:.74rem;color:var(--ag-muted)}
 .ag-marquee-viewport{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
-.ag-marquee-track{display:flex;width:max-content;animation:ag-marquee 42s linear infinite;will-change:transform}
+.ag-marquee-track{display:flex;width:max-content;animation:ag-marquee var(--ag-marquee-duration,42s) linear infinite;will-change:transform}
 .ag-marquee-track ul{display:flex;align-items:center;gap:0;list-style:none;margin:0;padding:0}
 .ag-marquee-track li{display:flex;align-items:center;justify-content:center;height:44px;padding:0 30px;white-space:nowrap;font-size:1.05rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ag-mark)}
 .ag-marquee-track li img{height:30px;width:auto;filter:grayscale(1);opacity:.8}
@@ -388,8 +388,8 @@ a.ag-tile:hover{border-color:var(--ag-chevron);box-shadow:0 12px 28px rgba(15,36
 .ag-marquee-label{text-align:center;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase}
 .ag-marquee-toggle{position:absolute;right:0;top:0;color:var(--ag-muted);font-size:.75rem;background:#fff;border:1px solid var(--ag-line);padding:8px 12px;border-radius:4px;cursor:pointer;min-height:36px}
 .ag-marquee-toggle[hidden]{display:none}
-.ag-marquee-track ul{width:max(100vw,1100px);justify-content:space-around}
-.ag-marquee-track li{height:84px;padding:8px 34px;flex:1;min-width:0}
+.ag-marquee-track ul{width:max-content;min-width:max(100vw,1100px);justify-content:space-around}
+.ag-marquee-track li{height:84px;padding:8px 34px;flex:1 0 auto}
 .ag-marquee-track li img{display:block;width:190px;max-width:none;height:45px;object-fit:contain;filter:none;opacity:1}
 .ag-marquee-track li[data-brand="Apple"] img{width:32px;height:101px}
 .ag-marquee-track li[data-brand="Stanford Health Care"] img{width:214px;height:40px}
@@ -397,4 +397,4 @@ a.ag-tile:hover{border-color:var(--ag-chevron);box-shadow:0 12px 28px rgba(15,36
 .ag-marquee-track li[data-brand="SFC Surf School"] img{width:66px;height:60px}
 .ag-marquee[data-paused="true"] .ag-marquee-track{animation-play-state:paused}
 @media(max-width:560px){.ag-marquee-head{justify-content:space-between}.ag-marquee-label{text-align:left;font-size:.68rem}.ag-marquee-toggle{position:static}.ag-marquee-track li{padding:8px 26px}}
-@media(prefers-reduced-motion:reduce){.ag-marquee-toggle{display:none}.ag-marquee-track ul{width:100%;gap:12px}.ag-marquee-track li{flex:0 1 210px}}
+@media(prefers-reduced-motion:reduce){.ag-marquee-toggle{display:none}.ag-marquee-track ul{width:100%;min-width:0;gap:12px}.ag-marquee-track li{flex:0 1 210px}}

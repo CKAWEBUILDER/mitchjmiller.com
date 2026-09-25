@@ -71,8 +71,13 @@ for (const file of walk(dist).filter(file => file.endsWith('.html'))) {
   if (!/<nav class="ag-nav" aria-label="(Primary|Principal)">/.test(pageBody)) fail(route, 'missing primary navigation');
   for (const label of shellText.labels) if (!new RegExp(`<a href="[^"]+"[^>]*>${label}(<span class="ag-caret"[^>]*></span>)?</a>`).test(pageBody)) fail(route, `primary nav lacks ${label}`);
   if (!shellText.cta.test(pageBody)) fail(route, `missing green ${shellText.ctaName} contact button`);
-  if (!/href="https:\/\/mitchjmiller\.com\/"/.test(pageBody) || !/href="\/clients\/"/.test(pageBody)) fail(route, 'utility links (personal portfolio, Clients) missing');
+  if (!/<a class="ag-utility-link" href="https:\/\/linkedin\.com\/in\/mitchelljmillerjr"/.test(pageBody) || !/href="\/clients\/"/.test(pageBody)) fail(route, 'utility links (LinkedIn, Clients) missing');
+  // mitchjmiller.com does not serve the personal portfolio yet (see site/lib/agency.ts personalPortfolio).
+  if (/href="https?:\/\/(?:www\.)?mitchjmiller\.com\/?"/.test(pageBody)) fail(route, 'links to mitchjmiller.com, which does not serve the personal portfolio yet');
   if (!/<details class="ag-menu">/.test(pageBody)) fail(route, 'missing mobile menu');
+  // M² mark (2026-09-25): the brand link carries the inline mark, never a photo.
+  const brandLink = pageBody.match(/<a class="ag-brand"[^>]*>([\s\S]*?)<\/a>/)?.[1] || '';
+  if (!/^\s*<svg class="m2-mark"[^>]*aria-hidden="true"/.test(brandLink) || /<img\b/.test(brandLink)) fail(route, 'header brand lacks the inline M² mark or still carries an image');
   if (/<dialog id="resume-chooser"|data-resume-open|resume-download-dialog/.test(pageBody)) fail(route, 'retired resume chooser is still present');
   if ((pageBody.match(/<h1\b/gi) || []).length !== 1) fail(route, 'expected exactly one h1');
   // TODO/TBD are uppercase developer markers; case-insensitive matching would flag the Spanish word "todo".
@@ -157,6 +162,7 @@ const pairs = [
   ['white text on green button', '#ffffff', tokens['ag-green'], 4.5], ['white text on green hover', '#ffffff', tokens['ag-green-hover'], 4.5],
   ['green text on white', tokens['ag-green'], '#ffffff', 4.5], ['green button against navy hero (non-text)', tokens['ag-green'], tokens['ag-navy'], 3],
   ['white text on navy', '#ffffff', tokens['ag-navy'], 4.5], ['deck text on navy', tokens['ag-on-navy'], tokens['ag-navy'], 4.5], ['eyebrow on navy', tokens['ag-green-on-navy'], tokens['ag-navy'], 4.5],
+  ['M² mark M and ring on the white header (non-text)', tokens['ag-heading'], tokens['ag-surface'], 3], ['M² mark 2 on the white header (non-text)', tokens['ag-green-text'], tokens['ag-surface'], 3],
   ['muted text on white', tokens['ag-muted'], '#ffffff', 4.5], ['muted text on tint', tokens['ag-muted'], tokens['ag-tint'], 4.5], ['marquee wordmark on white', tokens['ag-mark'], '#ffffff', 4.5], ['body text on white', tokens['ag-text'], '#ffffff', 4.5],
 ];
 const contrastReport = pairs.map(([label, fg, bg, minimum]) => { const ratio = Number(contrast(fg, bg).toFixed(2)); if (ratio < minimum) fail('contrast', `${label} ${fg} on ${bg} = ${ratio}:1 < ${minimum}:1`); return { label, fg, bg, ratio, minimum }; });

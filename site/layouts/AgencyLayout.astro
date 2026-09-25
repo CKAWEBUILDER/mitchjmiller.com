@@ -13,6 +13,7 @@
  * language picker with native names (no flags) and a suggestion banner that never redirects.
  */
 import { site, isCurrent } from '../lib/agency';
+import M2Mark from '../components/M2Mark.astro';
 import { shareFor, ogLocale } from '../lib/share';
 import { alternatesFor, counterpartOf, langOf, languageNames, navFor, ui, type Lang } from '../lib/i18n';
 import { themeScript } from '../lib/theme-script.mjs';
@@ -92,7 +93,7 @@ const choices = (['en', 'es'] as Lang[]).map(code => code === lang
     <header class="ag-header">
       <div class="ag-wrap ag-header-inner">
         <a class="ag-brand" href={home} aria-label={t.brandHome}>
-          <img src={site.headshot} alt="" width="40" height="40" />
+          <M2Mark />
           <span><span class="ag-brand-name">{site.name}</span><span class="ag-brand-tag">{t.tagline}</span></span>
         </a>
         <nav class="ag-nav" aria-label={t.primaryNav}>

@@ -1,0 +1,4800 @@
+{
+  "generated": "2026-09-25T18:26:24.332Z",
+  "base": "http://127.0.0.1:5193",
+  "documents": 84,
+  "axe": {
+    "version": "4.13.0",
+    "tags": [
+      "wcag2a",
+      "wcag2aa",
+      "wcag21a",
+      "wcag21aa",
+      "wcag22a",
+      "wcag22aa"
+    ],
+    "gate": "zero serious or critical",
+    "violationsByTheme": {
+      "light": {
+        "serious": 0,
+        "critical": 0,
+        "other": 0
+      },
+      "dark": {
+        "serious": 0,
+        "critical": 0,
+        "other": 0
+      }
+    }
+  },
+  "checks": 793,
+  "passed": 792,
+  "failed": 1,
+  "failures": [
+    {
+      "scope": "/blog/studying/all-in-ai-money-stack/@390",
+      "check": "no horizontal overflow",
+      "pass": false,
+      "detail": "scrollWidth 404 / viewport 390"
+    }
+  ],
+  "results": [
+    {
+      "scope": "/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/about/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/about/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/about/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/about/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/about/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/about/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/contact/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/contact/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/contact/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/contact/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/contact/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/contact/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/collab-ideas/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/collab-ideas/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/collab-ideas/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/collab-ideas/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/collab-ideas/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/collab-ideas/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/resume/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/resume/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/resume/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/resume/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/resume/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/resume/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/systems/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/systems/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/systems/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/systems/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/systems/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/systems/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/work/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/work/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/work/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/work/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/work/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/work/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/selected-builds/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/selected-builds/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/selected-builds/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/selected-builds/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/selected-builds/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/selected-builds/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/case-studies/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/case-studies/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/aeo-geo/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/aeo-geo/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/aeo-geo/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/aeo-geo/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/aeo-geo/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/aeo-geo/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/apple-seasonal-search/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/case-studies/apple-seasonal-search/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/apple-seasonal-search/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/apple-seasonal-search/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/case-studies/apple-seasonal-search/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/apple-seasonal-search/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/apple-store-amr/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/case-studies/apple-store-amr/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/apple-store-amr/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/apple-store-amr/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/case-studies/apple-store-amr/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/apple-store-amr/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/apple-education-store/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/case-studies/apple-education-store/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/apple-education-store/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/apple-education-store/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/case-studies/apple-education-store/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/apple-education-store/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/stanford-myhealth-seo/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/case-studies/stanford-myhealth-seo/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/stanford-myhealth-seo/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/stanford-myhealth-seo/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/case-studies/stanford-myhealth-seo/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/stanford-myhealth-seo/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/commonspirit-locations-conversion-engine/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/case-studies/commonspirit-locations-conversion-engine/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/commonspirit-locations-conversion-engine/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/commonspirit-locations-conversion-engine/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/case-studies/commonspirit-locations-conversion-engine/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/commonspirit-locations-conversion-engine/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/commonspirit-network-consolidation/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/case-studies/commonspirit-network-consolidation/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/commonspirit-network-consolidation/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/commonspirit-network-consolidation/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/case-studies/commonspirit-network-consolidation/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/commonspirit-network-consolidation/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/commonspirit-medical-content-library/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/case-studies/commonspirit-medical-content-library/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/commonspirit-medical-content-library/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/commonspirit-medical-content-library/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/case-studies/commonspirit-medical-content-library/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/commonspirit-medical-content-library/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/aem-content-fragmentation-architecture/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/case-studies/aem-content-fragmentation-architecture/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/aem-content-fragmentation-architecture/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/aem-content-fragmentation-architecture/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/case-studies/aem-content-fragmentation-architecture/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/aem-content-fragmentation-architecture/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/yext-entity-data-foundation/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/case-studies/yext-entity-data-foundation/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/yext-entity-data-foundation/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/yext-entity-data-foundation/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/case-studies/yext-entity-data-foundation/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/yext-entity-data-foundation/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/claritypulse-ai-reporting/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/case-studies/claritypulse-ai-reporting/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/claritypulse-ai-reporting/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/claritypulse-ai-reporting/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/case-studies/claritypulse-ai-reporting/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/claritypulse-ai-reporting/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/searchforge-content-intelligence/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/case-studies/searchforge-content-intelligence/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/searchforge-content-intelligence/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/searchforge-content-intelligence/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/case-studies/searchforge-content-intelligence/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/searchforge-content-intelligence/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/actionthread-transcript-execution/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/case-studies/actionthread-transcript-execution/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/actionthread-transcript-execution/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/actionthread-transcript-execution/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/case-studies/actionthread-transcript-execution/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/actionthread-transcript-execution/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/aeo-visibility-infrastructure/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/case-studies/aeo-visibility-infrastructure/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/aeo-visibility-infrastructure/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/aeo-visibility-infrastructure/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/case-studies/aeo-visibility-infrastructure/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/aeo-visibility-infrastructure/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/domainsignal/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/case-studies/domainsignal/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/domainsignal/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/domainsignal/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/case-studies/domainsignal/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/domainsignal/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/date-night/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/case-studies/date-night/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/date-night/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/date-night/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/case-studies/date-night/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/date-night/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/vet-advocates-growth-system/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/case-studies/vet-advocates-growth-system/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/vet-advocates-growth-system/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/vet-advocates-growth-system/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/case-studies/vet-advocates-growth-system/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/vet-advocates-growth-system/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/sfc-surf-school/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(242, 245, 247)"
+    },
+    {
+      "scope": "/case-studies/sfc-surf-school/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/sfc-surf-school/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/sfc-surf-school/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 23, 31)"
+    },
+    {
+      "scope": "/case-studies/sfc-surf-school/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/case-studies/sfc-surf-school/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/gbp-2026-ai-grounding/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/gbp-2026-ai-grounding/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/gbp-2026-ai-grounding/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/gbp-2026-ai-grounding/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/gbp-2026-ai-grounding/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/gbp-2026-ai-grounding/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/multi-agent-billing-traps/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/multi-agent-billing-traps/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/multi-agent-billing-traps/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/multi-agent-billing-traps/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/multi-agent-billing-traps/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/multi-agent-billing-traps/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/intrepid-agency-spotlight/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/intrepid-agency-spotlight/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/intrepid-agency-spotlight/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/intrepid-agency-spotlight/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/intrepid-agency-spotlight/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/intrepid-agency-spotlight/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/mitchell-miller-journey/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/mitchell-miller-journey/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/mitchell-miller-journey/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/mitchell-miller-journey/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/mitchell-miller-journey/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/mitchell-miller-journey/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/traditional-seo-to-ai-search/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/traditional-seo-to-ai-search/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/traditional-seo-to-ai-search/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/traditional-seo-to-ai-search/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/traditional-seo-to-ai-search/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/traditional-seo-to-ai-search/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/aeo-geo-measurement-framework/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/aeo-geo-measurement-framework/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/aeo-geo-measurement-framework/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/aeo-geo-measurement-framework/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/aeo-geo-measurement-framework/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/aeo-geo-measurement-framework/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/entity-seo-for-ai-retrieval/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/entity-seo-for-ai-retrieval/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/entity-seo-for-ai-retrieval/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/entity-seo-for-ai-retrieval/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/entity-seo-for-ai-retrieval/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/entity-seo-for-ai-retrieval/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/enterprise-seo-business-cases/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/enterprise-seo-business-cases/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/enterprise-seo-business-cases/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/enterprise-seo-business-cases/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/enterprise-seo-business-cases/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/enterprise-seo-business-cases/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/hermes-concepts-field-guide/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/studying/hermes-concepts-field-guide/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/hermes-concepts-field-guide/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/hermes-concepts-field-guide/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/studying/hermes-concepts-field-guide/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/hermes-concepts-field-guide/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/claude-watermark-seo/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/studying/claude-watermark-seo/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/claude-watermark-seo/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/claude-watermark-seo/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/studying/claude-watermark-seo/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/claude-watermark-seo/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/all-in-ai-money-stack/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/studying/all-in-ai-money-stack/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/all-in-ai-money-stack/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/all-in-ai-money-stack/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/studying/all-in-ai-money-stack/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/all-in-ai-money-stack/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/hermes-seo-agent/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/studying/hermes-seo-agent/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/hermes-seo-agent/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/hermes-seo-agent/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/studying/hermes-seo-agent/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/hermes-seo-agent/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/codex-obsolete-9-moves/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/studying/codex-obsolete-9-moves/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/codex-obsolete-9-moves/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/codex-obsolete-9-moves/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/studying/codex-obsolete-9-moves/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/codex-obsolete-9-moves/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/chatgpt-sites/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/studying/chatgpt-sites/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/chatgpt-sites/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/chatgpt-sites/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/studying/chatgpt-sites/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/chatgpt-sites/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/book-to-skill/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/studying/book-to-skill/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/book-to-skill/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/book-to-skill/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/studying/book-to-skill/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/book-to-skill/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/claude-code-6-new-rules/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/studying/claude-code-6-new-rules/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/claude-code-6-new-rules/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/claude-code-6-new-rules/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/studying/claude-code-6-new-rules/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/claude-code-6-new-rules/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/claude-code-make-money/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/studying/claude-code-make-money/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/claude-code-make-money/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/claude-code-make-money/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/studying/claude-code-make-money/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/claude-code-make-money/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/build-ai-agents-full-course/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/studying/build-ai-agents-full-course/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/build-ai-agents-full-course/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/build-ai-agents-full-course/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/studying/build-ai-agents-full-course/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/build-ai-agents-full-course/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/codex-voice-jarvis/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/studying/codex-voice-jarvis/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/codex-voice-jarvis/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/codex-voice-jarvis/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/studying/codex-voice-jarvis/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/codex-voice-jarvis/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/pi-coding-agent/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/studying/pi-coding-agent/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/pi-coding-agent/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/pi-coding-agent/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/studying/pi-coding-agent/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/pi-coding-agent/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/ships-100x-faster/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/studying/ships-100x-faster/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/ships-100x-faster/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/ships-100x-faster/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/studying/ships-100x-faster/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/ships-100x-faster/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/forget-loop-engineering/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/studying/forget-loop-engineering/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/forget-loop-engineering/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/forget-loop-engineering/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/studying/forget-loop-engineering/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/forget-loop-engineering/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/mark-cuban-ai-bubble/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/studying/mark-cuban-ai-bubble/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/mark-cuban-ai-bubble/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/mark-cuban-ai-bubble/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/studying/mark-cuban-ai-bubble/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/mark-cuban-ai-bubble/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/hormozi-build-this-instead/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/studying/hormozi-build-this-instead/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/hormozi-build-this-instead/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/hormozi-build-this-instead/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/studying/hormozi-build-this-instead/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/hormozi-build-this-instead/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/old-seo-collapsing/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/studying/old-seo-collapsing/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/old-seo-collapsing/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/old-seo-collapsing/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/studying/old-seo-collapsing/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/old-seo-collapsing/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/seo-2026-ai-era/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/studying/seo-2026-ai-era/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/seo-2026-ai-era/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/seo-2026-ai-era/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/studying/seo-2026-ai-era/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/seo-2026-ai-era/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/aeo-geo-aio/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/studying/aeo-geo-aio/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/aeo-geo-aio/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/aeo-geo-aio/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/studying/aeo-geo-aio/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/aeo-geo-aio/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/smith-chart-scariest-ee/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/studying/smith-chart-scariest-ee/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/smith-chart-scariest-ee/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/smith-chart-scariest-ee/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/studying/smith-chart-scariest-ee/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/smith-chart-scariest-ee/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/aeo-80-percent/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/studying/aeo-80-percent/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/aeo-80-percent/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/aeo-80-percent/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/studying/aeo-80-percent/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/aeo-80-percent/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/lab/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/lab/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/lab/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/lab/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/lab/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/lab/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/lab/population-workbench/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/lab/population-workbench/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/lab/population-workbench/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/lab/population-workbench/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/lab/population-workbench/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/lab/population-workbench/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/lab/population-workbench/methodology/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/lab/population-workbench/methodology/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/lab/population-workbench/methodology/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/lab/population-workbench/methodology/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/lab/population-workbench/methodology/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/lab/population-workbench/methodology/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/clients/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/clients/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/clients/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/clients/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/clients/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/clients/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/services/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/services/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/services/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/services/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/services/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/services/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/products/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/products/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/products/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/products/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/products/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/products/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/optimizing-for-ads-in-free-llm-answers/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/optimizing-for-ads-in-free-llm-answers/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/optimizing-for-ads-in-free-llm-answers/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/optimizing-for-ads-in-free-llm-answers/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/optimizing-for-ads-in-free-llm-answers/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/optimizing-for-ads-in-free-llm-answers/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/growth-title-market/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/growth-title-market/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/growth-title-market/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/growth-title-market/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/growth-title-market/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/growth-title-market/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/b2b-vs-b2c-by-vertical/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/b2b-vs-b2c-by-vertical/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/b2b-vs-b2c-by-vertical/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/b2b-vs-b2c-by-vertical/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/b2b-vs-b2c-by-vertical/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/b2b-vs-b2c-by-vertical/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/statistician-vs-data-scientist/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/statistician-vs-data-scientist/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/statistician-vs-data-scientist/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/statistician-vs-data-scientist/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/statistician-vs-data-scientist/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/statistician-vs-data-scientist/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/search-results-by-intent/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/search-results-by-intent/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/pocock-ai-coding-workflow/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/studying/pocock-ai-coding-workflow/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/pocock-ai-coding-workflow/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/pocock-ai-coding-workflow/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/studying/pocock-ai-coding-workflow/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/pocock-ai-coding-workflow/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/fde-1m-ai-job/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/studying/fde-1m-ai-job/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/fde-1m-ai-job/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/fde-1m-ai-job/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/studying/fde-1m-ai-job/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/fde-1m-ai-job/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/pocock-agentic-workflow/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/studying/pocock-agentic-workflow/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/pocock-agentic-workflow/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/pocock-agentic-workflow/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/studying/pocock-agentic-workflow/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/pocock-agentic-workflow/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/figma-shortest-course/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/studying/figma-shortest-course/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/figma-shortest-course/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/figma-shortest-course/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/studying/figma-shortest-course/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/figma-shortest-course/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/es/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/es/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/es/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/es/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/services/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/es/services/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/es/services/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/services/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/es/services/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/es/services/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/contact/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/es/contact/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/es/contact/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/contact/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/es/contact/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/es/contact/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/blog/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/es/blog/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/es/blog/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/blog/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/es/blog/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/es/blog/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/viz/search-results-by-intent-mandala/@light",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/viz/search-results-by-intent-mandala/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/viz/search-results-by-intent-mandala/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/viz/search-results-by-intent-mandala/@dark",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/viz/search-results-by-intent-mandala/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/viz/search-results-by-intent-mandala/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/viz/search-results-by-intent-journey/@light",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/viz/search-results-by-intent-journey/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/viz/search-results-by-intent-journey/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/viz/search-results-by-intent-journey/@dark",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/viz/search-results-by-intent-journey/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/viz/search-results-by-intent-journey/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/viz/llm-ads-mandala/@light",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/viz/llm-ads-mandala/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/viz/llm-ads-mandala/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/viz/llm-ads-mandala/@dark",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/viz/llm-ads-mandala/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/viz/llm-ads-mandala/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/viz/growth-title-market/@light",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/viz/growth-title-market/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/viz/growth-title-market/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/viz/growth-title-market/@dark",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/viz/growth-title-market/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/viz/growth-title-market/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/viz/b2b-vs-b2c-by-vertical/@light",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/viz/b2b-vs-b2c-by-vertical/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/viz/b2b-vs-b2c-by-vertical/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/viz/b2b-vs-b2c-by-vertical/@dark",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/viz/b2b-vs-b2c-by-vertical/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/viz/b2b-vs-b2c-by-vertical/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/viz/statistician-vs-data-scientist/@light",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/viz/statistician-vs-data-scientist/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/viz/statistician-vs-data-scientist/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/viz/statistician-vs-data-scientist/@dark",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/viz/statistician-vs-data-scientist/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/viz/statistician-vs-data-scientist/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/no-such-page/@light",
+      "check": "HTTP 404 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 404, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/no-such-page/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/no-such-page/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/no-such-page/@dark",
+      "check": "HTTP 404 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 404, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/no-such-page/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/no-such-page/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/about/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/about/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/contact/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/contact/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/collab-ideas/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/collab-ideas/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/resume/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/resume/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/systems/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/systems/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/work/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/work/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/selected-builds/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/selected-builds/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/case-studies/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/case-studies/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/aeo-geo/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/aeo-geo/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/case-studies/apple-seasonal-search/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/case-studies/apple-seasonal-search/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/case-studies/apple-store-amr/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/case-studies/apple-store-amr/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/case-studies/apple-education-store/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/case-studies/apple-education-store/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/case-studies/stanford-myhealth-seo/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/case-studies/stanford-myhealth-seo/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/case-studies/commonspirit-locations-conversion-engine/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/case-studies/commonspirit-locations-conversion-engine/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/case-studies/commonspirit-network-consolidation/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/case-studies/commonspirit-network-consolidation/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/case-studies/commonspirit-medical-content-library/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/case-studies/commonspirit-medical-content-library/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/case-studies/aem-content-fragmentation-architecture/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/case-studies/aem-content-fragmentation-architecture/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/case-studies/yext-entity-data-foundation/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/case-studies/yext-entity-data-foundation/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/case-studies/claritypulse-ai-reporting/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/case-studies/claritypulse-ai-reporting/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/case-studies/searchforge-content-intelligence/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/case-studies/searchforge-content-intelligence/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/case-studies/actionthread-transcript-execution/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/case-studies/actionthread-transcript-execution/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/case-studies/aeo-visibility-infrastructure/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/case-studies/aeo-visibility-infrastructure/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/case-studies/domainsignal/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/case-studies/domainsignal/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/case-studies/date-night/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/case-studies/date-night/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/case-studies/vet-advocates-growth-system/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/case-studies/vet-advocates-growth-system/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/case-studies/sfc-surf-school/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/gbp-2026-ai-grounding/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/gbp-2026-ai-grounding/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/multi-agent-billing-traps/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/multi-agent-billing-traps/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/intrepid-agency-spotlight/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/intrepid-agency-spotlight/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/mitchell-miller-journey/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/mitchell-miller-journey/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/traditional-seo-to-ai-search/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/traditional-seo-to-ai-search/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/aeo-geo-measurement-framework/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/aeo-geo-measurement-framework/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/entity-seo-for-ai-retrieval/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/entity-seo-for-ai-retrieval/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/enterprise-seo-business-cases/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/enterprise-seo-business-cases/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/studying/hermes-concepts-field-guide/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/studying/hermes-concepts-field-guide/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/studying/claude-watermark-seo/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/studying/claude-watermark-seo/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/studying/all-in-ai-money-stack/@390",
+      "check": "no horizontal overflow",
+      "pass": false,
+      "detail": "scrollWidth 404 / viewport 390"
+    },
+    {
+      "scope": "/blog/studying/all-in-ai-money-stack/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/studying/hermes-seo-agent/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/studying/hermes-seo-agent/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/studying/codex-obsolete-9-moves/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/studying/codex-obsolete-9-moves/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/studying/chatgpt-sites/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/studying/chatgpt-sites/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/studying/book-to-skill/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/studying/book-to-skill/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/studying/claude-code-6-new-rules/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/studying/claude-code-6-new-rules/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/studying/claude-code-make-money/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/studying/claude-code-make-money/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/studying/build-ai-agents-full-course/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/studying/build-ai-agents-full-course/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/studying/codex-voice-jarvis/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/studying/codex-voice-jarvis/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/studying/pi-coding-agent/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/studying/pi-coding-agent/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/studying/ships-100x-faster/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/studying/ships-100x-faster/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/studying/forget-loop-engineering/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/studying/forget-loop-engineering/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/studying/mark-cuban-ai-bubble/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/studying/mark-cuban-ai-bubble/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/studying/hormozi-build-this-instead/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/studying/hormozi-build-this-instead/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/studying/old-seo-collapsing/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/studying/old-seo-collapsing/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/studying/seo-2026-ai-era/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/studying/seo-2026-ai-era/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/studying/aeo-geo-aio/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/studying/aeo-geo-aio/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/studying/smith-chart-scariest-ee/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/studying/smith-chart-scariest-ee/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/studying/aeo-80-percent/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/studying/aeo-80-percent/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/lab/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/lab/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/lab/population-workbench/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/lab/population-workbench/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/lab/population-workbench/methodology/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/lab/population-workbench/methodology/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/clients/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/clients/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/services/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/services/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/products/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/products/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/optimizing-for-ads-in-free-llm-answers/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/optimizing-for-ads-in-free-llm-answers/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/growth-title-market/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/growth-title-market/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/b2b-vs-b2c-by-vertical/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/b2b-vs-b2c-by-vertical/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/statistician-vs-data-scientist/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/statistician-vs-data-scientist/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/studying/pocock-ai-coding-workflow/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/studying/pocock-ai-coding-workflow/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/studying/fde-1m-ai-job/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/studying/fde-1m-ai-job/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/studying/pocock-agentic-workflow/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/studying/pocock-agentic-workflow/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/studying/figma-shortest-course/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/studying/figma-shortest-course/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/es/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/es/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/es/services/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/es/services/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/es/contact/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/es/contact/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/es/blog/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/es/blog/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/viz/search-results-by-intent-mandala/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/viz/search-results-by-intent-journey/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/viz/llm-ads-mandala/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/viz/growth-title-market/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/viz/b2b-vs-b2c-by-vertical/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/viz/statistician-vs-data-scientist/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/no-such-page/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/no-such-page/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/@1281",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/@1360",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/@1500",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/services/@1281",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/services/@1360",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/services/@1500",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/@1281",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/@1360",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/@1500",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/es/@1281",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/es/@1360",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/es/@1500",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/es/services/@1281",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/es/services/@1360",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/es/services/@1500",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/es/contact/@1281",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/es/contact/@1360",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/es/contact/@1500",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/es/blog/@1281",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/es/blog/@1360",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/es/blog/@1500",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/@1281",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/@1360",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/@1500",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/ toggle",
+      "check": "system light: the named button (aria-pressed=false) switches to dark, aria-pressed=true, choice stored",
+      "pass": true,
+      "detail": "{\"pressed\":\"false\",\"name\":\"Dark theme\",\"tag\":\"BUTTON\"} → {\"theme\":\"dark\",\"pressed\":\"true\",\"stored\":\"dark\",\"bg\":\"rgb(10, 19, 34)\"}"
+    },
+    {
+      "scope": "/ toggle",
+      "check": "the choice persists across reloads against the system setting, before first paint",
+      "pass": true,
+      "detail": "{\"atBody\":\"dark\",\"pressed\":\"true\"}"
+    },
+    {
+      "scope": "/ toggle",
+      "check": "a stored choice ignores later system changes",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/ toggle",
+      "check": "keyboard operable (Enter and Space)",
+      "pass": true,
+      "detail": "light → dark"
+    },
+    {
+      "scope": "/ toggle",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/ system",
+      "check": "system dark: dark before first paint, aria-pressed=true; without a stored choice it follows a live system change",
+      "pass": true,
+      "detail": "{\"atBody\":\"dark\",\"pressed\":\"true\"} → light"
+    },
+    {
+      "scope": "/ system",
+      "check": "a stored light choice wins over system dark before first paint",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/ storage",
+      "check": "storage blocked: the system theme still applies, the toggle still works, no errors",
+      "pass": true,
+      "detail": "dark → light; "
+    },
+    {
+      "scope": "/services/ toggle",
+      "check": "system light: the named button (aria-pressed=false) switches to dark, aria-pressed=true, choice stored",
+      "pass": true,
+      "detail": "{\"pressed\":\"false\",\"name\":\"Dark theme\",\"tag\":\"BUTTON\"} → {\"theme\":\"dark\",\"pressed\":\"true\",\"stored\":\"dark\",\"bg\":\"rgb(10, 19, 34)\"}"
+    },
+    {
+      "scope": "/services/ toggle",
+      "check": "the choice persists across reloads against the system setting, before first paint",
+      "pass": true,
+      "detail": "{\"atBody\":\"dark\",\"pressed\":\"true\"}"
+    },
+    {
+      "scope": "/services/ toggle",
+      "check": "a stored choice ignores later system changes",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/services/ toggle",
+      "check": "keyboard operable (Enter and Space)",
+      "pass": true,
+      "detail": "light → dark"
+    },
+    {
+      "scope": "/services/ toggle",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/services/ system",
+      "check": "system dark: dark before first paint, aria-pressed=true; without a stored choice it follows a live system change",
+      "pass": true,
+      "detail": "{\"atBody\":\"dark\",\"pressed\":\"true\"} → light"
+    },
+    {
+      "scope": "/services/ system",
+      "check": "a stored light choice wins over system dark before first paint",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/services/ storage",
+      "check": "storage blocked: the system theme still applies, the toggle still works, no errors",
+      "pass": true,
+      "detail": "dark → light; "
+    },
+    {
+      "scope": "/blog/search-results-by-intent/ toggle",
+      "check": "system light: the named button (aria-pressed=false) switches to dark, aria-pressed=true, choice stored",
+      "pass": true,
+      "detail": "{\"pressed\":\"false\",\"name\":\"Dark theme\",\"tag\":\"BUTTON\"} → {\"theme\":\"dark\",\"pressed\":\"true\",\"stored\":\"dark\",\"bg\":\"rgb(10, 19, 34)\"}"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/ toggle",
+      "check": "the choice persists across reloads against the system setting, before first paint",
+      "pass": true,
+      "detail": "{\"atBody\":\"dark\",\"pressed\":\"true\"}"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/ toggle",
+      "check": "a stored choice ignores later system changes",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/search-results-by-intent/ toggle",
+      "check": "keyboard operable (Enter and Space)",
+      "pass": true,
+      "detail": "light → dark"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/ toggle",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/search-results-by-intent/ system",
+      "check": "system dark: dark before first paint, aria-pressed=true; without a stored choice it follows a live system change",
+      "pass": true,
+      "detail": "{\"atBody\":\"dark\",\"pressed\":\"true\"} → light"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/ system",
+      "check": "a stored light choice wins over system dark before first paint",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/search-results-by-intent/ storage",
+      "check": "storage blocked: the system theme still applies, the toggle still works, no errors",
+      "pass": true,
+      "detail": "dark → light; "
+    },
+    {
+      "scope": "/case-studies/apple-store-amr/ toggle",
+      "check": "system light: the named button (aria-pressed=false) switches to dark, aria-pressed=true, choice stored",
+      "pass": true,
+      "detail": "{\"pressed\":\"false\",\"name\":\"Dark theme\",\"tag\":\"BUTTON\"} → {\"theme\":\"dark\",\"pressed\":\"true\",\"stored\":\"dark\",\"bg\":\"rgb(10, 19, 34)\"}"
+    },
+    {
+      "scope": "/case-studies/apple-store-amr/ toggle",
+      "check": "the choice persists across reloads against the system setting, before first paint",
+      "pass": true,
+      "detail": "{\"atBody\":\"dark\",\"pressed\":\"true\"}"
+    },
+    {
+      "scope": "/case-studies/apple-store-amr/ toggle",
+      "check": "a stored choice ignores later system changes",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/apple-store-amr/ toggle",
+      "check": "keyboard operable (Enter and Space)",
+      "pass": true,
+      "detail": "light → dark"
+    },
+    {
+      "scope": "/case-studies/apple-store-amr/ toggle",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/apple-store-amr/ system",
+      "check": "system dark: dark before first paint, aria-pressed=true; without a stored choice it follows a live system change",
+      "pass": true,
+      "detail": "{\"atBody\":\"dark\",\"pressed\":\"true\"} → light"
+    },
+    {
+      "scope": "/case-studies/apple-store-amr/ system",
+      "check": "a stored light choice wins over system dark before first paint",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/apple-store-amr/ storage",
+      "check": "storage blocked: the system theme still applies, the toggle still works, no errors",
+      "pass": true,
+      "detail": "dark → light; "
+    },
+    {
+      "scope": "/lab/population-workbench/ toggle",
+      "check": "system light: the named button (aria-pressed=false) switches to dark, aria-pressed=true, choice stored",
+      "pass": true,
+      "detail": "{\"pressed\":\"false\",\"name\":\"Dark theme\",\"tag\":\"BUTTON\"} → {\"theme\":\"dark\",\"pressed\":\"true\",\"stored\":\"dark\",\"bg\":\"rgb(10, 19, 34)\"}"
+    },
+    {
+      "scope": "/lab/population-workbench/ toggle",
+      "check": "the choice persists across reloads against the system setting, before first paint",
+      "pass": true,
+      "detail": "{\"atBody\":\"dark\",\"pressed\":\"true\"}"
+    },
+    {
+      "scope": "/lab/population-workbench/ toggle",
+      "check": "a stored choice ignores later system changes",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/lab/population-workbench/ toggle",
+      "check": "keyboard operable (Enter and Space)",
+      "pass": true,
+      "detail": "light → dark"
+    },
+    {
+      "scope": "/lab/population-workbench/ toggle",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/lab/population-workbench/ system",
+      "check": "system dark: dark before first paint, aria-pressed=true; without a stored choice it follows a live system change",
+      "pass": true,
+      "detail": "{\"atBody\":\"dark\",\"pressed\":\"true\"} → light"
+    },
+    {
+      "scope": "/lab/population-workbench/ system",
+      "check": "a stored light choice wins over system dark before first paint",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/lab/population-workbench/ storage",
+      "check": "storage blocked: the system theme still applies, the toggle still works, no errors",
+      "pass": true,
+      "detail": "dark → light; "
+    },
+    {
+      "scope": "/services/ no-js",
+      "check": "JavaScript off + system dark: dark background, toggle hidden",
+      "pass": true,
+      "detail": "{\"bg\":\"rgb(10, 19, 34)\",\"toggle\":\"none\"}"
+    },
+    {
+      "scope": "/viz/search-results-by-intent-mandala/ motion",
+      "check": "the >5 s intro offers a visible \"Skip animation\" button that stops it and then goes away",
+      "pass": true,
+      "detail": "button true, stopped true, removed true"
+    },
+    {
+      "scope": "/viz/search-results-by-intent-mandala/ motion",
+      "check": "prefers-reduced-motion: no intro, no skip button",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/viz/search-results-by-intent-mandala/ motion",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/viz/search-results-by-intent-journey/ motion",
+      "check": "the >5 s intro offers a visible \"Skip animation\" button that stops it and then goes away",
+      "pass": true,
+      "detail": "button true, stopped true, removed true"
+    },
+    {
+      "scope": "/viz/search-results-by-intent-journey/ motion",
+      "check": "prefers-reduced-motion: no intro, no skip button",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/viz/search-results-by-intent-journey/ motion",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/viz/llm-ads-mandala/ motion",
+      "check": "the >5 s intro offers a visible \"Skip animation\" button that stops it and then goes away",
+      "pass": true,
+      "detail": "button true, stopped true, removed true"
+    },
+    {
+      "scope": "/viz/llm-ads-mandala/ motion",
+      "check": "prefers-reduced-motion: no intro, no skip button",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/viz/llm-ads-mandala/ motion",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/viz/growth-title-market/ motion",
+      "check": "the >5 s intro offers a visible \"Skip animation\" button that stops it and then goes away",
+      "pass": true,
+      "detail": "button true, stopped true, removed true"
+    },
+    {
+      "scope": "/viz/growth-title-market/ motion",
+      "check": "prefers-reduced-motion: no intro, no skip button",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/viz/growth-title-market/ motion",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/viz/b2b-vs-b2c-by-vertical/ motion",
+      "check": "the >5 s intro offers a visible \"Skip animation\" button that stops it and then goes away",
+      "pass": true,
+      "detail": "button true, stopped true, removed true"
+    },
+    {
+      "scope": "/viz/b2b-vs-b2c-by-vertical/ motion",
+      "check": "prefers-reduced-motion: no intro, no skip button",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/viz/b2b-vs-b2c-by-vertical/ motion",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/viz/statistician-vs-data-scientist/ motion",
+      "check": "the >5 s intro offers a visible \"Skip animation\" button that stops it and then goes away",
+      "pass": true,
+      "detail": "button true, stopped true, removed true"
+    },
+    {
+      "scope": "/viz/statistician-vs-data-scientist/ motion",
+      "check": "prefers-reduced-motion: no intro, no skip button",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/viz/statistician-vs-data-scientist/ motion",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/services/ banner",
+      "check": "Spanish browser: Spanish banner suggests /es/services/, and the page does not redirect",
+      "pass": true,
+      "detail": "{\"exists\":true,\"visible\":true,\"lang\":\"es\",\"href\":\"/es/services/\",\"text\":\"Esta página también está disponible en español.\",\"path\":\"/services/\"}"
+    },
+    {
+      "scope": "/services/ banner",
+      "check": "“No, gracias” hides it and is remembered across reloads; still no redirect",
+      "pass": true,
+      "detail": "{\"hidden\":true,\"lang\":\"en\"} → {\"exists\":true,\"visible\":false,\"lang\":\"es\",\"href\":\"/es/services/\",\"text\":\"Esta página también está disponible en español.\",\"path\":\"/services/\"}"
+    },
+    {
+      "scope": "/services/ banner",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/services/ banner",
+      "check": "English browser on an English page: no banner",
+      "pass": true,
+      "detail": "en-US,en → {\"exists\":true,\"visible\":false,\"lang\":\"es\",\"href\":\"/es/services/\",\"text\":\"Esta página también está disponible en español.\",\"path\":\"/services/\"}"
+    },
+    {
+      "scope": "/services/ banner",
+      "check": "English ranked above Spanish: no banner",
+      "pass": true,
+      "detail": "en-US,es → {\"exists\":true,\"visible\":false,\"lang\":\"es\",\"href\":\"/es/services/\",\"text\":\"Esta página también está disponible en español.\",\"path\":\"/services/\"}"
+    },
+    {
+      "scope": "/es/services/ banner",
+      "check": "Spanish browser on the Spanish page: no banner",
+      "pass": true,
+      "detail": "es-MX,es → {\"exists\":true,\"visible\":false,\"lang\":\"en\",\"href\":\"/services/\",\"text\":\"This page is also available in English.\",\"path\":\"/es/services/\"}"
+    },
+    {
+      "scope": "/es/services/ banner",
+      "check": "English browser on the Spanish page: English banner suggests /services/",
+      "pass": true,
+      "detail": "en-US,en → {\"exists\":true,\"visible\":true,\"lang\":\"en\",\"href\":\"/services/\",\"text\":\"This page is also available in English.\",\"path\":\"/es/services/\"}"
+    },
+    {
+      "scope": "/about/ banner",
+      "check": "page without a translation: no banner at all",
+      "pass": true,
+      "detail": "es-MX,es → {\"exists\":false,\"visible\":false,\"path\":\"/about/\"}"
+    },
+    {
+      "scope": "/services/ picker",
+      "check": "globe picker opens with Enter, lists English (current) and Español in their own script, Escape closes and returns focus",
+      "pass": true,
+      "detail": "[{\"text\":\"English\",\"lang\":\"en\",\"href\":\"/services/\",\"current\":\"true\"},{\"text\":\"Español\",\"lang\":\"es\",\"href\":\"/es/services/\",\"current\":null}] {\"open\":false,\"focus\":true}"
+    },
+    {
+      "scope": "/services/ picker",
+      "check": "choosing Español opens /es/services/ (lang=\"es\") and remembers the choice",
+      "pass": true,
+      "detail": "{\"path\":\"/es/services/\",\"lang\":\"es\",\"stored\":\"es\"}"
+    },
+    {
+      "scope": "/work/ picker",
+      "check": "on a page without a translation, Español leads to the Spanish home and says so",
+      "pass": true,
+      "detail": "{\"href\":\"/es/\",\"text\":\"Español (página de inicio)\"}"
+    },
+    {
+      "scope": "picker",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/contact/ form",
+      "check": "mocked Worker 200 ok: the status message is in Spanish",
+      "pass": true,
+      "detail": "Gracias: recibí tu mensaje. Respondo desde mitchelljmillerjr26@gmail.com."
+    },
+    {
+      "scope": "/es/contact/ form",
+      "check": "mocked Worker 400 validation: the status message is in Spanish",
+      "pass": true,
+      "detail": "Revisa los campos marcados e inténtalo de nuevo."
+    },
+    {
+      "scope": "share cards",
+      "check": "every referenced card serves 200 image/png at 1200×630 (84 cards)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/b2b-vs-b2c-by-vertical/ audio",
+      "check": "narration serves 200 audio/mp4",
+      "pass": true,
+      "detail": "200 audio/mp4"
+    },
+    {
+      "scope": "/blog/b2b-vs-b2c-by-vertical/ audio",
+      "check": "\"Listen to this article (17 min)\" (preload=\"none\") plays and its duration matches the record",
+      "pass": true,
+      "detail": "{\"found\":true,\"label\":\"Listen to this article (17 min)\",\"preloadAttr\":\"none\",\"currentTime\":0.561702,\"duration\":1030.548027}"
+    },
+    {
+      "scope": "/blog/b2b-vs-b2c-by-vertical/ audio",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/gbp-2026-ai-grounding/ audio",
+      "check": "narration serves 200 audio/mp4",
+      "pass": true,
+      "detail": "200 audio/mp4"
+    },
+    {
+      "scope": "/blog/gbp-2026-ai-grounding/ audio",
+      "check": "\"Listen to this article (7 min)\" (preload=\"none\") plays and its duration matches the record",
+      "pass": true,
+      "detail": "{\"found\":true,\"label\":\"Listen to this article (7 min)\",\"preloadAttr\":\"none\",\"currentTime\":0.562131,\"duration\":407.417324}"
+    },
+    {
+      "scope": "/blog/gbp-2026-ai-grounding/ audio",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/growth-title-market/ audio",
+      "check": "narration serves 200 audio/mp4",
+      "pass": true,
+      "detail": "200 audio/mp4"
+    },
+    {
+      "scope": "/blog/growth-title-market/ audio",
+      "check": "\"Listen to this article (10 min)\" (preload=\"none\") plays and its duration matches the record",
+      "pass": true,
+      "detail": "{\"found\":true,\"label\":\"Listen to this article (10 min)\",\"preloadAttr\":\"none\",\"currentTime\":0.567153,\"duration\":579.616508}"
+    },
+    {
+      "scope": "/blog/growth-title-market/ audio",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/intrepid-agency-spotlight/ audio",
+      "check": "narration serves 200 audio/mp4",
+      "pass": true,
+      "detail": "200 audio/mp4"
+    },
+    {
+      "scope": "/blog/intrepid-agency-spotlight/ audio",
+      "check": "\"Listen to this article (17 min)\" (preload=\"none\") plays and its duration matches the record",
+      "pass": true,
+      "detail": "{\"found\":true,\"label\":\"Listen to this article (17 min)\",\"preloadAttr\":\"none\",\"currentTime\":0.562328,\"duration\":992.142222}"
+    },
+    {
+      "scope": "/blog/intrepid-agency-spotlight/ audio",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/mitchell-miller-journey/ audio",
+      "check": "narration serves 200 audio/mp4",
+      "pass": true,
+      "detail": "200 audio/mp4"
+    },
+    {
+      "scope": "/blog/mitchell-miller-journey/ audio",
+      "check": "\"Listen to this article (3 min)\" (preload=\"none\") plays and its duration matches the record",
+      "pass": true,
+      "detail": "{\"found\":true,\"label\":\"Listen to this article (3 min)\",\"preloadAttr\":\"none\",\"currentTime\":0.562095,\"duration\":199.320091}"
+    },
+    {
+      "scope": "/blog/mitchell-miller-journey/ audio",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/multi-agent-billing-traps/ audio",
+      "check": "narration serves 200 audio/mp4",
+      "pass": true,
+      "detail": "200 audio/mp4"
+    },
+    {
+      "scope": "/blog/multi-agent-billing-traps/ audio",
+      "check": "\"Listen to this article (6 min)\" (preload=\"none\") plays and its duration matches the record",
+      "pass": true,
+      "detail": "{\"found\":true,\"label\":\"Listen to this article (6 min)\",\"preloadAttr\":\"none\",\"currentTime\":0.562215,\"duration\":337.66458}"
+    },
+    {
+      "scope": "/blog/multi-agent-billing-traps/ audio",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/optimizing-for-ads-in-free-llm-answers/ audio",
+      "check": "narration serves 200 audio/mp4",
+      "pass": true,
+      "detail": "200 audio/mp4"
+    },
+    {
+      "scope": "/blog/optimizing-for-ads-in-free-llm-answers/ audio",
+      "check": "\"Listen to this article (16 min)\" (preload=\"none\") plays and its duration matches the record",
+      "pass": true,
+      "detail": "{\"found\":true,\"label\":\"Listen to this article (16 min)\",\"preloadAttr\":\"none\",\"currentTime\":0.565023,\"duration\":942.3122}"
+    },
+    {
+      "scope": "/blog/optimizing-for-ads-in-free-llm-answers/ audio",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/search-results-by-intent/ audio",
+      "check": "narration serves 200 audio/mp4",
+      "pass": true,
+      "detail": "200 audio/mp4"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/ audio",
+      "check": "\"Listen to this article (23 min)\" (preload=\"none\") plays and its duration matches the record",
+      "pass": true,
+      "detail": "{\"found\":true,\"label\":\"Listen to this article (23 min)\",\"preloadAttr\":\"none\",\"currentTime\":0.561448,\"duration\":1362.08254}"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/ audio",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/statistician-vs-data-scientist/ audio",
+      "check": "narration serves 200 audio/mp4",
+      "pass": true,
+      "detail": "200 audio/mp4"
+    },
+    {
+      "scope": "/blog/statistician-vs-data-scientist/ audio",
+      "check": "\"Listen to this article (7 min)\" (preload=\"none\") plays and its duration matches the record",
+      "pass": true,
+      "detail": "{\"found\":true,\"label\":\"Listen to this article (7 min)\",\"preloadAttr\":\"none\",\"currentTime\":0.56635,\"duration\":418.934422}"
+    },
+    {
+      "scope": "/blog/statistician-vs-data-scientist/ audio",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/ audio",
+      "check": "narration serves 200 audio/mp4",
+      "pass": true,
+      "detail": "200 audio/mp4"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/ audio",
+      "check": "\"Escuchar este artículo (9 min)\" (preload=\"none\") plays and its duration matches the record",
+      "pass": true,
+      "detail": "{\"found\":true,\"label\":\"Escuchar este artículo (9 min)\",\"preloadAttr\":\"none\",\"currentTime\":0.561837,\"duration\":556.768073}"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/ audio",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    }
+  ]
+}

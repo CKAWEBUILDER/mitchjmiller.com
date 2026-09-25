@@ -19,7 +19,9 @@
     },
     {
       "path": "/resume/",
-      "kind": "general"
+      "kind": "general",
+      "minText": 150,
+      "note": "Transfer page since 2026-09-25 (work history on LinkedIn; the resume chooser and PDFs are retired): intentionally short, so the crawl floor is 150 characters instead of the general 300."
     },
     {
       "path": "/systems/",
@@ -1003,5 +1005,44 @@
       "note": "Standalone living infographic (no site shell, no analytics, noindex, follow; the post is the indexable page). Published copy of content-studio/viz/final/statistician-vs-data-scientist with same-origin jump links, width-scaled live mode and a Skip animation control."
     }
   ],
+  "retired": [
+    {
+      "path": "/files/Mitchell-Miller-AI-Search-Systems-Background-2026.pdf",
+      "kind": "pdf",
+      "decision": "retire",
+      "decidedBy": "Mitch",
+      "date": "2026-09-25",
+      "lastPublishedSha256": "f5f4564846729c20dc3105d6ab44e0a1443ed6fc8df33a5d8b9aa3433b018914",
+      "lastPublishedBytes": 421854
+    },
+    {
+      "path": "/files/Mitchell-Miller-Organic-Systems-Background-2026.pdf",
+      "kind": "pdf",
+      "decision": "retire",
+      "decidedBy": "Mitch",
+      "date": "2026-09-25",
+      "lastPublishedSha256": "82837461bd20e3b2380c441996aec6ad92eb97e86402f628e4bc26b9d65a7291",
+      "lastPublishedBytes": 421926
+    },
+    {
+      "path": "/files/Mitchell-Miller-Product-Systems-Background-2026.pdf",
+      "kind": "pdf",
+      "decision": "retire",
+      "decidedBy": "Mitch",
+      "date": "2026-09-25",
+      "lastPublishedSha256": "4f08e5861180b2111442bda249c3062c832e725fe3c766b756cc14c86d9a857d",
+      "lastPublishedBytes": 421918
+    },
+    {
+      "path": "/files/Mitchell-Miller-Search-Systems-Background-2026.pdf",
+      "kind": "pdf",
+      "decision": "retire",
+      "decidedBy": "Mitch",
+      "date": "2026-09-25",
+      "lastPublishedSha256": "8f48d7d786880c3a2c6f745174bf21a06af114da1cb14c146ecb342972ad8587",
+      "lastPublishedBytes": 421917
+    }
+  ],
+  "retiredNote": "Retired by Mitch, 2026-09-25: the four resume PDFs are no longer published on mj2.pro. His work history moved to the separate personal portfolio (one current PDF there); /resume/ stays as a transfer page. No email Mitch sent in the preceding 60 days links to these files. No redirect: the paths return 404. scripts/verify-parity.mjs fails the build if any of them is in the output or referenced by any built file; scripts/qa/crawl.mjs expects HTTP 404.",
   "note": "kind 'added' = routes introduced by the 2026-09-12 release (not in production snapshot 2745c7e): public lab page, population workbench (lane 2) and the client workspace entrance. They are indexable and in the sitemap; scripts/verify-parity.mjs checks them separately from the 57 archived routes. Agency redesign 2026-09-14: /services/ added (kind added); the home page is an Astro page in the agency shell; all other routes unchanged. Post 2026-09-24: /blog/search-results-by-intent/ plus the three study notes the 2026-09-21 build omitted (kind added, rendered from src/lib via baseline/src/lib/published.ts); the post's two standalone living infographics are listed under \"embeds\" (noindex, outside the shell, checked by scripts/verify-agency.mjs and scripts/qa/crawl.mjs). Site standards deploy 2 (2026-09-24): the Spanish pilot adds five routes of kind \"added\" with lang \"es\" and translationOf (the English path); site/lib/i18n.ts derives hreflang pairs from them, and each carries a \"translation\" record (model draft, independent review, native check pending)."
 }

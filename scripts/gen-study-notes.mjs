@@ -14,6 +14,7 @@ const LIB = "/Users/mitchellmiler/Desktop/claude-code/youtube-library";
 
 // slug on the site  ->  { dir, topic }   (only publish-ready syntheses)
 const NOTES = [
+  { slug: "figma-shortest-course", dir: "other/worlds-shortest-figma-course", topic: "Design & UX", date: "2026-09-24" },
   { slug: "pocock-ai-coding-workflow", dir: "agentic-engineering/full-walkthrough-workflow-for-ai-coding-matt-pocock", topic: "Agentic Engineering", date: "2026-09-22" },
   { slug: "fde-1m-ai-job", dir: "other/fde-the-1myear-ai-job-explained", topic: "Agentic Engineering", date: "2026-09-18" },
   { slug: "pocock-agentic-workflow", dir: "agentic-engineering/matt-pococks-agentic-engineering-workflow-just-copy-him", topic: "Agentic Engineering", date: "2026-09-18" },

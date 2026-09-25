@@ -42,7 +42,8 @@ body.ag-body{margin:0;background:var(--ag-bg);color:var(--ag-text);font-family:v
 .ag-parity .prose :is(h2,h3)[id]{scroll-margin-top:110px}
 .ag-header-inner{display:flex;align-items:center;gap:32px;min-height:84px}
 .ag-brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ag-heading);white-space:nowrap}
-.ag-brand img{width:40px;height:40px;border-radius:50%;object-fit:cover;object-position:top;border:1px solid var(--ag-line)}
+.ag-brand .m2-mark{width:40px;height:40px;flex:none}
+.m2-mark .m2-ring{stroke:var(--ag-heading)}.m2-mark .m2-ink{fill:var(--ag-heading)}.m2-mark .m2-exp{fill:var(--ag-green-text)}
 .ag-brand-name{font-size:1.15rem;font-weight:700;letter-spacing:-.02em;line-height:1.1;display:block}
 .ag-brand-tag{display:block;font-size:.72rem;color:var(--ag-muted);margin-top:3px;letter-spacing:.01em}
 .ag-nav{flex:1;display:flex;justify-content:center}
@@ -185,7 +186,7 @@ a.ag-tile:hover{border-color:var(--ag-chevron);box-shadow:0 12px 28px rgba(15,36
 .ag-posts h3 a:hover{text-decoration:underline;text-underline-offset:4px}
 .ag-posts p{margin:6px 0 0;font-size:.9rem;color:var(--ag-muted)}
 .ag-principal{display:flex;gap:22px;align-items:center;padding:22px;border:1px solid var(--ag-line);border-radius:6px;background:var(--ag-surface)}
-.ag-principal img{width:88px;height:88px;border-radius:50%;object-fit:cover;object-position:top;flex:none}
+.ag-principal .m2-mark{width:88px;height:88px;flex:none}
 .ag-principal strong{display:block;color:var(--ag-heading);font-size:1.05rem}
 .ag-principal p{margin:4px 0 0;font-size:.9rem;color:var(--ag-muted)}
 

@@ -7,9 +7,10 @@
  */
 import AgencyLayout from '../../layouts/AgencyLayout.astro';
 import BrandMarquee from '../../components/BrandMarquee.astro';
+import M2Mark from '../../components/M2Mark.astro';
 import ServiceIcon from '../../components/ServiceIcon.astro';
 import ProductGrid from '../../components/ProductGrid.astro';
-import { caseStudies, portfolioImages, headshot, studyEditorial, sfcEvidenceImages } from '../../lib/content';
+import { caseStudies, portfolioImages, studyEditorial, sfcEvidenceImages } from '../../lib/content';
 import { publishedBlogPosts } from '../../../baseline/src/lib/published';
 import { esPosts } from '../../i18n/es-posts';
 import { site, organizationJsonLd, personJsonLd, graph } from '../../lib/agency';
@@ -141,7 +142,7 @@ const jsonLd = [graph(organizationJsonLd(), personJsonLd(), { '@type': 'WebPage'
   <section class="ag-section" aria-labelledby="principal-heading">
     <div class="ag-wrap ag-split">
       <div><p class="ag-eyebrow">Acerca de</p><h2 id="principal-heading">Un socio para pensar. Un creador que pone manos a la obra.</h2><p>Trabaja directamente con Mitchell Miller, desde la primera pregunta hasta los detalles que hacen que funcione.</p><a class="ag-textlink" href="/about/" hreflang="en">Acerca de Mitchell (en inglés) <span aria-hidden="true">→</span></a></div>
-      <div class="ag-principal"><img src={headshot} alt="Mitchell Miller" width="88" height="88" loading="lazy" /><div><strong>Mitchell Miller</strong><p>Estrategia digital, investigación e ingeniería · <a href={site.personalPortfolio} hreflang="en">Historial profesional y currículum (en inglés)</a> · <a href={site.linkedin}>LinkedIn</a>.</p></div></div>
+      <div class="ag-principal"><M2Mark size={88} /><div><strong>Mitchell Miller</strong><p>Estrategia digital, investigación e ingeniería · <a href={site.personalPortfolio} hreflang="en">Historial profesional y currículum (en inglés)</a> · <a href={site.linkedin}>LinkedIn</a>.</p></div></div>
     </div>
   </section>
 

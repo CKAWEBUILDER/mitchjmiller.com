@@ -12,9 +12,8 @@ export const site = {
   phone: '+1-626-316-8682',
   linkedin: 'https://linkedin.com/in/mitchelljmillerjr',
   personalPortfolio: 'https://mitchjmiller.com/',
-  // Retired 2026 social card (old domain wording). Only the Organization JSON-LD `logo` still
-  // points here until Mitch supplies the final M² logo file (docs/site-standards.md "Brand mark").
-  socialImage: '/images/portfolio-social.png',
+  // Organization JSON-LD logo: the M² roundel on white, 512×512 (scripts/brand-icons.mjs).
+  logo: '/images/brand/m2-logo-512.png',
   // Site default share image: the generated M² card of the home page (scripts/share-cards.mjs).
   defaultCard: '/og/home.png',
   headshot,
@@ -109,7 +108,7 @@ export function organizationJsonLd() {
     email: site.email,
     telephone: site.phone,
     image: `${site.url}${site.defaultCard}`,
-    logo: `${site.url}${site.socialImage}`,
+    logo: `${site.url}${site.logo}`,
     areaServed: 'United States',
     founder: { '@id': personId },
     sameAs: [site.linkedin],

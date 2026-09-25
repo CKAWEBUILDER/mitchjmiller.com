@@ -1,0 +1,6390 @@
+{
+  "generated": "2026-09-25T03:53:18.129Z",
+  "base": "http://127.0.0.1:5193",
+  "dist": "/private/tmp/claude-501/mj2-wave2/dist",
+  "routes": 77,
+  "checks": 1063,
+  "passed": 1063,
+  "failed": 0,
+  "failures": [],
+  "results": [
+    {
+      "scope": "/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/index.html"
+    },
+    {
+      "scope": "/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Make the next move matter."
+    },
+    {
+      "scope": "/",
+      "check": "main text ≥ 300 chars (general)",
+      "pass": true,
+      "detail": "5735 chars"
+    },
+    {
+      "scope": "/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/"
+    },
+    {
+      "scope": "/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Research, digital strategy, experience design and engineering. Work with Mitchell Miller t"
+    },
+    {
+      "scope": "/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Mitchell Miller — Digital Growth, Software & Consulting"
+    },
+    {
+      "scope": "/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "18 images, 0 without alt"
+    },
+    {
+      "scope": "/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/about/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/about/index.html"
+    },
+    {
+      "scope": "/about/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · About"
+    },
+    {
+      "scope": "/about/",
+      "check": "main text ≥ 300 chars (general)",
+      "pass": true,
+      "detail": "1902 chars"
+    },
+    {
+      "scope": "/about/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/about/"
+    },
+    {
+      "scope": "/about/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "From Apple and CommonSpirit Health to SFC Surf School — the practice behind the search and"
+    },
+    {
+      "scope": "/about/",
+      "check": "title present",
+      "pass": true,
+      "detail": "About Mitchell Miller, Principal"
+    },
+    {
+      "scope": "/about/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/about/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/about/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "2 images, 0 without alt"
+    },
+    {
+      "scope": "/about/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/about/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/about/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/contact/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/contact/index.html"
+    },
+    {
+      "scope": "/contact/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Contact"
+    },
+    {
+      "scope": "/contact/",
+      "check": "main text ≥ 300 chars (general)",
+      "pass": true,
+      "detail": "786 chars"
+    },
+    {
+      "scope": "/contact/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/contact/"
+    },
+    {
+      "scope": "/contact/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Tell Mitchell Miller the problem you want to solve. No booking confirmation, no pricing qu"
+    },
+    {
+      "scope": "/contact/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Contact — Start a Conversation"
+    },
+    {
+      "scope": "/contact/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/contact/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/contact/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "1 images, 0 without alt"
+    },
+    {
+      "scope": "/contact/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/contact/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/contact/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/collab-ideas/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/collab-ideas/index.html"
+    },
+    {
+      "scope": "/collab-ideas/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Useful ways to work together."
+    },
+    {
+      "scope": "/collab-ideas/",
+      "check": "main text ≥ 300 chars (general)",
+      "pass": true,
+      "detail": "2278 chars"
+    },
+    {
+      "scope": "/collab-ideas/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/collab-ideas/"
+    },
+    {
+      "scope": "/collab-ideas/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Ways to collaborate with Mitchell Miller across enterprise SEO, AEO/GEO measurement, organ"
+    },
+    {
+      "scope": "/collab-ideas/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Collab Ideas | Mitchell Miller"
+    },
+    {
+      "scope": "/collab-ideas/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/collab-ideas/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/collab-ideas/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "1 images, 0 without alt"
+    },
+    {
+      "scope": "/collab-ideas/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/collab-ideas/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/collab-ideas/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/resume/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/resume/index.html"
+    },
+    {
+      "scope": "/resume/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Resume"
+    },
+    {
+      "scope": "/resume/",
+      "check": "main text ≥ 300 chars (general)",
+      "pass": true,
+      "detail": "1309 chars"
+    },
+    {
+      "scope": "/resume/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/resume/"
+    },
+    {
+      "scope": "/resume/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Four resumes, one chronology: Search Direction, AI Search Engineering, Product Management,"
+    },
+    {
+      "scope": "/resume/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Resumes — Mitchell Miller"
+    },
+    {
+      "scope": "/resume/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/resume/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/resume/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "1 images, 0 without alt"
+    },
+    {
+      "scope": "/resume/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/resume/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/resume/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/systems/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/systems/index.html"
+    },
+    {
+      "scope": "/systems/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Systems Architecture"
+    },
+    {
+      "scope": "/systems/",
+      "check": "main text ≥ 300 chars (general)",
+      "pass": true,
+      "detail": "1515 chars"
+    },
+    {
+      "scope": "/systems/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/systems/"
+    },
+    {
+      "scope": "/systems/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Mitchell Miller's operating architecture across search, analytics, and AI systems."
+    },
+    {
+      "scope": "/systems/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Systems Architecture | Mitchell Miller"
+    },
+    {
+      "scope": "/systems/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/systems/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/systems/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "1 images, 0 without alt"
+    },
+    {
+      "scope": "/systems/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/systems/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/systems/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/work/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/work/index.html"
+    },
+    {
+      "scope": "/work/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Enterprise Search, AEO/GEO, and AI Systems Work"
+    },
+    {
+      "scope": "/work/",
+      "check": "main text ≥ 300 chars (general)",
+      "pass": true,
+      "detail": "2247 chars"
+    },
+    {
+      "scope": "/work/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/work/"
+    },
+    {
+      "scope": "/work/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "17 case studies spanning Apple, CommonSpirit Health, Stanford Health Care, SFC Surf School"
+    },
+    {
+      "scope": "/work/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Work — Search, Growth & AI-Search Case Studies"
+    },
+    {
+      "scope": "/work/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/work/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/work/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "17 images, 0 without alt"
+    },
+    {
+      "scope": "/work/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/work/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/work/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/selected-builds/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/selected-builds/index.html"
+    },
+    {
+      "scope": "/selected-builds/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Selected Builds"
+    },
+    {
+      "scope": "/selected-builds/",
+      "check": "main text ≥ 300 chars (general)",
+      "pass": true,
+      "detail": "1876 chars"
+    },
+    {
+      "scope": "/selected-builds/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/selected-builds/"
+    },
+    {
+      "scope": "/selected-builds/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Selected side builds, AI experiments, and workflow tools that support Mitchell Miller's SE"
+    },
+    {
+      "scope": "/selected-builds/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Selected Builds | Mitchell Miller"
+    },
+    {
+      "scope": "/selected-builds/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/selected-builds/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/selected-builds/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "10 images, 0 without alt"
+    },
+    {
+      "scope": "/selected-builds/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/selected-builds/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/selected-builds/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/index.html"
+    },
+    {
+      "scope": "/blog/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Signals & Systems"
+    },
+    {
+      "scope": "/blog/",
+      "check": "main text ≥ 300 chars (general)",
+      "pass": true,
+      "detail": "12945 chars"
+    },
+    {
+      "scope": "/blog/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/"
+    },
+    {
+      "scope": "/blog/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Field notes on enterprise search, AI-search measurement and growth systems, from real enga"
+    },
+    {
+      "scope": "/blog/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Writing — Search, Growth & AI-Search Notes"
+    },
+    {
+      "scope": "/blog/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "1 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/case-studies/index.html"
+    },
+    {
+      "scope": "/case-studies/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Case Studies"
+    },
+    {
+      "scope": "/case-studies/",
+      "check": "main text ≥ 300 chars (general)",
+      "pass": true,
+      "detail": "1793 chars"
+    },
+    {
+      "scope": "/case-studies/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/case-studies/"
+    },
+    {
+      "scope": "/case-studies/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "In-depth case studies on enterprise SEO, AEO/GEO, and AI Search."
+    },
+    {
+      "scope": "/case-studies/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Case Studies | Mitchell Miller"
+    },
+    {
+      "scope": "/case-studies/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/case-studies/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/case-studies/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "17 images, 0 without alt"
+    },
+    {
+      "scope": "/case-studies/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/aeo-geo/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/aeo-geo/index.html"
+    },
+    {
+      "scope": "/aeo-geo/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · AEO/GEO Measurement Methodology"
+    },
+    {
+      "scope": "/aeo-geo/",
+      "check": "main text ≥ 300 chars (general)",
+      "pass": true,
+      "detail": "8028 chars"
+    },
+    {
+      "scope": "/aeo-geo/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/aeo-geo/"
+    },
+    {
+      "scope": "/aeo-geo/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Mitchell Miller's AEO/GEO measurement methodology: prompt-cluster construction, citation v"
+    },
+    {
+      "scope": "/aeo-geo/",
+      "check": "title present",
+      "pass": true,
+      "detail": "AEO/GEO Measurement Methodology · Mitchell Miller"
+    },
+    {
+      "scope": "/aeo-geo/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/aeo-geo/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/aeo-geo/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "1 images, 0 without alt"
+    },
+    {
+      "scope": "/aeo-geo/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/aeo-geo/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/aeo-geo/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/apple-seasonal-search/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/case-studies/apple-seasonal-search/index.html"
+    },
+    {
+      "scope": "/case-studies/apple-seasonal-search/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Apple Seasonal Search"
+    },
+    {
+      "scope": "/case-studies/apple-seasonal-search/",
+      "check": "main text ≥ 700 chars (case)",
+      "pass": true,
+      "detail": "1669 chars"
+    },
+    {
+      "scope": "/case-studies/apple-seasonal-search/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/case-studies/apple-seasonal-search/"
+    },
+    {
+      "scope": "/case-studies/apple-seasonal-search/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Enterprise SEO program across Apple seasonal commerce surfaces"
+    },
+    {
+      "scope": "/case-studies/apple-seasonal-search/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Apple Seasonal Search | Mitchell Miller"
+    },
+    {
+      "scope": "/case-studies/apple-seasonal-search/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/case-studies/apple-seasonal-search/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/case-studies/apple-seasonal-search/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "2 images, 0 without alt"
+    },
+    {
+      "scope": "/case-studies/apple-seasonal-search/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/apple-seasonal-search/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/apple-seasonal-search/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/apple-store-amr/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/case-studies/apple-store-amr/index.html"
+    },
+    {
+      "scope": "/case-studies/apple-store-amr/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Apple Store AMR"
+    },
+    {
+      "scope": "/case-studies/apple-store-amr/",
+      "check": "main text ≥ 700 chars (case)",
+      "pass": true,
+      "detail": "1291 chars"
+    },
+    {
+      "scope": "/case-studies/apple-store-amr/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/case-studies/apple-store-amr/"
+    },
+    {
+      "scope": "/case-studies/apple-store-amr/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Seasonal merchandising SEO for the Americas"
+    },
+    {
+      "scope": "/case-studies/apple-store-amr/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Apple Store AMR | Mitchell Miller"
+    },
+    {
+      "scope": "/case-studies/apple-store-amr/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/case-studies/apple-store-amr/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/case-studies/apple-store-amr/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "2 images, 0 without alt"
+    },
+    {
+      "scope": "/case-studies/apple-store-amr/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/apple-store-amr/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/apple-store-amr/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/apple-education-store/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/case-studies/apple-education-store/index.html"
+    },
+    {
+      "scope": "/case-studies/apple-education-store/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Apple Education Store"
+    },
+    {
+      "scope": "/case-studies/apple-education-store/",
+      "check": "main text ≥ 700 chars (case)",
+      "pass": true,
+      "detail": "1221 chars"
+    },
+    {
+      "scope": "/case-studies/apple-education-store/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/case-studies/apple-education-store/"
+    },
+    {
+      "scope": "/case-studies/apple-education-store/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Back-to-school search optimization"
+    },
+    {
+      "scope": "/case-studies/apple-education-store/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Apple Education Store | Mitchell Miller"
+    },
+    {
+      "scope": "/case-studies/apple-education-store/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/case-studies/apple-education-store/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/case-studies/apple-education-store/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "2 images, 0 without alt"
+    },
+    {
+      "scope": "/case-studies/apple-education-store/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/apple-education-store/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/apple-education-store/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/stanford-myhealth-seo/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/case-studies/stanford-myhealth-seo/index.html"
+    },
+    {
+      "scope": "/case-studies/stanford-myhealth-seo/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Stanford MyHealth SEO"
+    },
+    {
+      "scope": "/case-studies/stanford-myhealth-seo/",
+      "check": "main text ≥ 700 chars (case)",
+      "pass": true,
+      "detail": "1492 chars"
+    },
+    {
+      "scope": "/case-studies/stanford-myhealth-seo/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/case-studies/stanford-myhealth-seo/"
+    },
+    {
+      "scope": "/case-studies/stanford-myhealth-seo/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Full-funnel paid and organic search for regulated academic healthcare"
+    },
+    {
+      "scope": "/case-studies/stanford-myhealth-seo/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Stanford MyHealth SEO | Mitchell Miller"
+    },
+    {
+      "scope": "/case-studies/stanford-myhealth-seo/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/case-studies/stanford-myhealth-seo/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/case-studies/stanford-myhealth-seo/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "2 images, 0 without alt"
+    },
+    {
+      "scope": "/case-studies/stanford-myhealth-seo/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/stanford-myhealth-seo/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/stanford-myhealth-seo/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/commonspirit-locations-conversion-engine/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/case-studies/commonspirit-locations-conversion-engine/index.html"
+    },
+    {
+      "scope": "/case-studies/commonspirit-locations-conversion-engine/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Dignity Health Yext Location Conversion Engine"
+    },
+    {
+      "scope": "/case-studies/commonspirit-locations-conversion-engine/",
+      "check": "main text ≥ 700 chars (case)",
+      "pass": true,
+      "detail": "4540 chars"
+    },
+    {
+      "scope": "/case-studies/commonspirit-locations-conversion-engine/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/case-studies/commonspirit-locations-conversion-engine/"
+    },
+    {
+      "scope": "/case-studies/commonspirit-locations-conversion-engine/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Programmatic SEO and conversion infrastructure across 1,000+ healthcare location pages"
+    },
+    {
+      "scope": "/case-studies/commonspirit-locations-conversion-engine/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Dignity Health Yext Location Conversion Engine | Mitchell Miller"
+    },
+    {
+      "scope": "/case-studies/commonspirit-locations-conversion-engine/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/case-studies/commonspirit-locations-conversion-engine/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/case-studies/commonspirit-locations-conversion-engine/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "4 images, 0 without alt"
+    },
+    {
+      "scope": "/case-studies/commonspirit-locations-conversion-engine/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/commonspirit-locations-conversion-engine/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/commonspirit-locations-conversion-engine/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/commonspirit-network-consolidation/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/case-studies/commonspirit-network-consolidation/index.html"
+    },
+    {
+      "scope": "/case-studies/commonspirit-network-consolidation/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · CommonSpirit Network Consolidation"
+    },
+    {
+      "scope": "/case-studies/commonspirit-network-consolidation/",
+      "check": "main text ≥ 700 chars (case)",
+      "pass": true,
+      "detail": "1662 chars"
+    },
+    {
+      "scope": "/case-studies/commonspirit-network-consolidation/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/case-studies/commonspirit-network-consolidation/"
+    },
+    {
+      "scope": "/case-studies/commonspirit-network-consolidation/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Analytics and SEO preservation during massive health system merger"
+    },
+    {
+      "scope": "/case-studies/commonspirit-network-consolidation/",
+      "check": "title present",
+      "pass": true,
+      "detail": "CommonSpirit Network Consolidation | Mitchell Miller"
+    },
+    {
+      "scope": "/case-studies/commonspirit-network-consolidation/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/case-studies/commonspirit-network-consolidation/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/case-studies/commonspirit-network-consolidation/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "2 images, 0 without alt"
+    },
+    {
+      "scope": "/case-studies/commonspirit-network-consolidation/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/commonspirit-network-consolidation/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/commonspirit-network-consolidation/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/commonspirit-medical-content-library/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/case-studies/commonspirit-medical-content-library/index.html"
+    },
+    {
+      "scope": "/case-studies/commonspirit-medical-content-library/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Dignity Health Conditions & Treatments Library"
+    },
+    {
+      "scope": "/case-studies/commonspirit-medical-content-library/",
+      "check": "main text ≥ 700 chars (case)",
+      "pass": true,
+      "detail": "2664 chars"
+    },
+    {
+      "scope": "/case-studies/commonspirit-medical-content-library/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/case-studies/commonspirit-medical-content-library/"
+    },
+    {
+      "scope": "/case-studies/commonspirit-medical-content-library/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Competitive-intelligence content library that became AEM migration leverage"
+    },
+    {
+      "scope": "/case-studies/commonspirit-medical-content-library/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Dignity Health Conditions & Treatments Library | Mitchell Miller"
+    },
+    {
+      "scope": "/case-studies/commonspirit-medical-content-library/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/case-studies/commonspirit-medical-content-library/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/case-studies/commonspirit-medical-content-library/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "2 images, 0 without alt"
+    },
+    {
+      "scope": "/case-studies/commonspirit-medical-content-library/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/commonspirit-medical-content-library/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/commonspirit-medical-content-library/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/aem-content-fragmentation-architecture/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/case-studies/aem-content-fragmentation-architecture/index.html"
+    },
+    {
+      "scope": "/case-studies/aem-content-fragmentation-architecture/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · AEM Content Fragmentation Architecture"
+    },
+    {
+      "scope": "/case-studies/aem-content-fragmentation-architecture/",
+      "check": "main text ≥ 700 chars (case)",
+      "pass": true,
+      "detail": "1782 chars"
+    },
+    {
+      "scope": "/case-studies/aem-content-fragmentation-architecture/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/case-studies/aem-content-fragmentation-architecture/"
+    },
+    {
+      "scope": "/case-studies/aem-content-fragmentation-architecture/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Turned the Conditions & Treatments library into a modular AEM adoption case"
+    },
+    {
+      "scope": "/case-studies/aem-content-fragmentation-architecture/",
+      "check": "title present",
+      "pass": true,
+      "detail": "AEM Content Fragmentation Architecture | Mitchell Miller"
+    },
+    {
+      "scope": "/case-studies/aem-content-fragmentation-architecture/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/case-studies/aem-content-fragmentation-architecture/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/case-studies/aem-content-fragmentation-architecture/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "2 images, 0 without alt"
+    },
+    {
+      "scope": "/case-studies/aem-content-fragmentation-architecture/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/aem-content-fragmentation-architecture/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/aem-content-fragmentation-architecture/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/yext-entity-data-foundation/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/case-studies/yext-entity-data-foundation/index.html"
+    },
+    {
+      "scope": "/case-studies/yext-entity-data-foundation/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Yext Entity Data Foundation"
+    },
+    {
+      "scope": "/case-studies/yext-entity-data-foundation/",
+      "check": "main text ≥ 700 chars (case)",
+      "pass": true,
+      "detail": "1296 chars"
+    },
+    {
+      "scope": "/case-studies/yext-entity-data-foundation/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/case-studies/yext-entity-data-foundation/"
+    },
+    {
+      "scope": "/case-studies/yext-entity-data-foundation/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Network-wide entity cleanup and syndication"
+    },
+    {
+      "scope": "/case-studies/yext-entity-data-foundation/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Yext Entity Data Foundation | Mitchell Miller"
+    },
+    {
+      "scope": "/case-studies/yext-entity-data-foundation/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/case-studies/yext-entity-data-foundation/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/case-studies/yext-entity-data-foundation/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "2 images, 0 without alt"
+    },
+    {
+      "scope": "/case-studies/yext-entity-data-foundation/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/yext-entity-data-foundation/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/yext-entity-data-foundation/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/claritypulse-ai-reporting/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/case-studies/claritypulse-ai-reporting/index.html"
+    },
+    {
+      "scope": "/case-studies/claritypulse-ai-reporting/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · ClarityPulse"
+    },
+    {
+      "scope": "/case-studies/claritypulse-ai-reporting/",
+      "check": "main text ≥ 700 chars (case)",
+      "pass": true,
+      "detail": "1598 chars"
+    },
+    {
+      "scope": "/case-studies/claritypulse-ai-reporting/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/case-studies/claritypulse-ai-reporting/"
+    },
+    {
+      "scope": "/case-studies/claritypulse-ai-reporting/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Personal AI reporting prototype: GA4, GSC, ads data → source-backed narratives"
+    },
+    {
+      "scope": "/case-studies/claritypulse-ai-reporting/",
+      "check": "title present",
+      "pass": true,
+      "detail": "ClarityPulse | Mitchell Miller"
+    },
+    {
+      "scope": "/case-studies/claritypulse-ai-reporting/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/case-studies/claritypulse-ai-reporting/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/case-studies/claritypulse-ai-reporting/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "2 images, 0 without alt"
+    },
+    {
+      "scope": "/case-studies/claritypulse-ai-reporting/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/claritypulse-ai-reporting/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/claritypulse-ai-reporting/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/searchforge-content-intelligence/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/case-studies/searchforge-content-intelligence/index.html"
+    },
+    {
+      "scope": "/case-studies/searchforge-content-intelligence/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · SearchForge"
+    },
+    {
+      "scope": "/case-studies/searchforge-content-intelligence/",
+      "check": "main text ≥ 700 chars (case)",
+      "pass": true,
+      "detail": "1295 chars"
+    },
+    {
+      "scope": "/case-studies/searchforge-content-intelligence/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/case-studies/searchforge-content-intelligence/"
+    },
+    {
+      "scope": "/case-studies/searchforge-content-intelligence/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "AI content intelligence for entity-driven brief generation"
+    },
+    {
+      "scope": "/case-studies/searchforge-content-intelligence/",
+      "check": "title present",
+      "pass": true,
+      "detail": "SearchForge | Mitchell Miller"
+    },
+    {
+      "scope": "/case-studies/searchforge-content-intelligence/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/case-studies/searchforge-content-intelligence/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/case-studies/searchforge-content-intelligence/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "2 images, 0 without alt"
+    },
+    {
+      "scope": "/case-studies/searchforge-content-intelligence/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/searchforge-content-intelligence/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/searchforge-content-intelligence/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/actionthread-transcript-execution/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/case-studies/actionthread-transcript-execution/index.html"
+    },
+    {
+      "scope": "/case-studies/actionthread-transcript-execution/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · ActionThread"
+    },
+    {
+      "scope": "/case-studies/actionthread-transcript-execution/",
+      "check": "main text ≥ 700 chars (case)",
+      "pass": true,
+      "detail": "1184 chars"
+    },
+    {
+      "scope": "/case-studies/actionthread-transcript-execution/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/case-studies/actionthread-transcript-execution/"
+    },
+    {
+      "scope": "/case-studies/actionthread-transcript-execution/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "AI transcript-to-execution workflow automation"
+    },
+    {
+      "scope": "/case-studies/actionthread-transcript-execution/",
+      "check": "title present",
+      "pass": true,
+      "detail": "ActionThread | Mitchell Miller"
+    },
+    {
+      "scope": "/case-studies/actionthread-transcript-execution/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/case-studies/actionthread-transcript-execution/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/case-studies/actionthread-transcript-execution/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "2 images, 0 without alt"
+    },
+    {
+      "scope": "/case-studies/actionthread-transcript-execution/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/actionthread-transcript-execution/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/actionthread-transcript-execution/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/aeo-visibility-infrastructure/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/case-studies/aeo-visibility-infrastructure/index.html"
+    },
+    {
+      "scope": "/case-studies/aeo-visibility-infrastructure/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · AEO Visibility Infrastructure"
+    },
+    {
+      "scope": "/case-studies/aeo-visibility-infrastructure/",
+      "check": "main text ≥ 700 chars (case)",
+      "pass": true,
+      "detail": "1393 chars"
+    },
+    {
+      "scope": "/case-studies/aeo-visibility-infrastructure/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/case-studies/aeo-visibility-infrastructure/"
+    },
+    {
+      "scope": "/case-studies/aeo-visibility-infrastructure/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Measurement system for brand visibility in AI search engines"
+    },
+    {
+      "scope": "/case-studies/aeo-visibility-infrastructure/",
+      "check": "title present",
+      "pass": true,
+      "detail": "AEO Visibility Infrastructure | Mitchell Miller"
+    },
+    {
+      "scope": "/case-studies/aeo-visibility-infrastructure/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/case-studies/aeo-visibility-infrastructure/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/case-studies/aeo-visibility-infrastructure/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "2 images, 0 without alt"
+    },
+    {
+      "scope": "/case-studies/aeo-visibility-infrastructure/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/aeo-visibility-infrastructure/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/aeo-visibility-infrastructure/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/domainsignal/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/case-studies/domainsignal/index.html"
+    },
+    {
+      "scope": "/case-studies/domainsignal/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · DomainSignal"
+    },
+    {
+      "scope": "/case-studies/domainsignal/",
+      "check": "main text ≥ 700 chars (case)",
+      "pass": true,
+      "detail": "1126 chars"
+    },
+    {
+      "scope": "/case-studies/domainsignal/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/case-studies/domainsignal/"
+    },
+    {
+      "scope": "/case-studies/domainsignal/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "AI-driven domain authority and intelligence platform"
+    },
+    {
+      "scope": "/case-studies/domainsignal/",
+      "check": "title present",
+      "pass": true,
+      "detail": "DomainSignal | Mitchell Miller"
+    },
+    {
+      "scope": "/case-studies/domainsignal/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/case-studies/domainsignal/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/case-studies/domainsignal/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "2 images, 0 without alt"
+    },
+    {
+      "scope": "/case-studies/domainsignal/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/domainsignal/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/domainsignal/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/date-night/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/case-studies/date-night/index.html"
+    },
+    {
+      "scope": "/case-studies/date-night/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Date Night"
+    },
+    {
+      "scope": "/case-studies/date-night/",
+      "check": "main text ≥ 700 chars (case)",
+      "pass": true,
+      "detail": "1087 chars"
+    },
+    {
+      "scope": "/case-studies/date-night/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/case-studies/date-night/"
+    },
+    {
+      "scope": "/case-studies/date-night/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Couples-focused app prototype for shared discovery"
+    },
+    {
+      "scope": "/case-studies/date-night/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Date Night | Mitchell Miller"
+    },
+    {
+      "scope": "/case-studies/date-night/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/case-studies/date-night/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/case-studies/date-night/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "2 images, 0 without alt"
+    },
+    {
+      "scope": "/case-studies/date-night/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/date-night/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/date-night/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/vet-advocates-growth-system/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/case-studies/vet-advocates-growth-system/index.html"
+    },
+    {
+      "scope": "/case-studies/vet-advocates-growth-system/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Vet Advocates Growth System"
+    },
+    {
+      "scope": "/case-studies/vet-advocates-growth-system/",
+      "check": "main text ≥ 700 chars (case)",
+      "pass": true,
+      "detail": "1116 chars"
+    },
+    {
+      "scope": "/case-studies/vet-advocates-growth-system/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/case-studies/vet-advocates-growth-system/"
+    },
+    {
+      "scope": "/case-studies/vet-advocates-growth-system/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Structured acquisition system for a veterans-services nonprofit"
+    },
+    {
+      "scope": "/case-studies/vet-advocates-growth-system/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Vet Advocates Growth System | Mitchell Miller"
+    },
+    {
+      "scope": "/case-studies/vet-advocates-growth-system/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/case-studies/vet-advocates-growth-system/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/case-studies/vet-advocates-growth-system/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "2 images, 0 without alt"
+    },
+    {
+      "scope": "/case-studies/vet-advocates-growth-system/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/vet-advocates-growth-system/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/vet-advocates-growth-system/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/sfc-surf-school/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/case-studies/sfc-surf-school/index.html"
+    },
+    {
+      "scope": "/case-studies/sfc-surf-school/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Search Visibility Report"
+    },
+    {
+      "scope": "/case-studies/sfc-surf-school/",
+      "check": "main text ≥ 700 chars (case)",
+      "pass": true,
+      "detail": "8803 chars"
+    },
+    {
+      "scope": "/case-studies/sfc-surf-school/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/case-studies/sfc-surf-school/"
+    },
+    {
+      "scope": "/case-studies/sfc-surf-school/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Search visibility report for SFC Surf School — competitive analysis, first-party crawl of "
+    },
+    {
+      "scope": "/case-studies/sfc-surf-school/",
+      "check": "title present",
+      "pass": true,
+      "detail": "SFC Search Visibility"
+    },
+    {
+      "scope": "/case-studies/sfc-surf-school/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/case-studies/sfc-surf-school/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/case-studies/sfc-surf-school/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "0 images, 0 without alt"
+    },
+    {
+      "scope": "/case-studies/sfc-surf-school/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/sfc-surf-school/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/case-studies/sfc-surf-school/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": "standalone report keeps its archived body by parity rule"
+    },
+    {
+      "scope": "/blog/gbp-2026-ai-grounding/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/gbp-2026-ai-grounding/index.html"
+    },
+    {
+      "scope": "/blog/gbp-2026-ai-grounding/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Your Google Business Profile Is Now an AI Grounding Source — What Actually Chang"
+    },
+    {
+      "scope": "/blog/gbp-2026-ai-grounding/",
+      "check": "main text ≥ 1500 chars (article)",
+      "pass": true,
+      "detail": "8518 chars"
+    },
+    {
+      "scope": "/blog/gbp-2026-ai-grounding/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/gbp-2026-ai-grounding/"
+    },
+    {
+      "scope": "/blog/gbp-2026-ai-grounding/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "For a decade a Google Business Profile was a visibility asset. In 2026 it became an AI gro"
+    },
+    {
+      "scope": "/blog/gbp-2026-ai-grounding/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Your Google Business Profile Is Now an AI Grounding Source — What Actually Changed in 2026"
+    },
+    {
+      "scope": "/blog/gbp-2026-ai-grounding/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/gbp-2026-ai-grounding/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/gbp-2026-ai-grounding/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "1 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/gbp-2026-ai-grounding/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/gbp-2026-ai-grounding/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/gbp-2026-ai-grounding/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/multi-agent-billing-traps/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/multi-agent-billing-traps/index.html"
+    },
+    {
+      "scope": "/blog/multi-agent-billing-traps/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · The Flat-Fee Multi-Agent Stack — and the 3 Billing Traps That Quietly Meter You"
+    },
+    {
+      "scope": "/blog/multi-agent-billing-traps/",
+      "check": "main text ≥ 1500 chars (article)",
+      "pass": true,
+      "detail": "7370 chars"
+    },
+    {
+      "scope": "/blog/multi-agent-billing-traps/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/multi-agent-billing-traps/"
+    },
+    {
+      "scope": "/blog/multi-agent-billing-traps/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "The two-subscription agent stack (orchestrator + Claude Code) is real and works — but thre"
+    },
+    {
+      "scope": "/blog/multi-agent-billing-traps/",
+      "check": "title present",
+      "pass": true,
+      "detail": "The Flat-Fee Multi-Agent Stack — and the 3 Billing Traps That Quietly Meter You | Signals "
+    },
+    {
+      "scope": "/blog/multi-agent-billing-traps/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/multi-agent-billing-traps/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/multi-agent-billing-traps/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "1 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/multi-agent-billing-traps/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/multi-agent-billing-traps/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/multi-agent-billing-traps/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/intrepid-agency-spotlight/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/intrepid-agency-spotlight/index.html"
+    },
+    {
+      "scope": "/blog/intrepid-agency-spotlight/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Agency Spotlight: Intrepid Digital and the Long Game in Search Marketing"
+    },
+    {
+      "scope": "/blog/intrepid-agency-spotlight/",
+      "check": "main text ≥ 1500 chars (article)",
+      "pass": true,
+      "detail": "19748 chars"
+    },
+    {
+      "scope": "/blog/intrepid-agency-spotlight/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/intrepid-agency-spotlight/"
+    },
+    {
+      "scope": "/blog/intrepid-agency-spotlight/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Intrepid has produced content for AWS for about seven years — a strong run in a field wher"
+    },
+    {
+      "scope": "/blog/intrepid-agency-spotlight/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Agency Spotlight: Intrepid Digital and the Long Game in Search Marketing | Signals & Syste"
+    },
+    {
+      "scope": "/blog/intrepid-agency-spotlight/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/intrepid-agency-spotlight/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/intrepid-agency-spotlight/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "1 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/intrepid-agency-spotlight/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/intrepid-agency-spotlight/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/intrepid-agency-spotlight/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/mitchell-miller-journey/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/mitchell-miller-journey/index.html"
+    },
+    {
+      "scope": "/blog/mitchell-miller-journey/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · The Long Road to Systems Thinking: My Journey in Search, AI, and Building Things"
+    },
+    {
+      "scope": "/blog/mitchell-miller-journey/",
+      "check": "main text ≥ 1500 chars (article)",
+      "pass": true,
+      "detail": "3564 chars"
+    },
+    {
+      "scope": "/blog/mitchell-miller-journey/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/mitchell-miller-journey/"
+    },
+    {
+      "scope": "/blog/mitchell-miller-journey/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "From agency environments to Apple-scale SEO programs, and why search in 2026 feels like be"
+    },
+    {
+      "scope": "/blog/mitchell-miller-journey/",
+      "check": "title present",
+      "pass": true,
+      "detail": "The Long Road to Systems Thinking: My Journey in Search, AI, and Building Things | Signals"
+    },
+    {
+      "scope": "/blog/mitchell-miller-journey/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/mitchell-miller-journey/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/mitchell-miller-journey/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "1 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/mitchell-miller-journey/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/mitchell-miller-journey/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/mitchell-miller-journey/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/traditional-seo-to-ai-search/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/traditional-seo-to-ai-search/index.html"
+    },
+    {
+      "scope": "/blog/traditional-seo-to-ai-search/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · From Traditional SEO to AI Search: What Actually Changed"
+    },
+    {
+      "scope": "/blog/traditional-seo-to-ai-search/",
+      "check": "main text ≥ 40 chars (placeholder)",
+      "pass": true,
+      "detail": "277 chars"
+    },
+    {
+      "scope": "/blog/traditional-seo-to-ai-search/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/traditional-seo-to-ai-search/"
+    },
+    {
+      "scope": "/blog/traditional-seo-to-ai-search/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "A breakdown of how information retrieval has shifted from blue links to generated answers,"
+    },
+    {
+      "scope": "/blog/traditional-seo-to-ai-search/",
+      "check": "title present",
+      "pass": true,
+      "detail": "From Traditional SEO to AI Search: What Actually Changed | Signals & Systems"
+    },
+    {
+      "scope": "/blog/traditional-seo-to-ai-search/",
+      "check": "robots noindex (placeholder)",
+      "pass": true,
+      "detail": "noindex, follow"
+    },
+    {
+      "scope": "/blog/traditional-seo-to-ai-search/",
+      "check": "GA4 loader absent on noindex page",
+      "pass": true,
+      "detail": "0 loader(s), id present: false"
+    },
+    {
+      "scope": "/blog/traditional-seo-to-ai-search/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "1 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/traditional-seo-to-ai-search/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/traditional-seo-to-ai-search/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/traditional-seo-to-ai-search/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/aeo-geo-measurement-framework/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/aeo-geo-measurement-framework/index.html"
+    },
+    {
+      "scope": "/blog/aeo-geo-measurement-framework/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · AEO vs GEO vs SEO: A Practical Measurement Framework"
+    },
+    {
+      "scope": "/blog/aeo-geo-measurement-framework/",
+      "check": "main text ≥ 40 chars (placeholder)",
+      "pass": true,
+      "detail": "263 chars"
+    },
+    {
+      "scope": "/blog/aeo-geo-measurement-framework/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/aeo-geo-measurement-framework/"
+    },
+    {
+      "scope": "/blog/aeo-geo-measurement-framework/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "How to measure brand visibility, citation velocity, and share-of-voice across ChatGPT, Per"
+    },
+    {
+      "scope": "/blog/aeo-geo-measurement-framework/",
+      "check": "title present",
+      "pass": true,
+      "detail": "AEO vs GEO vs SEO: A Practical Measurement Framework | Signals & Systems"
+    },
+    {
+      "scope": "/blog/aeo-geo-measurement-framework/",
+      "check": "robots noindex (placeholder)",
+      "pass": true,
+      "detail": "noindex, follow"
+    },
+    {
+      "scope": "/blog/aeo-geo-measurement-framework/",
+      "check": "GA4 loader absent on noindex page",
+      "pass": true,
+      "detail": "0 loader(s), id present: false"
+    },
+    {
+      "scope": "/blog/aeo-geo-measurement-framework/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "1 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/aeo-geo-measurement-framework/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/aeo-geo-measurement-framework/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/aeo-geo-measurement-framework/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/entity-seo-for-ai-retrieval/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/entity-seo-for-ai-retrieval/index.html"
+    },
+    {
+      "scope": "/blog/entity-seo-for-ai-retrieval/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Entity SEO for AI Retrieval Systems"
+    },
+    {
+      "scope": "/blog/entity-seo-for-ai-retrieval/",
+      "check": "main text ≥ 40 chars (placeholder)",
+      "pass": true,
+      "detail": "238 chars"
+    },
+    {
+      "scope": "/blog/entity-seo-for-ai-retrieval/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/entity-seo-for-ai-retrieval/"
+    },
+    {
+      "scope": "/blog/entity-seo-for-ai-retrieval/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Why structured data and parent/child entity architecture are the foundational infrastructu"
+    },
+    {
+      "scope": "/blog/entity-seo-for-ai-retrieval/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Entity SEO for AI Retrieval Systems | Signals & Systems"
+    },
+    {
+      "scope": "/blog/entity-seo-for-ai-retrieval/",
+      "check": "robots noindex (placeholder)",
+      "pass": true,
+      "detail": "noindex, follow"
+    },
+    {
+      "scope": "/blog/entity-seo-for-ai-retrieval/",
+      "check": "GA4 loader absent on noindex page",
+      "pass": true,
+      "detail": "0 loader(s), id present: false"
+    },
+    {
+      "scope": "/blog/entity-seo-for-ai-retrieval/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "1 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/entity-seo-for-ai-retrieval/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/entity-seo-for-ai-retrieval/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/entity-seo-for-ai-retrieval/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/enterprise-seo-business-cases/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/enterprise-seo-business-cases/index.html"
+    },
+    {
+      "scope": "/blog/enterprise-seo-business-cases/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · The Enterprise SEO Business Case: How to Get Engineering Prioritized"
+    },
+    {
+      "scope": "/blog/enterprise-seo-business-cases/",
+      "check": "main text ≥ 40 chars (placeholder)",
+      "pass": true,
+      "detail": "249 chars"
+    },
+    {
+      "scope": "/blog/enterprise-seo-business-cases/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/enterprise-seo-business-cases/"
+    },
+    {
+      "scope": "/blog/enterprise-seo-business-cases/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Translating technical requirements into executive-ready models that secure roadmap placeme"
+    },
+    {
+      "scope": "/blog/enterprise-seo-business-cases/",
+      "check": "title present",
+      "pass": true,
+      "detail": "The Enterprise SEO Business Case: How to Get Engineering Prioritized | Signals & Systems"
+    },
+    {
+      "scope": "/blog/enterprise-seo-business-cases/",
+      "check": "robots noindex (placeholder)",
+      "pass": true,
+      "detail": "noindex, follow"
+    },
+    {
+      "scope": "/blog/enterprise-seo-business-cases/",
+      "check": "GA4 loader absent on noindex page",
+      "pass": true,
+      "detail": "0 loader(s), id present: false"
+    },
+    {
+      "scope": "/blog/enterprise-seo-business-cases/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "1 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/enterprise-seo-business-cases/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/enterprise-seo-business-cases/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/enterprise-seo-business-cases/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/hermes-concepts-field-guide/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/studying/hermes-concepts-field-guide/index.html"
+    },
+    {
+      "scope": "/blog/studying/hermes-concepts-field-guide/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Every Hermes Concept in Plain English — a Field Guide to the Agent Harness"
+    },
+    {
+      "scope": "/blog/studying/hermes-concepts-field-guide/",
+      "check": "main text ≥ 1500 chars (note)",
+      "pass": true,
+      "detail": "11473 chars"
+    },
+    {
+      "scope": "/blog/studying/hermes-concepts-field-guide/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/studying/hermes-concepts-field-guide/"
+    },
+    {
+      "scope": "/blog/studying/hermes-concepts-field-guide/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Hermes (the open-source agent from Nous Research) is a harness wrapped around a swappable "
+    },
+    {
+      "scope": "/blog/studying/hermes-concepts-field-guide/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Every Hermes Concept in Plain English — a Field Guide to the Agent Harness | Studying — Mi"
+    },
+    {
+      "scope": "/blog/studying/hermes-concepts-field-guide/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/studying/hermes-concepts-field-guide/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/studying/hermes-concepts-field-guide/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "7 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/studying/hermes-concepts-field-guide/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/hermes-concepts-field-guide/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/hermes-concepts-field-guide/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/claude-watermark-seo/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/studying/claude-watermark-seo/index.html"
+    },
+    {
+      "scope": "/blog/studying/claude-watermark-seo/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Did Claude's Watermark Just \"Break\" SEO? The Fear Chain vs. the Evidence"
+    },
+    {
+      "scope": "/blog/studying/claude-watermark-seo/",
+      "check": "main text ≥ 1500 chars (note)",
+      "pass": true,
+      "detail": "11625 chars"
+    },
+    {
+      "scope": "/blog/studying/claude-watermark-seo/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/studying/claude-watermark-seo/"
+    },
+    {
+      "scope": "/blog/studying/claude-watermark-seo/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Anthropic began watermarking all Claude-written text (every model since Aug 2, 2026, acros"
+    },
+    {
+      "scope": "/blog/studying/claude-watermark-seo/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Did Claude's Watermark Just \"Break\" SEO? The Fear Chain vs. the Evidence | Studying — Mitc"
+    },
+    {
+      "scope": "/blog/studying/claude-watermark-seo/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/studying/claude-watermark-seo/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/studying/claude-watermark-seo/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "4 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/studying/claude-watermark-seo/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/claude-watermark-seo/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/claude-watermark-seo/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/all-in-ai-money-stack/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/studying/all-in-ai-money-stack/index.html"
+    },
+    {
+      "scope": "/blog/studying/all-in-ai-money-stack/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · TL;DW: Anthropic's $2T IPO, Zuck's Manifesto, Nvidia's $500B Bet & Grok's Comeba"
+    },
+    {
+      "scope": "/blog/studying/all-in-ai-money-stack/",
+      "check": "main text ≥ 1500 chars (note)",
+      "pass": true,
+      "detail": "6150 chars"
+    },
+    {
+      "scope": "/blog/studying/all-in-ai-money-stack/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/studying/all-in-ai-money-stack/"
+    },
+    {
+      "scope": "/blog/studying/all-in-ai-money-stack/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "TL;DR “All their pricing power depends on them remaining in the lead by six months.” — Dav"
+    },
+    {
+      "scope": "/blog/studying/all-in-ai-money-stack/",
+      "check": "title present",
+      "pass": true,
+      "detail": "TL;DW: Anthropic's $2T IPO, Zuck's Manifesto, Nvidia's $500B Bet & Grok's Comeback | Study"
+    },
+    {
+      "scope": "/blog/studying/all-in-ai-money-stack/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/studying/all-in-ai-money-stack/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/studying/all-in-ai-money-stack/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "7 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/studying/all-in-ai-money-stack/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/all-in-ai-money-stack/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/all-in-ai-money-stack/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/hermes-seo-agent/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/studying/hermes-seo-agent/index.html"
+    },
+    {
+      "scope": "/blog/studying/hermes-seo-agent/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · A \"Hermes\" Agent That Runs SEO End-to-End — What Actually Holds Up"
+    },
+    {
+      "scope": "/blog/studying/hermes-seo-agent/",
+      "check": "main text ≥ 1500 chars (note)",
+      "pass": true,
+      "detail": "7099 chars"
+    },
+    {
+      "scope": "/blog/studying/hermes-seo-agent/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/studying/hermes-seo-agent/"
+    },
+    {
+      "scope": "/blog/studying/hermes-seo-agent/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "The pitch is a \"24/7 traffic engine\": an AI agent (confusingly called *Hermes* — memory ac"
+    },
+    {
+      "scope": "/blog/studying/hermes-seo-agent/",
+      "check": "title present",
+      "pass": true,
+      "detail": "A \"Hermes\" Agent That Runs SEO End-to-End — What Actually Holds Up | Studying — Mitchell M"
+    },
+    {
+      "scope": "/blog/studying/hermes-seo-agent/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/studying/hermes-seo-agent/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/studying/hermes-seo-agent/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "5 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/studying/hermes-seo-agent/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/hermes-seo-agent/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/hermes-seo-agent/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/codex-obsolete-9-moves/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/studying/codex-obsolete-9-moves/index.html"
+    },
+    {
+      "scope": "/blog/studying/codex-obsolete-9-moves/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Codex Just Made Claude \"Obsolete\"? — 9 Platform Moves Worth Studying"
+    },
+    {
+      "scope": "/blog/studying/codex-obsolete-9-moves/",
+      "check": "main text ≥ 1500 chars (note)",
+      "pass": true,
+      "detail": "8744 chars"
+    },
+    {
+      "scope": "/blog/studying/codex-obsolete-9-moves/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/studying/codex-obsolete-9-moves/"
+    },
+    {
+      "scope": "/blog/studying/codex-obsolete-9-moves/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "A creator ran through nine things Codex can do that Claude Code (mostly) can't yet — and t"
+    },
+    {
+      "scope": "/blog/studying/codex-obsolete-9-moves/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Codex Just Made Claude \"Obsolete\"? — 9 Platform Moves Worth Studying | Studying — Mitchell"
+    },
+    {
+      "scope": "/blog/studying/codex-obsolete-9-moves/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/studying/codex-obsolete-9-moves/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/studying/codex-obsolete-9-moves/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "7 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/studying/codex-obsolete-9-moves/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/codex-obsolete-9-moves/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/codex-obsolete-9-moves/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/chatgpt-sites/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/studying/chatgpt-sites/index.html"
+    },
+    {
+      "scope": "/blog/studying/chatgpt-sites/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · ChatGPT Sites: Build + Host a Real Internal App From One Conversation"
+    },
+    {
+      "scope": "/blog/studying/chatgpt-sites/",
+      "check": "main text ≥ 1500 chars (note)",
+      "pass": true,
+      "detail": "4902 chars"
+    },
+    {
+      "scope": "/blog/studying/chatgpt-sites/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/studying/chatgpt-sites/"
+    },
+    {
+      "scope": "/blog/studying/chatgpt-sites/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "ChatGPT Sites lets you describe an internal site or lightweight app in the Codex desktop a"
+    },
+    {
+      "scope": "/blog/studying/chatgpt-sites/",
+      "check": "title present",
+      "pass": true,
+      "detail": "ChatGPT Sites: Build + Host a Real Internal App From One Conversation | Studying — Mitchel"
+    },
+    {
+      "scope": "/blog/studying/chatgpt-sites/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/studying/chatgpt-sites/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/studying/chatgpt-sites/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "1 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/studying/chatgpt-sites/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/chatgpt-sites/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/chatgpt-sites/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/book-to-skill/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/studying/book-to-skill/index.html"
+    },
+    {
+      "scope": "/blog/studying/book-to-skill/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · I Turned a Book into an AI Agent (book-to-skill)"
+    },
+    {
+      "scope": "/blog/studying/book-to-skill/",
+      "check": "main text ≥ 1500 chars (note)",
+      "pass": true,
+      "detail": "4393 chars"
+    },
+    {
+      "scope": "/blog/studying/book-to-skill/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/studying/book-to-skill/"
+    },
+    {
+      "scope": "/blog/studying/book-to-skill/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "A trending open-source repo — `book-to-skill` (MIT, ~14k★) — ingests a PDF you own and tur"
+    },
+    {
+      "scope": "/blog/studying/book-to-skill/",
+      "check": "title present",
+      "pass": true,
+      "detail": "I Turned a Book into an AI Agent (book-to-skill) | Studying — Mitchell Miller"
+    },
+    {
+      "scope": "/blog/studying/book-to-skill/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/studying/book-to-skill/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/studying/book-to-skill/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "3 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/studying/book-to-skill/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/book-to-skill/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/book-to-skill/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/claude-code-6-new-rules/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/studying/claude-code-6-new-rules/index.html"
+    },
+    {
+      "scope": "/blog/studying/claude-code-6-new-rules/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Claude Code Just Changed — the 6 New Rules of Context Engineering"
+    },
+    {
+      "scope": "/blog/studying/claude-code-6-new-rules/",
+      "check": "main text ≥ 1500 chars (note)",
+      "pass": true,
+      "detail": "5790 chars"
+    },
+    {
+      "scope": "/blog/studying/claude-code-6-new-rules/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/studying/claude-code-6-new-rules/"
+    },
+    {
+      "scope": "/blog/studying/claude-code-6-new-rules/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Anthropic engineer Tariq published \"The new rules of context engineering for Claude 5 mode"
+    },
+    {
+      "scope": "/blog/studying/claude-code-6-new-rules/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Claude Code Just Changed — the 6 New Rules of Context Engineering | Studying — Mitchell Mi"
+    },
+    {
+      "scope": "/blog/studying/claude-code-6-new-rules/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/studying/claude-code-6-new-rules/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/studying/claude-code-6-new-rules/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "6 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/studying/claude-code-6-new-rules/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/claude-code-6-new-rules/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/claude-code-6-new-rules/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/claude-code-make-money/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/studying/claude-code-make-money/index.html"
+    },
+    {
+      "scope": "/blog/studying/claude-code-make-money/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · I Asked Claude Code to Make Me as Much Money as Possible"
+    },
+    {
+      "scope": "/blog/studying/claude-code-make-money/",
+      "check": "main text ≥ 1500 chars (note)",
+      "pass": true,
+      "detail": "6337 chars"
+    },
+    {
+      "scope": "/blog/studying/claude-code-make-money/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/studying/claude-code-make-money/"
+    },
+    {
+      "scope": "/blog/studying/claude-code-make-money/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Claude is tuned to make you feel *productive*, not to make you *money* — and your income i"
+    },
+    {
+      "scope": "/blog/studying/claude-code-make-money/",
+      "check": "title present",
+      "pass": true,
+      "detail": "I Asked Claude Code to Make Me as Much Money as Possible | Studying — Mitchell Miller"
+    },
+    {
+      "scope": "/blog/studying/claude-code-make-money/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/studying/claude-code-make-money/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/studying/claude-code-make-money/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "7 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/studying/claude-code-make-money/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/claude-code-make-money/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/claude-code-make-money/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/build-ai-agents-full-course/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/studying/build-ai-agents-full-course/index.html"
+    },
+    {
+      "scope": "/blog/studying/build-ai-agents-full-course/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Build AI Agents to Automate Your Business — the Full Framework"
+    },
+    {
+      "scope": "/blog/studying/build-ai-agents-full-course/",
+      "check": "main text ≥ 1500 chars (note)",
+      "pass": true,
+      "detail": "7167 chars"
+    },
+    {
+      "scope": "/blog/studying/build-ai-agents-full-course/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/studying/build-ai-agents-full-course/"
+    },
+    {
+      "scope": "/blog/studying/build-ai-agents-full-course/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "The jump from chat (question → answer) to agents (goal → result) is a 5–10× productivity d"
+    },
+    {
+      "scope": "/blog/studying/build-ai-agents-full-course/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Build AI Agents to Automate Your Business — the Full Framework | Studying — Mitchell Mille"
+    },
+    {
+      "scope": "/blog/studying/build-ai-agents-full-course/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/studying/build-ai-agents-full-course/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/studying/build-ai-agents-full-course/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "9 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/studying/build-ai-agents-full-course/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/build-ai-agents-full-course/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/build-ai-agents-full-course/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/codex-voice-jarvis/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/studying/codex-voice-jarvis/index.html"
+    },
+    {
+      "scope": "/blog/studying/codex-voice-jarvis/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · OpenAI's Codex Voice: Real-Time Voice That Runs Your Computer"
+    },
+    {
+      "scope": "/blog/studying/codex-voice-jarvis/",
+      "check": "main text ≥ 1500 chars (note)",
+      "pass": true,
+      "detail": "4987 chars"
+    },
+    {
+      "scope": "/blog/studying/codex-voice-jarvis/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/studying/codex-voice-jarvis/"
+    },
+    {
+      "scope": "/blog/studying/codex-voice-jarvis/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "OpenAI put real-time voice directly inside Codex — not dictation, but a live voice agent t"
+    },
+    {
+      "scope": "/blog/studying/codex-voice-jarvis/",
+      "check": "title present",
+      "pass": true,
+      "detail": "OpenAI's Codex Voice: Real-Time Voice That Runs Your Computer | Studying — Mitchell Miller"
+    },
+    {
+      "scope": "/blog/studying/codex-voice-jarvis/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/studying/codex-voice-jarvis/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/studying/codex-voice-jarvis/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "4 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/studying/codex-voice-jarvis/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/codex-voice-jarvis/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/codex-voice-jarvis/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/pi-coding-agent/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/studying/pi-coding-agent/index.html"
+    },
+    {
+      "scope": "/blog/studying/pi-coding-agent/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · The Pi Coding Agent — the Only Real Claude Code Competitor"
+    },
+    {
+      "scope": "/blog/studying/pi-coding-agent/",
+      "check": "main text ≥ 1500 chars (note)",
+      "pass": true,
+      "detail": "4370 chars"
+    },
+    {
+      "scope": "/blog/studying/pi-coding-agent/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/studying/pi-coding-agent/"
+    },
+    {
+      "scope": "/blog/studying/pi-coding-agent/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Claude Code created the agentic-coding category with great architecture, a great harness, "
+    },
+    {
+      "scope": "/blog/studying/pi-coding-agent/",
+      "check": "title present",
+      "pass": true,
+      "detail": "The Pi Coding Agent — the Only Real Claude Code Competitor | Studying — Mitchell Miller"
+    },
+    {
+      "scope": "/blog/studying/pi-coding-agent/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/studying/pi-coding-agent/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/studying/pi-coding-agent/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "5 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/studying/pi-coding-agent/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/pi-coding-agent/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/pi-coding-agent/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/ships-100x-faster/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/studying/ships-100x-faster/index.html"
+    },
+    {
+      "scope": "/blog/studying/ships-100x-faster/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Why This Dev Ships 100x Faster Than 99% of Engineers"
+    },
+    {
+      "scope": "/blog/studying/ships-100x-faster/",
+      "check": "main text ≥ 1500 chars (note)",
+      "pass": true,
+      "detail": "5225 chars"
+    },
+    {
+      "scope": "/blog/studying/ships-100x-faster/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/studying/ships-100x-faster/"
+    },
+    {
+      "scope": "/blog/studying/ships-100x-faster/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Mickey — a senior dev who has AI write 95% of his code — isn't typing prompts into a chatb"
+    },
+    {
+      "scope": "/blog/studying/ships-100x-faster/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Why This Dev Ships 100x Faster Than 99% of Engineers | Studying — Mitchell Miller"
+    },
+    {
+      "scope": "/blog/studying/ships-100x-faster/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/studying/ships-100x-faster/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/studying/ships-100x-faster/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "1 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/studying/ships-100x-faster/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/ships-100x-faster/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/ships-100x-faster/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/forget-loop-engineering/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/studying/forget-loop-engineering/index.html"
+    },
+    {
+      "scope": "/blog/studying/forget-loop-engineering/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Forget \"Loop Engineering\" — Agentic Engineering Is About This"
+    },
+    {
+      "scope": "/blog/studying/forget-loop-engineering/",
+      "check": "main text ≥ 1500 chars (note)",
+      "pass": true,
+      "detail": "4929 chars"
+    },
+    {
+      "scope": "/blog/studying/forget-loop-engineering/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/studying/forget-loop-engineering/"
+    },
+    {
+      "scope": "/blog/studying/forget-loop-engineering/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "\"Loop engineering\" is a hype-y rebrand of the software development life cycle — and a misl"
+    },
+    {
+      "scope": "/blog/studying/forget-loop-engineering/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Forget \"Loop Engineering\" — Agentic Engineering Is About This | Studying — Mitchell Miller"
+    },
+    {
+      "scope": "/blog/studying/forget-loop-engineering/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/studying/forget-loop-engineering/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/studying/forget-loop-engineering/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "1 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/studying/forget-loop-engineering/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/forget-loop-engineering/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/forget-loop-engineering/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/mark-cuban-ai-bubble/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/studying/mark-cuban-ai-bubble/index.html"
+    },
+    {
+      "scope": "/blog/studying/mark-cuban-ai-bubble/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Mark Cuban on the AI Bubble: Who Actually Gets Wiped Out?"
+    },
+    {
+      "scope": "/blog/studying/mark-cuban-ai-bubble/",
+      "check": "main text ≥ 1500 chars (note)",
+      "pass": true,
+      "detail": "6221 chars"
+    },
+    {
+      "scope": "/blog/studying/mark-cuban-ai-bubble/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/studying/mark-cuban-ai-bubble/"
+    },
+    {
+      "scope": "/blog/studying/mark-cuban-ai-bubble/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Cuban's core claim: this is not the dot-com bubble. There's no retail mania — it won't wip"
+    },
+    {
+      "scope": "/blog/studying/mark-cuban-ai-bubble/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Mark Cuban on the AI Bubble: Who Actually Gets Wiped Out? | Studying — Mitchell Miller"
+    },
+    {
+      "scope": "/blog/studying/mark-cuban-ai-bubble/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/studying/mark-cuban-ai-bubble/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/studying/mark-cuban-ai-bubble/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "1 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/studying/mark-cuban-ai-bubble/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/mark-cuban-ai-bubble/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/mark-cuban-ai-bubble/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/hormozi-build-this-instead/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/studying/hormozi-build-this-instead/index.html"
+    },
+    {
+      "scope": "/blog/studying/hormozi-build-this-instead/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Alex Hormozi's Warning: Stop Chasing AI, Build This Instead"
+    },
+    {
+      "scope": "/blog/studying/hormozi-build-this-instead/",
+      "check": "main text ≥ 1500 chars (note)",
+      "pass": true,
+      "detail": "8441 chars"
+    },
+    {
+      "scope": "/blog/studying/hormozi-build-this-instead/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/studying/hormozi-build-this-instead/"
+    },
+    {
+      "scope": "/blog/studying/hormozi-build-this-instead/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Hormozi's warning isn't \"avoid AI\" — it's stop building AI businesses and stop outsourcing"
+    },
+    {
+      "scope": "/blog/studying/hormozi-build-this-instead/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Alex Hormozi's Warning: Stop Chasing AI, Build This Instead | Studying — Mitchell Miller"
+    },
+    {
+      "scope": "/blog/studying/hormozi-build-this-instead/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/studying/hormozi-build-this-instead/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/studying/hormozi-build-this-instead/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "1 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/studying/hormozi-build-this-instead/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/hormozi-build-this-instead/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/hormozi-build-this-instead/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/old-seo-collapsing/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/studying/old-seo-collapsing/index.html"
+    },
+    {
+      "scope": "/blog/studying/old-seo-collapsing/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · The Old SEO System Is Collapsing — Here's What Replaces It"
+    },
+    {
+      "scope": "/blog/studying/old-seo-collapsing/",
+      "check": "main text ≥ 1500 chars (note)",
+      "pass": true,
+      "detail": "4841 chars"
+    },
+    {
+      "scope": "/blog/studying/old-seo-collapsing/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/studying/old-seo-collapsing/"
+    },
+    {
+      "scope": "/blog/studying/old-seo-collapsing/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Rankings are holding, but organic clicks are collapsing on any query AI touches — over hal"
+    },
+    {
+      "scope": "/blog/studying/old-seo-collapsing/",
+      "check": "title present",
+      "pass": true,
+      "detail": "The Old SEO System Is Collapsing — Here's What Replaces It | Studying — Mitchell Miller"
+    },
+    {
+      "scope": "/blog/studying/old-seo-collapsing/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/studying/old-seo-collapsing/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/studying/old-seo-collapsing/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "7 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/studying/old-seo-collapsing/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/old-seo-collapsing/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/old-seo-collapsing/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/seo-2026-ai-era/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/studying/seo-2026-ai-era/index.html"
+    },
+    {
+      "scope": "/blog/studying/seo-2026-ai-era/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · SEO in 2026: How I'd Rank in Google in the AI Era"
+    },
+    {
+      "scope": "/blog/studying/seo-2026-ai-era/",
+      "check": "main text ≥ 1500 chars (note)",
+      "pass": true,
+      "detail": "4657 chars"
+    },
+    {
+      "scope": "/blog/studying/seo-2026-ai-era/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/studying/seo-2026-ai-era/"
+    },
+    {
+      "scope": "/blog/studying/seo-2026-ai-era/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "When an AI Overview appears, the #1 organic page now loses ~58% of its clicks (up from 35%"
+    },
+    {
+      "scope": "/blog/studying/seo-2026-ai-era/",
+      "check": "title present",
+      "pass": true,
+      "detail": "SEO in 2026: How I'd Rank in Google in the AI Era | Studying — Mitchell Miller"
+    },
+    {
+      "scope": "/blog/studying/seo-2026-ai-era/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/studying/seo-2026-ai-era/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/studying/seo-2026-ai-era/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "6 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/studying/seo-2026-ai-era/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/seo-2026-ai-era/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/seo-2026-ai-era/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/aeo-geo-aio/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/studying/aeo-geo-aio/index.html"
+    },
+    {
+      "scope": "/blog/studying/aeo-geo-aio/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · AEO vs GEO vs AIO — How AI Search Actually Works in 2026"
+    },
+    {
+      "scope": "/blog/studying/aeo-geo-aio/",
+      "check": "main text ≥ 1500 chars (note)",
+      "pass": true,
+      "detail": "5457 chars"
+    },
+    {
+      "scope": "/blog/studying/aeo-geo-aio/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/studying/aeo-geo-aio/"
+    },
+    {
+      "scope": "/blog/studying/aeo-geo-aio/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Ranking #1 no longer guarantees anyone sees you — AI answers before people reach your site"
+    },
+    {
+      "scope": "/blog/studying/aeo-geo-aio/",
+      "check": "title present",
+      "pass": true,
+      "detail": "AEO vs GEO vs AIO — How AI Search Actually Works in 2026 | Studying — Mitchell Miller"
+    },
+    {
+      "scope": "/blog/studying/aeo-geo-aio/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/studying/aeo-geo-aio/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/studying/aeo-geo-aio/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "4 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/studying/aeo-geo-aio/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/aeo-geo-aio/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/aeo-geo-aio/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/smith-chart-scariest-ee/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/studying/smith-chart-scariest-ee/index.html"
+    },
+    {
+      "scope": "/blog/studying/smith-chart-scariest-ee/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · The Scariest Chart in Electrical Engineering (The Smith Chart)"
+    },
+    {
+      "scope": "/blog/studying/smith-chart-scariest-ee/",
+      "check": "main text ≥ 1500 chars (note)",
+      "pass": true,
+      "detail": "5700 chars"
+    },
+    {
+      "scope": "/blog/studying/smith-chart-scariest-ee/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/studying/smith-chart-scariest-ee/"
+    },
+    {
+      "scope": "/blog/studying/smith-chart-scariest-ee/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "The Smith Chart looks like sci-fi witchcraft (some versions literally say \"Black Magic\"), "
+    },
+    {
+      "scope": "/blog/studying/smith-chart-scariest-ee/",
+      "check": "title present",
+      "pass": true,
+      "detail": "The Scariest Chart in Electrical Engineering (The Smith Chart) | Studying — Mitchell Mille"
+    },
+    {
+      "scope": "/blog/studying/smith-chart-scariest-ee/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/studying/smith-chart-scariest-ee/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/studying/smith-chart-scariest-ee/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "7 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/studying/smith-chart-scariest-ee/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/smith-chart-scariest-ee/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/smith-chart-scariest-ee/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/aeo-80-percent/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/studying/aeo-80-percent/index.html"
+    },
+    {
+      "scope": "/blog/studying/aeo-80-percent/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Learn 80% of AEO in 19 Minutes (Ahrefs)"
+    },
+    {
+      "scope": "/blog/studying/aeo-80-percent/",
+      "check": "main text ≥ 1500 chars (note)",
+      "pass": true,
+      "detail": "6787 chars"
+    },
+    {
+      "scope": "/blog/studying/aeo-80-percent/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/studying/aeo-80-percent/"
+    },
+    {
+      "scope": "/blog/studying/aeo-80-percent/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Winning in AI search isn't luck — it's a 5-piece system on top of solid SEO. (1) Understan"
+    },
+    {
+      "scope": "/blog/studying/aeo-80-percent/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Learn 80% of AEO in 19 Minutes (Ahrefs) | Studying — Mitchell Miller"
+    },
+    {
+      "scope": "/blog/studying/aeo-80-percent/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/studying/aeo-80-percent/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/studying/aeo-80-percent/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "7 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/studying/aeo-80-percent/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/aeo-80-percent/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/aeo-80-percent/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/lab/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/lab/index.html"
+    },
+    {
+      "scope": "/lab/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Think it through. Then try it."
+    },
+    {
+      "scope": "/lab/",
+      "check": "main text ≥ 400 chars (added)",
+      "pass": true,
+      "detail": "4629 chars"
+    },
+    {
+      "scope": "/lab/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/lab/"
+    },
+    {
+      "scope": "/lab/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Try free, in-browser tools, including a population workbench built on real Census microdat"
+    },
+    {
+      "scope": "/lab/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Lab — Free Search & Growth Tools"
+    },
+    {
+      "scope": "/lab/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/lab/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/lab/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "1 images, 0 without alt"
+    },
+    {
+      "scope": "/lab/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/lab/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/lab/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/lab/population-workbench/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/lab/population-workbench/index.html"
+    },
+    {
+      "scope": "/lab/population-workbench/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Build your own simulated population"
+    },
+    {
+      "scope": "/lab/population-workbench/",
+      "check": "main text ≥ 400 chars (added)",
+      "pass": true,
+      "detail": "6641 chars"
+    },
+    {
+      "scope": "/lab/population-workbench/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/lab/population-workbench/"
+    },
+    {
+      "scope": "/lab/population-workbench/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Free lab tool: filter 39.5 million Californians from public Census microdata, compare a ve"
+    },
+    {
+      "scope": "/lab/population-workbench/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Build your own simulated population — free lab tool | Mitchell Miller"
+    },
+    {
+      "scope": "/lab/population-workbench/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/lab/population-workbench/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/lab/population-workbench/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "1 images, 0 without alt"
+    },
+    {
+      "scope": "/lab/population-workbench/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/lab/population-workbench/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/lab/population-workbench/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/lab/population-workbench/methodology/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/lab/population-workbench/methodology/index.html"
+    },
+    {
+      "scope": "/lab/population-workbench/methodology/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Methodology and limitations"
+    },
+    {
+      "scope": "/lab/population-workbench/methodology/",
+      "check": "main text ≥ 400 chars (added)",
+      "pass": true,
+      "detail": "7575 chars"
+    },
+    {
+      "scope": "/lab/population-workbench/methodology/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/lab/population-workbench/methodology/"
+    },
+    {
+      "scope": "/lab/population-workbench/methodology/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Data source, weighting, what is observed versus calculated, simulated and assumed, limitat"
+    },
+    {
+      "scope": "/lab/population-workbench/methodology/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Population workbench methodology | Mitchell Miller"
+    },
+    {
+      "scope": "/lab/population-workbench/methodology/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/lab/population-workbench/methodology/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/lab/population-workbench/methodology/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "1 images, 0 without alt"
+    },
+    {
+      "scope": "/lab/population-workbench/methodology/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/lab/population-workbench/methodology/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/lab/population-workbench/methodology/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/clients/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/clients/index.html"
+    },
+    {
+      "scope": "/clients/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Client workspace sign-in"
+    },
+    {
+      "scope": "/clients/",
+      "check": "main text ≥ 250 chars (added)",
+      "pass": true,
+      "detail": "279 chars"
+    },
+    {
+      "scope": "/clients/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/clients/"
+    },
+    {
+      "scope": "/clients/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Sign in to the private client workspace where Mitchell Miller shares interactive deliverab"
+    },
+    {
+      "scope": "/clients/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Client workspace sign-in | Mitchell Miller"
+    },
+    {
+      "scope": "/clients/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/clients/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/clients/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "1 images, 0 without alt"
+    },
+    {
+      "scope": "/clients/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/clients/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/clients/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/services/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/services/index.html"
+    },
+    {
+      "scope": "/services/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · See the opportunity. Bring it to life."
+    },
+    {
+      "scope": "/services/",
+      "check": "main text ≥ 1500 chars (added)",
+      "pass": true,
+      "detail": "4006 chars"
+    },
+    {
+      "scope": "/services/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/services/"
+    },
+    {
+      "scope": "/services/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Research, digital strategy, UX and content design, front-end engineering, AI workflows and"
+    },
+    {
+      "scope": "/services/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Digital Strategy, Design & Engineering — Mitchell Miller"
+    },
+    {
+      "scope": "/services/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/services/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/services/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "11 images, 0 without alt"
+    },
+    {
+      "scope": "/services/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/services/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/services/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/products/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/products/index.html"
+    },
+    {
+      "scope": "/products/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Better decisions. Less busywork."
+    },
+    {
+      "scope": "/products/",
+      "check": "main text ≥ 800 chars (added)",
+      "pass": true,
+      "detail": "1871 chars"
+    },
+    {
+      "scope": "/products/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/products/"
+    },
+    {
+      "scope": "/products/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Explore software for analytics, domain research, content and everyday planning. Try the fr"
+    },
+    {
+      "scope": "/products/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Software & Tools — Mitchell Miller"
+    },
+    {
+      "scope": "/products/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/products/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/products/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "6 images, 0 without alt"
+    },
+    {
+      "scope": "/products/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/products/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/products/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/optimizing-for-ads-in-free-llm-answers/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/optimizing-for-ads-in-free-llm-answers/index.html"
+    },
+    {
+      "scope": "/blog/optimizing-for-ads-in-free-llm-answers/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Ads in Free LLM Answers: What to Buy, What Gets Cited"
+    },
+    {
+      "scope": "/blog/optimizing-for-ads-in-free-llm-answers/",
+      "check": "main text ≥ 1500 chars (added)",
+      "pass": true,
+      "detail": "13802 chars"
+    },
+    {
+      "scope": "/blog/optimizing-for-ads-in-free-llm-answers/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/optimizing-for-ads-in-free-llm-answers/"
+    },
+    {
+      "scope": "/blog/optimizing-for-ads-in-free-llm-answers/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "ChatGPT, Google AI Mode, Copilot, Perplexity and Meta AI compared: who sees ads, what adve"
+    },
+    {
+      "scope": "/blog/optimizing-for-ads-in-free-llm-answers/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Ads in Free LLM Answers: What to Buy, What Gets Cited | Signals & Systems"
+    },
+    {
+      "scope": "/blog/optimizing-for-ads-in-free-llm-answers/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/optimizing-for-ads-in-free-llm-answers/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/optimizing-for-ads-in-free-llm-answers/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "2 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/optimizing-for-ads-in-free-llm-answers/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/optimizing-for-ads-in-free-llm-answers/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/optimizing-for-ads-in-free-llm-answers/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/growth-title-market/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/growth-title-market/index.html"
+    },
+    {
+      "scope": "/blog/growth-title-market/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Ten Job Titles, Two Right Answers Each"
+    },
+    {
+      "scope": "/blog/growth-title-market/",
+      "check": "main text ≥ 1500 chars (added)",
+      "pass": true,
+      "detail": "9105 chars"
+    },
+    {
+      "scope": "/blog/growth-title-market/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/growth-title-market/"
+    },
+    {
+      "scope": "/blog/growth-title-market/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Ten growth, SEO and AI-search job titles counted on one day: exact-phrase postings against"
+    },
+    {
+      "scope": "/blog/growth-title-market/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Ten Job Titles, Two Right Answers Each | Signals & Systems"
+    },
+    {
+      "scope": "/blog/growth-title-market/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/growth-title-market/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/growth-title-market/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "2 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/growth-title-market/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/growth-title-market/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/growth-title-market/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/b2b-vs-b2c-by-vertical/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/b2b-vs-b2c-by-vertical/index.html"
+    },
+    {
+      "scope": "/blog/b2b-vs-b2c-by-vertical/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · In Education, Winning a B2B Customer Costs 7.3× More Than Winning a B2C One"
+    },
+    {
+      "scope": "/blog/b2b-vs-b2c-by-vertical/",
+      "check": "main text ≥ 1500 chars (added)",
+      "pass": true,
+      "detail": "13142 chars"
+    },
+    {
+      "scope": "/blog/b2b-vs-b2c-by-vertical/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/b2b-vs-b2c-by-vertical/"
+    },
+    {
+      "scope": "/blog/b2b-vs-b2c-by-vertical/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Interactive B2B vs B2C benchmarks by industry: acquisition cost, conversion, paid search a"
+    },
+    {
+      "scope": "/blog/b2b-vs-b2c-by-vertical/",
+      "check": "title present",
+      "pass": true,
+      "detail": "In Education, Winning a B2B Customer Costs 7.3× More Than Winning a B2C One | Signals & Sy"
+    },
+    {
+      "scope": "/blog/b2b-vs-b2c-by-vertical/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/b2b-vs-b2c-by-vertical/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/b2b-vs-b2c-by-vertical/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "2 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/b2b-vs-b2c-by-vertical/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/b2b-vs-b2c-by-vertical/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/b2b-vs-b2c-by-vertical/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/statistician-vs-data-scientist/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/statistician-vs-data-scientist/index.html"
+    },
+    {
+      "scope": "/blog/statistician-vs-data-scientist/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Statistician vs Data Scientist — and Two Jobs With No BLS Code"
+    },
+    {
+      "scope": "/blog/statistician-vs-data-scientist/",
+      "check": "main text ≥ 1500 chars (added)",
+      "pass": true,
+      "detail": "6217 chars"
+    },
+    {
+      "scope": "/blog/statistician-vs-data-scientist/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/statistician-vs-data-scientist/"
+    },
+    {
+      "scope": "/blog/statistician-vs-data-scientist/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Real BLS pay, employment and 2035-growth data for statistician vs data scientist, plus the"
+    },
+    {
+      "scope": "/blog/statistician-vs-data-scientist/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Statistician vs Data Scientist — and Two Jobs With No BLS Code | Signals & Systems"
+    },
+    {
+      "scope": "/blog/statistician-vs-data-scientist/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/statistician-vs-data-scientist/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/statistician-vs-data-scientist/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "2 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/statistician-vs-data-scientist/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/statistician-vs-data-scientist/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/statistician-vs-data-scientist/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/search-results-by-intent/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/search-results-by-intent/index.html"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Search Results by Intent: Five Pages and the Zero-Click Future SEOs Already Meas"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/",
+      "check": "main text ≥ 1500 chars (added)",
+      "pass": true,
+      "detail": "19251 chars"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/search-results-by-intent/"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Watch the results page redraw by intent — AI Overview, CTR, zero-click rates, sourced and "
+    },
+    {
+      "scope": "/blog/search-results-by-intent/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Search Results by Intent: Five Pages and the Zero-Click Future SEOs Already Measured | Sig"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "8 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/search-results-by-intent/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/search-results-by-intent/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/pocock-ai-coding-workflow/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/studying/pocock-ai-coding-workflow/index.html"
+    },
+    {
+      "scope": "/blog/studying/pocock-ai-coding-workflow/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Matt Pocock's Full AI-Coding Workflow — Idea to Merge"
+    },
+    {
+      "scope": "/blog/studying/pocock-ai-coding-workflow/",
+      "check": "main text ≥ 1500 chars (added)",
+      "pass": true,
+      "detail": "15779 chars"
+    },
+    {
+      "scope": "/blog/studying/pocock-ai-coding-workflow/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/studying/pocock-ai-coding-workflow/"
+    },
+    {
+      "scope": "/blog/studying/pocock-ai-coding-workflow/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Pocock's thesis: AI isn't a new paradigm that throws out software-engineering fundamentals"
+    },
+    {
+      "scope": "/blog/studying/pocock-ai-coding-workflow/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Matt Pocock's Full AI-Coding Workflow — Idea to Merge | Studying — Mitchell Miller"
+    },
+    {
+      "scope": "/blog/studying/pocock-ai-coding-workflow/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/studying/pocock-ai-coding-workflow/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/studying/pocock-ai-coding-workflow/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "1 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/studying/pocock-ai-coding-workflow/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/pocock-ai-coding-workflow/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/pocock-ai-coding-workflow/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/fde-1m-ai-job/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/studying/fde-1m-ai-job/index.html"
+    },
+    {
+      "scope": "/blog/studying/fde-1m-ai-job/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · FDE: The $1M/Year AI Job, Explained"
+    },
+    {
+      "scope": "/blog/studying/fde-1m-ai-job/",
+      "check": "main text ≥ 1500 chars (added)",
+      "pass": true,
+      "detail": "15528 chars"
+    },
+    {
+      "scope": "/blog/studying/fde-1m-ai-job/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/studying/fde-1m-ai-job/"
+    },
+    {
+      "scope": "/blog/studying/fde-1m-ai-job/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Every company can now buy the same intelligence — the frontier models ship weekly and ever"
+    },
+    {
+      "scope": "/blog/studying/fde-1m-ai-job/",
+      "check": "title present",
+      "pass": true,
+      "detail": "FDE: The $1M/Year AI Job, Explained | Studying — Mitchell Miller"
+    },
+    {
+      "scope": "/blog/studying/fde-1m-ai-job/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/studying/fde-1m-ai-job/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/studying/fde-1m-ai-job/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "3 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/studying/fde-1m-ai-job/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/fde-1m-ai-job/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/fde-1m-ai-job/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/pocock-agentic-workflow/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/studying/pocock-agentic-workflow/index.html"
+    },
+    {
+      "scope": "/blog/studying/pocock-agentic-workflow/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Matt Pocock's Agentic Engineering Workflow — Harness Over Model"
+    },
+    {
+      "scope": "/blog/studying/pocock-agentic-workflow/",
+      "check": "main text ≥ 1500 chars (added)",
+      "pass": true,
+      "detail": "10640 chars"
+    },
+    {
+      "scope": "/blog/studying/pocock-agentic-workflow/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/studying/pocock-agentic-workflow/"
+    },
+    {
+      "scope": "/blog/studying/pocock-agentic-workflow/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Matt Pocock's core claim: everyone obsesses over the model (the engine); the leverage is i"
+    },
+    {
+      "scope": "/blog/studying/pocock-agentic-workflow/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Matt Pocock's Agentic Engineering Workflow — Harness Over Model | Studying — Mitchell Mill"
+    },
+    {
+      "scope": "/blog/studying/pocock-agentic-workflow/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/studying/pocock-agentic-workflow/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/studying/pocock-agentic-workflow/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "1 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/studying/pocock-agentic-workflow/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/pocock-agentic-workflow/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/pocock-agentic-workflow/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/figma-shortest-course/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/blog/studying/figma-shortest-course/index.html"
+    },
+    {
+      "scope": "/blog/studying/figma-shortest-course/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · The World's Shortest Figma Course — 80% in 7 Minutes"
+    },
+    {
+      "scope": "/blog/studying/figma-shortest-course/",
+      "check": "main text ≥ 1500 chars (added)",
+      "pass": true,
+      "detail": "10995 chars"
+    },
+    {
+      "scope": "/blog/studying/figma-shortest-course/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/studying/figma-shortest-course/"
+    },
+    {
+      "scope": "/blog/studying/figma-shortest-course/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Figma is a UI design tool with a small enough surface that you can learn ~80% of it in one"
+    },
+    {
+      "scope": "/blog/studying/figma-shortest-course/",
+      "check": "title present",
+      "pass": true,
+      "detail": "The World's Shortest Figma Course — 80% in 7 Minutes | Studying — Mitchell Miller"
+    },
+    {
+      "scope": "/blog/studying/figma-shortest-course/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/blog/studying/figma-shortest-course/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/blog/studying/figma-shortest-course/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "1 images, 0 without alt"
+    },
+    {
+      "scope": "/blog/studying/figma-shortest-course/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/figma-shortest-course/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/figma-shortest-course/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/es/index.html"
+    },
+    {
+      "scope": "/es/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Haz que el próximo paso cuente."
+    },
+    {
+      "scope": "/es/",
+      "check": "main text ≥ 1500 chars (added)",
+      "pass": true,
+      "detail": "7131 chars"
+    },
+    {
+      "scope": "/es/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/es/"
+    },
+    {
+      "scope": "/es/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Investigación, estrategia digital, diseño de experiencia e ingeniería. Trabaja con Mitchel"
+    },
+    {
+      "scope": "/es/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Mitchell Miller — Crecimiento digital, software y consultoría"
+    },
+    {
+      "scope": "/es/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/es/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/es/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "18 images, 0 without alt"
+    },
+    {
+      "scope": "/es/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/services/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/es/services/index.html"
+    },
+    {
+      "scope": "/es/services/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Ve la oportunidad. Hazla realidad."
+    },
+    {
+      "scope": "/es/services/",
+      "check": "main text ≥ 1500 chars (added)",
+      "pass": true,
+      "detail": "4730 chars"
+    },
+    {
+      "scope": "/es/services/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/es/services/"
+    },
+    {
+      "scope": "/es/services/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Investigación, estrategia digital, diseño de UX y de contenido, ingeniería front-end, fluj"
+    },
+    {
+      "scope": "/es/services/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Estrategia digital, diseño e ingeniería — Mitchell Miller"
+    },
+    {
+      "scope": "/es/services/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/es/services/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/es/services/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "11 images, 0 without alt"
+    },
+    {
+      "scope": "/es/services/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/services/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/services/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/contact/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/es/contact/index.html"
+    },
+    {
+      "scope": "/es/contact/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Contacto"
+    },
+    {
+      "scope": "/es/contact/",
+      "check": "main text ≥ 400 chars (added)",
+      "pass": true,
+      "detail": "898 chars"
+    },
+    {
+      "scope": "/es/contact/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/es/contact/"
+    },
+    {
+      "scope": "/es/contact/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Cuéntale a Mitchell Miller el problema que quieres resolver. Sin confirmación de cita ni c"
+    },
+    {
+      "scope": "/es/contact/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Contacto — Iniciemos una conversación"
+    },
+    {
+      "scope": "/es/contact/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/es/contact/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/es/contact/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "1 images, 0 without alt"
+    },
+    {
+      "scope": "/es/contact/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/contact/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/contact/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/blog/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/es/blog/index.html"
+    },
+    {
+      "scope": "/es/blog/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Signals & Systems"
+    },
+    {
+      "scope": "/es/blog/",
+      "check": "main text ≥ 400 chars (added)",
+      "pass": true,
+      "detail": "3672 chars"
+    },
+    {
+      "scope": "/es/blog/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/es/blog/"
+    },
+    {
+      "scope": "/es/blog/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "Notas de campo sobre búsqueda empresarial, medición de la búsqueda con IA y sistemas de cr"
+    },
+    {
+      "scope": "/es/blog/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Artículos — Notas sobre búsqueda, crecimiento y búsqueda con IA"
+    },
+    {
+      "scope": "/es/blog/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/es/blog/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/es/blog/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "1 images, 0 without alt"
+    },
+    {
+      "scope": "/es/blog/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/blog/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/blog/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/",
+      "check": "built file exists",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/mj2-wave2/dist/es/blog/gbp-2026-ai-grounding/index.html"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1 h1 · Tu Google Business Profile ahora es una fuente de grounding para la IA: lo que r"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/",
+      "check": "main text ≥ 1500 chars (added)",
+      "pass": true,
+      "detail": "10840 chars"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/",
+      "check": "one correct canonical",
+      "pass": true,
+      "detail": "https://mj2.pro/es/blog/gbp-2026-ai-grounding/"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/",
+      "check": "meta description present",
+      "pass": true,
+      "detail": "En 2026, el Google Business Profile pasó de ser un activo de visibilidad a una fuente de g"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/",
+      "check": "title present",
+      "pass": true,
+      "detail": "Tu Google Business Profile ahora es una fuente de grounding para la IA: lo que realmente c"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/",
+      "check": "robots index,follow (no noindex)",
+      "pass": true,
+      "detail": "index, follow"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": "1 loader(s), id present: true"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/",
+      "check": "images have alt attributes",
+      "pass": true,
+      "detail": "1 images, 0 without alt"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/",
+      "check": "no whole-page client shell",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/",
+      "check": "no staging/review wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/",
+      "check": "agency shell (header, primary nav, green contact button, footer)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "site",
+      "check": "meta descriptions unique across routes",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "site",
+      "check": "titles unique across routes",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "server",
+      "check": "static server reachable at http://127.0.0.1:5193",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/about/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/contact/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/collab-ideas/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/resume/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/systems/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/work/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/selected-builds/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/case-studies/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/aeo-geo/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/case-studies/apple-seasonal-search/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/case-studies/apple-store-amr/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/case-studies/apple-education-store/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/case-studies/stanford-myhealth-seo/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/case-studies/commonspirit-locations-conversion-engine/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/case-studies/commonspirit-network-consolidation/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/case-studies/commonspirit-medical-content-library/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/case-studies/aem-content-fragmentation-architecture/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/case-studies/yext-entity-data-foundation/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/case-studies/claritypulse-ai-reporting/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/case-studies/searchforge-content-intelligence/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/case-studies/actionthread-transcript-execution/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/case-studies/aeo-visibility-infrastructure/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/case-studies/domainsignal/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/case-studies/date-night/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/case-studies/vet-advocates-growth-system/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/case-studies/sfc-surf-school/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/gbp-2026-ai-grounding/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/multi-agent-billing-traps/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/intrepid-agency-spotlight/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/mitchell-miller-journey/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/traditional-seo-to-ai-search/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/aeo-geo-measurement-framework/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/entity-seo-for-ai-retrieval/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/enterprise-seo-business-cases/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/studying/hermes-concepts-field-guide/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/studying/claude-watermark-seo/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/studying/all-in-ai-money-stack/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/studying/hermes-seo-agent/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/studying/codex-obsolete-9-moves/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/studying/chatgpt-sites/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/studying/book-to-skill/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/studying/claude-code-6-new-rules/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/studying/claude-code-make-money/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/studying/build-ai-agents-full-course/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/studying/codex-voice-jarvis/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/studying/pi-coding-agent/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/studying/ships-100x-faster/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/studying/forget-loop-engineering/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/studying/mark-cuban-ai-bubble/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/studying/hormozi-build-this-instead/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/studying/old-seo-collapsing/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/studying/seo-2026-ai-era/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/studying/aeo-geo-aio/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/studying/smith-chart-scariest-ee/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/studying/aeo-80-percent/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/lab/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/lab/population-workbench/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/lab/population-workbench/methodology/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/clients/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/services/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/products/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/optimizing-for-ads-in-free-llm-answers/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/growth-title-market/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/b2b-vs-b2c-by-vertical/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/statistician-vs-data-scientist/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/studying/pocock-ai-coding-workflow/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/studying/fde-1m-ai-job/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/studying/pocock-agentic-workflow/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/blog/studying/figma-shortest-course/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/es/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/es/services/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/es/contact/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/es/blog/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/",
+      "check": "HTTP 200 and body equals built file",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "site",
+      "check": "internal links and assets resolve (281 unique paths)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/viz/search-results-by-intent-mandala/",
+      "check": "embed serves 200 as HTML, noindex, without analytics",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/viz/search-results-by-intent-mandala/poster-1080x1080.png",
+      "check": "serves 200 as image/png",
+      "pass": true,
+      "detail": "status 200, image/png, 417510 bytes"
+    },
+    {
+      "scope": "/viz/search-results-by-intent-mandala/poster-1080x1350.png",
+      "check": "serves 200 as image/png",
+      "pass": true,
+      "detail": "status 200, image/png, 507123 bytes"
+    },
+    {
+      "scope": "/viz/search-results-by-intent-mandala/poster-2160x2700.png",
+      "check": "serves 200 as image/png",
+      "pass": true,
+      "detail": "status 200, image/png, 1175634 bytes"
+    },
+    {
+      "scope": "/viz/search-results-by-intent-mandala/anim-640x800.gif",
+      "check": "serves 200 as image/gif",
+      "pass": true,
+      "detail": "status 200, image/gif, 985256 bytes"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/",
+      "check": "iframes /viz/search-results-by-intent-mandala/ with the canonical ?parent=",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/viz/search-results-by-intent-journey/",
+      "check": "embed serves 200 as HTML, noindex, without analytics",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/viz/search-results-by-intent-journey/poster-1080x1080.png",
+      "check": "serves 200 as image/png",
+      "pass": true,
+      "detail": "status 200, image/png, 404894 bytes"
+    },
+    {
+      "scope": "/viz/search-results-by-intent-journey/poster-1080x1350.png",
+      "check": "serves 200 as image/png",
+      "pass": true,
+      "detail": "status 200, image/png, 469564 bytes"
+    },
+    {
+      "scope": "/viz/search-results-by-intent-journey/poster-2160x2700.png",
+      "check": "serves 200 as image/png",
+      "pass": true,
+      "detail": "status 200, image/png, 976587 bytes"
+    },
+    {
+      "scope": "/viz/search-results-by-intent-journey/anim-640x800.gif",
+      "check": "serves 200 as image/gif",
+      "pass": true,
+      "detail": "status 200, image/gif, 867310 bytes"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/",
+      "check": "iframes /viz/search-results-by-intent-journey/ with the canonical ?parent=",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/viz/llm-ads-mandala/",
+      "check": "embed serves 200 as HTML, noindex, without analytics",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/viz/llm-ads-mandala/poster-1080x1080.png",
+      "check": "serves 200 as image/png",
+      "pass": true,
+      "detail": "status 200, image/png, 453457 bytes"
+    },
+    {
+      "scope": "/viz/llm-ads-mandala/poster-1080x1350.png",
+      "check": "serves 200 as image/png",
+      "pass": true,
+      "detail": "status 200, image/png, 511008 bytes"
+    },
+    {
+      "scope": "/viz/llm-ads-mandala/poster-2160x2700.png",
+      "check": "serves 200 as image/png",
+      "pass": true,
+      "detail": "status 200, image/png, 1176498 bytes"
+    },
+    {
+      "scope": "/viz/llm-ads-mandala/anim-640x800.gif",
+      "check": "serves 200 as image/gif",
+      "pass": true,
+      "detail": "status 200, image/gif, 1036266 bytes"
+    },
+    {
+      "scope": "/viz/llm-ads-mandala/ads-in-free-llm-answers-data-mandala-1200x630.png",
+      "check": "serves 200 as image/png",
+      "pass": true,
+      "detail": "status 200, image/png, 291515 bytes"
+    },
+    {
+      "scope": "/blog/optimizing-for-ads-in-free-llm-answers/",
+      "check": "iframes /viz/llm-ads-mandala/ with the canonical ?parent=",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/viz/growth-title-market/",
+      "check": "embed serves 200 as HTML, noindex, without analytics",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/viz/growth-title-market/poster-1080x1080.png",
+      "check": "serves 200 as image/png",
+      "pass": true,
+      "detail": "status 200, image/png, 657496 bytes"
+    },
+    {
+      "scope": "/viz/growth-title-market/poster-1080x1350.png",
+      "check": "serves 200 as image/png",
+      "pass": true,
+      "detail": "status 200, image/png, 803398 bytes"
+    },
+    {
+      "scope": "/viz/growth-title-market/poster-2160x2700.png",
+      "check": "serves 200 as image/png",
+      "pass": true,
+      "detail": "status 200, image/png, 1861229 bytes"
+    },
+    {
+      "scope": "/viz/growth-title-market/anim-640x800.gif",
+      "check": "serves 200 as image/gif",
+      "pass": true,
+      "detail": "status 200, image/gif, 1494400 bytes"
+    },
+    {
+      "scope": "/blog/growth-title-market/",
+      "check": "iframes /viz/growth-title-market/ with the canonical ?parent=",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/viz/b2b-vs-b2c-by-vertical/",
+      "check": "embed serves 200 as HTML, noindex, without analytics",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/viz/b2b-vs-b2c-by-vertical/poster-1080x1080.png",
+      "check": "serves 200 as image/png",
+      "pass": true,
+      "detail": "status 200, image/png, 293970 bytes"
+    },
+    {
+      "scope": "/viz/b2b-vs-b2c-by-vertical/poster-1080x1350.png",
+      "check": "serves 200 as image/png",
+      "pass": true,
+      "detail": "status 200, image/png, 369106 bytes"
+    },
+    {
+      "scope": "/viz/b2b-vs-b2c-by-vertical/poster-2160x2700.png",
+      "check": "serves 200 as image/png",
+      "pass": true,
+      "detail": "status 200, image/png, 776538 bytes"
+    },
+    {
+      "scope": "/viz/b2b-vs-b2c-by-vertical/anim-640x800.gif",
+      "check": "serves 200 as image/gif",
+      "pass": true,
+      "detail": "status 200, image/gif, 2747822 bytes"
+    },
+    {
+      "scope": "/blog/b2b-vs-b2c-by-vertical/",
+      "check": "iframes /viz/b2b-vs-b2c-by-vertical/ with the canonical ?parent=",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/viz/statistician-vs-data-scientist/",
+      "check": "embed serves 200 as HTML, noindex, without analytics",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "/viz/statistician-vs-data-scientist/poster-1080x1080.png",
+      "check": "serves 200 as image/png",
+      "pass": true,
+      "detail": "status 200, image/png, 340471 bytes"
+    },
+    {
+      "scope": "/viz/statistician-vs-data-scientist/poster-1080x1350.png",
+      "check": "serves 200 as image/png",
+      "pass": true,
+      "detail": "status 200, image/png, 399741 bytes"
+    },
+    {
+      "scope": "/viz/statistician-vs-data-scientist/poster-2160x2700.png",
+      "check": "serves 200 as image/png",
+      "pass": true,
+      "detail": "status 200, image/png, 846001 bytes"
+    },
+    {
+      "scope": "/viz/statistician-vs-data-scientist/anim-640x800.gif",
+      "check": "serves 200 as image/gif",
+      "pass": true,
+      "detail": "status 200, image/gif, 1312865 bytes"
+    },
+    {
+      "scope": "/blog/statistician-vs-data-scientist/",
+      "check": "iframes /viz/statistician-vs-data-scientist/ with the canonical ?parent=",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/files/Mitchell-Miller-AI-Search-Systems-Background-2026.pdf",
+      "check": "PDF serves 200 with the corrected sha256 and application/pdf",
+      "pass": true,
+      "detail": "status 200, 421854 bytes, sha256 f5f456484672… (expected f5f456484672…, previous 316f0d659d85…)"
+    },
+    {
+      "scope": "/files/Mitchell-Miller-Organic-Systems-Background-2026.pdf",
+      "check": "PDF serves 200 with the corrected sha256 and application/pdf",
+      "pass": true,
+      "detail": "status 200, 421926 bytes, sha256 82837461bd20… (expected 82837461bd20…, previous 4175811e6807…)"
+    },
+    {
+      "scope": "/files/Mitchell-Miller-Product-Systems-Background-2026.pdf",
+      "check": "PDF serves 200 with the corrected sha256 and application/pdf",
+      "pass": true,
+      "detail": "status 200, 421918 bytes, sha256 4f08e5861180… (expected 4f08e5861180…, previous a5182dd924cb…)"
+    },
+    {
+      "scope": "/files/Mitchell-Miller-Search-Systems-Background-2026.pdf",
+      "check": "PDF serves 200 with the corrected sha256 and application/pdf",
+      "pass": true,
+      "detail": "status 200, 421917 bytes, sha256 8f48d7d78688… (expected 8f48d7d78688…, previous 80dc6d91137c…)"
+    },
+    {
+      "scope": "/no-such-page/",
+      "check": "unknown route returns HTTP 404 with the 404 document",
+      "pass": true,
+      "detail": "status 404"
+    },
+    {
+      "scope": "/blog/does-not-exist/",
+      "check": "unknown route returns HTTP 404 with the 404 document",
+      "pass": true,
+      "detail": "status 404"
+    },
+    {
+      "scope": "/case-studies/nope/",
+      "check": "unknown route returns HTTP 404 with the 404 document",
+      "pass": true,
+      "detail": "status 404"
+    },
+    {
+      "scope": "/lab/missing/",
+      "check": "unknown route returns HTTP 404 with the 404 document",
+      "pass": true,
+      "detail": "status 404"
+    },
+    {
+      "scope": "/blog/gbp-2026-ai-grounding/",
+      "check": "former missing route now returns full content (200, one h1, ≥1500 chars)",
+      "pass": true,
+      "detail": "status 200, 8518 chars"
+    },
+    {
+      "scope": "/blog/studying/hermes-concepts-field-guide/",
+      "check": "former missing route now returns full content (200, one h1, ≥1500 chars)",
+      "pass": true,
+      "detail": "status 200, 11473 chars"
+    },
+    {
+      "scope": "/work",
+      "check": "extensionless path redirects to trailing slash (GitHub Pages behavior emulated)",
+      "pass": true,
+      "detail": "status 301 → /work/"
+    },
+    {
+      "scope": "sitemap.xml",
+      "check": "lists exactly the 73 indexable URLs",
+      "pass": true,
+      "detail": "73 URLs"
+    },
+    {
+      "scope": "robots.txt",
+      "check": "allows all and declares the sitemap",
+      "pass": true,
+      "detail": "User-agent: * / Allow: / / Sitemap: https://mj2.pro/sitemap.xml / "
+    },
+    {
+      "scope": "CNAME",
+      "check": "contains mj2.pro",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": ".nojekyll",
+      "check": "present",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "404.html",
+      "check": "present with public copy",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "artifact",
+      "check": "noindex only on 404.html, the four retained Coming Soon placeholders and the declared embeds",
+      "pass": true,
+      "detail": "11 noindex documents: /404.html, /blog/aeo-geo-measurement-framework/index.html, /blog/enterprise-seo-business-cases/index.html, /blog/entity-seo-for-ai-retrieval/index.html, /blog/traditional-seo-to-ai-search/index.html, /viz/b2b-vs-b2c-by-vertical/index.html, /viz/growth-title-market/index.html, /viz/llm-ads-mandala/index.html, /viz/search-results-by-intent-journey/index.html, /viz/search-results-by-intent-mandala/index.html, /viz/statistician-vs-data-scientist/index.html"
+    },
+    {
+      "scope": "artifact",
+      "check": "no review/design/proof/theme/staging output or source maps",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "artifact",
+      "check": "every HTML document is a manifest route, a declared embed or 404.html",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "artifact",
+      "check": "no credential-shaped strings in text output",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "artifact",
+      "check": "no references to content-drafts/content-studio in output",
+      "pass": true,
+      "detail": ""
+    }
+  ]
+}

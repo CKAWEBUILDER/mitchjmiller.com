@@ -1,6 +1,20 @@
 {
   "about": "Narrated audio per post (docs/site-standards.md). Written by scripts/narrate.mjs; do not edit by hand. Render or refresh: npm run narrate -- <slug> | --lang es <slug> | --missing | --all.",
   "items": {
+    "/blog/b2b-vs-b2c-by-vertical/": {
+      "src": "/audio/blog/b2b-vs-b2c-by-vertical.m4a",
+      "lang": "en",
+      "voice": "Samantha",
+      "voiceLocale": "en_US",
+      "seconds": 1030.4,
+      "minutes": 17,
+      "bytes": 6285691,
+      "bitRate": 48000,
+      "channels": 1,
+      "textSha256": "9f4add5d436596fae87fa4c52a113bcb034b0da5a2570487dacd3dc479d32b78",
+      "words": 1980,
+      "rendered": "2026-09-25"
+    },
     "/blog/gbp-2026-ai-grounding/": {
       "src": "/audio/blog/gbp-2026-ai-grounding.m4a",
       "lang": "en",
@@ -14,6 +28,20 @@
       "textSha256": "1f64479a7490188c5d7e0a6c59c420e601e513d618e069422e68aa181c99d121",
       "words": 1037,
       "rendered": "2026-09-24"
+    },
+    "/blog/growth-title-market/": {
+      "src": "/audio/blog/growth-title-market.m4a",
+      "lang": "en",
+      "voice": "Samantha",
+      "voiceLocale": "en_US",
+      "seconds": 579.5,
+      "minutes": 10,
+      "bytes": 3535016,
+      "bitRate": 47999,
+      "channels": 1,
+      "textSha256": "c0d22b3466957f3cda69a26c80144b77169e87cc7afbb67064a0da071a1762da",
+      "words": 1373,
+      "rendered": "2026-09-25"
     },
     "/blog/intrepid-agency-spotlight/": {
       "src": "/audio/blog/intrepid-agency-spotlight.m4a",
@@ -57,6 +85,20 @@
       "words": 927,
       "rendered": "2026-09-24"
     },
+    "/blog/optimizing-for-ads-in-free-llm-answers/": {
+      "src": "/audio/blog/optimizing-for-ads-in-free-llm-answers.m4a",
+      "lang": "en",
+      "voice": "Samantha",
+      "voiceLocale": "en_US",
+      "seconds": 942.2,
+      "minutes": 16,
+      "bytes": 5748088,
+      "bitRate": 48000,
+      "channels": 1,
+      "textSha256": "21f25e811e47659ceace30889e0f1d5c0724aa5087894bce30fa56f186b8b4f3",
+      "words": 1958,
+      "rendered": "2026-09-25"
+    },
     "/blog/search-results-by-intent/": {
       "src": "/audio/blog/search-results-by-intent.m4a",
       "lang": "en",
@@ -70,6 +112,20 @@
       "textSha256": "e584b2186325e5e236661fbd99312d7713d7c9ebe0062ade1986ce12cc5a2b08",
       "words": 2892,
       "rendered": "2026-09-24"
+    },
+    "/blog/statistician-vs-data-scientist/": {
+      "src": "/audio/blog/statistician-vs-data-scientist.m4a",
+      "lang": "en",
+      "voice": "Samantha",
+      "voiceLocale": "en_US",
+      "seconds": 418.8,
+      "minutes": 7,
+      "bytes": 2558613,
+      "bitRate": 47999,
+      "channels": 1,
+      "textSha256": "1ba2ff81fcd6e269ef36aa15002993b090856c7077b6f263ae0f0a1f1afd0bc0",
+      "words": 867,
+      "rendered": "2026-09-25"
     },
     "/es/blog/gbp-2026-ai-grounding/": {
       "src": "/audio/es/blog/gbp-2026-ai-grounding.m4a",

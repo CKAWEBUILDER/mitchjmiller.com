@@ -25,12 +25,13 @@ import '../styles/standards.css';
 interface Props {
   path: string; title: string; description: string;
   type?: 'website' | 'article'; noindex?: boolean; jsonLd?: unknown[]; bodyClass?: string;
-  /** Share-card overrides: a shorter card title, or a poster of the page's own living artifact. */
-  cardTitle?: string; poster?: { src: string; title: string };
+  /** Share-card overrides: a shorter card title, a poster of the page's own living artifact, or a
+   *  ready-made 1200×630 card for the page (site/lib/share.ts ReadyCard). */
+  cardTitle?: string; poster?: { src: string; title: string }; card?: { src: string; alt: string };
 }
-const { path, title, description, type = 'website', noindex = false, jsonLd = [], bodyClass = '', cardTitle, poster } = Astro.props;
+const { path, title, description, type = 'website', noindex = false, jsonLd = [], bodyClass = '', cardTitle, poster, card } = Astro.props;
 const canonical = new URL(path, site.url).href;
-const share = shareFor(path, title, { cardTitle, poster });
+const share = shareFor(path, title, { cardTitle, poster, card });
 const release = process.env.SITE_BUILD_MODE === 'release';
 const year = new Date().getFullYear();
 const lang = langOf(path);

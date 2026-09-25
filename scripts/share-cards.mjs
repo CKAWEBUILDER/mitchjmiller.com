@@ -29,7 +29,7 @@ const esc = value => String(value).replace(/&/g, '&amp;').replace(/"/g, '&quot;'
 const routeOf = file => file === join(dist, '404.html') ? '/404.html' : file.slice(dist.length).replace(/index\.html$/, '');
 const failures = [];
 const cards = new Map();
-let markers = 0, injected = 0;
+let markers = 0, injected = 0, readyCards = 0;
 for (const file of walk(dist).filter(path => path.endsWith('.html'))) {
   const route = routeOf(file);
   let html = readFileSync(file, 'utf8');
@@ -38,8 +38,10 @@ for (const file of walk(dist).filter(path => path.endsWith('.html'))) {
     const spec = JSON.parse(decodeHTML(marker[1]));
     html = html.replace(marker[0], '');
     markers++;
-    cards.set(share.cardPath(route), { ...spec, route });
     writeFileSync(file, html);
+    // A ready-made card (site/lib/share.ts ReadyCard) is used as-is; it must ship in dist.
+    if (spec.card) { if (!existsSync(join(dist, spec.card))) failures.push(`${route}: ready-made card ${spec.card} is missing from dist`); else readyCards++; continue; }
+    cards.set(share.cardPath(route), { ...spec, route });
     continue;
   }
   // Standalone document: add only the tags it lacks, before </head>.
@@ -97,5 +99,5 @@ try {
   await browser.close();
 }
 
-console.log(`Share cards: ${cards.size} rendered at 1200×630 (${markers} layout documents, ${injected} standalone documents given share tags).`);
+console.log(`Share cards: ${cards.size} rendered at 1200×630 (${markers} layout documents, ${injected} standalone documents given share tags), ${readyCards} ready-made.`);
 if (failures.length) { console.error(failures.map(value => `  - ${value}`).join('\n')); process.exitCode = 1; }

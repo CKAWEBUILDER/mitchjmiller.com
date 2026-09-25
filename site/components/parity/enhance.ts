@@ -141,21 +141,28 @@ if (contactForm) {
   });
 }
 
-// Living infographics embedded in posts (iframes under /viz/) post {type: "viz-intent", intent}
-// when a reader asks to jump to that intent's section. Only same-origin messages from one of
-// this page's own /viz/ frames are honored; the frame's own target=_top link remains the fallback.
+// Living infographics embedded in posts (iframes under /viz/) post {type: "viz-intent", intent,
+// anchor?} when a reader asks to jump to a section: `anchor` is the id of that section in the post
+// (#assistant-chatgpt, #vertical-education, #role-pay, #how-to-read …); without it the section is
+// #intent-<intent> (the 2026-09-24 search-intent maps). Only same-origin messages from one of this
+// page's own /viz/ frames are honored, and only for a heading inside the post body; the frame's
+// own target=_top link remains the fallback.
 const vizFrames = [...document.querySelectorAll<HTMLIFrameElement>('iframe[src^="/viz/"]')];
 if (vizFrames.length) {
   window.addEventListener("message", event => {
     if (event.origin !== window.location.origin) return;
-    if (!vizFrames.some(frame => frame.contentWindow === event.source)) return;
-    const data = event.data as { type?: unknown; intent?: unknown } | null;
+    const frame = vizFrames.find(item => item.contentWindow === event.source);
+    if (!frame) return;
+    const data = event.data as { type?: unknown; intent?: unknown; anchor?: unknown } | null;
     if (!data || data.type !== "viz-intent" || typeof data.intent !== "string" || !/^[a-z-]{1,40}$/.test(data.intent)) return;
-    const target = document.getElementById(`intent-${data.intent}`);
-    if (!target) return;
+    if (data.anchor !== undefined && (typeof data.anchor !== "string" || !/^[a-z-]{1,60}$/.test(data.anchor))) return;
+    const id = typeof data.anchor === "string" ? data.anchor : `intent-${data.intent}`;
+    const target = document.getElementById(id);
+    const body = frame.closest(".prose");
+    if (!target || !/^H[2-4]$/.test(target.tagName) || (body && !body.contains(target))) return;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     target.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
-    history.replaceState(null, "", `#intent-${data.intent}`);
+    history.replaceState(null, "", `#${id}`);
   });
   // Fit each frame to its content (the static height="1200" is the no-script fallback) and follow
   // later changes such as an opened panel or a narrower column. The observer is created in the

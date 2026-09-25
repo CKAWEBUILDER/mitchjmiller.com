@@ -76,12 +76,21 @@ export function cardAlt(cardTitle: string, section: string, lang: Lang, posterTi
   return `mj2.pro card: “${cardTitle}” (${section})${posterTitle ? (own ? ', beside its poster' : `, beside the poster of “${posterTitle}”`) : ''}.`;
 }
 
-export interface CardSpec { title: string; section: string; lang: Lang; poster?: string; route: string }
+export interface CardSpec { title: string; section: string; lang: Lang; poster?: string; route: string; card?: string }
 
-export function shareFor(route: string, title: string, options: { cardTitle?: string; poster?: { src: string; title: string } } = {}) {
+/** A ready-made card: a site path to a 1200×630 PNG/JPG made for this page (for example a post's
+ *  living-artifact frame with its headline), with alt text saying what it shows. It replaces the
+ *  generated card; scripts/verify-standards.mjs holds it to the same size, format and uniqueness rules. */
+export interface ReadyCard { src: string; alt: string }
+
+export function shareFor(route: string, title: string, options: { cardTitle?: string; poster?: { src: string; title: string }; card?: ReadyCard } = {}) {
   const lang = langOf(route);
   const cardTitle = options.cardTitle || cardTitleFor(title);
   const section = sectionFor(route, lang);
+  if (options.card) {
+    const spec: CardSpec = { title: cardTitle, section, lang, route, card: options.card.src };
+    return { image: `${origin}${options.card.src}`, alt: options.card.alt, locale: ogLocale[lang], spec };
+  }
   const poster = options.poster || posterFor(route);
   const image = `${origin}${cardPath(route)}`;
   const spec: CardSpec = { title: cardTitle, section, lang, poster: poster?.src, route };

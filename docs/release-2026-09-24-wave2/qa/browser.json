@@ -1,0 +1,3232 @@
+{
+  "generated": "2026-09-25T03:57:04.424Z",
+  "base": "http://127.0.0.1:5193",
+  "checks": 537,
+  "passed": 537,
+  "failed": 0,
+  "failures": [],
+  "results": [
+    {
+      "scope": "home@1360",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "home@1360",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 1360 / viewport 1360"
+    },
+    {
+      "scope": "home@1360",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "home@1360",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "home@1360",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "home@1360",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "home@1360",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/home-1360.png"
+    },
+    {
+      "scope": "home@390",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "home@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "home@390",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "home@390",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "home@390",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "home@390",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "home@390",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/home-390.png"
+    },
+    {
+      "scope": "services@1360",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "services@1360",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 1360 / viewport 1360"
+    },
+    {
+      "scope": "services@1360",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "services@1360",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "services@1360",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "services@1360",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "services@1360",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/services-1360.png"
+    },
+    {
+      "scope": "services@390",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "services@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "services@390",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "services@390",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "services@390",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "services@390",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "services@390",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/services-390.png"
+    },
+    {
+      "scope": "work@1360",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "work@1360",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 1360 / viewport 1360"
+    },
+    {
+      "scope": "work@1360",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "work@1360",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "work@1360",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "work@1360",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "work@1360",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/work-1360.png"
+    },
+    {
+      "scope": "work@390",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "work@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "work@390",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "work@390",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "work@390",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "work@390",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "work@390",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/work-390.png"
+    },
+    {
+      "scope": "case-commonspirit@1360",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "case-commonspirit@1360",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 1360 / viewport 1360"
+    },
+    {
+      "scope": "case-commonspirit@1360",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "case-commonspirit@1360",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "case-commonspirit@1360",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "case-commonspirit@1360",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "case-commonspirit@1360",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/case-commonspirit-1360.png"
+    },
+    {
+      "scope": "case-commonspirit@390",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "case-commonspirit@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "case-commonspirit@390",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "case-commonspirit@390",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "case-commonspirit@390",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "case-commonspirit@390",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "case-commonspirit@390",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/case-commonspirit-390.png"
+    },
+    {
+      "scope": "case-sfc@1360",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "case-sfc@1360",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 1360 / viewport 1360"
+    },
+    {
+      "scope": "case-sfc@1360",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "case-sfc@1360",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "case-sfc@1360",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "case-sfc@1360",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "case-sfc@1360",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/case-sfc-1360.png"
+    },
+    {
+      "scope": "case-sfc@390",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "case-sfc@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "case-sfc@390",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "case-sfc@390",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "case-sfc@390",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "case-sfc@390",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "case-sfc@390",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/case-sfc-390.png"
+    },
+    {
+      "scope": "post-gbp@1360",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "post-gbp@1360",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 1360 / viewport 1360"
+    },
+    {
+      "scope": "post-gbp@1360",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-gbp@1360",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-gbp@1360",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "post-gbp@1360",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-gbp@1360",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/post-gbp-1360.png"
+    },
+    {
+      "scope": "post-gbp@390",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "post-gbp@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "post-gbp@390",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-gbp@390",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-gbp@390",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "post-gbp@390",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-gbp@390",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/post-gbp-390.png"
+    },
+    {
+      "scope": "note-hermes-mermaid@1360",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "note-hermes-mermaid@1360",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 1360 / viewport 1360"
+    },
+    {
+      "scope": "note-hermes-mermaid@1360",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "note-hermes-mermaid@1360",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "note-hermes-mermaid@1360",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "note-hermes-mermaid@1360",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "note-hermes-mermaid@1360",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/note-hermes-mermaid-1360.png"
+    },
+    {
+      "scope": "note-hermes-mermaid@390",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "note-hermes-mermaid@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "note-hermes-mermaid@390",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "note-hermes-mermaid@390",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "note-hermes-mermaid@390",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "note-hermes-mermaid@390",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "note-hermes-mermaid@390",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/note-hermes-mermaid-390.png"
+    },
+    {
+      "scope": "lab@1360",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "lab@1360",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 1360 / viewport 1360"
+    },
+    {
+      "scope": "lab@1360",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "lab@1360",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "lab@1360",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "lab@1360",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "lab@1360",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/lab-1360.png"
+    },
+    {
+      "scope": "lab@390",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "lab@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "lab@390",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "lab@390",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "lab@390",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "lab@390",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "lab@390",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/lab-390.png"
+    },
+    {
+      "scope": "workbench@1360",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "workbench@1360",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 1360 / viewport 1360"
+    },
+    {
+      "scope": "workbench@1360",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "workbench@1360",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "workbench@1360",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "workbench@1360",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "workbench@1360",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/workbench-1360.png"
+    },
+    {
+      "scope": "workbench@390",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "workbench@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "workbench@390",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "workbench@390",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "workbench@390",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "workbench@390",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "workbench@390",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/workbench-390.png"
+    },
+    {
+      "scope": "workbench-methodology@1360",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "workbench-methodology@1360",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 1360 / viewport 1360"
+    },
+    {
+      "scope": "workbench-methodology@1360",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "workbench-methodology@1360",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "workbench-methodology@1360",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "workbench-methodology@1360",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "workbench-methodology@1360",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/workbench-methodology-1360.png"
+    },
+    {
+      "scope": "workbench-methodology@390",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "workbench-methodology@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "workbench-methodology@390",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "workbench-methodology@390",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "workbench-methodology@390",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "workbench-methodology@390",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "workbench-methodology@390",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/workbench-methodology-390.png"
+    },
+    {
+      "scope": "resume@1360",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "resume@1360",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 1360 / viewport 1360"
+    },
+    {
+      "scope": "resume@1360",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "resume@1360",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "resume@1360",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "resume@1360",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "resume@1360",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/resume-1360.png"
+    },
+    {
+      "scope": "resume@390",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "resume@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "resume@390",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "resume@390",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "resume@390",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "resume@390",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "resume@390",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/resume-390.png"
+    },
+    {
+      "scope": "contact@1360",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "contact@1360",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 1360 / viewport 1360"
+    },
+    {
+      "scope": "contact@1360",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "contact@1360",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "contact@1360",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "contact@1360",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "contact@1360",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/contact-1360.png"
+    },
+    {
+      "scope": "contact@390",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "contact@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "contact@390",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "contact@390",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "contact@390",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "contact@390",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "contact@390",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/contact-390.png"
+    },
+    {
+      "scope": "clients@1360",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "clients@1360",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 1360 / viewport 1360"
+    },
+    {
+      "scope": "clients@1360",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "clients@1360",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "clients@1360",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "clients@1360",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "clients@1360",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/clients-1360.png"
+    },
+    {
+      "scope": "clients@390",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "clients@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "clients@390",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "clients@390",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "clients@390",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "clients@390",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "clients@390",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/clients-390.png"
+    },
+    {
+      "scope": "404@1360",
+      "check": "HTTP 404",
+      "pass": true,
+      "detail": "status 404"
+    },
+    {
+      "scope": "404@1360",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 1360 / viewport 1360"
+    },
+    {
+      "scope": "404@1360",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "404@1360",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "404@1360",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "404@1360",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "404@1360",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/404-1360.png"
+    },
+    {
+      "scope": "404@390",
+      "check": "HTTP 404",
+      "pass": true,
+      "detail": "status 404"
+    },
+    {
+      "scope": "404@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "404@390",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "404@390",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "404@390",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "404@390",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "404@390",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/404-390.png"
+    },
+    {
+      "scope": "post-search-intent@1360",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "post-search-intent@1360",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 1360 / viewport 1360"
+    },
+    {
+      "scope": "post-search-intent@1360",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-search-intent@1360",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-search-intent@1360",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "post-search-intent@1360",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-search-intent@1360",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/post-search-intent-1360.png"
+    },
+    {
+      "scope": "post-search-intent@390",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "post-search-intent@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "post-search-intent@390",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-search-intent@390",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-search-intent@390",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "post-search-intent@390",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-search-intent@390",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/post-search-intent-390.png"
+    },
+    {
+      "scope": "note-pocock-ai-coding@1360",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "note-pocock-ai-coding@1360",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 1360 / viewport 1360"
+    },
+    {
+      "scope": "note-pocock-ai-coding@1360",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "note-pocock-ai-coding@1360",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "note-pocock-ai-coding@1360",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "note-pocock-ai-coding@1360",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "note-pocock-ai-coding@1360",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/note-pocock-ai-coding-1360.png"
+    },
+    {
+      "scope": "note-pocock-ai-coding@390",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "note-pocock-ai-coding@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "note-pocock-ai-coding@390",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "note-pocock-ai-coding@390",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "note-pocock-ai-coding@390",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "note-pocock-ai-coding@390",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "note-pocock-ai-coding@390",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/note-pocock-ai-coding-390.png"
+    },
+    {
+      "scope": "note-fde@1360",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "note-fde@1360",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 1360 / viewport 1360"
+    },
+    {
+      "scope": "note-fde@1360",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "note-fde@1360",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "note-fde@1360",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "note-fde@1360",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "note-fde@1360",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/note-fde-1360.png"
+    },
+    {
+      "scope": "note-fde@390",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "note-fde@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "note-fde@390",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "note-fde@390",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "note-fde@390",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "note-fde@390",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "note-fde@390",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/note-fde-390.png"
+    },
+    {
+      "scope": "note-pocock-agentic@1360",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "note-pocock-agentic@1360",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 1360 / viewport 1360"
+    },
+    {
+      "scope": "note-pocock-agentic@1360",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "note-pocock-agentic@1360",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "note-pocock-agentic@1360",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "note-pocock-agentic@1360",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "note-pocock-agentic@1360",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/note-pocock-agentic-1360.png"
+    },
+    {
+      "scope": "note-pocock-agentic@390",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "note-pocock-agentic@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "note-pocock-agentic@390",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "note-pocock-agentic@390",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "note-pocock-agentic@390",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "note-pocock-agentic@390",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "note-pocock-agentic@390",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/note-pocock-agentic-390.png"
+    },
+    {
+      "scope": "post-llm-ads@1360",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "post-llm-ads@1360",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 1360 / viewport 1360"
+    },
+    {
+      "scope": "post-llm-ads@1360",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-llm-ads@1360",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-llm-ads@1360",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "post-llm-ads@1360",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-llm-ads@1360",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/post-llm-ads-1360.png"
+    },
+    {
+      "scope": "post-llm-ads@390",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "post-llm-ads@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "post-llm-ads@390",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-llm-ads@390",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-llm-ads@390",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "post-llm-ads@390",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-llm-ads@390",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/post-llm-ads-390.png"
+    },
+    {
+      "scope": "post-titles@1360",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "post-titles@1360",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 1360 / viewport 1360"
+    },
+    {
+      "scope": "post-titles@1360",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-titles@1360",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-titles@1360",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "post-titles@1360",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-titles@1360",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/post-titles-1360.png"
+    },
+    {
+      "scope": "post-titles@390",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "post-titles@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "post-titles@390",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-titles@390",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-titles@390",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "post-titles@390",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-titles@390",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/post-titles-390.png"
+    },
+    {
+      "scope": "post-b2b@1360",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "post-b2b@1360",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 1360 / viewport 1360"
+    },
+    {
+      "scope": "post-b2b@1360",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-b2b@1360",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-b2b@1360",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "post-b2b@1360",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-b2b@1360",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/post-b2b-1360.png"
+    },
+    {
+      "scope": "post-b2b@390",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "post-b2b@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "post-b2b@390",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-b2b@390",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-b2b@390",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "post-b2b@390",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-b2b@390",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/post-b2b-390.png"
+    },
+    {
+      "scope": "post-roles@1360",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "post-roles@1360",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 1360 / viewport 1360"
+    },
+    {
+      "scope": "post-roles@1360",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-roles@1360",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-roles@1360",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "post-roles@1360",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-roles@1360",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/post-roles-1360.png"
+    },
+    {
+      "scope": "post-roles@390",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "post-roles@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "post-roles@390",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-roles@390",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-roles@390",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "post-roles@390",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-roles@390",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/post-roles-390.png"
+    },
+    {
+      "scope": "es-home@1360",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "es-home@1360",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 1360 / viewport 1360"
+    },
+    {
+      "scope": "es-home@1360",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "es-home@1360",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "es-home@1360",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "es-home@1360",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "es-home@1360",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/es-home-1360.png"
+    },
+    {
+      "scope": "es-home@390",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "es-home@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "es-home@390",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "es-home@390",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "es-home@390",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "es-home@390",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "es-home@390",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/es-home-390.png"
+    },
+    {
+      "scope": "es-services@1360",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "es-services@1360",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 1360 / viewport 1360"
+    },
+    {
+      "scope": "es-services@1360",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "es-services@1360",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "es-services@1360",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "es-services@1360",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "es-services@1360",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/es-services-1360.png"
+    },
+    {
+      "scope": "es-services@390",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "es-services@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "es-services@390",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "es-services@390",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "es-services@390",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "es-services@390",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "es-services@390",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/es-services-390.png"
+    },
+    {
+      "scope": "es-contact@1360",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "es-contact@1360",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 1360 / viewport 1360"
+    },
+    {
+      "scope": "es-contact@1360",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "es-contact@1360",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "es-contact@1360",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "es-contact@1360",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "es-contact@1360",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/es-contact-1360.png"
+    },
+    {
+      "scope": "es-contact@390",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "es-contact@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "es-contact@390",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "es-contact@390",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "es-contact@390",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "es-contact@390",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "es-contact@390",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/es-contact-390.png"
+    },
+    {
+      "scope": "es-blog@1360",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "es-blog@1360",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 1360 / viewport 1360"
+    },
+    {
+      "scope": "es-blog@1360",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "es-blog@1360",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "es-blog@1360",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "es-blog@1360",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "es-blog@1360",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/es-blog-1360.png"
+    },
+    {
+      "scope": "es-blog@390",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "es-blog@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "es-blog@390",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "es-blog@390",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "es-blog@390",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "es-blog@390",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "es-blog@390",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/es-blog-390.png"
+    },
+    {
+      "scope": "es-post-gbp@1360",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "es-post-gbp@1360",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 1360 / viewport 1360"
+    },
+    {
+      "scope": "es-post-gbp@1360",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "es-post-gbp@1360",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "es-post-gbp@1360",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "es-post-gbp@1360",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "es-post-gbp@1360",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/es-post-gbp-1360.png"
+    },
+    {
+      "scope": "es-post-gbp@390",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "es-post-gbp@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "es-post-gbp@390",
+      "check": "no broken images",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "es-post-gbp@390",
+      "check": "no placeholder/developer text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "es-post-gbp@390",
+      "check": "exactly one h1 in the DOM",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "es-post-gbp@390",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "es-post-gbp@390",
+      "check": "screenshot (full page + above the fold)",
+      "pass": true,
+      "detail": "/private/tmp/claude-501/-Users-mitchellmiler-Library-Application-Support-Claude-scratch-workspaces-2df61e81-3a2c-4f51-b4b6-9635460079a4-ae1b91c3-f891-4864-b81e-2713cb0d8458-scratch-2026-09-14-ad9d52/c894dae6-7ac4-48d0-bb90-23bf12e1eca7/scratchpad/wave2/shots-final/es-post-gbp-390.png"
+    },
+    {
+      "scope": "post-search-intent@1360",
+      "check": "both living infographics load in same-origin frames",
+      "pass": true,
+      "detail": "mandala true, journey true"
+    },
+    {
+      "scope": "post-search-intent@1360",
+      "check": "frames fit their content with no horizontal overflow inside",
+      "pass": true,
+      "detail": "950px for 948px, 702/702 · 921px for 919px, 702/702"
+    },
+    {
+      "scope": "post-search-intent@1360",
+      "check": "a real click on a mandala sector opens its panel",
+      "pass": true,
+      "detail": "clicked at 200,279 in frame"
+    },
+    {
+      "scope": "post-search-intent@1360",
+      "check": "panel shows the labelled representative rendering and a same-origin jump link",
+      "pass": true,
+      "detail": "http://127.0.0.1:5193/blog/search-results-by-intent/#intent-local · IMG · Representative rendering, drawn from the ledger — not a screenshot. Re"
+    },
+    {
+      "scope": "post-search-intent@1360",
+      "check": "“Read the local section” lands the parent on #intent-local below the sticky header",
+      "pass": true,
+      "detail": "#intent-local top=110"
+    },
+    {
+      "scope": "post-search-intent@1360",
+      "check": "a journey territory click lands the parent on #intent-transactional",
+      "pass": true,
+      "detail": "http://127.0.0.1:5193/blog/search-results-by-intent/#intent-transactional"
+    },
+    {
+      "scope": "post-search-intent@1360",
+      "check": "parent listener honors only its own /viz/ frames and valid intents",
+      "pass": true,
+      "detail": "frame message landed true; foreign/malformed ignored true"
+    },
+    {
+      "scope": "post-search-intent",
+      "check": "JSON-LD parses: Article, BreadcrumbList and FAQPage",
+      "pass": true,
+      "detail": "Article, BreadcrumbList, FAQPage"
+    },
+    {
+      "scope": "post-search-intent",
+      "check": "GIFs and posters are served (200, image types)",
+      "pass": true,
+      "detail": "8 files"
+    },
+    {
+      "scope": "post-search-intent@1360",
+      "check": "no console or page errors (post and frames)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-search-intent@390",
+      "check": "both living infographics load in same-origin frames",
+      "pass": true,
+      "detail": "mandala true, journey true"
+    },
+    {
+      "scope": "post-search-intent@390",
+      "check": "frames fit their content with no horizontal overflow inside",
+      "pass": true,
+      "detail": "564px for 562px, 356/356 · 489px for 487px, 356/356"
+    },
+    {
+      "scope": "post-search-intent@390",
+      "check": "a real click on a mandala sector opens its panel",
+      "pass": true,
+      "detail": "clicked at 102,223 in frame"
+    },
+    {
+      "scope": "post-search-intent@390",
+      "check": "panel shows the labelled representative rendering and a same-origin jump link",
+      "pass": true,
+      "detail": "http://127.0.0.1:5193/blog/search-results-by-intent/#intent-local · IMG · Representative rendering, drawn from the ledger — not a screenshot. Re"
+    },
+    {
+      "scope": "post-search-intent@390",
+      "check": "“Read the local section” lands the parent on #intent-local below the sticky header",
+      "pass": true,
+      "detail": "#intent-local top=110"
+    },
+    {
+      "scope": "post-search-intent@390",
+      "check": "a journey territory click lands the parent on #intent-transactional",
+      "pass": true,
+      "detail": "http://127.0.0.1:5193/blog/search-results-by-intent/#intent-transactional"
+    },
+    {
+      "scope": "post-search-intent@390",
+      "check": "parent listener honors only its own /viz/ frames and valid intents",
+      "pass": true,
+      "detail": "frame message landed true; foreign/malformed ignored true"
+    },
+    {
+      "scope": "post-search-intent@390",
+      "check": "no console or page errors (post and frames)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "viz-mandala@1360",
+      "check": "HTTP 200, renders, no horizontal overflow, noindex",
+      "pass": true,
+      "detail": "status 200, 1360/1360, robots noindex, follow"
+    },
+    {
+      "scope": "viz-mandala@1360",
+      "check": "jump links target the post on this origin even with an off-site ?parent=",
+      "pass": true,
+      "detail": "http://127.0.0.1:5193/blog/search-results-by-intent/#intent-commercial"
+    },
+    {
+      "scope": "viz-mandala@1360",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "viz-mandala@390",
+      "check": "HTTP 200, renders, no horizontal overflow, noindex",
+      "pass": true,
+      "detail": "status 200, 390/390, robots noindex, follow"
+    },
+    {
+      "scope": "viz-mandala@390",
+      "check": "jump links target the post on this origin even with an off-site ?parent=",
+      "pass": true,
+      "detail": "http://127.0.0.1:5193/blog/search-results-by-intent/#intent-commercial"
+    },
+    {
+      "scope": "viz-mandala@390",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "viz-journey@1360",
+      "check": "HTTP 200, renders, no horizontal overflow, noindex",
+      "pass": true,
+      "detail": "status 200, 1360/1360, robots noindex, follow"
+    },
+    {
+      "scope": "viz-journey@1360",
+      "check": "jump links target the post on this origin even with an off-site ?parent=",
+      "pass": true,
+      "detail": "http://127.0.0.1:5193/blog/search-results-by-intent/#intent-informational, http://127.0.0.1:5193/blog/search-results-by-intent/#intent-navigational"
+    },
+    {
+      "scope": "viz-journey@1360",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "viz-journey@390",
+      "check": "HTTP 200, renders, no horizontal overflow, noindex",
+      "pass": true,
+      "detail": "status 200, 390/390, robots noindex, follow"
+    },
+    {
+      "scope": "viz-journey@390",
+      "check": "jump links target the post on this origin even with an off-site ?parent=",
+      "pass": true,
+      "detail": "http://127.0.0.1:5193/blog/search-results-by-intent/#intent-informational, http://127.0.0.1:5193/blog/search-results-by-intent/#intent-navigational"
+    },
+    {
+      "scope": "viz-journey@390",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-llm-ads@1360",
+      "check": "the living infographic loads in a same-origin frame",
+      "pass": true,
+      "detail": "/viz/llm-ads-mandala/?parent=https%3A%2F%2Fmj2.pro%2Fblog%2Foptimizing-for-ads-in-free-llm-answers%2F"
+    },
+    {
+      "scope": "post-llm-ads@1360",
+      "check": "the frame fits its content with no horizontal overflow inside",
+      "pass": true,
+      "detail": "973px for 971px, 702/702"
+    },
+    {
+      "scope": "post-llm-ads@1360",
+      "check": "every jump target is a heading in this post, on this origin, and the manifest declares the same anchors",
+      "pass": true,
+      "detail": "5 targets, 5 anchors: assistant-chatgpt assistant-google-ai-mode assistant-copilot assistant-perplexity assistant-meta-ai"
+    },
+    {
+      "scope": "post-llm-ads@1360",
+      "check": "a real click on a sector opens its panel with a same-origin jump link",
+      "pass": true,
+      "detail": "clicked at 514,300 in frame · http://127.0.0.1:5193/blog/optimizing-for-ads-in-free-llm-answers/#assistant-google-ai-mode"
+    },
+    {
+      "scope": "post-llm-ads@1360",
+      "check": "the click lands the post on #assistant-google-ai-mode below the sticky header",
+      "pass": true,
+      "detail": "#assistant-google-ai-mode top=110"
+    },
+    {
+      "scope": "post-llm-ads@1360",
+      "check": "the listener honors its own frame and ignores the page, malformed anchors and non-heading targets",
+      "pass": true,
+      "detail": "frame message landed true; others ignored true"
+    },
+    {
+      "scope": "post-llm-ads",
+      "check": "JSON-LD parses: Article, BreadcrumbList and FAQPage",
+      "pass": true,
+      "detail": "Article, BreadcrumbList, FAQPage"
+    },
+    {
+      "scope": "post-llm-ads",
+      "check": "GIF, posters, card and narration are served (200, image/audio types)",
+      "pass": true,
+      "detail": "6 files"
+    },
+    {
+      "scope": "post-llm-ads",
+      "check": "the \"Listen to this article\" audio element points at the narration",
+      "pass": true,
+      "detail": "{\"src\":\"/audio/blog/optimizing-for-ads-in-free-llm-answers.m4a\",\"label\":\"Listen to this article (16 min)Download the narration (M4A a\"}"
+    },
+    {
+      "scope": "post-llm-ads@1360",
+      "check": "no console or page errors (post and frame)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-llm-ads@390",
+      "check": "the living infographic loads in a same-origin frame",
+      "pass": true,
+      "detail": "/viz/llm-ads-mandala/?parent=https%3A%2F%2Fmj2.pro%2Fblog%2Foptimizing-for-ads-in-free-llm-answers%2F"
+    },
+    {
+      "scope": "post-llm-ads@390",
+      "check": "the frame fits its content with no horizontal overflow inside",
+      "pass": true,
+      "detail": "593px for 591px, 356/356"
+    },
+    {
+      "scope": "post-llm-ads@390",
+      "check": "every jump target is a heading in this post, on this origin, and the manifest declares the same anchors",
+      "pass": true,
+      "detail": "5 targets, 5 anchors: assistant-chatgpt assistant-google-ai-mode assistant-copilot assistant-perplexity assistant-meta-ai"
+    },
+    {
+      "scope": "post-llm-ads@390",
+      "check": "a real click on a sector opens its panel with a same-origin jump link",
+      "pass": true,
+      "detail": "clicked at 256,251 in frame · http://127.0.0.1:5193/blog/optimizing-for-ads-in-free-llm-answers/#assistant-google-ai-mode"
+    },
+    {
+      "scope": "post-llm-ads@390",
+      "check": "the click lands the post on #assistant-google-ai-mode below the sticky header",
+      "pass": true,
+      "detail": "#assistant-google-ai-mode top=110"
+    },
+    {
+      "scope": "post-llm-ads@390",
+      "check": "the listener honors its own frame and ignores the page, malformed anchors and non-heading targets",
+      "pass": true,
+      "detail": "frame message landed true; others ignored true"
+    },
+    {
+      "scope": "post-llm-ads@390",
+      "check": "no console or page errors (post and frame)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "viz-llm-ads@1360",
+      "check": "HTTP 200, renders, no horizontal overflow, noindex",
+      "pass": true,
+      "detail": "status 200, 1360/1360, robots noindex, follow"
+    },
+    {
+      "scope": "viz-llm-ads@1360",
+      "check": "jump links target the post on this origin even with an off-site ?parent=",
+      "pass": true,
+      "detail": "http://127.0.0.1:5193/blog/optimizing-for-ads-in-free-llm-answers/#assistant-chatgpt, http://127.0.0.1:5193/blog/optimizing-for-ads-in-free-llm-answers/#assistant-google-ai-mode"
+    },
+    {
+      "scope": "viz-llm-ads@1360",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "viz-llm-ads@390",
+      "check": "HTTP 200, renders, no horizontal overflow, noindex",
+      "pass": true,
+      "detail": "status 200, 390/390, robots noindex, follow"
+    },
+    {
+      "scope": "viz-llm-ads@390",
+      "check": "jump links target the post on this origin even with an off-site ?parent=",
+      "pass": true,
+      "detail": "http://127.0.0.1:5193/blog/optimizing-for-ads-in-free-llm-answers/#assistant-chatgpt, http://127.0.0.1:5193/blog/optimizing-for-ads-in-free-llm-answers/#assistant-google-ai-mode"
+    },
+    {
+      "scope": "viz-llm-ads@390",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-titles@1360",
+      "check": "the living infographic loads in a same-origin frame",
+      "pass": true,
+      "detail": "/viz/growth-title-market/?parent=https%3A%2F%2Fmj2.pro%2Fblog%2Fgrowth-title-market%2F"
+    },
+    {
+      "scope": "post-titles@1360",
+      "check": "the frame fits its content with no horizontal overflow inside",
+      "pass": true,
+      "detail": "1006px for 1004px, 702/702"
+    },
+    {
+      "scope": "post-titles@1360",
+      "check": "every jump target is a heading in this post, on this origin, and the manifest declares the same anchors",
+      "pass": true,
+      "detail": "10 targets, 6 anchors: how-to-read title-gtm-engineer title-growth-engineer title-director-of-seo title-growth-ops-engineer title-head-of-aeo"
+    },
+    {
+      "scope": "post-titles@1360",
+      "check": "a real click on a sector opens its panel with a same-origin jump link",
+      "pass": true,
+      "detail": "clicked at 399,520 in frame · http://127.0.0.1:5193/blog/growth-title-market/#title-director-of-seo"
+    },
+    {
+      "scope": "post-titles@1360",
+      "check": "the click lands the post on #title-director-of-seo below the sticky header",
+      "pass": true,
+      "detail": "#title-director-of-seo top=110"
+    },
+    {
+      "scope": "post-titles@1360",
+      "check": "the listener honors its own frame and ignores the page, malformed anchors and non-heading targets",
+      "pass": true,
+      "detail": "frame message landed true; others ignored true"
+    },
+    {
+      "scope": "post-titles",
+      "check": "JSON-LD parses: Article, BreadcrumbList and FAQPage",
+      "pass": true,
+      "detail": "Article, BreadcrumbList, FAQPage"
+    },
+    {
+      "scope": "post-titles",
+      "check": "GIF, posters, card and narration are served (200, image/audio types)",
+      "pass": true,
+      "detail": "5 files"
+    },
+    {
+      "scope": "post-titles",
+      "check": "the \"Listen to this article\" audio element points at the narration",
+      "pass": true,
+      "detail": "{\"src\":\"/audio/blog/growth-title-market.m4a\",\"label\":\"Listen to this article (10 min)Download the narration (M4A a\"}"
+    },
+    {
+      "scope": "post-titles@1360",
+      "check": "no console or page errors (post and frame)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-titles@390",
+      "check": "the living infographic loads in a same-origin frame",
+      "pass": true,
+      "detail": "/viz/growth-title-market/?parent=https%3A%2F%2Fmj2.pro%2Fblog%2Fgrowth-title-market%2F"
+    },
+    {
+      "scope": "post-titles@390",
+      "check": "the frame fits its content with no horizontal overflow inside",
+      "pass": true,
+      "detail": "615px for 613px, 356/356"
+    },
+    {
+      "scope": "post-titles@390",
+      "check": "every jump target is a heading in this post, on this origin, and the manifest declares the same anchors",
+      "pass": true,
+      "detail": "10 targets, 6 anchors: how-to-read title-gtm-engineer title-growth-engineer title-director-of-seo title-growth-ops-engineer title-head-of-aeo"
+    },
+    {
+      "scope": "post-titles@390",
+      "check": "a real click on a sector opens its panel with a same-origin jump link",
+      "pass": true,
+      "detail": "clicked at 201,317 in frame · http://127.0.0.1:5193/blog/growth-title-market/#title-director-of-seo"
+    },
+    {
+      "scope": "post-titles@390",
+      "check": "the click lands the post on #title-director-of-seo below the sticky header",
+      "pass": true,
+      "detail": "#title-director-of-seo top=110"
+    },
+    {
+      "scope": "post-titles@390",
+      "check": "the listener honors its own frame and ignores the page, malformed anchors and non-heading targets",
+      "pass": true,
+      "detail": "frame message landed true; others ignored true"
+    },
+    {
+      "scope": "post-titles@390",
+      "check": "no console or page errors (post and frame)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "viz-titles@1360",
+      "check": "HTTP 200, renders, no horizontal overflow, noindex",
+      "pass": true,
+      "detail": "status 200, 1360/1360, robots noindex, follow"
+    },
+    {
+      "scope": "viz-titles@1360",
+      "check": "jump links target the post on this origin even with an off-site ?parent=",
+      "pass": true,
+      "detail": "http://127.0.0.1:5193/blog/growth-title-market/#how-to-read, http://127.0.0.1:5193/blog/growth-title-market/#title-gtm-engineer"
+    },
+    {
+      "scope": "viz-titles@1360",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "viz-titles@390",
+      "check": "HTTP 200, renders, no horizontal overflow, noindex",
+      "pass": true,
+      "detail": "status 200, 390/390, robots noindex, follow"
+    },
+    {
+      "scope": "viz-titles@390",
+      "check": "jump links target the post on this origin even with an off-site ?parent=",
+      "pass": true,
+      "detail": "http://127.0.0.1:5193/blog/growth-title-market/#how-to-read, http://127.0.0.1:5193/blog/growth-title-market/#title-gtm-engineer"
+    },
+    {
+      "scope": "viz-titles@390",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-b2b@1360",
+      "check": "the living infographic loads in a same-origin frame",
+      "pass": true,
+      "detail": "/viz/b2b-vs-b2c-by-vertical/?parent=https%3A%2F%2Fmj2.pro%2Fblog%2Fb2b-vs-b2c-by-vertical%2F"
+    },
+    {
+      "scope": "post-b2b@1360",
+      "check": "the frame fits its content with no horizontal overflow inside",
+      "pass": true,
+      "detail": "2074px for 2072px, 704/704"
+    },
+    {
+      "scope": "post-b2b@1360",
+      "check": "every jump target is a heading in this post, on this origin, and the manifest declares the same anchors",
+      "pass": true,
+      "detail": "10 targets, 10 anchors: vertical-education vertical-financial-services vertical-real-estate vertical-travel-hospitality vertical-professional-services vertical-saas-software vertical-ecommerce-retail vertical-healthcare vertical-manufacturing-industrial vertical-nonprofit"
+    },
+    {
+      "scope": "post-b2b@1360",
+      "check": "a real click on a vertical selects it and points the panel link at its section",
+      "pass": true,
+      "detail": "aria-pressed true · http://127.0.0.1:5193/blog/b2b-vs-b2c-by-vertical/#vertical-saas-software"
+    },
+    {
+      "scope": "post-b2b@1360",
+      "check": "the click lands the post on #vertical-saas-software below the sticky header",
+      "pass": true,
+      "detail": "#vertical-saas-software top=110"
+    },
+    {
+      "scope": "post-b2b@1360",
+      "check": "the listener honors its own frame and ignores the page, malformed anchors and non-heading targets",
+      "pass": true,
+      "detail": "frame message landed true; others ignored true"
+    },
+    {
+      "scope": "post-b2b",
+      "check": "JSON-LD parses: Article, BreadcrumbList and FAQPage",
+      "pass": true,
+      "detail": "Article, BreadcrumbList, FAQPage"
+    },
+    {
+      "scope": "post-b2b",
+      "check": "GIF, posters, card and narration are served (200, image/audio types)",
+      "pass": true,
+      "detail": "5 files"
+    },
+    {
+      "scope": "post-b2b",
+      "check": "the \"Listen to this article\" audio element points at the narration",
+      "pass": true,
+      "detail": "{\"src\":\"/audio/blog/b2b-vs-b2c-by-vertical.m4a\",\"label\":\"Listen to this article (17 min)Download the narration (M4A a\"}"
+    },
+    {
+      "scope": "post-b2b@1360",
+      "check": "no console or page errors (post and frame)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-b2b@390",
+      "check": "the living infographic loads in a same-origin frame",
+      "pass": true,
+      "detail": "/viz/b2b-vs-b2c-by-vertical/?parent=https%3A%2F%2Fmj2.pro%2Fblog%2Fb2b-vs-b2c-by-vertical%2F"
+    },
+    {
+      "scope": "post-b2b@390",
+      "check": "the frame fits its content with no horizontal overflow inside",
+      "pass": true,
+      "detail": "2102px for 2100px, 358/358"
+    },
+    {
+      "scope": "post-b2b@390",
+      "check": "every jump target is a heading in this post, on this origin, and the manifest declares the same anchors",
+      "pass": true,
+      "detail": "10 targets, 10 anchors: vertical-education vertical-financial-services vertical-real-estate vertical-travel-hospitality vertical-professional-services vertical-saas-software vertical-ecommerce-retail vertical-healthcare vertical-manufacturing-industrial vertical-nonprofit"
+    },
+    {
+      "scope": "post-b2b@390",
+      "check": "a real click on a vertical selects it and points the panel link at its section",
+      "pass": true,
+      "detail": "aria-pressed true · http://127.0.0.1:5193/blog/b2b-vs-b2c-by-vertical/#vertical-saas-software"
+    },
+    {
+      "scope": "post-b2b@390",
+      "check": "the click lands the post on #vertical-saas-software below the sticky header",
+      "pass": true,
+      "detail": "#vertical-saas-software top=110"
+    },
+    {
+      "scope": "post-b2b@390",
+      "check": "the listener honors its own frame and ignores the page, malformed anchors and non-heading targets",
+      "pass": true,
+      "detail": "frame message landed true; others ignored true"
+    },
+    {
+      "scope": "post-b2b@390",
+      "check": "no console or page errors (post and frame)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "viz-b2b@1360",
+      "check": "HTTP 200, renders, no horizontal overflow, noindex",
+      "pass": true,
+      "detail": "status 200, 1360/1360, robots noindex, follow"
+    },
+    {
+      "scope": "viz-b2b@1360",
+      "check": "jump links target the post on this origin even with an off-site ?parent=",
+      "pass": true,
+      "detail": "http://127.0.0.1:5193/blog/b2b-vs-b2c-by-vertical/#vertical-education, http://127.0.0.1:5193/blog/b2b-vs-b2c-by-vertical/#vertical-financial-services"
+    },
+    {
+      "scope": "viz-b2b@1360",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "viz-b2b@390",
+      "check": "HTTP 200, renders, no horizontal overflow, noindex",
+      "pass": true,
+      "detail": "status 200, 390/390, robots noindex, follow"
+    },
+    {
+      "scope": "viz-b2b@390",
+      "check": "jump links target the post on this origin even with an off-site ?parent=",
+      "pass": true,
+      "detail": "http://127.0.0.1:5193/blog/b2b-vs-b2c-by-vertical/#vertical-education, http://127.0.0.1:5193/blog/b2b-vs-b2c-by-vertical/#vertical-financial-services"
+    },
+    {
+      "scope": "viz-b2b@390",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-roles@1360",
+      "check": "the living infographic loads in a same-origin frame",
+      "pass": true,
+      "detail": "/viz/statistician-vs-data-scientist/?parent=https%3A%2F%2Fmj2.pro%2Fblog%2Fstatistician-vs-data-scientist%2F"
+    },
+    {
+      "scope": "post-roles@1360",
+      "check": "the frame fits its content with no horizontal overflow inside",
+      "pass": true,
+      "detail": "929px for 927px, 704/704"
+    },
+    {
+      "scope": "post-roles@1360",
+      "check": "every jump target is a heading in this post, on this origin, and the manifest declares the same anchors",
+      "pass": true,
+      "detail": "8 targets, 6 anchors: role-no-bls-code role-education role-pay role-growth role-methods role-practice"
+    },
+    {
+      "scope": "post-roles@1360",
+      "check": "the stop is a real link to its section on this origin",
+      "pass": true,
+      "detail": "http://127.0.0.1:5193/blog/statistician-vs-data-scientist/#role-pay"
+    },
+    {
+      "scope": "post-roles@1360",
+      "check": "the click lands the post on #role-pay below the sticky header",
+      "pass": true,
+      "detail": "#role-pay top=110"
+    },
+    {
+      "scope": "post-roles@1360",
+      "check": "the listener honors its own frame and ignores the page, malformed anchors and non-heading targets",
+      "pass": true,
+      "detail": "frame message landed true; others ignored true"
+    },
+    {
+      "scope": "post-roles",
+      "check": "JSON-LD parses: Article, BreadcrumbList and FAQPage",
+      "pass": true,
+      "detail": "Article, BreadcrumbList, FAQPage"
+    },
+    {
+      "scope": "post-roles",
+      "check": "GIF, posters, card and narration are served (200, image/audio types)",
+      "pass": true,
+      "detail": "5 files"
+    },
+    {
+      "scope": "post-roles",
+      "check": "the \"Listen to this article\" audio element points at the narration",
+      "pass": true,
+      "detail": "{\"src\":\"/audio/blog/statistician-vs-data-scientist.m4a\",\"label\":\"Listen to this article (7 min)Download the narration (M4A au\"}"
+    },
+    {
+      "scope": "post-roles@1360",
+      "check": "no console or page errors (post and frame)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "post-roles@390",
+      "check": "the living infographic loads in a same-origin frame",
+      "pass": true,
+      "detail": "/viz/statistician-vs-data-scientist/?parent=https%3A%2F%2Fmj2.pro%2Fblog%2Fstatistician-vs-data-scientist%2F"
+    },
+    {
+      "scope": "post-roles@390",
+      "check": "the frame fits its content with no horizontal overflow inside",
+      "pass": true,
+      "detail": "507px for 505px, 358/358"
+    },
+    {
+      "scope": "post-roles@390",
+      "check": "every jump target is a heading in this post, on this origin, and the manifest declares the same anchors",
+      "pass": true,
+      "detail": "8 targets, 6 anchors: role-no-bls-code role-education role-pay role-growth role-methods role-practice"
+    },
+    {
+      "scope": "post-roles@390",
+      "check": "the stop is a real link to its section on this origin",
+      "pass": true,
+      "detail": "http://127.0.0.1:5193/blog/statistician-vs-data-scientist/#role-pay"
+    },
+    {
+      "scope": "post-roles@390",
+      "check": "the click lands the post on #role-pay below the sticky header",
+      "pass": true,
+      "detail": "#role-pay top=110"
+    },
+    {
+      "scope": "post-roles@390",
+      "check": "the listener honors its own frame and ignores the page, malformed anchors and non-heading targets",
+      "pass": true,
+      "detail": "frame message landed true; others ignored true"
+    },
+    {
+      "scope": "post-roles@390",
+      "check": "no console or page errors (post and frame)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "viz-roles@1360",
+      "check": "HTTP 200, renders, no horizontal overflow, noindex",
+      "pass": true,
+      "detail": "status 200, 1360/1360, robots noindex, follow"
+    },
+    {
+      "scope": "viz-roles@1360",
+      "check": "jump links target the post on this origin even with an off-site ?parent=",
+      "pass": true,
+      "detail": "http://127.0.0.1:5193/blog/statistician-vs-data-scientist/#role-no-bls-code, http://127.0.0.1:5193/blog/statistician-vs-data-scientist/#role-no-bls-code"
+    },
+    {
+      "scope": "viz-roles@1360",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "viz-roles@390",
+      "check": "HTTP 200, renders, no horizontal overflow, noindex",
+      "pass": true,
+      "detail": "status 200, 390/390, robots noindex, follow"
+    },
+    {
+      "scope": "viz-roles@390",
+      "check": "jump links target the post on this origin even with an off-site ?parent=",
+      "pass": true,
+      "detail": "http://127.0.0.1:5193/blog/statistician-vs-data-scientist/#role-no-bls-code, http://127.0.0.1:5193/blog/statistician-vs-data-scientist/#role-no-bls-code"
+    },
+    {
+      "scope": "viz-roles@390",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "home",
+      "check": "brand marquee animates (CSS only, duplicated track, aria-hidden copy, labelled section)",
+      "pass": true,
+      "detail": "ag-marquee running, 10 items"
+    },
+    {
+      "scope": "home",
+      "check": "marquee pauses on hover",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "home",
+      "check": "header “Let’s talk” button is green with white text and links to /contact/",
+      "pass": true,
+      "detail": "rgb(20, 128, 74) rgb(255, 255, 255) /contact/"
+    },
+    {
+      "scope": "home",
+      "check": "primary nav order Services · Products · Work · Lab · Writing · About",
+      "pass": true,
+      "detail": "Services · Products · Work · Lab · Writing · About"
+    },
+    {
+      "scope": "home",
+      "check": "nav dropdown opens on hover",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "home",
+      "check": "prefers-reduced-motion: marquee static, duplicate hidden, no overflow",
+      "pass": true,
+      "detail": "none / duplicate none"
+    },
+    {
+      "scope": "home",
+      "check": "no console or page errors (shell checks)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "services",
+      "check": "brand marquee animates (CSS only, duplicated track, aria-hidden copy, labelled section)",
+      "pass": true,
+      "detail": "ag-marquee running, 10 items"
+    },
+    {
+      "scope": "services",
+      "check": "marquee pauses on hover",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "services",
+      "check": "header “Let’s talk” button is green with white text and links to /contact/",
+      "pass": true,
+      "detail": "rgb(20, 128, 74) rgb(255, 255, 255) /contact/"
+    },
+    {
+      "scope": "services",
+      "check": "primary nav order Services · Products · Work · Lab · Writing · About",
+      "pass": true,
+      "detail": "Services · Products · Work · Lab · Writing · About"
+    },
+    {
+      "scope": "services",
+      "check": "nav dropdown opens on hover",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "services",
+      "check": "prefers-reduced-motion: marquee static, duplicate hidden, no overflow",
+      "pass": true,
+      "detail": "none / duplicate none"
+    },
+    {
+      "scope": "services",
+      "check": "no console or page errors (shell checks)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "home@390",
+      "check": "mobile menu opens with the full navigation and the contact button; no overflow",
+      "pass": true,
+      "detail": "22 links, scrollWidth 390"
+    },
+    {
+      "scope": "home@390",
+      "check": "no console or page errors (menu)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "lab",
+      "check": "three lab islands hydrate (astro-island loses ssr)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "lab",
+      "check": "lab controls respond to clicks (aria-pressed toggles)",
+      "pass": true,
+      "detail": "3 of 3 clicked controls became pressed"
+    },
+    {
+      "scope": "lab",
+      "check": "no console or page errors after interaction",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "workbench",
+      "check": "workbench island hydrates to data-workbench-state=\"ready\"",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "workbench",
+      "check": "filter changes the weighted count",
+      "pass": true,
+      "detail": "39,512,222 → 19,219,404"
+    },
+    {
+      "scope": "workbench",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "note-hermes-mermaid",
+      "check": "Mermaid diagram renders to SVG with the source kept in a details element",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "note-hermes-mermaid",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "resume",
+      "check": "resume dialog opens on click and closes on Escape",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "resume",
+      "check": "dialog offers the four PDF paths",
+      "pass": true,
+      "detail": "/files/Mitchell-Miller-Search-Systems-Background-2026.pdf, /files/Mitchell-Miller-AI-Search-Systems-Background-2026.pdf, /files/Mitchell-Miller-Product-Systems-Background-2026.pdf, /files/Mitchell-Miller-Organic-Systems-Background-2026.pdf"
+    },
+    {
+      "scope": "resume",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "contact",
+      "check": "?topic=population-simulation pre-fills the topic select",
+      "pass": true,
+      "detail": "population-simulation"
+    },
+    {
+      "scope": "contact",
+      "check": "mocked Worker 200 ok: honest message shown",
+      "pass": true,
+      "detail": "ok: Thanks — your message was received. I reply from mitchelljmillerjr26@gmail.com."
+    },
+    {
+      "scope": "contact",
+      "check": "form resets after success",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "contact",
+      "check": "no console or page errors (200 ok)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "contact",
+      "check": "mocked Worker 400 validation: honest message shown",
+      "pass": true,
+      "detail": "error: Please check the highlighted fields and try again."
+    },
+    {
+      "scope": "contact",
+      "check": "validation errors mark the field aria-invalid",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "contact",
+      "check": "no console or page errors (400 validation)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "contact",
+      "check": "mocked Worker network failure: honest message shown",
+      "pass": true,
+      "detail": "error: The message could not be sent (network error). Please email mitchelljmillerjr26@gmail.com."
+    },
+    {
+      "scope": "contact",
+      "check": "no console or page errors (network failure)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "contact",
+      "check": "JavaScript off: form hidden via noscript style, mailto links remain",
+      "pass": true,
+      "detail": "3 mailto links"
+    }
+  ]
+}

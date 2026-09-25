@@ -87,6 +87,8 @@
 /* Wide article tables wrap inside the column instead of widening the page at 390 px. */
 .ag-body .prose table { width: 100%; }
 .ag-body .prose :is(th, td) { overflow-wrap: anywhere; }
+/* A bare URL written out as link text (source lists) breaks inside the column at 390 px too. */
+.ag-body .prose a { overflow-wrap: break-word; }
 
 /* Light islands: self-contained media and tools keep their own light palette in both themes
    (standards: "self-contained infographics keep their own palette") — the brand-logo marquee,

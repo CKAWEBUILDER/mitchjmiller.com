@@ -249,6 +249,347 @@ export const caseStudies = [
 
 export const blogPosts = [
   {
+    slug: "optimizing-for-ads-in-free-llm-answers",
+    title: "Ads in Free LLM Answers: What to Buy, What Gets Cited",
+    author: "Mitchell Miller",
+    date: "September 24, 2026",
+    status: "published",
+    teaser: "Three assistants put ads inside free answers, one uses your chats to target ads elsewhere, and one quit. Click an assistant to see who sees ads there, and why buying the ad still doesn't buy the citation.",
+    metaDescription: "ChatGPT, Google AI Mode, Copilot, Perplexity and Meta AI compared: who sees ads, what advertisers can buy today, and what still earns a citation.",
+    card: { src: "/viz/llm-ads-mandala/ads-in-free-llm-answers-data-mandala-1200x630.png", alt: "Data mandala of five AI assistants across three rings: who sees the ads, how often (ChatGPT 25.94% and Google AI Mode 29.45% of commercial prompts carried an ad) and what gets cited (AI Mode advertisers' own domains 11.53%). Hub: 5.6% of ChatGPT's 900M weekly users pay." },
+    contentHtml: `<p><em>By Mitchell Miller · ~7 min read · AI search / paid media · September 24, 2026</em></p>
+<p>Three of the five assistants compared here place ads inside free answers: ChatGPT (Free and Go tiers, self-serve from $25 a day), Google&#39;s AI Mode and AI Overviews (through existing Search, Shopping and Performance Max campaigns) and Microsoft Copilot (sponsored recommendations). Meta AI uses chats to target ads elsewhere. Perplexity quit ads in February 2026.</p>
+<figure class="viz-embed">
+  <iframe src="/viz/llm-ads-mandala/?parent=https%3A%2F%2Fmj2.pro%2Fblog%2Foptimizing-for-ads-in-free-llm-answers%2F"
+          title="Ads inside free AI answers: five-assistant data mandala"
+          loading="lazy" width="100%" height="1120"
+          style="display:block;width:100%;border:1px solid #0f2440;border-radius:10px"></iframe>
+  <noscript>
+    <img src="/viz/llm-ads-mandala/poster-1080x1350.png" width="1080" height="1350"
+         alt="Data mandala: ChatGPT, Google AI Mode, Microsoft Copilot, Perplexity and Meta AI as five sectors across three rings: who sees the ads, how often they appear (ChatGPT 25.94%, AI Mode 29.45% of commercial prompts) and what gets cited (AI Mode ad buyers' domains 11.53%). Hub: 5.6% of ChatGPT's weekly users pay. Dashed cells are not disclosed or not measured."
+         style="display:block;width:100%;height:auto;border-radius:10px" />
+  </noscript>
+  <figcaption>
+    <strong>Click an assistant: see who sees ads there, and what still earns a citation.</strong>
+    The rail under the wheel gives each medallion its study; dashed grey cells are figures the company hasn't published or no study has measured.
+    <a href="/viz/llm-ads-mandala/">Open the full-screen version</a> if the frame is cut off.
+  </figcaption>
+</figure><h2>TL;DR: three numbers</h2>
+<ul>
+<li><strong>5.6%</strong> of ChatGPT&#39;s weekly users pay: 50 million paying subscribers against 900 million weekly users. <em>(OpenAI, via TechCrunch, 27 February 2026.)</em></li>
+<li><strong>25.94%</strong> of 50,006 commercial ChatGPT prompts returned an ad; 14.35% of those ads were off-target. <em>(SE Ranking, data collected 23 July 2026.)</em></li>
+<li><strong>11.53%</strong>: how often advertisers&#39; own domains appeared among Google AI Mode&#39;s cited sources on keywords showing their text ad. The exact ad URL: <strong>1.95%</strong>. <em>(SE Ranking, 50,032 keywords, 30 June 2026.)</em></li>
+</ul>
+<h2 id="assistant-chatgpt">Can you buy ads inside ChatGPT?</h2><p>Yes, self-serve, from $25 a day per campaign. Ads have run on the Free and Go ($8 a month) tiers since 9 February 2026, to logged-in adults, US first; the UK, Mexico, Brazil, Japan and South Korea followed on 11 August. Plus, Pro, Business, Enterprise and Edu are ad-free <em>(OpenAI, via MacRumors and Help Net Security)</em>, and with 50 million paying against 900 million weekly users, more than nine in ten sit on a tier that can carry ads.</p>
+<p>Ads are labeled and set apart from the answer. Since 16 September, a Sponsored Agents pilot opens a labeled chat with the brand&#39;s own AI agent (US; Wayfair, HubSpot and Shopify named) <em>(OpenAI, via Forkast)</em>.</p>
+<p>SE Ranking measured ads on 25.94% of commercial prompts, 14.35% of them off-target. An academic audit of 91 test accounts and 3,000+ ads found lower-income accounts received more ads, regardless of race signal <em>(Lurie, Encarnación, Friedler and Metaxa, arXiv, August 2026)</em>.</p>
+<p>What still earns a citation: ChatGPT cites 4.5 sources per answer, skewed to documentation, papers and vendor pricing and help pages <em>(Orbit Media, 2 September 2026)</em>. OpenAI&#39;s policy says ads don&#39;t influence answers.</p>
+<h2 id="assistant-google-ai-mode">How do ads get into Google AI Mode and AI Overviews?</h2><p>Through campaigns you already run; neither surface can be targeted directly. Existing Search, Shopping and Performance Max campaigns become eligible for AI Overviews automatically; advertisers can&#39;t target that placement or opt out, and sensitive verticals are excluded <em>(Google Ads Help)</em>. AI Mode takes AI Max, Performance Max, broad match with Smart Bidding, Dynamic Search Ads and Shopping. Since 4 September a small test also admits exact and phrase match &quot;where there is explicit and direct user intent&quot; <em>(Google Ads Liaison Ginny Marvin, via PPC Land)</em>. The Gemini app is a separate product with no ads today, though Google SVP Nick Fox told WIRED &quot;we&#39;re not ruling them out&quot; <em>(WIRED, 12 March 2026)</em>. Google discloses no paid split.</p>
+<p>Measured: of 50,032 commercial keywords picked because they trigger text ads, 29.45% showed one in AI Mode on 30 June, more often as cost per click rose (24% under $2, 53.56% at $10+). On those keywords, advertisers&#39; own domains appeared among AI Mode&#39;s cited sources 11.53% of the time; the exact ad URL, 1.95% <em>(SE Ranking, 14 July 2026)</em>.</p>
+<p>What still earns a citation: 54.5% of AI Overview citations also rank organically in top positions <em>(BrightEdge, September 2025)</em>. The inference: organic rank, not the ad buy, is the route into the answer.</p>
+<h2 id="assistant-copilot">Does Microsoft Copilot show ads in its answers?</h2><p>Yes, as labeled sponsored recommendations on commercial queries, tested from late 2024 and generally available in 2025. No Copilot-only campaign type exists; placements draw on existing Microsoft Advertising Search, Shopping and Performance Max campaigns <em>(secondary reporting; Microsoft documents its ad-buying assistant, not this placement)</em>.</p>
+<p>Who sees them: consumer Copilot, about 145 million monthly users. The consumer paid count isn&#39;t disclosed, and the 28 million paid seats are Microsoft 365 enterprise licences <em>(Microsoft figures, via Panto)</em>. The only performance data is Microsoft&#39;s own: 73% higher click-through and 16% higher conversion than traditional search, February to May 2025, unaudited <em>(Microsoft Advertising, 6 August 2025)</em>. No Copilot citation study turned up.</p>
+<h2 id="assistant-perplexity">Can you still advertise on Perplexity?</h2><p>No. Sponsored follow-up questions ran from 12 November 2024; new advertisers were paused in October 2025 and ads ended in February 2026. Ad revenue in 2024 was about $20,000 of $34 million; an executive told the Financial Times the company is in &quot;the accuracy business&quot; <em>(ALM Corp, 18 February 2026)</em>. There is no program and no waitlist.</p>
+<p>No one sees ads across its 100M+ monthly users; paid-share estimates (~1% vs 5–7%) contradict each other. The citation is the only door: Perplexity cites 19.2 sources per answer, the most of four assistants tracked, led by LinkedIn, YouTube and Reddit <em>(Orbit Media)</em>.</p>
+<h2 id="assistant-meta-ai">Does Meta AI show ads?</h2><p>Not inside the chat. Since 16 December 2025, Meta has used Meta AI conversations to personalize content and ads across its apps in most regions, excluding sensitive topics like health <em>(Meta, 1 October 2025)</em>; the EU, the UK and South Korea are left out <em>(Proton)</em>. A shopping-carousel test inside Meta AI has run since March 2026, US and web only; Meta hasn&#39;t confirmed a sponsored label or said whether advertisers get priority <em>(MediaPost)</em>.</p>
+<p>Reach: 1.2–1.5 billion monthly users by a broad count, about 640 million counting deliberate use; no consumer paid tier is live <em>(DemandSage)</em>. No Meta AI placement exists; standard Facebook, Instagram and WhatsApp ads are the route, now shaped partly by the chats. No Meta AI citation study turned up.</p>
+<h2>What a small business or consultant does this quarter</h2>
+<p>Missing on purpose: a Perplexity advertiser waitlist, which doesn&#39;t exist.</p>
+<table>
+<thead>
+<tr>
+<th>Lever</th>
+<th>Cost</th>
+<th>Eligibility</th>
+<th>The catch</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Test ChatGPT ads</td>
+<td>$25 a day per campaign</td>
+<td>US, Canada, Australia, New Zealand or 31 European markets; Persona verification</td>
+<td>$3–5 a click buys 5–8 clicks a day, too few to read conversion <em>(Top Growth Marketing)</em></td>
+</tr>
+<tr>
+<td>Migrate to AI Max on your schedule</td>
+<td>No added fee found</td>
+<td>Search campaigns using automatically created assets or campaign broad match; upgrades began 1 September</td>
+<td>No opt-out; less keyword control; AI Overview placement can&#39;t be targeted or declined</td>
+</tr>
+<tr>
+<td>Import Google Ads into Microsoft Advertising</td>
+<td>Free, one-time or scheduled</td>
+<td>A linked Google Ads account</td>
+<td>Audiences don&#39;t transfer; low bids get raised to Microsoft&#39;s floors <em>(Microsoft Learn)</em></td>
+</tr>
+<tr>
+<td>Claim your category&#39;s review profiles</td>
+<td>$0 to claim</td>
+<td>G2 and Capterra for software</td>
+<td>Inclusion, not rank: every ChatGPT-named SaaS tool had Capterra reviews; review counts didn&#39;t predict placement <em>(Quoleady)</em></td>
+</tr>
+<tr>
+<td>Earn citations per assistant</td>
+<td>Editorial time</td>
+<td>Anyone</td>
+<td>ChatGPT leans on primary docs, Perplexity on LinkedIn, YouTube and Reddit; four assistants agree on a cited domain 1.7% of the time <em>(Orbit Media)</em></td>
+</tr>
+</tbody></table>
+<p>Wikidata and Wikipedia entries are widely recommended, not independently measured.</p>
+<p>The prompt-set tracking I&#39;ve built for AI citation share covers ChatGPT, Perplexity and Google AI Overviews (<a href="/case-studies/aeo-visibility-infrastructure/">case study</a>). Report each assistant on its own line: at 1.7% agreement, a blended score hides more than it shows (measurement framework).</p>
+<h2>Does schema markup earn AI citations?</h2>
+<p>Unresolved. Figures attributed to BrightEdge claim 44% more AI citations for sites with structured data, and 3.2 times as many for 73 sites with proper schema. Ahrefs tested 1,885 pages and found no citation uplift from schema alone. A February 2026 SSRN preprint by Kurt Fischman leans skeptical. None was re-fetched verbatim here. This site argues entity structure helps models understand a brand (entity SEO for AI retrieval); whether markup moves citation rates is a narrower, unsettled claim. Ship schema as hygiene; don&#39;t sell it as a citation lever.</p>
+<h2>How this connects to zero-click</h2>
+<p><a href="/blog/search-results-by-intent/">Search Results by Intent</a> mapped how often a results page ends without a click. When the answer keeps the session, the ad moves into the answer: Alphabet earned more than 70% of its 2025 revenue from advertising <em>(Form 10-K)</em>, and in Pew&#39;s panel just 1% of visits to a page with an AI summary clicked a link inside it <em>(July 2025)</em>. Paying puts a brand beside the answer; the citation stays the unpaid route in.</p>
+<p><strong>Limits.</strong> SE Ranking&#39;s numbers are single-date snapshots; Orbit&#39;s tracker covers 72 prompts for three B2B brands; OpenAI&#39;s figures reach this piece through other outlets. Google changed AI Mode ads twice in twelve days this month <em>(PPC Land, 4 September; Search Engine Watch, 16 September)</em>.</p>
+<p><strong>Share this with someone deciding whether to put budget into ChatGPT ads this quarter.</strong></p>
+<hr>
+<h2>FAQ</h2>
+<h3>How much does it cost to advertise in ChatGPT?</h3>
+<p>The floor is $25 a day per campaign, self-serve, with Persona verification, for businesses in the US, Canada, Australia, New Zealand or 31 European markets. At $3–5 a click that buys 5–8 clicks a day, too few to judge conversion.</p>
+<h3>Does advertising in Google AI Mode get my site cited?</h3>
+<p>Not on the evidence so far: on 50,032 ad-triggering keywords, advertisers&#39; own domains appeared among AI Mode&#39;s cited sources 11.53% of the time, the exact ad URL 1.95% (SE Ranking, 30 June 2026). Organic rank is the better-documented route: 54.5% of AI Overview citations also rank in top organic positions (BrightEdge).</p>
+<h3>Are there ads in Gemini?</h3>
+<p>Not in the Gemini app today. Google SVP Nick Fox told WIRED in March 2026 &quot;we&#39;re not ruling them out.&quot; Ads run in Search&#39;s AI Mode and AI Overviews, a separate product.</p>
+<h3>Can I still buy ads on Perplexity?</h3>
+<p>No. Perplexity ended ads in February 2026 after about $20,000 in 2024 ad revenue. There is no waitlist; the route in is citation, at 19.2 sources per answer (Orbit Media).</p>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does it cost to advertise in ChatGPT?","acceptedAnswer":{"@type":"Answer","text":"The floor is $25 a day per campaign, self-serve, with Persona verification, for businesses in the US, Canada, Australia, New Zealand or 31 European markets. At $3–5 a click that buys 5–8 clicks a day, too few to judge conversion."}},{"@type":"Question","name":"Does advertising in Google AI Mode get my site cited?","acceptedAnswer":{"@type":"Answer","text":"Not on the evidence so far: on 50,032 ad-triggering keywords, advertisers' own domains appeared among AI Mode's cited sources 11.53% of the time, the exact ad URL 1.95% (SE Ranking, 30 June 2026). Organic rank is the better-documented route: 54.5% of AI Overview citations also rank in top organic positions (BrightEdge)."}},{"@type":"Question","name":"Are there ads in Gemini?","acceptedAnswer":{"@type":"Answer","text":"Not in the Gemini app today. Google SVP Nick Fox told WIRED in March 2026 \\"we're not ruling them out.\\" Ads run in Search's AI Mode and AI Overviews, a separate product."}},{"@type":"Question","name":"Can I still buy ads on Perplexity?","acceptedAnswer":{"@type":"Answer","text":"No. Perplexity ended ads in February 2026 after about $20,000 in 2024 ad revenue. There is no waitlist; the route in is citation, at 19.2 sources per answer (Orbit Media)."}}]}</script>
+<hr>
+<h2>Sources</h2>
+<p>Primary and first-party, then reporting. Retrieved 24 September 2026 unless noted.</p>
+<ol>
+<li>Google Ads Help — <a href="https://support.google.com/google-ads/answer/16297775?hl=en">About ads and AI Overviews</a>. &quot;You can&#39;t directly target ad placements in the AI Overviews&quot;; no opt-out; sensitive-vertical exclusions.</li>
+<li>SE Ranking — <a href="https://seranking.com/blog/google-ai-mode-ads/">Google AI Mode ads study</a>. 50,032 commercial keywords selected to trigger text ads, 20 niches, US, data 30 June 2026; published 14 July 2026. Write-up: <a href="https://www.searchenginejournal.com/google-ai-mode-shows-ads-on-1-in-3-commercial-keywords/582976/">Search Engine Journal</a>, 21 July 2026.</li>
+<li>SE Ranking — <a href="https://seranking.com/blog/chatgpt-ads-study/">ChatGPT shows ads for 1 in 4 commercial prompts</a>. 50,006 prompts, 20 niches, US, data 23 July 2026; published 10 August 2026.</li>
+<li>Orbit Media Studios (Bill Widmer) — <a href="https://www.orbitmedia.com/blog/ai-citation-sources/">LLM citation study</a>. 72 prompts, 3 B2B brands, 13,184 citations, 1,765 answers; published 2 September 2026.</li>
+<li>Lurie, Encarnación, Friedler, Metaxa — <a href="https://arxiv.org/abs/2608.05008">The Beginning of ChatGPT Ads</a>. arXiv, submitted 5 August 2026; accepted to AAAI/ACM AIES 2026.</li>
+<li>Microsoft Advertising — <a href="https://about.ads.microsoft.com/en/blog/post/august-2025/73-higher-ctrs-why-advertisers-need-to-pay-attention-to-conversational-ai">73% higher CTRs: why advertisers need to pay attention to conversational AI</a>. First-party data, February–May 2025; published 6 August 2025.</li>
+<li>Microsoft Learn — <a href="https://learn.microsoft.com/en-us/advertising/guides/google-ads-import?view=bingads-13">Import campaigns from Google Ads</a>.</li>
+<li>Meta — <a href="https://about.fb.com/news/2025/10/improving-your-recommendations-apps-ai-meta/">Improving your recommendations on our apps with AI at Meta</a>. Published 1 October 2025; effective 16 December 2025.</li>
+<li>Quoleady — <a href="https://www.quoleady.com/llmo-research/">LLMO research</a>. SaaS &quot;alternatives&quot; prompts; published 4 June 2026.</li>
+<li>BrightEdge — <a href="https://www.brightedge.com/resources/weekly-ai-search-insights/rank-overlap-after-16-months-of-aio">AI Overview citations now 54% from organic rankings</a>. Published 18 September 2025.</li>
+<li>Alphabet Inc. — <a href="https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm">Form 10-K, fiscal year 2025</a>. &quot;More than 70% of total revenues from online advertising.&quot;</li>
+<li>Pew Research Center — <a href="https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/">Do people click on links in Google AI summaries?</a> Published 22 July 2025.</li>
+<li>TechCrunch — <a href="https://techcrunch.com/2026/02/27/chatgpt-reaches-900m-weekly-active-users">ChatGPT reaches 900M weekly active users</a>. 900M weekly users, 50M paying subscribers; 27 February 2026.</li>
+<li>Help Net Security — <a href="https://www.helpnetsecurity.com/2026/08/31/chatgpt-ads-privacy-policy/">ChatGPT ads and the privacy policy</a>. Quotes OpenAI&#39;s Ads in ChatGPT policy; 31 August 2026.</li>
+<li>MacRumors — <a href="https://www.macrumors.com/2026/02/09/chatgpt-now-has-ads/">ChatGPT now has ads</a>. 9 February 2026.</li>
+<li>Forkast — <a href="https://forkast.news/openais-sponsored-agents-turn-chatgpt-into-an-ad-platform-where-brands-are-the-product/">OpenAI&#39;s Sponsored Agents</a>; Quartz — <a href="https://qz.com/openai-chatgpt-sponsored-agents-hubspot-shopify-091726">Sponsored Agents with HubSpot and Shopify</a>. September 2026.</li>
+<li>Lapis — <a href="https://www.trylapis.com/resources/chatgpt-self-serve-ads-small-business-guide">ChatGPT self-serve ads for small businesses</a>. August 2026.</li>
+<li>Top Growth Marketing — <a href="https://topgrowthmarketing.com/how-much-do-chatgpt-ads-cost/">How much do ChatGPT ads cost</a>. Updated 24 September 2026.</li>
+<li>PPC Land — <a href="https://ppc.land/exact-and-phrase-match-keywords-gain-ai-mode-ads-in-google-test/">Exact and phrase match keywords gain AI Mode ads in Google test</a>. 4 September 2026.</li>
+<li>Search Engine Watch — <a href="https://searchenginewatch.com/google-ai-mode-now-showing-descriptions-for-ads/">Google AI Mode now showing descriptions for ads</a>. 16 September 2026.</li>
+<li>WIRED (Maxwell Zeff) — <a href="https://www.wired.com/story/google-nick-fox-advertising-search-ai-gemini/">Google Is Not Ruling Out Ads in Gemini</a>. Interview with Google SVP Nick Fox: &quot;No, we&#39;re not ruling them out. It&#39;s just not where we&#39;ve been focusing.&quot; 12 March 2026. It supersedes Google&#39;s December 2025 denial (<a href="https://searchengineland.com/google-corrects-report-claiming-ads-are-coming-to-gemini-in-2026-465856">Search Engine Land</a>).</li>
+<li>Search Engine Land — <a href="https://searchengineland.com/google-to-auto-upgrade-some-search-campaigns-to-ai-max-484428">Google to auto-upgrade some Search campaigns to AI Max</a>. Auto-upgrade from 1 September 2026.</li>
+<li>Implicator — <a href="https://www.implicator.ai/google-puts-gemini-at-1-billion-monthly-users-without-naming-paying-subscribers/">Google puts Gemini at 1 billion monthly users</a>. August 2026.</li>
+<li>ALM Corp — <a href="https://almcorp.com/blog/perplexity-ai-abandons-advertising-2026-analysis/">Perplexity AI abandons advertising</a>. 18 February 2026. Launch detail: <a href="https://searchengineland.com/perplexity-begins-testing-ads-448277">Search Engine Land, Perplexity begins testing ads</a>.</li>
+<li>Resourcera — <a href="https://resourcera.com/data/artificial-intelligence/perplexity-ai-statistics/">Perplexity AI statistics</a>; DemandSage — <a href="https://www.demandsage.com/meta-ai-users/">Meta AI users</a>. Third-party aggregations, 2026.</li>
+<li>Panto — <a href="https://www.getpanto.ai/blog/microsoft-copilot-statistics">Microsoft Copilot statistics</a>. Q1 2026 figures.</li>
+<li>Proton — <a href="https://proton.me/blog/meta-ai-ads">Meta AI ads</a>. December 2025.</li>
+<li>MediaPost — <a href="https://www.mediapost.com/publications/article/413248/">Meta AI shopping test</a>. March 2026.</li>
+<li>Kurt Fischman — <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6284518">Does schema markup predict AI citation?</a> SSRN preprint, February 2026. BrightEdge&#39;s 73-site claim and Ahrefs&#39; 1,885-page test were reached through secondary aggregation and not re-fetched.</li>
+<li>Thrad and Stackmatix — secondary reporting on Copilot&#39;s in-answer ad placement.</li>
+</ol>`,
+  },
+  {
+    slug: "growth-title-market",
+    title: "Ten Job Titles, Two Right Answers Each",
+    author: "Mitchell Miller",
+    date: "September 24, 2026",
+    status: "published",
+    teaser: "On 14 September 2026 I counted ten growth, SEO and AI-search job titles twice — once by exact phrase, once by keyword match — and pulled every published salary figure for each. One title returned zero postings on one board and 10,000+ on another. Two salary sources disagree by 3.5x on the same title. The living version lets you check all ten.",
+    metaDescription: "Ten growth, SEO and AI-search job titles counted on one day: exact-phrase postings against loose keyword counts, and every published pay figure.",
+    contentHtml: `<p><em>By Mitchell Miller · ~4 min read · job market / measurement / AI search</em></p>
+<h2>TL;DR</h2>
+<ul>
+<li><strong>0 against 10,000+.</strong> &quot;Growth Operations Engineer&quot; returned zero results on SimplyHired&#39;s exact-phrase US search on 14 September 2026 — the page says so in a sentence — while LinkedIn&#39;s public guest search claimed 10,000+ for the same three words on the same day.</li>
+<li><strong>$101,752 against $359,824.</strong> Two salary sources publish a median for &quot;Growth Engineer&quot;. They are 3.5x apart. Glassdoor&#39;s figure rests on 38 self-reported salaries.</li>
+<li><strong>12.2% to 20.3% in six months.</strong> The share of SEO job ads naming AI search, GEO or AEO nearly doubled between December 2025 and June 2026, across a study of 328,650 marketing postings — and those postings carry a median $117,500 against $97,500 for ones that don&#39;t.</li>
+</ul>
+<h2>Open the artifact, not the summary</h2>
+<figure class="viz-embed">
+  <iframe src="/viz/growth-title-market/?parent=https%3A%2F%2Fmj2.pro%2Fblog%2Fgrowth-title-market%2F"
+    title="Ten job titles, two right answers: an interactive data mandala of US postings, published pay and dated signals for ten growth, SEO and AI-search titles"
+    loading="lazy" width="100%" height="1560"
+    style="display:block;width:100%;border:1px solid #d9e1ea;border-radius:10px"></iframe>
+  <noscript>
+    <img src="/viz/growth-title-market/poster-1080x1350.png" width="1080" height="1350"
+         alt="Data mandala of ten growth, SEO and AI-search job titles across three rings: exact-phrase US postings against LinkedIn's placeholder, the lowest and highest published median pay, and the dated signal for each title. Hub: Growth Operations Engineer, 0 exact-phrase postings against 10,000+ on LinkedIn, 14 September 2026."
+         style="display:block;width:100%;height:auto;border-radius:10px" />
+  </noscript>
+  <figcaption>
+    Click any of the ten titles for every board count, every published pay figure and every dated signal, then jump to its section. The sources drawer dates all 21.
+    <a href="/viz/growth-title-market/">Open the full-screen version</a> if the frame is cut off.
+  </figcaption>
+</figure><h2 id="title-director-of-seo">The floor</h2><p>Nineteen. That is how many US postings SimplyHired returned for the exact phrase <strong>&quot;director of SEO&quot;</strong> on 14 September 2026. Built In returned zero. <em>Reading: the title most often used for senior organic-search ownership is, as a literal string employers type, rare.</em></p>
+<h2>The ceiling</h2>
+<p>LinkedIn&#39;s public guest search returned 3,000+ for the same words on the same day — 158 times the exact-phrase count. Its own topic page, for the adjacent phrase, returned a much tighter 74. <em>Reading: <strong>job board counts</strong> are not one measurement. A round ceiling and a literal count answer different questions, and only one of them is countable.</em></p>
+<h2 id="title-growth-ops-engineer">The zero</h2><p>Nine of the ten titles have a floor. <strong>Growth Operations Engineer</strong> has none: SimplyHired states plainly that it could not find any such job in the United States, while LinkedIn showed 10,000+. <em>Reading: this is job-description language, not a title people are hired under. It describes work accurately and costs you the search.</em></p>
+<h2 id="title-growth-engineer">The disagreement</h2><p>Ask what a <strong>growth engineer salary</strong> is and you get four answers. ZipRecruiter returns $101,752 on one of its own URL slugs and $146,868 on another. GTME Pulse, working from Levels.fyi, lands at $160,000. Glassdoor says $359,824 from a sample of 38. End to end, the published band for this one title runs $84,000 to $503,754. <em>Reading: do not average these. The spread is the finding, and it is widest where the title is least standardised.</em></p>
+<h2 id="title-gtm-engineer">The one that is actually growing</h2><p><strong>GTM Engineer jobs</strong> are the only title in the set with a growth rate measured on the title itself and quotable from its live source. GTME Pulse states, as the page reads today: &quot;GTM Engineer job postings grew 205% year-over-year from 2024 to 2025,&quot; and &quot;As of March 2026, there are more than 3,000 open GTM Engineer roles across major job boards.&quot; (Rome Thorndike, March 2026; re-checked 14 September 2026.) Its exact-phrase floor is 146, the second-highest here. <em>Reading: when the floor and the trend agree, the title is real.</em></p>
+<h2 id="title-head-of-aeo">The payoff</h2><p>Now the number that pays for the other five. In a study of 328,650 marketing postings collected over twelve months, 720 carried AI search, GEO or AEO directly in the job title — and 28% of those were Director, Head, VP, Principal or Lead, against 15% for standard SEO titles. Across 13,779 postings with advertised salaries, naming AI-search skills was worth a 20.5% median premium.</p>
+<p><em>Reading: <strong>AI search job titles</strong> are not a junior specialism being bolted onto marketing. They are being hired at the level where budget is set, and they pay more before anyone has agreed what to call them. That is the window, and windows close when the vocabulary settles.</em></p>
+<h2 id="how-to-read">How to read these numbers</h2><ul>
+<li><strong>The LinkedIn figures are placeholders, not counts.</strong> All ten titles returned a round &quot;X,000+&quot; from the public guest search, including titles with one real posting or none. They do not track rarity, so every gap shown is a lower bound rather than a measurement.</li>
+<li><strong>The floor is a literal count.</strong> Exact phrase, United States, one board, one day. A zero is a real zero, and a floor, not a total: adjacent titles are not in it.</li>
+<li><strong>Nothing is averaged.</strong> Where sources disagree on pay, the artifact shows both ends and prints the distance. Two titles have no title-specific pay data at all; their figures are proxies from an adjacent title, marked <strong>thin data</strong> wherever they appear.</li>
+<li><strong>There is no Google Trends data here.</strong> The public explore page rate-limited during the research window, so relative interest is absent from every title rather than present for some.</li>
+<li><strong>One count is not a count of titles.</strong> The Head of AEO/GEO figure of 435 counts postings where AEO and GEO both appear anywhere, so it is labelled <strong>mentions, not titles</strong> and held out of the ranking rather than allowed to top it.</li>
+<li><strong>One claim was withdrawn, not caveated.</strong> A widely-repeated 127% growth figure for RevOps traces to one trade article citing a report with no link and no methodology. That dataset could not be reached, so the figure appears nowhere on the artifact.</li>
+<li><strong>Two measurements and a signal.</strong> The outer rings count how many jobs exist and what they pay, each as a floor and a ceiling. The inner ring is a dated signal, not a measurement: one title in ten has a growth rate measured on the title itself, one has a dated count of AI-search titles, four carry a whole-category figure, and the other four say not measured, or claim pulled.</li>
+</ul>
+<h2>FAQ</h2>
+<h3>How many Director of SEO jobs are open in the US?</h3>
+<p>Nineteen matched the exact phrase on SimplyHired on 14 September 2026, and zero on Built In. LinkedIn&#39;s guest search showed 3,000+ for the same words, but that is a loose keyword match, not a title count. Treat the literal count as a floor and the keyword count as an upper bound on a different question.</p>
+<h3>Why do salary sites disagree about growth engineer pay?</h3>
+<p>Because they are measuring different populations under one label. ZipRecruiter&#39;s national averages, Glassdoor&#39;s self-reported sample of 38, and Levels.fyi-derived total compensation including equity are three different things. For Growth Engineer they land $101,752, $359,824 and $160,000. Read the band, not a single figure.</p>
+<h3>Which growth or AI-search job title is actually growing?</h3>
+<p>GTM Engineer is the only one in this set with a growth rate measured on the title itself. Its cited source states that GTM Engineer postings &quot;grew 205% year-over-year from 2024 to 2025&quot; and that &quot;as of March 2026, there are more than 3,000 open GTM Engineer roles across major job boards&quot; (GTME Pulse, March 2026, re-checked 14 September 2026). Six of the ten titles have no dated growth figure at all, and three of the rest measure a whole category rather than the title.</p>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How many Director of SEO jobs are open in the US?","acceptedAnswer":{"@type":"Answer","text":"Nineteen matched the exact phrase on SimplyHired on 14 September 2026, and zero on Built In. LinkedIn's guest search showed 3,000+ for the same words, but that is a loose keyword match, not a title count. Treat the literal count as a floor and the keyword count as an upper bound on a different question."}},{"@type":"Question","name":"Why do salary sites disagree about growth engineer pay?","acceptedAnswer":{"@type":"Answer","text":"Because they are measuring different populations under one label. ZipRecruiter's national averages, Glassdoor's self-reported sample of 38, and Levels.fyi-derived total compensation including equity are three different things. For Growth Engineer they land $101,752, $359,824 and $160,000. Read the band, not a single figure."}},{"@type":"Question","name":"Which growth or AI-search job title is actually growing?","acceptedAnswer":{"@type":"Answer","text":"GTM Engineer is the only one in this set with a growth rate measured on the title itself. Its cited source states that GTM Engineer postings \\"grew 205% year-over-year from 2024 to 2025\\" and that \\"as of March 2026, there are more than 3,000 open GTM Engineer roles across major job boards\\" (GTME Pulse, March 2026, re-checked 14 September 2026). Six of the ten titles have no dated growth figure at all, and three of the rest measure a whole category rather than the title."}}]}</script>
+<h2>Sources</h2>
+<p>Every figure above, and every figure on the artifact, carries its source and retrieval date in the artifact&#39;s sources drawer. The load-bearing ones:</p>
+<ul>
+<li>SimplyHired, exact-phrase US job search, retrieved 14 September 2026 — <a href="https://www.simplyhired.com/">https://www.simplyhired.com/</a></li>
+<li>LinkedIn, public guest job search, retrieved 14 September 2026 — <a href="https://www.linkedin.com/jobs/">https://www.linkedin.com/jobs/</a></li>
+<li>Built In, keyword job search, retrieved 14 September 2026 — <a href="https://builtin.com/jobs">https://builtin.com/jobs</a></li>
+<li>SearchForHire, &quot;The Future of Search: 5 Experts and 328,650 Job Postings,&quot; 15 July 2026 — <a href="https://www.searchforhire.com/blog/the-future-of-search-5-experts-and-328650-job-postings-on-what-happens-next/">https://www.searchforhire.com/blog/the-future-of-search-5-experts-and-328650-job-postings-on-what-happens-next/</a></li>
+<li>Bloomberry, &quot;I analyzed 1000 GTM Engineering jobs,&quot; published 3 October 2025, updated 25 January 2026 — <a href="https://bloomberry.com/blog/i-analyzed-1000-gtm-engineering-jobs-here-is-what-i-learned/">https://bloomberry.com/blog/i-analyzed-1000-gtm-engineering-jobs-here-is-what-i-learned/</a></li>
+<li>GTME Pulse, job-market analysis 2026 — <a href="https://gtmepulse.com/insights/job-market-2026/">https://gtmepulse.com/insights/job-market-2026/</a></li>
+<li>ZipRecruiter salary pages, August 2026 — <a href="https://www.ziprecruiter.com/Salaries/">https://www.ziprecruiter.com/Salaries/</a></li>
+<li>Glassdoor salary pages, May 2026 — <a href="https://www.glassdoor.com/Salaries/">https://www.glassdoor.com/Salaries/</a></li>
+<li>Levels.fyi, GTM Engineer, last updated 14 September 2026 — <a href="https://www.levels.fyi/t/gtm-engineer">https://www.levels.fyi/t/gtm-engineer</a></li>
+<li>Kaleigh Moore, &quot;AEO Job Openings in 2026,&quot; 6 July 2026 — <a href="https://www.kaleighmoore.com/blog/2026/7/6/ai-search-jobs">https://www.kaleighmoore.com/blog/2026/7/6/ai-search-jobs</a></li>
+<li>Sloane Staffing, &quot;AEO/GEO Hiring in 2026,&quot; 11 August 2026 — <a href="https://www.sloane-staffing.com/insights/aeo-geo-hiring-2026/">https://www.sloane-staffing.com/insights/aeo-geo-hiring-2026/</a></li>
+<li>The Pragmatic Engineer, &quot;What is Growth Engineering?&quot;, 20 March 2025 — <a href="https://newsletter.pragmaticengineer.com/p/what-is-growth-engineering">https://newsletter.pragmaticengineer.com/p/what-is-growth-engineering</a></li>
+</ul>
+<p>The remaining nine sources — Salary.com, Robert Half, Growth.Talent, Agents for Hire, CRM Today, JobsPikr, ALM Corp citing Semrush, GTM 8020 and Kalungi — are listed with dates inside the artifact.</p>
+<p><strong>Share this with someone who is about to pick a job title for their resume.</strong> Send them the living version and let them check their own title: <a href="/viz/growth-title-market/">/viz/growth-title-market/</a></p>`,
+  },
+  {
+    slug: "b2b-vs-b2c-by-vertical",
+    title: "In Education, Winning a B2B Customer Costs 7.3× More Than Winning a B2C One",
+    author: "Mitchell Miller",
+    date: "September 24, 2026",
+    status: "published",
+    teaser: "The widest same-vertical acquisition-cost gap in this dataset is 7.3×. The narrowest is 1.3×. Both are \"B2B vs B2C.\" Pick a vertical in the living artifact and watch the number that's actually true for your market.",
+    metaDescription: "Interactive B2B vs B2C benchmarks by industry: acquisition cost, conversion, paid search and email — real 2026 data, sourced, gaps shown honestly.",
+    contentHtml: `<p><em>By Mitchell Miller · ~7 min read · growth benchmarks / applied data</em></p>
+<h2>TL;DR</h2>
+<ul>
+<li><strong>Acquisition cost, same vertical, both editions of the same report:</strong> the B2B/B2C gap runs from <strong>1.3×</strong> in ecommerce ($86 vs $66) to <strong>7.3×</strong> in education ($1,143 vs $156). Across every vertical this dataset can match, not one number describes it.</li>
+<li><strong>&quot;Conversion rate&quot; is at least three numbers wearing one label.</strong> The SaaS/software category converts at 3.8% on a landing page (Unbounce) and 7.6% site-wide (Ruler Analytics) — both true, neither publisher splits the figure by B2B vs. B2C, and they&#39;re not the same measurement anyway.</li>
+<li><strong>Reviews aren&#39;t the B2C-only habit they&#39;re assumed to be.</strong> 86% of B2B software buyers turned to peer-review sites to reach a final decision, per G2&#39;s 2021 survey; roughly 93% of consumers do the same before an ordinary purchase. The gap most people assume is there mostly isn&#39;t.</li>
+</ul>
+<h2>See it by vertical, not by average</h2>
+<figure class="viz-embed">
+  <iframe src="/viz/b2b-vs-b2c-by-vertical/?parent=https%3A%2F%2Fmj2.pro%2Fblog%2Fb2b-vs-b2c-by-vertical%2F"
+    title="B2B vs B2C by vertical — the cost to win one customer, ten verticals, three depths"
+    loading="lazy" width="100%" height="2150"
+    style="display:block;width:100%;border:0;"></iframe>
+  <noscript>
+    <img src="/viz/b2b-vs-b2c-by-vertical/poster-1080x1350.png" width="1080" height="1350" alt="Fractal-stack infographic. Winning one customer costs 7.3 times more for B2B than for B2C in Education ($1,143 vs $156). Ten verticals ranked by that gap, from 7.3x to 1.3x, with three that have no ratio. Education is opened: paid search, site conversion and email click rate are single figures their sources do not split; touchpoints are cross-industry; review reliance, landing-page conversion and sales cycle have no source." style="width:100%;height:auto;">
+  </noscript>
+  <figcaption><strong>Click a vertical: see what it costs to win a customer on each side.</strong> Every number carries its source and date; real gaps show as "no source," never a guess. <a href="/viz/b2b-vs-b2c-by-vertical/">Open the full-screen version</a> if the frame is cut off.</figcaption>
+</figure><h2>Acquisition cost: the range hiding inside the average</h2>
+<p>The most-repeated version of this stat compares two B2B figures from different industries: a B2B education customer costs <strong>$1,143</strong> to acquire; a B2B wholesale/ecommerce customer costs <strong>$86</strong> — same buyer type, same job, &quot;get a business to buy,&quot; a 13× spread between the two priciest and cheapest verticals in First Page Sage&#39;s entire B2B report. That&#39;s real, and it&#39;s the widest gap in the B2B column. What it is <em>not</em> is a B2B-vs-B2C comparison, whatever the shorthand version implies — both numbers are First Page Sage&#39;s B2B figures. The actual B2C ecommerce number is separate and lower still: $66.</p>
+<p>Do the same-vertical version instead — First Page Sage&#39;s B2B and B2C reports, matched industry to industry — and the picture changes. Ecommerce: $86 vs $66, <strong>1.3×</strong>. Real estate: $791 vs $165, <strong>4.8×</strong>. Education: $1,143 vs $156, <strong>7.3×</strong>. Healthcare has no B2B figure in either report at all — a real gap, not a rounding error. Pick your own vertical in the artifact above; the number that matters is the one for your market, not the dataset&#39;s extreme.</p>
+<h2>Conversion rate isn&#39;t one number</h2>
+<p>This is the trap that catches the most benchmark decks. &quot;SaaS converts at 3.8%&quot; (Unbounce&#39;s SaaS landing-page category, 2024 data) and &quot;software converts at 7.6%&quot; (Ruler Analytics&#39; Software category, full site, 2026) are not in disagreement — they&#39;re answering different questions, and neither publisher splits its figure by B2B vs. B2C in the first place. One measures a single landing page; the other measures every visit to the whole site. Layer in paid-search conversion (a third, separate figure) and you get three legitimate &quot;conversion rate&quot; numbers per vertical, and a lot of decks that quietly average two of them into a number no single report actually measured.</p>
+<h2>Paid search: the same click costs 4× more in one vertical than another</h2>
+<p>WordStream&#39;s 2026 Google Ads benchmarks (13,000+ campaigns) put legal services at <strong>$131.63</strong> cost per lead against travel&#39;s <strong>$44.70</strong> — a gap driven almost entirely by cost-per-click ($9.87 vs $2.14), not by how often the ad gets clicked or the click converts. Three verticals in this dataset — SaaS, manufacturing, nonprofit — have no dedicated paid-search category at all in WordStream&#39;s 23-industry list. The artifact shows that as &quot;no source,&quot; not a zero.</p>
+<h2>The sales cycle that goes unmeasured on the B2C side</h2>
+<p>B2B sales-cycle length gets tracked in days by name — 60 for SaaS, 195 for financial services (sources disagree here by more than 2×; both are secondary and directional only), 162 for nonprofit B2B sales. B2C doesn&#39;t get the same treatment: no benchmark report in this pass quantifies &quot;B2C sales cycle&quot; in days the way B2B reports do, because consumer purchases are mostly treated as near-instant. That absence is itself the finding, not a missed search.</p>
+<p>Touchpoints tell a similar story at a different scale: published B2B figures range from <strong>27 to 417</strong> depending on deal size and how &quot;touchpoint&quot; is defined, against roughly <strong>6</strong> for a consumer purchase. No single number is &quot;the&quot; B2B touchpoint count — the spread is the fact.</p>
+<h2>By vertical</h2>
+<p>The artifact&#39;s ten verticals in its order, ranked by the acquisition-cost gap. Every figure carries its source, year and funnel stage; &quot;industry-wide&quot; means the source does not split B2B from B2C. Touchpoints are cross-industry, so they stay in the sales-cycle section above.</p>
+<h3 id="vertical-education">Education</h3><p>Winning one customer costs $1,143 on the B2B side and $156 on the B2C side, a 7.3× gap (First Page Sage, B2B edition 2026, B2C edition 2025; full funnel). The B2C figure is consumer higher-ed, so part of that gap is a different buyer. Industry-wide: paid search, impression to lead, runs 7.56% click-through, $4.81 per click and $77.48 per lead (WordStream/LocaliQ, 2026); site conversion, any visit, is 6.3% (Ruler Analytics, 2026); email click rate, nurture, is 3.02% (Mailchimp, 2023 data). No source: landing-page conversion, sales cycle, review reliance.</p>
+<h3 id="vertical-financial-services">Financial services</h3><p>Both First Page Sage editions list &quot;Financial Services&quot;: $784 per B2B customer, $160 per B2C customer, 4.9× (2026 and 2025; full funnel). B2B only: a 195-day sales cycle, first contact to close, from 2026 secondary roundups that disagree (another cites 9–18 months); B2C: no source. Industry-wide: paid search 9.83% click-through, $3.39 per click, $74.44 per lead (WordStream/LocaliQ, 2026); landing-page conversion 8.4% (Unbounce, 2023–24 data, lower confidence); site conversion 6.3% (Ruler Analytics, 2026); email click rate 2.78% (Mailchimp, 2023). Review reliance: no source.</p>
+<h3 id="vertical-real-estate">Real estate</h3><p>&quot;Real Estate&quot; on both sides of First Page Sage: $791 per B2B customer, $165 per B2C customer, 4.8× (2026 and 2025 editions; full funnel). Industry-wide: paid search, impression to lead, runs 7.61% click-through, $3.22 per click and $102.51 per lead (WordStream/LocaliQ, 2026); site conversion, any visit, is 2.8% (Ruler Analytics, 2026). Promodo&#39;s 4.7% measures visitor to lead, a different stage, so it stays out of the chart. No source: landing-page conversion, sales cycle, email click rate, review reliance.</p>
+<h3 id="vertical-travel-hospitality">Travel &amp; hospitality</h3><p>$683 to win a B2B customer against $228 for a B2C one, 3.0× (First Page Sage, 2026 and 2025 editions; full funnel), but the two sides are different sub-industries, Aviation and Hotels &amp; Resorts, so read the ratio directionally. Industry-wide: paid search, impression to lead, runs 9.32% click-through, $2.14 per click and $44.70 per lead (WordStream/LocaliQ, 2026); site conversion, any visit, is 1.9%, the lowest of Ruler Analytics&#39; 13 industries (2026). No source: landing-page conversion, sales cycle, email click rate, review reliance.</p>
+<h3 id="vertical-professional-services">Professional services</h3><p>Legal services on both sides: $749 per B2B customer, $323 per B2C customer, 2.3× (First Page Sage, 2026 and 2025 editions; full funnel). Industry-wide: attorney paid search, impression to lead, runs 5.87% click-through, $9.87 per click and $131.63 per lead, the highest cost per click and per lead of WordStream/LocaliQ&#39;s 23 industries (2026); landing-page conversion is 6.1% (Unbounce, 2023–24 data); site conversion, any visit, 6.1% (Ruler Analytics, 2026); email click rate 4.9% (a 2026 aggregator, lower confidence). No source: sales cycle, review reliance.</p>
+<h3 id="vertical-saas-software">SaaS &amp; software</h3><p>$239 per B2B SaaS customer against $166 for consumer SaaS, 1.4× (First Page Sage, 2026 and 2025 editions; full funnel). B2B only: 86% of B2B software buyers used peer-review sites to reach a final verdict (G2 survey, 2021; pre-click research), and the sales cycle runs about 60 days, first contact to close (2026 roundups); B2C: no source for either. Industry-wide: landing-page conversion is 3.8% (Unbounce, 2023–24 data) and site conversion, any visit, 7.6% (Ruler Analytics, 2026). No source: paid search, email click rate.</p>
+<h3 id="vertical-ecommerce-retail">Ecommerce &amp; retail</h3><p>$86 per B2B customer, First Page Sage&#39;s wholesale and ordering-platform figure, against $66 in B2C ecommerce, 1.3× (2026 and 2025 editions; full funnel). B2B only: a 70-day wholesale sales cycle, first contact to close (2026 roundups); B2C: no source. Industry-wide: paid search 8.28% click-through, $4.14 per click, $49.40 per lead (WordStream/LocaliQ, 2026); landing-page conversion 4.2% (Unbounce, 2023–24 data); site conversion 2.4% (Ruler Analytics, 2026); email click rate 1.74% (Mailchimp, 2023). Review reliance: no source.</p>
+<h3 id="vertical-healthcare">Healthcare</h3><p>No ratio here. First Page Sage&#39;s B2B edition (2026) has no healthcare category, so the B2B side is no source; B2C medical practices cost $148 per customer (2025 edition; full funnel). Industry-wide: paid search for physicians and surgeons, impression to lead, runs 6.61% click-through, $4.76 per click and $40.04 per lead, the lowest cost per lead here (WordStream/LocaliQ, 2026); site conversion, any visit, is 2.3% (Ruler Analytics, 2026). No source: landing-page conversion, sales cycle, email click rate, review reliance.</p>
+<h3 id="vertical-manufacturing-industrial">Manufacturing &amp; industrial</h3><p>$723 to win a B2B manufacturing customer (First Page Sage B2B edition, 2026; full funnel). The B2C edition has no manufacturing category, so the consumer side is no source and there is no ratio. The only other figure is industry-wide: site conversion, any visit, is 4.9% for Ruler Analytics&#39; closest proxy, construction and engineering (2026). No source: paid search, landing-page conversion, sales cycle, email click rate, review reliance.</p>
+<h3 id="vertical-nonprofit">Nonprofit</h3><p>Neither First Page Sage edition covers nonprofits, so both sides of acquisition cost are no source; the sector measures cost per donor instead. B2B only: selling to nonprofits takes about 162 days, first contact to close, the longest cycle cited (2026 roundups); B2C: no source. Industry-wide: 1.6% of site visitors donated (M+R, 2026, a different method), and the email click rate is 3.27% (Mailchimp, 2023 data), which M+R splits into 0.59% for fundraising asks and 2.3% for advocacy. No source: paid search, landing-page conversion, review reliance.</p>
+<h2>How to read these numbers</h2>
+<ul>
+<li><strong>Three funnel stages, never one axis.</strong> Landing-page conversion (a single page), full-site conversion (any visit, anywhere), and paid-search conversion are different measurements. This piece and the artifact keep them in separate rows on purpose.</li>
+<li><strong>Report years and sample sizes, because they vary a lot.</strong> Ruler Analytics: 110M+ sessions, 13 industries, 2026. Unbounce: 41,000 landing pages / 464M visitors, data through mid-2024. WordStream/LocaliQ: 13,000+ US Search campaigns, Apr 2025–Mar 2026. First Page Sage: anonymized client-analytics accounts, B2B edition data through Aug 2025 (published Jan 2026), B2C edition from 103 clients (published Jul 2025). Mailchimp&#39;s benchmark page was fetched September 2026 but states its underlying data was last updated December 2023 — still their current published figure, cited as such.</li>
+<li><strong>&quot;Overall&quot; means the source didn&#39;t split B2B from B2C.</strong> Most conversion and paid-search figures here are industry-wide, not buyer-type-specific — marked plainly, never invented.</li>
+</ul>
+<h2>FAQ</h2>
+<h3>Is B2B customer acquisition cost really higher than B2C?</h3>
+<p>Usually, but the size of the gap depends entirely on the vertical — from roughly 1.3× in ecommerce to more than 7× in education, in matched First Page Sage data. A single blended &quot;B2B costs more&quot; number erases that range.</p>
+<h3>Why do B2B and B2C conversion rate benchmarks disagree so much?</h3>
+<p>Mostly because &quot;conversion rate&quot; describes at least three different funnel stages — a landing page, a full site, or a paid-search click — that different publishers measure differently. Two accurate numbers for the same vertical can look contradictory if you don&#39;t check which stage each one is measuring.</p>
+<h3>Do B2B buyers read reviews as much as B2C shoppers?</h3>
+<p>In the one vertical with sourced data on both sides, yes, almost as much: 86% of B2B software buyers turned to peer-review sites before a final decision (G2&#39;s 2021 B2B Software Behavior Survey) versus roughly 93% of consumers generally. The &quot;reviews are a B2C thing&quot; assumption doesn&#39;t hold up where it can actually be checked.</p>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is B2B customer acquisition cost really higher than B2C?","acceptedAnswer":{"@type":"Answer","text":"Usually, but the size of the gap depends entirely on the vertical — from roughly 1.3× in ecommerce to more than 7× in education, in matched First Page Sage data. A single blended \\"B2B costs more\\" number erases that range."}},{"@type":"Question","name":"Why do B2B and B2C conversion rate benchmarks disagree so much?","acceptedAnswer":{"@type":"Answer","text":"Mostly because \\"conversion rate\\" describes at least three different funnel stages — a landing page, a full site, or a paid-search click — that different publishers measure differently. Two accurate numbers for the same vertical can look contradictory if you don't check which stage each one is measuring."}},{"@type":"Question","name":"Do B2B buyers read reviews as much as B2C shoppers?","acceptedAnswer":{"@type":"Answer","text":"In the one vertical with sourced data on both sides, yes, almost as much: 86% of B2B software buyers turned to peer-review sites before a final decision (G2's 2021 B2B Software Behavior Survey) versus roughly 93% of consumers generally. The \\"reviews are a B2C thing\\" assumption doesn't hold up where it can actually be checked."}}]}</script>
+<p><strong>Share this with someone about to build a &quot;B2B vs B2C&quot; slide from one benchmark study that doesn&#39;t say which funnel stage it measured.</strong></p>
+<h2>Sources</h2>
+<ul>
+<li>First Page Sage, <a href="https://firstpagesage.com/reports/average-customer-acquisition-cost-cac-by-industry-b2b-edition-fc/">Average Customer Acquisition Cost (CAC) by Industry: B2B Edition</a> (Jan 2026) and <a href="https://firstpagesage.com/reports/average-cac-by-industry-b2c-edition/">B2C Edition</a> (Jul 2025).</li>
+<li>Ruler Analytics, <a href="https://www.ruleranalytics.com/blog/insight/conversion-rate-by-industry/">Conversion Rate Benchmarks 2026</a>.</li>
+<li>Unbounce, <a href="https://unbounce.com/average-conversion-rates-landing-pages/">Conversion Benchmark Report</a>.</li>
+<li>WordStream (LocaliQ), <a href="https://www.wordstream.com/blog/2026-google-ads-benchmarks">Google Ads Benchmarks 2026</a>.</li>
+<li>Mailchimp, <a href="https://mailchimp.com/resources/email-marketing-benchmarks/">Email Marketing Benchmarks by Industry</a>.</li>
+<li>M+R Benchmarks 2026, <a href="https://mrbenchmarks.com/email-messaging/">Email &amp; Messaging</a>.</li>
+<li>G2 2021 B2B Software Behavior Survey, via <a href="https://www.demandgenreport.com/industry-news/new-research-86-of-b2b-software-buyers-rely-on-third-party-reviews-when-making-a-purchase-decision/7019/">DemandGen Report</a> (B2B review reliance; corrected Sept 14, 2026).</li>
+</ul>`,
+  },
+  {
+    slug: "statistician-vs-data-scientist",
+    title: "Statistician vs Data Scientist — and Two Jobs With No BLS Code",
+    author: "Mitchell Miller",
+    date: "September 24, 2026",
+    status: "published",
+    teaser: "Statistician and data scientist both carry a BLS occupation code, a wage survey and a 2035 growth projection. Growth engineer and AI engineer carry neither. Real numbers, an interactive comparison, and the gaps shown rather than guessed.",
+    metaDescription: "Real BLS pay, employment and 2035-growth data for statistician vs data scientist, plus the two roles with no official occupation code.",
+    contentHtml: `<p><em>By Mitchell Miller · ~4 min read · labor data / applied statistics</em></p>
+<h2>TL;DR</h2>
+<ul>
+<li>Data scientist employment is projected to grow <strong>35%</strong> from 2025–2035 — more than 3x statisticians&#39; <strong>11%</strong>. (<a href="https://www.bls.gov/ooh/math/data-scientists.htm">BLS Occupational Outlook Handbook</a>, 2025 edition)</li>
+<li>Data scientists out-earn statisticians by <strong>$14,600</strong> a year at the national median (<a href="https://www.bls.gov/ooh/math/data-scientists.htm">$120,230</a> vs <a href="https://www.bls.gov/ooh/math/mathematicians-and-statisticians.htm">$105,650</a>) — but that flips inside computer systems design: statisticians <strong>$167,180</strong>, data scientists <strong>$132,380</strong> (same two BLS Occupational Outlook Handbook pages, industry pay tables).</li>
+<li><strong>Growth engineer and AI engineer have no BLS occupation code at all</strong> — no SOC classification, no wage survey, no growth projection — even though AI engineer out-posts every other title on every job board checked. (<a href="https://www.bls.gov/soc/notices/2022/finding_soc_code.htm">BLS SOC lookup guidance</a>)</li>
+</ul>
+<figure class="viz-embed">
+  <iframe src="/viz/statistician-vs-data-scientist/?parent=https%3A%2F%2Fmj2.pro%2Fblog%2Fstatistician-vs-data-scientist%2F"
+          title="Two roads into data: statistician vs data scientist journey map, with growth engineer and AI engineer as the two titles that have no BLS code"
+          loading="lazy" width="100%" height="1000"
+          style="display:block;width:100%;border:0;border-radius:10px;background:#FBF3E4"></iframe>
+  <noscript>
+    <img src="/viz/statistician-vs-data-scientist/poster-1080x1350.png" width="1080" height="1350"
+         alt="Journey map: statistician and data scientist roads pass five stops (education gate, pay, employment and growth, tools, live postings) to a journey's end reading prove why versus predict what next; growth engineer and AI engineer end at signposts marked no BLS code."
+         style="display:block;width:100%;height:auto;border-radius:10px" />
+  </noscript>
+  <figcaption>Click a stop on either road to jump to its section. <a href="/viz/statistician-vs-data-scientist/">Open the full-screen version</a> if the frame is cut off.</figcaption>
+</figure><h2 id="role-no-bls-code">The gap in the data</h2><p>Statistician and data scientist each carry a BLS SOC code, an annual OEWS wage table and an Occupational Outlook Handbook page. Growth engineer and AI engineer carry neither — no code, no wage survey, no official growth projection exists for either title, confirmed against BLS&#39;s own SOC-lookup guidance. That&#39;s not a gap in this research; it&#39;s a gap in the federal government&#39;s occupational taxonomy. The map above shows it: both titles are dashed side paths that end at a &quot;no BLS code&quot; signpost, while statistician and data scientist run through all five stops. Click a stop on either road to jump to its section.</p>
+<h2 id="role-pay">What each role pays</h2><p>Data scientists earn <a href="https://www.bls.gov/ooh/math/data-scientists.htm"><strong>$120,230</strong></a> a year at the national median against statisticians&#39; <a href="https://www.bls.gov/ooh/math/mathematicians-and-statisticians.htm"><strong>$105,650</strong></a> (BLS Occupational Outlook Handbook, 2025). But &quot;the&quot; data-scientist salary depends on which 2025 survey you read: Stack Overflow&#39;s global sample says <strong>$82,910</strong>; a US-only re-cut of that dataset says <strong>$160,000</strong>; BLS lands between. (<a href="https://survey.stackoverflow.co/2025/work">2025 Stack Overflow Developer Survey</a>) None of those is wrong — different scopes, not different facts, and averaging them would hide that. Growth engineer has no compensation survey tracking the title directly at all.</p>
+<h2 id="role-growth">Who's growing faster</h2><p>Data scientist employment is projected to grow <strong>35%</strong> from 2025 to 2035; statistician, <strong>11%</strong>. (<a href="https://www.bls.gov/ooh/math/mathematicians-and-statisticians.htm">BLS Employment Projections</a>) Growth engineer and AI engineer have no projection to cite — the closest BLS-tracked cousin to &quot;AI engineer,&quot; Computer and Information Research Scientists, is projected at 22%, and it is explicitly a proxy, not a measurement of AI engineer itself.</p>
+<h2 id="role-education">The education gate</h2><p><strong>62%</strong> of statisticians hold a master&#39;s degree as their highest credential; data scientists split <strong>48%</strong> bachelor&#39;s and <strong>44%</strong> master&#39;s — a materially lower graduate bar. (<a href="https://www.onetonline.org/link/summary/15-2051.00">O*NET OnLine</a>) Neither growth engineer nor AI engineer has an O*NET occupational profile to pull an education distribution from.</p>
+<h2 id="role-practice">Prove why, or predict what's next</h2><p>Underneath the pay and growth numbers is a practice difference that explains most of the rest. A statistician&#39;s work is inference: design the study, quantify the uncertainty, defend the result under scrutiny — usually against data someone else already curated. A data scientist&#39;s work is prediction: build and ship a model optimized for forecast accuracy, usually after cleaning the messy data themselves. (<a href="https://yardstick.team/compare-roles/what-is-the-difference-between-data-scientist-and-statistician">Yardstick</a>) One is hypothesis-driven; the other, exploratory. (<a href="https://www.indeed.com/career-advice/finding-a-job/data-scientist-vs-statistician">Indeed Career Advice</a>) Prove why the number moved, or predict what moves it next — that split, more than the job titles, is what the pay and growth gaps above are actually pricing.</p>
+<h2 id="role-methods">How to read these numbers</h2><p>Two BLS products disagree on purpose, not by error. Occupational Outlook Handbook employment counts run 5–8% higher than the raw OEWS survey estimate for the same occupation-year — OOH&#39;s Employment Projections program adjusts the OEWS number rather than repeating it, so both are legitimate. Survey pay figures carry the same caveat at a larger scale: a self-reported developer survey, a US-only cut of it, and a government wage census measure overlapping but different populations — why data-scientist pay above spans <strong>$82,910</strong> to <strong>$160,000</strong> before BLS&#39;s figure even enters the range. The artifact&#39;s sources drawer labels every number with its specific product and date rather than blending them into one line.</p>
+<h2>FAQ</h2>
+<h3>Is a data scientist the same as a statistician?</h3>
+<p>No. Statisticians work hypothesis-driven inference on curated data; data scientists work exploratory prediction on data they usually clean themselves, per BLS occupational data and Indeed/Yardstick&#39;s role comparisons.</p>
+<h3>Which pays more, statistician or data scientist?</h3>
+<p>Data scientist, at the national median (<a href="https://www.bls.gov/ooh/math/data-scientists.htm">$120,230</a> vs <a href="https://www.bls.gov/ooh/math/mathematicians-and-statisticians.htm">$105,650</a>) — but statistician pays more specifically inside computer systems design ($167,180 vs $132,380, same two BLS Occupational Outlook Handbook pages&#39; industry tables).</p>
+<h3>Do growth engineer and AI engineer have official job classifications?</h3>
+<p>No. Neither has a BLS SOC occupation code, wage table or growth projection; job-board volume and practitioner surveys are the only available signal for either title.</p>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is a data scientist the same as a statistician?","acceptedAnswer":{"@type":"Answer","text":"No. Statisticians work hypothesis-driven inference on curated data; data scientists work exploratory prediction on data they usually clean themselves, per BLS occupational data and Indeed/Yardstick's role comparisons."}},{"@type":"Question","name":"Which pays more, statistician or data scientist?","acceptedAnswer":{"@type":"Answer","text":"Data scientist, at the national median ( $120,230 vs $105,650 ) — but statistician pays more specifically inside computer systems design ($167,180 vs $132,380, same two BLS Occupational Outlook Handbook pages' industry tables)."}},{"@type":"Question","name":"Do growth engineer and AI engineer have official job classifications?","acceptedAnswer":{"@type":"Answer","text":"No. Neither has a BLS SOC occupation code, wage table or growth projection; job-board volume and practitioner surveys are the only available signal for either title."}}]}</script>
+<h2>Sources</h2>
+<ul>
+<li>BLS Occupational Outlook Handbook — <a href="https://www.bls.gov/ooh/math/mathematicians-and-statisticians.htm">Statisticians/Mathematicians</a> · <a href="https://www.bls.gov/ooh/math/data-scientists.htm">Data Scientists</a> · <a href="https://www.bls.gov/ooh/computer-and-information-technology/computer-and-information-research-scientists.htm">Computer and Information Research Scientists</a> — 2025 edition, modified 2026-08-27</li>
+<li><a href="https://www.bls.gov/news.release/ocwage.t01.htm">BLS Occupational Employment and Wage Statistics, Table 1</a> — news release USDL-26-0725, May 2025</li>
+<li>O*NET OnLine — <a href="https://www.onetonline.org/link/summary/15-2041.00">Statisticians 15-2041.00</a> · <a href="https://www.onetonline.org/link/summary/15-2051.00">Data Scientists 15-2051.00</a></li>
+<li><a href="https://www.bls.gov/soc/notices/2022/finding_soc_code.htm">BLS SOC-code lookup guidance</a> — no SOC code for growth engineer or AI engineer</li>
+<li><a href="https://survey.stackoverflow.co/2025/work">2025 Stack Overflow Developer Survey</a> · <a href="https://techrecruiting.io/en/stack-overflow-developer-survey-2025-usa/">US-only re-cut, techrecruiting.io</a> (secondary analysis)</li>
+<li><a href="https://www.indeed.com/career-advice/finding-a-job/data-scientist-vs-statistician">Data Scientist vs. Statistician, Indeed Career Advice</a> · <a href="https://yardstick.team/compare-roles/what-is-the-difference-between-data-scientist-and-statistician">Yardstick role comparison</a></li>
+<li>Job-board snapshots, live 2026-09-14: <a href="https://www.indeed.com/jobs?q=%22data+scientist%22&l=">Indeed</a> · <a href="https://builtin.com/jobs?search=AI%20engineer">Built In</a> · <a href="https://wellfound.com/role/r/ai-engineer">Wellfound</a></li>
+</ul>
+<p><strong>Share this with someone choosing between a statistics track and a data-science track — or writing the job description for either.</strong></p>`,
+  },
+  {
     slug: "search-results-by-intent",
     title: "Search Results by Intent: Five Pages and the Zero-Click Future SEOs Already Measured",
     author: "Mitchell Miller",

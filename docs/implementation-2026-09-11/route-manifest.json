@@ -539,6 +539,84 @@
       ]
     },
     {
+      "path": "/blog/optimizing-for-ads-in-free-llm-answers/",
+      "kind": "added",
+      "since": "post-2026-09-24-wave-2",
+      "title": "Ads in Free LLM Answers: What to Buy, What Gets Cited",
+      "minText": 1500,
+      "expected": [
+        "Ads in Free LLM Answers: What to Buy, What Gets Cited",
+        "TL;DR: three numbers",
+        "Can you buy ads inside ChatGPT?",
+        "How do ads get into Google AI Mode and AI Overviews?",
+        "Does Microsoft Copilot show ads in its answers?",
+        "Can you still advertise on Perplexity?",
+        "Does Meta AI show ads?",
+        "What a small business or consultant does this quarter",
+        "Does schema markup earn AI citations?",
+        "How this connects to zero-click",
+        "How much does it cost to advertise in ChatGPT?"
+      ],
+      "note": "Published 2026-09-24, wave 2 (Mitch: \"publish now\"). Entry in src/lib/data.ts, rendered through baseline/src/lib/published.ts. Embeds the living infographic declared under \"embeds\"."
+    },
+    {
+      "path": "/blog/growth-title-market/",
+      "kind": "added",
+      "since": "post-2026-09-24-wave-2",
+      "title": "Ten Job Titles, Two Right Answers Each",
+      "minText": 1500,
+      "expected": [
+        "Ten Job Titles, Two Right Answers Each",
+        "Open the artifact, not the summary",
+        "The floor",
+        "The ceiling",
+        "The zero",
+        "The disagreement",
+        "The one that is actually growing",
+        "The payoff",
+        "How to read these numbers",
+        "How many Director of SEO jobs are open in the US?"
+      ],
+      "note": "Published 2026-09-24, wave 2 (Mitch: \"publish now\"). Entry in src/lib/data.ts, rendered through baseline/src/lib/published.ts. Embeds the living infographic declared under \"embeds\"."
+    },
+    {
+      "path": "/blog/b2b-vs-b2c-by-vertical/",
+      "kind": "added",
+      "since": "post-2026-09-24-wave-2",
+      "title": "In Education, Winning a B2B Customer Costs 7.3\u00d7 More Than Winning a B2C One",
+      "minText": 1500,
+      "expected": [
+        "In Education, Winning a B2B Customer Costs 7.3\u00d7 More Than Winning a B2C One",
+        "See it by vertical, not by average",
+        "Acquisition cost: the range hiding inside the average",
+        "Conversion rate isn't one number",
+        "Paid search: the same click costs 4\u00d7 more in one vertical than another",
+        "The sales cycle that goes unmeasured on the B2C side",
+        "By vertical",
+        "How to read these numbers",
+        "Is B2B customer acquisition cost really higher than B2C?"
+      ],
+      "note": "Published 2026-09-24, wave 2 (Mitch: \"publish now\"). Entry in src/lib/data.ts, rendered through baseline/src/lib/published.ts. Embeds the living infographic declared under \"embeds\"."
+    },
+    {
+      "path": "/blog/statistician-vs-data-scientist/",
+      "kind": "added",
+      "since": "post-2026-09-24-wave-2",
+      "title": "Statistician vs Data Scientist \u2014 and Two Jobs With No BLS Code",
+      "minText": 1500,
+      "expected": [
+        "Statistician vs Data Scientist \u2014 and Two Jobs With No BLS Code",
+        "The gap in the data",
+        "What each role pays",
+        "Who's growing faster",
+        "The education gate",
+        "Prove why, or predict what's next",
+        "How to read these numbers",
+        "Is a data scientist the same as a statistician?"
+      ],
+      "note": "Published 2026-09-24, wave 2 (Mitch: \"publish now\"). Entry in src/lib/data.ts, rendered through baseline/src/lib/published.ts. Embeds the living infographic declared under \"embeds\"."
+    },
+    {
       "path": "/blog/search-results-by-intent/",
       "kind": "added",
       "since": "post-2026-09-24",
@@ -812,7 +890,14 @@
         "poster-2160x2700.png",
         "anim-640x800.gif"
       ],
-      "note": "Standalone living infographic (no site shell, no analytics, noindex, follow; the post is the indexable page). Published copy of content-studio direction 01 with same-origin jump links, the /images/blog/serp-examples/ renderings and the mj2.pro signature."
+      "note": "Standalone living infographic (no site shell, no analytics, noindex, follow; the post is the indexable page). Published copy of content-studio direction 01 with same-origin jump links, the /images/blog/serp-examples/ renderings and the mj2.pro signature.",
+      "anchors": [
+        "intent-informational",
+        "intent-commercial",
+        "intent-transactional",
+        "intent-navigational",
+        "intent-local"
+      ]
     },
     {
       "path": "/viz/search-results-by-intent-journey/",
@@ -824,7 +909,98 @@
         "poster-2160x2700.png",
         "anim-640x800.gif"
       ],
-      "note": "Standalone living infographic (no site shell, no analytics, noindex, follow; the post is the indexable page). Published copy of content-studio direction 05 with same-origin jump links."
+      "note": "Standalone living infographic (no site shell, no analytics, noindex, follow; the post is the indexable page). Published copy of content-studio direction 05 with same-origin jump links.",
+      "anchors": [
+        "intent-informational",
+        "intent-commercial",
+        "intent-transactional",
+        "intent-navigational",
+        "intent-local"
+      ]
+    },
+    {
+      "path": "/viz/llm-ads-mandala/",
+      "embeddedIn": "/blog/optimizing-for-ads-in-free-llm-answers/",
+      "title": "Ads Inside Free AI Answers \u2014 Data Mandala",
+      "files": [
+        "poster-1080x1080.png",
+        "poster-1080x1350.png",
+        "poster-2160x2700.png",
+        "anim-640x800.gif",
+        "ads-in-free-llm-answers-data-mandala-1200x630.png"
+      ],
+      "anchors": [
+        "assistant-chatgpt",
+        "assistant-google-ai-mode",
+        "assistant-copilot",
+        "assistant-perplexity",
+        "assistant-meta-ai"
+      ],
+      "note": "Standalone living infographic (no site shell, no analytics, noindex, follow; the post is the indexable page). Published copy of content-studio/viz/final/llm-ads-mandala with same-origin jump links and a group-role wheel; ships the post's ready-made 1200\u00d7630 share card."
+    },
+    {
+      "path": "/viz/growth-title-market/",
+      "embeddedIn": "/blog/growth-title-market/",
+      "title": "Ten Job Titles, Two Right Answers \u2014 data mandala",
+      "files": [
+        "poster-1080x1080.png",
+        "poster-1080x1350.png",
+        "poster-2160x2700.png",
+        "anim-640x800.gif"
+      ],
+      "anchors": [
+        "title-director-of-seo",
+        "title-growth-ops-engineer",
+        "title-growth-engineer",
+        "title-gtm-engineer",
+        "title-head-of-aeo",
+        "how-to-read"
+      ],
+      "note": "Standalone living infographic (no site shell, no analytics, noindex, follow; the post is the indexable page). Published copy of content-studio/viz/final/growth-title-market with same-origin jump links and a Skip animation control."
+    },
+    {
+      "path": "/viz/b2b-vs-b2c-by-vertical/",
+      "embeddedIn": "/blog/b2b-vs-b2c-by-vertical/",
+      "title": "B2B vs B2C by vertical \u2014 the fractal stack",
+      "files": [
+        "poster-1080x1080.png",
+        "poster-1080x1350.png",
+        "poster-2160x2700.png",
+        "anim-640x800.gif"
+      ],
+      "anchors": [
+        "vertical-education",
+        "vertical-financial-services",
+        "vertical-real-estate",
+        "vertical-travel-hospitality",
+        "vertical-professional-services",
+        "vertical-saas-software",
+        "vertical-ecommerce-retail",
+        "vertical-healthcare",
+        "vertical-manufacturing-industrial",
+        "vertical-nonprofit"
+      ],
+      "note": "Standalone living infographic (no site shell, no analytics, noindex, follow; the post is the indexable page). Published copy of content-studio/viz/final/b2b-vs-b2c-by-vertical with same-origin jump links, no ledger path and a Skip animation control."
+    },
+    {
+      "path": "/viz/statistician-vs-data-scientist/",
+      "embeddedIn": "/blog/statistician-vs-data-scientist/",
+      "title": "Two Roads Into Data",
+      "files": [
+        "poster-1080x1080.png",
+        "poster-1080x1350.png",
+        "poster-2160x2700.png",
+        "anim-640x800.gif"
+      ],
+      "anchors": [
+        "role-no-bls-code",
+        "role-pay",
+        "role-growth",
+        "role-education",
+        "role-practice",
+        "role-methods"
+      ],
+      "note": "Standalone living infographic (no site shell, no analytics, noindex, follow; the post is the indexable page). Published copy of content-studio/viz/final/statistician-vs-data-scientist with same-origin jump links, width-scaled live mode and a Skip animation control."
     }
   ],
   "note": "kind 'added' = routes introduced by the 2026-09-12 release (not in production snapshot 2745c7e): public lab page, population workbench (lane 2) and the client workspace entrance. They are indexable and in the sitemap; scripts/verify-parity.mjs checks them separately from the 57 archived routes. Agency redesign 2026-09-14: /services/ added (kind added); the home page is an Astro page in the agency shell; all other routes unchanged. Post 2026-09-24: /blog/search-results-by-intent/ plus the three study notes the 2026-09-21 build omitted (kind added, rendered from src/lib via baseline/src/lib/published.ts); the post's two standalone living infographics are listed under \"embeds\" (noindex, outside the shell, checked by scripts/verify-agency.mjs and scripts/qa/crawl.mjs). Site standards deploy 2 (2026-09-24): the Spanish pilot adds five routes of kind \"added\" with lang \"es\" and translationOf (the English path); site/lib/i18n.ts derives hreflang pairs from them, and each carries a \"translation\" record (model draft, independent review, native check pending)."

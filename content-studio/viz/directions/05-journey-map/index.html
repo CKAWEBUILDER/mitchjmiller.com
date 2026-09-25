@@ -7,9 +7,15 @@
   html, body { margin: 0; padding: 0; background: #FBF3E4; }
   #stage { position: relative; overflow: hidden; }
   svg { display: block; }
+  #prompt {
+    display: none; margin: 0; padding: 11px 16px; background: #17120F; color: #FFC53D;
+    font: 700 15px/1.3 'Avenir Next','Helvetica Neue',Helvetica,Arial,sans-serif; letter-spacing: .2px;
+  }
+  a:focus-visible { outline: 3px solid #17120F; outline-offset: 2px; }
 </style>
 </head>
 <body>
+<p id="prompt">Click a territory to jump to its section.</p>
 <div id="stage"><svg id="viz" xmlns="http://www.w3.org/2000/svg"></svg></div>
 <script>
 /* ============================================================================
@@ -17,15 +23,24 @@
    Self-contained: no network requests, macOS system fonts only.
 
    URL params
-     ?size=1080x1350 | 1080x1080 | 640x800 | portrait | square   (default portrait)
-     ?poster=1   freeze at the settled frame
-     ?gif=1      static clock, exporter drives it
+     ?size=1080x1350 | 1080x1080 | 2160x2700 | 640x800 | portrait | square   (default portrait)
+     ?poster=1   freeze at the settled frame (also hides the "click a territory" prompt)
+     ?gif=1      static clock, exporter drives it (also hides the prompt)
      ?static=1   no rAF; only window.VIZ.seek() moves the clock
      ?t=2.4      seek to a time in seconds
+     ?parent=https://example.com/post   base URL for each territory's fallback
+                 link (else document.referrer, else same-page "#intent-<slug>")
 
    Export hook
-     window.VIZ = { ready, duration, seek(t), frame() }
+     window.VIZ = { ready, duration, seek(t), frame(), selectIntent(slug) }
+     selectIntent highlights a territory and posts {type:'viz-intent', intent:slug}
+     to window.parent when embedded in an iframe. slug is one of: informational,
+     commercial, transactional, navigational, local.
      document.documentElement.dataset.ready === '1' once the first paint is done.
+
+   Reduced motion
+     prefers-reduced-motion: reduce skips straight to the settled frame; the
+     live page otherwise plays one slowed draw on load, then holds (no loop).
 
    Every figure is lifted verbatim from
      content-studio/research/2026-09-14/search-intent/data.json
@@ -45,6 +60,11 @@ const IS_SQUARE = Math.abs(SIZE.w / SIZE.h - 1) < 0.06;
 const FMT = IS_SQUARE ? 'square' : 'portrait';
 const SQ = FMT === 'square';
 const STATIC = Q.has('poster') || Q.has('gif') || Q.has('static');
+const INTERACTIVE = !Q.has('poster') && !Q.has('gif');
+if (INTERACTIVE) {
+  const pr = document.getElementById('prompt');
+  if (pr) pr.style.display = 'block';
+}
 
 /* ------------------------------------------------------------------ palette */
 const C = {
@@ -96,14 +116,14 @@ const TERRITORIES = [
     src: 'Authoritas · Semrush',
   },
   {
-    n: 3, key: 'commercial', slot: 'R2', icon: 'versus', name: 'COMMERCIAL',
+    n: 3, key: 'commercial', slot: 'L2', icon: 'versus', name: 'COMMERCIAL',
     a: { fig: '95.4%',  roll: 95.4, dec: 1, label: 'OF “X VS Y” QUERIES',      detail: 'AI Overview on 267 of 280 comparisons' },   // [10]
     b: { fig: '+71%',                       label: 'COMMERCIAL AIO GROWTH',    detail: 'Nov 2025 – Apr 2026, 600,000 keywords' },   // [18]
     foot: 'Headphone paid clicks: 16% → 36%',                                                                                      // [40]
     src: 'Seer · Semrush · Search Engine Land',
   },
   {
-    n: 4, key: 'transactional', slot: 'L2', icon: 'cart', name: 'TRANSACTIONAL',
+    n: 4, key: 'transactional', slot: 'R2', icon: 'cart', name: 'TRANSACTIONAL',
     a: { fig: '5%',     roll: 5,    dec: 0, label: 'SHOW AN AI OVERVIEW',      detail: 'Lowest rate of any intent measured' },      // [7]
     b: { fig: '−5%',                        label: 'AIO SHARE, SAME 6 MONTHS', detail: 'Falling while commercial rose 71%' },       // [19]
     foot: 'Shopping units by intent: not measured',
@@ -352,8 +372,8 @@ function roundedPolyline(pts, radius) {
 
 /* ============================================================ build the map */
 const L = {
-  ground: G(svg), terrain: G(svg), ghost: G(svg), cards: G(svg),
-  road: G(svg), marks: G(svg), chrome: G(svg), fx: G(svg),
+  ground: G(svg), terrain: G(svg), ghost: G(svg), road: G(svg),
+  cards: G(svg), marks: G(svg), chrome: G(svg), fx: G(svg),
 };
 
 el('rect', { x: 0, y: 0, width: M.W, height: M.H, fill: C.cream }, L.ground);
@@ -393,7 +413,7 @@ el('rect', { x: 0, y: 0, width: M.W, height: M.H, fill: C.cream }, L.ground);
   const padX = 40, wMax = M.W - padX * 2;
   const eb = { size: M.f.eyebrow, weight: 700, family: BODY, spacing: 1.8 };
   line(g, TITLE.eyebrow, padX, SQ ? 36 : 44,
-    { ...eb, size: fit(TITLE.eyebrow, wMax, eb, 12), fill: C.gold },
+    { ...eb, size: fit(TITLE.eyebrow, wMax, eb, 14), fill: C.gold },
     [padX, 8, wMax, SQ ? 32 : 40]);
 
   const hs = { size: M.f.head, weight: 800, family: DISPLAY, spacing: -0.5 };
@@ -427,7 +447,7 @@ const COMPASS = { x: M.W - M.compass - 34, y: M.startY + M.startH / 2, r: M.comp
     [x0 + 46, y - boxH / 2, w - 48, boxH]);
   const subX = x0 + w + 16, subW = (COMPASS.x - COMPASS.r - 20) - subX;
   line(g, START.sub, subX, y + M.f.startSub * 0.35,
-    { ...ss, size: fit(START.sub, subW, ss, 11), fill: C.muted }, [subX, y - 18, subW, 36]);
+    { ...ss, size: fit(START.sub, subW, ss, 14), fill: C.muted }, [subX, y - 18, subW, 36]);
   mandala(g, COMPASS.x, COMPASS.y, COMPASS.r);
 })();
 
@@ -440,10 +460,23 @@ const SLOTS = {
 const rollers = [];
 const cardBoxes = {};
 
+/* ------------------------------------------------------- click / jump target
+   Inside an iframe embed, a click posts to the parent AND falls back to a
+   plain top-level link — whichever the host actually handles. */
+function parentUrl() {
+  const p = Q.get('parent');
+  if (p) return p;
+  try { if (document.referrer) return document.referrer; } catch (e) {}
+  return '';
+}
+function hrefFor(slug) { return parentUrl() + '#intent-' + slug; }
+
 function card(t) {
   const [x, y] = SLOTS[t.slot];
   const w = M.colW, h = M.rowH, col = TC[t.key];
-  const g = G(L.cards);
+  const a = el('a', { href: hrefFor(t.key), target: '_top', 'aria-label': `Jump to the ${t.name} section` }, L.cards);
+  a.setAttribute('data-territory', t.key);
+  const g = G(a);
   el('rect', { x: x + 5, y: y + 6, width: w, height: h, rx: 22, fill: C.ink, opacity: 0.10 }, g);
   el('rect', { x, y, width: w, height: h, rx: 22, fill: col.tint, stroke: col.deep, 'stroke-width': 3 }, g);
 
@@ -487,11 +520,11 @@ function card(t) {
     const ls = { size: M.f.figLbl, weight: 700, family: BODY, spacing: 1.1 };
     const lw = bw - figW - 12;
     line(g, d.label, bx + figW + 12, figY - (SQ ? 2 : 3),
-      { ...ls, size: fit(d.label, lw, ls, 11), fill: C.ink }, [bx + figW + 10, by, lw + 2, M.f.fig * 1.02]);
+      { ...ls, size: fit(d.label, lw, ls, 14), fill: C.ink }, [bx + figW + 10, by, lw + 2, M.f.fig * 1.02]);
     const ds = { size: M.f.detail, weight: 500, family: BODY };
     const dy = by + M.card.blockH - 6;
     line(g, d.detail, bx, dy,
-      { ...ds, size: fit(d.detail, bw, ds, 12), fill: C.muted }, [bx, dy - M.f.detail * 0.82, bw, M.f.detail * 1.2]);
+      { ...ds, size: fit(d.detail, bw, ds, 14), fill: C.muted }, [bx, dy - M.f.detail * 0.82, bw, M.f.detail * 1.2]);
     by += M.card.blockH;
     el('rect', { x: bx, y: by + M.card.gap / 2 - 1, width: bw, height: 2, fill: col.deep, opacity: 0.3 }, g);
     by += M.card.gap;
@@ -502,18 +535,43 @@ function card(t) {
   const nm = /not measured/i.test(t.foot);
   const fs2 = { size: M.f.foot, weight: nm ? 800 : 600, family: BODY };
   const fy = by + M.f.foot * 0.9;
-  line(g, t.foot, bx, fy, { ...fs2, size: fit(t.foot, bw, fs2, 12), fill: nm ? C.flag : C.ink },
+  line(g, t.foot, bx, fy, { ...fs2, size: fit(t.foot, bw, fs2, 14), fill: nm ? C.flag : C.ink },
     [bx, fy - M.f.foot * 0.85, bw, M.f.foot * 1.2]);
 
   const cs = { size: M.f.src, weight: 600, family: BODY, spacing: 0.7 };
   const cy2 = y + h - (SQ ? 9 : 11);
   line(g, t.src.toUpperCase(), x + w - M.card.pad, cy2,
-    { ...cs, size: fit(t.src.toUpperCase(), bw - 8, cs, 9), fill: col.deep, anchor: 'end' },
+    { ...cs, size: fit(t.src.toUpperCase(), bw - 8, cs, 12), fill: col.deep, anchor: 'end' },
     [x + 12, cy2 - M.f.src, w - 24, M.f.src * 1.25]);
 
-  cardBoxes[t.n] = { x, y, w, h, disc, col };
+  const hi = el('rect', {
+    x: x - 3, y: y - 3, width: w + 6, height: h + 6, rx: 25, fill: 'none',
+    stroke: C.flag, 'stroke-width': 7, opacity: 0, 'pointer-events': 'none',
+  }, g);
+
+  cardBoxes[t.n] = { x, y, w, h, disc, col, a, highlight: hi, key: t.key };
 }
 TERRITORIES.forEach(card);
+
+/* --------------------------------------------------------- click to jump
+   Every territory is a real, keyboard-reachable <a>. A click — or a call to
+   window.VIZ.selectIntent(id) — highlights it and posts to the embedding
+   parent; the <a>'s own href/target=_top is the fallback if nothing is
+   listening (see hrefFor above). */
+function highlightTerritory(key) {
+  for (const n in cardBoxes) cardBoxes[n].highlight.setAttribute('opacity', cardBoxes[n].key === key ? 1 : 0);
+}
+function selectIntent(key) {
+  if (!TC[key]) return false;
+  highlightTerritory(key);
+  try {
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({ type: 'viz-intent', intent: key }, '*');
+    }
+  } catch (e) { /* cross-origin parent read blocked — postMessage itself still fires */ }
+  return true;
+}
+TERRITORIES.forEach(t => { cardBoxes[t.n].a.addEventListener('click', () => selectIntent(t.key)); });
 
 /* ------------------------------------------------------- destination card */
 let destRoller = null;
@@ -563,17 +621,28 @@ let destRoller = null;
   const cs = { size: M.f.src, weight: 600, family: BODY, spacing: 0.7 };
   const cy2 = y + h - (SQ ? 9 : 11);
   line(g, DEST.src.toUpperCase(), x + w - pad, cy2,
-    { ...cs, size: fit(DEST.src.toUpperCase(), bw - 8, cs, 9), fill: C.gold, anchor: 'end' },
+    { ...cs, size: fit(DEST.src.toUpperCase(), bw - 8, cs, 12), fill: C.gold, anchor: 'end' },
     [x + 12, cy2 - M.f.src, w - 24, M.f.src * 1.25]);
 })();
 
-/* ------------------------------------------------------------------- roads */
+/* ------------------------------------------------------------------- roads
+   A straight serpentine: every row reads left-to-right in both the grid and
+   the route (1→2, 3→4, 5→end), matching plain reading order. A short dogleg
+   jog — down, across, down — carries the trail back to the left margin
+   between rows instead of doubling the row itself back on itself. Cards draw
+   after the road (see L above), so the sliver of each jog that passes behind
+   a card's top edge is simply hidden under it. */
+const JOG = 20;
 const ROUTE = [
   [M.chanL, M.startY + M.startH / 2],
   [M.chanL, M.gut[0]],
   [M.chanR, M.gut[0]],
-  [M.chanR, M.gut[1]],
+  [M.chanR, M.gut[0] + JOG],
+  [M.chanL, M.gut[0] + JOG],
   [M.chanL, M.gut[1]],
+  [M.chanR, M.gut[1]],
+  [M.chanR, M.gut[1] + JOG],
+  [M.chanL, M.gut[1] + JOG],
   [M.chanL, M.bottomY],
   [M.colR + M.colW / 2, M.bottomY],
   [M.colR + M.colW / 2, M.rows[2] + M.rowH + 6],
@@ -700,12 +769,12 @@ MILE.forEach(m => {
     if (M.legend.lines === 1) {
       const txt = it.label + ' · ' + it.short;
       const tw = colW - 32;
-      line(g, txt, x + 32, y + 20, { ...vs, size: fit(txt, tw, { ...vs, weight: 600 }, 11), weight: 600, fill: it.color },
+      line(g, txt, x + 32, y + 20, { ...vs, size: fit(txt, tw, { ...vs, weight: 600 }, 12), weight: 600, fill: it.color },
         [x + 30, y + 2, tw + 2, 26]);
     } else {
-      line(g, it.label, x + 32, y + 18, { ...ls, size: fit(it.label, colW - 34, ls, 12), fill: C.ink },
+      line(g, it.label, x + 32, y + 18, { ...ls, size: fit(it.label, colW - 34, ls, 14), fill: C.ink },
         [x + 30, y, colW - 30, 24]);
-      line(g, it.val, x + 32, y + 39, { ...vs, size: fit(it.val, colW - 34, vs, 11), fill: it.color },
+      line(g, it.val, x + 32, y + 39, { ...vs, size: fit(it.val, colW - 34, vs, 14), fill: it.color },
         [x + 30, y + 24, colW - 30, 22]);
     }
   });
@@ -714,18 +783,54 @@ MILE.forEach(m => {
 /* ------------------------------------------------------------- source line */
 (function sourceLine() {
   const s = { size: M.f.src2, weight: 500, family: BODY };
-  line(L.chrome, SOURCES, 30, M.srcY, { ...s, size: fit(SOURCES, M.W - 60, s, 7), fill: C.muted },
+  line(L.chrome, SOURCES, 30, M.srcY, { ...s, size: fit(SOURCES, M.W - 60, s, 12), fill: C.muted },
     [30, M.srcY - M.f.src2, M.W - 60, M.f.src2 * 1.4]);
 })();
 
-/* =========================================================== the animation */
-const T = { start: 0.12, roadEnd: 3.35, destRoll: 0.62, tail: 0.28 };
-const DURATION = T.roadEnd + T.destRoll + T.tail;      // ≈ 4.25 s
+/* =========================================================== the animation
+   The trail draws roughly 2x slower than a plain sweep and holds for a beat
+   as it crosses into each territory: a piecewise schedule of eased MOVE
+   segments and flat HOLD segments, built from the milestones' real positions
+   along the finished road (MILE, already in ascending-L / ascending-number
+   order by construction) so it stays correct regardless of route geometry. */
+const PAUSE = 0.7;                                       // held at each territory's entry
+const T = { start: 0.12, drawSpan: (3.35 - 0.12) * 2, destRoll: 0.62, tail: 0.28 };  // drawSpan: ~2x the v1 draw time
 const easeInOut = u => (u < 0.5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2);
 const easeOut = u => 1 - Math.pow(1 - u, 3);
 const clamp01 = v => Math.max(0, Math.min(1, v));
 
-MILE.forEach(m => { m.t = T.start + (m.L / ROAD_LEN) * (T.roadEnd - T.start); });
+const MILE_ORDER = MILE.slice().sort((a, b) => a.L - b.L);
+const SEGS = [];
+(function buildSchedule() {
+  let t = T.start, frac = 0;
+  for (const m of MILE_ORDER) {
+    const f = m.L / ROAD_LEN;
+    const dur = (f - frac) * T.drawSpan;
+    SEGS.push({ t0: t, t1: t + dur, f0: frac, f1: f, hold: false });
+    t += dur;
+    m.t = t;                        // the trail visibly reaches this territory here
+    SEGS.push({ t0: t, t1: t + PAUSE, f0: f, f1: f, hold: true });
+    t += PAUSE;
+    frac = f;
+  }
+  const dur = (1 - frac) * T.drawSpan;
+  SEGS.push({ t0: t, t1: t + dur, f0: frac, f1: 1, hold: false });
+  T.roadEnd = t + dur;
+})();
+const DURATION = T.roadEnd + T.destRoll + T.tail;
+
+function roadFrac(t) {
+  if (t <= T.start) return 0;
+  if (t >= T.roadEnd) return 1;
+  for (const s of SEGS) {
+    if (t > s.t1) continue;
+    if (s.hold) return s.f1;
+    const u = s.t1 > s.t0 ? (t - s.t0) / (s.t1 - s.t0) : 1;
+    return s.f0 + (s.f1 - s.f0) * easeInOut(clamp01(u));
+  }
+  return 1;
+}
+
 rollers.forEach(r => {
   const m = MILE.find(x => x.key === r.key);
   r.t0 = m ? m.t : 0;
@@ -739,12 +844,11 @@ const mileNodes = MILE.map(m => ({
 
 function render(t) {
   t = Math.max(0, Math.min(DURATION, t));
-  const u = clamp01((t - T.start) / (T.roadEnd - T.start));
-  const shown = easeInOut(u) * ROAD_LEN;
+  const shown = roadFrac(t) * ROAD_LEN;
   revealPath.setAttribute('stroke-dasharray', `${shown.toFixed(1)} ${(ROAD_LEN + 20).toFixed(1)}`);
 
   const p = roadBase.getPointAtLength(Math.max(0.01, shown));
-  travel.setAttribute('opacity', (t < 0.05 || u >= 1) ? 0 : 1);
+  travel.setAttribute('opacity', (t < 0.05 || shown >= ROAD_LEN) ? 0 : 1);
   travelDot.setAttribute('cx', p.x.toFixed(1)); travelDot.setAttribute('cy', p.y.toFixed(1));
   travelRing.setAttribute('cx', p.x.toFixed(1)); travelRing.setAttribute('cy', p.y.toFixed(1));
   travelRing.setAttribute('r', (14 + 4.5 * Math.sin(t * 9)).toFixed(1));
@@ -773,17 +877,26 @@ function render(t) {
   destRoller.node.textContent = (destRoller.to * easeOut(dk)).toFixed(destRoller.dec) + '%';
 }
 
-/* ------------------------------------------------------------- clock / API */
+/* ------------------------------------------------------------- clock / API
+   Live page: one slowed draw, then it holds on the settled frame — it does
+   not auto-loop. Reduced-motion skips straight to the settled frame. */
+const REDUCED_MOTION = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 let clock = 0, raf = null, t0 = null;
 function loop(ts) {
   if (t0 === null) t0 = ts;
-  clock = ((ts - t0) / 1000) % (DURATION + 0.9);
-  render(Math.min(clock, DURATION));
+  clock = (ts - t0) / 1000;
+  if (clock >= DURATION) { clock = DURATION; render(DURATION); raf = null; return; }
+  render(clock);
   raf = requestAnimationFrame(loop);
 }
 
-render(Q.has('poster') ? DURATION : (Q.has('t') ? parseFloat(Q.get('t')) || 0 : 0));
-if (!STATIC && !Q.has('t')) raf = requestAnimationFrame(loop);
+const initialT = Q.has('poster') ? DURATION
+  : Q.has('t') ? (parseFloat(Q.get('t')) || 0)
+  : REDUCED_MOTION ? DURATION
+  : 0;
+render(initialT);
+clock = initialT;
+if (!STATIC && !Q.has('t') && !REDUCED_MOTION) raf = requestAnimationFrame(loop);
 
 window.VIZ = {
   ready: Promise.resolve(true),
@@ -792,6 +905,7 @@ window.VIZ = {
   size: SIZE,
   seek(t) { if (raf) { cancelAnimationFrame(raf); raf = null; } render(t); return t; },
   frame() { return clock; },
+  selectIntent,
 };
 document.documentElement.dataset.ready = '1';
 </script>

@@ -1,0 +1,7 @@
+# Source — verbatim from Mitch (2026-09-24, chat)
+
+Topic: how to rank a client's new website in a market already saturated with legacy competitors. e.g. surf school in Waikiki.
+
+Answer: exhaustive analysis — export 100s of thousands of lines of data, id biggest market shareholders, their strategies locations across the web — rem SEO is now Everywhere Optimization — cite the number of touchpoints avg consumers tap prior to conversion. are OTAs very important, if so which ones? are there locations top comps aren't present in? are they leveraging paid channels? if not quickest potential win.. compile all this data, use ai models to help organize and run queries like SQL even to id opps, gaps, appropriation of those top comps strats and improve on them.. how many web pages they have? what kws they ranking for? going to be diff to outrank for top kws (e.g. surf lessons waikiki) so id other high commercial intent or pre commercial intent queries no one has content about (e.g. best time of day to surf in waikiki, or what to consider when booking a surf lesson, questions only a prospective customer would search in the location of operation.. could/should also leverage website and other web locations to offer free value to prospective customers and others to get more visits, shares, engagement among non prospects but that build authority and send positive signals to google and other engines, strategic FAQs marked up w/ schema to increase ai visibility/citations, etc)
+
+Constraint set by Mitch: data-viz-first post (Sept 14 brief). Draft only. No publishing.

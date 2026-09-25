@@ -1,0 +1,377 @@
+{
+  "assignment": "Real Google SERP captures for 10 of Mitch's target keywords (2 per intent) for the 'search results by intent' post expansion, 2026-09-22.",
+  "researcher_note": "ALL 10 CAPTURES FAILED. Every attempt \u2014 headless Chrome (puppeteer-core, local machine) and the in-app browser (separate network path) \u2014 was blocked by Google before any SERP content rendered. No AI Overview / ads / local pack / featured snippet / PAA / shopping / video / organic-result / mitchjmiller.com presence could be observed for any query. Do not treat any 'not observable' field below as a negative result (i.e. 'feature absent') \u2014 it means the page was never seen. See root_cause for why, and serp-examples/notes.md for full methodology and what to do next.",
+  "capture_method": {
+    "headless": "puppeteer-core driving local Google Chrome via the repo's existing content-studio/viz/kit/export/lib/browser.mjs helper (no new dependency). Script: capture-serp.mjs in this folder. hl=en&gl=us&num=10 on every query. Desktop viewport 1280x1000 @1x; mobile viewport 390x844 @2x with a Pixel 8 Android Chrome UA. Full-page PNG screenshot taken ~1.8s after networkidle2.",
+    "in_app_browser_fallback": "mcp__Claude_Browser__* tools (navigate, resize_window, computer:screenshot) per the assignment's instruction to document a consent/captcha/unusual-traffic page rather than bypass it. Never clicked the reCAPTCHA checkbox."
+  },
+  "root_cause": {
+    "finding": "This session's outbound internet connection \u2014 both the local Mac used for the headless-Chrome run and the separate network path behind the in-app Browser pane \u2014 resolves to a residential ISP in Metro Manila, Philippines (AS10139 Smart Broadband, Inc.), not a US IP. Google's abuse system serves a 429 'unusual traffic' reCAPTCHA interstitial to this network for Google Search regardless of the &hl=en&gl=us query parameters, which only set language/region *preferences* and do not override IP-based geolocation or bot-risk scoring.",
+    "evidence": [
+      "Headless Chrome egress: 2407:9803:5340:3423:c4ab:73cc:1d0c:f59f -> ip-api.com: Manila, PH, AS10139 Smart Broadband, Inc.",
+      "In-app browser egress: 175.158.207.7 -> ip-api.com: Quezon City, PH, AS10139 Smart Broadband, Inc.",
+      "Same ASN/ISP on both paths; both blocked identically."
+    ],
+    "consistency_with_prior_ledger": "Matches content-studio/research/2026-09-14/search-intent/notes.md, which independently found 'Google: fully blocked on every attempt' and Bing results geolocating to the Philippines (.ph domains, PHP pricing) despite &mkt=en-US&cc=US. This is now confirmed with IP/ASN evidence rather than inferred from symptoms.",
+    "recommendation": "A real US-IP browsing session (Mitch's own residential/office connection, or a US-based proxy/VPN he approves) is required to capture live Google SERPs for this environment. This falls outside what either automation path available in this session can do without solving a CAPTCHA, which is off-limits."
+  },
+  "queries": [
+    {
+      "query": "what is answer engine optimization",
+      "intent": "informational",
+      "n": 1,
+      "capture_status": "FAILED \u2014 blocked",
+      "headless_attempt": {
+        "method": "puppeteer-core + local Chrome via content-studio/viz/kit/export/lib/browser.mjs",
+        "date_time_utc": "2026-09-22T12:02:05.601Z",
+        "url_requested": "https://www.google.com/search?q=what%20is%20answer%20engine%20optimization&hl=en&gl=us&num=10",
+        "http_status": 429,
+        "egress_ip": "2407:9803:5340:3423:c4ab:73cc:1d0c:f59f (IPv6; geolocates to Manila, Philippines, ASN10139 Smart Broadband, Inc. \u2014 see root_cause)",
+        "what_appeared": "Google 'Our systems have detected unusual traffic from your computer network' interstitial with an embedded reCAPTCHA challenge ('I'm not a robot'). No organic results, AI Overview, ads, or any other SERP feature rendered.",
+        "desktop_viewport": "1280x1000",
+        "mobile_viewport": "390x844 (deviceScaleFactor 2)",
+        "files": {
+          "desktop": "informational-1-desktop.png",
+          "mobile": "informational-1-mobile.png"
+        }
+      },
+      "in_app_browser_attempt": {
+        "method": "mcp__Claude_Browser__* (in-app browser, Claude Browser pane)",
+        "viewports_tested": [
+          "1280x1000 desktop",
+          "390x844 mobile"
+        ],
+        "date_time_utc": [
+          "2026-09-22T12:04:00Z",
+          "2026-09-22T12:04:48Z"
+        ],
+        "url_requested": "https://www.google.com/search?q=what+is+answer+engine+optimization&hl=en&gl=us&num=10",
+        "ip_shown_on_google_interstitial": "175.158.207.7",
+        "what_appeared": "Same Google 'unusual traffic' interstitial with embedded reCAPTCHA ('I'm not a robot' checkbox) rendered at both viewports. Did not click the checkbox (CAPTCHA-solving is off-limits)."
+      },
+      "serp_features_observed": {
+        "ai_overview": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "ads_count_and_position": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "local_pack": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "featured_snippet": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "people_also_ask": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "shopping": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "video": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "organic_count_above_fold": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "mitchjmiller_com_appears": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered"
+      }
+    },
+    {
+      "query": "what is generative engine optimization",
+      "intent": "informational",
+      "n": 2,
+      "capture_status": "FAILED \u2014 blocked",
+      "headless_attempt": {
+        "method": "puppeteer-core + local Chrome via content-studio/viz/kit/export/lib/browser.mjs",
+        "date_time_utc": "2026-09-22T12:02:14.087Z",
+        "url_requested": "https://www.google.com/search?q=what%20is%20generative%20engine%20optimization&hl=en&gl=us&num=10",
+        "http_status": 429,
+        "egress_ip": "2407:9803:5340:3423:c4ab:73cc:1d0c:f59f (IPv6; geolocates to Manila, Philippines, ASN10139 Smart Broadband, Inc. \u2014 see root_cause)",
+        "what_appeared": "Google 'Our systems have detected unusual traffic from your computer network' interstitial with an embedded reCAPTCHA challenge ('I'm not a robot'). No organic results, AI Overview, ads, or any other SERP feature rendered.",
+        "desktop_viewport": "1280x1000",
+        "mobile_viewport": "390x844 (deviceScaleFactor 2)",
+        "files": {
+          "desktop": "informational-2-desktop.png",
+          "mobile": "informational-2-mobile.png"
+        }
+      },
+      "in_app_browser_attempt": "not individually re-tested \u2014 see root_cause; 3 of 10 queries (informational-1, navigational-1, local-2) were spot-checked live via the in-app browser across desktop and mobile and all three hit an identical interstitial from the same egress network, so the remaining 7 were not separately re-tested to avoid redundant captcha screenshots",
+      "serp_features_observed": {
+        "ai_overview": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "ads_count_and_position": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "local_pack": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "featured_snippet": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "people_also_ask": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "shopping": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "video": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "organic_count_above_fold": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "mitchjmiller_com_appears": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered"
+      }
+    },
+    {
+      "query": "ahrefs vs semrush",
+      "intent": "commercial",
+      "n": 1,
+      "capture_status": "FAILED \u2014 blocked",
+      "headless_attempt": {
+        "method": "puppeteer-core + local Chrome via content-studio/viz/kit/export/lib/browser.mjs",
+        "date_time_utc": "2026-09-22T12:02:21.860Z",
+        "url_requested": "https://www.google.com/search?q=ahrefs%20vs%20semrush&hl=en&gl=us&num=10",
+        "http_status": 429,
+        "egress_ip": "2407:9803:5340:3423:c4ab:73cc:1d0c:f59f (IPv6; geolocates to Manila, Philippines, ASN10139 Smart Broadband, Inc. \u2014 see root_cause)",
+        "what_appeared": "Google 'Our systems have detected unusual traffic from your computer network' interstitial with an embedded reCAPTCHA challenge ('I'm not a robot'). No organic results, AI Overview, ads, or any other SERP feature rendered.",
+        "desktop_viewport": "1280x1000",
+        "mobile_viewport": "390x844 (deviceScaleFactor 2)",
+        "files": {
+          "desktop": "commercial-1-desktop.png",
+          "mobile": "commercial-1-mobile.png"
+        }
+      },
+      "in_app_browser_attempt": "not individually re-tested \u2014 see root_cause; 3 of 10 queries (informational-1, navigational-1, local-2) were spot-checked live via the in-app browser across desktop and mobile and all three hit an identical interstitial from the same egress network, so the remaining 7 were not separately re-tested to avoid redundant captcha screenshots",
+      "serp_features_observed": {
+        "ai_overview": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "ads_count_and_position": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "local_pack": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "featured_snippet": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "people_also_ask": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "shopping": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "video": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "organic_count_above_fold": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "mitchjmiller_com_appears": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered"
+      }
+    },
+    {
+      "query": "best AEO consultant",
+      "intent": "commercial",
+      "n": 2,
+      "capture_status": "FAILED \u2014 blocked",
+      "headless_attempt": {
+        "method": "puppeteer-core + local Chrome via content-studio/viz/kit/export/lib/browser.mjs",
+        "date_time_utc": "2026-09-22T12:02:29.946Z",
+        "url_requested": "https://www.google.com/search?q=best%20AEO%20consultant&hl=en&gl=us&num=10",
+        "http_status": 429,
+        "egress_ip": "2407:9803:5340:3423:c4ab:73cc:1d0c:f59f (IPv6; geolocates to Manila, Philippines, ASN10139 Smart Broadband, Inc. \u2014 see root_cause)",
+        "what_appeared": "Google 'Our systems have detected unusual traffic from your computer network' interstitial with an embedded reCAPTCHA challenge ('I'm not a robot'). No organic results, AI Overview, ads, or any other SERP feature rendered.",
+        "desktop_viewport": "1280x1000",
+        "mobile_viewport": "390x844 (deviceScaleFactor 2)",
+        "files": {
+          "desktop": "commercial-2-desktop.png",
+          "mobile": "commercial-2-mobile.png"
+        }
+      },
+      "in_app_browser_attempt": "not individually re-tested \u2014 see root_cause; 3 of 10 queries (informational-1, navigational-1, local-2) were spot-checked live via the in-app browser across desktop and mobile and all three hit an identical interstitial from the same egress network, so the remaining 7 were not separately re-tested to avoid redundant captcha screenshots",
+      "serp_features_observed": {
+        "ai_overview": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "ads_count_and_position": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "local_pack": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "featured_snippet": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "people_also_ask": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "shopping": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "video": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "organic_count_above_fold": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "mitchjmiller_com_appears": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered"
+      }
+    },
+    {
+      "query": "hire seo consultant",
+      "intent": "transactional",
+      "n": 1,
+      "capture_status": "FAILED \u2014 blocked",
+      "headless_attempt": {
+        "method": "puppeteer-core + local Chrome via content-studio/viz/kit/export/lib/browser.mjs",
+        "date_time_utc": "2026-09-22T12:02:37.453Z",
+        "url_requested": "https://www.google.com/search?q=hire%20seo%20consultant&hl=en&gl=us&num=10",
+        "http_status": 429,
+        "egress_ip": "2407:9803:5340:3423:c4ab:73cc:1d0c:f59f (IPv6; geolocates to Manila, Philippines, ASN10139 Smart Broadband, Inc. \u2014 see root_cause)",
+        "what_appeared": "Google 'Our systems have detected unusual traffic from your computer network' interstitial with an embedded reCAPTCHA challenge ('I'm not a robot'). No organic results, AI Overview, ads, or any other SERP feature rendered.",
+        "desktop_viewport": "1280x1000",
+        "mobile_viewport": "390x844 (deviceScaleFactor 2)",
+        "files": {
+          "desktop": "transactional-1-desktop.png",
+          "mobile": "transactional-1-mobile.png"
+        }
+      },
+      "in_app_browser_attempt": "not individually re-tested \u2014 see root_cause; 3 of 10 queries (informational-1, navigational-1, local-2) were spot-checked live via the in-app browser across desktop and mobile and all three hit an identical interstitial from the same egress network, so the remaining 7 were not separately re-tested to avoid redundant captcha screenshots",
+      "serp_features_observed": {
+        "ai_overview": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "ads_count_and_position": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "local_pack": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "featured_snippet": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "people_also_ask": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "shopping": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "video": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "organic_count_above_fold": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "mitchjmiller_com_appears": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered"
+      }
+    },
+    {
+      "query": "seo audit service pricing",
+      "intent": "transactional",
+      "n": 2,
+      "capture_status": "FAILED \u2014 blocked",
+      "headless_attempt": {
+        "method": "puppeteer-core + local Chrome via content-studio/viz/kit/export/lib/browser.mjs",
+        "date_time_utc": "2026-09-22T12:02:44.621Z",
+        "url_requested": "https://www.google.com/search?q=seo%20audit%20service%20pricing&hl=en&gl=us&num=10",
+        "http_status": 429,
+        "egress_ip": "2407:9803:5340:3423:c4ab:73cc:1d0c:f59f (IPv6; geolocates to Manila, Philippines, ASN10139 Smart Broadband, Inc. \u2014 see root_cause)",
+        "what_appeared": "Google 'Our systems have detected unusual traffic from your computer network' interstitial with an embedded reCAPTCHA challenge ('I'm not a robot'). No organic results, AI Overview, ads, or any other SERP feature rendered.",
+        "desktop_viewport": "1280x1000",
+        "mobile_viewport": "390x844 (deviceScaleFactor 2)",
+        "files": {
+          "desktop": "transactional-2-desktop.png",
+          "mobile": "transactional-2-mobile.png"
+        }
+      },
+      "in_app_browser_attempt": "not individually re-tested \u2014 see root_cause; 3 of 10 queries (informational-1, navigational-1, local-2) were spot-checked live via the in-app browser across desktop and mobile and all three hit an identical interstitial from the same egress network, so the remaining 7 were not separately re-tested to avoid redundant captcha screenshots",
+      "serp_features_observed": {
+        "ai_overview": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "ads_count_and_position": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "local_pack": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "featured_snippet": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "people_also_ask": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "shopping": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "video": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "organic_count_above_fold": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "mitchjmiller_com_appears": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered"
+      }
+    },
+    {
+      "query": "mitchjmiller.com",
+      "intent": "navigational",
+      "n": 1,
+      "capture_status": "FAILED \u2014 blocked",
+      "headless_attempt": {
+        "method": "puppeteer-core + local Chrome via content-studio/viz/kit/export/lib/browser.mjs",
+        "date_time_utc": "2026-09-22T12:02:51.950Z",
+        "url_requested": "https://www.google.com/search?q=mitchjmiller.com&hl=en&gl=us&num=10",
+        "http_status": 429,
+        "egress_ip": "2407:9803:5340:3423:c4ab:73cc:1d0c:f59f (IPv6; geolocates to Manila, Philippines, ASN10139 Smart Broadband, Inc. \u2014 see root_cause)",
+        "what_appeared": "Google 'Our systems have detected unusual traffic from your computer network' interstitial with an embedded reCAPTCHA challenge ('I'm not a robot'). No organic results, AI Overview, ads, or any other SERP feature rendered.",
+        "desktop_viewport": "1280x1000",
+        "mobile_viewport": "390x844 (deviceScaleFactor 2)",
+        "files": {
+          "desktop": "navigational-1-desktop.png",
+          "mobile": "navigational-1-mobile.png"
+        }
+      },
+      "in_app_browser_attempt": {
+        "method": "mcp__Claude_Browser__* (in-app browser, Claude Browser pane)",
+        "viewports_tested": [
+          "1280x1000 desktop"
+        ],
+        "date_time_utc": [
+          "2026-09-22T12:05:30Z"
+        ],
+        "url_requested": "https://www.google.com/search?q=mitchjmiller.com&hl=en&gl=us&num=10",
+        "ip_shown_on_google_interstitial": "175.158.207.7",
+        "what_appeared": "Same interstitial/reCAPTCHA. Not solved."
+      },
+      "serp_features_observed": {
+        "ai_overview": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "ads_count_and_position": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "local_pack": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "featured_snippet": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "people_also_ask": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "shopping": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "video": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "organic_count_above_fold": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "mitchjmiller_com_appears": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered"
+      }
+    },
+    {
+      "query": "mitchell miller seo",
+      "intent": "navigational",
+      "n": 2,
+      "capture_status": "FAILED \u2014 blocked",
+      "headless_attempt": {
+        "method": "puppeteer-core + local Chrome via content-studio/viz/kit/export/lib/browser.mjs",
+        "date_time_utc": "2026-09-22T12:02:59.500Z",
+        "url_requested": "https://www.google.com/search?q=mitchell%20miller%20seo&hl=en&gl=us&num=10",
+        "http_status": 429,
+        "egress_ip": "2407:9803:5340:3423:c4ab:73cc:1d0c:f59f (IPv6; geolocates to Manila, Philippines, ASN10139 Smart Broadband, Inc. \u2014 see root_cause)",
+        "what_appeared": "Google 'Our systems have detected unusual traffic from your computer network' interstitial with an embedded reCAPTCHA challenge ('I'm not a robot'). No organic results, AI Overview, ads, or any other SERP feature rendered.",
+        "desktop_viewport": "1280x1000",
+        "mobile_viewport": "390x844 (deviceScaleFactor 2)",
+        "files": {
+          "desktop": "navigational-2-desktop.png",
+          "mobile": "navigational-2-mobile.png"
+        }
+      },
+      "in_app_browser_attempt": "not individually re-tested \u2014 see root_cause; 3 of 10 queries (informational-1, navigational-1, local-2) were spot-checked live via the in-app browser across desktop and mobile and all three hit an identical interstitial from the same egress network, so the remaining 7 were not separately re-tested to avoid redundant captcha screenshots",
+      "serp_features_observed": {
+        "ai_overview": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "ads_count_and_position": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "local_pack": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "featured_snippet": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "people_also_ask": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "shopping": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "video": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "organic_count_above_fold": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "mitchjmiller_com_appears": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered"
+      }
+    },
+    {
+      "query": "seo consultant near me",
+      "intent": "local",
+      "n": 1,
+      "capture_status": "FAILED \u2014 blocked",
+      "headless_attempt": {
+        "method": "puppeteer-core + local Chrome via content-studio/viz/kit/export/lib/browser.mjs",
+        "date_time_utc": "2026-09-22T12:03:06.579Z",
+        "url_requested": "https://www.google.com/search?q=seo%20consultant%20near%20me&hl=en&gl=us&num=10",
+        "http_status": 429,
+        "egress_ip": "2407:9803:5340:3423:c4ab:73cc:1d0c:f59f (IPv6; geolocates to Manila, Philippines, ASN10139 Smart Broadband, Inc. \u2014 see root_cause)",
+        "what_appeared": "Google 'Our systems have detected unusual traffic from your computer network' interstitial with an embedded reCAPTCHA challenge ('I'm not a robot'). No organic results, AI Overview, ads, or any other SERP feature rendered.",
+        "desktop_viewport": "1280x1000",
+        "mobile_viewport": "390x844 (deviceScaleFactor 2)",
+        "files": {
+          "desktop": "local-1-desktop.png",
+          "mobile": "local-1-mobile.png"
+        }
+      },
+      "in_app_browser_attempt": "not individually re-tested \u2014 see root_cause; 3 of 10 queries (informational-1, navigational-1, local-2) were spot-checked live via the in-app browser across desktop and mobile and all three hit an identical interstitial from the same egress network, so the remaining 7 were not separately re-tested to avoid redundant captcha screenshots",
+      "serp_features_observed": {
+        "ai_overview": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "ads_count_and_position": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "local_pack": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "featured_snippet": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "people_also_ask": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "shopping": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "video": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "organic_count_above_fold": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "mitchjmiller_com_appears": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered"
+      }
+    },
+    {
+      "query": "surf lessons waikiki",
+      "intent": "local",
+      "n": 2,
+      "capture_status": "FAILED \u2014 blocked",
+      "headless_attempt": {
+        "method": "puppeteer-core + local Chrome via content-studio/viz/kit/export/lib/browser.mjs",
+        "date_time_utc": "2026-09-22T12:03:14.347Z",
+        "url_requested": "https://www.google.com/search?q=surf%20lessons%20waikiki&hl=en&gl=us&num=10",
+        "http_status": 429,
+        "egress_ip": "2407:9803:5340:3423:c4ab:73cc:1d0c:f59f (IPv6; geolocates to Manila, Philippines, ASN10139 Smart Broadband, Inc. \u2014 see root_cause)",
+        "what_appeared": "Google 'Our systems have detected unusual traffic from your computer network' interstitial with an embedded reCAPTCHA challenge ('I'm not a robot'). No organic results, AI Overview, ads, or any other SERP feature rendered.",
+        "desktop_viewport": "1280x1000",
+        "mobile_viewport": "390x844 (deviceScaleFactor 2)",
+        "files": {
+          "desktop": "local-2-desktop.png",
+          "mobile": "local-2-mobile.png"
+        }
+      },
+      "in_app_browser_attempt": {
+        "method": "mcp__Claude_Browser__* (in-app browser, Claude Browser pane)",
+        "viewports_tested": [
+          "1280x1000 desktop",
+          "390x844 mobile"
+        ],
+        "date_time_utc": [
+          "2026-09-22T12:05:40Z",
+          "2026-09-22T12:05:43Z"
+        ],
+        "url_requested": "https://www.google.com/search?q=surf+lessons+waikiki&hl=en&gl=us&num=10",
+        "ip_shown_on_google_interstitial": "175.158.207.7",
+        "what_appeared": "Same interstitial/reCAPTCHA. Not solved."
+      },
+      "serp_features_observed": {
+        "ai_overview": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "ads_count_and_position": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "local_pack": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "featured_snippet": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "people_also_ask": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "shopping": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "video": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "organic_count_above_fold": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered",
+        "mitchjmiller_com_appears": "not observable \u2014 Google returned a bot-check interstitial before any SERP content rendered"
+      }
+    }
+  ]
+}

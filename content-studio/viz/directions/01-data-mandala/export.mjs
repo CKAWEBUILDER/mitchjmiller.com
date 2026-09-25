@@ -1,11 +1,17 @@
 #!/usr/bin/env node
 /**
- * Exporter for the Data Mandala direction.
+ * Exporter for the Data Mandala direction (v2).
  *
- *   node export.mjs            # both posters + the GIF
- *   node export.mjs --posters  # posters only
- *   node export.mjs --gif      # GIF only
- *   node export.mjs --gif --fps 10 --colors 48 --dur 4.0
+ *   node export.mjs                 # posters (1x + 2x) + the GIF + verify
+ *   node export.mjs --posters       # posters only
+ *   node export.mjs --gif           # GIF only
+ *   node export.mjs --verify        # type-size / overlap audit only
+ *   node export.mjs --gif --fps 10 --colors 56 --hold 50
+ *
+ * The GIF is three complete renderings in a row -- each a slowed assembly with a
+ * 0.70s beat between stages and a 1.50s settled hold -- followed by ONE frame
+ * held for --hold seconds, then the loop repeats. Beats and holds are single
+ * frames carrying a long delay, so a 80-second loop still costs ~200 frames.
  *
  * Borrows Chrome discovery / launch / network-blocking from the shared kit
  * (viz/kit/export/lib/browser.mjs) and resolves gifenc + pngjs out of
@@ -26,42 +32,70 @@ const { GIFEncoder, quantize, applyPalette } = kitRequire('gifenc');
 
 const argv = process.argv.slice(2);
 const arg = (k, d) => { const i = argv.indexOf(`--${k}`); return i >= 0 ? argv[i + 1] : d; };
-const wants = n => argv.length === 0 || argv.includes(`--${n}`) ||
-  (!argv.includes('--posters') && !argv.includes('--gif'));
+const only = argv.filter(a => a.startsWith('--') && ['--posters', '--gif', '--verify'].includes(a));
+const wants = n => only.length === 0 || only.includes(`--${n}`);
 
 const TEMPLATE = resolve(HERE, 'index.html');
 const OUT = HERE;
-const SETTLED = Number(arg('t', 3.2));
 mkdirSync(OUT, { recursive: true });
+
+/* posters: [css width, css height, device scale] */
+const POSTERS = [[1080, 1350, 1], [1080, 1080, 1], [1080, 1350, 2]];
 
 const t0 = now();
 const browser = await launch();
+let failures = 0;
 try {
   /* ------------------------------------------------------------- posters */
   if (wants('posters')) {
-    for (const [w, h] of [[1080, 1350], [1080, 1080]]) {
+    for (const [w, h, dsf] of POSTERS) {
       const t = now();
-      const { page, errors, external } = await openViz(browser, vizUrl(TEMPLATE, { size: `${w}x${h}`, t: SETTLED }), {
-        width: w, height: h, deviceScaleFactor: 1,
+      const { page, errors, external } = await openViz(browser, vizUrl(TEMPLATE, { size: `${w}x${h}`, poster: 1 }), {
+        width: w, height: h, deviceScaleFactor: dsf,
       });
       if (errors.length) throw new Error(`page errors @${w}x${h}: ${errors.join(' | ')}`);
       if (external.length) throw new Error(`artifact hit the network: ${external.slice(0, 3).join(', ')}`);
       const buf = await page.screenshot({ clip: { x: 0, y: 0, width: w, height: h }, captureBeyondViewport: false });
-      const file = join(OUT, `poster-${w}x${h}.png`);
+      const file = join(OUT, `poster-${w * dsf}x${h * dsf}.png`);
       writeFileSync(file, buf);
       await page.close();
-      console.log(`poster ${w}×${h}  ${(statSync(file).size / 1024).toFixed(0)} KB  ${ms(t)}`);
+      console.log(`poster ${w * dsf}x${h * dsf}  ${(statSync(file).size / 1024).toFixed(0)} KB  ${ms(t)}`);
     }
+  }
+
+  /* -------------------------------------------------------------- verify */
+  if (wants('verify')) {
+    for (const [w, h, dsf] of POSTERS) {
+      if (dsf !== 1) continue;                       // 2x is the same layout, doubled
+      const { page } = await openViz(browser, vizUrl(TEMPLATE, { size: `${w}x${h}`, poster: 1 }), {
+        width: w, height: h, deviceScaleFactor: 1,
+      });
+      const a = await page.evaluate(() => window.VIZ.audit());
+      await page.close();
+      const bad = a.under.length + a.overlaps.length;
+      failures += bad;
+      console.log(`verify ${w}x${h}: ${a.textCount} text runs, ${a.under.length} under 14px, ${a.overlaps.length} overlaps`);
+      a.under.slice(0, 12).forEach(u => console.log(`   UNDER ${u.size}px  "${u.text}"`));
+      a.overlaps.slice(0, 12).forEach(o => console.log(`   OVERLAP "${o.a}" x "${o.b}"  ${o.ox}x${o.oy}px`));
+    }
+    /* the GIF canvas is a straight scale-down of the 4:5 poster */
+    const { page } = await openViz(browser, vizUrl(TEMPLATE, { size: '640x800', poster: 1 }), {
+      width: 640, height: 800, deviceScaleFactor: 1,
+    });
+    const a = await page.evaluate(() => window.VIZ.audit());
+    await page.close();
+    console.log(`verify 640x800 (gif canvas): ${a.textCount} text runs, ${a.overlaps.length} overlaps` +
+      ` (type floor is defined at 1080 wide, so "under" is normalised: ${a.under.length})`);
+    a.overlaps.slice(0, 12).forEach(o => console.log(`   OVERLAP "${o.a}" x "${o.b}"  ${o.ox}x${o.oy}px`));
+    failures += a.overlaps.length;
   }
 
   /* ----------------------------------------------------------------- gif */
   if (wants('gif')) {
     const W = Number(arg('w', 640)), H = Number(arg('h', 800));
     const fps = Number(arg('fps', 11));
-    const dur = Number(arg('dur', 4.0));
-    const colors = Number(arg('colors', 64));
-    const frames = Math.round(dur * fps);
-    const delay = Math.round(1000 / fps);
+    const colors = Number(arg('colors', 72));
+    const holdS = Number(arg('hold', 50));
 
     const t = now();
     const { page, errors, external } = await openViz(browser, vizUrl(TEMPLATE, { size: `${W}x${H}`, t: 0 }), {
@@ -70,40 +104,60 @@ try {
     if (errors.length) throw new Error(`page errors @gif: ${errors.join(' | ')}`);
     if (external.length) throw new Error(`artifact hit the network: ${external.slice(0, 3).join(', ')}`);
 
-    const shots = [];
-    for (let i = 0; i < frames; i++) {
-      await page.evaluate(s => window.VIZ.seek(s), (i / frames) * dur);
-      shots.push(await page.screenshot({ clip: { x: 0, y: 0, width: W, height: H }, captureBeyondViewport: false }));
+    const cycleWipe = await page.evaluate(n => window.VIZ.framePlan(n, { wipe: true }), fps);
+    const cycleLast = await page.evaluate(n => window.VIZ.framePlan(n, { wipe: false }), fps);
+    const settled = await page.evaluate(() => window.VIZ.settled);
+    const seq = [...cycleWipe, ...cycleWipe, ...cycleLast, { t: settled, delay: holdS * 1000 }];
+
+    /* capture every distinct timestamp exactly once */
+    const uniq = [...new Set(seq.map(s => s.t))].sort((a, b) => a - b);
+    const shots = new Map();
+    for (const tt of uniq) {
+      await page.evaluate(s => window.VIZ.seek(s), tt);
+      shots.set(tt, await page.screenshot({ clip: { x: 0, y: 0, width: W, height: H }, captureBeyondViewport: false }));
     }
     await page.close();
-    console.log(`  captured ${frames} frames at ${W}×${H} in ${ms(t)}`);
+    const cycleS = cycleWipe.reduce((n, s) => n + s.delay, 0) / 1000;
+    const lastS  = cycleLast.reduce((n, s) => n + s.delay, 0) / 1000;
+    const totalS = (seq.reduce((n, s) => n + s.delay, 0)) / 1000;
+    console.log(`  captured ${uniq.length} distinct frames at ${W}x${H} in ${ms(t)}`);
+    console.log(`  cycle ${cycleS.toFixed(2)}s (x2) + final cycle ${lastS.toFixed(2)}s + ${holdS}s hold = ${totalS.toFixed(2)}s loop, ${seq.length} frames`);
 
+    /* palette from a spread of the distinct frames */
     const px = W * H;
-    const rgba = shots.map(b => new Uint8Array(PNG.sync.read(b).data));
-    const idxs = [0, Math.floor(frames * 0.3), Math.floor(frames * 0.55), Math.floor(frames * 0.8), frames - 1];
-    const sample = new Uint8Array(idxs.length * px * 4);
-    idxs.forEach((fr, i) => sample.set(rgba[fr], i * px * 4));
+    const pick = [0, 0.18, 0.36, 0.55, 0.75, 0.93].map(k => uniq[Math.min(uniq.length - 1, Math.floor(k * uniq.length))]);
+    const sample = new Uint8Array(pick.length * px * 4);
+    pick.forEach((tt, i) => sample.set(new Uint8Array(PNG.sync.read(shots.get(tt)).data), i * px * 4));
     const palette = quantize(sample, Math.min(255, colors), { format: 'rgb565' });
     const transparentIndex = palette.length;
     const tablePalette = [...palette, [0, 0, 0]];
-    const indexed = rgba.map(fr => applyPalette(fr, palette, 'rgb565'));
+
+    /* index each distinct frame once, then write the sequence */
+    const indexed = new Map();
+    for (const tt of uniq) {
+      indexed.set(tt, applyPalette(new Uint8Array(PNG.sync.read(shots.get(tt)).data), palette, 'rgb565'));
+      shots.delete(tt);
+    }
 
     const gif = GIFEncoder();
-    for (let i = 0; i < indexed.length; i++) {
-      const cur = indexed[i];
-      if (i === 0) { gif.writeFrame(cur, W, H, { delay, repeat: 0, palette: tablePalette }); continue; }
-      const prev = indexed[i - 1], out = new Uint8Array(px);
+    let prev = null;
+    for (let i = 0; i < seq.length; i++) {
+      const cur = indexed.get(seq[i].t), delay = seq[i].delay;
+      if (i === 0) { gif.writeFrame(cur, W, H, { delay, repeat: 0, palette: tablePalette }); prev = cur; continue; }
+      const out = new Uint8Array(px);
       for (let p = 0; p < px; p++) out[p] = cur[p] === prev[p] ? transparentIndex : cur[p];
       gif.writeFrame(out, W, H, { delay, repeat: 0, transparent: true, transparentIndex, dispose: 1 });
+      prev = cur;
     }
     gif.finish();
     const file = join(OUT, `anim-${W}x${H}.gif`);
     writeFileSync(file, gif.bytes());
     const kb = statSync(file).size / 1024;
-    console.log(`gif ${W}×${H}  ${frames} frames @ ${fps}fps  ${palette.length} colours  ${(kb / 1024).toFixed(2)} MB  ${file}`);
-    if (kb > 3072) console.warn('  WARNING: over 3 MB — lower --fps or --colors.');
+    console.log(`gif ${W}x${H}  ${seq.length} frames @ ${fps}fps  ${palette.length} colours  ${(kb / 1024).toFixed(2)} MB  ${file}`);
+    if (kb > 3072) { console.warn('  WARNING: over 3 MB -- lower --colors or --fps.'); failures++; }
   }
 } finally {
   await browser.close();
 }
-console.log(`done in ${ms(t0)}`);
+console.log(`done in ${ms(t0)}${failures ? `  (${failures} issue(s) reported)` : ''}`);
+if (failures) process.exitCode = 1;

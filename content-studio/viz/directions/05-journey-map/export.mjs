@@ -36,6 +36,7 @@ mkdirSync(OUT, { recursive: true });
 const POSTERS = [
   { w: 1080, h: 1350, file: 'poster-1080x1350.png' },
   { w: 1080, h: 1080, file: 'poster-1080x1080.png' },
+  { w: 2160, h: 2700, file: 'poster-2160x2700.png' },
 ];
 
 /* ------------------------------------------------------------- fit checking
@@ -120,13 +121,22 @@ try {
     }
   }
 
-  /* ----------------------------------------------------------------- gif */
+  /* ----------------------------------------------------------------- gif
+     index.html's own render() already spends a beat paused on each
+     territory (see PAUSE/SEGS there), so a plain uniform time-sample over
+     [0, duration] captures the pacing for free. Three complete renderings
+     are then written back to back — reusing the same captured/quantised
+     frames, no extra screenshots — each ending on a short settled hold,
+     except the third, which holds on the final frame for 50s before the
+     GIF's own NETSCAPE loop (repeat: 0) starts it over. */
   if (only !== 'posters') {
     const size = Number(arg('size', 640));
     const height = Number(arg('height', 800));
     const fps = Number(arg('fps', 11));
     const colors = Number(arg('colors', 144));
-    const hold = Number(arg('hold', 1150));
+    const cycleHold = Number(arg('cycle-hold', 1500));   // short settled hold after renderings 1 & 2
+    const finalHold = Number(arg('final-hold', 50000));  // long hold after rendering 3, before the loop
+    const reps = Number(arg('reps', 3));
     const t = now();
 
     const { page, errors, external } = await openViz(browser, vizUrl(TEMPLATE, { size: `${size}x${height}`, gif: 1 }), { width: size, height });
@@ -143,7 +153,7 @@ try {
       shots.push(await page.screenshot({ clip: { x: 0, y: 0, width: size, height }, captureBeyondViewport: false }));
     }
     await page.close();
-    console.log(`  captured ${frames} frames at ${size}×${height}, ${fps} fps, ${clip}s in ${ms(t)}`);
+    console.log(`  captured ${frames} frames at ${size}×${height}, ${fps} fps, ${clip}s (x${reps} renderings) in ${ms(t)}`);
 
     const tEnc = now();
     const rgba = shots.map(b => new Uint8Array(PNG.sync.read(b).data));
@@ -157,20 +167,24 @@ try {
     const indexed = rgba.map(f => applyPalette(f, palette, 'rgb565'));
 
     const gif = GIFEncoder();
-    for (let i = 0; i < indexed.length; i++) {
-      const cur = indexed[i];
-      const last = i === indexed.length - 1;
-      const opts = { delay: last ? delay + hold : delay, repeat: 0 };
-      if (i === 0) { gif.writeFrame(cur, size, height, { ...opts, palette: tablePalette }); continue; }
-      const prev = indexed[i - 1];
-      const out = new Uint8Array(px);
-      for (let p = 0; p < px; p++) out[p] = cur[p] === prev[p] ? transparentIndex : cur[p];
-      gif.writeFrame(out, size, height, { ...opts, transparent: true, transparentIndex, dispose: 1 });
+    let prevFrame = null;
+    for (let c = 0; c < reps; c++) {
+      for (let i = 0; i < indexed.length; i++) {
+        const cur = indexed[i];
+        const isRepEnd = i === indexed.length - 1;
+        const extra = isRepEnd ? (c < reps - 1 ? cycleHold : finalHold) : 0;
+        const opts = { delay: delay + extra, repeat: 0 };
+        if (prevFrame === null) { gif.writeFrame(cur, size, height, { ...opts, palette: tablePalette }); prevFrame = cur; continue; }
+        const out = new Uint8Array(px);
+        for (let p = 0; p < px; p++) out[p] = cur[p] === prevFrame[p] ? transparentIndex : cur[p];
+        gif.writeFrame(out, size, height, { ...opts, transparent: true, transparentIndex, dispose: 1 });
+        prevFrame = cur;
+      }
     }
     gif.finish();
     const path = join(OUT, `anim-${size}x${height}.gif`);
     writeFileSync(path, gif.bytes());
-    console.log(`  encoded ${palette.length} colours in ${ms(tEnc)}`);
+    console.log(`  encoded ${palette.length} colours, ${reps * indexed.length} total frames in ${ms(tEnc)}`);
     written.push([path, ms(t)]);
     const mb = statSync(path).size / 1048576;
     if (mb > 3) { console.error(`  ✗ gif is ${mb.toFixed(2)} MB — over the 3 MB ceiling`); problems++; }

@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>New Site, Crowded Local Market: Field Chart</title>
+<!--
+  Hero, share card and social stills for
+  "Ranking a New Site in a Market Legacy Competitors Own"
+  (content-studio/drafts/2026-09-24-rank-new-site-saturated-market.blog.md).
+  Visual language: content-studio/viz/directions/03-reference-poster (bright print poster,
+  loud title bar with the shock stat, labelled colour cells, legend, one tiny sources line).
+
+  Static by design (hero_type: image). Self-contained: no network, no webfonts, no assets.
+  Markup is assembled only from the constants in this file; the one URL parameter (size)
+  is matched against a fixed list and never inserted into the page.
+
+  Query params
+    ?size=1080x1350   4:5 poster, 12 cells (default; LinkedIn and X still)
+    ?size=1080x1080   square, 8 cells
+    ?size=1200x630    share card and on-page hero, 8 cells (og:image / twitter:image)
+
+  Export contract (content-studio/viz/kit/export/lib/browser.mjs):
+    window.VIZ.ready resolves once laid out; document.documentElement.dataset.ready === '1'.
+
+  DATA. Every figure is from content-studio/research/2026-09-24/rank-new-site-saturated-market/
+  findings.md, re-checked at the primary on 2026-09-25 (critic report:
+  content-studio/routines/runs/2026-09-25-critic-saturated-market.md), and every figure also
+  appears in the post. Nothing is estimated, blended or rounded up.
+    0.01% / 0.14%  seoClarity, AI Overviews impact study, 500M+ U.S. keywords, updated 2025-10-23
+    15.69%         Semrush AI Overviews study, 10M+ keywords, November 2025
+    15% / 92%      Whitespark, 540 hand-collected queries, 3 U.S. cities, 6 local-business categories, 2025-05-12
+    -5.41%         Ghose & Yang, ADKDD '08 (NYU Stern): organic ("natural") search, conversion rate per extra keyword word
+    -6.6%          Ghose & Yang, WSDM 2008: sponsored-search click-through per extra keyword word
+    2007 / 776     same data: 776 keywords, one U.S. nationwide retailer, 13 weeks, January 1 to March 31, 2007
+    not required   Google Search Central, generative AI features guide, mythbusting section
+    May 7, 2026    Google Search Central documentation updates, 2026-05-08 entry (FAQ rich result deprecation)
+    -4.6%          Ahrefs, 2026-05-11: 1,885 pages that added JSON-LD, 3 matched controls each, difference-in-differences
+    37%            Arival, Global Operator Landscape 4th ed., 2026-01-26, 5,000+ operators (operators' own bookings, 2025)
+    22.9M / $4.7B  Tripadvisor Form 10-K FY2025 (Viator experiences booked; gross booking value), operating metrics
+    973, 5 -> 54, 470 -> 1,652   SFC Surf School first-party: competitor crawl (mj2.pro/case-studies/sfc-surf-school/);
+                   Search Console, Aug 12-Sep 8 vs Jul 15-Aug 11, 2026, reviewed Sep 10 (mj2.pro/lab/)
+  Deliberately absent: the Princeton/Moz schema multiplier (no paper found), Ahrefs' retired long-tail share,
+  Whitespark's mixed-intent 68%, the Arival channel sub-splits, any tours-and-activities touchpoint count.
+-->
+<style>
+  :root{
+    --ink:#131015; --paper:#FFF3DE; --white:#FFFFFF;
+    --c-ai:#5B8CFF;     /* AI answers on local   ink on it 5.97:1 */
+    --c-long:#FFC01E;   /* long-tail             ink on it 11.51:1 */
+    --c-schema:#FF5A36; /* schema                ink on it 6.08:1 */
+    --c-dist:#33D17A;   /* distribution          ink on it 9.47:1 */
+    --c-pilot:#C77DFF;  /* first-party pilot     ink on it 7.02:1 */
+    --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --stroke:3px;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{ height:100%; overflow:hidden; background:var(--ink); }
+  body{ font-family:var(--sans); color:var(--ink); -webkit-font-smoothing:antialiased; }
+  #stage{ position:absolute; top:0; left:0; transform-origin:top left; background:var(--paper); overflow:hidden; }
+  .poster{ width:100%; height:100%; display:flex; flex-direction:column; background:var(--paper); }
+
+  /* Line heights never drop below 1.2: the audit measures each line's full font box,
+     so tighter leading would register as overlap and clipping. */
+
+  /* ------------------------------------------------------------ title bar */
+  .titlebar{ background:var(--ink); color:var(--paper); flex:0 0 auto; }
+  .eyebrow{ font-family:var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--c-long); line-height:1.25; }
+  .headrow{ display:flex; align-items:center; }
+  .counter{ font-weight:900; letter-spacing:-.045em; line-height:1.2; color:var(--c-long); white-space:nowrap; flex:0 0 auto;
+            font-variant-numeric:tabular-nums; }
+  .headline{ font-weight:800; line-height:1.2; letter-spacing:-.01em; text-transform:uppercase; }
+  .thesis{ font-weight:900; text-transform:uppercase; letter-spacing:.01em; color:var(--c-dist); line-height:1.2; white-space:nowrap; }
+  .subline{ font-family:var(--mono); color:#CFC6BC; line-height:1.34; white-space:nowrap; }
+
+  /* --------------------------------------------------------------- legend */
+  .legend{ flex:0 0 auto; display:flex; flex-wrap:wrap; align-items:center; border-bottom:var(--stroke) solid var(--ink); }
+  .legend .lab{ font-family:var(--mono); letter-spacing:.1em; text-transform:uppercase; font-weight:700; line-height:1.25; }
+  .chip{ display:flex; align-items:center; font-weight:800; letter-spacing:.04em; text-transform:uppercase; white-space:nowrap; line-height:1.25; }
+  .chip i{ display:block; border:2px solid var(--ink); flex:0 0 auto; }
+  .chip em{ font-style:normal; font-weight:600; letter-spacing:.02em; text-transform:none; }
+
+  /* ----------------------------------------------------------------- grid */
+  .grid{ flex:1 1 auto; min-height:0; display:flex; flex-direction:column; }
+  .row{ flex:1 1 0; min-height:0; display:grid; }
+  .rail{ border:var(--stroke) solid var(--ink); box-shadow:5px 5px 0 var(--ink); display:flex; flex-direction:column;
+         align-items:center; justify-content:center; overflow:hidden; }
+  .rail span{ writing-mode:vertical-rl; transform:rotate(180deg); font-weight:900; text-transform:uppercase; white-space:nowrap; line-height:1.2; }
+  .rail svg{ display:block; flex:0 0 auto; }
+
+  .cell{ border:var(--stroke) solid var(--ink); box-shadow:5px 5px 0 var(--ink); display:flex; flex-direction:column; min-height:0; overflow:hidden; }
+  .chead{ display:flex; align-items:center; justify-content:space-between; flex:0 0 auto; }
+  .num{ font-family:var(--mono); font-weight:700; letter-spacing:.04em; background:var(--ink); color:var(--paper); line-height:1.25; }
+  .chead svg{ display:block; }
+  .cbig{ font-weight:900; letter-spacing:-.03em; line-height:1.2; white-space:nowrap; flex:0 0 auto; font-variant-numeric:tabular-nums; }
+  .ctitle{ font-weight:900; letter-spacing:.02em; text-transform:uppercase; line-height:1.2; flex:0 0 auto; white-space:nowrap; }
+  .clines{ font-weight:600; line-height:1.24; flex:1 1 auto; min-height:0; }
+  .csrc{ font-family:var(--mono); font-weight:600; letter-spacing:.01em; flex:0 0 auto; border-top:2px solid var(--ink);
+         white-space:nowrap; overflow:hidden; line-height:1.25; }
+
+  /* ----------------------------------------------------------------- foot */
+  .foot{ flex:0 0 auto; display:flex; flex-direction:column; }
+  .strip{ border:var(--stroke) solid var(--ink); display:flex; align-items:baseline; font-weight:600; line-height:1.28; }
+  .strip b{ font-family:var(--mono); letter-spacing:.08em; text-transform:uppercase; background:var(--ink); color:var(--paper);
+            font-weight:700; flex:0 0 auto; white-space:nowrap; line-height:1.3; }
+  .strip.pilot{ background:var(--c-pilot); }
+  .strip.gap{ background:var(--white); }
+  .sources{ font-family:var(--sans); font-weight:600; line-height:1.25; white-space:nowrap; overflow:hidden; }
+
+  /* ================================================================ SIZES
+     Type floor: 14 px at 1080 wide. The 1200-wide card uses 16 px as its floor
+     (16 x 1080 / 1200 = 14.4 px normalised). */
+
+  /* ---- 4:5 poster, 12 cells ---- */
+  [data-size="p"] .titlebar{ padding:20px 32px 16px; }
+  [data-size="p"] .eyebrow{ font-size:15px; margin-bottom:4px; }
+  [data-size="p"] .headrow{ gap:24px; }
+  [data-size="p"] .counter{ font-size:96px; }
+  [data-size="p"] .headline{ font-size:32px; }
+  [data-size="p"] .thesis{ font-size:28px; margin-top:4px; }
+  [data-size="p"] .subline{ font-size:15px; margin-top:8px; }
+  [data-size="p"] .legend{ gap:7px 18px; padding:10px 32px 9px; }
+  [data-size="p"] .legend .lab{ font-size:14px; }
+  [data-size="p"] .chip{ font-size:14px; gap:7px; }
+  [data-size="p"] .chip i{ width:17px; height:17px; }
+  [data-size="p"] .grid{ gap:14px; padding:13px 30px 11px; }
+  [data-size="p"] .row{ grid-template-columns:58px repeat(3, 1fr); gap:15px; }
+  [data-size="p"] .rail{ padding:8px 0; gap:9px; }
+  [data-size="p"] .rail span{ font-size:15px; letter-spacing:.1em; }
+  [data-size="p"] .rail svg{ width:30px; height:30px; }
+  [data-size="p"] .cell{ padding:8px 12px 7px; }
+  [data-size="p"] .chead{ height:26px; }
+  [data-size="p"] .num{ font-size:15px; padding:1px 7px; }
+  [data-size="p"] .chead svg{ width:27px; height:27px; }
+  [data-size="p"] .cbig{ font-size:42px; margin-top:0; }
+  [data-size="p"] .cbig.sm{ font-size:31px; margin-top:6px; margin-bottom:5px; }
+  [data-size="p"] .ctitle{ font-size:17px; }
+  [data-size="p"] .clines{ font-size:16px; margin-top:3px; }
+  [data-size="p"] .csrc{ font-size:14px; padding-top:3px; margin-top:3px; }
+  [data-size="p"] .foot{ gap:8px; padding:2px 30px 12px; }
+  [data-size="p"] .strip{ font-size:15px; gap:10px; padding:6px 10px; }
+  [data-size="p"] .strip b{ font-size:14px; padding:1px 7px; }
+  [data-size="p"] .sources{ font-size:14px; }
+
+  /* ---- square, 8 cells ---- */
+  [data-size="s"] .titlebar{ padding:18px 30px 14px; }
+  [data-size="s"] .eyebrow{ font-size:14px; margin-bottom:2px; }
+  [data-size="s"] .headrow{ gap:22px; }
+  [data-size="s"] .counter{ font-size:84px; }
+  [data-size="s"] .headline{ font-size:28px; }
+  [data-size="s"] .thesis{ font-size:24px; margin-top:2px; }
+  [data-size="s"] .subline{ font-size:14px; margin-top:6px; }
+  [data-size="s"] .legend{ gap:6px 16px; padding:8px 30px 8px; }
+  [data-size="s"] .legend .lab{ font-size:14px; }
+  [data-size="s"] .chip{ font-size:14px; gap:6px; }
+  [data-size="s"] .chip i{ width:16px; height:16px; }
+  [data-size="s"] .grid{ gap:12px; padding:12px 28px 9px; }
+  [data-size="s"] .row{ grid-template-columns:50px repeat(2, 1fr); gap:14px; }
+  [data-size="s"] .rail{ padding:6px 0; }
+  [data-size="s"] .rail svg{ display:none; }
+  [data-size="s"] .rail span{ font-size:14px; letter-spacing:.07em; }
+  [data-size="s"] .cell{ padding:7px 12px 6px; display:grid; grid-template-columns:auto 1fr; grid-template-rows:auto 1fr auto;
+                         column-gap:16px; }
+  [data-size="s"] .chead{ grid-column:1 / 3; height:24px; }
+  [data-size="s"] .num{ font-size:14px; padding:0 6px; }
+  [data-size="s"] .chead svg{ width:25px; height:25px; }
+  [data-size="s"] .cbig{ grid-column:1; grid-row:2; font-size:46px; align-self:center; }
+  [data-size="s"] .cbig.sm{ font-size:30px; }
+  [data-size="s"] .ctext{ grid-column:2; grid-row:2; display:flex; flex-direction:column; justify-content:center; min-width:0; }
+  [data-size="s"] .ctitle{ font-size:16px; }
+  [data-size="s"] .clines{ font-size:15px; margin-top:2px; flex:0 0 auto; }
+  [data-size="s"] .csrc{ grid-column:1 / 3; grid-row:3; font-size:14px; padding-top:2px; margin-top:3px; }
+  [data-size="s"] .foot{ gap:6px; padding:2px 28px 10px; }
+  [data-size="s"] .strip{ font-size:14px; gap:9px; padding:5px 10px; }
+  [data-size="s"] .strip b{ font-size:14px; padding:0 6px; }
+  [data-size="s"] .sources{ font-size:14px; }
+
+  /* ---- 1200 x 630 share card, 8 cells in four premise columns ---- */
+  [data-size="l"] .titlebar{ padding:10px 24px 8px; }
+  [data-size="l"] .eyebrow{ font-size:16px; margin-bottom:0; }
+  [data-size="l"] .headrow{ gap:20px; }
+  [data-size="l"] .counter{ font-size:80px; }
+  [data-size="l"] .headline{ font-size:26px; white-space:nowrap; }
+  [data-size="l"] .thesis{ font-size:24px; }
+  [data-size="l"] .htext{ display:flex; flex-direction:column; gap:2px; }
+  [data-size="l"] .grid{ flex-direction:row; gap:12px; padding:10px 22px 6px; }
+  [data-size="l"] .col{ flex:1 1 0; min-width:0; display:flex; flex-direction:column; gap:8px; }
+  [data-size="l"] .colhead{ display:flex; align-items:center; justify-content:space-between; border:var(--stroke) solid var(--ink);
+                            padding:1px 6px 1px 10px; flex:0 0 auto; }
+  [data-size="l"] .colhead span{ font-size:16px; font-weight:900; letter-spacing:.08em; text-transform:uppercase; white-space:nowrap; line-height:1.25; }
+  [data-size="l"] .colhead svg{ width:22px; height:22px; display:block; }
+  [data-size="l"] .cell{ flex:1 1 0; padding:5px 10px 4px; box-shadow:4px 4px 0 var(--ink); }
+  [data-size="l"] .chead{ height:22px; }
+  [data-size="l"] .num{ font-size:16px; padding:0 6px; }
+  [data-size="l"] .chead svg{ width:23px; height:23px; }
+  [data-size="l"] .cbig{ font-size:36px; }
+  [data-size="l"] .cbig.sm{ font-size:26px; margin-top:4px; margin-bottom:5px; }
+  [data-size="l"] .ctitle{ font-size:16px; }
+  [data-size="l"] .clines{ font-size:16px; margin-top:1px; line-height:1.2; }
+  [data-size="l"] .csrc{ font-size:16px; padding-top:1px; margin-top:2px; }
+  [data-size="l"] .foot{ gap:4px; padding:4px 22px 7px; }
+  [data-size="l"] .strip{ font-size:16px; gap:9px; padding:2px 9px; }
+  [data-size="l"] .strip b{ font-size:16px; padding:0 6px; }
+  [data-size="l"] .sources{ font-size:16px; }
+  [data-size="l"] .footrow{ display:flex; align-items:center; justify-content:space-between; gap:16px; }
+  [data-size="l"] .key{ display:flex; align-items:center; gap:5px; font-size:16px; font-weight:700; line-height:1.25; white-space:nowrap; }
+  [data-size="l"] .key svg{ width:18px; height:18px; display:block; margin-left:8px; }
+</style>
+</head>
+<body>
+<div id="stage"><div class="poster" id="poster"></div></div>
+<script>
+const Q = new URLSearchParams(location.search);
+const SIZES = { '1080x1350':[1080,1350,'p'], '1080x1080':[1080,1080,'s'], '1200x630':[1200,630,'l'] };
+const key = SIZES[Q.get('size')] ? Q.get('size') : '1080x1350';
+const [W, H, MODE] = SIZES[key];
+document.documentElement.dataset.size = MODE;
+
+const INK = '#131015';
+const ICON = {
+  bars:    `<rect x="2" y="16" width="7" height="12" fill="${INK}"/><rect x="11.5" y="8" width="7" height="20" fill="${INK}"/><rect x="21" y="2" width="7" height="26" fill="${INK}"/>`,
+  pin:     `<path d="M15 2.5c-5.2 0-9.4 4.1-9.4 9.2 0 6.9 9.4 15.8 9.4 15.8s9.4-8.9 9.4-15.8c0-5.1-4.2-9.2-9.4-9.2z" fill="${INK}"/><circle cx="15" cy="11.5" r="3.6" fill="#FFF3DE"/>`,
+  ask:     `<path d="M8.4 10.2a6.6 6.6 0 1 1 6.6 6.6v3.4" fill="none" stroke="${INK}" stroke-width="3.4" stroke-linecap="round"/><circle cx="15" cy="25.4" r="2.6" fill="${INK}"/>`,
+  words:   `<path d="M3 6h14M3 12h10M3 18h7" stroke="${INK}" stroke-width="3.2" stroke-linecap="round"/><path d="M23 4v17" stroke="${INK}" stroke-width="3.6" stroke-linecap="round"/><path d="M23 28.5 16.5 20h13z" fill="${INK}"/>`,
+  cursor:  `<path d="M5.5 2.5 24.5 13.4 15.4 15.6 11.4 24.6z" fill="${INK}"/><path d="M17.5 17.5 27.5 27.5" stroke="${INK}" stroke-width="3.6" stroke-linecap="round"/>`,
+  calendar:`<rect x="2.5" y="5.5" width="25" height="22" rx="2" fill="none" stroke="${INK}" stroke-width="3"/><path d="M2.5 11.5h25" stroke="${INK}" stroke-width="3"/><path d="M9 2.5v6M21 2.5v6" stroke="${INK}" stroke-width="3" stroke-linecap="round"/><rect x="8" y="16" width="5" height="5" fill="${INK}"/>`,
+  calx:    `<rect x="2.5" y="5.5" width="25" height="22" rx="2" fill="none" stroke="${INK}" stroke-width="3"/><path d="M2.5 11.5h25" stroke="${INK}" stroke-width="3"/><path d="M9 2.5v6M21 2.5v6" stroke="${INK}" stroke-width="3" stroke-linecap="round"/><path d="M11 15.5l8 8M19 15.5l-8 8" stroke="${INK}" stroke-width="3.2" stroke-linecap="round"/>`,
+  brackets:`<path d="M10 3.5c-4 0-4.5 2-4.5 5.5v2.5c0 2.2-1.2 3.5-3.5 3.5 2.3 0 3.5 1.3 3.5 3.5V21c0 3.5.5 5.5 4.5 5.5M20 3.5c4 0 4.5 2 4.5 5.5v2.5c0 2.2 1.2 3.5 3.5 3.5-2.3 0-3.5 1.3-3.5 3.5V21c0 3.5-.5 5.5-4.5 5.5" fill="none" stroke="${INK}" stroke-width="3" stroke-linecap="round"/>`,
+  quotedn: `<path d="M2 4h8v7.6c0 4.2-3.1 6.7-8 7.6v-3.5c2.7-.7 4.2-1.8 4.2-4.1H2z" fill="${INK}"/><path d="M13 4h8v7.6c0 4.2-3.1 6.7-8 7.6v-3.5c2.7-.7 4.2-1.8 4.2-4.1H13z" fill="${INK}"/><path d="M25.5 12v10" stroke="${INK}" stroke-width="3.2" stroke-linecap="round"/><path d="M25.5 29 20.5 21.5h10z" fill="${INK}"/>`,
+  ticket:  `<path d="M2.5 8h25v4.2a2.8 2.8 0 0 0 0 5.6V22h-25v-4.2a2.8 2.8 0 0 0 0-5.6z" fill="${INK}"/><path d="M19 9.5v11" stroke="#33D17A" stroke-width="2" stroke-dasharray="2 2"/>`,
+  globe:   `<circle cx="15" cy="15" r="11.8" fill="none" stroke="${INK}" stroke-width="3"/><path d="M3.5 15h23M15 3.2c-4.4 4-4.4 19.6 0 23.6M15 3.2c4.4 4 4.4 19.6 0 23.6" fill="none" stroke="${INK}" stroke-width="2.6"/>`,
+  coin:    `<circle cx="15" cy="15" r="12.5" fill="${INK}"/><path d="M19.4 10.4c-1-1.4-2.6-2-4.4-2-2.6 0-4.4 1.3-4.4 3.3 0 4.6 9 2.6 9 7 0 2-1.9 3.3-4.6 3.3-2 0-3.7-.7-4.7-2.1M15 5.8v2.6M15 21v3" fill="none" stroke="#33D17A" stroke-width="2.4" stroke-linecap="round"/>`,
+};
+const VERDICT = {
+  mixed: `<circle cx="17" cy="17" r="14" fill="#FFF3DE" stroke="${INK}" stroke-width="3"/><path d="M17 3a14 14 0 0 1 0 28z" fill="${INK}"/>`,
+  no:    `<circle cx="17" cy="17" r="14" fill="#FFF3DE" stroke="${INK}" stroke-width="3"/><path d="M11 11l12 12M23 11 11 23" stroke="${INK}" stroke-width="3.6" stroke-linecap="round"/>`,
+  yes:   `<circle cx="17" cy="17" r="14" fill="#FFF3DE" stroke="${INK}" stroke-width="3"/><path d="M10 17.5l5 5 9.5-10.5" fill="none" stroke="${INK}" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>`,
+};
+
+const BANDS = {
+  ai:     { rail:'AI answers',   legend:'AI answers on local',       col:'AI answers',   verdict:'mixed', css:'var(--c-ai)' },
+  long:   { rail:'Long-tail',    legend:'Long-tail converts better', col:'Long-tail',    verdict:'no',    css:'var(--c-long)' },
+  schema: { rail:'Schema',       legend:'Schema buys AI citations',  col:'Schema',       verdict:'no',    css:'var(--c-schema)' },
+  dist:   { rail:'Distribution', legend:'Distribution is the gap',   col:'Distribution', verdict:'yes',   css:'var(--c-dist)' },
+};
+
+/* Cell text. `p` = 4:5 poster; `x` = the 8-cell square and share card. */
+const CELLS = {
+  all:   { band:'ai', icon:'bars', big:'15.69%', title:'All keywords',
+           p:'of 10M+ tracked keywords showed one, November 2025.', src:'Semrush · 2025' },
+  local: { band:'ai', icon:'pin', big:'15%', title:'Local-intent searches',
+           p:'showed one in a hand-collected 540-query, 3-city sample.',
+           x:'showed an AI Overview. 540 queries, 3 cities.', src:'Whitespark · 2025' },
+  ask:   { band:'ai', icon:'ask', big:'92%', title:'Local questions',
+           p:'of informational local-business searches showed one.',
+           x:'of informational local-business searches did.', src:'Whitespark · 2025' },
+  conv:  { band:'long', icon:'words', big:'−5.41%', title:'Conversion rate',
+           p:'per extra word in an organic keyword.', src:'Ghose & Yang · NYU · 2008' },
+  ctr:   { band:'long', icon:'cursor', big:'−6.6%', title:'Click-through rate',
+           p:'per extra word in a paid-search keyword.', src:'Ghose & Yang · WSDM 2008' },
+  old:   { band:'long', icon:'calendar', big:'2007', title:'One retailer, 13 weeks',
+           p:'776 keywords. No modern replication found.', src:'Ghose & Yang · ADKDD 2008' },
+  req:   { band:'schema', icon:'brackets', big:'Not required', sm:true, title:'Google on schema',
+           p:'“Structured data isn’t required for generative AI search.”',
+           x:'for AI search. FAQ rich results ended May 7, 2026.', src:'Google Search Central · 2026' },
+  faq:   { band:'schema', icon:'calx', big:'May 7, 2026', sm:true, title:'FAQ rich results end',
+           p:'Google stopped showing FAQ rich results in Search.', src:'Google Search Central · 2026' },
+  cite:  { band:'schema', icon:'quotedn', big:'−4.6%', title:'AI Overview citations',
+           p:'after 1,885 already-cited pages added schema.', src:'Ahrefs · 2026' },
+  ota:   { band:'dist', icon:'ticket', big:'37%', title:'OTA share',
+           p:'of tour and activity operators’ bookings came via OTAs, 2025.',
+           x:'of tour operators’ bookings came via OTAs, 2025.', src:'Arival · 5,000+ operators · 2026' },
+  via:   { band:'dist', icon:'globe', big:'22.9M', title:'Viator bookings',
+           p:'experiences booked through one OTA in 2025.', x:'experiences booked through Viator, 2025.',
+           src:'Tripadvisor 10-K · FY2025' },
+  gbv:   { band:'dist', icon:'coin', big:'$4.7B', title:'Viator gross bookings',
+           p:'gross booking value powered by Viator in 2025.', src:'Tripadvisor 10-K · FY2025' },
+};
+const ROWS_P = [['ai',['all','local','ask']], ['long',['conv','ctr','old']], ['schema',['req','faq','cite']], ['dist',['ota','via','gbv']]];
+const ROWS_X = [['ai',['local','ask']], ['long',['conv','ctr']], ['schema',['req','cite']], ['dist',['ota','via']]];
+const SRC_X = { ota:'Arival · 2026', req:'Google · 2026', conv:'Ghose & Yang · 2008', ctr:'Ghose & Yang · 2008', via:'Tripadvisor 10-K · 2025', ask:'Whitespark · 2025', local:'Whitespark · 2025', cite:'Ahrefs · 2026' };
+
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const svg = (body, vb = 30) => `<svg viewBox="0 0 ${vb} ${vb}" aria-hidden="true">${body}</svg>`;
+
+let n = 0;
+function cellHtml(id){
+  const c = CELLS[id]; n += 1;
+  const lines = MODE === 'p' ? c.p : (c.x || c.p);
+  const src = MODE === 'l' ? (SRC_X[id] || c.src) : c.src;
+  const text = `<div class="ctitle">${esc(c.title)}</div><div class="clines">${esc(lines)}</div>`;
+  return `<div class="cell" style="background:${BANDS[c.band].css}">
+      <div class="chead"><div class="num">${String(n).padStart(2,'0')}</div>${svg(ICON[c.icon])}</div>
+      <div class="cbig${c.sm ? ' sm' : ''}">${esc(c.big)}</div>
+      ${MODE === 's' ? `<div class="ctext">${text}</div>` : text}
+      <div class="csrc">${esc(src)}</div>
+    </div>`;
+}
+
+const WORD = { mixed:'mixed', no:'contradicted', yes:'holds' };
+const legendChips = Object.values(BANDS).map(b => `<div class="chip"><i style="background:${b.css}"></i>${esc(b.legend)}<em>· ${WORD[b.verdict]}</em></div>`).join('')
+  + `<div class="chip"><i style="background:var(--c-pilot)"></i>First-party pilot</div>`;
+
+let gridHtml;
+if (MODE === 'l') {
+  gridHtml = ROWS_X.map(([band, ids]) => `<div class="col">
+      <div class="colhead" style="background:${BANDS[band].css}"><span>${esc(BANDS[band].col)}</span>${svg(VERDICT[BANDS[band].verdict],34)}</div>
+      ${ids.map(cellHtml).join('')}
+    </div>`).join('');
+} else {
+  gridHtml = (MODE === 'p' ? ROWS_P : ROWS_X).map(([band, ids]) => `<div class="row">
+      <div class="rail" style="background:${BANDS[band].css}">${svg(VERDICT[BANDS[band].verdict],34)}<span>${esc(BANDS[band].rail)}</span></div>
+      ${ids.map(cellHtml).join('')}
+    </div>`).join('');
+}
+
+const TITLE = {
+  p: { eyebrow:'New site, crowded local market · field chart · Sept 2026',
+       head:'of local keywords showed<br>a Google AI Overview',
+       thesis:'A new site’s gap is coverage, not markup',
+       sub:'seoClarity · 500M+ U.S. keywords · Sept 2025 (0.14% in March). Local questions: 92% (Whitespark).' },
+  s: { eyebrow:'New site, crowded local market · Sept 2026',
+       head:'of local keywords showed<br>a Google AI Overview',
+       thesis:'A new site’s gap is coverage, not markup',
+       sub:'seoClarity · 500M+ U.S. keywords · Sept 2025 (0.14% in March).' },
+  l: { eyebrow:'New site, crowded local market · field chart · Sept 2026',
+       head:'of local keywords showed a Google AI Overview',
+       thesis:'A new site’s gap is coverage, not markup',
+       sub:'' },
+}[MODE];
+
+const PILOT = {
+  p:'Waikiki surf school, 2026: 973 competitor pages crawled. Search Console clicks 5 → 54, impressions 470 → 1,652 over two 28-day windows. One site, small base; the explorer launched after the window.',
+  s:'Waikiki surf school, 2026: 973 competitor pages crawled. Clicks 5 → 54 over two 28-day windows. One site, small base.',
+  l:'Waikiki surf school, 2026: 973 competitor pages crawled; clicks 5 → 54 over two 28-day windows.',
+}[MODE];
+
+const SOURCES = 'Sources and dates on each cell · full list with links: mj2.pro/blog/rank-new-site-saturated-market';
+
+const titleHtml = MODE === 'l'
+  ? `<div class="titlebar"><div class="eyebrow">${esc(TITLE.eyebrow)}</div>
+       <div class="headrow"><div class="counter">0.01%</div>
+         <div class="htext"><div class="headline">${TITLE.head}</div><div class="thesis">${esc(TITLE.thesis)}</div></div></div></div>`
+  : `<div class="titlebar"><div class="eyebrow">${esc(TITLE.eyebrow)}</div>
+       <div class="headrow"><div class="counter">0.01%</div><div class="headline">${TITLE.head}</div></div>
+       <div class="thesis">${esc(TITLE.thesis)}</div>
+       <div class="subline">${TITLE.sub}</div></div>`;
+
+const markup = `
+  ${titleHtml}
+  ${MODE === 'l' ? '' : `<div class="legend"><div class="lab">Premise checked</div>${legendChips}</div>`}
+  <div class="grid">${gridHtml}</div>
+  <div class="foot">
+    <div class="strip pilot"><b>First-party pilot</b><div>${esc(PILOT)}</div></div>
+    ${MODE === 'p' ? `<div class="strip gap"><b>Not measured</b><div>No tours-and-activities touchpoint count exists; no independent check on Arival’s channel survey.</div></div>` : ''}
+    ${MODE === 'l'
+      ? `<div class="footrow"><div class="sources">${esc(SOURCES)}</div><div class="key">${svg(VERDICT.no,34)}<span>contradicted</span>${svg(VERDICT.mixed,34)}<span>mixed</span>${svg(VERDICT.yes,34)}<span>holds</span></div></div>`
+      : `<div class="sources">${esc(SOURCES)}</div>`}
+  </div>`;
+
+/* Parse the constant markup and move the nodes in (no user input reaches it). */
+const parsed = new DOMParser().parseFromString(`<div id="root">${markup}</div>`, 'text/html');
+document.getElementById('poster').replaceChildren(...parsed.getElementById('root').childNodes);
+
+const stage = document.getElementById('stage');
+function layout(){
+  stage.style.width = W + 'px'; stage.style.height = H + 'px';
+  const s = Math.min(window.innerWidth / W, window.innerHeight / H);
+  stage.style.transform = `scale(${s})`;
+}
+layout();
+window.addEventListener('resize', layout);
+
+window.VIZ = {
+  size: [W, H], mode: MODE, duration: 0,
+  seek(){},
+  ready: (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve())
+    .then(() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))))
+    .then(() => { layout(); document.documentElement.dataset.ready = '1'; return true; }),
+};
+</script>
+</body>
+</html>

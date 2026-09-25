@@ -1,0 +1,1302 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Two Roads Into Data</title>
+<meta name="description" content="A journey map of statistician vs data scientist on BLS, O*NET, survey and job-board data, with growth engineer and AI engineer shown as the two titles that have no BLS occupation code.">
+<style>
+  html, body { margin: 0; padding: 0; background: #FBF3E4; color: #17120F; }
+  body.fluid { height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+  #bar {
+    display: none; align-items: center; gap: 12px; margin: 0; padding: 9px 14px;
+    background: #17120F; color: #FFC53D;
+    font: 700 15px/1.3 'Avenir Next','Helvetica Neue',Helvetica,Arial,sans-serif; letter-spacing: .2px;
+  }
+  #bar.on { display: flex; }
+  #prompt { flex: 1; min-width: 0; margin: 0; }
+  #src-btn {
+    flex: none; font: 800 13px/1 'Avenir Next','Helvetica Neue',Helvetica,Arial,sans-serif; letter-spacing: .8px;
+    text-transform: uppercase; color: #17120F; background: #FFC53D; border: 0; border-radius: 999px;
+    padding: 8px 13px; cursor: pointer;
+  }
+  #src-btn:focus-visible { outline: 3px solid #FBF3E4; outline-offset: 2px; }
+  #stage { position: relative; overflow: hidden; }
+  body.fluid #stage { flex: 1; min-height: 0; }
+  svg { display: block; }
+  body.fluid svg { width: 100%; height: 100%; }
+  svg a { cursor: pointer; }
+  svg a:focus { outline: none; }
+  #drawer {
+    position: absolute; left: 0; right: 0; bottom: 0; max-height: 80%; overflow: auto; box-sizing: border-box;
+    background: #FBF3E4; border-top: 6px solid #E8441F; box-shadow: 0 -12px 30px rgba(23,18,15,.28);
+    padding: 14px 18px 20px; font: 500 14px/1.45 'Avenir Next','Helvetica Neue',Helvetica,Arial,sans-serif; color: #17120F;
+  }
+  #drawer[hidden] { display: none; }
+  #drawer .dh { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 0 8px; }
+  #drawer h2 { margin: 0; font: 800 16px/1.2 'Avenir Next','Helvetica Neue',Helvetica,Arial,sans-serif; letter-spacing: 1.4px; text-transform: uppercase; }
+  #drawer h2:focus { outline: none; }
+  #drawer .x { font: 800 13px/1 'Avenir Next',sans-serif; letter-spacing: .8px; text-transform: uppercase; background: #17120F; color: #FBF3E4; border: 0; border-radius: 999px; padding: 8px 12px; cursor: pointer; }
+  #drawer .x:focus-visible { outline: 3px solid #E8441F; outline-offset: 2px; }
+  #drawer ol { margin: 0; padding-left: 22px; }
+  #drawer li { margin: 0 0 8px; }
+  #drawer li b { font-weight: 800; }
+  #drawer .when { color: #6E6055; }
+  #drawer a { color: #A92E12; text-underline-offset: 2px; word-break: break-word; }
+  #drawer p.note { margin: 10px 0 0; color: #6E6055; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+</style>
+</head>
+<body>
+<div id="bar">
+  <p id="prompt">Click a stop on either road to jump to its section.</p>
+  <button id="src-btn" type="button" aria-expanded="false" aria-controls="drawer">Sources</button>
+</div>
+<div id="stage">
+  <svg id="viz" xmlns="http://www.w3.org/2000/svg"></svg>
+  <aside id="drawer" aria-labelledby="drawer-h" hidden>
+    <div class="dh"><h2 id="drawer-h" tabindex="-1">Sources and methods</h2><button class="x" type="button">Close</button></div>
+    <ol id="drawer-list"></ol>
+    <p class="note" id="drawer-note"></p>
+  </aside>
+</div>
+<p class="sr-only" id="summary"></p>
+<script>
+/* ============================================================================
+   TWO ROADS INTO DATA — statistician vs data scientist as a journey map.
+   Visual language: content-studio/viz/directions/05-journey-map (v2, approved
+   2026-09-22). Self-contained: no network requests, macOS system fonts only.
+
+   Two paved roads leave one trailhead ("a career in data") and pass the same
+   five stops — education gate, pay, employment & growth, tools, live postings —
+   to a dark journey's end that states the practice difference. Growth engineer
+   and AI engineer leave the same trailhead as dashed side paths that end at
+   signposts: no BLS occupation code, so no stop on either road has data for
+   them; only job-board counts do.
+
+   URL params
+     ?size=1080x1350 | 1080x1080 | 2160x2700 | 640x800 | portrait | square
+                 fixed pixel size (exports). Omit it (or size=fluid) for the
+                 live page: the map then fits whatever frame it is given.
+     ?format=square   square layout in fluid mode
+     ?poster=1   freeze at the settled frame; hides the prompt bar and drawer
+     ?gif=1      static clock, the exporter drives it; hides the prompt bar
+     ?static=1   no rAF; only window.VIZ.seek() moves the clock
+     ?t=4.2      seek to a time in seconds
+     ?parent=https://mj2.pro/blog/statistician-vs-data-scientist/
+                 base URL for every stop's fallback link. Without it: when framed,
+                 document.referrer (the embedding page); when opened on its own
+                 (e.g. from the LinkedIn link), the post URL in STANDALONE_PARENT —
+                 never a top-level referrer, which would be LinkedIn or Google.
+                 Only http(s)/file URLs count.
+
+   Click contract (same message type as the search-intent maps)
+     A click, Enter or Space on a stop highlights it and posts
+       { type: 'viz-intent', intent: '<section>', stop: '<stop>' }
+     to window.parent; the stop is also a plain <a target="_top"> to
+       <parent>#role-<section>
+     for hosts that do not listen. <section> is always an anchor that exists in
+     drafts/2026-09-14-statistician-vs-data-scientist.blog.md:
+       no-bls-code | pay | growth | education | practice | methods
+     (tools and postings have no section of their own; both map to "methods").
+
+   Export hook
+     window.VIZ = { ready, duration, seek(t), frame(), selectIntent(slug), stops }
+     document.documentElement.dataset.ready === '1' once the first paint is done.
+
+   Every figure is lifted from content-studio/research/2026-09-14/roles/data.json;
+   the ledger path is noted beside each one. Two derived figures are the ledger's
+   own shock-stat wording (shock-stats.md #1 "more than 3x", #2 "~$35K", #3
+   "12.3x"). Nothing else is derived, averaged or invented.
+   ========================================================================= */
+
+/* ------------------------------------------------------------------ params */
+const Q = new URLSearchParams(location.search);
+const POSTER = Q.has('poster'), GIFMODE = Q.has('gif');
+const STATIC = POSTER || GIFMODE || Q.has('static');
+const INTERACTIVE = !POSTER && !GIFMODE;
+const rawSize = (Q.get('size') || '').toLowerCase();
+const FLUID = !rawSize || rawSize === 'fluid';
+const SIZE = (() => {
+  if (rawSize === 'portrait') return { w: 1080, h: 1350 };
+  if (rawSize === 'square') return { w: 1080, h: 1080 };
+  const m = rawSize.match(/^(\d+)\s*[x×]\s*(\d+)$/);
+  if (m) return { w: +m[1], h: +m[2] };
+  return Q.get('format') === 'square' ? { w: 1080, h: 1080 } : { w: 1080, h: 1350 };
+})();
+const SQ = Math.abs(SIZE.w / SIZE.h - 1) < 0.06;
+const FMT = SQ ? 'square' : 'portrait';
+if (FLUID) document.body.classList.add('fluid');
+if (INTERACTIVE) document.getElementById('bar').classList.add('on');
+
+/* ------------------------------------------------------------------ palette */
+const C = {
+  cream: '#FBF3E4', paper: '#F4E7CD', paper2: '#EFDFC0',
+  ink: '#17120F', muted: '#5E5249', rule: '#D9C7A6', ghost: '#D2BE9B',   // muted darkened 2026-09-24: >= 5.6:1 on every tint and on the signpost hatching
+  gold: '#FFC53D', flag: '#E8441F', flagDeep: '#A82D12', flagTint: '#FCE3D9',  // flagDeep = red text + chips; darkened 2026-09-24: >= 5.1:1 on pink/green tints and hatching
+  bar: '#B22F16',                 // title bar. Measured worst case incl. the 5% white stripes: cream 5.29:1, eyebrow 4.69:1, numeral 4.02:1
+  eyebrow: '#FFE594',             // lighter gold for the 18px/15px eyebrow (the #FFC53D numeral is large text)
+  road: '#8C5A2B', roadDark: '#6B4220', endText: '#E9DCC8',
+};
+const TC = {                      // one colour per territory; deep = header strip + big figures
+  education: { deep: '#6A3FD1', tint: '#E7DFFB' },
+  pay:       { deep: '#217A45', tint: '#DCF0E1' },
+  growth:    { deep: '#0B7A7C', tint: '#DCF0EE' },
+  tools:     { deep: '#9A6300', tint: '#FBEACA' },
+  postings:  { deep: '#CC1D63', tint: '#FBDDE9', ink: '#A3164E' },   // ink: board counts, which are normal-size text on the square (17px)
+};
+const DISPLAY = "'Avenir Next Condensed','Arial Narrow',Impact,sans-serif";
+const BODY    = "'Avenir Next','Helvetica Neue',Helvetica,Arial,sans-serif";
+
+/* -------------------------------------------------------------------- copy */
+const COPY = {
+  eyebrow: 'FOUR DATA JOB TITLES, MAPPED  ·  BLS  ·  O*NET  ·  SURVEYS  ·  JOB BOARDS',
+  big: '2 OF 4',
+  lines: ['DATA JOB TITLES', 'DON’T OFFICIALLY EXIST', 'TO THE U.S. GOVERNMENT'],
+  sub: 'Growth engineer and AI engineer have no BLS occupation code: no wage table, no 2035 projection.',
+  subSq: 'Growth engineer and AI engineer have no BLS occupation code.',
+  trailhead: 'A CAREER IN DATA',
+};
+
+/* The two roads' names ride in every stop's header strip (left = statistician,
+   right = data scientist); stop 1 also carries the SOC code. */
+const ROLE = {
+  stat: { name: 'STATISTICIAN', soc: 'SOC 15-2041' },   // roles.statistician.soc_code
+  ds:   { name: 'DATA SCIENTIST', soc: 'SOC 15-2051' }, // roles.data_scientist.soc_code
+};
+
+/* Row types: fig (big figure + label + sub), note (small text, wraps),
+   tool (condensed text as the figure), board (count + board + method).
+   `sq` = shorter text for the square poster; sq: null drops the row there. */
+const STOPS = [
+  {
+    n: 1, key: 'education', section: 'education', title: 'EDUCATION GATE', label: 'Stop 1, education gate', icon: 'cap',
+    left: [
+      { t: 'fig', fig: '62%', roll: { to: 62, fmt: 'pct0' }, label: 'HOLD A MASTER’S', sub: 'O*NET · highest credential' },   // roles.statistician.onet.education_distribution_pct.masters
+      { t: 'note', text: '10% doctoral · 14% bachelor’s · BLS typical entry: master’s',                                        // .doctoral, .bachelors; roles.statistician.typical_education
+        sq: '10% doctoral · 14% bachelor’s · BLS entry: master’s' },
+    ],
+    right: [
+      { t: 'fig', fig: '48% · 44%', label: 'BACHELOR’S · MASTER’S', sub: 'O*NET · highest credential' },                     // roles.data_scientist.onet.education_distribution_pct
+      { t: 'note', text: 'BLS typical entry: bachelor’s, one degree tier lower',                                               // roles.data_scientist.typical_education; shock-stats #4
+        sq: 'BLS entry: bachelor’s, a tier lower' },
+    ],
+  },
+  {
+    n: 2, key: 'pay', section: 'pay', title: 'PAY', label: 'Stop 2, pay', icon: 'note',
+    left: [
+      { t: 'fig', fig: '$105,650', roll: { to: 105650, fmt: 'usd' }, label: 'MEDIAN PAY', sub: 'BLS OOH · May 2025 wages' },  // roles.statistician.median_pay_2025_usd
+      { t: 'fig', size: 'fig2', flip: true, fig: '$167,180', label: 'IN COMPUTER SYSTEMS DESIGN', sub: 'THE FLIP: ~$35K above data scientists' }, // .pay_by_industry_usd_median_annual[0]; shock-stats #2
+    ],
+    right: [
+      { t: 'fig', fig: '$120,230', roll: { to: 120230, fmt: 'usd' }, label: 'MEDIAN PAY', sub: 'BLS OOH · May 2025 wages' },  // roles.data_scientist.median_pay_2025_usd
+      { t: 'fig', size: 'fig2', fig: '$132,380', label: 'IN COMPUTER SYSTEMS DESIGN', sub: 'the one top-five industry they share' }, // .pay_by_industry_usd_median_annual[1]; both industry_employment_share_pct lists
+    ],
+    strip: { text: 'Self-reported data-scientist pay, not averaged: $82,910 global · $160,000 US-only (Stack Overflow 2025 and a US re-cut)',   // surveys.stack_overflow_2025.global_median_annual_comp_usd.data_scientist; .us_specific_...data_scientist_ml_specialist
+             sq: 'Self-reported, not averaged: $82,910 global · $160,000 US-only (SO 2025 + US re-cut)' },
+  },
+  {
+    n: 3, key: 'growth', section: 'growth', title: 'EMPLOYMENT & GROWTH', label: 'Stop 3, employment and growth', icon: 'trend',
+    left: [
+      { t: 'fig', fig: '+11%', roll: { to: 11, fmt: 'plus' }, label: 'MORE JOBS BY 2035', sub: 'BLS OOH projection from 2025' },            // roles.statistician.growth_pct_2025_2035
+      { t: 'note', text: '31,300 employed (BLS OOH) · 29,030 in the OEWS survey',                                              // .employment_2025_ooh / .employment_2025_oews_news_release
+        sq: '31,300 employed (OOH) · 29,030 (OEWS)' },
+    ],
+    right: [
+      { t: 'fig', fig: '+35%', roll: { to: 35, fmt: 'plus' }, label: 'MORE JOBS BY 2035', sub: 'BLS OOH · more than 3× the statistician rate', sqSub: 'BLS OOH · over 3× the statistician rate' }, // roles.data_scientist.growth_pct_2025_2035; shock-stats #1
+      { t: 'note', text: '275,600 employed (BLS OOH) · 262,440 in the OEWS survey',                                            // .employment_2025_ooh / .employment_2025_oews_news_release
+        sq: '275,600 employed (OOH) · 262,440 (OEWS)' },
+    ],
+  },
+  {
+    n: 4, key: 'tools', section: 'methods', title: 'TOOLS', label: 'Stop 4, tools', icon: 'gear',
+    left: [
+      { t: 'tool', text: 'SPSS · SAS · MINITAB · MATLAB', sub: 'Primary tools · O*NET 15-2041' },                             // practice_differences[Primary tools].statistician
+    ],
+    right: [
+      { t: 'tool', text: 'TENSORFLOW · SPARK · KUBERNETES', sub: 'Primary tools · O*NET 15-2051' },                           // practice_differences[Primary tools].data_scientist
+    ],
+    strip: { text: 'Stack Overflow 2025, 31,771 respondents of every role: Python 57.9% (up 7 points in a year) · SQL 58.6% · R 4.9%',   // surveys.stack_overflow_2025.language_usage_pct.all_respondents; .notable_quote
+             sq: 'Stack Overflow 2025, 31,771 respondents, every role: Python 57.9% · SQL 58.6% · R 4.9%' },
+  },
+  {
+    n: 5, key: 'postings', section: 'methods', title: 'LIVE POSTINGS', label: 'Stop 5, live postings', icon: 'case',
+    left: [   // job_postings_snapshot_2026_09_14.*.results[statistician]
+      { t: 'board', count: '1,000', board: 'INDEED', how: 'rounded display bucket', sqHow: 'rounded bucket' },
+      { t: 'board', count: '2', roll: { to: 2, fmt: 'int' }, board: 'BUILT IN', how: 'exact count' },
+      { t: 'board', count: '', board: 'WELLFOUND', how: 'no role page for this title', sqHow: 'no role page', gap: true },
+    ],
+    right: [  // job_postings_snapshot_2026_09_14.*.results[data scientist]
+      { t: 'board', count: '', board: 'INDEED', how: 'no count displayed', gap: true },
+      { t: 'board', count: '32', roll: { to: 32, fmt: 'int' }, board: 'BUILT IN', how: 'exact count' },
+      { t: 'board', count: '161', roll: { to: 161, fmt: 'int' }, board: 'WELLFOUND', how: 'remote-only listings', sqHow: 'remote only' },
+    ],
+    strip: { text: 'Snapshot 2026-09-14; counts drift within hours. Built In’s index skewed to Binance and APAC listings that day.',   // job_postings_snapshot_2026_09_14.*.caveat
+             sq: 'Snapshot 2026-09-14 · Built In’s index skewed to Binance/APAC that day' },
+  },
+];
+
+const SIDE = [   // the two titles with no SOC code — roles.growth_engineer / roles.ai_engineer
+  {
+    key: 'growth-engineer', section: 'no-bls-code', side: 'L', title: 'GROWTH ENGINEER', label: 'Growth engineer, no BLS code',
+    rows: [
+      { t: 'fig', size: 'sideFig', fig: '50', roll: { to: 50, fmt: 'int' }, label: 'INDEED LISTINGS', sub: 'rounded display bucket' },   // indeed.results[growth engineer]
+      { t: 'board', count: '3', board: 'BUILT IN', how: 'exact count' },                                                                // built_in.results[growth engineer]
+      { t: 'board', count: '', board: 'WELLFOUND', how: 'no role page', gap: true },                                                   // wellfound.results[growth engineer]
+    ],
+  },
+  {
+    key: 'ai-engineer', section: 'no-bls-code', side: 'R', title: 'AI ENGINEER', label: 'AI engineer, no BLS code',
+    rows: [
+      { t: 'fig', size: 'sideFig', fig: '1,985', roll: { to: 1985, fmt: 'int' }, label: 'WELLFOUND · REMOTE', sub: 'vs 161 data scientist · 12.3×' },  // wellfound.results[AI engineer]; shock-stats #3
+      { t: 'board', count: '103', board: 'BUILT IN', how: 'exact count' },                                                             // built_in.results[AI engineer]
+      { t: 'board', count: '3,000', board: 'INDEED', how: 'rounded bucket' },                                                          // indeed.results[AI engineer]
+    ],
+  },
+];
+
+const END = {   // practice_differences[Core objective] — Yardstick; [Analytical posture] — Indeed Career Advice
+  key: 'practice', section: 'practice',
+  eyebrow: 'JOURNEY’S END · THE PRACTICE DIFFERENCE',
+  src: 'YARDSTICK · INDEED CAREER ADVICE',
+  left:  { head: 'PROVE WHY', text: 'Statistician · inference: design the study, quantify the uncertainty, defend the result.' },
+  right: { head: 'PREDICT WHAT NEXT', text: 'Data scientist · prediction: build and ship a model optimized for forecast accuracy.' },
+};
+
+const KEY = [
+  { icon: 'road',  label: 'PAVED ROAD',       val: 'a title with a BLS code',           sq: 'has a BLS code' },
+  { icon: 'path',  label: 'DASHED PATH',      val: 'no BLS code; boards only',          sq: 'no BLS code' },
+  { icon: 'pip',   label: 'STOP',             val: 'both roads stop at all five',       sq: 'on both roads' },
+  { icon: 'book',  label: 'BLS OOH',          val: 'Handbook: pay, 2035 outlook',       sq: 'Handbook, May 2025' },
+  { icon: 'clip',  label: 'OEWS',             val: 'BLS wage survey, own head count',   sq: 'BLS wage survey' },
+  { icon: 'glass', label: 'SCOPE',            val: 'stated per figure, never averaged', sq: 'never averaged' },
+];
+
+const SOURCE_LINE = 'Sources: BLS Occupational Outlook Handbook, 2025 ed. (updated 2026-08-27) · BLS OEWS, May 2025 · O*NET OnLine · Stack Overflow 2025 · Indeed, Built In, Wellfound (2026-09-14) · Yardstick · Indeed Career Advice';
+const SOURCE_LINE_SHORT = 'Sources: BLS OOH 2025 ed. (updated 2026-08-27) · BLS OEWS May 2025 · O*NET · Stack Overflow 2025 · Indeed, Built In, Wellfound (2026-09-14) · Yardstick';
+
+/* Sources drawer (live page only). Every entry is in roles/sources.md + data.json. */
+const SOURCES = [
+  { name: 'BLS Occupational Outlook Handbook, 2025 edition', when: 'page updated 2026-08-27; May 2025 wages; 2025–35 projections',
+    links: [['Statisticians', 'https://www.bls.gov/ooh/math/mathematicians-and-statisticians.htm'], ['Data scientists', 'https://www.bls.gov/ooh/math/data-scientists.htm']],
+    use: 'Median pay ($105,650 / $120,230), the computer-systems-design pay flip ($167,180 / $132,380, the Pay tab’s industry table), 2025 employment (31,300 / 275,600), 2025–35 growth (+11% / +35%), typical entry degree.' },
+  { name: 'BLS Occupational Employment and Wage Statistics, May 2025 (USDL-26-0725, Table 1)', when: 'released 2026-05-15',
+    links: [['Table 1', 'https://www.bls.gov/news.release/ocwage.t01.htm']],
+    use: 'The survey head counts shown beside OOH: 29,030 statisticians, 262,440 data scientists. A different BLS product from the Handbook, so the two are shown side by side, not merged.' },
+  { name: 'O*NET OnLine', when: 'accessed 2026-09-14',
+    links: [['15-2041.00', 'https://www.onetonline.org/link/summary/15-2041.00'], ['15-2051.00', 'https://www.onetonline.org/link/summary/15-2051.00']],
+    use: 'Highest-credential shares (62% master’s; 48% bachelor’s / 44% master’s) and primary tools. The shares do not sum to 100; the rest sits in tiers O*NET does not itemize there.' },
+  { name: 'Stack Overflow Developer Survey 2025', when: 'results mid-2025',
+    links: [['Work section', 'https://survey.stackoverflow.co/2025/work']],
+    use: '$82,910 global median pay for data scientists (48,178 respondents with employment data); Python 57.9%, SQL 58.6%, R 4.9% among 31,771 respondents of every role; Python up 7 points on 2024.' },
+  { name: 'techrecruiting.io, US-only re-cut of the Stack Overflow 2025 data', when: 'secondary analysis, accessed 2026-09-14',
+    links: [['Analysis', 'https://techrecruiting.io/en/stack-overflow-developer-survey-2025-usa/']],
+    use: '$160,000 for US data scientists / ML specialists. Same survey, different scope; never averaged with the global figure or with BLS.' },
+  { name: 'Indeed job search', when: 'live snapshot 2026-09-14',
+    links: [['Search', 'https://www.indeed.com/jobs?q=%22AI+engineer%22&l=']],
+    use: 'Counts read from the page title, which Indeed rounds into display buckets: statistician 1,000, AI engineer 3,000, growth engineer 50; data scientist showed no number.' },
+  { name: 'Built In job search', when: 'live snapshot 2026-09-14',
+    links: [['Search', 'https://builtin.com/jobs?search=AI%20engineer']],
+    use: 'Exact counts by paging, 25 per page: statistician 2, data scientist 32, growth engineer 3, AI engineer 103. That day’s index skewed to Binance and APAC listings.' },
+  { name: 'Wellfound role pages', when: 'live snapshot 2026-09-14, remote-only by default',
+    links: [['AI engineer', 'https://wellfound.com/role/r/ai-engineer'], ['Data scientist', 'https://wellfound.com/role/r/data-scientist']],
+    use: 'AI engineer 1,985 vs data scientist 161. Statistician and growth engineer have no role page, so no count is shown for them.' },
+  { name: 'BLS SOC guidance and TechBridge SOC mapping', when: 'accessed 2026-09-14',
+    links: [['BLS', 'https://www.bls.gov/soc/notices/2022/finding_soc_code.htm'], ['TechBridge', 'https://techbridgeinc.com/choosing-the-right-soc-code-for-tech-roles-a-guide-for-startups-and-immigration-attorneys/']],
+    use: 'Growth engineer and AI engineer have no SOC occupation code, no Handbook page and no OEWS table.' },
+  { name: 'Yardstick role comparison · Indeed Career Advice', when: 'accessed 2026-09-14',
+    links: [['Yardstick', 'https://yardstick.team/compare-roles/what-is-the-difference-between-data-scientist-and-statistician'], ['Indeed', 'https://www.indeed.com/career-advice/finding-a-job/data-scientist-vs-statistician']],
+    use: 'Journey’s end: inference (prove why) vs prediction (predict what next); hypothesis-driven vs exploratory.' },
+];
+const SOURCE_NOTE = 'Full ledger with every figure, source and date: content-studio/research/2026-09-14/roles/data.json.';
+
+/* ------------------------------------------------------------------ layout */
+const F = SQ ? {
+  eyebrow: 15, big: 94, bigLines: 23, sub: 15,
+  pill: 17, sideTitle: 19, chip: 12, sideFig: 30, sideLab: 12.5, sideSub: 12, sideBoard: 17, sideBoardTxt: 12.5,
+  head: 21, tag: 13, disc: 16, fig: 32, fig2: 30, lab: 14, lab2: 12.5, sub2: 12.5, note: 14, strip: 13.5, tool: 20, toolSub: 13.5,
+  board: 17, boardTxt: 13.5,
+  endEye: 13, endHead: 27, endTxt: 14, endSrc: 12.5,
+  keyCap: 13, keyTxt: 13.5, src: 12,
+} : {
+  eyebrow: 18, big: 120, bigLines: 30, sub: 19,
+  pill: 21, sideTitle: 23, chip: 14, sideFig: 34, sideLab: 14, sideSub: 14, sideBoard: 20, sideBoardTxt: 14,
+  head: 26, tag: 14, disc: 19, fig: 40, fig2: 34, lab: 15, lab2: 14, sub2: 14, note: 14, strip: 14, tool: 25, toolSub: 14,
+  board: 22, boardTxt: 14,
+  endEye: 15, endHead: 35, endTxt: 15, endSrc: 14,
+  keyCap: 14, keyTxt: 14, src: 12.5,
+};
+const M = SQ ? {
+  W: 1080, H: 1080, titleH: 146, eyebrowY: 29, bigBase: 112, subY: 131,
+  trailTop: 154, sideW: 352, medR: 21, pillH: 26, pad: 13,
+  chanL: 38, chanR: 1042, bandX0: 66, bandX1: 1014, headH: 29, bodyPad: 7, gap: 4, stripGap: 5,
+  forkGap: 15, bandTop0: 16, minGap: 7, endX0: 112, endX1: 968, endPad: 12,
+  keyRowH: 21, keyCols: 3, keyLines: 1, srcY: 1071,
+} : {
+  W: 1080, H: 1350, titleH: 188, eyebrowY: 38, bigBase: 144, subY: 170,
+  trailTop: 198, sideW: 362, medR: 29, pillH: 30, pad: 16,
+  chanL: 44, chanR: 1036, bandX0: 76, bandX1: 1004, headH: 36, bodyPad: 8, gap: 7, stripGap: 7,
+  forkGap: 20, bandTop0: 20, minGap: 11, endX0: 120, endX1: 960, endPad: 16,
+  keyRowH: 26, keyCols: 3, keyLines: 1, srcY: 1342,
+};
+M.mid = (M.bandX0 + M.bandX1) / 2;
+
+/* ------------------------------------------------------------- svg helpers */
+const NS = 'http://www.w3.org/2000/svg';
+const svg = document.getElementById('viz');
+svg.setAttribute('viewBox', `0 0 ${M.W} ${M.H}`);
+svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+svg.setAttribute('role', 'group');
+svg.setAttribute('aria-labelledby', 'viz-title viz-desc');
+if (FLUID) {
+  svg.setAttribute('width', '100%'); svg.setAttribute('height', '100%');
+} else {
+  svg.setAttribute('width', SIZE.w); svg.setAttribute('height', SIZE.h);
+  const stage = document.getElementById('stage');
+  stage.style.width = SIZE.w + 'px'; stage.style.height = SIZE.h + 'px';
+}
+
+function el(tag, attrs = {}, parent = null) {
+  const n = document.createElementNS(NS, tag);
+  for (const [k, v] of Object.entries(attrs)) if (v !== null && v !== undefined) n.setAttribute(k, v);
+  if (parent) parent.appendChild(n);
+  return n;
+}
+const G = (parent, attrs = {}) => el('g', attrs, parent);
+el('title', { id: 'viz-title' }, svg).textContent = 'Two roads into data: statistician vs data scientist, and two titles with no BLS code';
+el('desc', { id: 'viz-desc' }, svg).textContent = 'A journey map. The full text of every figure is in the summary that follows the map.';
+
+const hidden = el('g', { visibility: 'hidden' }, svg);
+const probe = el('text', {}, hidden);
+function measure(str, s) {
+  probe.setAttribute('font-family', s.family || BODY);
+  probe.setAttribute('font-size', s.size);
+  probe.setAttribute('font-weight', s.weight || 400);
+  probe.setAttribute('letter-spacing', s.spacing || 0);
+  probe.textContent = str;
+  return probe.getComputedTextLength();
+}
+function wrap(str, maxW, s) {
+  const words = String(str).split(/\s+/);
+  const out = []; let cur = '';
+  for (const w of words) {
+    const t = cur ? cur + ' ' + w : w;
+    if (cur && measure(t, s) > maxW) { out.push(cur); cur = w; } else cur = t;
+  }
+  if (cur) out.push(cur);
+  return out;
+}
+function wrapBalanced(str, maxW, s) {
+  const lines = wrap(str, maxW, s);
+  if (lines.length !== 2 || measure(lines[1], s) >= maxW * 0.36) return lines;
+  for (const f of [0.8, 0.74, 0.68, 0.62, 0.56]) {
+    const alt = wrap(str, maxW * f, s);
+    if (alt.length === 2 && measure(alt[1], s) >= maxW * 0.36) return alt;
+  }
+  return lines;
+}
+function fit(str, maxW, s, min = 12) {
+  let n = s.size;
+  while (n > min && measure(str, { ...s, size: n }) > maxW) n -= 0.5;
+  return n;
+}
+/* One text line. `box` = the rect it may occupy; the exporter asserts the
+   rendered ink stays inside it, off the frame edge, off every other line and
+   off the roads. */
+function line(parent, str, x, y, s, box) {
+  const t = el('text', {
+    x, y,
+    'font-family': s.family || BODY,
+    'font-size': s.size,
+    'font-weight': s.weight || 400,
+    'letter-spacing': s.spacing || 0,
+    fill: s.fill || C.ink,
+    'text-anchor': s.anchor || 'start',
+  }, parent);
+  t.textContent = str;
+  if (box) t.setAttribute('data-box', box.map(v => Math.round(v * 10) / 10).join(','));
+  return t;
+}
+const FMTS = {
+  pct0: v => Math.round(v) + '%',
+  plus: v => '+' + Math.round(v) + '%',
+  usd:  v => '$' + Math.round(v).toLocaleString('en-US'),
+  int:  v => Math.round(v).toLocaleString('en-US'),
+};
+
+/* ------------------------------------------------------------------- icons */
+function icon(parent, kind, cx, cy, r, color, bg = C.cream) {
+  const g = G(parent, {});
+  const s = r / 12;
+  const P = d => el('path', { d, fill: color }, g);
+  const R = (x, y, w, h, rx, fill = color) => el('rect', { x, y, width: w, height: h, rx, fill }, g);
+  switch (kind) {
+    case 'cap':
+      P(`M${cx - 12.5 * s} ${cy - 3.5 * s} L${cx} ${cy - 10 * s} L${cx + 12.5 * s} ${cy - 3.5 * s} L${cx} ${cy + 3 * s} Z`);
+      P(`M${cx - 7.2 * s} ${cy + 0.2 * s} V${cy + 6 * s} Q${cx} ${cy + 10.5 * s} ${cx + 7.2 * s} ${cy + 6 * s} V${cy + 0.2 * s} L${cx} ${cy + 4 * s} Z`);
+      R(cx + 10 * s, cy - 3.6 * s, 1.9 * s, 9 * s, 0.9 * s);
+      break;
+    case 'note':
+      R(cx - 12.5 * s, cy - 7.8 * s, 25 * s, 15.6 * s, 2.6 * s);
+      el('circle', { cx, cy, r: 4.4 * s, fill: bg }, g);
+      el('circle', { cx: cx - 8.4 * s, cy, r: 1.5 * s, fill: bg }, g);
+      el('circle', { cx: cx + 8.4 * s, cy, r: 1.5 * s, fill: bg }, g);
+      break;
+    case 'trend':
+      el('path', { d: `M${cx - 11.5 * s} ${cy + 7.5 * s} L${cx - 3.6 * s} ${cy - 0.4 * s} L${cx + 1.6 * s} ${cy + 4.8 * s} L${cx + 8.5 * s} ${cy - 2.5 * s}`, fill: 'none', stroke: color, 'stroke-width': 3.4 * s, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, g);
+      P(`M${cx + 12 * s} ${cy - 9.5 * s} L${cx + 12 * s} ${cy + 0.5 * s} L${cx + 2 * s} ${cy - 9.5 * s} Z`);
+      break;
+    case 'gear':
+      for (let i = 0; i < 8; i++) el('rect', { x: cx - 2 * s, y: cy - 12 * s, width: 4 * s, height: 6 * s, rx: 0.9 * s, fill: color, transform: `rotate(${i * 45} ${cx} ${cy})` }, g);
+      el('circle', { cx, cy, r: 8.2 * s, fill: color }, g);
+      el('circle', { cx, cy, r: 3.3 * s, fill: bg }, g);
+      break;
+    case 'case':
+      el('rect', { x: cx - 5 * s, y: cy - 10 * s, width: 10 * s, height: 7 * s, rx: 2.2 * s, fill: 'none', stroke: color, 'stroke-width': 2.4 * s }, g);
+      R(cx - 12.5 * s, cy - 5 * s, 25 * s, 15.5 * s, 2.6 * s);
+      R(cx - 12.5 * s, cy + 0.6 * s, 25 * s, 1.8 * s, 0, bg);
+      R(cx - 2.2 * s, cy - 0.6 * s, 4.4 * s, 4.2 * s, 1 * s);
+      break;
+    case 'sign':
+      R(cx - 1.4 * s, cy - 11 * s, 2.8 * s, 23 * s, 1.1 * s);
+      P(`M${cx - 10.5 * s} ${cy - 9.5 * s} H${cx + 7 * s} L${cx + 11.5 * s} ${cy - 5.8 * s} L${cx + 7 * s} ${cy - 2.1 * s} H${cx - 10.5 * s} Z`);
+      P(`M${cx + 10.5 * s} ${cy + 0.2 * s} H${cx - 7 * s} L${cx - 11.5 * s} ${cy + 3.9 * s} L${cx - 7 * s} ${cy + 7.6 * s} H${cx + 10.5 * s} Z`);
+      break;
+    case 'flagpin':
+      R(cx - 1.4 * s, cy - 11 * s, 2.8 * s, 22 * s, 1.2 * s);
+      P(`M${cx + 1.4 * s} ${cy - 11 * s} L${cx + 12 * s} ${cy - 6.2 * s} L${cx + 1.4 * s} ${cy - 1.4 * s} Z`);
+      break;
+    case 'book':
+      R(cx - 11 * s, cy - 8 * s, 9.6 * s, 15 * s, 1.4 * s);
+      R(cx + 1.4 * s, cy - 8 * s, 9.6 * s, 15 * s, 1.4 * s);
+      R(cx - 0.9 * s, cy - 9.6 * s, 1.8 * s, 18 * s, 0.9 * s);
+      break;
+    case 'clip':
+      R(cx - 9 * s, cy - 9 * s, 18 * s, 21 * s, 2.2 * s);
+      R(cx - 4.5 * s, cy - 11.5 * s, 9 * s, 5 * s, 1.6 * s);
+      [0, 1, 2].forEach(i => R(cx - 5.5 * s, cy - 3 * s + i * 4.8 * s, 11 * s, 2.2 * s, 1.1 * s, bg));
+      break;
+    case 'glass':
+      el('circle', { cx: cx - 1.6 * s, cy: cy - 1.6 * s, r: 7.2 * s, fill: 'none', stroke: color, 'stroke-width': 3 * s }, g);
+      el('rect', { x: cx + 2.6 * s, y: cy + 2.6 * s, width: 3 * s, height: 10 * s, rx: 1.5 * s, fill: color, transform: `rotate(-45 ${cx + 4.1 * s} ${cy + 4.1 * s})` }, g);
+      break;
+    case 'road':
+      R(cx - 14 * s, cy - 4.5 * s, 28 * s, 9 * s, 4.5 * s, C.road);
+      [-8, 0, 8].forEach(dx => R(cx + dx * s - 2.4 * s, cy - 0.7 * s, 4.8 * s, 1.4 * s, 0.7 * s, C.cream));
+      break;
+    case 'path':
+      [-11, -3.7, 3.7, 11].forEach(dx => el('circle', { cx: cx + dx * s, cy, r: 2.6 * s, fill: C.flag }, g));
+      break;
+    case 'pip':
+      el('circle', { cx, cy, r: 9.5 * s, fill: C.cream, stroke: C.roadDark, 'stroke-width': 3 * s }, g);
+      el('circle', { cx, cy, r: 4.6 * s, fill: TC.growth.deep }, g);
+      break;
+  }
+  return g;
+}
+
+/* ----------------------------------------------------- mandala compass rose */
+function mandala(parent, cx, cy, r) {
+  const g = G(parent, {});
+  el('circle', { cx, cy, r, fill: C.ink }, g);
+  el('circle', { cx, cy, r: r * 0.94, fill: C.flag }, g);
+  for (let i = 0; i < 16; i++) {
+    const a = (i / 16) * Math.PI * 2 - Math.PI / 2;
+    const a1 = a - Math.PI / 30, a2 = a + Math.PI / 30;
+    const R1 = r * 0.9, r0 = r * 0.4;
+    const pt = (ang, rad) => `${(cx + Math.cos(ang) * rad).toFixed(1)} ${(cy + Math.sin(ang) * rad).toFixed(1)}`;
+    el('path', { d: `M${pt(a1, r0)} L${pt(a, R1)} L${pt(a2, r0)} Z`, fill: i % 2 ? C.gold : C.cream, opacity: i % 2 ? 1 : 0.9 }, g);
+  }
+  el('circle', { cx, cy, r: r * 0.44, fill: TC.growth.deep }, g);
+  el('circle', { cx, cy, r: r * 0.3, fill: C.gold }, g);
+  el('circle', { cx, cy, r: r * 0.15, fill: C.ink }, g);
+  return g;
+}
+
+/* ---------------------------------------------------------- road geometry */
+function roundedPolyline(pts, radius) {
+  let d = '';
+  for (let i = 0; i < pts.length; i++) {
+    const p = pts[i];
+    if (i === 0) { d += `M${p[0]} ${p[1]}`; continue; }
+    if (i === pts.length - 1) { d += ` L${p[0]} ${p[1]}`; continue; }
+    const prev = pts[i - 1], next = pts[i + 1];
+    const v1 = [p[0] - prev[0], p[1] - prev[1]], v2 = [next[0] - p[0], next[1] - p[1]];
+    const l1 = Math.hypot(v1[0], v1[1]), l2 = Math.hypot(v2[0], v2[1]);
+    const r = Math.min(radius, l1 / 2, l2 / 2);
+    const a = [p[0] - (v1[0] / l1) * r, p[1] - (v1[1] / l1) * r];
+    const b = [p[0] + (v2[0] / l2) * r, p[1] + (v2[1] / l2) * r];
+    d += ` L${a[0].toFixed(1)} ${a[1].toFixed(1)} Q${p[0]} ${p[1]} ${b[0].toFixed(1)} ${b[1].toFixed(1)}`;
+  }
+  return d;
+}
+/* A gentle meander so a trail reads as a road, not a border. The wobble
+   tapers to nothing at every corner and at both ends; `ampAt(point)` lets a
+   caller flatten stretches that run close to other things. */
+function meanderPts(pts, { amp = 9, wavelength = 165, ampAt = null } = {}) {
+  const d = roundedPolyline(pts, 26);
+  const tmp = el('path', { d }, hidden);
+  const total = tmp.getTotalLength();
+  const nearest = (px, py) => {
+    let best = 0, bd = Infinity;
+    for (let i = 0; i <= 800; i++) {
+      const l = (i / 800) * total, q = tmp.getPointAtLength(l);
+      const dd = (q.x - px) ** 2 + (q.y - py) ** 2;
+      if (dd < bd) { bd = dd; best = l; }
+    }
+    return best;
+  };
+  const corners = pts.slice(1, -1).map(pt => nearest(pt[0], pt[1]));
+  const N = Math.max(240, Math.round(total / 4));
+  const out = [];
+  for (let i = 0; i <= N; i++) {
+    const sL = (i / N) * total;
+    const p = tmp.getPointAtLength(sL);
+    const p0 = tmp.getPointAtLength(Math.max(0, sL - 2));
+    const p1 = tmp.getPointAtLength(Math.min(total, sL + 2));
+    const tx = p1.x - p0.x, ty = p1.y - p0.y, tl = Math.hypot(tx, ty) || 1;
+    let a = (ampAt ? ampAt(p) : amp) * Math.min(1, sL / 70) * Math.min(1, (total - sL) / 70);
+    for (const c of corners) { const dd = Math.abs(sL - c); if (dd < 48) a *= dd / 48; }
+    const off = a * Math.sin((sL / wavelength) * Math.PI * 2);
+    out.push([p.x - (ty / tl) * off, p.y + (tx / tl) * off]);
+  }
+  tmp.remove();
+  return out;
+}
+const toD = pts => 'M' + pts.map(q => `${q[0].toFixed(1)} ${q[1].toFixed(1)}`).join(' L');
+
+/* ============================================================ measure + place
+   Every block's height comes from its content, then the five stops share the
+   space left between the fork and journey's end. */
+const S = {   // text styles
+  fig:     n => ({ size: n, weight: 800, family: DISPLAY, spacing: -0.5 }),
+  lab:     n => ({ size: n, weight: 700, family: BODY, spacing: 1.0 }),
+  sub:     n => ({ size: n, weight: 500, family: BODY }),
+  note:    n => ({ size: n, weight: 600, family: BODY }),
+  board:   n => ({ size: n, weight: 800, family: DISPLAY, spacing: -0.3 }),
+  boardT:  n => ({ size: n, weight: 800, family: BODY, spacing: 1.0 }),
+  how:     n => ({ size: n, weight: 500, family: BODY }),
+  tool:    n => ({ size: n, weight: 800, family: DISPLAY, spacing: 0.4 }),
+};
+const figSize = r => (r.size ? F[r.size] : F.fig);
+
+/* A stack of rows inside one half of a stop (or a signpost). With dry=true it
+   only measures; otherwise it draws. Returns the height used. */
+function stack(g, rows, x, y0, w, o) {
+  const dry = !g;
+  let y = y0;
+  const nodes = { rollers: [], flip: null };
+  const BS = o.boardSize || F.board, BT = o.boardTxt || F.boardTxt;
+  const countW = o.countW !== undefined ? o.countW
+    : Math.max(0, ...rows.filter(r => r.t === 'board').map(r => measure(r.count || '0', S.board(BS))));
+  rows.forEach((r, i) => {
+    if (SQ && r.sq === null) return;
+    if (i) y += r.t === 'board' && rows[i - 1].t === 'board' ? (SQ ? 1 : 3) : M.gap;
+    if (r.t === 'fig') {
+      const fs = figSize(r);
+      const base = y + fs * 0.78;
+      const fstyle = S.fig(fs);
+      const figW = measure(r.fig, fstyle);
+      const small = fs < F.fig;
+      const labSize = r.size === 'sideFig' ? F.sideLab : small ? F.lab2 : F.lab;
+      const subSize = r.size === 'sideFig' ? F.sideSub : F.sub2;
+      if (!dry) {
+        if (r.flip) {   // the flip: a gold highlighter behind the figure
+          nodes.flip = el('rect', { x: x - 5, y: base - fs * 0.76, width: figW + 10, height: fs * 0.86, rx: 5, fill: C.gold }, g);
+        }
+        const fn = line(g, r.fig, x, base, { ...fstyle, fill: o.figFill }, [x, y, figW + 4, fs * 1.02]);
+        if (r.roll) nodes.rollers.push({ node: fn, ...r.roll });
+        const lx = x + figW + (SQ ? 9 : 12), lw = w - figW - (SQ ? 9 : 12);
+        const ls = S.lab(labSize), ss = S.sub(subSize);
+        const capTop = base - fs * 0.72;
+        const lb = capTop + labSize * 0.74;
+        line(g, r.label, lx, lb, { ...ls, size: fit(r.label, lw, ls, 12), fill: C.ink },
+          [lx - 1, lb - labSize * 0.8, lw + 2, labSize * 1.05]);
+        if (r.sub) {
+          const subTxt = SQ && r.sqSub ? r.sqSub : r.sub;
+          const flipSub = r.flip;
+          const sst = { ...ss, weight: flipSub ? 800 : 500 };
+          line(g, subTxt, lx, base, { ...sst, size: fit(subTxt, lw, sst, 12), fill: flipSub ? C.flagDeep : C.muted },
+            [lx - 1, base - subSize * 0.8, lw + 2, subSize * 1.05]);
+        }
+      }
+      y += fs;
+    } else if (r.t === 'note') {
+      const txt = SQ && r.sq ? r.sq : r.text;
+      const ns = S.note(F.note);
+      const size = fit(txt, w, ns, F.note - 1);
+      const lines = measure(txt, { ...ns, size }) > w ? wrapBalanced(txt, w, ns) : [txt];
+      lines.forEach((t, k) => {
+        const b = y + (lines.length > 1 ? F.note : size) * 0.78 + k * F.note * 1.28;
+        if (!dry) line(g, t, x, b, { ...ns, size: lines.length > 1 ? F.note : size, fill: C.ink }, [x - 1, b - F.note * 0.8, w + 2, F.note * 1.05]);
+      });
+      y += F.note + (lines.length - 1) * F.note * 1.28;
+    } else if (r.t === 'tool') {
+      const ts = S.tool(F.tool);
+      const size = fit(r.text, w, ts, 16);
+      const b = y + F.tool * 0.78;
+      if (!dry) line(g, r.text, x, b, { ...ts, size, fill: o.figFill }, [x - 1, y, w + 2, F.tool * 1.02]);
+      y += F.tool + (SQ ? 3 : 5);
+      const ss = S.sub(F.toolSub);
+      const b2 = y + F.toolSub * 0.78;
+      if (!dry) line(g, r.sub, x, b2, { ...ss, size: fit(r.sub, w, ss, 12), fill: C.muted }, [x - 1, b2 - F.toolSub * 0.8, w + 2, F.toolSub * 1.05]);
+      y += F.toolSub;
+    } else if (r.t === 'board') {
+      const bs = S.board(BS), bt = S.boardT(BT), hs = S.how(BT);
+      const base = y + BS * 0.78;
+      const cx = x + countW;                 // counts right-align on one column
+      const tx = cx + (countW ? (SQ ? 9 : 11) : 0);
+      if (!dry) {
+        if (r.count) {
+          const cn = line(g, r.count, cx, base, { ...bs, fill: o.countFill || o.figFill, anchor: 'end' }, [cx - countW - 4, y, countW + 5, BS * 1.02]);
+          if (r.roll) nodes.rollers.push({ node: cn, ...r.roll });
+        }
+        const bw = measure(r.board, bt);
+        line(g, r.board, tx, base, { ...bt, fill: C.ink }, [tx - 1, base - BT * 0.8, bw + 3, BT * 1.05]);
+        const hx = tx + bw + (SQ ? 7 : 9), hw = x + w - hx;
+        const how = SQ && r.sqHow ? r.sqHow : r.how;
+        const hst = { ...hs, weight: r.gap ? 700 : 500 };
+        line(g, how, hx, base, { ...hst, size: fit(how, hw, hst, 12), fill: r.gap ? C.flagDeep : C.muted },
+          [hx - 1, base - BT * 0.8, hw + 2, BT * 1.05]);
+      }
+      y += BS;
+    }
+  });
+  return { h: y - y0, nodes };
+}
+function stripH(st) { return st ? M.stripGap + F.strip : 0; }
+
+/* ---- measure every block */
+const bandInnerW = (M.bandX1 - M.bandX0) / 2 - M.pad - (SQ ? 12 : 16);
+const boardCountW = rows => Math.max(0, ...rows.filter(r => r.t === 'board').map(r => measure(r.count || '0', S.board(F.board))));
+STOPS.forEach(s => {
+  s.countW = boardCountW([...s.left, ...s.right]);
+  const lh = stack(null, s.left, 0, 0, bandInnerW, { countW: s.countW }).h;
+  const rh = stack(null, s.right, 0, 0, bandInnerW, { countW: s.countW }).h;
+  s.bodyH = Math.max(lh, rh);
+  s.h = M.headH + M.bodyPad + s.bodyH + stripH(s.strip) + M.bodyPad + (SQ ? 1 : 2);
+});
+const sideInnerW = M.sideW - M.pad * 2;
+const sideTitleH = SQ ? 24 : 28;
+const SIDE_OPT = { boardSize: F.sideBoard, boardTxt: F.sideBoardTxt };
+SIDE.forEach(s => { s.bodyH = stack(null, s.rows, 0, 0, sideInnerW, SIDE_OPT).h; s.h = sideTitleH + (SQ ? 6 : 8) + s.bodyH + (SQ ? 8 : 10); });
+const trailH = Math.max(...SIDE.map(s => s.h), M.medR * 2 + 8 + M.pillH);
+const endEyeH = SQ ? 24 : 28;
+const endTextStyle = S.sub(F.endTxt);
+const endHalfW = (M.endX1 - M.endX0) / 2 - M.endPad - 14;
+const endLines = side => wrapBalanced(END[side].text, endHalfW, endTextStyle);
+const END_H = endEyeH + F.endHead + (SQ ? 6 : 8) + Math.max(endLines('left').length, endLines('right').length) * F.endTxt * 1.3 + M.endPad - 2;
+
+/* ---- bottom block: map key + source line, built up from the bottom edge */
+const keyRows = Math.ceil(KEY.length / M.keyCols);
+const keyTop = M.srcY - F.src - (SQ ? 14 : 18) - keyRows * M.keyRowH;   // top of first key row
+const keyRuleY = keyTop - (SQ ? 6 : 8);
+const keyCapY = keyRuleY - (SQ ? 6 : 8);
+/* ---- vertical plan */
+const Y = {};
+Y.trailTop = M.trailTop;
+Y.trailBot = M.trailTop + trailH;
+Y.fork = Y.trailBot + M.forkGap;
+Y.bandsTop = Y.fork + M.bandTop0;
+Y.endBot = keyCapY - F.keyCap - (SQ ? 12 : 18);
+Y.endTop = Y.endBot - END_H;
+const bandsSum = STOPS.reduce((a, s) => a + s.h, 0);
+const freeGap = (Y.endTop - Y.bandsTop - bandsSum) / STOPS.length;   // four gaps between stops + one above the end card
+const GAP = Math.max(M.minGap, freeGap);
+{ let y = Y.bandsTop; STOPS.forEach(s => { s.y = y; y += s.h + GAP; }); }
+Y.endCy = Y.endTop + END_H / 2;
+
+/* ============================================================ build the map */
+const L = {
+  ground: G(svg), terrain: G(svg), ghost: G(svg), road: G(svg),
+  cards: G(svg), marks: G(svg), chrome: G(svg), fx: G(svg),
+};
+el('rect', { x: 0, y: 0, width: M.W, height: M.H, fill: C.cream }, L.ground);
+
+/* posterised terrain: flat blobs, contour rings, hatch ticks — deterministic */
+(function terrain() {
+  let seed = 20260924;
+  const rnd = () => (seed = (seed * 1664525 + 1013904223) % 4294967296) / 4294967296;
+  const top = M.titleH + 8, bot = keyCapY - 24;
+  for (let i = 0; i < 24; i++) {
+    const cx = 16 + rnd() * (M.W - 32), cy = top + rnd() * (bot - top), rr = 28 + rnd() * 64;
+    el('ellipse', { cx: cx.toFixed(1), cy: cy.toFixed(1), rx: rr.toFixed(1), ry: (rr * (0.48 + rnd() * 0.42)).toFixed(1), fill: rnd() > 0.5 ? C.paper : C.paper2 }, L.terrain);
+  }
+  for (let i = 0; i < 13; i++) {
+    const cx = 16 + rnd() * (M.W - 32), cy = top + rnd() * (bot - top), rr = 40 + rnd() * 92;
+    el('circle', { cx: cx.toFixed(1), cy: cy.toFixed(1), r: rr.toFixed(1), fill: 'none', stroke: C.rule, 'stroke-width': 2, opacity: 0.55 }, L.terrain);
+    el('circle', { cx: cx.toFixed(1), cy: cy.toFixed(1), r: (rr * 0.64).toFixed(1), fill: 'none', stroke: C.rule, 'stroke-width': 2, opacity: 0.45 }, L.terrain);
+  }
+  for (let i = 0; i < 80; i++) {
+    const x = 16 + rnd() * (M.W - 32), y = top + rnd() * (bot - top);
+    el('rect', { x: x.toFixed(1), y: y.toFixed(1), width: 8, height: 2.6, rx: 1.3, fill: C.rule, opacity: 0.6 }, L.terrain);
+  }
+})();
+
+/* --------------------------------------------------------------- title bar */
+(function titleBar() {
+  const g = L.chrome;
+  el('rect', { x: 0, y: 0, width: M.W, height: M.titleH, fill: C.bar }, g);
+  for (let i = 0; i < 14; i++) el('rect', { x: M.W - 420 + i * 30, y: 0, width: 11, height: M.titleH - 9, fill: '#FFFFFF', opacity: 0.05 }, g);
+  el('rect', { x: 0, y: M.titleH - 9, width: M.W, height: 9, fill: C.gold }, g);
+
+  const padX = SQ ? 34 : 40, wMax = M.W - padX * 2;
+  const eb = { size: F.eyebrow, weight: 800, family: BODY, spacing: 1.6 };
+  line(g, COPY.eyebrow, padX, M.eyebrowY, { ...eb, size: fit(COPY.eyebrow, wMax, eb, 12), fill: C.eyebrow },
+    [padX, M.eyebrowY - F.eyebrow * 0.8, wMax, F.eyebrow * 1.05]);
+
+  const bs = { size: F.big, weight: 800, family: DISPLAY, spacing: -2 };
+  const bigW = measure(COPY.big, bs);
+  line(g, COPY.big, padX - 2, M.bigBase, { ...bs, fill: C.gold }, [padX - 3, M.bigBase - F.big * 0.78, bigW + 6, F.big * 1.0]);
+
+  /* three lines to the right, their cap block spanning the numeral's cap height */
+  const lx = padX + bigW + (SQ ? 18 : 24), lw = M.W - padX - lx;
+  const hs = { size: F.bigLines, weight: 800, family: DISPLAY, spacing: 0.3 };
+  const size = Math.min(...COPY.lines.map(s => fit(s, lw, hs, 18)));
+  const capBig = F.big * 0.72, capL = size * 0.72;
+  const step = (capBig - capL) / 2;
+  COPY.lines.forEach((s, i) => {
+    const b = M.bigBase - capBig + capL + i * step;
+    line(g, s, lx, b, { ...hs, size, fill: C.cream }, [lx - 1, b - size * 0.8, lw + 2, size * 1.03]);
+  });
+
+  const ss = { size: F.sub, weight: 600, family: BODY };
+  const sub = SQ ? COPY.subSq : COPY.sub;
+  line(g, sub, padX, M.subY, { ...ss, size: fit(sub, wMax, ss, 12), fill: C.cream }, [padX, M.subY - F.sub * 0.8, wMax, F.sub * 1.05]);
+  g.querySelectorAll('text').forEach(t => t.setAttribute('data-zone', 'title'));   // the exporter's contrast gate keys on this
+})();
+
+/* ------------------------------------------------- the four-way trailhead */
+const MED = { x: M.W / 2, y: Y.trailTop + M.medR + (SQ ? 2 : 4), r: M.medR };
+const PILL = { cx: M.W / 2, cy: MED.y + M.medR + 6 + M.pillH / 2, h: M.pillH };
+PILL.bot = PILL.cy + M.pillH / 2;
+(function trailhead() {
+  const g = L.marks;
+  const ps = { size: F.pill, weight: 800, family: DISPLAY, spacing: 1.3 };
+  const tw = measure(COPY.trailhead, ps);
+  const w = tw + (SQ ? 30 : 38);
+  el('rect', { x: PILL.cx - w / 2, y: PILL.cy - PILL.h / 2, width: w, height: PILL.h, rx: PILL.h / 2, fill: C.ink }, g);
+  line(g, COPY.trailhead, PILL.cx, PILL.cy + F.pill * 0.36, { ...ps, fill: C.cream, anchor: 'middle' },
+    [PILL.cx - w / 2 + 4, PILL.cy - PILL.h / 2, w - 8, PILL.h]);
+  PILL.w = w;
+  mandala(g, MED.x, MED.y, MED.r);
+})();
+
+/* --------------------------------------------------- click / jump targets
+   A stop posts to the embedding parent AND is a plain top-level link. */
+function safeBase(u) {
+  if (!u) return '';
+  try {
+    const p = new URL(u, location.href);
+    if (!/^(https?|file):$/.test(p.protocol)) return '';
+    p.hash = '';
+    return p.href;
+  } catch (e) { return ''; }
+}
+const STANDALONE_PARENT = 'https://mj2.pro/blog/statistician-vs-data-scientist/';
+const FRAMED = (() => { try { return window.self !== window.top; } catch (e) { return true; } })();
+function parentUrl() {
+  const p = safeBase(Q.get('parent'));
+  if (p) return p;
+  if (!FRAMED) return STANDALONE_PARENT;   // top-level: the referrer is whoever linked here, not a host page
+  try { return safeBase(document.referrer); } catch (e) { return ''; }
+}
+const hrefFor = section => parentUrl() + '#role-' + section;
+const STOP_NODES = [];        // { key, section, a, ring, label }
+function stopLink(parent, key, section, label) {
+  const a = el('a', { href: hrefFor(section), target: '_top', tabindex: INTERACTIVE ? 0 : -1, 'aria-label': `${label}: read the section` }, parent);
+  a.setAttribute('data-stop', key);
+  a.setAttribute('data-section', section);
+  return a;
+}
+
+/* ------------------------------------------------------ side-path signposts */
+const SIGNS = {};
+SIDE.forEach(sp => {
+  const w = M.sideW, h = sp.h;
+  const x = sp.side === 'L' ? (SQ ? 20 : 22) : M.W - (SQ ? 20 : 22) - w;
+  const y = Y.trailTop + (trailH - h) / 2;
+  const a = stopLink(L.cards, sp.key, sp.section, sp.label);
+  const g = G(a);
+  el('rect', { x: x + 4, y: y + 5, width: w, height: h, rx: 16, fill: C.ink, opacity: 0.08 }, g);
+  el('rect', { x, y, width: w, height: h, rx: 16, fill: C.flagTint }, g);
+  const cid = 'clip-' + sp.key;
+  const cp = el('clipPath', { id: cid }, g);
+  el('rect', { x, y, width: w, height: h, rx: 16 }, cp);
+  const hatch = G(g, { 'clip-path': `url(#${cid})`, opacity: 0.08 });   // 8%, down from 16%, so text over it clears 4.5:1
+  for (let i = -h; i < w; i += 14) el('rect', { x: x + i, y: y - 4, width: 3, height: h * 1.8, fill: C.flag, transform: `rotate(35 ${x + i} ${y})` }, hatch);
+  el('rect', { x, y, width: w, height: h, rx: 16, fill: 'none', stroke: C.flag, 'stroke-width': 3, 'stroke-dasharray': '10 7' }, g);
+
+  const pad = M.pad;
+  const ts = { size: F.sideTitle, weight: 800, family: DISPLAY, spacing: 0.8 };
+  const tb = y + (SQ ? 19 : 24);
+  icon(g, 'sign', x + pad + (SQ ? 8 : 10), tb - F.sideTitle * 0.34, SQ ? 9 : 11, C.ink);
+  const tx = x + pad + (SQ ? 22 : 27);
+  const chipTxt = 'NO BLS CODE';
+  const cs = { size: F.chip, weight: 800, family: BODY, spacing: 1.2 };
+  const chipW = measure(chipTxt, cs) + (SQ ? 14 : 18), chipH = SQ ? 19 : 22;
+  const chipX = x + w - pad - chipW;
+  const titleW = chipX - 8 - tx;
+  line(g, sp.title, tx, tb, { ...ts, size: fit(sp.title, titleW, ts, 14), fill: C.ink }, [tx - 1, tb - F.sideTitle * 0.8, titleW + 2, F.sideTitle * 1.03]);
+  el('rect', { x: chipX, y: tb - F.sideTitle * 0.36 - chipH / 2, width: chipW, height: chipH, rx: chipH / 2, fill: C.flagDeep }, g);
+  line(g, chipTxt, chipX + chipW / 2, tb - F.sideTitle * 0.36 + F.chip * 0.36, { ...cs, fill: '#FFFFFF', anchor: 'middle' },
+    [chipX + 2, tb - F.sideTitle * 0.36 - chipH / 2, chipW - 4, chipH]);
+
+  const body = G(g, { 'data-body': sp.key });
+  const r = stack(body, sp.rows, x + pad, y + sideTitleH + (SQ ? 6 : 8), w - pad * 2, { ...SIDE_OPT, figFill: C.flagDeep });
+  const ring = el('rect', { x: x - 4, y: y - 4, width: w + 8, height: h + 8, rx: 19, fill: 'none', stroke: C.ink, 'stroke-width': 5, opacity: 0, 'pointer-events': 'none' }, g);
+  SIGNS[sp.key] = { x, y, w, h, body, rollers: r.nodes.rollers, side: sp.side };
+  STOP_NODES.push({ key: sp.key, section: sp.section, a, ring, label: sp.label });
+});
+
+/* -------------------------------------------------------------- the stops */
+const BANDS = {};
+STOPS.forEach(s => {
+  const x0 = M.bandX0, x1 = M.bandX1, w = x1 - x0, y = s.y, h = s.h, col = TC[s.key];
+  const a = stopLink(L.cards, s.key, s.section, s.label);
+  const g = G(a);
+  el('rect', { x: x0 + 5, y: y + 6, width: w, height: h, rx: 20, fill: C.ink, opacity: 0.10 }, g);
+  el('rect', { x: x0, y, width: w, height: h, rx: 20, fill: col.tint, stroke: col.deep, 'stroke-width': 3 }, g);
+  const cid = 'clip-' + s.key;
+  const cp = el('clipPath', { id: cid }, g);
+  el('rect', { x: x0, y, width: w, height: h, rx: 20 }, cp);
+  const rings = G(g, { 'clip-path': `url(#${cid})`, opacity: 0.13 });
+  for (let i = 0; i < 5; i++) el('circle', { cx: M.mid, cy: y + h + 30, r: 60 + i * 38, fill: 'none', stroke: col.deep, 'stroke-width': 3 }, rings);
+
+  const hh = M.headH;
+  el('path', { d: `M${x0} ${y + hh} V${y + 20} A20 20 0 0 1 ${x0 + 20} ${y} H${x1 - 20} A20 20 0 0 1 ${x1} ${y + 20} V${y + hh} Z`, fill: col.deep }, g);
+
+  /* header: role tags at both ends, number disc + name + icon centred */
+  const tg = { size: F.tag, weight: 800, family: BODY, spacing: 1.3 };
+  const tagY = y + hh / 2 + F.tag * 0.36;
+  const lt = s.n === 1 ? `${ROLE.stat.name} · ${ROLE.stat.soc}` : ROLE.stat.name;
+  const rt = s.n === 1 ? `${ROLE.ds.name} · ${ROLE.ds.soc}` : ROLE.ds.name;
+  const ltw = measure(lt, tg), rtw = measure(rt, tg);
+  line(g, lt, x0 + M.pad, tagY, { ...tg, fill: '#FFFFFF' }, [x0 + M.pad - 1, y + 2, ltw + 3, hh - 4]);
+  line(g, rt, x1 - M.pad, tagY, { ...tg, fill: '#FFFFFF', anchor: 'end' }, [x1 - M.pad - rtw - 2, y + 2, rtw + 3, hh - 4]);
+  const ns = { size: F.head, weight: 800, family: DISPLAY, spacing: 0.8 };
+  const nw = measure(s.title, ns);
+  const dr = SQ ? 11 : 13.5, iw = SQ ? 22 : 26;
+  const groupW = dr * 2 + 10 + nw + 10 + iw;
+  const gx = M.mid - groupW / 2;
+  const disc = G(L.marks, { 'data-disc': s.n });
+  el('circle', { cx: gx + dr, cy: y + hh / 2, r: dr, fill: C.cream, stroke: col.deep, 'stroke-width': 3 }, disc);
+  const nt = el('text', { x: gx + dr, y: y + hh / 2 + F.disc * 0.36, 'text-anchor': 'middle', 'font-family': DISPLAY, 'font-size': F.disc, 'font-weight': 800, fill: col.deep }, disc);
+  nt.textContent = s.n;
+  const nx = gx + dr * 2 + 10;
+  line(g, s.title, nx, y + hh / 2 + F.head * 0.35, { ...ns, fill: '#FFFFFF' }, [nx - 1, y + 2, nw + 3, hh - 4]);
+  icon(g, s.icon, nx + nw + 10 + iw / 2, y + hh / 2, SQ ? 9.5 : 11.5, '#FFFFFF', col.deep);
+
+  /* body: two halves split by a dashed divider, then an optional strip */
+  const body = G(g, { 'data-body': s.key });
+  const top = y + hh + M.bodyPad;
+  const lx = x0 + M.pad, rx = M.mid + (SQ ? 12 : 16);
+  const L1 = stack(body, s.left, lx, top, bandInnerW, { figFill: col.deep, countFill: col.ink, countW: s.countW });
+  const R1 = stack(body, s.right, rx, top, bandInnerW, { figFill: col.deep, countFill: col.ink, countW: s.countW });
+  const divBot = top + s.bodyH + 2;
+  el('line', { x1: M.mid, y1: y + hh + 6, x2: M.mid, y2: divBot, stroke: col.deep, 'stroke-width': 2, 'stroke-dasharray': '4 6', opacity: 0.5 }, g);
+  if (s.strip) {
+    const txt = SQ && s.strip.sq ? s.strip.sq : s.strip.text;
+    const st = { size: F.strip, weight: 600, family: BODY };
+    const sw = w - M.pad * 2;
+    const sb = top + s.bodyH + M.stripGap + F.strip * 0.78;
+    el('rect', { x: x0 + M.pad, y: sb - F.strip * 0.78 - M.stripGap / 2 - 1, width: sw, height: 1.5, fill: col.deep, opacity: 0.35 }, body);
+    line(body, txt, x0 + M.pad, sb, { ...st, size: fit(txt, sw, st, 12), fill: C.ink }, [x0 + M.pad - 1, sb - F.strip * 0.8, sw + 2, F.strip * 1.05]);
+  }
+  /* keep the decorative rings out from under text: the rings are masked with a
+     hole round every line, and the holes fade in with the text they protect */
+  const mkId = 'ringmask-' + s.key;
+  const mk = el('mask', { id: mkId, maskUnits: 'userSpaceOnUse', x: x0, y, width: w, height: h }, g);
+  el('rect', { x: x0, y, width: w, height: h, fill: '#fff' }, mk);
+  const cut = G(mk, {});
+  body.querySelectorAll('text').forEach(t => {
+    const b = t.getBBox();
+    el('rect', { x: b.x - 6, y: b.y - 4, width: b.width + 12, height: b.height + 8, rx: 5, fill: '#000' }, cut);
+  });
+  rings.setAttribute('mask', `url(#${mkId})`);
+  const ring = el('rect', { x: x0 - 4, y: y - 4, width: w + 8, height: h + 8, rx: 23, fill: 'none', stroke: C.flag, 'stroke-width': 6, opacity: 0, 'pointer-events': 'none' }, g);
+  BANDS[s.key] = { n: s.n, x0, x1, y, h, cy: y + h / 2, col, body, cut, disc, rollers: [...L1.nodes.rollers, ...R1.nodes.rollers], flip: L1.nodes.flip || R1.nodes.flip };
+  STOP_NODES.push({ key: s.key, section: s.section, a, ring, label: s.label });
+});
+
+/* ---------------------------------------------------------- journey's end */
+const ENDC = {};
+(function journeysEnd() {
+  const x = M.endX0, w = M.endX1 - M.endX0, y = Y.endTop, h = END_H;
+  const a = stopLink(L.cards, END.key, END.section, 'Journey’s end, the practice difference');
+  const g = G(a);
+  el('rect', { x: x + 5, y: y + 6, width: w, height: h, rx: 20, fill: C.ink, opacity: 0.2 }, g);
+  el('rect', { x, y, width: w, height: h, rx: 20, fill: C.ink, stroke: C.gold, 'stroke-width': 4 }, g);
+  const cp = el('clipPath', { id: 'clip-end' }, g);
+  el('rect', { x, y, width: w, height: h, rx: 20 }, cp);
+  const burst = G(g, { 'clip-path': 'url(#clip-end)' });
+  const bx0 = x + w / 2, by0 = y + h * 0.55;
+  for (let i = 0; i < 28; i++) {
+    const an = (i / 28) * Math.PI * 2, a1 = an - 0.045, a2 = an + 0.045, R = 520;
+    el('path', { d: `M${bx0} ${by0} L${(bx0 + Math.cos(a1) * R).toFixed(1)} ${(by0 + Math.sin(a1) * R).toFixed(1)} L${(bx0 + Math.cos(a2) * R).toFixed(1)} ${(by0 + Math.sin(a2) * R).toFixed(1)} Z`, fill: C.gold, opacity: 0.09 }, burst);
+  }
+  const pad = M.endPad;
+  const es = { size: F.endEye, weight: 800, family: BODY, spacing: 2 };
+  const ey = y + (SQ ? 19 : 24);
+  const srcS = { size: F.endSrc, weight: 700, family: BODY, spacing: 0.9 };
+  const srcW = measure(END.src, srcS);
+  icon(g, 'flagpin', x + pad + 8, ey - F.endEye * 0.36, SQ ? 8.5 : 10, C.gold);
+  const ex = x + pad + (SQ ? 20 : 24), ew = w - pad * 2 - srcW - 24 - (SQ ? 20 : 24);
+  line(g, END.eyebrow, ex, ey, { ...es, size: fit(END.eyebrow, ew, es, 12), fill: C.gold }, [ex - 1, ey - F.endEye * 0.8, ew + 2, F.endEye * 1.05]);
+  line(g, END.src, x + w - pad, ey, { ...srcS, fill: C.gold, anchor: 'end' }, [x + w - pad - srcW - 2, ey - F.endSrc * 0.8, srcW + 3, F.endSrc * 1.05]);
+  const mid = x + w / 2;
+  el('line', { x1: mid, y1: y + endEyeH + 2, x2: mid, y2: y + h - 12, stroke: C.gold, 'stroke-width': 2, 'stroke-dasharray': '4 6', opacity: 0.55 }, g);
+  const body = G(g, { 'data-body': 'end' });
+  const heads = [];
+  ['left', 'right'].forEach(side => {
+    const hx = side === 'left' ? x + pad : mid + (SQ ? 12 : 16);
+    const hw = endHalfW;
+    const hs = { size: F.endHead, weight: 800, family: DISPLAY, spacing: 0 };
+    const hb = y + endEyeH + F.endHead * 0.78;
+    const hsz = fit(END[side].head, hw, hs, 18);
+    heads.push(line(body, END[side].head, hx, hb, { ...hs, size: hsz, fill: C.gold }, [hx - 1, hb - F.endHead * 0.8, hw + 2, F.endHead * 1.02]));
+    endLines(side).forEach((t, k) => {
+      const b = hb + F.endHead * 0.22 + (SQ ? 6 : 8) + F.endTxt * 0.78 + k * F.endTxt * 1.3;
+      line(body, t, hx, b, { ...endTextStyle, fill: C.endText }, [hx - 1, b - F.endTxt * 0.8, hw + 2, F.endTxt * 1.05]);
+    });
+  });
+  const ring = el('rect', { x: x - 4, y: y - 4, width: w + 8, height: h + 8, rx: 23, fill: 'none', stroke: C.flag, 'stroke-width': 6, opacity: 0, 'pointer-events': 'none' }, g);
+  Object.assign(ENDC, { x, y, w, h, body });
+  STOP_NODES.push({ key: END.key, section: END.section, a, ring, label: 'Journey’s end, the practice difference' });
+})();
+
+/* ------------------------------------------------------------------- roads
+   Two roads leave the pill's foot together, fork along one gutter, run the
+   outer channels past the five stops and hook into journey's end from either
+   side. The right road is the left road mirrored, so both reach every stop at
+   the same moment. Cards draw after the roads (layer order), so the roads
+   read as passing behind the stops. */
+const ROUTE_L = [
+  [M.W / 2, PILL.bot + 3],
+  [M.W / 2, Y.fork],
+  [M.chanL, Y.fork],
+  [M.chanL, Y.endCy],
+  [M.endX0 + 1, Y.endCy],
+];
+const flatNear = p => (p.y < Y.fork + 30 ? 3.5 : 9);           // keep the fork gutter tidy
+const PTS_L = meanderPts(ROUTE_L, { amp: 9, wavelength: 165, ampAt: flatNear });
+const PTS_R = PTS_L.map(([x, y]) => [M.W - x, y]);
+const ROAD_D = [toD(PTS_L), toD(PTS_R)];
+
+ROAD_D.forEach(d => el('path', { d, fill: 'none', stroke: C.ghost, 'stroke-width': 13, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-dasharray': '2 13' }, L.ghost));
+
+const defs = el('defs', {}, svg);
+const roadMask = el('mask', { id: 'road-reveal', maskUnits: 'userSpaceOnUse', x: 0, y: 0, width: M.W, height: M.H }, defs);
+const roadBases = ROAD_D.map((d, i) => el('path', { d, fill: 'none', stroke: C.road, 'stroke-width': 14, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', mask: 'url(#road-reveal)', 'data-road': i ? 'right' : 'left' }, L.road));
+const ROAD_LEN = roadBases[0].getTotalLength();
+const roadReveals = ROAD_D.map(d => el('path', { d, fill: 'none', stroke: '#fff', 'stroke-width': 26, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-dasharray': `0 ${ROAD_LEN + 20}` }, roadMask));
+ROAD_D.forEach(d => el('path', { d, fill: 'none', stroke: C.cream, 'stroke-width': 2.8, 'stroke-dasharray': '10 11', mask: 'url(#road-reveal)' }, L.road));
+const chevrons = G(L.road, { mask: 'url(#road-reveal)' });
+roadBases.forEach(rb => {
+  const step = 118, w = 7.5, hgt = 9;
+  for (let d = 40; d < ROAD_LEN - 24; d += step) {
+    const p = rb.getPointAtLength(d), q = rb.getPointAtLength(Math.min(ROAD_LEN, d + 6));
+    const an = Math.atan2(q.y - p.y, q.x - p.x) * 180 / Math.PI;
+    el('path', { d: `M${-hgt} ${-w} L${hgt * 0.7} 0 L${-hgt} ${w} L${-hgt * 0.35} 0 Z`, fill: C.gold, transform: `translate(${p.x.toFixed(1)} ${p.y.toFixed(1)}) rotate(${an.toFixed(1)})` }, chevrons);
+  }
+});
+
+/* side paths: dashed footpaths from the medallion to each signpost */
+const sideD = SIDE.map(sp => {
+  const sg = SIGNS[sp.key];
+  const y = MED.y;
+  const x0 = sp.side === 'L' ? MED.x - MED.r - 2 : MED.x + MED.r + 2;
+  const x1 = sp.side === 'L' ? sg.x + sg.w + 2 : sg.x - 2;
+  const mx = (x0 + x1) / 2, bend = SQ ? 5 : 7;
+  return `M${x0} ${y} C${(x0 + mx) / 2} ${y - bend} ${(mx + x1) / 2} ${y + bend} ${x1} ${y}`;
+});
+sideD.forEach(d => el('path', { d, fill: 'none', stroke: C.ghost, 'stroke-width': 6, 'stroke-linecap': 'round', 'stroke-dasharray': '1 11' }, L.ghost));
+const sideMask = el('mask', { id: 'side-reveal', maskUnits: 'userSpaceOnUse', x: 0, y: 0, width: M.W, height: M.H }, defs);
+const sidePaths = sideD.map((d, i) => el('path', { d, fill: 'none', stroke: C.flag, 'stroke-width': 7, 'stroke-linecap': 'round', 'stroke-dasharray': '1 12', mask: 'url(#side-reveal)', 'data-road': i ? 'side-right' : 'side-left' }, L.road));
+const SIDE_LEN = sidePaths[0].getTotalLength();
+const sideReveals = sideD.map(d => el('path', { d, fill: 'none', stroke: '#fff', 'stroke-width': 18, 'stroke-linecap': 'round', 'stroke-dasharray': `0 ${SIDE_LEN + 20}` }, sideMask));
+
+/* travellers */
+const travel = G(L.fx);
+const travellers = [0, 1].map(() => ({
+  ring: el('circle', { r: 15, fill: C.gold, opacity: 0.5 }, travel),
+  dot: el('circle', { r: 9.5, fill: C.flag, stroke: C.cream, 'stroke-width': 3 }, travel),
+}));
+const sideTrav = [0, 1].map(() => el('circle', { r: 6.5, fill: C.flagDeep, stroke: C.cream, 'stroke-width': 2.5 }, travel));
+
+/* milestone pips where each road passes each stop */
+function lengthAt(path, px, py) {
+  let best = 0, bestD = Infinity;
+  for (let i = 0; i <= 1400; i++) {
+    const l = (i / 1400) * ROAD_LEN, p = path.getPointAtLength(l);
+    const d = (p.x - px) ** 2 + (p.y - py) ** 2;
+    if (d < bestD) { bestD = d; best = l; }
+  }
+  return best;
+}
+const MILE = STOPS.map(s => {
+  const b = BANDS[s.key];
+  const at = lengthAt(roadBases[0], M.chanL, b.cy);
+  return { n: s.n, key: s.key, L: at, col: TC[s.key], pts: roadBases.map(rb => rb.getPointAtLength(at)) };
+});
+MILE.forEach(m => {
+  m.pips = m.pts.map((p, i) => {
+    const g = G(L.marks, { 'data-mile': `${m.n}${i ? 'R' : 'L'}` });
+    el('circle', { cx: p.x, cy: p.y, r: 13, fill: C.cream, stroke: C.roadDark, 'stroke-width': 4, 'data-pip': 1 }, g);
+    el('circle', { cx: p.x, cy: p.y, r: 6.5, fill: m.col.deep }, g);
+    return g;
+  });
+});
+
+/* ------------------------------------------------------------------ map key */
+(function mapKey() {
+  const g = L.chrome;
+  const x0 = SQ ? 26 : 30, totalW = M.W - x0 * 2, gut = SQ ? 16 : 21;
+  const colW = (totalW - gut * (M.keyCols - 1)) / M.keyCols;
+  const cap = { size: F.keyCap, weight: 800, family: BODY, spacing: 2.2 };
+  line(g, 'MAP KEY — HOW TO READ THIS MAP', x0, keyCapY, { ...cap, fill: C.muted }, [x0, keyCapY - F.keyCap * 0.8, totalW, F.keyCap * 1.05]);
+  el('rect', { x: x0, y: keyRuleY, width: totalW, height: 2, fill: C.rule }, g);
+  KEY.forEach((it, i) => {
+    const c = i % M.keyCols, r = Math.floor(i / M.keyCols);
+    const x = x0 + c * (colW + gut), y = keyTop + r * M.keyRowH;
+    const icx = x + 14, icy = y + (M.keyLines === 1 ? F.keyTxt * 0.45 : M.keyRowH * 0.42);
+    const iconColor = it.icon === 'book' ? TC.education.deep : it.icon === 'clip' ? TC.growth.deep : it.icon === 'glass' ? TC.postings.deep : C.ink;
+    icon(g, it.icon, icx, icy, SQ ? 10 : 12, iconColor, C.cream);
+    const tx = x + (SQ ? 30 : 34), tw = colW - (SQ ? 30 : 34);
+    const ls = { size: F.keyTxt, weight: 800, family: BODY, spacing: 0.8 };
+    const vs = { size: F.keyTxt, weight: 500, family: BODY };
+    if (M.keyLines === 1) {
+      const b = y + F.keyTxt * 0.78;
+      const lw = measure(it.label, ls);
+      line(g, it.label, tx, b, { ...ls, fill: C.ink }, [tx - 1, b - F.keyTxt * 0.8, lw + 3, F.keyTxt * 1.05]);
+      const vx = tx + lw + 7, vw = x + colW - vx;
+      const val = SQ ? it.sq : it.val;
+      line(g, val, vx, b, { ...vs, size: fit(val, vw, vs, 12), fill: C.muted }, [vx - 1, b - F.keyTxt * 0.8, vw + 2, F.keyTxt * 1.05]);
+    } else {
+      const b1 = y + F.keyTxt * 0.9, b2 = b1 + F.keyTxt * 1.3;
+      line(g, it.label, tx, b1, { ...ls, size: fit(it.label, tw, ls, 12), fill: C.ink }, [tx - 1, b1 - F.keyTxt * 0.8, tw + 2, F.keyTxt * 1.05]);
+      line(g, it.val, tx, b2, { ...vs, size: fit(it.val, tw, vs, 12), fill: C.muted }, [tx - 1, b2 - F.keyTxt * 0.8, tw + 2, F.keyTxt * 1.05]);
+    }
+  });
+})();
+
+/* ------------------------------------------------------------- source line */
+(function sourceLine() {
+  const s = { size: F.src, weight: 500, family: BODY };
+  const x0 = SQ ? 26 : 30, w = M.W - x0 * 2;
+  const txt = measure(SOURCE_LINE, s) <= w ? SOURCE_LINE : SOURCE_LINE_SHORT;
+  line(L.chrome, txt, x0, M.srcY, { ...s, size: fit(txt, w, s, 12), fill: C.muted }, [x0, M.srcY - F.src * 0.8, w, F.src * 1.05]);
+})();
+
+/* =========================================================== the animation
+   Pacing (Mitch, 2026-09-22): draw about 2x slower than a natural sweep and
+   hold a 0.7 s beat as the trail enters each stop. Order: the two dashed side
+   paths run out to their signposts first (the title's claim, shown), a beat,
+   then both roads draw together, pausing at each of the five stops, and
+   journey's end resolves last. The schedule is built from the pips' real
+   positions along the finished road, so it survives any change of geometry.
+   No single leg runs longer than T.maxLeg: the fork leg is ~45% of each road
+   and would otherwise hold back the first figure for three seconds. */
+const PAUSE = 0.7;
+const T = { start: 0.15, sideDraw: 0.8, roadSpan: 7.2, maxLeg: 2.5, endReveal: 0.9, tail: 0.35 };
+const easeInOut = u => (u < 0.5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2);
+const easeOut = u => 1 - Math.pow(1 - u, 3);
+const clamp01 = v => Math.max(0, Math.min(1, v));
+
+T.sideEnd = T.start + T.sideDraw;
+T.roadStart = T.sideEnd + PAUSE;
+const SEGS = [];
+(function buildSchedule() {
+  let t = T.roadStart, frac = 0;
+  for (const m of MILE.slice().sort((a, b) => a.L - b.L)) {
+    const f = m.L / ROAD_LEN, dur = Math.min(T.maxLeg, (f - frac) * T.roadSpan);   // the long fork leg is capped so stop 1 lands sooner
+    SEGS.push({ t0: t, t1: t + dur, f0: frac, f1: f, hold: false });
+    t += dur; m.t = t;
+    SEGS.push({ t0: t, t1: t + PAUSE, f0: f, f1: f, hold: true });
+    t += PAUSE; frac = f;
+  }
+  const dur = (1 - frac) * T.roadSpan;
+  SEGS.push({ t0: t, t1: t + dur, f0: frac, f1: 1, hold: false });
+  T.roadEnd = t + dur;
+})();
+const DURATION = T.roadEnd + T.endReveal + T.tail;
+
+function roadFrac(t) {
+  if (t <= T.roadStart) return 0;
+  if (t >= T.roadEnd) return 1;
+  for (const s of SEGS) {
+    if (t > s.t1) continue;
+    if (s.hold) return s.f1;
+    const u = s.t1 > s.t0 ? (t - s.t0) / (s.t1 - s.t0) : 1;
+    return s.f0 + (s.f1 - s.f0) * easeInOut(clamp01(u));
+  }
+  return 1;
+}
+const sideFrac = t => easeInOut(clamp01((t - T.start) / T.sideDraw));
+
+/* What appears when. A figure only exists once its trail has arrived, so an
+   un-rolled counter can never read as a measured zero. */
+const REVEALS = [];
+SIDE.forEach(sp => REVEALS.push({ body: SIGNS[sp.key].body, t0: T.sideEnd, rollers: SIGNS[sp.key].rollers }));
+MILE.forEach(m => REVEALS.push({ body: BANDS[m.key].body, cut: BANDS[m.key].cut, t0: m.t, rollers: BANDS[m.key].rollers, flip: BANDS[m.key].flip, disc: BANDS[m.key].disc, band: BANDS[m.key], m }));
+
+function render(t) {
+  t = Math.max(0, Math.min(DURATION, t));
+  /* side paths */
+  const sf = sideFrac(t) * SIDE_LEN;
+  sideReveals.forEach(p => p.setAttribute('stroke-dasharray', `${sf.toFixed(1)} ${(SIDE_LEN + 20).toFixed(1)}`));
+  sidePaths.forEach((sp, i) => {
+    const on = t > T.start && t < T.sideEnd;
+    const p = sp.getPointAtLength(Math.max(0.01, sf));
+    sideTrav[i].setAttribute('cx', p.x.toFixed(1)); sideTrav[i].setAttribute('cy', p.y.toFixed(1));
+    sideTrav[i].setAttribute('opacity', on ? 1 : 0);
+  });
+  /* roads */
+  const shown = roadFrac(t) * ROAD_LEN;
+  roadReveals.forEach(p => p.setAttribute('stroke-dasharray', `${shown.toFixed(1)} ${(ROAD_LEN + 20).toFixed(1)}`));
+  const moving = t > T.roadStart && shown < ROAD_LEN;
+  roadBases.forEach((rb, i) => {
+    const p = rb.getPointAtLength(Math.max(0.01, shown));
+    const tr = travellers[i];
+    for (const n of [tr.ring, tr.dot]) { n.setAttribute('cx', p.x.toFixed(1)); n.setAttribute('cy', p.y.toFixed(1)); }
+    tr.ring.setAttribute('r', (14 + 4.5 * Math.sin(t * 9)).toFixed(1));
+    tr.ring.setAttribute('opacity', moving ? 0.5 : 0);
+    tr.dot.setAttribute('opacity', moving ? 1 : 0);
+  });
+  /* stops */
+  for (const r of REVEALS) {
+    const since = t - r.t0, on = since >= 0;
+    const vis = on ? easeOut(clamp01(since / 0.35)).toFixed(3) : 0;
+    r.body.setAttribute('opacity', vis);
+    if (r.cut) r.cut.setAttribute('opacity', vis);
+    for (const ro of r.rollers) {
+      const k = easeOut(clamp01(since / 0.5));
+      ro.node.textContent = FMTS[ro.fmt](ro.to * (on ? k : 0));
+    }
+    if (r.flip) {
+      const k = easeOut(clamp01((since - 0.45) / 0.35));
+      const x = +r.flip.getAttribute('x'), w0 = r.flip.__w || (r.flip.__w = +r.flip.getAttribute('width'));
+      r.flip.setAttribute('width', (w0 * k).toFixed(1));
+      r.flip.setAttribute('x', x);
+    }
+    if (r.m) {
+      const k = on ? Math.min(1, since / 0.28) : 0;
+      const s = on ? 1 + 0.6 * (1 - easeOut(k)) : 0.001;
+      r.m.pips.forEach((pip, i) => {
+        const p = r.m.pts[i];
+        pip.setAttribute('transform', `translate(${p.x} ${p.y}) scale(${s.toFixed(3)}) translate(${-p.x} ${-p.y})`);
+        pip.setAttribute('opacity', on ? 1 : 0);
+      });
+      const b = r.band, c = r.disc.querySelector('circle');
+      const cx = +c.getAttribute('cx'), cy = +c.getAttribute('cy');
+      const ds = on ? 1 + 0.35 * (1 - easeOut(Math.min(1, since / 0.4))) : 1;
+      r.disc.setAttribute('transform', `translate(${cx} ${cy}) scale(${ds.toFixed(3)}) translate(${-cx} ${-cy})`);
+    }
+  }
+  /* journey's end */
+  const ek = easeOut(clamp01((t - T.roadEnd) / T.endReveal));
+  ENDC.body.setAttribute('opacity', t < T.roadEnd ? 0 : ek.toFixed(3));
+  ENDC.body.setAttribute('transform', `translate(0 ${((1 - ek) * 10).toFixed(2)})`);
+}
+
+/* ------------------------------------------------------------ interaction */
+const prompt = document.getElementById('prompt');
+const PROMPT_DEFAULT = prompt.textContent;
+let selected = null;
+function paint() {
+  for (const s of STOP_NODES) s.ring.setAttribute('opacity', s.key === selected ? 1 : s.hover ? 0.55 : 0);
+}
+function selectIntent(slug) {
+  const hit = STOP_NODES.filter(s => s.key === slug || s.section === slug);
+  if (!hit.length) return false;
+  const s = hit[0];
+  selected = s.key; paint();
+  try {
+    if (window.parent && window.parent !== window) window.parent.postMessage({ type: 'viz-intent', intent: s.section, stop: s.key }, '*');
+  } catch (e) { /* a blocked parent read never stops the native link fallback */ }
+  return true;
+}
+STOP_NODES.forEach(s => {
+  s.a.addEventListener('click', () => selectIntent(s.key));
+  s.a.addEventListener('keydown', e => {
+    if (e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); s.a.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true })); }
+  });
+  const on = () => { s.hover = true; paint(); prompt.textContent = `Read the section: ${s.label} →`; };
+  const off = () => { s.hover = false; paint(); prompt.textContent = PROMPT_DEFAULT; };
+  s.a.addEventListener('mouseenter', on); s.a.addEventListener('mouseleave', off);
+  s.a.addEventListener('focus', on); s.a.addEventListener('blur', off);
+});
+
+/* sources drawer */
+(function drawer() {
+  const list = document.getElementById('drawer-list');
+  SOURCES.forEach(s => {
+    const li = document.createElement('li');
+    const b = document.createElement('b'); b.textContent = s.name; li.appendChild(b);
+    const when = document.createElement('span'); when.className = 'when'; when.textContent = ` — ${s.when}. `; li.appendChild(when);
+    li.appendChild(document.createTextNode(s.use + ' '));
+    s.links.forEach(([label, url], i) => {
+      const a = document.createElement('a'); a.href = url; a.textContent = label; a.target = '_blank'; a.rel = 'noopener noreferrer';
+      li.appendChild(a);
+      if (i < s.links.length - 1) li.appendChild(document.createTextNode(' · '));
+    });
+    list.appendChild(li);
+  });
+  document.getElementById('drawer-note').textContent = SOURCE_NOTE;
+  const btn = document.getElementById('src-btn'), dr = document.getElementById('drawer');
+  const close = dr.querySelector('.x'), head = document.getElementById('drawer-h');
+  const set = open => {
+    dr.hidden = !open; btn.setAttribute('aria-expanded', String(open));
+    if (open) head.focus(); else btn.focus();
+  };
+  btn.addEventListener('click', () => set(dr.hidden));
+  close.addEventListener('click', () => set(false));
+  dr.addEventListener('keydown', e => { if (e.key === 'Escape') set(false); });
+})();
+
+/* text alternative for screen readers */
+document.getElementById('summary').textContent =
+  'Two of four data job titles have no BLS occupation code. Statistician (SOC 15-2041) and data scientist (SOC 15-2051) are paved roads through five stops. ' +
+  'Education: 62% of statisticians hold a master’s as highest credential; data scientists split 48% bachelor’s and 44% master’s (O*NET). ' +
+  'Pay: median $105,650 vs $120,230 (BLS OOH, May 2025 wages); inside computer systems design the order flips, $167,180 vs $132,380. Self-reported data-scientist pay: $82,910 global, $160,000 US-only (Stack Overflow 2025), not averaged. ' +
+  'Employment and growth: +11% vs +35% jobs 2025–35 (BLS OOH); 31,300 vs 275,600 employed (BLS OOH); 29,030 vs 262,440 in the OEWS survey. ' +
+  'Tools: SPSS, SAS, Minitab, MATLAB vs TensorFlow, Spark, Kubernetes (O*NET); all Stack Overflow 2025 respondents: Python 57.9%, SQL 58.6%, R 4.9%. ' +
+  'Live postings on 2026-09-14: statistician Indeed 1,000 (rounded), Built In 2, no Wellfound role page; data scientist Indeed no count shown, Built In 32, Wellfound 161 remote. ' +
+  'Side paths with no BLS code: growth engineer Indeed 50 (rounded), Built In 3, no Wellfound role page; AI engineer Wellfound 1,985 remote vs 161 for data scientist, Built In 103, Indeed 3,000 (rounded). ' +
+  'Journey’s end: statisticians prove why (inference); data scientists predict what next (prediction), per Yardstick and Indeed Career Advice.';
+
+/* ------------------------------------------------------------- clock / API
+   Live page: one slowed draw, then it holds (no loop). Reduced motion skips
+   straight to the settled frame. */
+const REDUCED_MOTION = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+let clock = 0, raf = null, t0 = null;
+function loop(ts) {
+  if (t0 === null) t0 = ts;
+  clock = (ts - t0) / 1000;
+  if (clock >= DURATION) { clock = DURATION; render(DURATION); raf = null; return; }
+  render(clock);
+  raf = requestAnimationFrame(loop);
+}
+const initialT = POSTER ? DURATION
+  : Q.has('t') ? (parseFloat(Q.get('t')) || 0)
+  : REDUCED_MOTION ? DURATION
+  : 0;
+render(initialT);
+clock = initialT;
+if (!STATIC && !Q.has('t') && !REDUCED_MOTION) raf = requestAnimationFrame(loop);
+
+window.VIZ = {
+  ready: Promise.resolve(true),
+  duration: DURATION,
+  format: FMT,
+  size: SIZE,
+  schedule: { sideEnd: T.sideEnd, roadStart: T.roadStart, stops: MILE.map(m => ({ key: m.key, t: +m.t.toFixed(3) })), roadEnd: T.roadEnd },
+  seek(t) { if (raf) { cancelAnimationFrame(raf); raf = null; } clock = t; render(t); return t; },
+  frame() { return clock; },
+  selectIntent,
+  stops: STOP_NODES.map(s => ({ key: s.key, section: s.section })),
+};
+document.documentElement.dataset.ready = '1';
+</script>
+</body>
+</html>

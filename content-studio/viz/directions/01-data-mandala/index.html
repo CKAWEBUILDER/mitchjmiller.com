@@ -1,21 +1,77 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Data Mandala — Search Intent 2026</title>
 <style>
-  :root { color-scheme: light; }
+  :root { color-scheme: light; --paper:#FFF6E9; --ink:#14100B; --inksoft:#5B5147; --hot:#FFE600; --rule:#D9CCB6; }
   html, body { margin: 0; padding: 0; background: #E7DECF; }
-  body { overflow: hidden; }
-  #stage { position: relative; margin: 0 auto; }
-  svg { display: block; }
+  body { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: var(--ink); }
   text { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
   .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
-  .num { font-variant-numeric: tabular-nums; }
+  .num  { font-variant-numeric: tabular-nums; }
+
+  /* ---------- poster mode: fixed canvas, nothing but the SVG ---------- */
+  body.poster { overflow: hidden; }
+  body.poster #stage { position: relative; margin: 0 auto; }
+  body.poster svg { display: block; }
+
+  /* ---------- live mode: responsive document for the blog iframe ------ */
+  body.live { background: var(--paper); }
+  body.live #app { max-width: 1120px; margin: 0 auto; padding: 14px 14px 30px; }
+  body.live #prompt {
+    margin: 2px 0 12px; font-size: 16px; line-height: 1.45; font-weight: 650; color: var(--ink);
+    background: #FBEFDA; border: 1.5px solid var(--ink); border-radius: 9px; padding: 11px 14px;
+  }
+  body.live #prompt b { background: var(--hot); padding: 0 4px; border-radius: 3px; }
+  body.live #stage svg { display: block; width: 100%; height: auto; }
+  .hit { cursor: pointer; outline: none; }
+  #panel[hidden] { display: none; }
+  #panel {
+    margin-top: 16px; border: 2px solid var(--ink); border-radius: 12px; background: #FFFDF7;
+    box-shadow: 0 2px 0 var(--ink); overflow: hidden;
+  }
+  #panel .phead { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-bottom: 1.5px solid var(--ink); }
+  #panel .swatch { width: 20px; height: 20px; border-radius: 4px; border: 1.5px solid var(--ink); flex: none; }
+  #panel h3 { margin: 0; font-size: 17px; letter-spacing: .06em; flex: 1 1 auto; }
+  #panel .close {
+    font: inherit; font-size: 15px; font-weight: 700; line-height: 1; padding: 7px 11px; cursor: pointer;
+    background: var(--paper); color: var(--ink); border: 1.5px solid var(--ink); border-radius: 7px;
+  }
+  #panel .pbody { padding: 14px; display: grid; gap: 14px; grid-template-columns: 1fr; }
+  @media (min-width: 720px) { #panel .pbody { grid-template-columns: 1fr 1fr; } }
+  #panel h4 { margin: 0 0 6px; font-size: 12.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--inksoft); }
+  #panel .stat { font-size: 16px; line-height: 1.5; margin: 0 0 8px; }
+  #panel .stat b { font-size: 21px; }
+  #panel .src { display: block; font-size: 13px; color: var(--inksoft); margin-top: 2px; }
+  #panel ul { margin: 0; padding-left: 0; list-style: none; }
+  #panel li { font-size: 15px; line-height: 1.5; padding: 5px 0 5px 16px; position: relative; }
+  #panel li::before { content: "›"; position: absolute; left: 3px; font-weight: 800; }
+  #panel figure { margin: 0; }
+  #panel figure img, #panel figure svg { display: block; width: 100%; height: auto; border: 1.5px solid var(--ink); border-radius: 8px; background: #fff; }
+  #panel figcaption { font-size: 12.5px; color: var(--inksoft); margin-top: 6px; line-height: 1.45; }
+  #panel .jump {
+    display: inline-block; margin: 2px 0 0; font-size: 15.5px; font-weight: 800; text-decoration: none;
+    background: var(--hot); color: var(--ink); border: 2px solid var(--ink); border-radius: 9px;
+    padding: 11px 16px; box-shadow: 0 2px 0 var(--ink);
+  }
+  #panel .jump:hover { transform: translateY(1px); box-shadow: 0 1px 0 var(--ink); }
+  .hit:focus-visible { outline: none; }
+  body.live a:focus-visible, body.live button:focus-visible { outline: 3px solid #0B63CE; outline-offset: 2px; }
+  .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 </style>
-<div id="stage"><svg id="viz" xmlns="http://www.w3.org/2000/svg"></svg></div>
-<script type="module">
+<div id="app"><div id="stage"><svg id="viz" xmlns="http://www.w3.org/2000/svg"></svg></div></div>
+<script>
+(function () {
 /* ============================================================================
-   THE DATA MANDALA — search intent × the AI SERP
+   THE DATA MANDALA v2 — search intent x the AI SERP
    Self-contained: no network, no webfonts, no build step.
-   ?size=1080x1350 | 1080x1080 | 640x800     ?t=<seconds>     ?static=1
-   window.VIZ.seek(seconds) / .seekMs(ms) / .duration / .ready
+
+   POSTER MODE  ?size=1080x1350 | 1080x1080 | 2160x2700 | 640x800   ?t=<s>  ?static=1
+   LIVE MODE    (no ?t / ?static / ?poster)  — assembles once, sectors are buttons
+                ?parent=<blog url>   used for the "read the section" fallback link
+
+   window.VIZ.seek(s) / .seekMs(ms) / .duration / .settled / .ready
+   window.VIZ.selectIntent(slug) / .framePlan(fps,{wipe}) / .audit()
    ========================================================================== */
 
 /* ---------------------------------------------------------------- palette */
@@ -26,50 +82,100 @@ const INK_SOFT   = '#5B5147';
 const HOT        = '#FFE600';
 const NM         = '#9A8F81';   // "not measured"
 
+/* ---------------------------------------------------------------- content */
 const INTENTS = [
-  { key:'informational', name:'INFORMATIONAL',            hue:'#00C2FF', icon:'ask',   ex:'“how to tie a tie”' },
-  { key:'commercial',    name:'COMMERCIAL INVESTIGATION', hue:'#A855F7', icon:'scale', ex:'“ahrefs vs semrush”' },
-  { key:'transactional', name:'TRANSACTIONAL',            hue:'#FF4D97', icon:'bag',   ex:'“buy nike air max 270”' },
-  { key:'navigational',  name:'NAVIGATIONAL',             hue:'#C6FF00', icon:'goto',  ex:'“chase bank login”' },
-  { key:'local',         name:'LOCAL',                    hue:'#FF9500', icon:'pin',   ex:'“plumber near me”' },
+  {
+    slug: 'informational', name: 'INFORMATIONAL', hue: '#00C2FF', icon: 'ask',
+    ex: '“how to tie a tie”',
+    lede: 'Google answers it above the links.',
+    dom: [{ what: 'AI Overview', rate: '36%', tail: 'of informational queries carry one',
+            src: 'Seer Interactive · 5.47M queries · Apr 2026' }],
+    queries: ['what is answer engine optimization',
+              'how does an AI Overview pick its sources',
+              'what is GEO in search'],
+  },
+  {
+    slug: 'commercial', name: 'COMMERCIAL INVESTIGATION', hue: '#A855F7', icon: 'scale',
+    ex: '“ahrefs vs semrush”',
+    lede: 'Comparisons get summarised before you click.',
+    dom: [{ what: 'AI Overview on “X vs Y” queries', rate: '95.4%', tail: '267 of 280 comparison queries',
+            src: 'Seer Interactive · 267 of 280 comparison queries · Apr 2026' }],
+    queries: ['AEO agency vs in-house team',
+              'ahrefs vs semrush for AI search',
+              'best AI search visibility trackers'],
+  },
+  {
+    slug: 'transactional', name: 'TRANSACTIONAL', hue: '#FF4D97', icon: 'bag',
+    ex: '“buy nike air max 270”',
+    lede: 'The AI stays out — the ads do not.',
+    dom: [{ what: 'AI Overview', rate: '5%', tail: 'the lowest trigger rate in the study',
+            src: 'Seer Interactive · 5.47M queries · Apr 2026' },
+          { what: 'Paid click share, US headphones', rate: '36%', tail: 'up from 16% a year earlier',
+            src: 'Search Engine Land / Similarweb, analysis by Aleyda Solis · Jan 2026' }],
+    queries: ['hire an AEO consultant',
+              'SEO consulting retainer pricing',
+              'book a growth systems audit'],
+  },
+  {
+    slug: 'navigational', name: 'NAVIGATIONAL', hue: '#C6FF00', icon: 'goto',
+    ex: '“chase bank login”',
+    lede: 'Still a link — but the AI is moving in.',
+    dom: [{ what: 'AI Overview', rate: '0% → 10.33%', tail: '0 of 10,000 keywords in Dec 2024; 10.33% of AI Overview queries by Oct 2025',
+            src: 'Authoritas 10K kw Jan 2025 · Semrush 10M kw Feb 2026' }],
+    queries: ['mitch j miller',
+              'mitchjmiller.com blog',
+              'sfc surf school waikiki'],
+  },
+  {
+    slug: 'local', name: 'LOCAL', hue: '#FF9500', icon: 'pin',
+    ex: '“plumber near me”',
+    lede: 'The map pack still owns the screen.',
+    dom: [{ what: 'Local Pack', rate: '93%', tail: 'of local-intent searches still show one',
+            src: 'Whitespark · 540 queries, 3 US metros · May 2025' }],
+    queries: ['surf lessons waikiki',
+              'surf school near me honolulu',
+              'beginner surf lesson oahu'],
+  },
 ];
 
-/* rings, inner → outer; cells indexed [ring][intent] */
+/* rings, inner -> outer; cells indexed [ring][intent] */
 const RINGS = [
-  { mark:'①', glyph:'spark', title:'DOES AN AI ANSWER APPEAR?', sub:'AI Overview trigger rate · 0–36% · mixed panels', tint:0.13, bar:true, max:36 },
-  { mark:'②', glyph:'click', title:'WHO TAKES THE CLICK?',      sub:'click share · organic CTR',  tint:0.36 },
-  { mark:'③', glyph:'delta', title:'WHAT MOVED IN A YEAR',      sub:'2024–25 → 2026',             tint:0.52 },
+  { mark: '1', glyph: 'spark', title: 'DOES AN AI ANSWER APPEAR?', sub: 'trigger rate · 0–36% · mixed panels', tint: 0.13, bar: true, max: 36 },
+  { mark: '2', glyph: 'click', title: 'WHO TAKES THE CLICK?',      sub: 'click share · organic CTR',           tint: 0.36 },
+  { mark: '3', glyph: 'delta', title: 'WHAT MOVED IN A YEAR',      sub: 'Oct 2024 → Apr 2026',                tint: 0.52 },
 ];
 
+/* val = medallion face.  cap = rail caption (wide).  capShort = rail caption (tight). */
 const CELLS = [
-  [ // ①  AI Overview trigger rate
-    { v:36, val:'36%', long:'85.9% on “what / how / why”', short:'85.9% on “what/how/why”' },
-    { v:8,  val:'8%',  long:'but 95.4% on “X vs Y”',       short:'95.4% on “X vs Y”' },
-    { v:5,  val:'5%',  long:'lowest rate in the study',    short:'lowest rate measured' },
-    { v:0,  val:'0%',  long:'0 of 10,000 kw, Dec 2024',    short:'0 of 10,000 kw, Dec 2024' },
-    { v:15, val:'15%', long:'vs 92% informational',        short:'vs 92% informational' },
+  [ /* (1)  AI Overview trigger rate */
+    { v: 36, val: '36%', cap: '85.9% on “what / how / why”',        capShort: '85.9% on “what/how/why”' },
+    { v: 8,  val: '8%',  cap: 'but 95.4% on “X vs Y” queries',      capShort: '95.4% on “X vs Y”' },
+    { v: 5,  val: '5%',  cap: 'lowest rate in the Seer study',      capShort: 'lowest rate measured' },
+    { v: 0,  val: '0%',  cap: '0 of 10,000 keywords, Dec 2024',     capShort: '0 of 10,000 kw, Dec 2024' },
+    { v: 15, val: '15%', cap: 'vs 92% informational, same study',   capShort: 'vs 92% informational' },
   ],
-  [ // ②  who takes the click
-    { val:'0.94%', long:'organic CTR when an AI Overview cites someone else', short:'AI Overview cites someone else' },
-    { val:'36%',   long:'paid click share, US headphones — 16% a year ago',  short:'paid share — 16% a year ago' },
-    { val:'2.15%', long:'organic CTR under an AI Overview — −48% in a year', short:'under an AI Overview, −48%' },
-    { val:'n/m',   long:'no intent-segmented CTR study in this ledger',      short:'no intent-segmented study', nm:true },
-    { val:'93%',   long:'local-intent searches still show a Local Pack',     short:'still show a Local Pack' },
+  [ /* (2)  who takes the click */
+    { val: '0.94%', cap: 'organic CTR when the AI cites someone else', capShort: 'AI cites someone else' },
+    { val: '36%',   cap: 'paid click share, US headphones — was 16%', capShort: 'paid share — was 16%' },
+    { val: '2.15%', cap: 'organic CTR under an AI Overview — down 48%', capShort: 'under an AI Overview' },
+    { val: 'not measured', nm: true, cap: 'no intent-segmented CTR study in this ledger', capShort: 'no intent-segmented study' },
+    { val: '93%',   cap: 'of local-intent searches still show a Local Pack', capShort: 'still show a Local Pack' },
   ],
-  [ // ③  what moved
-    { val:'−34pt', long:'informational share of AI Overview queries: 91.3% → 57.1%',   short:'AI Overview mix: 91.3% → 57.1%' },
-    { val:'+71%',  long:'growth in commercial SERPs carrying an AI Overview, 6 months', short:'commercial SERPs with an AIO, 6 mo' },
-    { val:'−5%',   long:'transactional AI Overview share fell over the same 6 months',  short:'fell over the same 6 months' },
-    { val:'12×',   long:'navigational share of AI Overview queries: 0.84% → 10.33%',    short:'AI Overview mix: 0.84% → 10.33%' },
-    { val:'n/m',   long:'one 2025 snapshot only — no trend series published',           short:'one snapshot, no trend', nm:true },
+  [ /* (3)  what moved */
+    { val: '−34pt', cap: 'share of AI Overview queries: 91.3% → 57.1%', capShort: 'AIO mix: 91.3 → 57.1%' },
+    { val: '+71%',  cap: 'more commercial SERPs carry one, 6 months', capShort: 'commercial SERPs, 6 mo' },
+    { val: '−5%',   cap: 'AI Overview share fell over the same 6 months', capShort: 'fell, same 6-month window' },
+    { val: '12×',   cap: 'share of AI Overview queries: 0.84% → 10.33%', capShort: 'AIO mix: 0.84 → 10.33%' },
+    { val: 'not measured', nm: true, cap: 'one 2025 snapshot only — no trend series published', capShort: 'one snapshot, no trend' },
   ],
 ];
 
-const SOURCE_LINE =
-  'Published — Seer Interactive 5.47M queries Apr 2026 · Semrush 10M kw Feb 2026 + 600K kw Jul 2026 · SparkToro × Similarweb Jun 2026 · ' +
-  'Ahrefs 300K kw Feb 2026 · Whitespark 540 queries May 2025 · Authoritas 10K kw Jan 2025 · n/m = not measured in this ledger';
+const SOURCES_A = 'Sources — Seer Interactive 5.47M queries Apr 2026 · Semrush 10M kw Feb 2026 + 600K kw Jul 2026';
+const SOURCES_B = 'SparkToro × Similarweb Jan–Apr 2026 · Ahrefs 300K kw Feb 2026 · Whitespark 540 queries May 2025';
+const SOURCES_C = 'Authoritas 10K kw Jan 2025 · NOT MEASURED = this ledger has no figure for that cell';
+const HEAD_SRC  = 'SparkToro × Similarweb · Jan–Apr 2026 · US';
 
-/* ---------------------------------------------------------------- icons (24×24) */
+/* ---------------------------------------------------------------- icons (24x24) */
 const ICON = {
   ask:   ['M8.3 9.0a3.7 3.7 0 1 1 3.7 3.8v2.0','M12 18.3h.01'],
   scale: ['M12 4.2v15.0','M6.2 7.4h11.6','M8.2 19.2h7.6','M6.2 7.4 3.2 13.4h6z','M17.8 7.4l-3 6h6z'],
@@ -80,7 +186,7 @@ const ICON = {
   click: ['M6.0 4.2 18.4 11.4l-5.3 1.2-1.6 5.3z'],
   delta: ['M12 5.0 17.6 14.2H6.4z','M7.2 18.4h9.6'],
 };
-const ICON_FILLED = { spark:true, click:true };
+const ICON_FILLED = { spark: true, click: true };
 
 /* ---------------------------------------------------------------- helpers */
 const NS = 'http://www.w3.org/2000/svg';
@@ -93,7 +199,7 @@ const el = (n, a = {}, parent) => {
 const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
 const lerp = (a, b, t) => a + (b - a) * t;
 const easeOutExpo = t => (t >= 1 ? 1 : 1 - Math.pow(2, -9 * t));
-const easeOutBack = t => { const c = 1.9; return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); };
+const easeOutBack = t => { const c = 1.7; return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); };
 const easeInOut = t => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
 const win = (t, a, b) => clamp((t - a) / (b - a), 0, 1);
 
@@ -127,38 +233,55 @@ function arcPath(cx, cy, r, a0, a1, reversed) {
   return `M${f(x0)} ${f(y0)}A${f(r)} ${f(r)} 0 ${big} ${reversed ? 0 : 1} ${f(x1)} ${f(y1)}`;
 }
 
-/* ---------------------------------------------------------------- size */
+/* ---------------------------------------------------------------- mode + size */
 const Q = new URLSearchParams(location.search);
 const parseSize = s => { const m = /^(\d{2,5})\s*[x×]\s*(\d{2,5})$/.exec((s || '').trim()); return m ? [+m[1], +m[2]] : null; };
 const [W, H] = parseSize(Q.get('size')) || [1080, 1350];
 const S  = W / 1080;
 const px = n => n * S;
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const tParam = Q.get('t');
+const POSTER = Q.has('poster') || Q.has('static') || tParam !== null;
+document.body.className = POSTER ? 'poster' : 'live';
+
+/* every piece of type on the artboard is >= this */
+const MIN_PX = px(14);
 
 const stage = document.getElementById('stage');
-stage.style.width = W + 'px'; stage.style.height = H + 'px';
 const svg = document.getElementById('viz');
-svg.setAttribute('width', W); svg.setAttribute('height', H);
 svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+svg.setAttribute('width', W); svg.setAttribute('height', H);
+if (POSTER) { stage.style.width = W + 'px'; stage.style.height = H + 'px'; }
+svg.setAttribute('role', 'img');
+svg.setAttribute('aria-label',
+  'Data mandala: five search intents as sectors, three measured rings - AI Overview trigger rate, who takes the click, and what moved in a year.');
 
 /* ---------------------------------------------------------------- layout */
-const M      = Math.round(px(34));
-const BAR_H  = Math.round(px(202));
-const KEY_H  = Math.round(px(62));
-const FOOT_H = Math.round(px(104));
+const TALL  = H / W >= 1.15;         // 4:5 poster vs square
+const RAIL  = TALL;                  // the reading rail only fits the 4:5 crops
+const DENSE = W >= 860;              // room for two-line rail captions
+const M      = Math.round(px(30));
+const BAR_H  = Math.round(px(TALL ? 190 : 168));
+const KEY_H  = Math.round(px(54));
+const RAIL_ROW = Math.round(px(DENSE ? 52 : 38));
+const RAIL_HEAD = Math.round(px(52));
+const RAIL_H = RAIL ? Math.round(px(12)) + RAIL_HEAD + 3 * RAIL_ROW + Math.round(px(8)) : 0;
+const FOOT_H = Math.round(px(RAIL ? 74 : 114));
+
 const CX = W / 2;
-const areaTop = BAR_H + KEY_H, areaBot = H - FOOT_H;
+const areaTop = BAR_H + KEY_H, areaBot = H - FOOT_H - RAIL_H;
 const R  = Math.floor(Math.min((areaBot - areaTop) / 2, (W - 2 * M) / 2));
 const CY = Math.round(areaTop + (areaBot - areaTop) / 2);
-const TIGHT = R < 420;
 
 const rr = k => R * k;
-const HUB = rr(0.232), G0 = rr(0.012), GAP = rr(0.0443), BD = rr(0.1833);
+const HUB = rr(0.255), BD = rr(0.1877), GAP = rr(0.019);
 const BANDS = [];
-let cursor = HUB + G0;
+let cursor = HUB + rr(0.013);
 for (let i = 0; i < 3; i++) { BANDS.push({ i: cursor, o: cursor + BD }); cursor += BD + GAP; }
 const CROWN = { i: cursor, o: R };
-const GUT = 1.15;                       // degrees of gutter each side of a sector
-const MEDR = BD / 2 - px(4.5);          // medallion radius
+const GUT  = 1.15;                      // degrees of gutter each side of a sector
+const MEDR = BD / 2 - px(5);            // medallion radius
+const MEDR_NM = MEDR + GAP * 0.45;      // the two honest blanks break the ring on purpose
 
 /* ---------------------------------------------------------------- scaffold */
 const defs = el('defs', {}, svg);
@@ -168,45 +291,89 @@ el('stop', { offset: '58%', 'stop-color': PAPER }, grad);
 el('stop', { offset: '100%','stop-color': PAPER }, grad);
 
 el('rect', { x: 0, y: 0, width: W, height: H, fill: PAPER }, svg);
-el('circle', { cx: CX, cy: CY, r: R * 1.18, fill: 'url(#bloom)' }, svg);
+el('circle', { cx: CX, cy: CY, r: R * 1.16, fill: 'url(#bloom)' }, svg);
 
-const gStatic = el('g', {}, svg);   // phyllotaxis grain
+const gStatic = el('g', {}, svg);   // phyllotaxis grain + tick rings (armature)
 const gBands  = el('g', {}, svg);
 const gBars   = el('g', {}, svg);
-const gSpin   = el('g', {}, svg);   // K-fold ticks; turns exactly 360/K per loop
 const gRings  = el('g', {}, svg);
 const gSpokes = el('g', {}, svg);
 const gMeds   = el('g', {}, svg);
-const gLabels = el('g', {}, svg);
 const gCrown  = el('g', {}, svg);
 const gHub    = el('g', {}, svg);
+const gHilite = el('g', {}, svg);   // live-mode selection veil + outline
 const gChrome = el('g', {}, svg);
+const gHit    = el('g', {}, svg);   // live-mode sector buttons (transparent, on top)
 
 /* ---------------------------------------------------------------- text utils */
+const ruler = el('text', { visibility: 'hidden', x: -9999, y: -9999 }, svg);
+function measure(s, size, weight, cls) {
+  ruler.setAttribute('font-size', f(size));
+  ruler.setAttribute('font-weight', weight || 400);
+  ruler.setAttribute('class', cls || '');
+  ruler.setAttribute('letter-spacing', 0);
+  ruler.textContent = s;
+  return ruler.getComputedTextLength();
+}
 function txt(parent, s, a) { const t = el('text', a, parent); t.textContent = s; return t; }
-function fit(t, maxW, minSize) {
-  let size = parseFloat(t.getAttribute('font-size')), guard = 60;
-  while (guard-- > 0 && t.getComputedTextLength() > maxW && size > (minSize || 6)) {
-    size *= 0.95; t.setAttribute('font-size', f(size));
+
+/* shrink-to-fit that refuses to go below the artboard floor */
+function fit(t, maxW, floor) {
+  const lo = Math.max(floor === undefined ? MIN_PX : floor, 1);
+  let size = parseFloat(t.getAttribute('font-size')), guard = 80;
+  while (guard-- > 0 && t.getComputedTextLength() > maxW && size > lo) {
+    size = Math.max(lo, size * 0.96); t.setAttribute('font-size', f(size));
   }
   return size;
 }
-function arcLabel(parent, s, { r, a0, a1, size, fill, weight = 650, spacing = 0, id, nm }) {
+/* greedy word wrap at a given size; returns array of lines */
+function wrapAt(s, maxW, size, weight, cls) {
+  const words = s.split(' '), lines = [];
+  let line = '';
+  for (const w of words) {
+    const test = line ? line + ' ' + w : w;
+    if (line && measure(test, size, weight, cls) > maxW) { lines.push(line); line = w; }
+    else line = test;
+  }
+  if (line) lines.push(line);
+  return lines;
+}
+/* wrap into at most maxLines, shrinking to the floor before giving up */
+function wrapFit(s, maxW, size, weight, maxLines, cls) {
+  let fs = size, guard = 40, lines = wrapAt(s, maxW, fs, weight, cls);
+  while (guard-- > 0 && lines.length > maxLines && fs > MIN_PX) {
+    fs = Math.max(MIN_PX, fs * 0.96);
+    lines = wrapAt(s, maxW, fs, weight, cls);
+  }
+  return { size: fs, lines };
+}
+function drawLines(parent, lines, { x, y, size, lineH, weight, fill, anchor, cls, spacing }) {
+  const g = [];
+  lines.forEach((ln, i) => g.push(txt(parent, ln, {
+    x: f(x), y: f(y + i * lineH), 'font-size': f(size), 'font-weight': weight, fill,
+    'text-anchor': anchor || 'start', class: cls || null, 'letter-spacing': spacing ? f(spacing) : null,
+  })));
+  return g;
+}
+/* curved inscription — used only on the crown plate, where the radius is largest */
+function arcLabel(parent, s, { r, a0, a1, size, fill, weight = 800, spacing = 0, id }) {
   const mid = ((a0 + a1) / 2 + 360) % 360;
   const rev = mid > 90 && mid < 270;                  // bottom half: reverse so text stays upright
-  const rad = s2 => (rev ? r + s2 * 0.82 : r);
+  /* glyphs hang outward on a clockwise arc and inward on a reversed one, so the
+     baseline moves half a cap-height the other way and the word stays centred
+     on its plate instead of riding over the ring line. */
+  const rad = s2 => (rev ? r + s2 * 0.36 : r - s2 * 0.36);
   const p = el('path', { id, d: arcPath(CX, CY, rad(size), a0, a1, rev), fill: 'none' }, defs);
   const t = el('text', {
-    'font-size': f(size), 'font-weight': weight, fill, 'letter-spacing': f(spacing),
-    'text-anchor': 'middle', 'font-style': nm ? 'italic' : null,
+    'font-size': f(size), 'font-weight': weight, fill, 'letter-spacing': f(spacing), 'text-anchor': 'middle',
   }, parent);
   const tp = el('textPath', { href: '#' + id, startOffset: '50%' }, t);
   tp.textContent = s;
   let s2 = size, guard = 60;
-  while (guard-- > 0 && t.getComputedTextLength() > p.getTotalLength() * 0.95 && s2 > 5) {
-    s2 *= 0.955;
+  while (guard-- > 0 && t.getComputedTextLength() > p.getTotalLength() * 0.94 && s2 > MIN_PX) {
+    s2 = Math.max(MIN_PX, s2 * 0.96);
     t.setAttribute('font-size', f(s2));
-    if (rev) p.setAttribute('d', arcPath(CX, CY, rad(s2), a0, a1, true));
+    p.setAttribute('d', arcPath(CX, CY, rad(s2), a0, a1, rev));
   }
   return t;
 }
@@ -221,8 +388,8 @@ function icon(parent, name, x, y, size, color, sw) {
   return g;
 }
 
-/* ============================================================== ORNAMENT */
-const K = 10;                                   // fold symmetry = the loop divisor
+/* ============================================================== ORNAMENT (static armature) */
+const K = 10;
 function tickRing(parent, r, count, len, w, color, op) {
   const g = el('g', { opacity: op }, parent);
   for (let i = 0; i < count; i++) {
@@ -231,12 +398,13 @@ function tickRing(parent, r, count, len, w, color, op) {
     el('line', { x1: f(x0), y1: f(y0), x2: f(x1), y2: f(y1), stroke: color, 'stroke-width': f(w), 'stroke-linecap': 'round' }, g);
   }
 }
-BANDS.forEach((B, i) => tickRing(gSpin, B.i + BD * 0.10, K * (4 + i), BD * 0.12, px(1.5), INK, 0.30));
-tickRing(gSpin, CROWN.o - rr(0.016), K * 9, rr(0.016), px(1.15), shade(INK, -0.1), 0.34);
+/* ticks live in the band gaps only — never where type sits */
+BANDS.forEach((B, i) => { if (i < 2) tickRing(gStatic, B.o + GAP / 2, K * (5 + i), GAP * 0.62, px(1.4), INK, 0.30); });
+tickRing(gStatic, BANDS[2].o + GAP / 2, K * 8, GAP * 0.62, px(1.3), INK, 0.28);
 
 (function grain() {
   const n = 620, golden = Math.PI * (3 - Math.sqrt(5));
-  const g = el('g', { opacity: 0.34 }, gStatic);
+  const g = el('g', { opacity: 0.32 }, gStatic);
   for (let i = 0; i < n; i++) {
     const rad = Math.sqrt(i / n) * CROWN.i;
     if (rad < HUB * 1.1) continue;
@@ -249,6 +417,7 @@ tickRing(gSpin, CROWN.o - rr(0.016), K * 9, rr(0.016), px(1.15), shade(INK, -0.1
 
 /* ============================================================== CELLS */
 const art = [];
+const perIntent = INTENTS.map(() => ({ cells: [], crown: null }));
 
 INTENTS.forEach((it, ii) => {
   const A = ii * 72, a0 = A - 36 + GUT, a1 = A + 36 - GUT;
@@ -276,7 +445,7 @@ INTENTS.forEach((it, ii) => {
       }, pg);
     }
 
-    /* ① is the encoded ring: blade length = the trigger rate, linear, max 36% */
+    /* ring 1 is the encoded ring: blade length = the trigger rate, linear, max 36% */
     let bar = null, cap = null;
     if (ring.bar) {
       bar = el('path', { d: 'M0 0', fill: it.hue, stroke: shade(it.hue, 0.34), 'stroke-width': f(px(1.1)) }, gBars);
@@ -284,46 +453,63 @@ INTENTS.forEach((it, ii) => {
       bar.dataset.frac = (cell.v || 0) / ring.max;
     }
 
-    /* inscription: curved label riding the gap just outside the band */
-    const lab = arcLabel(gLabels, TIGHT ? cell.short : cell.long, {
-      r: B.o + rr(0.013), a0: a0 + 1.4, a1: a1 - 1.4,
-      size: px(14.2), fill: cell.nm ? '#6E6457' : INK, weight: 650, spacing: px(0.1),
-      id: `lab-${ri}-${ii}`, nm: cell.nm,
-    });
-
-    /* medallion */
+    /* medallion: a paper disc, so its type is always horizontal and never crossed */
     const [mx, my] = pt(CX, CY, (B.i + B.o) / 2, A);
     const g = el('g', { transform: `translate(${f(mx)} ${f(my)})` }, gMeds);
     const gs = el('g', {}, g);
-    el('circle', { r: f(MEDR + px(3.6)), fill: shade(cell.nm ? NM : it.hue, 0.05), opacity: 0.28 }, gs);
+    const MR = cell.nm ? MEDR_NM : MEDR;
+    el('circle', { r: f(MR + px(3.6)), fill: shade(cell.nm ? NM : it.hue, 0.05), opacity: 0.26 }, gs);
     el('circle', {
-      r: f(MEDR), fill: PAPER, stroke: cell.nm ? NM : shade(it.hue, 0.14), 'stroke-width': f(px(3.2)),
+      r: f(MR), fill: PAPER, stroke: cell.nm ? NM : shade(it.hue, 0.14), 'stroke-width': f(px(3.2)),
       'stroke-dasharray': cell.nm ? `${f(px(5))} ${f(px(4))}` : null,
     }, gs);
-    const badR = MEDR * 0.30;
-    const bg = el('g', { transform: `translate(0 ${f(-MEDR * 0.44)})` }, gs);
-    el('circle', { r: f(badR), fill: cell.nm ? '#E7DFD3' : it.hue, stroke: shade(it.hue, 0.2), 'stroke-width': f(px(1.1)) }, bg);
-    icon(bg, ri === 0 ? it.icon : ring.glyph, 0, 0, badR * 1.32, INK, 2.5);
-    const vt = txt(gs, cell.val, {
-      x: 0, y: f(MEDR * 0.53), 'text-anchor': 'middle', class: 'num',
-      'font-size': f(MEDR * 0.80), 'font-weight': 800, 'letter-spacing': f(-px(1.1)),
-      fill: cell.nm ? '#7A7062' : INK, 'font-style': cell.nm ? 'italic' : null,
-    });
-    fit(vt, MEDR * 1.58, px(9));
 
-    art.push({ ri, ii, band, pg, bar, cap, lab, med: g, scale: gs, a0, a1, B });
+    if (cell.nm) {
+      /* spelled out in full, never an abbreviation; the long word rides the widest chord */
+      const chord = y => 2 * Math.sqrt(Math.max(1, MR * MR - y * y)) * 0.94;
+      const size = Math.max(MIN_PX, MR * 0.34);
+      const l1 = txt(gs, 'NOT', {
+        x: 0, y: f(-MR * 0.30), 'text-anchor': 'middle', 'font-size': f(size),
+        'font-weight': 700, fill: '#6E6457', 'letter-spacing': f(px(0.4)),
+      });
+      fit(l1, chord(MR * 0.42));
+      const l2 = txt(gs, 'MEASURED', {
+        x: 0, y: f(MR * 0.20), 'text-anchor': 'middle', 'font-size': f(size),
+        'font-weight': 700, fill: '#6E6457', 'letter-spacing': 0,
+      });
+      fit(l2, chord(MR * 0.06));
+    } else {
+      const badR = MEDR * 0.29;
+      const bg = el('g', { transform: `translate(0 ${f(-MEDR * 0.47)})` }, gs);
+      el('circle', { r: f(badR), fill: it.hue, stroke: shade(it.hue, 0.2), 'stroke-width': f(px(1.1)) }, bg);
+      icon(bg, ri === 0 ? it.icon : ring.glyph, 0, 0, badR * 1.34, INK, 2.5);
+      const vt = txt(gs, cell.val, {
+        x: 0, y: f(MEDR * 0.58), 'text-anchor': 'middle', class: 'num',
+        'font-size': f(MEDR * 0.86), 'font-weight': 800, 'letter-spacing': f(-px(1.0)), fill: INK,
+      });
+      fit(vt, MEDR * 1.66);
+    }
+
+    art.push({ ri, ii, band, pg, bar, cap, med: g, scale: gs, a0, a1, B });
+    perIntent[ii].cells.push({ band, pg, bar, cap, med: g });
   });
 
-  /* crown: saturated rim carrying the intent name */
-  const crown = el('path', {
+  /* crown: saturated rim + an inset inscription plate that nothing crosses */
+  const crownWedge = el('path', {
     d: sectorPath(CX, CY, CROWN.i, CROWN.o, a0, a1),
     fill: it.hue, stroke: shade(it.hue, 0.34), 'stroke-width': f(px(1.2)),
   }, gCrown);
+  const pin = CROWN.i + px(4.5), pout = CROWN.o - px(5.5);
+  const plate = el('path', {
+    d: sectorPath(CX, CY, pin, pout, a0 + 2.2, a1 - 2.2),
+    fill: tint(it.hue, 0.20), stroke: shade(it.hue, 0.40), 'stroke-width': f(px(1.3)), 'stroke-opacity': 0.75,
+  }, gCrown);
   const cname = arcLabel(gCrown, it.name, {
-    r: CROWN.i + (CROWN.o - CROWN.i) * 0.70, a0: a0 + 2.4, a1: a1 - 2.4,
-    size: px(20), fill: INK, weight: 800, spacing: px(1.8), id: `crown-${ii}`,
+    r: (pin + pout) / 2, a0: a0 + 4.0, a1: a1 - 4.0,
+    size: px(21), fill: INK, weight: 800, spacing: px(0.7), id: `crown-${ii}`,
   });
-  art.push({ crownOnly: true, ii, band: crown, lab: cname, a0, a1 });
+  art.push({ crownOnly: true, ii, band: crownWedge, plate, lab: cname, a0, a1 });
+  perIntent[ii].crown = { crownWedge, plate, cname };
 
   /* spoke divider + boss */
   const sa = A + 36;
@@ -333,7 +519,7 @@ INTENTS.forEach((it, ii) => {
   el('circle', { cx: f(dx), cy: f(dy), r: f(px(5.4)), fill: PAPER, stroke: INK, 'stroke-width': f(px(2)) }, gSpokes);
 });
 
-/* boundary circles */
+/* boundary circles — they bound the bands, they never run through type */
 const bounds = [HUB, ...BANDS.flatMap(B => [B.i, B.o]), CROWN.i, CROWN.o];
 bounds.forEach((r, i) => el('circle', {
   cx: CX, cy: CY, r: f(r), fill: 'none', stroke: INK,
@@ -344,7 +530,7 @@ bounds.forEach((r, i) => el('circle', {
 /* ============================================================== HUB */
 const hub = (() => {
   el('circle', { cx: CX, cy: CY, r: f(HUB), fill: PAPER }, gHub);
-  const ros = el('g', { opacity: 0.55 }, gHub);
+  const ros = el('g', { opacity: 0.5 }, gHub);
   for (let k = 0; k < K; k++) {
     const a = (360 / K) * k;
     const [tx, ty] = pt(CX, CY, HUB * 0.95, a);
@@ -356,7 +542,7 @@ const hub = (() => {
     }, ros);
   }
   /* gauge: the arc is 58% of the circle — the number is the arc */
-  const gw = px(13), gr = HUB - gw / 2 - px(2.5);
+  const gw = px(12), gr = HUB - gw / 2 - px(2.5);
   el('circle', { cx: CX, cy: CY, r: f(gr), fill: 'none', stroke: '#EFE2C8', 'stroke-width': f(gw) }, gHub);
   const sweep  = el('path', { d: 'M0 0', fill: 'none', stroke: HOT, 'stroke-width': f(gw) }, gHub);
   const sweep2 = el('path', { d: 'M0 0', fill: 'none', stroke: INK, 'stroke-width': f(px(1.6)), opacity: 0.55 }, gHub);
@@ -364,123 +550,214 @@ const hub = (() => {
   el('circle', { cx: CX, cy: CY, r: f(core), fill: PAPER, stroke: INK, 'stroke-width': f(px(1.4)), 'stroke-opacity': 0.45 }, gHub);
 
   /* every hub line is fitted to the chord of the core disc at its own height */
-  const chord = y => 2 * Math.sqrt(Math.max(1, core * core - y * y)) * 0.93;
-  const big = txt(gHub, '−0%', {
-    x: CX, y: f(CY - core * 0.10), 'text-anchor': 'middle', class: 'num',
-    'font-size': f(px(58)), 'font-weight': 800, 'letter-spacing': f(-px(3)), fill: INK,
+  const chord = y => 2 * Math.sqrt(Math.max(1, core * core - y * y)) * 0.92;
+  const big = txt(gHub, '0%', {
+    x: CX, y: f(CY - core * 0.24), 'text-anchor': 'middle', class: 'num',
+    'font-size': f(core * 0.60), 'font-weight': 800, 'letter-spacing': f(-px(2.4)), fill: INK,
   });
-  fit(big, chord(core * 0.46), px(20));
-  ['position-one organic CTR', 'when an AI Overview appears'].forEach((s, i) => {
-    const y = core * 0.20 + px(15.6) * i;
+  fit(big, chord(core * 0.52));
+  [['position-one CTR', px(16)], ['with an AI Overview', px(34)]].forEach(([s, y]) => {
     fit(txt(gHub, s, {
-      x: CX, y: f(CY + y), 'text-anchor': 'middle', 'font-size': f(px(13.2)), 'font-weight': 650, fill: INK,
-    }), chord(y), px(8));
+      x: CX, y: f(CY + y), 'text-anchor': 'middle', 'font-size': f(px(14.4)), 'font-weight': 700, fill: INK,
+    }), chord(y + px(3)));
   });
-  const sy = core * 0.20 + px(15.6) * 2 + px(4);
-  fit(txt(gHub, 'AHREFS · 300K KEYWORDS · 2026', {
-    x: CX, y: f(CY + sy), 'text-anchor': 'middle', class: 'mono',
-    'font-size': f(px(8.8)), 'font-weight': 600, fill: INK_SOFT, 'letter-spacing': f(px(0.3)),
-  }), chord(sy + px(3)), px(5.5));
+  fit(txt(gHub, 'AHREFS · 2026', {
+    x: CX, y: f(CY + px(54)), 'text-anchor': 'middle', class: 'mono',
+    'font-size': f(px(14)), 'font-weight': 600, fill: INK_SOFT, 'letter-spacing': f(px(0.2)),
+  }), chord(px(57)));
   return { sweep, sweep2, big, gr };
 })();
 
-/* ============================================================== CHROME */
+/* ============================================================== TITLE BAR */
 el('rect', { x: 0, y: 0, width: W, height: BAR_H, fill: INK }, gChrome);
 el('rect', { x: 0, y: BAR_H - px(7), width: W, height: px(7), fill: HOT }, gChrome);
 
-txt(gChrome, 'SEARCH INTENT × THE AI SERP · A DATA MANDALA · SEPTEMBER 2026', {
-  x: M, y: f(px(41)), 'font-size': f(px(13)), 'font-weight': 800, fill: HOT, 'letter-spacing': f(px(2.5)),
-});
+fit(txt(gChrome, 'SEARCH INTENT × THE AI SERP · A DATA MANDALA · SEPTEMBER 2026', {
+  x: M, y: f(px(TALL ? 36 : 30)), 'font-size': f(px(14)), 'font-weight': 800, fill: HOT, 'letter-spacing': f(px(2.2)),
+}), W - 2 * M);
+
 const headA = el('text', {
-  x: M, y: f(px(99)), 'font-size': f(px(56)), 'font-weight': 800, fill: PAPER,
+  x: M, y: f(px(TALL ? 88 : 74)), 'font-size': f(px(TALL ? 48 : 42)), 'font-weight': 800, fill: PAPER,
   'letter-spacing': f(-px(2)), class: 'num',
 }, gChrome);
 const headNum = el('tspan', { fill: HOT }, headA); headNum.textContent = '0.00%';
 const headRest = el('tspan', {}, headA); headRest.textContent = ' of U.S. Google searches';
 txt(gChrome, 'now end with no click at all.', {
-  x: M, y: f(px(155)), 'font-size': f(px(56)), 'font-weight': 800, fill: PAPER, 'letter-spacing': f(-px(2)),
+  x: M, y: f(px(TALL ? 144 : 124)), 'font-size': f(px(TALL ? 48 : 42)), 'font-weight': 800, fill: PAPER, 'letter-spacing': f(-px(2)),
 });
-txt(gChrome, 'This wheel maps where the attention goes instead — five intents, three rings.', {
-  x: M, y: f(px(182)), 'font-size': f(px(16.5)), 'font-weight': 600, fill: '#C9BFAF',
-});
+fit(txt(gChrome, 'This wheel maps where the attention goes instead — five intents, three rings.', {
+  x: M, y: f(BAR_H - px(18)), 'font-size': f(px(16)), 'font-weight': 600, fill: '#C9BFAF',
+}), W * 0.62);
+fit(txt(gChrome, HEAD_SRC, {
+  x: W - M, y: f(BAR_H - px(18)), 'text-anchor': 'end', 'font-size': f(px(14)), 'font-weight': 600, fill: '#A2988A',
+}), W * 0.32);
 
+/* ============================================================== RING KEY */
 (function keyStrip() {
   const y = BAR_H + KEY_H / 2, colW = (W - 2 * M) / 3;
   RINGS.forEach((ring, i) => {
     const x = M + colW * i;
     el('rect', {
-      x: f(x), y: f(BAR_H + px(9)), width: f(colW - px(11)), height: f(KEY_H - px(18)), rx: f(px(5)),
+      x: f(x), y: f(BAR_H + px(8)), width: f(colW - px(10)), height: f(KEY_H - px(16)), rx: f(px(5)),
       fill: tint(INK, 0.05 + 0.055 * i), stroke: INK, 'stroke-width': f(px(1.2)), 'stroke-opacity': 0.45,
     }, gChrome);
-    const bx = x + px(21);
+    const bx = x + px(20);
     el('circle', { cx: f(bx), cy: f(y), r: f(px(12.5)), fill: INK }, gChrome);
     icon(gChrome, ring.glyph, bx, y, px(15), HOT, 2.3);
-    const cap = colW - px(45);
-    fit(txt(gChrome, `${ring.mark}  ${ring.title}`, {
-      x: f(bx + px(20)), y: f(y - px(2)), 'font-size': f(px(13.4)), 'font-weight': 800, fill: INK, 'letter-spacing': f(px(0.4)),
-    }), cap, px(8));
+    const mx = bx + px(20);
+    el('rect', { x: f(mx), y: f(y - px(15)), width: f(px(17)), height: f(px(17)), rx: f(px(4)),
+      fill: INK }, gChrome);
+    txt(gChrome, ring.mark, { x: f(mx + px(8.5)), y: f(y - px(2.5)), 'text-anchor': 'middle',
+      'font-size': f(px(14)), 'font-weight': 800, fill: HOT, class: 'num' });
+    const tx = mx + px(23), capw = colW - px(66);
+    fit(txt(gChrome, ring.title, {
+      x: f(tx), y: f(y - px(3)), 'font-size': f(px(14.4)), 'font-weight': 800, fill: INK, 'letter-spacing': f(px(0.3)),
+    }), capw);
     fit(txt(gChrome, ring.sub, {
-      x: f(bx + px(20)), y: f(y + px(13)), 'font-size': f(px(11)), 'font-weight': 600, fill: INK_SOFT,
-    }), cap, px(7));
+      x: f(mx), y: f(y + px(14)), 'font-size': f(px(14)), 'font-weight': 600, fill: INK_SOFT,
+    }), colW - px(46));
   });
 })();
 
-(function foot() {
-  const y = H - FOOT_H + px(32), colW = (W - 2 * M) / 5;
-  INTENTS.forEach((it, i) => {
-    const x = M + colW * i;
-    el('rect', { x: f(x), y: f(y - px(18)), width: f(px(21)), height: f(px(21)), rx: f(px(3)), fill: it.hue, stroke: INK, 'stroke-width': f(px(1.2)) }, gChrome);
-    icon(gChrome, it.icon, x + px(10.5), y - px(7.5), px(14), INK, 2.5);
-    fit(txt(gChrome, it.name, {
-      x: f(x + px(28)), y: f(y - px(6)), 'font-size': f(px(11.6)), 'font-weight': 800, fill: INK, 'letter-spacing': f(px(0.4)),
-    }), colW - px(34), px(7.5));
+/* ============================================================== READING RAIL
+   Every inscription that used to curve around the wheel now sits here: straight,
+   horizontal, at least 14px at 1080 wide, on plain paper with nothing crossing it. */
+const RAIL_TOP = H - FOOT_H - RAIL_H;
+if (RAIL) (function rail() {
+  const colW = (W - 2 * M) / 5;
+  el('line', { x1: M, y1: f(RAIL_TOP + px(4)), x2: W - M, y2: f(RAIL_TOP + px(4)),
+    stroke: INK, 'stroke-width': f(px(1.4)), 'stroke-opacity': 0.35 }, gChrome);
+
+  INTENTS.forEach((it, ii) => {
+    const x = M + colW * ii, inner = colW - px(12);
+    /* column header: swatch + name (wraps to two lines) + example query */
+    el('rect', { x: f(x), y: f(RAIL_TOP + px(14)), width: f(px(18)), height: f(px(18)), rx: f(px(3)),
+      fill: it.hue, stroke: INK, 'stroke-width': f(px(1.2)) }, gChrome);
+    icon(gChrome, it.icon, x + px(9), RAIL_TOP + px(23), px(12.5), INK, 2.6);
+
+    const nameW = inner - px(24);
+    const nm = wrapFit(it.name, nameW, px(14.6), 800, 2);
+    drawLines(gChrome, nm.lines, {
+      x: x + px(24), y: RAIL_TOP + px(nm.lines.length > 1 ? 20 : 27), size: nm.size, lineH: px(15.5),
+      weight: 800, fill: INK, spacing: px(0.3),
+    });
     fit(txt(gChrome, it.ex, {
-      x: f(x + px(28)), y: f(y + px(9)), 'font-size': f(px(10.4)), 'font-weight': 500, fill: INK_SOFT, class: 'mono',
-    }), colW - px(34), px(7));
-  });
-  el('line', { x1: M, y1: f(H - px(41)), x2: W - M, y2: f(H - px(41)), stroke: INK, 'stroke-width': f(px(1)), 'stroke-opacity': 0.22 }, gChrome);
-  fit(txt(gChrome, SOURCE_LINE, { x: M, y: f(H - px(24)), 'font-size': f(px(10)), 'font-weight': 500, fill: INK_SOFT }),
-      W - 2 * M - px(140), px(6));
-  txt(gChrome, 'mitchjmiller.com', {
-    x: W - M, y: f(H - px(24)), 'text-anchor': 'end', 'font-size': f(px(10.4)), 'font-weight': 800, fill: INK, 'letter-spacing': f(px(0.5)),
+      x: f(x), y: f(RAIL_TOP + px(50)), 'font-size': f(px(14)), 'font-weight': 500, fill: INK_SOFT, class: 'mono',
+    }), inner);
+
+    /* three caption rows, one per ring */
+    RINGS.forEach((ring, ri) => {
+      const cell = CELLS[ri][ii];
+      const ry = RAIL_TOP + px(12) + RAIL_HEAD + ri * RAIL_ROW;
+      el('line', { x1: f(x), y1: f(ry - px(6)), x2: f(x + inner), y2: f(ry - px(6)),
+        stroke: INK, 'stroke-width': f(px(1)), 'stroke-opacity': 0.14 }, gChrome);
+      el('rect', { x: f(x), y: f(ry - px(1)), width: f(px(18)), height: f(px(18)), rx: f(px(4)),
+        fill: cell.nm ? '#B9AE9D' : shade(it.hue, 0.34) }, gChrome);
+      txt(gChrome, ring.mark, { x: f(x + px(9)), y: f(ry + px(13)), 'text-anchor': 'middle',
+        'font-size': f(px(14)), 'font-weight': 800, fill: PAPER, class: 'num' });
+      const cx0 = x + px(24), cw = inner - px(24);
+      const body = DENSE ? cell.cap : cell.capShort;
+      const wrapped = wrapFit(body, cw, px(14.6), 600, DENSE ? 3 : 2);
+      drawLines(gChrome, wrapped.lines, {
+        x: cx0, y: ry + px(12), size: wrapped.size, lineH: px(15.8), weight: 600,
+        fill: cell.nm ? '#6E6457' : INK,
+      });
+    });
   });
 })();
 
-/* ============================================================== TIMELINE */
-const DUR  = 4.4;
-const WIN  = {
-  crown: [0.14, 0.80], ring3: [0.58, 1.30], ring2: [1.12, 1.84], ring1: [1.66, 2.42],
-  hub:   [2.00, 2.74], roll: [1.50, 2.72], hold: 3.90,
-};
-const RINGWIN = [WIN.ring1, WIN.ring2, WIN.ring3];
-const STAG = 0.085;
-const fmt2 = v => v.toFixed(2).padStart(5, ' ');
+/* ============================================================== FOOTER */
+(function foot() {
+  const top = H - FOOT_H;
+  el('line', { x1: M, y1: f(top + px(2)), x2: W - M, y2: f(top + px(2)),
+    stroke: INK, 'stroke-width': f(px(1)), 'stroke-opacity': 0.22 }, gChrome);
 
-function reveal(t, w, idx) {
-  const up = easeInOut(win(t, w[0] + idx * STAG, w[1] + idx * STAG * 0.4));
-  if (t <= WIN.hold) return up;
-  return Math.min(up, 1 - easeInOut(win(t, WIN.hold, DUR)));
+  /* the square crop has no reading rail, so the intent legend lives here instead */
+  if (!RAIL) {
+    const colW = (W - 2 * M) / 5;
+    INTENTS.forEach((it, ii) => {
+      const x = M + colW * ii, inner = colW - px(12);
+      el('rect', { x: f(x), y: f(top + px(10)), width: f(px(18)), height: f(px(18)), rx: f(px(3)),
+        fill: it.hue, stroke: INK, 'stroke-width': f(px(1.2)) }, gChrome);
+      icon(gChrome, it.icon, x + px(9), top + px(19), px(12.5), INK, 2.6);
+      const nm = wrapFit(it.name, inner - px(24), px(14.6), 800, 2);
+      drawLines(gChrome, nm.lines, {
+        x: x + px(24), y: top + px(nm.lines.length > 1 ? 16 : 23), size: nm.size, lineH: px(15.5),
+        weight: 800, fill: INK, spacing: px(0.3),
+      });
+      fit(txt(gChrome, it.ex, {
+        x: f(x), y: f(top + px(46)), 'font-size': f(px(14)), 'font-weight': 500, fill: INK_SOFT, class: 'mono',
+      }), inner);
+    });
+  }
+
+  const y = top + (RAIL ? px(21) : px(64));
+  [SOURCES_A, SOURCES_B].forEach((line, i) => fit(txt(gChrome, line,
+    { x: M, y: f(y + i * px(19)), 'font-size': f(px(14)), 'font-weight': 500, fill: INK_SOFT }), W - 2 * M));
+  fit(txt(gChrome, SOURCES_C, { x: M, y: f(y + px(38)), 'font-size': f(px(14)), 'font-weight': 500, fill: INK_SOFT }),
+      W - 2 * M - px(190));
+  txt(gChrome, 'mitchjmiller.com', {
+    x: W - M, y: f(y + px(38)), 'text-anchor': 'end', 'font-size': f(px(14)), 'font-weight': 800, fill: INK, 'letter-spacing': f(px(0.4)),
+  });
+})();
+
+/* ============================================================== SELECTION LAYER */
+const HILITE = INTENTS.map((it, ii) => {
+  const A = ii * 72, a0 = A - 36, a1 = A + 36;
+  const veil = el('path', {
+    d: sectorPath(CX, CY, HUB, CROWN.o, a0, a1), fill: PAPER, opacity: 0, 'pointer-events': 'none',
+  }, gHilite);
+  const ring = el('path', {
+    d: sectorPath(CX, CY, HUB, CROWN.o, a0 + 0.3, a1 - 0.3), fill: 'none',
+    stroke: INK, 'stroke-width': f(px(4.5)), opacity: 0, 'pointer-events': 'none', 'stroke-linejoin': 'round',
+  }, gHilite);
+  return { veil, ring };
+});
+
+/* ============================================================== TIMELINE
+   One "rendering" = slowed assembly with a 0.70s beat between stages, then a
+   1.50s settled hold, then (for the looping GIF) a 0.60s reverse wipe.        */
+const BEAT = 0.70, STAG = 0.10;
+const T = {
+  crown: [0.00, 1.30],
+  ring3: [2.00, 3.10],
+  ring2: [3.80, 4.90],
+  ring1: [5.60, 6.70],
+  hub:   [7.40, 8.45],
+  roll:  [5.60, 8.45],
+  settled: 8.45,
+  holdEnd: 9.95,
+  wipeEnd: 10.55,
+};
+const DUR = T.wipeEnd;
+const RINGWIN = [T.ring1, T.ring2, T.ring3];
+const fmt2 = v => v.toFixed(2).padStart(5, ' ');
+
+/* each sector is staggered inside its stage window; the last one lands on the beat */
+function revealOf(t, w, idx) {
+  const span = (w[1] - w[0]) - 4 * STAG;
+  const a = w[0] + idx * STAG;
+  const up = easeInOut(win(t, a, a + span));
+  if (t <= T.holdEnd) return up;
+  return up * (1 - easeInOut(win(t, T.holdEnd, T.wipeEnd)));
 }
 
 function render(t) {
   t = clamp(t, 0, DUR);
-  gSpin.setAttribute('transform', `rotate(${f((360 / K) * (t / DUR))} ${f(CX)} ${f(CY)})`);
-  gStatic.setAttribute('opacity', f(0.10 + 0.90 * reveal(t, WIN.ring2, 0)));
-  gRings.setAttribute('opacity', f(0.25 + 0.75 * reveal(t, WIN.crown, 0)));
-  gSpokes.setAttribute('opacity', f(0.22 + 0.78 * reveal(t, WIN.crown, 0)));
 
   for (const c of art) {
-    const k = reveal(t, c.crownOnly ? WIN.crown : RINGWIN[c.ri], c.ii);
+    const k = revealOf(t, c.crownOnly ? T.crown : RINGWIN[c.ri], c.ii);
     const a1 = c.a0 + (c.a1 - c.a0) * k;
 
     if (c.crownOnly) {
       c.band.setAttribute('d', sectorPath(CX, CY, CROWN.i, CROWN.o, c.a0, a1));
-      c.lab.setAttribute('opacity', f(easeOutExpo(clamp((k - 0.55) / 0.45, 0, 1))));
+      const pk = easeOutExpo(clamp((k - 0.40) / 0.60, 0, 1));
+      c.plate.setAttribute('opacity', f(pk));
+      c.lab.setAttribute('opacity', f(easeOutExpo(clamp((k - 0.58) / 0.42, 0, 1))));
       continue;
     }
     c.band.setAttribute('d', sectorPath(CX, CY, c.B.i, c.B.o, c.a0, a1));
     c.pg.setAttribute('opacity', f(0.55 * easeOutExpo(clamp((k - 0.35) / 0.65, 0, 1))));
-    c.lab.setAttribute('opacity', f(easeOutExpo(clamp((k - 0.62) / 0.38, 0, 1))));
 
     if (c.bar) {
       const grow = easeOutExpo(clamp((k - 0.15) / 0.85, 0, 1)) * (+c.bar.dataset.frac);
@@ -492,38 +769,276 @@ function render(t) {
     c.scale.setAttribute('transform', `scale(${f(mk <= 0 ? 0.001 : lerp(0.66, 1, easeOutBack(mk)))})`);
   }
 
-  const hk = reveal(t, WIN.hub, 0);
+  const hk = revealOf(t, T.hub, 0);
   const deg = 360 * 0.58 * easeOutExpo(hk);
   const d = deg < 0.4 ? 'M0 0' : arcPath(CX, CY, hub.gr, 0, deg, false);
   hub.sweep.setAttribute('d', d); hub.sweep2.setAttribute('d', d);
-  hub.big.textContent = '−' + String(Math.round(58 * easeOutExpo(hk))).padStart(2, ' ') + '%';
+  hub.big.textContent = '−' + String(Math.round(58 * easeOutExpo(hk))) + '%';
   gHub.setAttribute('opacity', f(0.12 + 0.88 * Math.min(1, hk * 3)));
 
-  let rk = easeOutExpo(win(t, WIN.roll[0], WIN.roll[1]));
-  if (t > WIN.hold) rk = 1 - easeInOut(win(t, WIN.hold, DUR));
+  let rk = easeOutExpo(win(t, T.roll[0], T.roll[1]));
+  if (t > T.holdEnd) rk = 1 - easeInOut(win(t, T.holdEnd, T.wipeEnd));
   headNum.textContent = fmt2(68.01 * rk) + '%';
+}
+
+/* frame plan for the exporter: moving frames at `fps`, one long frame per beat */
+function framePlan(fps, opts) {
+  const wipe = !opts || opts.wipe !== false;
+  const dt = 1 / fps, ms = Math.round(dt * 1000), out = [];
+  const seg = (a, b) => { for (let t = a; t < b - 1e-6; t += dt) out.push({ t: +t.toFixed(4), delay: ms }); };
+  const beat = t => out.push({ t: +t.toFixed(4), delay: Math.round(BEAT * 1000) });
+  seg(T.crown[0], T.crown[1]); beat(T.crown[1]);
+  seg(T.ring3[0], T.ring3[1]); beat(T.ring3[1]);
+  seg(T.ring2[0], T.ring2[1]); beat(T.ring2[1]);
+  seg(T.ring1[0], T.ring1[1]); beat(T.ring1[1]);
+  seg(T.hub[0], T.hub[1]);
+  out.push({ t: T.settled, delay: 1500 });
+  if (wipe) for (let t = T.holdEnd + dt; t <= T.wipeEnd + 1e-6; t += dt) out.push({ t: +t.toFixed(4), delay: ms });
+  return out;
 }
 
 /* ---------------------------------------------------------------- driver */
 let raf = 0;
-const stop = () => { if (raf) cancelAnimationFrame(raf); raf = 0; };
-function play() {
-  stop();
+const stopAnim = () => { if (raf) cancelAnimationFrame(raf); raf = 0; };
+function playOnce() {
+  stopAnim();
   const t0 = performance.now();
-  const step = now => { render(((now - t0) / 1000) % DUR); raf = requestAnimationFrame(step); };
+  const step = now => {
+    const t = (now - t0) / 1000;
+    if (t >= T.settled) { render(T.settled); raf = 0; return; }
+    render(t); raf = requestAnimationFrame(step);
+  };
   raf = requestAnimationFrame(step);
 }
-const tParam = Q.get('t');
-const isStatic = Q.has('static') || Q.has('poster') || tParam !== null ||
-  matchMedia('(prefers-reduced-motion: reduce)').matches;
-render(tParam !== null ? parseFloat(tParam) : (isStatic ? 3.2 : 0));
-if (!isStatic) play();
+render(tParam !== null ? parseFloat(tParam) : (POSTER || REDUCED ? T.settled : 0));
+if (!POSTER && !REDUCED) playOnce();
+
+/* ============================================================== LIVE MODE */
+const SERP_DIR = '../../../research/2026-09-22/serp-examples/';
+let selected = null;
+let panel = null, promptEl = null;
+
+function parentBase() {
+  const raw = Q.get('parent') || document.referrer || '';
+  if (!raw) return '';
+  try {
+    const u = new URL(raw, location.href);
+    if (u.protocol !== 'http:' && u.protocol !== 'https:') return '';
+    return u.origin + u.pathname + u.search;
+  } catch (e) { return ''; }
+}
+
+/* a drawn, clearly-labelled stand-in — never a fake screenshot */
+function mockSerp(it) {
+  const w = 640, h = 380, pad = 18;
+  const blk = (x, y, ww, hh, fill, stroke, rx) =>
+    `<rect x="${x}" y="${y}" width="${ww}" height="${hh}" rx="${rx === undefined ? 4 : rx}" fill="${fill}"${stroke ? ` stroke="${stroke}" stroke-width="1.4"` : ''}/>`;
+  const line = (x, y, ww, op) => `<rect x="${x}" y="${y}" width="${ww}" height="7" rx="3.5" fill="#14100B" opacity="${op || 0.30}"/>`;
+  const tag = (x, y, s, fill) =>
+    `<text x="${x}" y="${y}" font-size="13" font-weight="800" fill="${fill || '#14100B'}" font-family="ui-sans-serif,system-ui,sans-serif" letter-spacing="0.6">${s}</text>`;
+  const note = (x, y, s) =>
+    `<text x="${x}" y="${y}" font-size="12.5" font-weight="600" fill="#5B5147" font-family="ui-sans-serif,system-ui,sans-serif">${s}</text>`;
+
+  let body = '';
+  const top = 74;
+  if (it.slug === 'informational' || it.slug === 'commercial') {
+    const label = it.slug === 'commercial' ? 'AI OVERVIEW — “X vs Y”' : 'AI OVERVIEW';
+    body += blk(pad, top, w - 2 * pad, 150, tint(it.hue, 0.13), shade(it.hue, 0.35), 8);
+    body += tag(pad + 14, top + 26, label, shade(it.hue, 0.55));
+    body += line(pad + 14, top + 42, w - 2 * pad - 120) + line(pad + 14, top + 60, w - 2 * pad - 60)
+         +  line(pad + 14, top + 78, w - 2 * pad - 180);
+    body += note(pad + 14, top + 108, 'cited sources');
+    for (let i = 0; i < 3; i++) body += blk(pad + 14 + i * 96, top + 118, 86, 20, '#FFFFFF', shade(it.hue, 0.3), 5);
+    body += tag(pad, top + 190, 'ORGANIC RESULTS');
+    body += line(pad, top + 208, 300, 0.5) + line(pad, top + 224, 460, 0.22);
+    body += line(pad, top + 252, 260, 0.5) + line(pad, top + 268, 420, 0.22);
+  } else if (it.slug === 'transactional') {
+    body += blk(pad, top, w - 2 * pad, 86, tint(it.hue, 0.10), shade(it.hue, 0.35), 8);
+    body += tag(pad + 14, top + 24, 'SPONSORED — TEXT ADS + SHOPPING', shade(it.hue, 0.55));
+    for (let i = 0; i < 4; i++) body += blk(pad + 14 + i * 142, top + 34, 130, 38, '#FFFFFF', shade(it.hue, 0.3), 5);
+    body += tag(pad, top + 128, 'ORGANIC RESULTS');
+    body += line(pad, top + 146, 320, 0.5) + line(pad, top + 162, 470, 0.22);
+    body += line(pad, top + 190, 250, 0.5) + line(pad, top + 206, 430, 0.22);
+    body += line(pad, top + 234, 290, 0.5) + line(pad, top + 250, 400, 0.22);
+  } else if (it.slug === 'navigational') {
+    body += tag(pad, top + 16, 'ONE DOMINANT RESULT + SITELINKS');
+    body += line(pad, top + 34, 300, 0.55) + line(pad, top + 50, 420, 0.22);
+    for (let i = 0; i < 4; i++) body += blk(pad, top + 66 + Math.floor(i / 2) * 30, 190, 22, '#FFFFFF', '#C9BCA6', 4)
+      .replace('x="' + pad + '"', 'x="' + (pad + (i % 2) * 200) + '"');
+    body += blk(w - pad - 190, top, 190, 210, tint(it.hue, 0.12), shade(it.hue, 0.35), 8);
+    body += tag(w - pad - 176, top + 26, 'KNOWLEDGE PANEL', shade(it.hue, 0.6));
+    body += line(w - pad - 176, top + 44, 140, 0.3) + line(w - pad - 176, top + 62, 110, 0.3);
+    body += tag(pad, top + 190, 'ORGANIC RESULTS');
+    body += line(pad, top + 208, 270, 0.5) + line(pad, top + 224, 380, 0.22);
+  } else {
+    body += blk(pad, top, 230, 170, tint(it.hue, 0.16), shade(it.hue, 0.35), 8);
+    body += tag(pad + 14, top + 24, 'MAP', shade(it.hue, 0.6));
+    body += `<circle cx="${pad + 90}" cy="${top + 96}" r="9" fill="${shade(it.hue, 0.25)}"/>`;
+    body += `<circle cx="${pad + 150}" cy="${top + 70}" r="9" fill="${shade(it.hue, 0.25)}"/>`;
+    body += `<circle cx="${pad + 130}" cy="${top + 128}" r="9" fill="${shade(it.hue, 0.25)}"/>`;
+    body += tag(pad + 250, top + 18, 'LOCAL PACK — 3 LISTINGS', shade(it.hue, 0.6));
+    for (let i = 0; i < 3; i++) {
+      body += blk(pad + 250, top + 30 + i * 48, w - pad - 250 - pad, 40, '#FFFFFF', shade(it.hue, 0.3), 6);
+      body += line(pad + 264, top + 48 + i * 48, 150, 0.45);
+    }
+    body += tag(pad, top + 208, 'ORGANIC RESULTS');
+    body += line(pad, top + 226, 280, 0.5) + line(pad, top + 242, 400, 0.22);
+  }
+
+  return `<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Representative rendering of a ${it.name.toLowerCase()} results page, drawn from the ledger.">
+    <rect width="${w}" height="${h}" fill="#FFFDF7"/>
+    <rect x="${pad}" y="20" width="${w - 2 * pad}" height="34" rx="17" fill="#FFFFFF" stroke="#C9BCA6" stroke-width="1.4"/>
+    <text x="${pad + 18}" y="42" font-size="14" font-weight="600" fill="#5B5147" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">${it.queries[0]}</text>
+    ${body}
+    <rect x="0" y="${h - 26}" width="${w}" height="26" fill="#14100B"/>
+    <text x="${pad}" y="${h - 8}" font-size="12.5" font-weight="800" fill="#FFE600" letter-spacing="0.8" font-family="ui-sans-serif,system-ui,sans-serif">REPRESENTATIVE RENDERING — DRAWN FROM THE LEDGER, NOT A SCREENSHOT</text>
+  </svg>`;
+}
+
+function buildPanel() {
+  panel = document.createElement('div');
+  panel.id = 'panel';
+  panel.hidden = true;
+  panel.setAttribute('role', 'region');
+  panel.setAttribute('aria-live', 'polite');
+  panel.setAttribute('aria-label', 'What this search usually returns');
+  document.getElementById('app').appendChild(panel);
+}
+
+function renderPanel(it) {
+  const slug = it.slug;
+  const base = parentBase();
+  const href = (base ? base : '') + '#intent-' + slug;
+  const stats = it.dom.map(d => `<p class="stat"><b>${d.what} — ${d.rate}</b><br>${d.tail}<span class="src">${d.src}</span></p>`).join('');
+  const qs = it.queries.map(q => `<li>${q}</li>`).join('');
+  panel.innerHTML = `
+    <div class="phead">
+      <span class="swatch" style="background:${it.hue}"></span>
+      <h3>${it.name}</h3>
+      <button class="close" type="button" aria-label="Close this panel">Close ×</button>
+    </div>
+    <div class="pbody">
+      <div>
+        <h4>What this search usually returns</h4>
+        <p class="stat" style="font-weight:650">${it.lede}</p>
+        ${stats}
+        <h4 style="margin-top:14px">Queries like this on this site</h4>
+        <ul>${qs}</ul>
+        <p style="margin:14px 0 0"><a class="jump" href="${href}" target="_top" data-intent="${slug}">Read the ${it.name.toLowerCase()} section ↓</a></p>
+      </div>
+      <figure>
+        <div class="shot"></div>
+        <figcaption class="cap"></figcaption>
+      </figure>
+    </div>`;
+  panel.querySelector('.close').addEventListener('click', () => selectIntent(null));
+  panel.querySelector('.jump').addEventListener('click', () => {
+    try { if (window.parent && window.parent !== window) window.parent.postMessage({ type: 'viz-intent', intent: slug }, '*'); } catch (e) {}
+  });
+
+  /* real capture if the research folder has one; a labelled drawing if not */
+  const holder = panel.querySelector('.shot'), cap = panel.querySelector('.cap');
+  const img = new Image();
+  img.alt = `Desktop results page for a ${it.name.toLowerCase()} query, captured 2026-09-22.`;
+  img.onload = () => {
+    holder.innerHTML = ''; holder.appendChild(img);
+    cap.textContent = `Captured results page — ${SERP_DIR}${slug}-desktop.png · desktop · 2026-09-22.`;
+  };
+  img.onerror = () => {
+    holder.innerHTML = mockSerp(it);
+    cap.textContent = 'Representative rendering, drawn from the ledger — not a screenshot. A captured example will replace it when ' + slug + '-desktop.png lands in research/2026-09-22/serp-examples/.';
+  };
+  holder.innerHTML = mockSerp(it);
+  cap.textContent = 'Representative rendering, drawn from the ledger — not a screenshot.';
+  img.src = SERP_DIR + slug + '-desktop.png';
+}
+
+function paintSelection() {
+  HILITE.forEach((hl, i) => {
+    const on = selected !== null;
+    hl.veil.setAttribute('opacity', on && i !== selected ? 0.62 : 0);
+    hl.ring.setAttribute('opacity', on && i === selected ? 1 : 0);
+  });
+  HITS.forEach((p, i) => p.setAttribute('aria-pressed', selected === i ? 'true' : 'false'));
+}
+
+function selectIntent(id) {
+  let idx = null;
+  if (id !== null && id !== undefined && id !== false) {
+    idx = typeof id === 'number' ? id : INTENTS.findIndex(x => x.slug === String(id).toLowerCase());
+    if (idx < 0) return false;
+  }
+  selected = idx;
+  paintSelection();
+  if (!panel) return true;
+  if (idx === null) { panel.hidden = true; panel.innerHTML = ''; return true; }
+  renderPanel(INTENTS[idx]);
+  panel.hidden = false;
+  return true;
+}
+
+const HITS = [];
+if (!POSTER) {
+  document.body.classList.add('live');
+  promptEl = document.createElement('p');
+  promptEl.id = 'prompt';
+  promptEl.innerHTML = '<b>Click a sector</b>: see what that search usually returns, then jump to its section.';
+  const app = document.getElementById('app');
+  app.insertBefore(promptEl, app.firstChild);
+  buildPanel();
+
+  INTENTS.forEach((it, ii) => {
+    const A = ii * 72;
+    const p = el('path', {
+      d: sectorPath(CX, CY, HUB, CROWN.o, A - 36, A + 36),
+      fill: 'transparent', class: 'hit', role: 'button', tabindex: '0',
+      'aria-pressed': 'false',
+      'aria-label': `${it.name} — see what that search usually returns`,
+    }, gHit);
+    p.addEventListener('click', () => selectIntent(selected === ii ? null : ii));
+    p.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); selectIntent(selected === ii ? null : ii); }
+      if (e.key === 'Escape') selectIntent(null);
+    });
+    p.addEventListener('focus', () => HILITE[ii].ring.setAttribute('opacity', 1));
+    p.addEventListener('blur',  () => paintSelection());
+    HITS.push(p);
+  });
+}
+
+/* ---------------------------------------------------------------- audit */
+function audit() {
+  const under = [], boxes = [];
+  const scale = 1080 / W;
+  for (const t of svg.querySelectorAll('text')) {
+    if (t === ruler) continue;
+    const size = parseFloat(getComputedStyle(t).fontSize) * scale;
+    const s = (t.textContent || '').trim();
+    if (!s) continue;
+    if (size < 13.95) under.push({ text: s.slice(0, 60), size: Math.round(size * 100) / 100 });
+    if (t.querySelector('textPath')) continue;      // crown inscriptions sit alone on their plate
+    const b = t.getBoundingClientRect();
+    boxes.push({ text: s.slice(0, 40), x: b.left, y: b.top, w: b.width, h: b.height });
+  }
+  const overlaps = [];
+  for (let i = 0; i < boxes.length; i++) for (let j = i + 1; j < boxes.length; j++) {
+    const a = boxes[i], b = boxes[j];
+    const ox = Math.min(a.x + a.w, b.x + b.w) - Math.max(a.x, b.x);
+    const oy = Math.min(a.y + a.h, b.y + b.h) - Math.max(a.y, b.y);
+    if (ox > 1.5 && oy > 1.5) overlaps.push({ a: a.text, b: b.text, ox: Math.round(ox), oy: Math.round(oy) });
+  }
+  return { size: [W, H], minRequired: 14, under, overlaps, textCount: boxes.length };
+}
 
 window.VIZ = {
-  ready: Promise.resolve(true), duration: DUR, settled: 3.2, size: [W, H],
-  seek: s => { stop(); render(+s); },
-  seekMs: v => { stop(); render(+v / 1000); },
-  play, stop,
+  ready: Promise.resolve(true), duration: DUR, settled: T.settled, size: [W, H], beat: BEAT,
+  seek: s => { stopAnim(); render(+s); },
+  seekMs: v => { stopAnim(); render(+v / 1000); },
+  play: playOnce, stop: stopAnim,
+  framePlan, audit, selectIntent,
+  get selected() { return selected === null ? null : INTENTS[selected].slug; },
+  intents: INTENTS.map(i => i.slug),
 };
 document.documentElement.dataset.ready = '1';
+})();
 </script>

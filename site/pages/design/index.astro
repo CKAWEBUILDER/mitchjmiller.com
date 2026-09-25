@@ -1,6 +1,6 @@
 ---
 import CandidateLayout from '../../layouts/CandidateLayout.astro';
-import {caseStudies, portfolioImages, headshot, resumeOptions, studyEditorial, sfcEvidenceImages} from '../../lib/content';
+import {caseStudies, portfolioImages, headshot, studyEditorial, sfcEvidenceImages} from '../../lib/content';
 
 const enterprise = ['apple-seasonal-search', 'commonspirit-locations-conversion-engine'].map(slug => ({
   slug, entry: caseStudies.find(entry => entry.slug === slug)!, story: studyEditorial[slug], image: portfolioImages[slug],
@@ -74,5 +74,5 @@ const stanfordImage = portfolioImages['stanford-myhealth-seo'];
     </div>
   </section>
 
-  <section class="candidate-cta" aria-labelledby="contact-heading"><div class="candidate-wrap cta-grid"><div><p class="eyebrow">The next useful conversation</p><h2 id="contact-heading">What are you trying to make possible?</h2><p>Bring a problem, a project or a role. I’m interested in work that connects thoughtful strategy with something people can actually use.</p><a class="candidate-button" href="/contact/">Let’s talk <span aria-hidden="true">↗</span></a></div><div class="resume-aside"><h3>Considering me for your team?</h3><p>Start with the experience most relevant to the role.</p><ul>{resumeOptions.map(resume => <li><a href={resume.href}>{resume.label}<span>PDF <span aria-hidden="true">↓</span></span></a></li>)}</ul></div></div></section>
+  <section class="candidate-cta" aria-labelledby="contact-heading"><div class="candidate-wrap cta-grid"><div><p class="eyebrow">The next useful conversation</p><h2 id="contact-heading">What are you trying to make possible?</h2><p>Bring a problem, a project or a role. I’m interested in work that connects thoughtful strategy with something people can actually use.</p><a class="candidate-button" href="/contact/">Let’s talk <span aria-hidden="true">↗</span></a></div><div class="resume-aside"><h3>Considering me for your team?</h3><p>My personal site has the work history and one current resume.</p><a class="text-link" href="https://mitchjmiller.com/">Visit mitchjmiller.com <span aria-hidden="true">↗</span></a><a class="text-link" href="https://linkedin.com/in/mitchelljmillerjr">Connect on LinkedIn <span aria-hidden="true">↗</span></a></div></div></section>
 </CandidateLayout>

@@ -3,7 +3,6 @@
 // previously reviewed expanded narratives without silently changing parity.
 export {caseStudies, blogPosts} from '../../baseline/src/lib/data';
 export {portfolioImages, headshot} from '../../baseline/src/lib/images';
-export {resumeOptions} from '../../baseline/src/lib/resumes';
 export {studyEditorial} from '../../src/lib/case-study-editorial';
 export const sfcEvidenceImages = [
   {src:'/images/portfolio-proof/sfc-south-shore-explorer.png',alt:'SFC Surf School interactive South Shore surf-break explorer',caption:'Production release review, September 10, 2026. Aerial: USDA-FSA NAIP, January 27, 2022, via NOAA Digital Coast.'},

@@ -45,7 +45,7 @@ export const ui = {
     footerBlurb: 'Digital strategy, websites, software and analytics for growing businesses. Work directly with Mitchell Miller.',
     country: 'United States',
     footerNote: 'Case studies describe work delivered in the roles and periods stated on each page.',
-    footerLinks: [{ label: 'Resumes', href: '/resume/' }, { label: 'Client sign-in', href: '/clients/' }, { label: 'Contact', href: '/contact/' }],
+    footerLinks: [{ label: 'Mitch’s portfolio', href: 'https://mitchjmiller.com/' }, { label: 'Client sign-in', href: '/clients/' }, { label: 'Contact', href: '/contact/' }],
     banner: { region: 'Language suggestion', text: 'This page is also available in English.', go: 'Read in English', dismiss: 'No, thanks' },
   },
   es: esUi,

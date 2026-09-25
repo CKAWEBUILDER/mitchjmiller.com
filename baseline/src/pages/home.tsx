@@ -1,8 +1,7 @@
 import { Layout } from "@/components/layout";
-import { ResumeDownloadDialog } from "@/components/resume-download-dialog";
 import { SEO } from "@/components/seo";
 import { Link } from "@/components/native-link";
-import { ArrowRight, FileText, Mail, ExternalLink } from "lucide-react";
+import { ArrowRight, Mail, ExternalLink } from "lucide-react";
 import { caseStudies } from "@/lib/data";
 import { headshot, portfolioImages } from "@/lib/images";
 
@@ -78,15 +77,12 @@ export default function Home() {
                 >
                   View AEO/GEO Lab <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
-                <ResumeDownloadDialog>
-                  <button
-                    type="button"
-                    className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-10 px-5"
-                    data-testid="link-download-resume"
-                  >
-                    Download Resume <FileText className="ml-2 h-4 w-4" />
-                  </button>
-                </ResumeDownloadDialog>
+                <a
+                  href="https://mitchjmiller.com/"
+                  className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-10 px-5"
+                >
+                  Personal portfolio <ExternalLink className="ml-2 h-4 w-4" />
+                </a>
                 <Link
                   href="/contact"
                   className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-10 px-5"

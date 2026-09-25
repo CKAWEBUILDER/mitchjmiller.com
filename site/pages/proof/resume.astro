@@ -1,5 +1,4 @@
 ---
 import ProofLayout from '../../layouts/ProofLayout.astro';
-import {resumeOptions} from '../../../src/lib/resumes';
 ---
-<ProofLayout title="Current resumes"><h1>A background for the work ahead.</h1><p class="deck">Four focused views of the same experience. Each download is a current two-page PDF.</p><div class="grid">{resumeOptions.map(resume=><section class="card"><h2>{resume.label}</h2><p>{resume.description}</p><ul>{resume.signals.map(signal=><li>{signal}</li>)}</ul><a href={`/review-assets${resume.href}`} download={resume.download}>Download {resume.label} PDF</a></section>)}</div></ProofLayout>
+<ProofLayout title="Personal portfolio"><h1>One personal profile.</h1><p class="deck">The personal portfolio holds the full work history and one current resume PDF. The M² site focuses on business services and delivered work.</p><div class="grid"><section class="card"><h2>Mitchell Miller</h2><p>Selected work, experience and a single downloadable resume.</p><a href="https://mitchjmiller.com/">Visit the personal portfolio</a></section></div></ProofLayout>

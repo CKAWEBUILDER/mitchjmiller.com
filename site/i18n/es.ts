@@ -12,7 +12,7 @@ export const esUi = {
   footerBlurb: 'Estrategia digital, sitios web, software y analítica para empresas en crecimiento. Trabaja directamente con Mitchell Miller.',
   country: 'Estados Unidos',
   footerNote: 'Los casos de estudio describen trabajo realizado en los roles y periodos que indica cada página.',
-  footerLinks: [{ label: 'Currículums', href: '/resume/' }, { label: 'Acceso de clientes', href: '/clients/' }, { label: 'Contacto', href: '/es/contact/' }],
+  footerLinks: [{ label: 'Portafolio de Mitch (en inglés)', href: 'https://mitchjmiller.com/' }, { label: 'Acceso de clientes', href: '/clients/' }, { label: 'Contacto', href: '/es/contact/' }],
   banner: { region: 'Sugerencia de idioma', text: 'Esta página también está disponible en español.', go: 'Leer en español', dismiss: 'No, gracias' },
 } as const;
 
@@ -47,7 +47,7 @@ const primary: NavItem[] = [
 
 export const esNav = {
   primary,
-  utility: [{ label: 'Currículums', href: '/resume/' }, { label: 'Clientes', href: '/clients/' }] as NavLink[],
+  utility: [{ label: 'Portafolio de Mitch', href: 'https://mitchjmiller.com/' }, { label: 'Clientes', href: '/clients/' }] as NavLink[],
   cta: { label: 'Hablemos', href: '/es/contact/' } as NavLink,
   footer: [
     { heading: 'Servicios', links: [
@@ -75,7 +75,7 @@ export const esNav = {
     { heading: 'Empresa', links: [
       { label: 'Acerca de', href: '/about/' },
       { label: 'Contacto', href: '/es/contact/' },
-      { label: 'Currículums', href: '/resume/' },
+      { label: 'Portafolio de Mitch (en inglés)', href: 'https://mitchjmiller.com/' },
       { label: 'Acceso de clientes', href: '/clients/' },
     ] },
   ],

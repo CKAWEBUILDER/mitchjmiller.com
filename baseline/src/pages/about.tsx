@@ -73,7 +73,12 @@ export default function About() {
           <div>
             <h2 className="text-xl font-bold text-primary mb-3">Open to</h2>
             <p className="text-muted-foreground">
-              Director-level roles in SEO, AEO/GEO, AI Search, or AI Systems leadership. I am also available for advisory engagements and speaking.
+              Advisory engagements, speaking, and selected enterprise or growth-systems roles. My personal portfolio has the full work history and current resume.
+            </p>
+            <p className="text-muted-foreground mt-3">
+              <a className="text-secondary hover:underline" href="https://mitchjmiller.com/">Visit mitchjmiller.com</a>
+              {" · "}
+              <a className="text-secondary hover:underline" href="https://linkedin.com/in/mitchelljmillerjr" target="_blank" rel="noopener noreferrer">Connect on LinkedIn</a>
             </p>
           </div>
 

@@ -31,7 +31,7 @@ export interface ParityRoute {
 }
 
 // Production snapshot 2745c7e. Existing Coming Soon routes remain noindex.
-// Titles/descriptions for work, writing, about, contact and resume follow the
+// Titles/descriptions for work, writing, about, contact and the legacy resume route follow the
 // 2026-09-14 agency copy pack (content-studio/drafts/2026-09-14-agency-copy-pack.md §h).
 // Duplicate slugs resolve to the first entry, matching production behavior.
 export const parityExceptions = { excludedDraftSlugs, duplicateBlogSlugs };
@@ -40,7 +40,7 @@ export const parityRoutes: ParityRoute[] = [
   { path: "/about", title: "About Mitchell Miller, Principal", description: "From Apple and CommonSpirit Health to SFC Surf School \u2014 the practice behind the search and growth work.", Component: About },
   { path: "/contact", title: "Contact \u2014 Start a Conversation", description: "Tell Mitchell Miller the problem you want to solve. No booking confirmation, no pricing quote \u2014 just a reply.", Component: Contact },
   { path: "/collab-ideas", title: "Collab Ideas | Mitchell Miller", description: "Ways to collaborate with Mitchell Miller across enterprise SEO, AEO/GEO measurement, organic systems, and practical AI workflow prototypes.", Component: CollabIdeas },
-  { path: "/resume", title: "Resumes \u2014 Mitchell Miller", description: "Four resumes, one chronology: Search Direction, AI Search Engineering, Product Management, Organic Systems Architecture.", Component: Resume },
+  { path: "/resume", title: "Personal portfolio | Mitchell Miller", description: "Mitchell Miller’s work history and current resume now live on his personal portfolio.", Component: Resume },
   { path: "/systems", title: "Systems Architecture | Mitchell Miller", description: "Mitchell Miller's operating architecture across search, analytics, and AI systems.", Component: Systems },
   { path: "/work", title: "Work \u2014 Search, Growth & AI-Search Case Studies", description: "17 case studies spanning Apple, CommonSpirit Health, Stanford Health Care, SFC Surf School and more.", Component: Work },
   { path: "/selected-builds", title: "Selected Builds | Mitchell Miller", description: "Selected side builds, AI experiments, and workflow tools that support Mitchell Miller's SEO, AEO/GEO, and product systems portfolio.", Component: VibeCoding },

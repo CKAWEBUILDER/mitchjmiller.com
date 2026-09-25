@@ -1,5 +1,4 @@
 import { publicPath } from "./paths";
-import { defaultResume } from "./resumes";
 
 export type AssetStatus = "ready" | "placeholder" | "missing";
 
@@ -13,8 +12,6 @@ export type PortfolioImage = {
 };
 
 export const headshot = publicPath("/images/headshot.png");
-
-export const resumePdf = defaultResume.href;
 
 export const portfolioImages: Record<string, PortfolioImage> = {
   "claritypulse-ai-reporting": {

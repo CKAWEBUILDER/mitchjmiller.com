@@ -11,6 +11,7 @@ export const site = {
   email: 'mitchelljmillerjr26@gmail.com',
   phone: '+1-626-316-8682',
   linkedin: 'https://linkedin.com/in/mitchelljmillerjr',
+  personalPortfolio: 'https://mitchjmiller.com/',
   // Retired 2026 social card (old domain wording). Only the Organization JSON-LD `logo` still
   // points here until Mitch supplies the final M² logo file (docs/site-standards.md "Brand mark").
   socialImage: '/images/portfolio-social.png',
@@ -52,7 +53,7 @@ export const primaryNav: NavItem[] = [
   { label: 'About', href: '/about/' },
 ];
 export const utilityNav: NavLink[] = [
-  { label: 'Resumes', href: '/resume/' },
+  { label: 'Mitch’s portfolio', href: site.personalPortfolio },
   { label: 'Clients', href: '/clients/' },
 ];
 export const contactCta: NavLink = { label: 'Let’s talk', href: '/contact/' };
@@ -83,7 +84,7 @@ export const footerColumns: { heading: string; links: NavLink[] }[] = [
   { heading: 'Company', links: [
     { label: 'About', href: '/about/' },
     { label: 'Contact', href: '/contact/' },
-    { label: 'Resumes', href: '/resume/' },
+    { label: 'Mitch’s portfolio', href: site.personalPortfolio },
     { label: 'Client sign-in', href: '/clients/' },
   ] },
 ];
@@ -125,7 +126,7 @@ export function personJsonLd() {
     image: `${site.url}${site.headshot}`,
     jobTitle: site.jobTitle,
     worksFor: { '@id': organizationId },
-    sameAs: [site.linkedin],
+    sameAs: [site.linkedin, site.personalPortfolio],
     email: site.email,
   };
 }

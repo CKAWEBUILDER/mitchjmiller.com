@@ -33,7 +33,7 @@ const searchItems = [
  {title:'Software & products',href:'/products/',category:'Products'},
  {title:'Contact Mitchell Miller',href:'/contact/',category:'Contact'},
  {title:'About Mitchell Miller',href:'/about/',category:'About'},
- {title:'Resumes & hiring',href:'/resume/',category:'Hiring'},
+ {title:'Personal portfolio',href:'https://mitchjmiller.com/',category:'Profile'},
  ...caseStudies.map(s=>({title:s.title,href:`/case-studies/${s.slug}/`,category:'Case study'})),
  ...publishedBlogPosts.map(p=>({title:p.title,href:`/blog/${p.slug}/`,category:'Writing'}))
 ];
@@ -78,7 +78,7 @@ const featured = products.filter(p=>p.featured).slice(0,3);
 <section class="section software" aria-labelledby="software-heading"><div class="inner"><h2 id="software-heading">Software &amp; tools</h2><p class="section-intro">Explore applications for research, reporting and everyday decisions. Try a live tool or follow a product taking shape.</p><div class="software-grid">{featured.map(product=><a class="product" href={product.href}>{product.image?<img src={product.image} alt={product.alt} loading="lazy" width="900" height="600"/>:<div class="product-art"><ServiceIcon name="measurement" label="Data exploration" decorative/></div>}<h3>{product.name}</h3><small>{product.status}</small></a>)}</div></div></section>
 <section class="section" aria-labelledby="industries-heading"><div class="inner"><h2 id="industries-heading">Experience across industries</h2><div class="industries-grid">{industries.map(industry=><article class:list={['industry',{placeholder:industry.placeholder}]}><ServiceIcon name={industry.icon} label={industry.name} decorative/><h3>{industry.href?<a href={industry.href}>{industry.name}</a>:industry.name}</h3><p>{industry.copy}</p>{industry.placeholder&&<small>Layout placeholder · not an experience claim</small>}</article>)}</div></div></section>
 <section class="closing" aria-labelledby="closing-heading"><div class="inner"><h2 id="closing-heading">Ready to explore further?</h2><p>Bring the question. We’ll work out the next move together—from a clearer direction to the details that make it work.</p><a class="cta" href="/contact/">Start a conversation</a></div></section>
-</main><footer class="footer"><div class="inner"><nav aria-label="Footer"><a href="/about/">About</a><a href="/resume/">Resumes</a><a href="/review/">Review hub</a><a href="/review/brand-options/">Logo options</a></nav><span>© 2026 Mitchell Miller · HTML layout review</span></div></footer>
+</main><footer class="footer"><div class="inner"><nav aria-label="Footer"><a href="/about/">About</a><a href="https://mitchjmiller.com/">Personal portfolio</a><a href="/review/">Review hub</a><a href="/review/brand-options/">Logo options</a></nav><span>© 2026 Mitchell Miller · HTML layout review</span></div></footer>
 <script type="application/json" id="search-index" set:html={JSON.stringify(searchItems).replace(/</g,'\u003c')}/>
 <script is:inline>
 (()=>{

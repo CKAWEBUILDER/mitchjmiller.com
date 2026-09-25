@@ -1,6 +1,6 @@
 import { Layout } from "@/components/layout";
 import { SEO } from "@/components/seo";
-import { Mail, Linkedin, Phone, FileText } from "lucide-react";
+import { Mail, Linkedin, Phone } from "lucide-react";
 import { Link } from "@/components/native-link";
 
 // Lane 3 contact contract (docs/cloudflare/README.md on claude/cloudflare-foundation):
@@ -144,14 +144,9 @@ export default function Contact() {
             ))}
           </div>
 
-          <Link
-            href="/resume"
-            className="inline-flex items-center gap-2 text-sm font-medium text-secondary hover:underline"
-            data-testid="link-resume"
-          >
-            <FileText className="h-4 w-4" />
-            Download resume (PDF)
-          </Link>
+          <a href="https://mitchjmiller.com/" className="inline-flex items-center gap-2 text-sm font-medium text-secondary hover:underline">
+            View my personal portfolio
+          </a>
         </div>
       </div>
     </Layout>

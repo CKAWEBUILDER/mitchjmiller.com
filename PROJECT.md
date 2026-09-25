@@ -1,4 +1,19 @@
-# CURRENT STATE — September 25, 2026: one checkout, one branch (reconciliation, Claude Code)
+# CURRENT STATE — September 25, 2026: M² profile and personal portfolio split
+
+Production remains https://mj2.pro/ from GitHub Pages gh-pages 94016fa; this work has not changed production or DNS. Mitch approved removing the M² four-resume chooser and moving his personal work history to a separate mitchjmiller.com portfolio with one current public resume PDF. Implementation is on branch codex/personal-site-split-20260925 in the M² checkout and in the separate personal project folder.
+
+| Item | Current state |
+|---|---|
+| M² source | /Users/mitchellmiler/Documents/mitchjmiller-html-migration, repository CKAWEBUILDER/mitchjmiller.com; this task branch is based on origin/main 4126e78. |
+| Personal source | /Users/mitchellmiler/Documents/mitchjmiller.com, separate public repository CKAWEBUILDER/mitchjmiller-portfolio created; main source commit e34696d pushed; deployment remains pending. |
+| M² changes | Profile links to LinkedIn and the personal portfolio; resume chooser removed from shared shell and legacy source; /resume/ retained as a transfer page; old direct PDF URLs remain available during transition; Spanish profile/contact updated. |
+| Personal changes | One-page static profile with selected work, career history, LinkedIn and one PDF (Mitchell-Miller-Search-Systems-Background-2026.pdf). |
+| Verification | M² typecheck passed. Release-candidate build passed parity 57/57, 73 sitemap URLs, agency checks across 77 shell documents, and standards checks across 84 documents. Local probes returned 200 for M² home and /resume/. Personal home, CSS and the one PDF each returned 200; copied PDF SHA-256 matches the approved source. The build reports a pre-existing Vite chunk-over-500-kB warning. |
+| Crawl input | A fresh crawl export was not present in the canonical project, Downloads or the shared workspace during this task. Work here follows the explicit resume/profile direction; crawl-driven SEO changes remain out of scope until the export is available. |
+| Gated, not done | No production deployment, DNS edit or indexing request. Preserve all five MX records, Replit verification TXT and Namecheap SPF TXT. Show the local release candidate and confirmed DNS/HTTPS plan for review before publication, following RELEASE-READY.md. |
+| Detailed record | Personal portfolio handoff: /Users/mitchellmiler/Documents/mitchjmiller.com/handoffs/2026-09-25-personal-portfolio.md; M² split handoff: handoffs/2026-09-25-personal-site-split.md. |
+
+# HISTORY — September 25, 2026: one-checkout reconciliation
 
 Production is https://mj2.pro/, built only from `main` and served by GitHub Pages `gh-pages` `94016fa` (source `b838034`; release record below). The reconciliation deployed nothing. The five content-studio posts are live with their living infographics (`/blog/search-results-by-intent/`, `/blog/optimizing-for-ads-in-free-llm-answers/`, `/blog/growth-title-market/`, `/blog/b2b-vs-b2c-by-vertical/`, `/blog/statistician-vs-data-scientist/`), next to four earlier posts and 25 study notes; the sitemap lists 73 URLs.
 

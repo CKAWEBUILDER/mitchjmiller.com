@@ -71,9 +71,9 @@ for (const file of walk(dist).filter(file => file.endsWith('.html'))) {
   if (!/<nav class="ag-nav" aria-label="(Primary|Principal)">/.test(pageBody)) fail(route, 'missing primary navigation');
   for (const label of shellText.labels) if (!new RegExp(`<a href="[^"]+"[^>]*>${label}(<span class="ag-caret"[^>]*></span>)?</a>`).test(pageBody)) fail(route, `primary nav lacks ${label}`);
   if (!shellText.cta.test(pageBody)) fail(route, `missing green ${shellText.ctaName} contact button`);
-  if (!/href="\/resume\/"/.test(pageBody) || !/href="\/clients\/"/.test(pageBody)) fail(route, 'utility links (Resumes, Clients) missing');
+  if (!/href="https:\/\/mitchjmiller\.com\/"/.test(pageBody) || !/href="\/clients\/"/.test(pageBody)) fail(route, 'utility links (personal portfolio, Clients) missing');
   if (!/<details class="ag-menu">/.test(pageBody)) fail(route, 'missing mobile menu');
-  if (!/<dialog id="resume-chooser"/.test(pageBody)) fail(route, 'missing resume chooser dialog');
+  if (/<dialog id="resume-chooser"|data-resume-open|resume-download-dialog/.test(pageBody)) fail(route, 'retired resume chooser is still present');
   if ((pageBody.match(/<h1\b/gi) || []).length !== 1) fail(route, 'expected exactly one h1');
   // TODO/TBD are uppercase developer markers; case-insensitive matching would flag the Spanish word "todo".
   if (/lorem ipsum|\[insert|Design review|THEME UNDER REVIEW/i.test(text(pageBody)) || /\bTODO\b|\bTBD\b/.test(text(pageBody))) fail(route, 'placeholder or review wording');

@@ -44,3 +44,5 @@ Source committed to `main` `1ddc06e`: `src/lib/study-notes.ts` now has 25 notes 
 - Bump the published-route count in `scripts/verify-agency.mjs` from **68 → 69** (line ~44) and update the adjacent comment.
 - `baseline/src/lib/published.ts` already prepends src/lib-only notes as `added`, so no baseline edit needed.
 Left to the release owner to keep the count constant single-sourced and avoid a mid-release collision.
+
+Wired and shipped 2026-09-24 by the site-standards release owner: route `/blog/studying/figma-shortest-course/` (kind `added`, not `note`: a `note` entry fails the 57-route parity check) and the count 68 → 69 in `main` `c04e56e`; live since gh-pages `3559667` (PROJECT.md "PUBLISHED — September 24, 2026 (21:55 EDT)").

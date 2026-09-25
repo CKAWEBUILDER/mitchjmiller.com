@@ -3,7 +3,9 @@
  * Browser QA for the site standards (docs/site-standards.md, 2026-09-24), headless Chrome.
  * Requires the static server: node scripts/qa/serve.mjs dist 5193
  *
- *   node scripts/qa/standards.mjs [--base http://127.0.0.1:5193] [--out docs/…/qa/standards.json] [--shots <dir>] [--only <route prefix>]
+ *   node scripts/qa/standards.mjs [--base http://127.0.0.1:5193] [--out docs/…/qa/standards.json] [--shots <dir>] [--only <route prefix>] [--routes /a/,/b/]
+ * Against a deployed origin (not 127.0.0.1/localhost) pages are awaited to "load" plus a short
+ * settle instead of "networkidle0", which a CDN keeping connections open may never reach.
  *
  * - axe-core (WCAG 2.0/2.1/2.2 A and AA rules) on every manifest route, every declared /viz/
  *   embed and the 404 document, in the light and the dark theme: zero serious or critical.
@@ -39,6 +41,9 @@ const wcagTags = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22a', 'wcag22
 
 let routes = [...manifest.routes.map(route => route.path), ...(manifest.embeds || []).map(embed => embed.path), '/no-such-page/'];
 if (args.only) routes = routes.filter(route => route.startsWith(args.only));
+if (args.routes) routes = args.routes.split(',').map(route => route.trim()).filter(Boolean);
+const live = !/^https?:\/\/(127\.0\.0\.1|localhost)(:|\/|$)/.test(base);
+const settle = { waitUntil: live ? 'load' : 'networkidle0', timeout: 60000 };
 const results = [];
 const record = (scope, check, pass, detail = '') => { results.push({ scope, check, pass, detail }); if (!pass || process.env.VERBOSE) console.log(`${pass ? 'PASS' : 'FAIL'} ${scope} — ${check}${detail ? ` (${detail})` : ''}`); };
 const wait = ms => new Promise(r => setTimeout(r, ms));
@@ -49,6 +54,8 @@ if (shots) mkdirSync(shots, { recursive: true });
 async function newPage({ scheme = 'light', width = 1360, height = 900, storage = null, blockStorage = false } = {}) {
   const context = await browser.createBrowserContext();
   const page = await context.newPage();
+  // A deployed origin can stall a request now and then: retry a timed-out navigation once.
+  if (live) { const goto = page.goto.bind(page); page.goto = async (url, options) => { try { return await goto(url, options); } catch (error) { if (!/timeout/i.test(String(error))) throw error; return goto(url, options); } }; }
   const errors = [];
   page.on('pageerror', error => errors.push(`pageerror: ${String(error).slice(0, 200)}`));
   page.on('console', message => { if (message.type() === 'error' && !blocked.test(message.location()?.url || '') && !/ERR_FAILED|ERR_BLOCKED_BY_CLIENT|net::|status of 404/.test(message.text())) errors.push(`console: ${message.text().slice(0, 200)}`); });
@@ -66,6 +73,7 @@ async function newPage({ scheme = 'light', width = 1360, height = 900, storage =
 }
 
 async function runAxe(page) {
+  if (live) await new Promise(r => setTimeout(r, 1500));
   await page.addScriptTag({ path: axePath });
   return page.evaluate(async tags => {
     const result = await window.axe.run(document, { runOnly: { type: 'tag', values: tags }, iframes: false, resultTypes: ['violations'] });
@@ -79,7 +87,9 @@ try {
   for (const route of routes) {
     for (const scheme of ['light', 'dark']) {
       const { page, errors, context } = await newPage({ scheme });
-      const response = await page.goto(`${base}${route}`, { waitUntil: 'networkidle0', timeout: 60000 });
+      let response;
+      try { response = await page.goto(`${base}${route}`, settle); }
+      catch (error) { record(`${route}@${scheme}`, 'page loads', false, String(error).slice(0, 160)); await context.close(); continue; }
       const expected = route === '/no-such-page/' ? 404 : 200;
       const standalone = route.startsWith('/viz/'); // embeds keep their own palette; the SFC report follows the site theme
       if (!standalone) {
@@ -99,7 +109,7 @@ try {
   // 2. 390 px: no horizontal overflow on any route; the theme toggle stays visible at 44×44.
   for (const route of routes) {
     const { page, context } = await newPage({ width: 390, height: 844 });
-    await page.goto(`${base}${route}`, { waitUntil: 'networkidle0', timeout: 60000 });
+    await page.goto(`${base}${route}`, settle);
     const m = await page.evaluate(() => { const t = document.querySelector('[data-theme-toggle]'); const r = t?.getBoundingClientRect(); return { sw: document.documentElement.scrollWidth, iw: window.innerWidth, toggle: r ? { w: Math.round(r.width), h: Math.round(r.height), visible: r.width > 0 && getComputedStyle(t).visibility !== 'hidden' && r.right <= window.innerWidth } : null }; });
     record(`${route}@390`, 'no horizontal overflow', m.sw <= m.iw, `scrollWidth ${m.sw} / viewport ${m.iw}`);
     if (m.toggle) record(`${route}@390`, 'theme toggle visible inside the viewport, at least 44×44', m.toggle.visible && m.toggle.w >= 44 && m.toggle.h >= 44, `${m.toggle.w}×${m.toggle.h}`);
@@ -111,7 +121,7 @@ try {
   for (const route of ['/', '/services/', '/blog/search-results-by-intent/', '/es/', '/es/services/', '/es/contact/', '/es/blog/', '/es/blog/gbp-2026-ai-grounding/'].filter(item => routes.includes(item))) {
     for (const width of [1281, 1360, 1500]) {
       const { page, context } = await newPage({ width, height: 800 });
-      await page.goto(`${base}${route}`, { waitUntil: 'networkidle0', timeout: 60000 });
+      await page.goto(`${base}${route}`, settle);
       const over = await page.evaluate(() => { const inner = document.querySelector('.ag-header-inner'); const box = inner.getBoundingClientRect(); const items = [...inner.children].filter(el => getComputedStyle(el).display !== 'none'); return Math.round(Math.max(...items.map(el => el.getBoundingClientRect().right)) - box.right); });
       record(`${route}@${width}`, 'desktop header items fit inside the header', over <= 0, `${over}px past the edge`);
       await context.close();
@@ -123,13 +133,13 @@ try {
   for (const route of themeRoutes) {
     {
       const { page, errors, context } = await newPage({ scheme: 'light' });
-      await page.goto(`${base}${route}`, { waitUntil: 'networkidle0' });
+      await page.goto(`${base}${route}`, settle);
       const before = await page.$eval('[data-theme-toggle]', el => ({ pressed: el.getAttribute('aria-pressed'), name: el.textContent.trim(), tag: el.tagName }));
       await page.click('[data-theme-toggle]');
       const after = await page.evaluate(() => ({ theme: document.documentElement.getAttribute('data-theme'), pressed: document.querySelector('[data-theme-toggle]').getAttribute('aria-pressed'), stored: localStorage.getItem('mj2-theme'), bg: getComputedStyle(document.body).backgroundColor }));
       record(`${route} toggle`, 'system light: the named button (aria-pressed=false) switches to dark, aria-pressed=true, choice stored', before.tag === 'BUTTON' && before.pressed === 'false' && /Dark theme/.test(before.name) && after.theme === 'dark' && after.pressed === 'true' && after.stored === 'dark' && after.bg !== 'rgb(255, 255, 255)', `${JSON.stringify(before)} → ${JSON.stringify(after)}`);
       if (shots && route === '/') await page.screenshot({ path: join(shots, 'home-dark-1360-fold.png') });
-      await page.reload({ waitUntil: 'networkidle0' });
+      await page.reload(settle);
       const persisted = await page.evaluate(() => ({ atBody: window.__themeAtBody, pressed: document.querySelector('[data-theme-toggle]').getAttribute('aria-pressed') }));
       record(`${route} toggle`, 'the choice persists across reloads against the system setting, before first paint', persisted.atBody === 'dark' && persisted.pressed === 'true', JSON.stringify(persisted));
       await page.emulateMediaFeatures([{ name: 'prefers-color-scheme', value: 'light' }]);
@@ -146,7 +156,7 @@ try {
     }
     {
       const { page, context } = await newPage({ scheme: 'dark' });
-      await page.goto(`${base}${route}`, { waitUntil: 'networkidle0' });
+      await page.goto(`${base}${route}`, settle);
       const first = await page.evaluate(() => ({ atBody: window.__themeAtBody, pressed: document.querySelector('[data-theme-toggle]').getAttribute('aria-pressed') }));
       if (shots && route === '/blog/search-results-by-intent/') await page.screenshot({ path: join(shots, 'post-dark-1360-fold.png') });
       await page.emulateMediaFeatures([{ name: 'prefers-color-scheme', value: 'light' }]);
@@ -157,11 +167,11 @@ try {
     }
     {
       const { page, context } = await newPage({ scheme: 'dark', storage: 'light' });
-      await page.goto(`${base}${route}`, { waitUntil: 'networkidle0' });
+      await page.goto(`${base}${route}`, settle);
       record(`${route} system`, 'a stored light choice wins over system dark before first paint', await page.evaluate(() => window.__themeAtBody) === 'light', '');
       await context.close();
       const run = await newPage({ scheme: 'dark', blockStorage: true });
-      await run.page.goto(`${base}${route}`, { waitUntil: 'networkidle0' });
+      await run.page.goto(`${base}${route}`, settle);
       const atBody = await run.page.evaluate(() => window.__themeAtBody);
       await run.page.click('[data-theme-toggle]');
       const toggled = await run.page.evaluate(() => document.documentElement.getAttribute('data-theme'));
@@ -172,8 +182,8 @@ try {
   if (routes.includes('/services/')) {
     const { page, context } = await newPage({ scheme: 'dark' });
     await page.setJavaScriptEnabled(false);
-    await page.goto(`${base}/services/`, { waitUntil: 'load' });
-    const m = await page.evaluate(() => ({ bg: getComputedStyle(document.body).backgroundColor, toggle: getComputedStyle(document.querySelector('[data-theme-toggle]')).display }));
+    const loaded = await page.goto(`${base}/services/`, settle).then(() => true).catch(error => { record('/services/ no-js', 'page loads', false, String(error).slice(0, 160)); return false; });
+    const m = !loaded ? { bg: null, toggle: null } : await page.evaluate(() => ({ bg: getComputedStyle(document.body).backgroundColor, toggle: getComputedStyle(document.querySelector('[data-theme-toggle]')).display }));
     record('/services/ no-js', 'JavaScript off + system dark: dark background, toggle hidden', m.bg === 'rgb(10, 19, 34)' && m.toggle === 'none', JSON.stringify(m));
     await context.close();
   }
@@ -182,7 +192,7 @@ try {
   // "Skip animation" button must stop it; under reduced motion there is no intro and no button.
   for (const embed of (manifest.embeds || []).filter(item => routes.includes(item.path))) {
     const { page, errors, context } = await newPage();
-    await page.goto(`${base}${embed.path}`, { waitUntil: 'load' });
+    await page.goto(`${base}${embed.path}`, settle).catch(error => record(`${embed.path} motion`, 'page loads', false, String(error).slice(0, 160)));
     const button = await page.waitForFunction(() => [...document.querySelectorAll('button')].find(b => b.textContent.trim() === 'Skip animation'), { timeout: 3000 }).then(() => true).catch(() => false);
     let stopped = false, removed = false;
     if (button) {
@@ -197,7 +207,7 @@ try {
     await context.close();
     const reduced = await newPage();
     await reduced.page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
-    await reduced.page.goto(`${base}${embed.path}`, { waitUntil: 'networkidle0' });
+    await reduced.page.goto(`${base}${embed.path}`, settle);
     record(`${embed.path} motion`, 'prefers-reduced-motion: no intro, no skip button', await reduced.page.evaluate(() => ![...document.querySelectorAll('button')].some(b => b.textContent.trim() === 'Skip animation')), '');
     record(`${embed.path} motion`, 'no console or page errors', errors.length === 0 && reduced.errors.length === 0, [...errors, ...reduced.errors].slice(0, 3).join(' | '));
     await reduced.context.close();
@@ -213,13 +223,13 @@ try {
   if (routes.includes('/es/services/') && routes.includes('/services/')) {
     {
       const { page, errors, context } = await withLanguages(['es-MX', 'es']);
-      await page.goto(`${base}/services/`, { waitUntil: 'networkidle0' });
+      await page.goto(`${base}/services/`, settle);
       await wait(1500);
       const shown = await bannerState(page);
       record('/services/ banner', 'Spanish browser: Spanish banner suggests /es/services/, and the page does not redirect', shown.visible && shown.lang === 'es' && shown.href === '/es/services/' && shown.path === '/services/' && /español/.test(shown.text || ''), JSON.stringify(shown));
       await page.click('[data-lang-dismiss]');
       const stored = await page.evaluate(() => ({ hidden: document.querySelector('[data-lang-banner]').hidden, lang: localStorage.getItem('mj2-lang') }));
-      await page.reload({ waitUntil: 'networkidle0' });
+      await page.reload(settle);
       await wait(800);
       const after = await bannerState(page);
       record('/services/ banner', '“No, gracias” hides it and is remembered across reloads; still no redirect', stored.hidden && stored.lang === 'en' && !after.visible && after.path === '/services/', `${JSON.stringify(stored)} → ${JSON.stringify(after)}`);
@@ -234,7 +244,7 @@ try {
       [['es-MX', 'es'], '/about/', false, 'page without a translation: no banner at all'],
     ]) {
       const { page, context } = await withLanguages(languages);
-      await page.goto(`${base}${route}`, { waitUntil: 'networkidle0' });
+      await page.goto(`${base}${route}`, settle);
       await wait(600);
       const state = await bannerState(page);
       const ok = state.visible === wantVisible && state.path === route && (!wantVisible || (state.lang === 'en' && state.href === '/services/')) && (route !== '/about/' || !state.exists);
@@ -243,7 +253,7 @@ try {
     }
     {
       const { page, errors, context } = await withLanguages(['en-US', 'en']);
-      await page.goto(`${base}/services/`, { waitUntil: 'networkidle0' });
+      await page.goto(`${base}/services/`, settle);
       await page.focus('[data-lang-picker] summary');
       await page.keyboard.press('Enter');
       const opened = await page.evaluate(() => document.querySelector('[data-lang-picker]').open);
@@ -252,10 +262,10 @@ try {
       const closed = await page.evaluate(() => ({ open: document.querySelector('[data-lang-picker]').open, focus: document.activeElement?.matches('[data-lang-picker] summary') }));
       record('/services/ picker', 'globe picker opens with Enter, lists English (current) and Español in their own script, Escape closes and returns focus', opened && items.length === 2 && items[0].text === 'English' && items[0].current === 'true' && items[1].text === 'Español' && items[1].lang === 'es' && items[1].href === '/es/services/' && !closed.open && closed.focus, `${JSON.stringify(items)} ${JSON.stringify(closed)}`);
       await page.click('[data-lang-picker] summary');
-      await Promise.all([page.waitForNavigation({ waitUntil: 'networkidle0' }), page.click('[data-lang-picker] a[lang="es"]')]);
+      await Promise.all([page.waitForNavigation(settle), page.click('[data-lang-picker] a[lang="es"]')]);
       const landed = await page.evaluate(() => ({ path: location.pathname, lang: document.documentElement.lang, stored: localStorage.getItem('mj2-lang') }));
       record('/services/ picker', 'choosing Español opens /es/services/ (lang="es") and remembers the choice', landed.path === '/es/services/' && landed.lang === 'es' && landed.stored === 'es', JSON.stringify(landed));
-      await page.goto(`${base}/work/`, { waitUntil: 'networkidle0' });
+      await page.goto(`${base}/work/`, settle);
       const untranslated = await page.$eval('[data-lang-picker] a[lang="es"]', a => ({ href: a.getAttribute('href'), text: a.textContent.trim() }));
       record('/work/ picker', 'on a page without a translation, Español leads to the Spanish home and says so', untranslated.href === '/es/' && /página de inicio/.test(untranslated.text), JSON.stringify(untranslated));
       record('picker', 'no console or page errors', errors.length === 0, errors.slice(0, 3).join(' | '));
@@ -269,7 +279,7 @@ try {
       await page.setRequestInterception(true);
       page.removeAllListeners('request');
       page.on('request', request => request.url() === endpoint && request.method() === 'POST' ? request.respond({ status, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: JSON.stringify(body) }) : (blocked.test(request.url()) || request.url() === endpoint ? request.abort('blockedbyclient') : request.continue()));
-      await page.goto(`${base}/es/contact/`, { waitUntil: 'networkidle0' });
+      await page.goto(`${base}/es/contact/`, settle);
       await page.type('#contact-name', 'QA Robot');
       await page.type('#contact-email', 'qa@example.com');
       await page.select('#contact-topic', 'consulting');
@@ -286,7 +296,7 @@ try {
   // 4. Share cards over HTTP and narration playback.
   {
     const { page, context } = await newPage();
-    await page.goto(`${base}/`, { waitUntil: 'networkidle0' });
+    await page.goto(`${base}/`, settle);
     const cards = new Set();
     for (const route of routes) {
       const html = await page.evaluate(async url => (await fetch(url)).text(), `${base}${route}`);
@@ -300,7 +310,7 @@ try {
   }
   for (const [route, item] of Object.entries(narration.items).filter(([route]) => routes.includes(route))) {
     const { page, errors, context } = await newPage();
-    await page.goto(`${base}${route}`, { waitUntil: 'networkidle0' });
+    await page.goto(`${base}${route}`, settle);
     const head = await page.evaluate(async src => { const r = await fetch(src, { method: 'HEAD' }); return { status: r.status, type: r.headers.get('content-type') }; }, item.src);
     const play = await page.evaluate(async () => {
       const audio = document.querySelector('.mj-narration audio');

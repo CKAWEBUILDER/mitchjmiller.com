@@ -463,11 +463,19 @@ const cardBoxes = {};
 /* ------------------------------------------------------- click / jump target
    Inside an iframe embed, a click posts to the parent AND falls back to a
    plain top-level link — whichever the host actually handles. */
+/* Published copy (mj2.pro): the fallback link targets the embedding post itself when it is
+   same-origin (a same-document jump, query string kept), then a same-origin ?parent=, else the
+   post on this origin. Cross-origin values are ignored so the link cannot be pointed off-site. */
 function parentUrl() {
-  const p = Q.get('parent');
-  if (p) return p;
-  try { if (document.referrer) return document.referrer; } catch (e) {}
-  return '';
+  try {
+    const p = window.parent;
+    if (p && p !== window && p.location.origin === location.origin) return p.location.origin + p.location.pathname + p.location.search;
+  } catch (e) {}
+  try {
+    const raw = Q.get('parent');
+    if (raw) { const u = new URL(raw, location.href); if (u.origin === location.origin) return u.origin + u.pathname + u.search; }
+  } catch (e) {}
+  return new URL('/blog/search-results-by-intent/', location.href).href;
 }
 function hrefFor(slug) { return parentUrl() + '#intent-' + slug; }
 
@@ -880,12 +888,24 @@ function render(t) {
 /* ------------------------------------------------------------- clock / API
    Live page: one slowed draw, then it holds on the settled frame — it does
    not auto-loop. Reduced-motion skips straight to the settled frame. */
+/* WCAG 2.2.2 (site standards, 2026-09-24): the intro runs longer than five seconds, so a visible
+   button stops it on the settled frame. It exists only while the intro plays. */
+function skipButton(onSkip) {
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.textContent = 'Skip animation';
+  b.style.cssText = 'position:fixed;top:10px;right:10px;z-index:20;min-height:44px;padding:10px 16px;border:1px solid #0f2440;border-radius:8px;background:#ffffff;color:#0f2440;font:600 14px/1.2 system-ui,-apple-system,"Segoe UI",sans-serif;cursor:pointer';
+  b.addEventListener('click', () => { onSkip(); b.remove(); });
+  document.body.append(b);
+  return b;
+}
 const REDUCED_MOTION = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-let clock = 0, raf = null, t0 = null;
+let clock = 0, raf = null, t0 = null, skip = null;
+const dropSkip = () => { if (skip) { skip.remove(); skip = null; } };
 function loop(ts) {
   if (t0 === null) t0 = ts;
   clock = (ts - t0) / 1000;
-  if (clock >= DURATION) { clock = DURATION; render(DURATION); raf = null; return; }
+  if (clock >= DURATION) { clock = DURATION; render(DURATION); raf = null; dropSkip(); return; }
   render(clock);
   raf = requestAnimationFrame(loop);
 }
@@ -896,14 +916,17 @@ const initialT = Q.has('poster') ? DURATION
   : 0;
 render(initialT);
 clock = initialT;
-if (!STATIC && !Q.has('t') && !REDUCED_MOTION) raf = requestAnimationFrame(loop);
+if (!STATIC && !Q.has('t') && !REDUCED_MOTION) {
+  raf = requestAnimationFrame(loop);
+  skip = skipButton(() => { if (raf) { cancelAnimationFrame(raf); raf = null; } clock = DURATION; render(DURATION); skip = null; });
+}
 
 window.VIZ = {
   ready: Promise.resolve(true),
   duration: DURATION,
   format: FMT,
   size: SIZE,
-  seek(t) { if (raf) { cancelAnimationFrame(raf); raf = null; } render(t); return t; },
+  seek(t) { if (raf) { cancelAnimationFrame(raf); raf = null; } dropSkip(); render(t); return t; },
   frame() { return clock; },
   selectIntent,
 };

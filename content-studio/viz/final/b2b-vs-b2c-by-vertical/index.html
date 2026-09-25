@@ -1100,22 +1100,19 @@ function framePlan(fps, opts) {
 }
 
 /* ============================================================== LIVE MODE */
-/* Where "Read the … section" lands when no listener catches the message.
-   document.referrer is never used: a reader who arrives from LinkedIn must not be
-   sent back there. ?parent= is honoured only for the site itself (https) and for
-   local tests (http on localhost / 127.0.0.1); anything else falls back to the post. */
-const DEFAULT_PARENT = 'https://mj2.pro/blog/b2b-vs-b2c-by-vertical/';
+/* Published copy (mj2.pro): the fallback link targets the embedding post itself when it is
+   same-origin (a same-document jump, query string kept), then a same-origin ?parent=, else the
+   post on this origin. Cross-origin values are ignored so the link cannot be pointed off-site. */
 function parentBase() {
-  const raw = Q.get('parent');
-  if (raw) {
-    try {
-      const u = new URL(raw);
-      const site = u.protocol === 'https:' && /^(www\.)?mj2\.pro$/.test(u.hostname);
-      const local = u.protocol === 'http:' && /^(localhost|127\.0\.0\.1)$/.test(u.hostname);
-      if (site || local) return u.origin + u.pathname + u.search;
-    } catch (e) {}
-  }
-  return DEFAULT_PARENT;
+  try {
+    const p = window.parent;
+    if (p && p !== window && p.location.origin === location.origin) return p.location.origin + p.location.pathname + p.location.search;
+  } catch (e) {}
+  try {
+    const raw = Q.get('parent');
+    if (raw) { const u = new URL(raw, location.href); if (u.origin === location.origin) return u.origin + u.pathname + u.search; }
+  } catch (e) {}
+  return new URL('/blog/b2b-vs-b2c-by-vertical/', location.href).href;
 }
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 function money(v) { return '$' + nf(v, 0); }
@@ -1173,7 +1170,7 @@ function wireJump() {
   const a = document.querySelector('#panel .jump');
   if (!a) return;
   a.addEventListener('click', () => {
-    try { if (window.parent && window.parent !== window) window.parent.postMessage({ type: 'viz-intent', intent: a.dataset.intent }, '*'); } catch (e) {}
+    try { if (window.parent && window.parent !== window) window.parent.postMessage({ type: 'viz-intent', intent: a.dataset.intent, anchor: 'vertical-' + a.dataset.intent }, '*'); } catch (e) {}
   });
 }
 function postHeight() {
@@ -1181,8 +1178,20 @@ function postHeight() {
 }
 
 /* ------------------------------------------------------ selection (live) */
-let raf = 0;
-const stop = () => { if (raf) cancelAnimationFrame(raf); raf = 0; };
+/* WCAG 2.2.2 (site standards, 2026-09-24): the intro runs longer than five seconds, so a visible
+   button stops it on the settled frame. It exists only while the intro plays. */
+function skipButton(onSkip) {
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.textContent = 'Skip animation';
+  b.style.cssText = 'position:fixed;top:10px;right:10px;z-index:20;min-height:44px;padding:10px 16px;border:1px solid #0f2440;border-radius:8px;background:#ffffff;color:#0f2440;font:600 14px/1.2 system-ui,-apple-system,"Segoe UI",sans-serif;cursor:pointer';
+  b.addEventListener('click', () => { onSkip(); b.remove(); });
+  document.body.append(b);
+  return b;
+}
+let raf = 0, skip = null;
+const dropSkip = () => { if (skip) { skip.remove(); skip = null; } };
+const stop = () => { if (raf) cancelAnimationFrame(raf); raf = 0; dropSkip(); };
 function settleAll() {
   stop();
   render(T.settled);
@@ -1329,10 +1338,11 @@ function playOnce() {
   const t0 = performance.now();
   const step = now => {
     const t = (now - t0) / 1000;
-    if (t >= T.settled) { render(T.settled); raf = 0; return; }
+    if (t >= T.settled) { render(T.settled); raf = 0; dropSkip(); return; }
     render(t); raf = requestAnimationFrame(step);
   };
   raf = requestAnimationFrame(step);
+  skip = skipButton(() => settleAll());
 }
 
 function boot() {

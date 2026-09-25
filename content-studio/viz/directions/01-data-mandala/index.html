@@ -1,4 +1,6 @@
 <!doctype html>
+<html lang="en">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Data Mandala — Search Intent 2026</title>
@@ -59,6 +61,8 @@
   body.live a:focus-visible, body.live button:focus-visible { outline: 3px solid #0B63CE; outline-offset: 2px; }
   .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 </style>
+</head>
+<body>
 <div id="app"><div id="stage"><svg id="viz" xmlns="http://www.w3.org/2000/svg"></svg></div></div>
 <script>
 (function () {
@@ -252,7 +256,7 @@ const svg = document.getElementById('viz');
 svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
 svg.setAttribute('width', W); svg.setAttribute('height', H);
 if (POSTER) { stage.style.width = W + 'px'; stage.style.height = H + 'px'; }
-svg.setAttribute('role', 'img');
+svg.setAttribute('role', 'group'); // a group, not an img: the sectors inside are buttons (axe nested-interactive)
 svg.setAttribute('aria-label',
   'Data mandala: five search intents as sectors, three measured rings - AI Overview trigger rate, who takes the click, and what moved in a year.');
 
@@ -798,17 +802,29 @@ function framePlan(fps, opts) {
 }
 
 /* ---------------------------------------------------------------- driver */
-let raf = 0;
-const stopAnim = () => { if (raf) cancelAnimationFrame(raf); raf = 0; };
+/* WCAG 2.2.2 (site standards, 2026-09-24): the intro runs longer than five seconds, so a visible
+   button stops it on the settled frame. It exists only while the intro plays. */
+function skipButton(onSkip) {
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.textContent = 'Skip animation';
+  b.style.cssText = 'position:fixed;top:10px;right:10px;z-index:20;min-height:44px;padding:10px 16px;border:1px solid #0f2440;border-radius:8px;background:#ffffff;color:#0f2440;font:600 14px/1.2 system-ui,-apple-system,"Segoe UI",sans-serif;cursor:pointer';
+  b.addEventListener('click', () => { onSkip(); b.remove(); });
+  document.body.append(b);
+  return b;
+}
+let raf = 0, skip = null;
+const stopAnim = () => { if (raf) cancelAnimationFrame(raf); raf = 0; if (skip) { skip.remove(); skip = null; } };
 function playOnce() {
   stopAnim();
   const t0 = performance.now();
   const step = now => {
     const t = (now - t0) / 1000;
-    if (t >= T.settled) { render(T.settled); raf = 0; return; }
+    if (t >= T.settled) { render(T.settled); raf = 0; if (skip) { skip.remove(); skip = null; } return; }
     render(t); raf = requestAnimationFrame(step);
   };
   raf = requestAnimationFrame(step);
+  skip = skipButton(() => { stopAnim(); render(T.settled); });
 }
 render(tParam !== null ? parseFloat(tParam) : (POSTER || REDUCED ? T.settled : 0));
 if (!POSTER && !REDUCED) playOnce();
@@ -818,14 +834,19 @@ const SERP_DIR = '../../../research/2026-09-22/serp-examples/';
 let selected = null;
 let panel = null, promptEl = null;
 
+/* Published copy (mj2.pro): the fallback link targets the embedding post itself when it is
+   same-origin (a same-document jump, query string kept), then a same-origin ?parent=, else the
+   post on this origin. Cross-origin values are ignored so the link cannot be pointed off-site. */
 function parentBase() {
-  const raw = Q.get('parent') || document.referrer || '';
-  if (!raw) return '';
   try {
-    const u = new URL(raw, location.href);
-    if (u.protocol !== 'http:' && u.protocol !== 'https:') return '';
-    return u.origin + u.pathname + u.search;
-  } catch (e) { return ''; }
+    const p = window.parent;
+    if (p && p !== window && p.location.origin === location.origin) return p.location.origin + p.location.pathname + p.location.search;
+  } catch (e) {}
+  try {
+    const raw = Q.get('parent');
+    if (raw) { const u = new URL(raw, location.href); if (u.origin === location.origin) return u.origin + u.pathname + u.search; }
+  } catch (e) {}
+  return new URL('/blog/search-results-by-intent/', location.href).href;
 }
 
 /* a drawn, clearly-labelled stand-in — never a fake screenshot */

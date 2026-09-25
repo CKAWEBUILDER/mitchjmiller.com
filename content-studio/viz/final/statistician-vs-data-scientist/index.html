@@ -83,12 +83,10 @@
      ?gif=1      static clock, the exporter drives it; hides the prompt bar
      ?static=1   no rAF; only window.VIZ.seek() moves the clock
      ?t=4.2      seek to a time in seconds
-     ?parent=https://mj2.pro/blog/statistician-vs-data-scientist/
-                 base URL for every stop's fallback link. Without it: when framed,
-                 document.referrer (the embedding page); when opened on its own
-                 (e.g. from the LinkedIn link), the post URL in STANDALONE_PARENT —
-                 never a top-level referrer, which would be LinkedIn or Google.
-                 Only http(s)/file URLs count.
+     ?parent=<post url>
+                 same-origin base URL for every stop's fallback link (published
+                 copy: the embedding post when it is same-origin, then a same-origin
+                 ?parent=, else the post on this origin; the referrer is never used).
 
    Click contract (same message type as the search-intent maps)
      A click, Enter or Space on a stop highlights it and posts
@@ -96,7 +94,7 @@
      to window.parent; the stop is also a plain <a target="_top"> to
        <parent>#role-<section>
      for hosts that do not listen. <section> is always an anchor that exists in
-     drafts/2026-09-14-statistician-vs-data-scientist.blog.md:
+     the post (the message also carries anchor: 'role-<section>'):
        no-bls-code | pay | growth | education | practice | methods
      (tools and postings have no section of their own; both map to "methods").
 
@@ -784,22 +782,19 @@ PILL.bot = PILL.cy + M.pillH / 2;
 
 /* --------------------------------------------------- click / jump targets
    A stop posts to the embedding parent AND is a plain top-level link. */
-function safeBase(u) {
-  if (!u) return '';
-  try {
-    const p = new URL(u, location.href);
-    if (!/^(https?|file):$/.test(p.protocol)) return '';
-    p.hash = '';
-    return p.href;
-  } catch (e) { return ''; }
-}
-const STANDALONE_PARENT = 'https://mj2.pro/blog/statistician-vs-data-scientist/';
-const FRAMED = (() => { try { return window.self !== window.top; } catch (e) { return true; } })();
+/* Published copy (mj2.pro): the fallback link targets the embedding post itself when it is
+   same-origin (a same-document jump, query string kept), then a same-origin ?parent=, else the
+   post on this origin. Cross-origin values are ignored so the link cannot be pointed off-site. */
 function parentUrl() {
-  const p = safeBase(Q.get('parent'));
-  if (p) return p;
-  if (!FRAMED) return STANDALONE_PARENT;   // top-level: the referrer is whoever linked here, not a host page
-  try { return safeBase(document.referrer); } catch (e) { return ''; }
+  try {
+    const p = window.parent;
+    if (p && p !== window && p.location.origin === location.origin) return p.location.origin + p.location.pathname + p.location.search;
+  } catch (e) {}
+  try {
+    const raw = Q.get('parent');
+    if (raw) { const u = new URL(raw, location.href); if (u.origin === location.origin) return u.origin + u.pathname + u.search; }
+  } catch (e) {}
+  return new URL('/blog/statistician-vs-data-scientist/', location.href).href;
 }
 const hrefFor = section => parentUrl() + '#role-' + section;
 const STOP_NODES = [];        // { key, section, a, ring, label }
@@ -1212,7 +1207,7 @@ function selectIntent(slug) {
   const s = hit[0];
   selected = s.key; paint();
   try {
-    if (window.parent && window.parent !== window) window.parent.postMessage({ type: 'viz-intent', intent: s.section, stop: s.key }, '*');
+    if (window.parent && window.parent !== window) window.parent.postMessage({ type: 'viz-intent', intent: s.section, anchor: 'role-' + s.section, stop: s.key }, '*');
   } catch (e) { /* a blocked parent read never stops the native link fallback */ }
   return true;
 }
@@ -1269,11 +1264,24 @@ document.getElementById('summary').textContent =
    Live page: one slowed draw, then it holds (no loop). Reduced motion skips
    straight to the settled frame. */
 const REDUCED_MOTION = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-let clock = 0, raf = null, t0 = null;
+/* WCAG 2.2.2 (site standards, 2026-09-24): the intro runs longer than five seconds, so a visible
+   button stops it on the settled frame. It exists only while the intro plays. Published copy: it
+   sits over the map's top-right corner, below the prompt bar, so it never hides "Sources". */
+function skipButton(onSkip) {
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.textContent = 'Skip animation';
+  b.style.cssText = "position:absolute;top:8px;right:8px;z-index:5;min-height:36px;font:800 13px/1 'Avenir Next','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:.8px;text-transform:uppercase;color:#FFC53D;background:#17120F;border:1.5px solid #FFC53D;border-radius:999px;padding:8px 13px;cursor:pointer";
+  b.addEventListener('click', () => { onSkip(); b.remove(); });
+  (document.getElementById('stage') || document.body).append(b);
+  return b;
+}
+let clock = 0, raf = null, t0 = null, skip = null;
+const dropSkip = () => { if (skip) { skip.remove(); skip = null; } };
 function loop(ts) {
   if (t0 === null) t0 = ts;
   clock = (ts - t0) / 1000;
-  if (clock >= DURATION) { clock = DURATION; render(DURATION); raf = null; return; }
+  if (clock >= DURATION) { clock = DURATION; render(DURATION); raf = null; dropSkip(); return; }
   render(clock);
   raf = requestAnimationFrame(loop);
 }
@@ -1283,7 +1291,10 @@ const initialT = POSTER ? DURATION
   : 0;
 render(initialT);
 clock = initialT;
-if (!STATIC && !Q.has('t') && !REDUCED_MOTION) raf = requestAnimationFrame(loop);
+if (!STATIC && !Q.has('t') && !REDUCED_MOTION) {
+  raf = requestAnimationFrame(loop);
+  skip = skipButton(() => { if (raf) { cancelAnimationFrame(raf); raf = null; } clock = DURATION; render(DURATION); skip = null; });
+}
 
 window.VIZ = {
   ready: Promise.resolve(true),
@@ -1291,7 +1302,7 @@ window.VIZ = {
   format: FMT,
   size: SIZE,
   schedule: { sideEnd: T.sideEnd, roadStart: T.roadStart, stops: MILE.map(m => ({ key: m.key, t: +m.t.toFixed(3) })), roadEnd: T.roadEnd },
-  seek(t) { if (raf) { cancelAnimationFrame(raf); raf = null; } clock = t; render(t); return t; },
+  seek(t) { if (raf) { cancelAnimationFrame(raf); raf = null; } dropSkip(); clock = t; render(t); return t; },
   frame() { return clock; },
   selectIntent,
   stops: STOP_NODES.map(s => ({ key: s.key, section: s.section })),

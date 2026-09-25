@@ -398,15 +398,14 @@ try {
     const { page, errors } = await newPage();
     await page.setViewport({ width: 1360, height: 900 });
     await page.goto(`${base}/resume/`, { waitUntil: 'networkidle0', timeout: 60000 });
-    await page.click('[data-resume-open]');
-    await wait(200);
-    const open = await page.$eval('#resume-chooser', el => el.open).catch(() => false);
-    await page.keyboard.press('Escape');
-    await wait(200);
-    const closed = await page.$eval('#resume-chooser', el => !el.open).catch(() => false);
-    const pdfLinks = await page.$$eval('#resume-chooser a[href$=".pdf"]', links => links.map(a => a.getAttribute('href')));
-    record('resume', 'resume dialog opens on click and closes on Escape', open && closed, '');
-    record('resume', 'dialog offers the four PDF paths', pdfLinks.length === 4 && pdfLinks.every(h => h.startsWith('/files/')), pdfLinks.join(', '));
+    // The resume chooser and the four PDFs were retired on 2026-09-25; /resume/ is a transfer page.
+    const transfer = await page.evaluate(() => ({
+      h1: document.querySelectorAll('main h1').length,
+      chooser: document.querySelectorAll('#resume-chooser, [data-resume-open]').length,
+      pdfLinks: document.querySelectorAll('a[href$=".pdf"]').length,
+      linkedin: [...document.querySelectorAll('main a[href]')].some(a => /linkedin\.com\/in\//.test(a.href)),
+    }));
+    record('resume', 'transfer page: one h1, a LinkedIn link, no chooser and no PDF links', transfer.h1 === 1 && transfer.linkedin && transfer.chooser === 0 && transfer.pdfLinks === 0, JSON.stringify(transfer));
     record('resume', 'no console or page errors', errors.length === 0, errors.slice(0, 3).join(' | '));
     await page.close();
   }

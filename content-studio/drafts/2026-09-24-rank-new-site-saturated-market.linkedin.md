@@ -40,7 +40,7 @@ Full write-up, with sources and the places the evidence is still thin: https://m
 ## Notes (not posted)
 
 - Nothing posted. Manual route: Mitch pastes the Post, attaches the 1080×1350 PNG with the image_alt above, then posts the link as the first comment.
-- Length: 1,308 characters (under 1,400). Hook: one complete sentence of 127 characters, inside the ~140-character mobile fold. Linter (linkedin-content post_linter.py): SHIP, 94/100.
+- Length: 1,308 characters (under 1,400). Hook: one complete sentence of 127 characters, inside the ~140-character mobile fold. Linter (linkedin-content post_linter.py, run by the gate with the image flag): SHIP, 96/100.
 - Every figure is in the blog and re-checked at its primary on 25 September 2026 (critic report: content-studio/routines/runs/2026-09-25-critic-saturated-market.md).
 - The 5.41% is organic search at one U.S. retailer, 2007 data; the post says "the one peer-reviewed test I found" and keeps the keyword/organic scope.
 - The Princeton/Moz statistic is deliberately not in the LinkedIn copy: the verified fact is only that no such paper could be found, and the post has no room to carry that caveat.

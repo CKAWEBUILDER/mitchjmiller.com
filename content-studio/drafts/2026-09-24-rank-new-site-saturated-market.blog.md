@@ -45,7 +45,7 @@ That part of the standard advice is right. The next two steps are where it goes 
 
 ## Does long-tail content convert better?
 
-No. It is cheaper to reach, which is a different argument.
+Not on the evidence I could find. It is cheaper to reach, which is a different argument.
 
 The one peer-reviewed measurement I found runs against the folklore. Ghose and Yang analysed 13 weeks of paid and organic search data from one U.S. nationwide retailer (776 keywords, early 2007). In organic search, "an increase in length of the keyword by 1 word decreases conversion rate by 5.41%." Their companion paper measured sponsored-search click-through falling 6.6% per additional word.
 

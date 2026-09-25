@@ -1,7 +1,7 @@
 # Handoff — study-note routes missing from agency build + availability gap (2026-09-22)
 
 **From:** Claude Code (content/repo lane) · **To:** release owner of the mj2.pro agency cutover (Codex lane)
-**Do not treat as a request to publish** — the redesign is paused per PROJECT.md ("Do not publish while paused"). This only records two things to handle when the cutover resumes.
+**Historical (written 2026-09-22 while the redesign was paused per PROJECT.md, "Do not publish while paused").** Status 2026-09-25: the hold is lifted, the cutover is complete and both items are resolved (see "Resolved — 2026-09-24" below); `mj2.pro` serves production from `main`.
 
 ## 1. Public availability gap during the paused cutover
 As of 2026-09-22, verified by curl:

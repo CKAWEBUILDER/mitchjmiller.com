@@ -7,10 +7,10 @@ Read `PROJECT.md`, then `handoffs/parity-design-2026-09-11.md`, then the applica
 ## Source of truth and workspace
 
 - Canonical GitHub repository: `https://github.com/CKAWEBUILDER/mitchjmiller.com.git`.
-- Active persistent migration checkout: `/Users/mitchellmiler/Documents/mitchjmiller-html-migration`.
-- Original checkout `/Users/mitchellmiler/Documents/mitchjmiller.com` contains unpublished user drafts. Preserve it; do not reset, clean, overwrite or publish those drafts.
+- Single canonical checkout: `/Users/mitchellmiler/Documents/mitchjmiller-html-migration`, on `main` (`python3 ~/Documents/ai-os/scripts/where.py mitchjmiller.com` resolves here). Do not create a second clone or a long-lived worktree; a temporary clone under `/private/tmp/claude-501/` for a build or release is removed when that task ends.
+- The second checkout `/Users/mitchellmiler/Documents/mitchjmiller.com` holds nothing that is not on `origin`: its `main` is an ancestor of `origin/main`, and its one local-only `gh-pages` build commit is tag `archive/checkout-b-gh-pages-2026-09-18`. It stays in place because Mitch, 2026-09-25: "we can keep mitchjmiller.com as my personal work history portfolio" (separate from M²; see [handoffs/checkout-reconciliation-2026-09-25.md](handoffs/checkout-reconciliation-2026-09-25.md)). Whether that portfolio gets its own repository is his open decision. Do not work on this repository there. Record: [handoffs/2026-09-25-one-checkout-reconciliation.md](handoffs/2026-09-25-one-checkout-reconciliation.md).
 - The September review checkout under `/private/tmp/mitchjmiller-overhaul-20260910` is a historical preview/reference, not the durable handoff location.
-- Verify the current branch, working tree and remote before edits or pushes. Current implementation branch is `claude/agency-redesign`; continue in this single canonical checkout. Record any later branch change in PROJECT.md.
+- Verify the current branch, working tree and remote before edits or pushes. `main` is the only long-lived branch, and production (`https://mj2.pro/`, GitHub Pages `gh-pages`) is built only from `main`. Do each task on a short-lived branch (`claude/<task>` or `codex/<task>`) from `origin/main`, fast-forward `main` to it (never force, never rewrite `main`) and leave the pushed branch as history. `claude/agency-redesign` is archived (tag `archive/agency-redesign-2026-09-25`) and its unique work was ported to `main` on 2026-09-25; do not commit to it.
 - GitHub source comes before host deployment. Push accepted source before publishing any host. One agent owns production release; do not run competing deployment workflows.
 
 ## Product contract

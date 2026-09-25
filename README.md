@@ -2,11 +2,13 @@
 
 Read [PROJECT.md](PROJECT.md) for current source, review state, permissions and the exact next task. [AGENTS.md](AGENTS.md) is the shared operating contract; [CLAUDE.md](CLAUDE.md) references the same records.
 
-Branch `claude/release-2026-09-12` is the verified public release candidate: the production-parity complete-HTML site (53 archived routes), the public lab and population workbench, the `/clients/` entrance, the contact form wired to the Cloudflare Worker, and the corrected September 10 resume PDFs. Publication to `gh-pages` is a separate, lead-owned step described in [RELEASE-READY.md](RELEASE-READY.md); QA evidence is in [docs/release-2026-09-12/qa-report.md](docs/release-2026-09-12/qa-report.md). The separate design candidate at `/design/` stays on the private review only. Earlier implementation evidence: [docs/implementation-2026-09-11/README.md](docs/implementation-2026-09-11/README.md).
+Production is https://mj2.pro/, built only from `main` and served from GitHub Pages `gh-pages`; releases follow [RELEASE-READY.md](RELEASE-READY.md) and are recorded at the top of PROJECT.md. Work happens only in the canonical checkout `/Users/mitchellmiler/Documents/mitchjmiller-html-migration` (on `main`), on short-lived branches fast-forwarded into `main`; `claude/agency-redesign` was archived on 2026-09-25 ([record](handoffs/2026-09-25-one-checkout-reconciliation.md)), and the second checkout `~/Documents/mitchjmiller.com` is not a working checkout.
 
-## Current design review
+History (September 12): branch `claude/release-2026-09-12` was the verified public release candidate: the production-parity complete-HTML site (53 archived routes), the public lab and population workbench, the `/clients/` entrance, the contact form wired to the Cloudflare Worker, and the corrected September 10 resume PDFs. Publication to `gh-pages` is a separate, lead-owned step described in [RELEASE-READY.md](RELEASE-READY.md); QA evidence is in [docs/release-2026-09-12/qa-report.md](docs/release-2026-09-12/qa-report.md). The separate design candidate at `/design/` stays on the private review only. Earlier implementation evidence: [docs/implementation-2026-09-11/README.md](docs/implementation-2026-09-11/README.md).
 
-The centered agency refinement is on `claude/agency-redesign` in the single canonical checkout. [Refinement record](docs/redesign-2026-09-14/refinement.md) documents the changes and validation. Private-stage routes `/`, `/services/`, `/review/`, and `/review/brand-options/` show the design and ten-logo/five-palette comparison. The older release descriptions below remain historical.
+## Design review (September 14–15, history)
+
+The centered agency refinement shipped with the agency redesign from `main` on 2026-09-21; the M² logo choice is still open. [Refinement record](docs/redesign-2026-09-14/refinement.md) documents the changes and validation. Private-stage routes `/`, `/services/`, `/review/`, and `/review/brand-options/` (staging build only; release output removes `/review/`) show the design and ten-logo/five-palette comparison. The older release descriptions below remain historical.
 
 ## Commands
 

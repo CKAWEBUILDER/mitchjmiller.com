@@ -1,5 +1,7 @@
 # mj2.pro migration — 2026-09-21
 
+> **Status 2026-09-25:** the cutover this record tracks is done. `https://mj2.pro/` serves production from `main` (latest gh-pages `94016fa`), and `http://mitchjmiller.com/<path>` 301-redirects to it. The ledger below is the September 21–23 history, ported from `claude/agency-redesign` on 2026-09-25; later releases are recorded in [PROJECT.md](../../PROJECT.md). Still open in the ledger: HTTPS for the legacy domain (`https://mitchjmiller.com/` still timed out on 2026-09-25), `clients.mj2.pro`, GSC/GA4 verification, the LinkedIn/M² page and Rio's invite.
+
 ## Scope and approval
 
 Mitchell approved the public-site redesign and domain cutover on September 21, 2026.

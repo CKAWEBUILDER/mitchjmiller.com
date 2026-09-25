@@ -28,3 +28,11 @@ It copies **all** frames from a note's `frames/` dir into `public/images/study/<
 ## Resolved — 2026-09-24
 
 Root cause confirmed: the agency build renders notes from the archived `baseline/src/lib/study-notes.ts` (21 notes), while new notes are generated into `src/lib/study-notes.ts`. `baseline/src/lib/published.ts` now prepends notes that exist only in `src/lib/` (archived slugs are never replaced); the three routes are manifest kind `added`. Live on mj2.pro since gh-pages `7844899` (source `main` `4fcfd6f`): all 24 `/blog/studying/*` routes return 200 and are in the sitemap (63 URLs). A future note must also be declared in the route manifest; `scripts/verify-agency.mjs` fails the build otherwise. The 2026-09-22 availability gap is closed (mj2.pro serves since 2026-09-23); `https://mitchjmiller.com` HTTPS remains unresolved (see PROJECT.md).
+
+## mitchjmiller.com redirect — root cause + fix (2026-09-24, Claude Code)
+
+Mitch reports old links don't reach mj2.pro. Diagnosed by curl:
+- `http://mitchjmiller.com/<path>` → **301 → `https://mj2.pro/<path>`**, path preserved. Works.
+- `https://mitchjmiller.com/<path>` → **000 (dead)**. No valid TLS cert on the forwarding host (A record `162.255.119.89`, Namecheap URL-forwarding).
+
+So the registrar URL-redirect covers HTTP only; every https:// old link (and HSTS/browser-default https) hits a dead endpoint. **Fix (registrar/infra lane):** either enable **SSL on the Namecheap URL-redirect record** for `mitchjmiller.com` + `www` (provisions a cert for the forward; ~1h), or front the apex with **Cloudflare** and a redirect rule `mitchjmiller.com/* → https://mj2.pro/$1` (301) for a valid edge cert + path preservation — fits the existing Cloudflare foundation. Needs Namecheap/Cloudflare access (not held by Claude Code).

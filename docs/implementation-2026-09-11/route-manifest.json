@@ -591,6 +591,17 @@
       "note": "Study note from src/lib/study-notes.ts (512be11); absent from the 2026-09-21 build, restored 2026-09-24 (handoffs/study-notes-deploy-gap-2026-09-22.md)."
     },
     {
+      "path": "/blog/studying/figma-shortest-course/",
+      "kind": "added",
+      "since": "standards-deploy-2",
+      "title": "The World's Shortest Figma Course \u2014 80% in 7 Minutes",
+      "minText": 1500,
+      "expected": [
+        "The World's Shortest Figma Course \u2014 80% in 7 Minutes"
+      ],
+      "note": "Study note from src/lib/study-notes.ts (main 1ddc06e); wired for release per handoffs/study-notes-deploy-gap-2026-09-22.md (\"New note to wire\"), shipped with site-standards deploy 2."
+    },
+    {
       "path": "/es/",
       "kind": "added",
       "since": "standards-deploy-2",

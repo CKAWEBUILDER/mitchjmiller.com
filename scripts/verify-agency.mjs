@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
  * Agency redesign verifier (2026-09-14). Runs after scripts/verify-parity.mjs on the
- * built dist/: route count (68 published URLs incl. /services/, the 2026-09-24 post and
- * study notes, and since site-standards deploy 2 the five Spanish pilot routes under /es/,
+ * built dist/: route count (69 published URLs incl. /services/, the 2026-09-24 post and
+ * study notes, the figma-shortest-course note, and since site-standards deploy 2 the five Spanish pilot routes under /es/,
  * whose shell is checked with its Spanish labels), the agency shell on every document except the byte-preserved standalone SFC
  * report and the declared standalone embeds (section 7), template markers
  * (nav, green CTA, marquee fed by site/data/brands.json, footer columns), JSON-LD
@@ -37,14 +37,14 @@ const walk = dir => readdirSync(dir, { withFileTypes: true }).flatMap(entry => e
 const jsonLdOf = html => [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(match => { try { return JSON.parse(match[1]); } catch { return null; } });
 const typesOf = html => jsonLdOf(html).flatMap(doc => doc ? (doc['@graph'] || [doc]).map(node => node['@type']) : ['INVALID']);
 
-// 1. Routes: 68 published (53 archived public + lab, workbench, methodology, clients, services, products,
-//    since 2026-09-24 one post and three study notes rendered from src/lib, and since site-standards
+// 1. Routes: 69 published (53 archived public + lab, workbench, methodology, clients, services, products,
+//    since 2026-09-24 one post and four study notes rendered from src/lib, and since site-standards
 //    deploy 2 five Spanish routes: /es/, /es/services/, /es/contact/, /es/blog/ and the GBP post) + 4 placeholders.
 const eligible = manifest.routes.filter(route => route.kind !== 'placeholder').map(route => route.path);
-if (eligible.length !== 68) fail('manifest', `expected 68 published routes, found ${eligible.length}`);
+if (eligible.length !== 69) fail('manifest', `expected 69 published routes, found ${eligible.length}`);
 if (!manifest.routes.some(route => route.path === '/services/' && route.kind === 'added')) fail('manifest', '/services/ missing or not kind "added"');
 const sitemap = existsSync(join(dist, 'sitemap.xml')) ? [...read(join(dist, 'sitemap.xml')).matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]) : [];
-if (sitemap.length !== 68 || !sitemap.includes(`${canonicalOrigin}/services/`) || !sitemap.includes(`${canonicalOrigin}/es/services/`)) fail('sitemap', `expected 68 URLs including /services/ and /es/services/, found ${sitemap.length}`);
+if (sitemap.length !== 69 || !sitemap.includes(`${canonicalOrigin}/services/`) || !sitemap.includes(`${canonicalOrigin}/es/services/`)) fail('sitemap', `expected 69 URLs including /services/ and /es/services/, found ${sitemap.length}`);
 tick('routes');
 
 // 2. Shell on every document except the standalone SFC report (byte-preserved by parity rule).

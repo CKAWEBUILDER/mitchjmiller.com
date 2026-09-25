@@ -144,8 +144,8 @@ export default function Contact() {
             ))}
           </div>
 
-          <a href="https://mitchjmiller.com/" className="inline-flex items-center gap-2 text-sm font-medium text-secondary hover:underline">
-            View my personal portfolio
+          <a href="https://linkedin.com/in/mitchelljmillerjr" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-medium text-secondary hover:underline">
+            View my work history on LinkedIn
           </a>
         </div>
       </div>

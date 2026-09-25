@@ -3,7 +3,7 @@ import type { ComponentType } from "react";
 import { caseStudies } from "../../baseline/src/lib/data";
 import { studyNoteTeaser } from "../../baseline/src/lib/study-note-teaser";
 import { visibleBlogPosts, excludedDraftSlugs, duplicateBlogSlugs, studyNotes } from "../../baseline/src/lib/published";
-import { headshot, portfolioImages } from "../../baseline/src/lib/images";
+import { portfolioImages } from "../../baseline/src/lib/images";
 import BlogPost from "../../baseline/src/pages/blog-post";
 import StudyNote from "../../baseline/src/pages/study-note";
 import CaseStudyDetail from "../../baseline/src/pages/case-study-detail";
@@ -65,7 +65,9 @@ export const parityRoutes: ParityRoute[] = [
 export function parityMetadata(path: string) {
   const normalized = path.replace(/\/$/, "") || "/";
   const route = parityRoutes.find(route => route.path === normalized);
-  return route ? { ...route, image: route.image || headshot } : undefined;
+  // No headshot fallback: share images are generated cards (docs/site-standards.md), and a
+  // route's own image is only its case-study project image.
+  return route ? { ...route } : undefined;
 }
 
 export default function ParityPage({ path }: { path: string }) {

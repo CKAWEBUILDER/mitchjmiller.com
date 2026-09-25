@@ -2,22 +2,32 @@
 /**
  * Agency shell (2026-09-14 redesign): Contiem-style white header with logo left,
  * horizontal navigation with dropdowns, green actions, navy hero support, link-column
- * footer. Owns the per-page head (title, description, self-canonical, OG/Twitter,
+ * footer. Owns the per-page head (title, description, self-canonical, share tags,
  * JSON-LD). scripts/finalize-parity.mjs still owns the final robots/analytics policy.
+ * Site standards (2026-09-24, docs/site-standards.md): every page ships the full Open Graph
+ * and summary_large_image Twitter set pointing at its generated M² card (the mj2:card marker
+ * is consumed and removed by scripts/share-cards.mjs), and light/dark themes: the inline
+ * head script applies the stored or system theme before first paint; the header button
+ * (aria-pressed) overrides it and remembers the choice.
  */
 import { ResumeChooser } from '../../baseline/src/components/resume-download-dialog';
 import { site, primaryNav, utilityNav, contactCta, footerColumns, isCurrent } from '../lib/agency';
+import { shareFor } from '../lib/share';
+import { themeScript } from '../lib/theme-script.mjs';
 import '../../baseline/src/index.css';
 import '../components/parity/parity.css';
 import '../styles/agency.css';
+import '../styles/standards.css';
 
 interface Props {
-  path: string; title: string; description: string; image?: string;
+  path: string; title: string; description: string;
   type?: 'website' | 'article'; noindex?: boolean; jsonLd?: unknown[]; bodyClass?: string;
+  /** Share-card overrides: a shorter card title, or a poster of the page's own living artifact. */
+  cardTitle?: string; poster?: { src: string; title: string };
 }
-const { path, title, description, image, type = 'website', noindex = false, jsonLd = [], bodyClass = '' } = Astro.props;
+const { path, title, description, type = 'website', noindex = false, jsonLd = [], bodyClass = '', cardTitle, poster } = Astro.props;
 const canonical = new URL(path, site.url).href;
-const ogImage = new URL(image || site.socialImage, site.url).href;
+const share = shareFor(path, title, { cardTitle, poster });
 const release = process.env.SITE_BUILD_MODE === 'release';
 const year = new Date().getFullYear();
 ---
@@ -26,6 +36,8 @@ const year = new Date().getFullYear();
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline set:html={themeScript} />
+    <meta name="color-scheme" content="light dark" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="robots" content={release && !noindex ? 'index, follow' : 'noindex, nofollow, noarchive'} />
@@ -36,11 +48,18 @@ const year = new Date().getFullYear();
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:type" content={type} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={share.locale} />
+    <meta property="og:image" content={share.image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:alt" content={share.alt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image" content={share.image} />
+    <meta name="twitter:image:alt" content={share.alt} />
+    <meta name="mj2:card" content={JSON.stringify(share.spec)} />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -48,7 +67,7 @@ const year = new Date().getFullYear();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     {jsonLd.map(item => <script type="application/ld+json" set:html={JSON.stringify(item)} />)}
-    <noscript><style>[data-filter-card][hidden]{display:block!important}[data-filter-value]{display:none!important}</style></noscript>
+    <noscript><style>[data-filter-card][hidden]{display:block!important}[data-filter-value]{display:none!important}.ag-theme-toggle{display:none!important}</style></noscript>
     <slot name="head" />
   </head>
   <body class:list={['ag-body', bodyClass]}>
@@ -69,6 +88,13 @@ const year = new Date().getFullYear();
             ))}
           </ul>
         </nav>
+        <div class="ag-header-tools">
+          <button type="button" class="ag-theme-toggle" data-theme-toggle aria-pressed="false">
+            <svg class="ag-theme-icon ag-theme-icon--moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.7 14.9A8.5 8.5 0 0 1 9.1 3.3a.8.8 0 0 0-1-1A10 10 0 1 0 21.7 15.9a.8.8 0 0 0-1-1Z"/></svg>
+            <svg class="ag-theme-icon ag-theme-icon--sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 1.8v2.4M12 19.8v2.4M1.8 12h2.4M19.8 12h2.4M4.8 4.8l1.7 1.7M17.5 17.5l1.7 1.7M4.8 19.2l1.7-1.7M17.5 6.5l1.7-1.7"/></svg>
+            <span class="ag-sr-only">Dark theme</span>
+          </button>
+        </div>
         <div class="ag-header-actions">
           {utilityNav.map(link => <a class="ag-utility-link" href={link.href} data-resume-open={link.href === '/resume/' ? 'true' : undefined}>{link.label}</a>)}
           <a class="ag-button ag-button--sm" href={contactCta.href}>{contactCta.label}</a>

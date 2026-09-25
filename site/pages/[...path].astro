@@ -10,6 +10,7 @@ import ParityPage, { parityRoutes, parityMetadata } from '../components/ParityPa
 import { caseStudies } from '../../baseline/src/lib/data';
 import { visibleBlogPosts, studyNotes } from '../../baseline/src/lib/published';
 import { site, personJsonLd, breadcrumbJsonLd, graph } from '../lib/agency';
+import { shareFor } from '../lib/share';
 
 export function getStaticPaths() {
   return parityRoutes.filter(route => !route.standalone && route.path !== '/').map(route => ({
@@ -30,6 +31,12 @@ const isoDate = (value?: string) => {
   return match && monthIndex[match[1]] ? `${match[2]}-${monthIndex[match[1]]}` : undefined;
 };
 const jsonLd: unknown[] = [];
+// A post may name its hero (a site path to a PNG/JPG poster) in its data; otherwise the card
+// uses the poster of the post's first declared embed (site/lib/share.ts), else the text card.
+const postData = path.startsWith('/blog/') && !path.startsWith('/blog/studying/') ? visibleBlogPosts.find(entry => `/blog/${entry.slug}` === path) as { hero?: string | { src?: string; alt?: string }; title?: string } | undefined : undefined;
+const heroSrc = typeof postData?.hero === 'string' ? postData.hero : postData?.hero?.src;
+const poster = heroSrc && /\.(png|jpe?g)$/i.test(heroSrc) ? { src: heroSrc, title: (typeof postData?.hero === 'object' && postData.hero.alt) || postData?.title || route.title } : undefined;
+const cardImage = shareFor(canonicalPath, route.title, { poster }).image;
 const publisher = { '@type': 'Organization', name: site.legalName, url: `${site.url}/` };
 if (path.startsWith('/blog/studying/')) {
   const note = studyNotes.find(entry => `/blog/studying/${entry.slug}` === path);
@@ -41,10 +48,10 @@ if (path.startsWith('/blog/studying/')) {
     breadcrumbJsonLd([{ name: 'Home', href: '/' }, { name: 'Signals & Systems', href: '/blog/' }, { name: post.title, href: canonicalPath }])));
 } else if (path.startsWith('/case-studies/')) {
   const study = caseStudies.find(entry => `/case-studies/${entry.slug}` === path);
-  if (study) jsonLd.push(graph({ '@type': 'CreativeWork', name: study.title, description: study.thesis, url: `${site.url}${canonicalPath}`, author: personJsonLd(), publisher, image: route.image ? `${site.url}${route.image}` : undefined },
+  if (study) jsonLd.push(graph({ '@type': 'CreativeWork', name: study.title, description: study.thesis, url: `${site.url}${canonicalPath}`, author: personJsonLd(), publisher, image: route.image ? `${site.url}${route.image}` : cardImage },
     breadcrumbJsonLd([{ name: 'Home', href: '/' }, { name: 'Work', href: '/work/' }, { name: study.title, href: canonicalPath }])));
 }
 ---
-<AgencyLayout path={canonicalPath} title={route.title} description={route.description} image={route.image} type={path.startsWith('/blog/') ? 'article' : 'website'} noindex={route.noindex} jsonLd={jsonLd} bodyClass="ag-parity">
+<AgencyLayout path={canonicalPath} title={route.title} description={route.description} poster={poster} type={path.startsWith('/blog/') ? 'article' : 'website'} noindex={route.noindex} jsonLd={jsonLd} bodyClass="ag-parity">
   <ParityPage path={path} />
 </AgencyLayout>

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "node scripts/prepare-astro-staging.mjs && astro dev --host 127.0.0.1 --port 5191",
-    "build": "node scripts/prepare-astro-staging.mjs && astro build && node scripts/finalize-parity.mjs && node scripts/verify-parity.mjs && node scripts/verify-agency.mjs",
+    "build": "node scripts/prepare-astro-staging.mjs && astro build && node scripts/finalize-parity.mjs && node scripts/share-cards.mjs && node scripts/verify-parity.mjs && node scripts/verify-agency.mjs && node scripts/verify-standards.mjs",
     "build:github": "node -e \"console.error('Production is gated pending theme approval and completion of the HTML migration. See PROJECT.md.'); process.exit(1)\"",
     "cloudflare:login": "npm_config_cache=.npm-cache npx -y wrangler login --browser=false",
     "deploy:cloudflare": "node -e \"console.error('Production is gated pending theme approval and completion of the HTML migration. See PROJECT.md.'); process.exit(1)\"",
@@ -18,11 +18,13 @@
     "build:production:legacy": "VITE_SITE_INDEXABLE=true npm run build",
     "build:github:legacy": "BASE_PATH=/mitchjmiller.com/ vite build --config vite.config.ts && node scripts/create-route-copies.mjs",
     "build:staging": "npm run build",
-    "build:release-candidate": "SITE_BUILD_MODE=release node scripts/prepare-astro-staging.mjs && SITE_BUILD_MODE=release astro build && SITE_BUILD_MODE=release node scripts/finalize-parity.mjs && SITE_BUILD_MODE=release node scripts/verify-parity.mjs && SITE_BUILD_MODE=release node scripts/verify-agency.mjs",
+    "build:release-candidate": "SITE_BUILD_MODE=release node scripts/prepare-astro-staging.mjs && SITE_BUILD_MODE=release astro build && SITE_BUILD_MODE=release node scripts/finalize-parity.mjs && SITE_BUILD_MODE=release node scripts/share-cards.mjs && SITE_BUILD_MODE=release node scripts/verify-parity.mjs && SITE_BUILD_MODE=release node scripts/verify-agency.mjs && SITE_BUILD_MODE=release node scripts/verify-standards.mjs",
     "verify:agency": "node scripts/verify-agency.mjs",
     "qa:serve": "node scripts/qa/serve.mjs dist 5189",
     "qa:crawl": "node scripts/qa/crawl.mjs --base http://127.0.0.1:5189",
-    "qa:browser": "node scripts/qa/browser.mjs --base http://127.0.0.1:5189"
+    "qa:browser": "node scripts/qa/browser.mjs --base http://127.0.0.1:5189",
+    "narrate": "node scripts/narrate.mjs",
+    "verify:standards": "node scripts/verify-standards.mjs"
   },
   "dependencies": {
     "@astrojs/react": "6.0.5",
@@ -89,6 +91,7 @@
     "@types/node": "^22.10.2",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
+    "axe-core": "4.13.0",
     "esbuild": "0.25.12",
     "puppeteer-core": "^25.2.1",
     "typescript": "^5.7.2",

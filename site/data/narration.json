@@ -1,0 +1,75 @@
+{
+  "about": "Narrated audio per post (docs/site-standards.md). Written by scripts/narrate.mjs; do not edit by hand. Render or refresh: npm run narrate -- <slug> | --lang es <slug> | --missing | --all.",
+  "items": {
+    "/blog/gbp-2026-ai-grounding/": {
+      "src": "/audio/blog/gbp-2026-ai-grounding.m4a",
+      "lang": "en",
+      "voice": "Samantha",
+      "voiceLocale": "en_US",
+      "seconds": 407.3,
+      "minutes": 7,
+      "bytes": 2485557,
+      "bitRate": 48001,
+      "channels": 1,
+      "textSha256": "1f64479a7490188c5d7e0a6c59c420e601e513d618e069422e68aa181c99d121",
+      "words": 1037,
+      "rendered": "2026-09-24"
+    },
+    "/blog/intrepid-agency-spotlight/": {
+      "src": "/audio/blog/intrepid-agency-spotlight.m4a",
+      "lang": "en",
+      "voice": "Samantha",
+      "voiceLocale": "en_US",
+      "seconds": 992,
+      "minutes": 17,
+      "bytes": 6051245,
+      "bitRate": 48000,
+      "channels": 1,
+      "textSha256": "9ce5f57b02f9830fb0c36065c0df8a8386bf2ee2728b11317dc16b5623cce93a",
+      "words": 2567,
+      "rendered": "2026-09-24"
+    },
+    "/blog/mitchell-miller-journey/": {
+      "src": "/audio/blog/mitchell-miller-journey.m4a",
+      "lang": "en",
+      "voice": "Samantha",
+      "voiceLocale": "en_US",
+      "seconds": 199.2,
+      "minutes": 3,
+      "bytes": 1216424,
+      "bitRate": 48000,
+      "channels": 1,
+      "textSha256": "ece5c0dfaa9b5d76029d80802379d51c1b8e6817830867d70354e6eb7724f848",
+      "words": 526,
+      "rendered": "2026-09-24"
+    },
+    "/blog/multi-agent-billing-traps/": {
+      "src": "/audio/blog/multi-agent-billing-traps.m4a",
+      "lang": "en",
+      "voice": "Samantha",
+      "voiceLocale": "en_US",
+      "seconds": 337.5,
+      "minutes": 6,
+      "bytes": 2062977,
+      "bitRate": 48002,
+      "channels": 1,
+      "textSha256": "ffe0bb79a6d351937b5b54aa1e135516672dbc26aec499b0e6950cf33e1e0fa0",
+      "words": 927,
+      "rendered": "2026-09-24"
+    },
+    "/blog/search-results-by-intent/": {
+      "src": "/audio/blog/search-results-by-intent.m4a",
+      "lang": "en",
+      "voice": "Samantha",
+      "voiceLocale": "en_US",
+      "seconds": 1362,
+      "minutes": 23,
+      "bytes": 8303873,
+      "bitRate": 48001,
+      "channels": 1,
+      "textSha256": "e584b2186325e5e236661fbd99312d7713d7c9ebe0062ade1986ce12cc5a2b08",
+      "words": 2892,
+      "rendered": "2026-09-24"
+    }
+  }
+}

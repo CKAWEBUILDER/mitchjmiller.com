@@ -1,0 +1,70 @@
+<!doctype html>
+<!--
+  The one M² share-card template (docs/site-standards.md "Share cards"). Rendered at 1200×630 by
+  scripts/share-cards.mjs for every route: section, page title, mj2.pro, brand navy and green,
+  and, for a post with its own living artifact, that artifact's poster on the right. No photo,
+  no logo (the M² mark waits for Mitch's final file). System fonts only, so renders are
+  deterministic and need no network.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>M² share card</title>
+<style>
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
+  body { background: #0f2440; color: #fff; font-family: -apple-system, "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  .card { position: relative; display: flex; width: 1200px; height: 630px; background: linear-gradient(115deg, #0a1a30 0%, #0f2440 62%, #173a63 100%); }
+  .accent { position: absolute; left: 0; top: 0; bottom: 0; width: 16px; background: #14804a; }
+  .text { flex: 1; min-width: 0; display: flex; flex-direction: column; padding: 70px 76px 62px 92px; }
+  .section { font-size: 25px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #9fd4b5; line-height: 1.2; }
+  .title { margin-top: 30px; font-weight: 700; letter-spacing: -.02em; line-height: 1.1; color: #fff; overflow-wrap: break-word; hyphens: manual; text-wrap: balance; }
+  .foot { margin-top: auto; display: flex; align-items: center; gap: 20px; font-size: 28px; font-weight: 600; color: #d3dde6; letter-spacing: .01em; }
+  .foot::before { content: ""; width: 60px; height: 5px; background: #14804a; }
+  .poster { flex: none; width: 504px; height: 630px; background: #0a1a30; }
+  .poster img { display: block; width: 504px; height: 630px; object-fit: cover; object-position: top center; }
+  .poster[hidden] { display: none; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="accent"></div>
+  <div class="text">
+    <div class="section" id="section"></div>
+    <div class="title" id="title"></div>
+    <div class="foot"><span>mj2.pro</span></div>
+  </div>
+  <div class="poster" id="poster" hidden><img id="poster-img" alt=""></div>
+</div>
+<script>
+  // Fill the card, then shrink the title until it fits its box in at most five lines.
+  window.renderCard = async ({ title, section, poster, lang }) => {
+    document.documentElement.lang = lang || 'en';
+    document.getElementById('section').textContent = section;
+    const titleEl = document.getElementById('title');
+    titleEl.textContent = title;
+    const box = document.getElementById('poster');
+    const img = document.getElementById('poster-img');
+    if (poster) {
+      box.hidden = false;
+      img.src = poster;
+      await img.decode();
+      if (!img.naturalWidth) throw new Error(`poster did not load: ${poster}`);
+    } else {
+      box.hidden = true;
+      img.removeAttribute('src');
+    }
+    const text = titleEl.parentElement;
+    const foot = text.querySelector('.foot');
+    let size = poster ? 58 : 70;
+    const fits = () => {
+      const lines = Math.round(titleEl.getBoundingClientRect().height / (size * 1.1));
+      return titleEl.getBoundingClientRect().bottom <= foot.getBoundingClientRect().top - 36 && lines <= 5 && titleEl.scrollWidth <= titleEl.clientWidth;
+    };
+    titleEl.style.fontSize = `${size}px`;
+    while (!fits() && size > 30) { size -= 2; titleEl.style.fontSize = `${size}px`; }
+    await document.fonts.ready;
+    return { size, fits: fits() };
+  };
+</script>
+</body>
+</html>

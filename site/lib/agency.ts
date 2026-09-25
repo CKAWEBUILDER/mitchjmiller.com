@@ -11,7 +11,11 @@ export const site = {
   email: 'mitchelljmillerjr26@gmail.com',
   phone: '+1-626-316-8682',
   linkedin: 'https://linkedin.com/in/mitchelljmillerjr',
+  // Retired 2026 social card (old domain wording). Only the Organization JSON-LD `logo` still
+  // points here until Mitch supplies the final M² logo file (docs/site-standards.md "Brand mark").
   socialImage: '/images/portfolio-social.png',
+  // Site default share image: the generated M² card of the home page (scripts/share-cards.mjs).
+  defaultCard: '/og/home.png',
   headshot,
   jobTitle: 'Director of SEO, AEO/GEO & AI Search Systems',
 } as const;
@@ -103,7 +107,7 @@ export function organizationJsonLd() {
     description: 'Digital strategy, websites, software and analytics for growing businesses: search and AI visibility, customer experience, application development and conversion optimization.',
     email: site.email,
     telephone: site.phone,
-    image: `${site.url}${site.socialImage}`,
+    image: `${site.url}${site.defaultCard}`,
     logo: `${site.url}${site.socialImage}`,
     areaServed: 'United States',
     founder: { '@id': personId },

@@ -55,6 +55,7 @@ async function renderDiagrams() {
     const source = node.textContent || "";
     const target = document.createElement("div");
     target.className = "parity-diagram";
+    target.setAttribute("role", "figure"); // aria-label is not allowed on a plain div (axe aria-prohibited-attr)
     target.setAttribute("aria-label", "Study diagram");
     try {
       const { svg, bindFunctions } = await mermaid.render(`study-diagram-${index}`, source);
@@ -171,3 +172,25 @@ if (vizFrames.length) {
     if (doc?.readyState === "complete" && doc.URL !== "about:blank") fitFrame(frame);
   });
 }
+
+// Themes (docs/site-standards.md): the inline head script applied the stored choice or the system
+// theme before first paint. The header button (aria-pressed = dark theme on) overrides it and
+// remembers the choice; without a stored choice the page follows system changes live.
+const root = document.documentElement;
+const themeButtons = [...document.querySelectorAll<HTMLButtonElement>("[data-theme-toggle]")];
+const storedTheme = () => {
+  try { const value = localStorage.getItem("mj2-theme"); return value === "light" || value === "dark" ? value : null; } catch { return null; }
+};
+const applyTheme = (theme: "light" | "dark") => {
+  root.setAttribute("data-theme", theme);
+  themeButtons.forEach(button => button.setAttribute("aria-pressed", String(theme === "dark")));
+};
+applyTheme(root.getAttribute("data-theme") === "dark" ? "dark" : "light");
+themeButtons.forEach(button => button.addEventListener("click", () => {
+  const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  applyTheme(next);
+  try { localStorage.setItem("mj2-theme", next); } catch { /* Storage blocked: the choice lasts for this page view. */ }
+}));
+window.matchMedia?.("(prefers-color-scheme: dark)").addEventListener?.("change", event => {
+  if (!storedTheme()) applyTheme(event.matches ? "dark" : "light");
+});

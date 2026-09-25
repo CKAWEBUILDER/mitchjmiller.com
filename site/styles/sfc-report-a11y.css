@@ -1,0 +1,9 @@
+/* WCAG AA fixes for the standalone SFC report (site standards, 2026-09-24). Injected into its
+   <head> by scripts/finalize-parity.mjs; the archived body stays byte-identical. Its light --mute
+   (#7C8FA0, 3.3:1), --kelp (#2E8B6F, 4.2:1 under white text) and --coral (#D96A5B, 3.4:1 as table
+   text) were below AA; html:root outranks the report's own :root, which sits later, in its body.
+   Under its own dark palette, light text on the lightened teal, kelp and mute grounds was
+   2.4–3.1:1, so those grounds take dark text. */
+html:root{--mute:#56697B;--kelp:#267559;--coral:#B04A3A}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) :is([style*="background:var(--teal)"],[style*="background:var(--kelp)"],[style*="background:var(--mute)"]){color:#08151D!important}}
+:root[data-theme="dark"] :is([style*="background:var(--teal)"],[style*="background:var(--kelp)"],[style*="background:var(--mute)"]){color:#08151D!important}

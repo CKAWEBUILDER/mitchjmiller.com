@@ -41,7 +41,8 @@ body.ag-body{margin:0;background:var(--ag-bg);color:var(--ag-text);font-family:v
 .ag-header{position:sticky;top:0;z-index:50;background:var(--ag-surface);border-bottom:1px solid var(--ag-line)}
 .ag-parity .prose :is(h2,h3)[id]{scroll-margin-top:110px}
 .ag-header-inner{display:flex;align-items:center;gap:32px;min-height:84px}
-.ag-brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ag-heading);white-space:nowrap}
+.ag-brand{display:flex;align-items:center;gap:12px;min-width:0;text-decoration:none;color:var(--ag-heading);white-space:nowrap}
+/* min-width:0 keeps the pre-2026-09-25 header geometry: the old <img> logo (max-width:100%) let the brand box shrink to fit the row; the inline SVG mark would not. */
 .ag-brand .m2-mark{width:40px;height:40px;flex:none}
 .m2-mark .m2-ring{stroke:var(--ag-heading)}.m2-mark .m2-ink{fill:var(--ag-heading)}.m2-mark .m2-exp{fill:var(--ag-green-text)}
 .ag-brand-name{font-size:1.15rem;font-weight:700;letter-spacing:-.02em;line-height:1.1;display:block}

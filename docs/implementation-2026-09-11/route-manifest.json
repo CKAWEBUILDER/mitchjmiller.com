@@ -19,7 +19,9 @@
     },
     {
       "path": "/resume/",
-      "kind": "general"
+      "kind": "general",
+      "minText": 150,
+      "note": "Transfer page since 2026-09-25 (work history on LinkedIn; the resume chooser and PDFs are retired): intentionally short, so the crawl floor is 150 characters instead of the general 300."
     },
     {
       "path": "/systems/",

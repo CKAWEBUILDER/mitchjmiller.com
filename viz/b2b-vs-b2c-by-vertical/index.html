@@ -1,0 +1,1406 @@
+<!doctype html>
+<html lang="en" data-ready="0">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B2B vs B2C by vertical — the fractal stack</title>
+<style>
+  :root{
+    --paper:#FFF6E9; --ink:#15100C; --ink-soft:#4A3F33; --rule:#0F0B08; --yellow:#FFE500;
+    --b2b:#1B3BEF; --b2c:#E25700; --gap:#8A7F70;
+    --s:1; --pad:44px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#C9C0B0}
+  body{
+    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums;color:var(--ink);
+  }
+  body.poster{height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  #frame{position:relative;overflow:hidden}
+  #poster{
+    position:absolute;top:0;left:0;transform-origin:0 0;
+    background:var(--paper);color:var(--ink);display:flex;flex-direction:column;overflow:hidden;
+  }
+
+  /* ------------------------------------------------------------ title bar */
+  #titlebar{
+    background:var(--yellow);border-bottom:calc(6px * var(--s)) solid var(--rule);
+    padding:calc(16px * var(--s)) var(--pad) calc(14px * var(--s));
+    display:flex;gap:calc(18px * var(--s));align-items:center;flex:none;overflow:hidden;
+  }
+  #titletext{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;justify-content:center}
+  .eyebrow{font-size:calc(16px * var(--s));font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:calc(9px * var(--s));line-height:1.15}
+  #h1{font-size:calc(58px * var(--s));line-height:.98;font-weight:900;letter-spacing:-.036em}
+  #h1 .lit{background:var(--ink);color:var(--yellow);padding:0 calc(8px * var(--s));display:inline-block}
+  #deck{margin-top:calc(11px * var(--s));font-size:calc(19px * var(--s));line-height:1.26;font-weight:650}
+  #rosette{flex:none;align-self:center;color:var(--ink)}
+
+  /* --------------------------------------------------------------- legend */
+  #legend{
+    flex:none;display:flex;flex-direction:column;justify-content:center;gap:calc(5px * var(--s));
+    padding:calc(6px * var(--s)) var(--pad);border-bottom:calc(2px * var(--s)) solid var(--rule);overflow:hidden;
+  }
+  .lrow{display:flex;align-items:center;gap:calc(12px * var(--s));white-space:nowrap}
+  .lhead{font-size:max(12px, calc(13px * var(--s)));font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+  .lchip{display:flex;align-items:center;gap:calc(6px * var(--s))}
+  .lsw{width:calc(16px * var(--s));height:calc(16px * var(--s));border:calc(2px * var(--s)) solid var(--rule);flex:none}
+  .lsw.hatch{background:repeating-linear-gradient(135deg,var(--gap) 0 3px,var(--paper) 3px 7px)}
+  .lchip span{font-size:calc(14px * var(--s));font-weight:800;letter-spacing:.02em;text-transform:uppercase}
+  .lnote{margin-left:auto;font-size:calc(14px * var(--s));font-weight:700;color:var(--ink-soft)}
+
+  /* ---------------------------------------------------------------- stack */
+  #stack{position:relative;flex:1 1 auto;min-height:0;padding:0 var(--pad);display:flex;flex-direction:column}
+  #wires{position:absolute;left:0;top:0;pointer-events:none;overflow:visible}
+  .band{display:flex;flex:none}
+  .wiregap{flex:none}
+  #band2{flex-direction:column}
+  .l2row{display:flex;flex:none}
+  #band3{flex:1 1 auto;min-height:0;display:flex;flex-direction:column}
+  .l3row{display:flex;flex:none;min-height:0}
+  .grp{display:flex;flex-direction:column;flex:none;min-width:0}
+  .gbar{
+    flex:none;display:flex;align-items:center;gap:calc(8px * var(--s));
+    background:var(--ink);color:var(--paper);border:calc(3px * var(--s)) solid var(--rule);border-bottom:0;
+    padding:calc(3px * var(--s)) calc(10px * var(--s));overflow:hidden;
+  }
+  .gbar.gC{background:var(--gap);color:var(--ink)}
+  .gbar span{font-size:calc(14px * var(--s));font-weight:900;letter-spacing:.07em;text-transform:uppercase;line-height:1.2}
+  .gbar .glyph{flex:none;display:flex;flex-direction:column;gap:2px}
+  .gbar .glyph i{display:block;height:calc(5px * var(--s));border:1.5px solid currentColor}
+  .gbar.spacer{background:transparent;border-color:transparent}
+  .gcells{display:flex;flex:1 1 auto;min-height:0}
+
+  /* ----------------------------------------------------------------- cell */
+  .cell{
+    position:relative;flex:1 1 0;min-width:0;display:flex;flex-direction:column;
+    border:calc(3px * var(--s)) solid var(--rule);background:var(--tint);overflow:hidden;
+    transform-origin:50% 0;
+  }
+  .strip{
+    flex:none;display:flex;align-items:center;gap:calc(7px * var(--s));
+    background:var(--fam);color:var(--on);
+    padding:calc(3px * var(--s)) calc(9px * var(--s));border-bottom:calc(3px * var(--s)) solid var(--rule);overflow:hidden;
+  }
+  .depth{display:flex;gap:calc(3px * var(--s));flex:none}
+  .depth i{width:calc(8px * var(--s));height:calc(8px * var(--s));background:currentColor;display:block}
+  .kicker{font-size:max(12px, calc(13.5px * var(--s)));font-weight:900;letter-spacing:.075em;text-transform:uppercase;white-space:nowrap;line-height:1.45;min-width:0;overflow:hidden}
+  .lvl{margin-left:auto;font-size:max(12px, calc(13.5px * var(--s)));font-weight:900;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap;flex:none}
+  .body{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;padding:calc(8px * var(--s)) calc(10px * var(--s));gap:calc(6px * var(--s))}
+  .head{display:flex;align-items:center;gap:calc(8px * var(--s));flex:none}
+  .ico{flex:none;display:block}
+  .ico svg{display:block}
+  .cname{font-weight:900;letter-spacing:-.02em;line-height:1.06;flex:1 1 auto;min-width:0}
+  .metric{display:flex;align-items:center;flex-wrap:wrap;column-gap:calc(8px * var(--s));row-gap:calc(2px * var(--s));flex:none}
+  .num{font-weight:900;letter-spacing:-.04em;line-height:1;white-space:nowrap;flex:none}
+  .num.word{letter-spacing:.01em}
+  .mlabel{font-size:max(12px, calc(13px * var(--s)));font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);line-height:1.18;flex:1 1 calc(84px * var(--s));min-width:0}
+  .lanes{display:flex;flex-direction:column;gap:calc(4px * var(--s));flex:none}
+  .lane{display:flex;align-items:center;gap:calc(6px * var(--s))}
+  .tag{
+    flex:none;font-size:max(12px, calc(12.5px * var(--s)));font-weight:900;letter-spacing:.04em;line-height:1;
+    padding:calc(3px * var(--s)) calc(4px * var(--s));border:calc(2px * var(--s)) solid var(--rule);
+  }
+  .lane.b2b .tag{background:var(--b2b);color:#fff}
+  .lane.b2c .tag{background:var(--b2c);color:var(--ink)}
+  .track{flex:1 1 auto;min-width:calc(24px * var(--s));position:relative;overflow:hidden;background:var(--track);border:calc(2px * var(--s)) solid var(--rule)}
+  .track .fill{position:absolute;left:0;top:0;bottom:0;width:0;display:block}
+  .lane.b2b .fill{background:var(--b2b)}
+  .lane.b2c .fill{background:var(--b2c)}
+  .hatch{background:repeating-linear-gradient(135deg,var(--gap) 0 3px,var(--paper) 3px 8px) !important}
+  .val{flex:none;font-weight:900;white-space:nowrap;text-align:right;letter-spacing:-.02em}
+  .val.gapv{font-size:max(12px, calc(12.5px * var(--s)));font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+  .bar{flex:none;position:relative;overflow:hidden;background:var(--track);border:calc(2.5px * var(--s)) solid var(--rule)}
+  .bar .fill{position:absolute;left:0;top:0;bottom:0;width:0;display:block;background:var(--fam)}
+  .prow{display:flex;flex-direction:column;gap:calc(3px * var(--s));flex:none}
+  .prow .pl{display:flex;align-items:baseline;gap:calc(7px * var(--s))}
+  .rlabel{font-size:max(12px, calc(13px * var(--s)));font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);white-space:nowrap}
+  .line{line-height:1.24;font-weight:600;flex:0 1 auto;min-height:0;overflow:hidden}
+  .line b{font-weight:900}
+  .src{
+    margin-top:auto;flex:none;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:max(12px, calc(12px * var(--s)));font-weight:600;color:var(--ink-soft);letter-spacing:-.02em;line-height:1.3;
+  }
+  .cell.gap .body{justify-content:flex-start}
+  .stamp{
+    flex:none;display:flex;align-items:center;justify-content:center;
+    border:calc(2.5px * var(--s)) solid var(--rule);
+    background:repeating-linear-gradient(135deg,var(--gap) 0 3px,var(--paper) 3px 8px);
+  }
+  .stamp span{background:var(--paper);border:calc(2px * var(--s)) solid var(--rule);padding:calc(2px * var(--s)) calc(7px * var(--s));font-weight:900;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+
+  #rootcell .tag{padding:calc(2px * var(--s)) calc(5px * var(--s))}
+  #rootcell .lanes{gap:calc(3px * var(--s))}
+  /* level-1 root runs horizontal */
+  #rootcell .body{flex-direction:row;align-items:stretch;gap:calc(22px * var(--s))}
+  #rootcell .leftcol{flex:none;display:flex;flex-direction:column;justify-content:center;gap:calc(6px * var(--s));width:41%}
+  #rootcell .rightcol{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:calc(6px * var(--s))}
+  #rootcell .src{margin-top:0}
+
+  /* level-2: the "open" marker floats so it never steals room from the rank */
+  .cell.l2 .strip{position:relative}
+  .cell.l2 .lvl{opacity:0;position:absolute;right:calc(9px * var(--s));top:50%;transform:translateY(-50%)}
+  .cell.l2 .head{align-items:flex-start}
+  .cell.l2 .body{padding:calc(6px * var(--s)) calc(10px * var(--s));gap:calc(4px * var(--s))}
+  .cell.l3 .body{padding:calc(7px * var(--s)) calc(10px * var(--s));gap:calc(5px * var(--s))}
+  .cell.l2 .mlabel{flex-basis:calc(56px * var(--s));font-size:max(12px, calc(12.5px * var(--s)))}
+  .cell.l2 .metric{flex-wrap:nowrap}
+  .cell.l2 .lanes{gap:calc(3px * var(--s))}
+  .cell.l2 .tag{padding:calc(2px * var(--s)) calc(4px * var(--s))}
+
+  /* --------------------------------------------------------------- footer */
+  #foot{
+    flex:none;background:var(--ink);color:var(--paper);padding:calc(8px * var(--s)) var(--pad);
+    display:flex;align-items:center;gap:calc(16px * var(--s));border-top:calc(4px * var(--s)) solid var(--rule);overflow:hidden;
+  }
+  #srcline{font-size:max(12px, calc(12.5px * var(--s)));line-height:1.35;font-weight:600;flex:1 1 auto;min-width:0}
+  #byline{flex:none;font-size:calc(14px * var(--s));font-weight:900;letter-spacing:.03em;text-transform:uppercase;color:var(--yellow);text-align:right;line-height:1.25;white-space:nowrap}
+
+  /* ----------------------------------------------------------- live mode */
+  body.live{background:var(--paper)}
+  body.live #app{max-width:1120px;margin:0 auto;padding:14px 14px 28px}
+  #prompt,#panel,#drawer,#announce{display:none}
+  body.live #prompt{
+    display:block;margin:0 0 12px;font-size:17px;line-height:1.4;font-weight:750;
+    background:var(--yellow);border:2px solid var(--ink);padding:11px 14px;box-shadow:0 3px 0 var(--ink);
+  }
+  body.live #frame{outline:2px solid var(--ink)}
+  body.live .cell.l2{cursor:pointer}
+  body.live .cell.l2:hover{outline:calc(4px * var(--s)) solid var(--ink);outline-offset:calc(2px * var(--s))}
+  body.live .cell.l2:focus-visible{outline:calc(6px * var(--s)) solid var(--b2b);outline-offset:calc(2px * var(--s))}
+  body.live #panel{
+    display:block;margin-top:16px;border:2px solid var(--ink);background:#FFFDF7;box-shadow:0 3px 0 var(--ink);
+  }
+  #panel .phead{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:2px solid var(--ink);background:var(--yellow)}
+  #panel h2{font-size:19px;letter-spacing:-.01em;flex:1 1 auto}
+  #panel .pratio{font-size:19px;font-weight:900}
+  #panel .pbody{padding:14px;display:grid;gap:16px;grid-template-columns:1fr}
+  @media (min-width:760px){ #panel .pbody{grid-template-columns:1.05fr .95fr} }
+  #panel h3{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 8px}
+  #panel p{font-size:16px;line-height:1.5;margin:0 0 9px}
+  #panel .ptag{display:inline-block;font-size:12.5px;font-weight:900;padding:2px 5px;border:2px solid var(--ink);margin-right:4px;vertical-align:1px}
+  #panel .ptag.b2b{background:var(--b2b);color:#fff}
+  #panel .ptag.b2c{background:var(--b2c);color:var(--ink)}
+  #panel .caveat{font-size:15px;color:var(--ink-soft)}
+  #panel ul{list-style:none;margin:0;padding:0}
+  #panel li{font-size:15px;line-height:1.45;padding:6px 0 6px 14px;border-top:1px solid #E4D7C2;position:relative}
+  #panel li::before{content:"";position:absolute;left:0;top:13px;width:7px;height:7px;background:var(--dot,var(--ink))}
+  #panel li .st{font-size:12.5px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+  #panel .jump{
+    display:inline-block;margin-top:4px;font-size:16px;font-weight:850;text-decoration:none;color:var(--ink);
+    background:var(--yellow);border:2px solid var(--ink);padding:12px 16px;box-shadow:0 3px 0 var(--ink);min-height:44px;
+  }
+  #panel .jump:hover{transform:translateY(1px);box-shadow:0 2px 0 var(--ink)}
+  body.live #drawer{display:block;margin-top:14px;border:2px solid var(--ink);background:#FFFDF7}
+  #drawer summary{cursor:pointer;font-size:16px;font-weight:850;padding:12px 14px;min-height:44px;list-style-position:inside}
+  #drawer .dbody{padding:4px 14px 14px;border-top:2px solid var(--ink)}
+  #drawer h4{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin:12px 0 6px}
+  #drawer li{font-size:14.5px;line-height:1.5;margin:0 0 8px 18px}
+  #drawer a{color:var(--b2b)}
+  body.live a:focus-visible,body.live button:focus-visible,body.live summary:focus-visible{outline:3px solid var(--b2b);outline-offset:2px}
+  .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  body.live #announce{display:block}
+</style>
+<meta name="robots" content="noindex, follow"/><meta property="og:site_name" content="Mitchell Miller">
+<meta property="og:title" content="B2B vs B2C by vertical — the fractal stack">
+<meta property="og:description" content="Interactive infographic from the mj2.pro post “In Education, Winning a B2B Customer Costs 7.3× More Than Winning a B2C One”.">
+<meta property="og:url" content="https://mj2.pro/viz/b2b-vs-b2c-by-vertical/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://mj2.pro/og/viz/b2b-vs-b2c-by-vertical.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="mj2.pro card: “B2B vs B2C by vertical — the fractal stack” (Interactive infographic), beside its poster.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="B2B vs B2C by vertical — the fractal stack">
+<meta name="twitter:description" content="Interactive infographic from the mj2.pro post “In Education, Winning a B2B Customer Costs 7.3× More Than Winning a B2C One”.">
+<meta name="twitter:image" content="https://mj2.pro/og/viz/b2b-vs-b2c-by-vertical.png">
+<meta name="twitter:image:alt" content="mj2.pro card: “B2B vs B2C by vertical — the fractal stack” (Interactive infographic), beside its poster.">
+</head>
+<body>
+<div id="app">
+  <p id="prompt">Click a vertical: see what it costs to win a customer on each side.</p>
+  <div id="frame"><div id="poster"></div></div>
+  <p id="announce" class="vh" aria-live="polite"></p>
+  <section id="panel" aria-label="The selected vertical, in words"></section>
+  <details id="drawer"><summary>Sources, dates and method</summary><div class="dbody"></div></details>
+</div>
+<script>
+(function () {
+'use strict';
+/* =============================================================================
+   B2B vs B2C BY VERTICAL — THE FRACTAL STACK
+   Level 1: the cost to win one customer (headline: Education, 7.3x).
+   Level 2: ten verticals, ranked by the CAC gap, B2B and B2C side by side.
+   Level 3: what else was measured inside the selected vertical, each figure at
+            its own funnel stage and on its own scale.
+
+   Self-contained: no network, no webfonts, no build step.
+   Every figure comes from this post's research ledger
+   (data.json, notes.md, shock-stats.md, sources.md) as curated for the first
+   build and corrected by the 2026-09-14 critic pass. Deliberately absent: open rates
+   (Apple MPP makes publishers disagree ~2x), the 1.1% / >10% B2B SaaS landing
+   figures, the 14.2% AI-referral figure, and G2's unverified 92%.
+
+   POSTER  ?poster=1 | ?static=1 | ?t=<s> | ?frame=n&frames=m   ?size=1080x1350|1080x1080
+   LIVE    (default) assembles once, vertical cells are buttons, ?parent=<post url>
+   ?vertical=<slug> opens a different vertical.   ?motion=reduce  settled, no motion.
+   window.VIZ: ready, duration, settled, seek(t), framePlan(fps,{wipe}), select(slug),
+               selected, verticals, audit()
+   ========================================================================== */
+
+const Q = new URLSearchParams(location.search);
+const tParam = Q.get('t'), frameParam = Q.get('frame');
+const POSTER = Q.has('poster') || Q.has('static') || tParam !== null || frameParam !== null;
+const REDUCED = Q.get('motion') === 'reduce' ||
+  !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+document.body.className = POSTER ? 'poster' : 'live';
+
+/* ------------------------------------------------------------------ palette */
+const PAPER = '#FFF6E9', INK = '#15100C', YELLOW = '#FFE500';
+const B2B = '#1B3BEF', B2C = '#E25700', GAPC = '#8A7F70';
+const FAM = {
+  close:   { c: '#15100C', name: 'To a customer' },     /* CAC, sales cycle, touchpoints */
+  find:    { c: '#B5419A', name: 'Before the site' },   /* research, paid search         */
+  site:    { c: '#009E73', name: 'On the site' },       /* landing page, whole site      */
+  nurture: { c: '#7A6500', name: 'Nurture' },           /* email                         */
+  none:    { c: '#8A7F70', name: 'No source' },
+};
+const hex2rgb = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+const rgb2hex = a => '#' + a.map(v => Math.round(Math.max(0, Math.min(255, v))).toString(16).padStart(2, '0')).join('').toUpperCase();
+const mix = (a, b, t) => rgb2hex(hex2rgb(a).map((v, i) => v * (1 - t) + hex2rgb(b)[i] * t));
+const lum = h => { const s = hex2rgb(h).map(v => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }); return 0.2126 * s[0] + 0.7152 * s[1] + 0.0722 * s[2]; };
+const ratio = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((m, n) => n - m); return (x + 0.05) / (y + 0.05); };
+const onColor = c => ratio('#FFFFFF', c) >= ratio(INK, c) ? '#FFFFFF' : INK;
+const TINT = { 1: 0.80, 2: 0.845, 3: 0.905 };
+const SEL_TINT = mix(YELLOW, PAPER, 0.55);
+
+/* ------------------------------------------------------------------ sources */
+const SOURCES = [
+  { id: 'fps-b2b', name: 'First Page Sage — Average CAC by Industry: B2B Edition', when: 'published 2026-01-26 · data Jan 2022–Aug 2025',
+    what: 'Client analytics accounts, blended organic + paid CAC, 29 B2B industries.', used: 'Levels 1–2, B2B side.',
+    links: [['firstpagesage.com', 'https://firstpagesage.com/reports/average-customer-acquisition-cost-cac-by-industry-b2b-edition-fc/']] },
+  { id: 'fps-b2c', name: 'First Page Sage — Average CAC by Industry: B2C Edition', when: 'published 2025-07-03 · data 2021–2025',
+    what: '103 B2C clients, blended organic + paid annual CAC, 20 industries. A separate report from the B2B edition, matched by closest sub-industry.', used: 'Levels 1–2, B2C side.',
+    links: [['firstpagesage.com', 'https://firstpagesage.com/reports/average-cac-by-industry-b2c-edition/']] },
+  { id: 'wordstream', name: 'WordStream (LocaliQ) — Google Ads Benchmarks 2026', when: 'Apr 2025–Mar 2026',
+    what: '13,000+ US Search campaigns, 23 industries. The publisher page returned HTTP 403 to a direct fetch; the table was read from a mirror (hawky.ai) whose all-industry averages match WordStream’s own.', used: 'Paid search: click-through, cost per click, cost per lead.',
+    links: [['wordstream.com', 'https://www.wordstream.com/blog/2026-google-ads-benchmarks'], ['mirror', 'https://hawky.ai/blog/google-ads-benchmarks']] },
+  { id: 'ruler', name: 'Ruler Analytics — Conversion Rate Benchmarks 2026', when: '2026',
+    what: '110M+ sessions, 5M+ conversions, 13 industries. Whole-site conversion, not split by B2B/B2C.', used: 'Site conversion (every vertical but nonprofit).',
+    links: [['ruleranalytics.com', 'https://www.ruleranalytics.com/blog/insight/conversion-rate-by-industry/']] },
+  { id: 'unbounce', name: 'Unbounce — Conversion Benchmark Report', when: 'data Jul 2023–Jul 2024',
+    what: '41,000 landing pages, 464M visitors, 57M conversions. The financial-services 8.4% was seen only in a secondary summary.', used: 'Landing-page conversion.',
+    links: [['unbounce.com', 'https://unbounce.com/average-conversion-rates-landing-pages/']] },
+  { id: 'mailchimp', name: 'Mailchimp — Email Marketing Benchmarks by Industry', when: 'fetched 2026-09-14 · data last updated Dec 2023',
+    what: 'Billions of emails, campaigns to 1,000+ subscribers, self-reported industry. Click rate used, not open rate.', used: 'Email click rate.',
+    links: [['mailchimp.com', 'https://mailchimp.com/resources/email-marketing-benchmarks/']] },
+  { id: 'mr', name: 'M+R Benchmarks 2026', when: '2026',
+    what: 'Nonprofit-sector annual report; a different method from the commercial sources.', used: 'Nonprofit site (donation) conversion; fundraising vs advocacy email clicks.',
+    links: [['mrbenchmarks.com', 'https://mrbenchmarks.com/email-messaging/']] },
+  { id: 'g2', name: 'G2 — 2021 B2B Software Behavior Survey, via DemandGen Report', when: 'article 2021-10-06',
+    what: '“86% of buyers turn to peer-review websites to reach a final verdict.” Replaces a 92% figure whose cited page did not contain it.', used: 'Review reliance, SaaS (B2B).',
+    links: [['demandgenreport.com', 'https://www.demandgenreport.com/industry-news/new-research-86-of-b2b-software-buyers-rely-on-third-party-reviews-when-making-a-purchase-decision/7019/']] },
+  { id: 'cycle', name: 'Secondary roundups — B2B sales-cycle length by industry', when: '2026',
+    what: 'focus-digital.co, ziellab.com, getboomerang.ai citing 2026 studies; they disagree by up to 2× on some verticals. No benchmark measures a B2C sales cycle in days.', used: 'Sales cycle (B2B only).',
+    links: [['focus-digital.co', 'https://focus-digital.co/average-sales-cycle-length-by-industry/'], ['ziellab.com', 'https://ziellab.com/post/b2b-sales-cycle-length-shorten-2026-guide']] },
+  { id: 'touch', name: 'Secondary roundups — touchpoints before a conversion', when: '2026 (B2B) · 2025 (B2C)',
+    what: 'B2B: 27 (upvise), ~60 (HockeyStack Labs), 76 (Dreamdata), 417 for deals over $100K (Geisheker). B2C: 6, from a 2025 consumer study not independently verified. No publisher splits touchpoints by vertical.', used: 'Touchpoints (cross-industry, level 3).',
+    links: [['hockeystack.com', 'https://www.hockeystack.com/lab-blog-posts/b2b-customer-journey-touchpoints'], ['dreamdata.io', 'https://dreamdata.io/b2b-customer-journey'], ['emailtooltester.com', 'https://www.emailtooltester.com/en/blog/how-many-touchpoints-before-a-sale/']] },
+  { id: 'email-agg', name: 'Email benchmarks roundup (lower confidence)', when: '2026',
+    what: 'Legal-sector click rate 4.90%; underlying publisher and method not fully confirmed.', used: 'Email click rate, professional services.',
+    links: [['omnisend.com', 'https://www.omnisend.com/blog/email-marketing-benchmarks/']] },
+];
+
+/* ------------------------------------------------------------------ metrics
+   Every level-3 metric keeps its own funnel stage and its own scale: a bar is
+   the value divided by the highest of the ten verticals for that metric.     */
+const MET = {
+  reviews: { name: 'Review reliance', kicker: 'Pre-click research', ks: 'Research', fam: 'find', icon: 'star', max: 100, kind: 'pct', dec: 0,
+             mlabel: 'of B2B software buyers', src: 'G2 2021 survey · DemandGen', gap: 'Only SaaS has a sourced figure: 86% of B2B software buyers (G2, 2021).' },
+  paid:    { name: 'Paid search', kicker: 'Impression → lead', ks: 'Paid search', fam: 'find', icon: 'paid',
+             rows: [ { k: 'ctr', label: 'click-through', max: 9.83, kind: 'pct', dec: 2 },
+                     { k: 'cpc', label: 'per click', max: 9.87, kind: 'money', dec: 2 },
+                     { k: 'cpl', label: 'per lead', max: 131.63, kind: 'money', dec: 2 } ],
+             src: 'WordStream/LocaliQ 2026', gap: 'WordStream’s 23 industries have no category for this vertical.' },
+  lp:      { name: 'Landing-page conversion', kicker: 'Landing → convert', ks: 'Landing page', fam: 'site', icon: 'lp', max: 8.4, kind: 'pct', dec: 1,
+             mlabel: 'median page converts', src: 'Unbounce · data 2023–24', gap: 'No Unbounce landing-page category maps to this vertical.' },
+  site:    { name: 'Site conversion', kicker: 'Any visit → convert', ks: 'Whole site', fam: 'site', icon: 'site', max: 7.6, kind: 'pct', dec: 1,
+             mlabel: 'of visits convert', src: 'Ruler Analytics 2026', gap: 'No site-conversion figure for this vertical.' },
+  cycle:   { name: 'Sales cycle', kicker: 'Contact → close', ks: 'To close', fam: 'close', icon: 'clock', max: 195, kind: 'int', dec: 0, unit: ' d',
+             mlabel: 'days · B2B', src: 'Secondary roundups 2026', gap: 'No figure for this vertical — and no B2C sales cycle is benchmarked in days anywhere.' },
+  email:   { name: 'Email click rate', kicker: 'Nurture · email', ks: 'Nurture', fam: 'nurture', icon: 'mail', max: 4.9, kind: 'pct', dec: 2,
+             mlabel: 'click rate, not opens', src: 'Mailchimp · data 2023-12', gap: 'No category in Mailchimp’s, Klaviyo’s or M+R’s published tables.' },
+  touch:   { name: 'Touchpoints', kicker: 'First touch → close', ks: 'To close', fam: 'close', icon: 'touch', max: 60, kind: 'int', dec: 0,
+             mlabel: 'B2B, by deal size', src: 'HockeyStack · Dreamdata 2026',
+             line: 'Cross-industry, not by vertical; 60 is mid-range.',
+             lineSq: 'Cross-industry; 60 is mid-range.' },
+};
+const L3_ORDER = ['reviews', 'paid', 'lp', 'site', 'cycle', 'email'];
+
+/* ---------------------------------------------------------------- verticals
+   Ranked by the CAC gap (B2B ÷ B2C, same First Page Sage method); the three
+   with no ratio go last. cac numbers are blended organic + paid.            */
+const VERTICALS = [
+  { slug: 'education', name: 'Education', icon: 'edu', pair: 'vs consumer higher-ed',
+    cac: { b2b: 1143, b2c: 156, subB2B: 'Education', subB2C: 'Higher Education & College', orgB2B: 862, paidB2B: 1985, orgB2C: 134, paidB2C: 177 },
+    note: 'The B2C side is consumer higher-ed (trade and for-profit schools), not the institutional buyer on the B2B side — part of this gap is a different buyer, not a markup.',
+    m: {
+      reviews: null,
+      paid: { ctr: 7.56, cpc: 4.81, cpl: 77.48, sub: 'Education and Instruction' },
+      lp: null,
+      site: { v: 6.3, sub: 'Education', line: 'Any visit, any page — not a landing-page rate.', lineSq: 'Any visit, any page.' },
+      cycle: null,
+      email: { v: 3.02, sub: 'Education + Training', line: 'Clicks, not opens: Apple Mail inflates opens.', lineSq: 'Clicks, not opens.' },
+    },
+    gaps: { lp: 'No Unbounce landing-page category maps to education.' } },
+
+  { slug: 'financial-services', name: 'Financial services', icon: 'fin', pair: 'same category',
+    cac: { b2b: 784, b2c: 160, subB2B: 'Financial Services', subB2C: 'Financial Services', orgB2B: 644, paidB2B: 1202, orgB2C: 146, paidB2C: 173 },
+    note: 'Both editions’ “Financial Services” category. The B2B report also lists Commercial Insurance at $593 (not shown).',
+    m: {
+      reviews: null,
+      paid: { ctr: 9.83, cpc: 3.39, cpl: 74.44, sub: 'Finance and Insurance', line: 'Highest click-through of WordStream’s 23 industries.' },
+      lp: { v: 8.4, sub: 'Financial services', low: true, line: 'Lower confidence: seen only in a secondary summary, not on unbounce.com.' },
+      site: { v: 6.3, sub: 'Finance' },
+      cycle: { b2b: 195, line: 'Midpoint of a 150–240-day range; another source says 9–18 months. Directional only.' },
+      email: { v: 2.78, sub: 'Business + Finance' },
+    } },
+
+  { slug: 'real-estate', name: 'Real estate', icon: 'home', pair: 'same category',
+    cac: { b2b: 791, b2c: 165, subB2B: 'Real Estate', subB2C: 'Real Estate', orgB2B: 660, paidB2B: 1185, orgB2C: 103, paidB2C: 226 },
+    note: 'Both editions’ “Real Estate” category.',
+    m: {
+      reviews: null,
+      paid: { ctr: 7.61, cpc: 3.22, cpl: 102.51, sub: 'Real Estate' },
+      lp: null,
+      site: { v: 2.8, sub: 'Real Estate', line: 'Any visit → any conversion. Promodo’s 4.7% is visitor → lead, a different stage, not shown.' },
+      cycle: null, email: null,
+    } },
+
+  { slug: 'travel-hospitality', name: 'Travel & hospitality', icon: 'travel', pair: 'aviation vs hotels',
+    cac: { b2b: 683, b2c: 228, subB2B: 'Aviation', subB2C: 'Hotels & Resorts', orgB2B: 588, paidB2B: 967, orgB2C: 208, paidB2C: 247 },
+    note: 'Different sub-industries on each side (Aviation vs Hotels & Resorts) — read the 3.0× directionally.',
+    m: {
+      reviews: null,
+      paid: { ctr: 9.32, cpc: 2.14, cpl: 44.70, sub: 'Travel', line: 'Lowest cost per click of the verticals here.' },
+      lp: null,
+      site: { v: 1.9, sub: 'Travel', line: 'Lowest of the 13 industries Ruler tracks.' },
+      cycle: null, email: null,
+    } },
+
+  { slug: 'professional-services', name: 'Professional services', icon: 'legal', pair: 'legal, both sides',
+    cac: { b2b: 749, b2c: 323, subB2B: 'Legal Services', subB2C: 'Legal Services', orgB2B: 584, paidB2B: 1245, orgB2C: 189, paidB2C: 457 },
+    note: 'Both editions’ “Legal Services” — the same sub-industry as the paid-search figures. The B2B report also lists Business Consulting at $533 (not shown).',
+    m: {
+      reviews: null,
+      paid: { ctr: 5.87, cpc: 9.87, cpl: 131.63, sub: 'Attorneys and Legal Services', line: 'Highest cost per click and per lead of all 23 industries.' },
+      lp: { v: 6.1, sub: 'Commercial & Professional Services' },
+      site: { v: 6.1, sub: 'Professional Services' },
+      cycle: null,
+      email: { v: 4.9, sub: 'legal', low: true, src: 'Aggregator roundup 2026 · legal', line: 'Lower confidence: an aggregator’s legal-sector figure, publisher not confirmed.' },
+    } },
+
+  { slug: 'saas-software', name: 'SaaS & software', icon: 'saas', pair: 'vs consumer SaaS',
+    cac: { b2b: 239, b2c: 166, subB2B: 'B2B SaaS', subB2C: 'SaaS', orgB2B: 205, paidB2B: 341, orgB2C: 135, paidB2C: 197 },
+    note: 'The B2C side is consumer and prosumer SaaS, not enterprise. Aggregators quote B2B SaaS CAC at $702–$1,200, likely fully loaded with sales headcount; not shown.',
+    m: {
+      reviews: { b2b: 86, line: 'Used peer-review sites to reach a final verdict. No consumer figure for software.' },
+      paid: null,
+      lp: { v: 3.8, sub: 'SaaS', line: '42% below Unbounce’s 6.6% all-industry median.' },
+      site: { v: 7.6, sub: 'Software', line: 'Twice the landing-page rate: a different stage, not a contradiction.' },
+      cycle: { b2b: 60, line: '“Roughly 60 days for horizontal SaaS” — the low end of the cited range.' },
+      email: null,
+    },
+    gaps: { paid: 'WordStream’s 23 industries have no software category.' } },
+
+  { slug: 'ecommerce-retail', name: 'Ecommerce & retail', icon: 'cart', pair: 'wholesale vs retail',
+    cac: { b2b: 86, b2c: 66, subB2B: 'eCommerce (wholesale / B2B ordering)', subB2C: 'eCommerce', orgB2B: 87, paidB2B: 81, orgB2C: 64, paidB2C: 68 },
+    note: 'B2B $86 is First Page Sage’s wholesale / ordering-platform figure. Against B2B Education ($1,143) it is a 13× spread — B2B to B2B across verticals, not a B2B-vs-B2C gap.',
+    m: {
+      reviews: null,
+      paid: { ctr: 8.28, cpc: 4.14, cpl: 49.40, sub: 'Shopping, Collectibles and Gifts' },
+      lp: { v: 4.2, sub: 'Ecommerce' },
+      site: { v: 2.4, sub: 'Retail & eCommerce' },
+      cycle: { b2b: 70, line: 'Shortest B2B cycle cited: wholesale selling, not consumer retail.' },
+      email: { v: 1.74, sub: 'Ecommerce', line: 'Klaviyo’s ecommerce-heavy panel agrees: 1.69% for campaigns.' },
+    } },
+
+  { slug: 'healthcare', name: 'Healthcare', icon: 'health', pair: 'no B2B category',
+    cac: { b2b: null, b2c: 148, subB2B: null, subB2C: 'Medical Practices', orgB2C: 120, paidB2C: 176 },
+    note: 'First Page Sage’s B2B report has no healthcare category — a real gap. The B2C report also lists Medical Device at $129 (not shown).',
+    m: {
+      reviews: null,
+      paid: { ctr: 6.61, cpc: 4.76, cpl: 40.04, sub: 'Physicians and Surgeons', line: 'Lowest cost per lead of the verticals here.' },
+      lp: null,
+      site: { v: 2.3, sub: 'Health & Social Care' },
+      cycle: null, email: null,
+    } },
+
+  { slug: 'manufacturing-industrial', name: 'Manufacturing & industrial', icon: 'factory', pair: 'no B2C category',
+    cac: { b2b: 723, b2c: null, subB2B: 'Manufacturing', subB2C: null, orgB2B: 662, paidB2B: 905 },
+    note: 'The B2C report has no manufacturing category — there is no consumer comparator.',
+    m: {
+      reviews: null, paid: null, lp: null,
+      site: { v: 4.9, sub: 'Construction & Engineering', line: 'Closest Ruler proxy: Construction & Engineering.' },
+      cycle: null, email: null,
+    },
+    gaps: { paid: 'WordStream’s 23 industries have no manufacturing category.' } },
+
+  { slug: 'nonprofit', name: 'Nonprofit', icon: 'heart', pair: 'in neither report',
+    cac: { b2b: null, b2c: null },
+    note: 'Neither First Page Sage report covers nonprofits; the sector measures cost per donor, not CAC.',
+    m: {
+      reviews: null, paid: null, lp: null,
+      site: { v: 1.6, sub: 'donations', src: 'M+R Benchmarks 2026', line: 'Visitors who donated (M+R): a different publisher and method from every other site rate here.' },
+      cycle: { b2b: 162, line: 'Selling to nonprofits, not fundraising — the longest B2B cycle cited.' },
+      email: { v: 3.27, sub: 'Non-Profits', line: 'M+R splits it: fundraising asks 0.59%, advocacy asks 2.3%.' },
+    },
+    gaps: { paid: 'WordStream’s 23 industries have no nonprofit category.' } },
+];
+const CAC_MAX = 1143;
+VERTICALS.forEach(v => { v.ratio = (v.cac.b2b && v.cac.b2c) ? v.cac.b2b / v.cac.b2c : null; });
+let rank = 0;
+VERTICALS.forEach(v => { v.rank = v.ratio ? ++rank : null; });
+const BY_SLUG = Object.fromEntries(VERTICALS.map(v => [v.slug, v]));
+
+const TEXT = {
+  eyebrow: 'B2B vs B2C · the cost to win one customer · 10 verticals, 3 depths',
+  h1: ['In Education, a B2B customer', 'costs {lit}7.3× more{/lit} than a B2C one'],
+  deckPoster: 'Ten verticals, one publisher, ranked by the gap: 1.3× to 7.3× where both sides exist. This still opens Education; the live version at mj2.pro opens all ten.',
+  deckSq: 'Ranked by the gap: 1.3× to 7.3× where both sides exist. Education opened; the live version opens all ten.',
+  deckLive: 'Ten verticals, one publisher, ranked by the gap: 1.3× to 7.3× where both sides exist. Click any vertical to open what else was measured inside it.',
+  srcline: 'Sources: First Page Sage 2026 & 2025 · WordStream/LocaliQ 2026 · Ruler 2026 · Mailchimp 2023 · HockeyStack, Dreamdata 2026',
+  srclineLive: 'Sources (2021–2026) are dated in every cell · full list, links and method in the drawer below',
+  byline: 'Mitchell Miller|mj2.pro',
+};
+
+/* -------------------------------------------------------------------- icons */
+const ICONS = {
+  root:  '<circle cx="17" cy="13" r="5"/><path d="M8 28c0-5.2 4-8.4 9-8.4s9 3.2 9 8.4"/>',
+  edu:   '<path d="M4.5 14l12.5-6.2 12.5 6.2-12.5 6.2z"/><path d="M10 17.2v5.6c0 2 3.1 3.9 7 3.9s7-1.9 7-3.9v-5.6"/><path d="M29.5 14v7.5"/>',
+  fin:   '<path d="M5.5 13h23L17 6.8z"/><path d="M9.5 16v8M15 16v8M19 16v8M24.5 16v8"/><path d="M5.5 27h23"/>',
+  home:  '<path d="M6.5 17.5L17 8.5l10.5 9"/><path d="M9.5 15.5V27h15V15.5"/><rect x="15" y="20" width="4" height="7" fill="currentColor" stroke="none"/>',
+  travel:'<rect x="6.5" y="12" width="21" height="14"/><path d="M13 12V8.5h8V12"/><path d="M6.5 18.5h21"/>',
+  legal: '<path d="M17 7v19M10.5 26.5h13M7.5 11h19"/><path d="M7.5 11l-3 7.5h6z"/><path d="M26.5 11l-3 7.5h6z"/>',
+  saas:  '<rect x="5.5" y="8" width="23" height="18"/><path d="M5.5 12.5h23"/><path d="M13.5 16l-3.2 3.2 3.2 3.2M20.5 16l3.2 3.2-3.2 3.2"/>',
+  cart:  '<path d="M6.8 9.5h4l3.4 11.5h11.6l3.4-8.2H12.2"/><circle cx="14.3" cy="25.2" r="1.9" fill="currentColor" stroke="none"/><circle cx="22.4" cy="25.2" r="1.9" fill="currentColor" stroke="none"/>',
+  health:'<rect x="14" y="7.5" width="6" height="19" fill="currentColor" stroke="none"/><rect x="7.5" y="14" width="19" height="6" fill="currentColor" stroke="none"/>',
+  factory:'<path d="M5.5 27V16.5l6 3.6v-3.6l6 3.6v-3.6l6 3.6V8.5h4.5V27z"/>',
+  heart: '<path d="M17 26.5s-9.5-5.6-9.5-11.8a4.7 4.7 0 0 1 9.5-1.6 4.7 4.7 0 0 1 9.5 1.6c0 6.2-9.5 11.8-9.5 11.8z"/>',
+  star:  '<path d="M17 6.5l3 6.3 6.9.9-5.1 4.8 1.3 6.8L17 22l-6.1 3.3 1.3-6.8-5.1-4.8 6.9-.9z"/>',
+  paid:  '<rect x="7" y="7.5" width="20" height="6" fill="currentColor" stroke="none"/><path d="M7 19h20M7 24.5h14"/>',
+  lp:    '<rect x="8.5" y="5.5" width="17" height="23"/><path d="M11.5 10.5h11M11.5 14.5h8"/><rect x="11.5" y="19.5" width="11" height="4.5" fill="currentColor" stroke="none"/>',
+  site:  '<rect x="5" y="7.5" width="24" height="19"/><path d="M5 12h24"/><rect x="8.5" y="15.5" width="7" height="7.5" fill="currentColor" stroke="none"/><path d="M19 16h7M19 19.5h7M19 23h4.5"/>',
+  clock: '<circle cx="17" cy="17" r="9.5"/><path d="M17 11.5V17l4.2 3"/>',
+  touch: '<circle cx="8.5" cy="24.5" r="2.6"/><circle cx="17" cy="10.5" r="2.6"/><circle cx="25.5" cy="22.5" r="2.6"/><path d="M10 22l5.6-9.2M18.6 12.8l5.5 7.4"/>',
+  mail:  '<rect x="5.5" y="9.5" width="23" height="15.5"/><path d="M5.5 9.5L17 19l11.5-9.5"/>',
+};
+const icon = (kind, px, dashed) =>
+  `<svg width="${px}" height="${px}" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true">` +
+  `<rect x="2" y="2" width="30" height="30"${dashed ? ' stroke-dasharray="3.2 2.6"' : ''}/>${ICONS[kind]}</svg>`;
+
+/* ----------------------------------------------------- rosette (signature)
+   12-fold symmetry; each petal spawns two children at 0.47 scale for three
+   levels — the same recursion as the stack below it. It turns 1/12 of a
+   revolution per rendering, so every loop is seamless.                       */
+function rosette(px) {
+  const R = 50, K = 12, parts = [];
+  function petal(cx, cy, r, ang, depth) {
+    const x = cx + Math.cos(ang) * r, y = cy + Math.sin(ang) * r, w = r * 0.30;
+    const nx = -Math.sin(ang) * w, ny = Math.cos(ang) * w;
+    parts.push(`<path d="M${cx.toFixed(2)} ${cy.toFixed(2)} Q${(cx + nx + (x - cx) * 0.5).toFixed(2)} ${(cy + ny + (y - cy) * 0.5).toFixed(2)} ${x.toFixed(2)} ${y.toFixed(2)} Q${(cx - nx + (x - cx) * 0.5).toFixed(2)} ${(cy - ny + (y - cy) * 0.5).toFixed(2)} ${cx.toFixed(2)} ${cy.toFixed(2)} Z" stroke-width="${(1.6 / (depth + 1)).toFixed(2)}"/>`);
+    if (depth < 2) { petal(x, y, r * 0.47, ang - 0.72, depth + 1); petal(x, y, r * 0.47, ang + 0.72, depth + 1); }
+  }
+  for (let k = 0; k < K; k++) petal(0, 0, R * 0.62, (k / K) * Math.PI * 2, 0);
+  const spokes = Array.from({ length: K }, (_, k) => {
+    const a = (k / K) * Math.PI * 2 + Math.PI / K;
+    return `<line x1="0" y1="0" x2="${(Math.cos(a) * R * 0.94).toFixed(2)}" y2="${(Math.sin(a) * R * 0.94).toFixed(2)}" stroke-width="0.9"/>`;
+  }).join('');
+  return `<svg id="rosette" width="${px}" height="${px}" viewBox="-54 -54 108 108" fill="none" stroke="currentColor" aria-hidden="true">` +
+    `<g id="rosette-spin">${spokes}${parts.join('')}<circle r="${R * 0.94}" stroke-width="2.6"/><circle r="${R * 0.2}" stroke-width="1.6"/><circle r="${R * 0.07}" fill="currentColor" stroke="none"/></g></svg>`;
+}
+
+/* ----------------------------------------------------------------- geometry */
+const SIZES = {
+  '1080x1350': { W: 1080, H: 1350, s: 1, pad: 44, title: 191, legend: 52, root: 162, wire: 26, l2row: 166, l2gap: 12, gutter: 12,
+                 gbar: 27, l3gap: 22, foot: 50, short: false,
+                 num: { root: 66, l2: 33, l3: 33, prow: 22, gap: 18 }, name: { root: 25, l2: 18, l3: 19.5 },
+                 line: { root: 15, l3: 15 }, lane: { root: 19, l2: 15, l3: 16 } },
+  '1080x1080': { W: 1080, H: 1080, s: 0.9, pad: 36, title: 156, legend: 48, root: 120, wire: 16, l2row: 140, l2gap: 8, gutter: 10,
+                 gbar: 24, l3gap: 16, foot: 48, short: true,
+                 num: { root: 46, l2: 28, l3: 30, prow: 20, gap: 16 }, name: { root: 21, l2: 16, l3: 17.5 },
+                 line: { root: 15, l3: 14 }, lane: { root: 18, l2: 14, l3: 15 } },
+};
+function pickSize() {
+  const raw = (Q.get('size') || '1080x1350').toLowerCase().trim();
+  if (raw === 'square' || raw === '1:1' || raw === '1080') return '1080x1080';
+  return SIZES[raw] ? raw : '1080x1350';
+}
+const SIZE_KEY = POSTER ? pickSize() : '1080x1350';
+const L = SIZES[SIZE_KEY];
+let PH = L.H;   /* poster height: fixed for stills; the live version grows when a vertical's level 3 needs room */
+const pick = (a, b) => (L.short && b) ? b : a;
+
+/* ---------------------------------------------------------------- formatting */
+const nf = (v, dec) => v.toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec });
+function fmt(spec, p) {
+  if (p === undefined) p = 1;
+  if (spec.kind === 'text') return spec.text;
+  const v = spec.v * p;
+  if (spec.kind === 'money') return '$' + nf(v, spec.dec || 0);
+  if (spec.kind === 'pct') return nf(v, spec.dec || 0) + '%';
+  if (spec.kind === 'ratio') return nf(v, 1) + '×';
+  if (spec.kind === 'int') return nf(Math.round(v), 0) + (spec.unit || '');
+  return String(v);
+}
+
+/* ------------------------------------------------------- DOM registry
+   Every animated node registers here so seek(t) is a pure function of t.    */
+const ROLLS = [];
+const reg = spec => { ROLLS.push(spec); return ROLLS.length - 1; };
+let ROOT = null, L2 = [], L3 = [], GBARS = [];
+let SELECTED = BY_SLUG[Q.get('vertical')] ? Q.get('vertical') : 'education';
+
+function famVars(fam, level) {
+  const c = FAM[fam].c;
+  return `--fam:${c};--tint:${mix(c, PAPER, TINT[level])};--track:${mix(c, PAPER, 0.955)};--on:${onColor(c)}`;
+}
+const depthHTML = n => `<span class="depth">${'<i></i>'.repeat(n)}</span>`;
+
+function laneHTML(side, value, px) {
+  const S = side.toUpperCase();
+  if (value === null || value === undefined)
+    return `<div class="lane ${side} nosrc"><span class="tag">${S}</span><span class="track hatch"></span><span class="val gapv">no source</span></div>`;
+  const pct = Math.max(0.5, Math.min(100, (value.v / value.max) * 100));
+  const r = reg(Object.assign({ pct }, value));
+  return `<div class="lane ${side}"><span class="tag">${S}</span><span class="track"><i class="fill" data-f="${r}"></i></span>` +
+         `<span class="val" data-r="${r}" style="font-size:${px}px">${fmt(value)}</span></div>`;
+}
+
+/* ------------------------------------------------------------- level 1 */
+function rootHTML() {
+  const ed = BY_SLUG.education;
+  const rr = reg({ kind: 'ratio', v: ed.ratio });
+  const lanePx = L.lane.root;
+  return `<article class="cell l1" id="rootcell" style="${famVars('close', 1)}">
+    <div class="strip">${depthHTML(1)}<span class="kicker">The whole question · ranked below by the gap</span><span class="lvl" style="opacity:.85">Level 1</span></div>
+    <div class="body">
+      <div class="leftcol">
+        <div class="head"><span class="ico">${icon('root', Math.round(32 * L.s))}</span><span class="cname" style="font-size:${L.name.root}px">Acquiring one customer</span></div>
+        <div class="metric"><span class="num" data-r="${rr}" style="font-size:${L.num.root}px">${fmt(ROLLS[rr])}</span><span class="mlabel">widest gap:<br>Education, B2B vs B2C</span></div>
+      </div>
+      <div class="rightcol">
+        <div class="lanes">${laneHTML('b2b', { kind: 'money', v: ed.cac.b2b, max: CAC_MAX }, lanePx)}${laneHTML('b2c', { kind: 'money', v: ed.cac.b2c, max: CAC_MAX }, lanePx)}</div>
+        ${L.short ? '' : `<p class="line" style="font-size:${L.line.root}px">Widest same-vertical gap; ecommerce is the narrowest at 1.3×. The B2C side is consumer higher-ed, so part of the gap is a different buyer.</p>`}
+        <div class="src">${pick('First Page Sage · B2B 2026-01-26 · B2C 2025-07-03 · organic + paid', 'First Page Sage · B2B 2026-01-26 · B2C 2025-07-03')}</div>
+      </div>
+    </div>
+  </article>`;
+}
+
+/* ------------------------------------------------------------- level 2 */
+function l2HTML(v, i) {
+  const noRatio = !v.ratio;
+  const kicker = v.rank ? `#${v.rank} gap` : 'no ratio';
+  let num;
+  if (noRatio) {
+    const word = v.cac.b2b ? 'B2B only' : v.cac.b2c ? 'B2C only' : 'no CAC';
+    num = `<span class="num word" style="font-size:${L.num.gap}px">${word}</span>`;
+  } else {
+    const rr = reg({ kind: 'ratio', v: v.ratio });
+    num = `<span class="num" data-r="${rr}" style="font-size:${L.num.l2}px">${fmt(ROLLS[rr])}</span>`;
+  }
+  const lane = (side, val) => laneHTML(side, val === null || val === undefined ? null : { kind: 'money', v: val, max: CAC_MAX }, L.lane.l2);
+  const label = `${v.name}: B2B ${v.cac.b2b ? '$' + nf(v.cac.b2b, 0) : 'no source'}, B2C ${v.cac.b2c ? '$' + nf(v.cac.b2c, 0) : 'no source'} to win one customer${v.ratio ? ', ' + fmt({ kind: 'ratio', v: v.ratio }) : ''}. Open level 3.`;
+  return `<article class="cell l2" id="v-${v.slug}" data-slug="${v.slug}" style="${famVars('close', 2)}"
+      ${POSTER ? '' : `role="button" tabindex="0" aria-pressed="false" aria-label="${label}"`}>
+    <div class="strip">${depthHTML(2)}<span class="kicker">${kicker}</span><span class="lvl">▼ open</span></div>
+    <div class="body">
+      <div class="head"><span class="ico">${icon(v.icon, Math.round(24 * L.s))}</span><span class="cname" style="font-size:${L.name.l2}px">${v.name}</span></div>
+      <div class="metric">${num}<span class="mlabel">${v.pair}</span></div>
+      <div class="lanes">${lane('b2b', v.cac.b2b)}${lane('b2c', v.cac.b2c)}</div>
+    </div>
+  </article>`;
+}
+
+/* ------------------------------------------------------------- level 3 */
+function statusOf(v, id) {
+  const d = v.m[id];
+  if (!d) return 'C';
+  if (id === 'reviews' || id === 'cycle') return 'A';
+  return 'B';
+}
+function planL3(v) {
+  const G = { A: [], B: [], C: [] };
+  L3_ORDER.forEach(id => G[statusOf(v, id)].push(id));
+  const row1 = [], row2 = [];
+  if (G.A.length + G.B.length <= 4) { if (G.A.length) row1.push({ g: 'A', ids: G.A }); if (G.B.length) row1.push({ g: 'B', ids: G.B }); }
+  else { row1.push({ g: 'B', ids: G.B }); row2.push({ g: 'A', ids: G.A }); }
+  row2.push({ g: 'C', ids: G.C });
+  const n = r => r.reduce((k, g) => k + g.ids.length, 0);
+  (n(row1) <= 3 ? row1 : row2).push({ g: 'D', ids: ['touch'] });
+  return [row1, row2].filter(r => r.length);
+}
+const GBAR_TEXT = {
+  A: { t: 'Split by segment', glyph: '<span class="glyph"><i style="background:var(--b2b);width:22px"></i><i style="background:var(--b2c);width:12px"></i></span>' },
+  B: { t: 'One figure — the source does not split B2B/B2C', glyph: '<span class="glyph"><i style="background:var(--paper);width:22px;height:12px"></i></span>' },
+  C: { t: 'No source — a gap, not a zero', glyph: '<span class="glyph"><i class="hatch" style="width:22px;height:12px"></i></span>' },
+};
+
+function l3CellHTML(v, id, g) {
+  const M = MET[id], d = v.m[id];
+  const fam = g === 'C' ? 'none' : M.fam;
+  const famStyle = g === 'C'
+    ? `--fam:${FAM[M.fam].c};--tint:${mix(GAPC, PAPER, 0.84)};--track:${mix(GAPC, PAPER, 0.9)};--on:${onColor(FAM[M.fam].c)}`
+    : famVars(M.fam, 3);
+  const kick = `<span class="kicker" data-long="${M.kicker}" data-short="${M.ks}">${M.kicker}</span>`;
+  const head = `<div class="head"><span class="ico">${icon(M.icon, Math.round(24 * L.s), g === 'C')}</span><span class="cname" style="font-size:${L.name.l3}px">${M.name}</span></div>`;
+  let inner = '';
+  if (g === 'C') {
+    const why = (v.gaps && v.gaps[id]) || M.gap;
+    inner = `${head}<div class="stamp" style="height:${Math.round(26 * L.s)}px"><span style="font-size:${Math.max(13, Math.round(14 * L.s))}px">no source</span></div>` +
+            (L.short ? '' : `<p class="line" style="font-size:${L.line.l3}px">${why}</p>`);
+  } else if (id === 'paid') {
+    const rows = M.rows.map(r => {
+      const spec = { kind: r.kind, dec: r.dec, v: d[r.k] };
+      const ri = reg(Object.assign({ pct: Math.max(0.5, (d[r.k] / r.max) * 100) }, spec));
+      return `<div class="prow"><div class="pl"><span class="num" data-r="${ri}" style="font-size:${L.num.prow}px">${fmt(spec)}</span><span class="rlabel">${r.label}</span></div>` +
+             `<div class="bar" style="height:${Math.round(10 * L.s)}px"><i class="fill" data-f="${ri}"></i></div></div>`;
+    }).join('');
+    const line = d.line ? `<p class="line" style="font-size:${L.line.l3}px">${pick(d.line, d.lineSq || '')}</p>` : '';
+    inner = `${head}${rows}${line}<div class="src">${M.src} · ${d.sub}</div>`;
+  } else if (id === 'touch') {
+    const b = reg({ kind: 'int', v: 60, max: 60, pct: 100 }), c = reg({ kind: 'int', v: 6, max: 60, pct: 10 });
+    inner = `${head}<div class="metric"><span class="num" style="font-size:${Math.round(L.num.l3 * 0.86)}px">27–417</span><span class="mlabel">${M.mlabel}</span></div>` +
+      `<div class="lanes"><div class="lane b2b"><span class="tag">B2B</span><span class="track"><i class="fill" data-f="${b}"></i></span><span class="val" data-r="${b}" style="font-size:${L.lane.l3}px">60</span></div>` +
+      `<div class="lane b2c"><span class="tag">B2C</span><span class="track"><i class="fill" data-f="${c}"></i></span><span class="val" data-r="${c}" style="font-size:${L.lane.l3}px">6</span></div></div>` +
+      `<p class="line" style="font-size:${L.line.l3}px">${pick(M.line, M.lineSq)}</p><div class="src">${M.src}</div>`;
+  } else if (g === 'A') {
+    const spec = { kind: M.kind, dec: M.dec, v: d.b2b, max: M.max, unit: M.unit };
+    const big = reg(Object.assign({}, spec));
+    inner = `${head}<div class="metric"><span class="num" data-r="${big}" style="font-size:${L.num.l3}px">${fmt(spec)}</span><span class="mlabel">${M.mlabel}</span></div>` +
+      `<div class="lanes">${laneHTML('b2b', spec, L.lane.l3)}${laneHTML('b2c', null, L.lane.l3)}</div>` +
+      (d.line ? `<p class="line" style="font-size:${L.line.l3}px">${pick(d.line, d.lineSq || '')}</p>` : '') +
+      `<div class="src">${d.src || M.src}</div>`;
+  } else {
+    const spec = { kind: M.kind, dec: M.dec, v: d.v };
+    const ri = reg(Object.assign({ pct: Math.max(0.5, (d.v / M.max) * 100) }, spec));
+    inner = `${head}<div class="metric"><span class="num" data-r="${ri}" style="font-size:${L.num.l3}px">${fmt(spec)}</span><span class="mlabel">${M.mlabel}</span></div>` +
+      `<div class="bar" style="height:${Math.round(13 * L.s)}px"><i class="fill" data-f="${ri}"></i></div>` +
+      (d.line ? `<p class="line" style="font-size:${L.line.l3}px">${pick(d.line, d.lineSq || '')}</p>` : '') +
+      `<div class="src">${d.src || (M.src + ' · ' + d.sub)}</div>`;
+  }
+  return `<article class="cell l3${g === 'C' ? ' gap' : ''}" id="m-${id}" data-metric="${id}" data-group="${g}" style="${famStyle}">
+      <div class="strip">${depthHTML(3)}${kick}</div>
+      <div class="body">${inner}</div>
+    </article>`;
+}
+
+function buildL3() {
+  const v = BY_SLUG[SELECTED];
+  const band = document.getElementById('band3');
+  const rows = planL3(v);
+  band.innerHTML = rows.map((row, ri) => `<div class="l3row" id="l3r${ri}">` + row.map(gr => {
+    const bar = gr.g === 'D'
+      ? `<div class="gbar spacer" aria-hidden="true"></div>`
+      : `<div class="gbar g${gr.g}" data-g="${gr.g}">${GBAR_TEXT[gr.g].glyph}<span>${GBAR_TEXT[gr.g].t}</span></div>`;
+    return `<div class="grp" data-g="${gr.g}" data-n="${gr.ids.length}">${bar}<div class="gcells">${gr.ids.map(id => l3CellHTML(v, id, gr.g)).join('')}</div></div>`;
+  }).join('') + `</div>`).join('');
+  layoutL3();
+  L3 = [...band.querySelectorAll('.cell')].map(collect);
+  GBARS = [...band.querySelectorAll('.gbar:not(.spacer)')];
+}
+
+/* level-3 geometry: equal cell widths across groups; row heights follow content */
+function layoutL3() {
+  const band = document.getElementById('band3');
+  const rows = [...band.querySelectorAll('.l3row')];
+  const W = band.clientWidth, G = L.gutter;
+  rows.forEach(row => {
+    const grps = [...row.querySelectorAll('.grp')];
+    const N = grps.reduce((k, g) => k + Number(g.dataset.n), 0);
+    const u = (W - (N - 1) * G) / N;
+    row.style.gap = G + 'px';
+    grps.forEach(g => {
+      const n = Number(g.dataset.n);
+      g.style.width = (n * u + (n - 1) * G) + 'px';
+      g.querySelector('.gcells').style.gap = G + 'px';
+      g.querySelector('.gbar').style.minHeight = L.gbar + 'px';
+    });
+  });
+  if (rows.length > 1) rows[1].style.marginTop = L.l3gap + 'px';
+  /* natural heights, then share out whatever room is left */
+  rows.forEach(r => { r.style.height = 'auto'; r.style.alignItems = 'flex-start'; });
+  const nat = rows.map(r => r.offsetHeight);
+  const gapH = rows.length > 1 ? L.l3gap : 0;
+  const total = nat.reduce((a, b) => a + b, 0);
+  if (!POSTER) {
+    const base = band.clientHeight - (PH - L.H);
+    const next = L.H + Math.max(0, Math.ceil(total + gapH - base));
+    if (next !== PH) { PH = next; document.getElementById('poster').style.height = PH + 'px'; }
+  }
+  const avail = band.clientHeight - gapH;
+  const extra = avail - total;
+  const share = rows.length > 1 ? [0.58, 0.42] : [1];
+  rows.forEach((r, i) => {
+    r.style.alignItems = 'stretch';
+    r.style.height = Math.floor(extra >= 0 ? nat[i] + extra * share[i] : nat[i] * (avail / total)) + 'px';
+  });
+}
+
+function collect(el) {
+  return {
+    el,
+    fills: [...el.querySelectorAll('.fill[data-f]')].map(f => ({ el: f, spec: ROLLS[+f.dataset.f] })),
+    rolls: [...el.querySelectorAll('[data-r]')].map(n => ({ el: n, spec: ROLLS[+n.dataset.r] })),
+  };
+}
+
+/* ---------------------------------------------------------------- build */
+function build() {
+  const poster = document.getElementById('poster');
+  const frame = document.getElementById('frame');
+  const root = document.documentElement;
+  root.style.setProperty('--s', L.s);
+  root.style.setProperty('--pad', `${L.pad}px`);
+  poster.style.width = L.W + 'px';
+  poster.style.height = L.H + 'px';
+  if (POSTER) { frame.style.width = L.W + 'px'; frame.style.height = L.H + 'px'; }
+
+  const h1 = TEXT.h1.map(l => l.replace(/\{lit\}(.*?)\{\/lit\}/g, '<span class="lit">$1</span>')).join('<br>');
+  const deck = POSTER ? pick(TEXT.deckPoster, TEXT.deckSq) : TEXT.deckLive;
+  const sw = (bg, t, cls) => `<span class="lchip"><span class="lsw${cls ? ' ' + cls : ''}" style="${bg ? 'background:' + bg : ''}"></span><span>${t}</span></span>`;
+  const byline = TEXT.byline;
+
+  poster.innerHTML = `
+    <header id="titlebar">
+      <div id="titletext">
+        <div class="eyebrow">${TEXT.eyebrow}</div>
+        <h1 id="h1">${h1}</h1>
+        <p id="deck">${deck}</p>
+      </div>
+      ${rosette(Math.round(L.title * 0.64))}
+    </header>
+    <div id="legend">
+      <div class="lrow">${sw(B2B, 'B2B')}${sw(B2C, 'B2C')}${sw('', 'No source', 'hatch')}
+        <span class="lnote">Bars: one scale per metric. B2B and B2C share it; no two metrics ever do.</span></div>
+      <div class="lrow"><span class="lhead">Funnel stage</span>${sw(FAM.find.c, FAM.find.name)}${sw(FAM.site.c, FAM.site.name)}${sw(FAM.nurture.c, FAM.nurture.name)}${sw(FAM.close.c, FAM.close.name)}
+        <span class="lnote">▪▪▪ = depth · verticals ranked by the gap</span></div>
+    </div>
+    <main id="stack">
+      <svg id="wires" aria-hidden="true"></svg>
+      <section class="band" id="band1">${rootHTML()}</section>
+      <div class="wiregap"></div>
+      <section class="band" id="band2">
+        <div class="l2row" id="l2r0">${VERTICALS.slice(0, 5).map(l2HTML).join('')}</div>
+        <div class="l2row" id="l2r1">${VERTICALS.slice(5, 10).map(l2HTML).join('')}</div>
+      </section>
+      <div class="wiregap"></div>
+      <section id="band3" aria-label="Level 3: measured inside the selected vertical"></section>
+    </main>
+    <footer id="foot">
+      <div id="srcline">${POSTER ? TEXT.srcline : TEXT.srclineLive}</div>
+      <div id="byline">${byline.split('|').join('<br>')}</div>
+    </footer>`;
+
+  document.getElementById('titlebar').style.height = L.title + 'px';
+  document.getElementById('legend').style.height = L.legend + 'px';
+  document.getElementById('band1').style.height = L.root + 'px';
+  document.getElementById('stack').style.paddingTop = Math.round(10 * L.s) + 'px';
+  document.getElementById('stack').style.paddingBottom = Math.round(12 * L.s) + 'px';
+  document.getElementById('foot').style.minHeight = L.foot + 'px';
+  document.querySelectorAll('.wiregap').forEach(w => { w.style.height = L.wire + 'px'; });
+  document.querySelectorAll('.l2row').forEach((r, i) => {
+    r.style.height = L.l2row + 'px'; r.style.gap = L.gutter + 'px';
+    if (i) r.style.marginTop = L.l2gap + 'px';
+  });
+
+  ROOT = collect(document.getElementById('rootcell'));
+  L2 = VERTICALS.map(v => Object.assign(collect(document.getElementById('v-' + v.slug)), { slug: v.slug }));
+  buildL3();
+}
+
+/* ------------------------------------------- fit: prove nothing is clipped
+   Type only shrinks down to hard floors (12px at 1080 wide, 14 preferred).   */
+const FLOOR = { line: 14, mlabel: 12, src: 12, cname: 15, kicker: 12, rlabel: 12, val: 13, gbar: 12.5 };
+function clipped(el) {
+  const cs = getComputedStyle(el);
+  if (cs.overflowX === 'visible' && cs.overflowY === 'visible') return false;
+  return el.scrollHeight > el.clientHeight + 1 || el.scrollWidth > el.clientWidth + 1;
+}
+function shrink(el, floor, step) {
+  if (!el) return false;
+  const fs = parseFloat(getComputedStyle(el).fontSize);
+  if (fs - step >= floor - 0.01) { el.style.fontSize = (fs - step) + 'px'; return true; }
+  return false;
+}
+function fitStrip(strip) {
+  const k = strip.querySelector('.kicker');
+  if (!k) return true;
+  let g = 40;
+  while (clipped(k) && g-- && shrink(k, 12.5, 0.25));              /* first: a little smaller */
+  if (clipped(k) && k.dataset.short) k.textContent = k.dataset.short; /* then: the short stage name */
+  while (clipped(k) && g-- && shrink(k, FLOOR.kicker, 0.25));
+  return !clipped(k);
+}
+function fitCell(cell) {
+  const q = s => [...cell.querySelectorAll(s)];
+  fitStrip(cell.querySelector('.strip'));
+  const body = cell.querySelector('.body');
+  const over = () => clipped(cell) || clipped(body) || q('.line').some(clipped) || q('.cname').some(e => e.scrollWidth > e.clientWidth + 1);
+  let guard = 200;
+  while (over() && guard--) {
+    let moved = false;
+    q('.line').forEach(e => { moved = shrink(e, FLOOR.line, 0.25) || moved; });
+    if (!moved) q('.line').forEach(e => { moved = shrink(e, 12.5, 0.25) || moved; });
+    q('.mlabel').forEach(e => { moved = shrink(e, FLOOR.mlabel, 0.25) || moved; });
+    q('.cname').forEach(e => { moved = shrink(e, FLOOR.cname, 0.25) || moved; });
+    if (!moved) break;
+  }
+  return !over();
+}
+function fitAll() {
+  const stuck = [];
+  document.querySelectorAll('.cell').forEach(c => { if (!fitCell(c)) stuck.push(c.id); });
+  document.querySelectorAll('.gbar:not(.spacer)').forEach(b => {
+    const s = b.querySelector('span:last-child'); let g = 20;
+    while (clipped(b) && g-- && shrink(s, FLOOR.gbar, 0.25));
+    if (clipped(b)) stuck.push('gbar-' + b.dataset.g);
+  });
+  const tb = document.getElementById('titlebar'), tt = document.getElementById('titletext'), h1 = document.getElementById('h1');
+  let hs = parseFloat(getComputedStyle(h1).fontSize), g = 60;
+  while ((tt.scrollHeight > tb.clientHeight - 28 * L.s || h1.scrollWidth > h1.clientWidth + 1) && hs > 30 && g--) { hs -= 1; h1.style.fontSize = hs + 'px'; }
+  for (const id of ['legend', 'foot']) {
+    const el = document.getElementById(id);
+    let guard = 30;
+    while (clipped(el) && guard--) {
+      let moved = false;
+      el.querySelectorAll('.lnote, .lchip span, .lhead, #srcline').forEach(t => { moved = shrink(t, 12, 0.25) || moved; });
+      if (!moved) break;
+    }
+    if (clipped(el)) stuck.push(id);
+  }
+  return stuck;
+}
+
+/* ------------------------------------------------------- wires (fractal)
+   Measured after layout, in the poster's own 1080-wide space. Each wire runs
+   parent-bottom → bus → a free channel through any row in between → child
+   top. The lit path (root → open vertical → its level 3) wears a yellow core. */
+let WIRES = [];
+function scaleK() {
+  const r = document.getElementById('poster').getBoundingClientRect();
+  return r.width / L.W || 1;
+}
+function buildWires() {
+  const stack = document.getElementById('stack'), svg = document.getElementById('wires');
+  const k = scaleK();
+  const S = stack.getBoundingClientRect();
+  const W = S.width / k, H = S.height / k;
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.setAttribute('width', W); svg.setAttribute('height', H);
+  svg.innerHTML = ''; WIRES = [];
+  const box = el => { const r = el.getBoundingClientRect(); return { x: (r.left - S.left) / k, y: (r.top - S.top) / k, w: r.width / k, h: r.height / k }; };
+
+  const rootB = box(ROOT.el);
+  const l2B = L2.map(c => box(c.el));
+  const l3rows = [...document.querySelectorAll('.l3row')].map(r => [...r.querySelectorAll('.gbar:not(.spacer), .cell')].map(box));
+  const ROWS = [[rootB], l2B.slice(0, 5), l2B.slice(5, 10), ...l3rows].map(bs => ({
+    top: Math.min(...bs.map(b => b.y)), bot: Math.max(...bs.map(b => b.y + b.h)), boxes: bs,
+  }));
+  const bus = i => (ROWS[i].bot + ROWS[i + 1].top) / 2;
+  const M = 15 * L.s;
+  const chans = ROWS.map(r => {
+    const iv = r.boxes.map(b => [b.x, b.x + b.w]).sort((a, b) => a[0] - b[0]);
+    const merged = [];
+    iv.forEach(([a, b]) => { if (merged.length && a <= merged[merged.length - 1][1] + 2) merged[merged.length - 1][1] = Math.max(merged[merged.length - 1][1], b); else merged.push([a, b]); });
+    const cs = [{ x: M, margin: true }, { x: W - M, margin: true }];
+    for (let i = 0; i < merged.length - 1; i++) {
+      const g0 = merged[i][1], g1 = merged[i + 1][0];
+      if (g1 - g0 >= 7) cs.push({ x: (g0 + g1) / 2, margin: false });
+    }
+    return cs;
+  });
+  const usage = new Map();
+  const segs = new Map();        /* bus index → horizontal runs already drawn by plain wires */
+  const shared = new Map();      /* row → channel x, reused by every branch of the lit trunk */
+  const overlaps = (b, x0, x1) => (segs.get(b) || []).some(([a, c]) => Math.min(c, Math.max(x0, x1)) - Math.max(a, Math.min(x0, x1)) > 4);
+  const pickChannel = (r, xFrom, xTo, lit) => {
+    if (lit && shared.has(r)) return shared.get(r);
+    let best = null;
+    chans[r].forEach((c, i) => {
+      const n = usage.get(r + ':' + i) || 0;
+      let cost = Math.abs(c.x - xTo) + 0.4 * Math.abs(c.x - xFrom) + n * 90;
+      if (lit && overlaps(r - 1, xFrom, c.x)) cost += 600;
+      if (!best || cost < best.cost) best = { c, i, cost };
+    });
+    const key = r + ':' + best.i, n = usage.get(key) || 0;
+    usage.set(key, n + 1);
+    const off = lit ? 0 : [0, -4, 4, -8, 8, -12, 12][n % 7] * L.s * (best.c.margin ? 1.5 : 1);
+    if (lit) shared.set(r, best.c.x);
+    return best.c.x + off;
+  };
+  const route = (p, rowFrom, xs, c, rowTo, xt, lit) => {
+    let x = xs, d = `M${x.toFixed(1)} ${(p.y + p.h).toFixed(1)} V${bus(rowFrom).toFixed(1)}`;
+    const run = (b, x0, x1) => { if (!lit) { if (!segs.has(b)) segs.set(b, []); segs.get(b).push([Math.min(x0, x1), Math.max(x0, x1)]); } };
+    for (let r = rowFrom + 1; r < rowTo; r++) {
+      const ch = pickChannel(r, x, xt, lit);
+      run(r - 1, x, ch);
+      d += ` H${ch.toFixed(1)} V${bus(r).toFixed(1)}`; x = ch;
+    }
+    run(rowTo - 1, x, xt);
+    return d + ` H${xt.toFixed(1)} V${c.y.toFixed(1)}`;
+  };
+  const NS = 'http://www.w3.org/2000/svg';
+  const path = (d, stroke, width) => {
+    const p = document.createElementNS(NS, 'path');
+    p.setAttribute('d', d); p.setAttribute('fill', 'none'); p.setAttribute('stroke', stroke);
+    p.setAttribute('stroke-width', String(width)); p.setAttribute('stroke-linecap', 'butt'); p.setAttribute('stroke-linejoin', 'miter');
+    return p;
+  };
+  const dot = (x, y, fill) => {
+    const r = document.createElementNS(NS, 'rect');
+    const s = 12 * L.s;
+    r.setAttribute('x', x - s / 2); r.setAttribute('y', y - s / 2); r.setAttribute('width', s); r.setAttribute('height', s);
+    r.setAttribute('fill', fill); r.setAttribute('stroke', INK); r.setAttribute('stroke-width', 2 * L.s);
+    r.style.opacity = '0';
+    return r;
+  };
+  const plain = [], lit = [];
+  const add = (list, d, group, lx, ly) => list.push({ d, group, lx, ly });
+
+  /* level 1 → level 2 (and the cross-industry cell), fanned from the root */
+  const selIdx = VERTICALS.findIndex(v => v.slug === SELECTED);
+  const touchCell = document.getElementById('m-touch');
+  const kids = VERTICALS.length + 1;
+  VERTICALS.forEach((v, i) => {
+    const b = l2B[i], row = i < 5 ? 1 : 2;
+    const xs = rootB.x + rootB.w / 2 + (i - (kids - 1) / 2) * 9 * L.s;
+    const d = route(rootB, 0, xs, b, row, b.x + b.w / 2);
+    add(plain, d, 'w2', b.x + b.w / 2, b.y);
+    if (i === selIdx) add(lit, d, 'lit', b.x + b.w / 2, b.y);
+  });
+  if (touchCell) {
+    const tb = box(touchCell);
+    const rowTo = 3 + [...document.querySelectorAll('.l3row')].findIndex(r => r.contains(touchCell));
+    const xs = rootB.x + rootB.w / 2 + (kids - 1 - (kids - 1) / 2) * 9 * L.s;
+    add(plain, route(rootB, 0, xs, tb, rowTo, tb.x + tb.w / 2), 'wd', tb.x + tb.w / 2, tb.y);
+  }
+  /* level 2 → level 3: the open vertical feeds each of its group bars */
+  const sb = l2B[selIdx], sRow = selIdx < 5 ? 1 : 2;
+  const bars = [...document.querySelectorAll('.gbar:not(.spacer)')];
+  /* one trunk leaves the open cell (left of centre, so it never lines up with a
+     wire entering the cell below) and branches once per group bar */
+  const xs = sb.x + sb.w * 0.3;
+  bars.forEach(bar => {
+    const bb = box(bar);
+    const rowTo = 3 + [...document.querySelectorAll('.l3row')].findIndex(r => r.contains(bar));
+    const xt = Math.max(bb.x + 30 * L.s, Math.min(bb.x + bb.w - 30 * L.s, xs + 40 * L.s));
+    add(lit, route(sb, sRow, xs, bb, rowTo, xt, true), 'w3', xt, bb.y);
+  });
+
+  const draw = (w, stroke, width, dotFill) => {
+    const p = path(w.d, stroke, width);
+    svg.appendChild(p);
+    const len = p.getTotalLength();
+    p.style.strokeDasharray = len; p.style.strokeDashoffset = len;
+    const o = { el: p, len, group: w.group };
+    if (dotFill) { o.dot = dot(w.lx, w.ly, dotFill); }
+    WIRES.push(o);
+    return o;
+  };
+  plain.forEach(w => draw(w, INK, 3.4 * L.s, INK));
+  lit.forEach(w => draw(w, INK, 8.5 * L.s, null));
+  lit.forEach(w => draw(w, YELLOW, 3.4 * L.s, YELLOW));
+  WIRES.forEach(w => { if (w.dot) svg.appendChild(w.dot); });
+}
+
+/* ------------------------------------------------------------- timeline
+   One rendering: root → beat → subdivide into ten verticals (≈2× slower than
+   the first stack) → beat → the open vertical subdivides into level 3 →
+   settle. The GIF plays three renderings, then holds still for 50 s.         */
+const T = {
+  root:   { in: [0.00, 0.60], fill: [0.30, 1.60] },
+  beat1:  1.60,
+  w2:     [2.30, 3.10],
+  l2:     { in0: 2.50, step: 0.11, dur: 0.55, fill0: 2.70, fillDur: 1.00 },
+  beat2:  4.70,
+  sel:    [5.40, 5.75],
+  lit:    [5.40, 5.90],
+  w3:     [5.60, 6.40],
+  wd:     [5.60, 6.60],
+  gbar:   [6.00, 6.45],
+  l3:     { in0: 6.20, step: 0.10, dur: 0.55, fill0: 6.35, fillDur: 0.90 },
+  settled: 7.90,
+  holdEnd: 9.40,
+  wipeEnd: 10.00,
+};
+const DUR = T.wipeEnd;
+const MOTION = [[0, T.beat1], [T.w2[0], T.beat2], [T.sel[0], T.settled]];
+const MOTION_TOTAL = MOTION.reduce((a, [x, y]) => a + (y - x), 0);
+const clamp01 = v => v < 0 ? 0 : v > 1 ? 1 : v;
+const span = (t, a, b) => clamp01((t - a) / (b - a));
+const easeOutExpo = p => p >= 1 ? 1 : 1 - Math.pow(2, -9 * p);
+const easeOutBack = p => { const c = 1.35, q = p - 1; return 1 + (c + 1) * q * q * q + c * q * q; };
+const easeInOut = p => p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+const motionAt = t => MOTION.reduce((a, [x, y]) => a + Math.max(0, Math.min(t, y) - x), 0) / MOTION_TOTAL;
+
+function applyCell(c, pIn, pFill, fade) {
+  const lift = (1 - easeOutBack(pIn)) * 16 * L.s;
+  c.el.style.opacity = String(clamp01(pIn * 1.4) * (1 - fade));
+  c.el.style.transform = `translateY(${(lift - fade * 10 * L.s).toFixed(2)}px)`;
+  const e = easeOutExpo(pFill);
+  c.fills.forEach(f => { f.el.style.width = `${(f.spec.pct * e).toFixed(2)}%`; });
+  c.rolls.forEach(r => { r.el.textContent = fmt(r.spec, e); });
+}
+let ROT_BASE = 0;
+function rosetteAt(p) {
+  const g = document.getElementById('rosette-spin');
+  if (g) g.setAttribute('transform', `rotate(${(ROT_BASE + p * 30).toFixed(3)})`);
+}
+function paintSel(c, p) {
+  const strip = c.el.querySelector('.strip');
+  strip.style.background = mix(INK, YELLOW, p);
+  strip.style.color = p > 0.5 ? INK : '#FFFFFF';
+  c.el.style.background = mix(mix(INK, PAPER, TINT[2]), SEL_TINT, p);
+  c.el.querySelector('.lvl').style.opacity = String(p);
+  if (!POSTER) c.el.setAttribute('aria-pressed', p > 0.5 ? 'true' : 'false');
+}
+function drawWires(groupWin, fade) {
+  WIRES.forEach(w => {
+    const win = groupWin[w.group];
+    const p = win ? easeOutExpo(span(win.t, win.a, win.b)) * (1 - fade) : 1 - fade;
+    w.el.style.strokeDashoffset = String(w.len * (1 - p));
+    if (w.dot) w.dot.style.opacity = p > 0.96 ? '1' : '0';
+  });
+}
+function renderL3(t, TL, fade) {
+  L3.forEach((c, i) => {
+    const a = TL.l3.in0 + i * TL.l3.step, f = TL.l3.fill0 + i * TL.l3.step;
+    applyCell(c, easeInOut(span(t, a, a + TL.l3.dur)), span(t, f, f + TL.l3.fillDur), fade);
+  });
+  GBARS.forEach(g => {
+    const p = easeInOut(span(t, TL.gbar[0], TL.gbar[1]));
+    g.style.opacity = String(p * (1 - fade));
+    g.style.transform = `translateY(${((1 - p) * 8 * L.s).toFixed(2)}px)`;
+  });
+}
+function render(t) {
+  t = Math.max(0, Math.min(DUR, t));
+  const fade = t > T.holdEnd ? easeInOut(span(t, T.holdEnd, T.wipeEnd)) : 0;
+  applyCell(ROOT, easeInOut(span(t, T.root.in[0], T.root.in[1])), span(t, T.root.fill[0], T.root.fill[1]), fade);
+  L2.forEach((c, i) => {
+    const a = T.l2.in0 + i * T.l2.step, f = T.l2.fill0 + i * T.l2.step;
+    applyCell(c, easeInOut(span(t, a, a + T.l2.dur)), span(t, f, f + T.l2.fillDur), fade);
+    paintSel(c, c.slug === SELECTED ? easeInOut(span(t, T.sel[0], T.sel[1])) * (1 - fade) : 0);
+  });
+  renderL3(t, T, fade);
+  const win = k => ({ t, a: T[k][0], b: T[k][1] });
+  drawWires({ w2: win('w2'), lit: win('lit'), w3: win('w3'), wd: win('wd') }, fade);
+  rosetteAt(motionAt(t));
+}
+
+/* frame plan for the exporter: moving frames at fps, one long frame per beat/hold */
+function framePlan(fps, opts) {
+  const wipe = !opts || opts.wipe !== false;
+  const dt = 1 / fps, ms = Math.round(dt * 1000), out = [];
+  const seg = (a, b) => { for (let t = a; t < b - 1e-6; t += dt) out.push({ t: +t.toFixed(4), delay: ms }); };
+  seg(0, T.beat1);           out.push({ t: T.beat1, delay: 700 });
+  seg(T.w2[0], T.beat2);     out.push({ t: T.beat2, delay: 700 });
+  seg(T.sel[0], T.settled);  out.push({ t: T.settled, delay: 1500 });
+  if (wipe) for (let t = T.holdEnd + dt; t <= T.wipeEnd + 1e-6; t += dt) out.push({ t: +Math.min(t, T.wipeEnd).toFixed(4), delay: ms });
+  return out;
+}
+
+/* ============================================================== LIVE MODE */
+/* Published copy (mj2.pro): the fallback link targets the embedding post itself when it is
+   same-origin (a same-document jump, query string kept), then a same-origin ?parent=, else the
+   post on this origin. Cross-origin values are ignored so the link cannot be pointed off-site. */
+function parentBase() {
+  try {
+    const p = window.parent;
+    if (p && p !== window && p.location.origin === location.origin) return p.location.origin + p.location.pathname + p.location.search;
+  } catch (e) {}
+  try {
+    const raw = Q.get('parent');
+    if (raw) { const u = new URL(raw, location.href); if (u.origin === location.origin) return u.origin + u.pathname + u.search; }
+  } catch (e) {}
+  return new URL('/blog/b2b-vs-b2c-by-vertical/', location.href).href;
+}
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+function money(v) { return '$' + nf(v, 0); }
+
+function panelHTML(v) {
+  const c = v.cac;
+  const side = (s, val, sub, org, paid) => val
+    ? `<p><span class="ptag ${s}">${s.toUpperCase()}</span><b>${money(val)}</b> to win one customer — First Page Sage “${esc(sub)}” · organic ${money(org)} / paid ${money(paid)}</p>`
+    : `<p><span class="ptag ${s}">${s.toUpperCase()}</span><b>No source.</b></p>`;
+  const rows = [];
+  const byG = { A: [], B: [], C: [] };
+  L3_ORDER.forEach(id => byG[statusOf(v, id)].push(id));
+  const say = id => {
+    const M = MET[id], d = v.m[id];
+    if (!d) return `<li style="--dot:${GAPC}"><b>${M.name}</b> <span class="st">${M.kicker}</span><br>${esc((v.gaps && v.gaps[id]) || M.gap)}</li>`;
+    let val;
+    if (id === 'paid') val = `click-through ${d.ctr.toFixed(2)}% · ${'$' + d.cpc.toFixed(2)} per click · ${'$' + d.cpl.toFixed(2)} per lead`;
+    else if (id === 'reviews') val = `B2B ${d.b2b}% · B2C no source`;
+    else if (id === 'cycle') val = `B2B ${d.b2b} days · B2C no source`;
+    else val = `${fmt({ kind: M.kind, dec: M.dec, v: d.v })}`;
+    const src = d.src || (M.src + (d.sub ? ' · “' + d.sub + '”' : ''));
+    return `<li style="--dot:${FAM[M.fam].c}"><b>${M.name}</b> <span class="st">${M.kicker}</span><br>${val}${d.line ? ' — ' + esc(d.line) : ''}<br><span class="st">${esc(src)}</span></li>`;
+  };
+  if (byG.A.length) rows.push(`<h3>Split by segment</h3><ul>${byG.A.map(say).join('')}</ul>`);
+  if (byG.B.length) rows.push(`<h3 style="margin-top:12px">One figure for both sides</h3><ul>${byG.B.map(say).join('')}</ul>`);
+  rows.push(`<h3 style="margin-top:12px">No source</h3><ul>${byG.C.map(say).join('')}</ul>`);
+  rows.push(`<h3 style="margin-top:12px">Cross-industry, same for all ten</h3><ul><li><b>Touchpoints</b> <span class="st">${MET.touch.kicker}</span><br>B2B 27–417 by deal size (60 is a mid-range count) · B2C about 6. No publisher splits touchpoints by vertical.<br><span class="st">${esc(MET.touch.src)} · B2C: 2025 consumer study, not independently verified</span></li></ul>`);
+  const href = parentBase() + '#vertical-' + v.slug;
+  return `<div class="phead"><h2>${esc(v.name)}</h2><span class="pratio">${v.ratio ? fmt({ kind: 'ratio', v: v.ratio }) + ' gap' : 'no ratio'}</span></div>
+    <div class="pbody">
+      <div>
+        <h3>What it costs to win one customer</h3>
+        ${side('b2b', c.b2b, c.subB2B, c.orgB2B, c.paidB2B)}
+        ${side('b2c', c.b2c, c.subB2C, c.orgB2C, c.paidB2C)}
+        <p class="caveat">${esc(v.note)}</p>
+        <p class="caveat">B2B edition published 2026-01-26; B2C edition 2025-07-03. Blended organic + paid CAC, matched by closest sub-industry.</p>
+        <p><a class="jump" href="${esc(href)}" target="_top" data-intent="${v.slug}">Read the ${esc(v.name)} section ↓</a></p>
+      </div>
+      <div>${rows.join('')}</div>
+    </div>`;
+}
+function drawerHTML() {
+  const li = SOURCES.map(s => `<li><b>${esc(s.name)}</b> — ${esc(s.when)}. ${esc(s.what)} <i>Used for:</i> ${esc(s.used)} ` +
+    s.links.map(([t, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(t)}</a>`).join(' · ') + `</li>`).join('');
+  return `<h4>Sources</h4><ul>${li}</ul>
+    <h4>Method</h4><ul>
+      <li>Level 2 ranks verticals by B2B ÷ B2C acquisition cost; its bars share one scale ($0–$1,143) because they are one metric from one method.</li>
+      <li>Every level-3 bar is the value divided by the highest of the ten verticals for that metric. Landing-page, site and paid-search figures are different funnel stages and never share an axis.</li>
+      <li>Email uses click rate, not open rate: Apple Mail Privacy Protection inflates opens and publishers disagree by up to 2×.</li>
+      <li>Left out on purpose: a “1.1% B2B SaaS” and a “&gt;10% free-trial” landing-page figure (unconfirmed aggregators), a 14.2% AI-referral conversion rate (low confidence, source paper not confirmed), and G2’s 92% (the cited page does not contain it).</li>
+    </ul>`;
+}
+function wireJump() {
+  const a = document.querySelector('#panel .jump');
+  if (!a) return;
+  a.addEventListener('click', () => {
+    try { if (window.parent && window.parent !== window) window.parent.postMessage({ type: 'viz-intent', intent: a.dataset.intent, anchor: 'vertical-' + a.dataset.intent }, '*'); } catch (e) {}
+  });
+}
+function postHeight() {
+  try { if (window.parent && window.parent !== window) window.parent.postMessage({ type: 'viz-height', height: Math.ceil(document.documentElement.scrollHeight) }, '*'); } catch (e) {}
+}
+
+/* ------------------------------------------------------ selection (live) */
+/* WCAG 2.2.2 (site standards, 2026-09-24): the intro runs longer than five seconds, so a visible
+   button stops it on the settled frame. It exists only while the intro plays. */
+function skipButton(onSkip) {
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.textContent = 'Skip animation';
+  b.style.cssText = 'position:fixed;top:10px;right:10px;z-index:20;min-height:44px;padding:10px 16px;border:1px solid #0f2440;border-radius:8px;background:#ffffff;color:#0f2440;font:600 14px/1.2 system-ui,-apple-system,"Segoe UI",sans-serif;cursor:pointer';
+  b.addEventListener('click', () => { onSkip(); b.remove(); });
+  document.body.append(b);
+  return b;
+}
+let raf = 0, skip = null;
+const dropSkip = () => { if (skip) { skip.remove(); skip = null; } };
+const stop = () => { if (raf) cancelAnimationFrame(raf); raf = 0; dropSkip(); };
+function settleAll() {
+  stop();
+  render(T.settled);
+}
+function relayout() {
+  buildL3();
+  window.VIZ.fitNotes = fitAll();
+  buildWires();
+  if (!POSTER) scaleToViewport();
+}
+const TS = { sel: [0, 0.35], lit: [0, 0.5], w3: [0.15, 0.85], gbar: [0.45, 0.85], l3: { in0: 0.55, step: 0.06, dur: 0.45, fill0: 0.65, fillDur: 0.75 }, end: 1.85 };
+function select(slug, opts) {
+  const v = BY_SLUG[slug];
+  if (!v) return false;
+  const instant = (opts && opts.instant) || REDUCED || POSTER;
+  if (slug === SELECTED && !(opts && opts.force)) return true;
+  stop();
+  const prev = SELECTED;
+  SELECTED = slug;
+  /* settle levels 1–2, then rebuild level 3 against final text */
+  render(T.settled);
+  relayout();
+  render(T.settled);
+  if (!POSTER) {
+    const panel = document.getElementById('panel');
+    panel.innerHTML = panelHTML(v); wireJump();
+    const ann = document.getElementById('announce');
+    const n = k => L3_ORDER.filter(id => statusOf(v, id) === k).length;
+    ann.textContent = `${v.name} opened. ${v.ratio ? 'B2B costs ' + fmt({ kind: 'ratio', v: v.ratio }) + ' what B2C does. ' : ''}${n('A') + n('B')} figures measured inside it, ${n('C')} with no source.`;
+    postHeight();
+  }
+  if (instant) { ROT_BASE += 30; rosetteAt(1); return true; }
+  const prevCell = L2.find(c => c.slug === prev), cur = L2.find(c => c.slug === slug);
+  const t0 = performance.now();
+  const base = ROT_BASE;
+  const step = now => {
+    const u = (now - t0) / 1000;
+    L2.forEach(c => {
+      if (c === cur) paintSel(c, easeInOut(span(u, TS.sel[0], TS.sel[1])));
+      else if (c === prevCell) paintSel(c, 1 - easeInOut(span(u, TS.sel[0], TS.sel[1])));
+      else paintSel(c, 0);
+    });
+    renderL3(u, TS, 0);
+    drawWires({ lit: { t: u, a: TS.lit[0], b: TS.lit[1] }, w3: { t: u, a: TS.w3[0], b: TS.w3[1] } }, 0);
+    ROT_BASE = base; rosetteAt(easeInOut(span(u, 0, TS.end)));
+    if (u < TS.end) raf = requestAnimationFrame(step);
+    else { raf = 0; ROT_BASE = base + 30; rosetteAt(0); }
+  };
+  raf = requestAnimationFrame(step);
+  return true;
+}
+
+/* ---------------------------------------------------------------- audit
+   Measured in the poster's own 1080-wide space: type floor, clipping, text
+   overlap, frame containment. Used by export.mjs; also handy in devtools.     */
+function audit() {
+  const poster = document.getElementById('poster');
+  const k = scaleK();
+  const P = poster.getBoundingClientRect();
+  const fail = [], under14 = [];
+  const vis = el => { const cs = getComputedStyle(el); return cs.display !== 'none' && cs.visibility !== 'hidden'; };
+  /* type sizes: every element that owns visible text */
+  let textEls = 0, minPx = 99;
+  poster.querySelectorAll('*').forEach(el => {
+    if (!vis(el)) return;
+    const own = [...el.childNodes].some(n => n.nodeType === 3 && n.textContent.trim());
+    if (!own) return;
+    textEls++;
+    const px = parseFloat(getComputedStyle(el).fontSize);
+    minPx = Math.min(minPx, px);
+    const txt = el.textContent.trim().slice(0, 40);
+    if (px < 11.95) fail.push(`type ${px}px < 12: "${txt}"`);
+    else if (px < 13.95) under14.push({ px, cls: String(el.className || el.id || el.tagName).split(' ')[0], txt });
+  });
+  /* clipping wherever overflow is actually clipped */
+  const clipAxes = el => { const cs = getComputedStyle(el); return { x: cs.overflowX !== 'visible' && el.scrollWidth > el.clientWidth + 1, y: cs.overflowY !== 'visible' && el.scrollHeight > el.clientHeight + 1 }; };
+  poster.querySelectorAll('.cell, .cell *, .gbar, #titlebar, #titletext, #legend, #foot').forEach(el => {
+    if (!vis(el)) return;
+    const a = clipAxes(el);
+    if (a.x || a.y) fail.push(`clipped ${a.x ? 'x' : ''}${a.y ? 'y' : ''}: ${el.id || el.className} "${el.textContent.trim().slice(0, 30)}"`);
+  });
+  /* containment */
+  const inside = (el, name) => {
+    const r = el.getBoundingClientRect();
+    if (r.top < P.top - 1 || r.bottom > P.bottom + 1 || r.left < P.left - 1 || r.right > P.right + 1) fail.push(`${name} outside the frame`);
+  };
+  ['foot', 'srcline', 'byline', 'band3'].forEach(id => inside(document.getElementById(id), id));
+  document.querySelectorAll('.cell').forEach(c => inside(c, c.id));
+  /* overlapping text runs, measured with a Range so overflowed text counts */
+  const runs = [];
+  poster.querySelectorAll('.kicker, .lvl, .cname, .num, .mlabel, .tag, .val, .rlabel, .line, .src, .gbar span:last-child, .stamp span, .eyebrow, #h1, #deck, .lchip span, .lhead, .lnote, #srcline, #byline').forEach(el => {
+    if (!vis(el) || getComputedStyle(el).opacity === '0') return;
+    const r = document.createRange(); r.selectNodeContents(el);
+    const b = r.getBoundingClientRect();
+    if (b.width > 1 && b.height > 1) runs.push({ b, el, txt: el.textContent.trim().slice(0, 24) });
+  });
+  for (let i = 0; i < runs.length; i++) for (let j = i + 1; j < runs.length; j++) {
+    const a = runs[i], c = runs[j];
+    if (a.el.contains(c.el) || c.el.contains(a.el)) continue;
+    const ox = Math.min(a.b.right, c.b.right) - Math.max(a.b.left, c.b.left);
+    const oy = Math.min(a.b.bottom, c.b.bottom) - Math.max(a.b.top, c.b.top);
+    if (ox > 2 * k && oy > 2 * k) fail.push(`text overlap: "${a.txt}" / "${c.txt}"`);
+  }
+  if (poster.scrollHeight > PH + 1 || poster.scrollWidth > L.W + 1) fail.push(`poster content ${poster.scrollWidth}x${poster.scrollHeight} > ${L.W}x${PH}`);
+  if (!/20\d\d/.test(document.getElementById('srcline').textContent)) fail.push('source line carries no date');
+  const fit = window.VIZ.fitNotes || [];
+  if (fit.length) fail.push(`fit gave up on: ${fit.join(', ')}`);
+  const cells = document.querySelectorAll('.cell').length;
+  if (cells !== 18) fail.push(`${cells} cells, expected 18 (1 + 10 + 7)`);
+  const once = (document.body.innerText.match(/source does not split/gi) || []).length;
+  if (once > 1) fail.push(`"the source does not split B2B/B2C" rendered ${once} times`);
+  return { size: SIZE_KEY, height: PH, vertical: SELECTED, cells, textEls, minPx, under14, fail };
+}
+
+/* ----------------------------------------------------------------- boot */
+let readyResolve;
+const ready = new Promise(r => { readyResolve = r; });
+window.VIZ = {
+  ready, duration: DUR, settled: T.settled, size: SIZE_KEY, timeline: T, beat: 0.7,
+  seek(t) { stop(); render(+t); },
+  frame(n, total) { stop(); render((n / total) * (Number(Q.get('clip')) || DUR)); },
+  framePlan, audit, fitNotes: [],
+  select(slug, opts) { return select(String(slug || '').toLowerCase(), Object.assign({ instant: true }, opts || {})); },
+  get selected() { return SELECTED; },
+  verticals: VERTICALS.map(v => v.slug),
+};
+
+function scaleToViewport() {
+  const frame = document.getElementById('frame'), poster = document.getElementById('poster');
+  let k;
+  if (POSTER) {
+    k = Math.min(window.innerWidth / L.W, window.innerHeight / L.H);
+  } else {
+    const w = document.getElementById('app').clientWidth - 28;
+    k = Math.min(1, Math.max(0.2, w / L.W));
+  }
+  poster.style.transform = `scale(${k})`;
+  frame.style.width = (L.W * k) + 'px';
+  frame.style.height = (PH * k) + 'px';
+}
+
+function playOnce() {
+  stop();
+  const t0 = performance.now();
+  const step = now => {
+    const t = (now - t0) / 1000;
+    if (t >= T.settled) { render(T.settled); raf = 0; dropSkip(); return; }
+    render(t); raf = requestAnimationFrame(step);
+  };
+  raf = requestAnimationFrame(step);
+  skip = skipButton(() => settleAll());
+}
+
+function boot() {
+  build();
+  render(T.settled);                 /* fit against final numbers, not "0" */
+  window.VIZ.fitNotes = fitAll();
+  buildWires();
+  if (!POSTER) {
+    document.getElementById('panel').innerHTML = panelHTML(BY_SLUG[SELECTED]); wireJump();
+    document.querySelector('#drawer .dbody').innerHTML = drawerHTML();
+    L2.forEach(c => {
+      c.el.addEventListener('click', () => select(c.slug));
+      c.el.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); select(c.slug); }
+      });
+    });
+    document.getElementById('drawer').addEventListener('toggle', postHeight);
+    addEventListener('resize', () => { scaleToViewport(); postHeight(); });
+  } else {
+    addEventListener('resize', scaleToViewport);
+  }
+  scaleToViewport();
+
+  if (frameParam !== null) window.VIZ.frame(Number(frameParam), Number(Q.get('frames') || 40));
+  else if (tParam !== null) render(Number(tParam));
+  else if (POSTER || REDUCED) render(T.settled);
+  else {
+    render(0);
+    const start = () => playOnce();
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); start(); } }, { threshold: 0.25 });
+      io.observe(document.getElementById('frame'));
+    } else start();
+    /* a click during the assembly settles it first */
+    document.getElementById('frame').addEventListener('pointerdown', () => { if (raf) settleAll(); }, true);
+  }
+  if (!POSTER) postHeight();
+  document.documentElement.dataset.ready = '1';
+  readyResolve(true);
+}
+
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+else boot();
+})();
+</script>
+</body>
+</html>

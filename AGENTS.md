@@ -2,7 +2,7 @@
 
 ## Start here
 
-Read `PROJECT.md`, then `handoffs/parity-design-2026-09-11.md`, then the applicable linked project records before substantive work. Use the newest explicit user instruction if it changes this record, and update the record. Do not re-discover documented facts or infer completed work from a plan.
+Read `PROJECT.md` (top entry first), then the current handoff (September 25: [handoffs/2026-09-25-one-checkout-reconciliation.md](handoffs/2026-09-25-one-checkout-reconciliation.md); update this pointer when a newer one replaces it), then the applicable linked project records before substantive work. Use the newest explicit user instruction if it changes this record, and update the record. Do not re-discover documented facts or infer completed work from a plan.
 
 ## Source of truth and workspace
 

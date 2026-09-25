@@ -1,0 +1,100 @@
+---
+/**
+ * /es/contact/ — Spanish translation of /contact/ (site standards pilot, 2026-09-24). Mirrors
+ * baseline/src/pages/contact.tsx: the same form contract (POST to the lane-3 Worker with name,
+ * email, topic, message, turnstileToken, source_url; the topic values are unchanged, only the
+ * labels are Spanish), the same Turnstile site key (data-language="es") and the mailto path
+ * without JavaScript. Status messages switch to Spanish in site/components/parity/enhance.ts.
+ * Route manifest: kind "added", lang "es", translationOf "/contact/".
+ */
+import { Mail, Linkedin, Phone, FileText } from 'lucide-react';
+import AgencyLayout from '../../../layouts/AgencyLayout.astro';
+import { site, breadcrumbJsonLd, graph } from '../../../lib/agency';
+
+const CONTACT_ENDPOINT = 'https://mitchjmiller-api.clearkayakrentalsoahu.workers.dev/contact';
+const TURNSTILE_SITEKEY = '0x4AAAAAAEwq_uUlQ6tYWRDc';
+const fieldClass = 'block w-full rounded-md border border-border bg-card px-3 py-2 text-sm text-primary shadow-sm focus:outline-none focus:ring-1 focus:ring-ring';
+const title = 'Contacto — Iniciemos una conversación';
+const description = 'Cuéntale a Mitchell Miller el problema que quieres resolver. Sin confirmación de cita ni cotización de precios: solo una respuesta.';
+const roles = ['SEO Director', 'AEO/GEO Lead', 'AI Search Strategist', 'Technical SEO/Product Manager', 'Organic Growth Lead', 'Website Growth Lead'];
+const jsonLd = [graph({ '@type': 'ContactPage', '@id': `${site.url}/es/contact/#webpage`, url: `${site.url}/es/contact/`, name: title, description, inLanguage: 'es', about: { '@id': `${site.url}/#organization` } }, breadcrumbJsonLd([{ name: 'Inicio', href: '/es/' }, { name: 'Contacto', href: '/es/contact/' }]))];
+---
+<AgencyLayout path="/es/contact/" title={title} description={description} jsonLd={jsonLd} bodyClass="ag-parity">
+  <div class="container mx-auto px-4 md:px-8 max-w-2xl py-24">
+    <h1 class="text-4xl md:text-5xl font-bold mb-3 text-primary" style="letter-spacing: -0.02em">Contacto</h1>
+    <p class="text-lg text-muted-foreground mb-12">Estados Unidos.</p>
+
+    <div class="space-y-4 mb-12">
+      <a href={`mailto:${site.email}`} class="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:shadow-md hover:border-secondary/40 transition-all group" data-testid="link-email">
+        <div class="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center flex-shrink-0"><Mail className="h-5 w-5 text-secondary" /></div>
+        <div>
+          <p class="text-xs uppercase tracking-wider font-semibold text-muted-foreground mb-0.5">Correo electrónico</p>
+          <p class="font-medium text-primary group-hover:text-secondary transition-colors">{site.email}</p>
+        </div>
+      </a>
+      <a href={site.linkedin} target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:shadow-md hover:border-secondary/40 transition-all group" data-testid="link-linkedin">
+        <div class="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center flex-shrink-0"><Linkedin className="h-5 w-5 text-secondary" /></div>
+        <div>
+          <p class="text-xs uppercase tracking-wider font-semibold text-muted-foreground mb-0.5">LinkedIn</p>
+          <p class="font-medium text-primary group-hover:text-secondary transition-colors">linkedin.com/in/mitchelljmillerjr</p>
+        </div>
+      </a>
+      <a href="tel:+16263168682" class="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:shadow-md hover:border-secondary/40 transition-all group" data-testid="link-phone">
+        <div class="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center flex-shrink-0"><Phone className="h-5 w-5 text-secondary" /></div>
+        <div>
+          <p class="text-xs uppercase tracking-wider font-semibold text-muted-foreground mb-0.5">Teléfono</p>
+          <p class="font-medium text-primary group-hover:text-secondary transition-colors">+1 (626) 316-8682</p>
+        </div>
+      </a>
+    </div>
+
+    <section aria-labelledby="contact-form-heading" class="border-t border-border pt-10 mb-12">
+      <h2 id="contact-form-heading" class="text-lg font-bold text-primary mb-2">Envía un mensaje</h2>
+      <p class="text-sm text-muted-foreground mb-6">Cuéntame qué quieres hacer posible. Los mensajes llegan a una bandeja de entrada privada; respondo desde el correo de arriba.</p>
+      <noscript>
+        <style>{'#contact-form{display:none}'}</style>
+        <p class="text-sm text-muted-foreground mb-6">El formulario necesita JavaScript. Sin él, escribe directamente a <a class="text-secondary hover:underline" href={`mailto:${site.email}`}>{site.email}</a>.</p>
+      </noscript>
+      <form id="contact-form" method="post" action={CONTACT_ENDPOINT} class="space-y-5">
+        <div>
+          <label for="contact-name" class="block text-sm font-medium text-primary mb-1.5">Nombre</label>
+          <input id="contact-name" name="name" type="text" required maxlength="120" autocomplete="name" class={fieldClass} />
+        </div>
+        <div>
+          <label for="contact-email" class="block text-sm font-medium text-primary mb-1.5">Correo electrónico</label>
+          <input id="contact-email" name="email" type="email" required maxlength="254" autocomplete="email" class={fieldClass} />
+        </div>
+        <div>
+          <label for="contact-topic" class="block text-sm font-medium text-primary mb-1.5">¿Qué quieres hacer posible?</label>
+          <select id="contact-topic" name="topic" class={fieldClass}>
+            <option value="" selected>Elige un tema (opcional)</option>
+            <option value="role">Un puesto: liderazgo en SEO, AEO/GEO o búsqueda con IA</option>
+            <option value="consulting">Asesoría o consultoría</option>
+            <option value="population-simulation">Simulación de población con mis propios datos</option>
+            <option value="speaking">Participación como conferencista</option>
+            <option value="other">Otra cosa</option>
+          </select>
+        </div>
+        <div>
+          <label for="contact-message" class="block text-sm font-medium text-primary mb-1.5">Mensaje</label>
+          <textarea id="contact-message" name="message" required maxlength="4000" rows="6" class={fieldClass}></textarea>
+        </div>
+        <div class="cf-turnstile" data-sitekey={TURNSTILE_SITEKEY} data-theme="light" data-size="flexible" data-language="es"></div>
+        <p class="text-xs text-muted-foreground">Verificación antispam de Cloudflare Turnstile. Sin cuenta, sin boletín y sin rastreo más allá de la analítica del sitio.</p>
+        <button type="submit" class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2 disabled:opacity-60">Enviar mensaje</button>
+        <p data-contact-status role="status" aria-live="polite" class="text-sm font-medium" hidden></p>
+      </form>
+      <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    </section>
+
+    <div class="border-t border-border pt-10">
+      <h2 class="text-lg font-bold text-primary mb-4">Actualmente disponible para</h2>
+      <div class="flex flex-wrap gap-2 mb-8">
+        {roles.map(role => <span lang="en" class="text-xs bg-muted border border-border rounded-full px-3 py-1.5 text-muted-foreground font-medium">{role}</span>)}
+        <span class="text-xs bg-muted border border-border rounded-full px-3 py-1.5 text-muted-foreground font-medium">Conferencias</span>
+        <span class="text-xs bg-muted border border-border rounded-full px-3 py-1.5 text-muted-foreground font-medium">Asesoría / consultoría</span>
+      </div>
+      <a href="/resume/" hreflang="en" class="inline-flex items-center gap-2 text-sm font-medium text-secondary hover:underline" data-testid="link-resume"><FileText className="h-4 w-4" />Descargar el currículum (PDF, en inglés)</a>
+    </div>
+  </div>
+</AgencyLayout>

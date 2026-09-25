@@ -14,6 +14,10 @@
  * - Every route at 390 px wide: no horizontal overflow; the toggle stays visible, 44×44.
  * - Declared /viz/ embeds: the intro (longer than five seconds) has a "Skip animation" button
  *   that stops it; reduced motion shows the settled frame with no button (WCAG 2.2.2).
+ * - Languages: the suggestion banner appears only when the browser's languages rank the page's
+ *   translation first (or that language was chosen before), never redirects, and remembers a
+ *   dismissal; the globe picker opens and closes by keyboard and remembers the language chosen;
+ *   the Spanish contact form reports in Spanish (mocked Worker).
  * - Every share card referenced by a page serves 200 image/png at 1200×630; every narration
  *   serves 200 audio/mp4, reports the recorded duration and actually plays.
  * Third-party hosts are blocked, as in scripts/qa/browser.mjs.
@@ -102,6 +106,18 @@ try {
     await context.close();
   }
 
+  // Desktop header: every item stays inside the header's content box where the full navigation
+  // shows (1281 px and up); Spanish labels run longer, so both languages are measured.
+  for (const route of ['/', '/services/', '/blog/search-results-by-intent/', '/es/', '/es/services/', '/es/contact/', '/es/blog/', '/es/blog/gbp-2026-ai-grounding/'].filter(item => routes.includes(item))) {
+    for (const width of [1281, 1360, 1500]) {
+      const { page, context } = await newPage({ width, height: 800 });
+      await page.goto(`${base}${route}`, { waitUntil: 'networkidle0', timeout: 60000 });
+      const over = await page.evaluate(() => { const inner = document.querySelector('.ag-header-inner'); const box = inner.getBoundingClientRect(); const items = [...inner.children].filter(el => getComputedStyle(el).display !== 'none'); return Math.round(Math.max(...items.map(el => el.getBoundingClientRect().right)) - box.right); });
+      record(`${route}@${width}`, 'desktop header items fit inside the header', over <= 0, `${over}px past the edge`);
+      await context.close();
+    }
+  }
+
   // 3. Theme behavior on representative templates.
   const themeRoutes = ['/', '/services/', '/blog/search-results-by-intent/', '/case-studies/apple-store-amr/', '/lab/population-workbench/'].filter(route => routes.includes(route));
   for (const route of themeRoutes) {
@@ -185,6 +201,86 @@ try {
     record(`${embed.path} motion`, 'prefers-reduced-motion: no intro, no skip button', await reduced.page.evaluate(() => ![...document.querySelectorAll('button')].some(b => b.textContent.trim() === 'Skip animation')), '');
     record(`${embed.path} motion`, 'no console or page errors', errors.length === 0 && reduced.errors.length === 0, [...errors, ...reduced.errors].slice(0, 3).join(' | '));
     await reduced.context.close();
+  }
+
+  // 5. Languages (runs when the Spanish pilot routes are in the manifest).
+  const withLanguages = async (languages, options = {}) => {
+    const run = await newPage(options);
+    await run.page.evaluateOnNewDocument(list => { Object.defineProperty(navigator, 'languages', { get: () => list }); Object.defineProperty(navigator, 'language', { get: () => list[0] }); }, languages);
+    return run;
+  };
+  const bannerState = page => page.evaluate(() => { const b = document.querySelector('[data-lang-banner]'); return { exists: Boolean(b), visible: Boolean(b && !b.hidden && b.getBoundingClientRect().height > 0), lang: b?.getAttribute('lang'), href: b?.querySelector('a')?.getAttribute('href'), text: b?.querySelector('p')?.textContent, path: location.pathname }; });
+  if (routes.includes('/es/services/') && routes.includes('/services/')) {
+    {
+      const { page, errors, context } = await withLanguages(['es-MX', 'es']);
+      await page.goto(`${base}/services/`, { waitUntil: 'networkidle0' });
+      await wait(1500);
+      const shown = await bannerState(page);
+      record('/services/ banner', 'Spanish browser: Spanish banner suggests /es/services/, and the page does not redirect', shown.visible && shown.lang === 'es' && shown.href === '/es/services/' && shown.path === '/services/' && /español/.test(shown.text || ''), JSON.stringify(shown));
+      await page.click('[data-lang-dismiss]');
+      const stored = await page.evaluate(() => ({ hidden: document.querySelector('[data-lang-banner]').hidden, lang: localStorage.getItem('mj2-lang') }));
+      await page.reload({ waitUntil: 'networkidle0' });
+      await wait(800);
+      const after = await bannerState(page);
+      record('/services/ banner', '“No, gracias” hides it and is remembered across reloads; still no redirect', stored.hidden && stored.lang === 'en' && !after.visible && after.path === '/services/', `${JSON.stringify(stored)} → ${JSON.stringify(after)}`);
+      record('/services/ banner', 'no console or page errors', errors.length === 0, errors.slice(0, 3).join(' | '));
+      await context.close();
+    }
+    for (const [languages, route, wantVisible, label] of [
+      [['en-US', 'en'], '/services/', false, 'English browser on an English page: no banner'],
+      [['en-US', 'es'], '/services/', false, 'English ranked above Spanish: no banner'],
+      [['es-MX', 'es'], '/es/services/', false, 'Spanish browser on the Spanish page: no banner'],
+      [['en-US', 'en'], '/es/services/', true, 'English browser on the Spanish page: English banner suggests /services/'],
+      [['es-MX', 'es'], '/about/', false, 'page without a translation: no banner at all'],
+    ]) {
+      const { page, context } = await withLanguages(languages);
+      await page.goto(`${base}${route}`, { waitUntil: 'networkidle0' });
+      await wait(600);
+      const state = await bannerState(page);
+      const ok = state.visible === wantVisible && state.path === route && (!wantVisible || (state.lang === 'en' && state.href === '/services/')) && (route !== '/about/' || !state.exists);
+      record(`${route} banner`, label, ok, `${languages.join(',')} → ${JSON.stringify(state)}`);
+      await context.close();
+    }
+    {
+      const { page, errors, context } = await withLanguages(['en-US', 'en']);
+      await page.goto(`${base}/services/`, { waitUntil: 'networkidle0' });
+      await page.focus('[data-lang-picker] summary');
+      await page.keyboard.press('Enter');
+      const opened = await page.evaluate(() => document.querySelector('[data-lang-picker]').open);
+      const items = await page.$$eval('[data-lang-picker] .ag-lang-menu a', links => links.map(a => ({ text: a.textContent.trim(), lang: a.getAttribute('lang'), href: a.getAttribute('href'), current: a.getAttribute('aria-current') })));
+      await page.keyboard.press('Escape');
+      const closed = await page.evaluate(() => ({ open: document.querySelector('[data-lang-picker]').open, focus: document.activeElement?.matches('[data-lang-picker] summary') }));
+      record('/services/ picker', 'globe picker opens with Enter, lists English (current) and Español in their own script, Escape closes and returns focus', opened && items.length === 2 && items[0].text === 'English' && items[0].current === 'true' && items[1].text === 'Español' && items[1].lang === 'es' && items[1].href === '/es/services/' && !closed.open && closed.focus, `${JSON.stringify(items)} ${JSON.stringify(closed)}`);
+      await page.click('[data-lang-picker] summary');
+      await Promise.all([page.waitForNavigation({ waitUntil: 'networkidle0' }), page.click('[data-lang-picker] a[lang="es"]')]);
+      const landed = await page.evaluate(() => ({ path: location.pathname, lang: document.documentElement.lang, stored: localStorage.getItem('mj2-lang') }));
+      record('/services/ picker', 'choosing Español opens /es/services/ (lang="es") and remembers the choice', landed.path === '/es/services/' && landed.lang === 'es' && landed.stored === 'es', JSON.stringify(landed));
+      await page.goto(`${base}/work/`, { waitUntil: 'networkidle0' });
+      const untranslated = await page.$eval('[data-lang-picker] a[lang="es"]', a => ({ href: a.getAttribute('href'), text: a.textContent.trim() }));
+      record('/work/ picker', 'on a page without a translation, Español leads to the Spanish home and says so', untranslated.href === '/es/' && /página de inicio/.test(untranslated.text), JSON.stringify(untranslated));
+      record('picker', 'no console or page errors', errors.length === 0, errors.slice(0, 3).join(' | '));
+      await context.close();
+    }
+  }
+  if (routes.includes('/es/contact/')) {
+    const endpoint = 'https://mitchjmiller-api.clearkayakrentalsoahu.workers.dev/contact';
+    for (const [status, body, pattern, label] of [[200, { ok: true, id: 'qa' }, /recibí tu mensaje/, '200 ok'], [400, { ok: false, error: 'validation', fields: { email: 'invalid' } }, /Revisa los campos marcados/, '400 validation']]) {
+      const { page, context } = await newPage();
+      await page.setRequestInterception(true);
+      page.removeAllListeners('request');
+      page.on('request', request => request.url() === endpoint && request.method() === 'POST' ? request.respond({ status, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: JSON.stringify(body) }) : (blocked.test(request.url()) || request.url() === endpoint ? request.abort('blockedbyclient') : request.continue()));
+      await page.goto(`${base}/es/contact/`, { waitUntil: 'networkidle0' });
+      await page.type('#contact-name', 'QA Robot');
+      await page.type('#contact-email', 'qa@example.com');
+      await page.select('#contact-topic', 'consulting');
+      await page.type('#contact-message', 'Mensaje automático de QA. No es una consulta real.');
+      await page.evaluate(() => { const input = document.createElement('input'); input.type = 'hidden'; input.name = 'turnstileToken'; input.value = 'qa-token'; document.getElementById('contact-form').append(input); });
+      await page.click('#contact-form button[type=submit]');
+      const shown = await page.waitForFunction(p => new RegExp(p).test(document.querySelector('[data-contact-status]')?.textContent || ''), { timeout: 8000 }, pattern.source).then(() => true).catch(() => false);
+      const text = await page.$eval('[data-contact-status]', el => el.textContent);
+      record('/es/contact/ form', `mocked Worker ${label}: the status message is in Spanish`, shown, text.slice(0, 100));
+      await context.close();
+    }
   }
 
   // 4. Share cards over HTTP and narration playback.

@@ -53,7 +53,7 @@ const speakCode = (code, lang) => code
 
 const lexicon = {
   en: [[/\bTL;DR\b/g, 'T L D R'], [/[~≈]\s?/g, 'about '], [/\bvs\.?(?=\s)/g, 'versus'], [/\be\.g\.,?/g, 'for example,'], [/\bi\.e\.,?/g, 'that is,'], [/\s&\s/g, ' and '], [/\s?→\s?/g, ' to '], [/\s·\s/g, ', '], [/(\d)\s?×/g, '$1 times'], [/\bmj2\.pro\b/g, 'M J 2 dot pro']],
-  es: [[/\bTL;DR\b/g, 'En resumen'], [/~\s?/g, 'unos '], [/≈\s?/g, 'aproximadamente '], [/\bvs\.?(?=\s)/g, 'frente a'], [/\bp\.\s?ej\.,?/g, 'por ejemplo,'], [/\s&\s/g, ' y '], [/\s?→\s?/g, ' a '], [/\s·\s/g, ', '], [/(\d)\s?×/g, '$1 veces'], [/\bmj2\.pro\b/g, 'M J 2 punto pro']],
+  es: [[/\bTL;DR\b/g, 'En resumen'], [/[~≈]\s?/g, 'aproximadamente '], [/\bvs\.?(?=\s)/g, 'frente a'], [/\bp\.\s?ej\.,?/g, 'por ejemplo,'], [/\s&\s/g, ' y '], [/\s?→\s?/g, ' a '], [/\s·\s/g, ', '], [/(\d)\s?×/g, '$1 veces'], [/(\d)\s?–\s?(\d)/g, '$1 a $2'], [/\bmj2\.pro\b/g, 'M J 2 punto pro']],
 };
 
 export function narrationText({ title, html, lang = 'en' }) {

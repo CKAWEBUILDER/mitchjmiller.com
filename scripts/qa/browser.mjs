@@ -37,6 +37,8 @@ const pages = [
   ['resume', '/resume/'], ['contact', '/contact/'], ['clients', '/clients/'], ['404', '/no-such-page/'],
   ['post-search-intent', '/blog/search-results-by-intent/'], ['note-pocock-ai-coding', '/blog/studying/pocock-ai-coding-workflow/'],
   ['note-fde', '/blog/studying/fde-1m-ai-job/'], ['note-pocock-agentic', '/blog/studying/pocock-agentic-workflow/'],
+  // Site standards deploy 2: the Spanish pilot.
+  ['es-home', '/es/'], ['es-services', '/es/services/'], ['es-contact', '/es/contact/'], ['es-blog', '/es/blog/'], ['es-post-gbp', '/es/blog/gbp-2026-ai-grounding/'],
 ];
 const viewports = [[1360, 900], [390, 844]];
 const results = [];
@@ -83,7 +85,8 @@ try {
       const metrics = await page.evaluate(() => ({
         scrollWidth: document.documentElement.scrollWidth, innerWidth: window.innerWidth,
         brokenImages: [...document.images].filter(img => img.getAttribute('src') && img.complete && img.naturalWidth === 0).map(img => img.getAttribute('src')),
-        placeholders: (document.body.innerText.match(/lorem ipsum|\bTODO\b|\bTBD\b|\[insert|\bFIXME\b|Did you forget to add the page/gi) || []).slice(0, 5),
+        // TODO/TBD/FIXME are uppercase developer markers; the Spanish word "todo" is content.
+        placeholders: [...(document.body.innerText.match(/lorem ipsum|\[insert|Did you forget to add the page/gi) || []), ...(document.body.innerText.match(/\bTODO\b|\bTBD\b|\bFIXME\b/g) || [])].slice(0, 5),
         h1: document.querySelectorAll('h1').length,
       }));
       record(`${name}@${width}`, 'no horizontal overflow', metrics.scrollWidth <= metrics.innerWidth, `scrollWidth ${metrics.scrollWidth} / viewport ${metrics.innerWidth}`);

@@ -70,6 +70,20 @@
       "textSha256": "e584b2186325e5e236661fbd99312d7713d7c9ebe0062ade1986ce12cc5a2b08",
       "words": 2892,
       "rendered": "2026-09-24"
+    },
+    "/es/blog/gbp-2026-ai-grounding/": {
+      "src": "/audio/es/blog/gbp-2026-ai-grounding.m4a",
+      "lang": "es",
+      "voice": "Paulina",
+      "voiceLocale": "es_MX",
+      "seconds": 556.6,
+      "minutes": 9,
+      "bytes": 3397903,
+      "bitRate": 47999,
+      "channels": 1,
+      "textSha256": "4f5f29e0fd61d8ef32c519e58668d3c3e2deb2f8bbe1e81765a9bf87f5e77691",
+      "words": 1373,
+      "rendered": "2026-09-25"
     }
   }
 }

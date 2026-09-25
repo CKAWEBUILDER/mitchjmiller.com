@@ -86,7 +86,9 @@ for (const route of manifest.routes) {
   record(scope, 'images have alt attributes', missingAlt.length === 0, `${images.length} images, ${missingAlt.length} without alt${missingAlt.length ? ': ' + missingAlt.map(i => i.src).slice(0, 3).join(', ') : ''}`);
   record(scope, 'no whole-page client shell', !/<div\b[^>]*id=["']root["'][^>]*>\s*<\/div>/i.test(body), '');
   record(scope, 'no staging/review wording', !/THEME UNDER REVIEW|NOT PRODUCTION|Design review/.test(body), '');
-  record(scope, 'agency shell (header, primary nav, green contact button, footer)', /<header class="ag-header">/.test(body) && /aria-label="Primary"/.test(body) && /class="ag-button ag-button--sm" href="\/contact\/"/.test(body) && /<footer class="ag-footer">/.test(body) || route.path === '/case-studies/sfc-surf-school/', route.path === '/case-studies/sfc-surf-school/' ? 'standalone report keeps its archived body by parity rule' : '');
+  // Spanish pilot pages (site standards deploy 2) carry the same shell with Spanish labels.
+  const es = route.path.startsWith('/es/');
+  record(scope, 'agency shell (header, primary nav, green contact button, footer)', /<header class="ag-header">/.test(body) && (es ? /aria-label="Principal"/ : /aria-label="Primary"/).test(body) && (es ? /class="ag-button ag-button--sm" href="\/es\/contact\/"/ : /class="ag-button ag-button--sm" href="\/contact\/"/).test(body) && /<footer class="ag-footer">/.test(body) || route.path === '/case-studies/sfc-surf-school/', route.path === '/case-studies/sfc-surf-school/' ? 'standalone report keeps its archived body by parity rule' : '');
   for (const tag of [...tags(body, 'a'), ...tags(body, 'img'), ...tags(body, 'source'), ...tags(html, 'link'), ...tags(html, 'script')]) {
     const a = attrs(tag);
     for (const name of ['href', 'src']) {

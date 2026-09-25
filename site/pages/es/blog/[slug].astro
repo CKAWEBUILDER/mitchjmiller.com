@@ -1,0 +1,35 @@
+---
+/**
+ * /es/blog/<slug>/ — Spanish translations of published posts (site/i18n/es-posts.ts), site
+ * standards pilot 2026-09-24. Same article markup as baseline/src/pages/blog-post.tsx, the
+ * Spanish narration near the top, Article + BreadcrumbList JSON-LD in Spanish that point back
+ * to the English original. Route manifest: kind "added", lang "es", translationOf the English post.
+ */
+import AgencyLayout from '../../../layouts/AgencyLayout.astro';
+import { NarrationPlayer } from '../../../../baseline/src/components/narration-player';
+import { esPosts } from '../../../i18n/es-posts';
+import { site, personJsonLd, breadcrumbJsonLd, graph } from '../../../lib/agency';
+
+export function getStaticPaths() {
+  return esPosts.map(post => ({ params: { slug: post.slug }, props: { post } }));
+}
+const { post } = Astro.props;
+const path = `/es/blog/${post.slug}/`;
+const publisher = { '@type': 'Organization', name: site.legalName, url: `${site.url}/` };
+const jsonLd = [graph(
+  { '@type': 'Article', headline: post.title, description: post.metaDescription, datePublished: post.datePublished, inLanguage: 'es', author: personJsonLd(), publisher, mainEntityOfPage: `${site.url}${path}`, translationOfWork: { '@id': `${site.url}/blog/${post.slug}/` } },
+  breadcrumbJsonLd([{ name: 'Inicio', href: '/es/' }, { name: 'Signals & Systems', href: '/es/blog/' }, { name: post.title, href: path }]),
+)];
+---
+<AgencyLayout path={path} title={`${post.title} | Signals & Systems`} description={post.metaDescription} type="article" jsonLd={jsonLd} bodyClass="ag-parity">
+  <article class="container mx-auto px-4 md:px-8 max-w-3xl py-24">
+    <header class="mb-12">
+      <div class="mb-4"><span class="text-sm font-bold uppercase tracking-wider text-secondary">{post.date}</span></div>
+      <h1 class="text-4xl md:text-5xl font-bold text-primary mb-6 leading-tight">{post.title}</h1>
+      <p class="text-xl text-muted-foreground leading-relaxed">{post.teaser}</p>
+      <NarrationPlayer route={path} />
+      <p class="mt-6 text-sm text-muted-foreground">Traducción del artículo original en inglés: <a class="text-secondary hover:underline" href={`/blog/${post.slug}/`} hreflang="en">léelo en inglés</a>.</p>
+    </header>
+    <div class="prose prose-lg prose-slate dark:prose-invert max-w-none" set:html={post.contentHtml} />
+  </article>
+</AgencyLayout>

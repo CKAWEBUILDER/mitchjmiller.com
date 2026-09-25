@@ -17,7 +17,7 @@ const sections: [RegExp, Record<Lang, string>][] = [
   [/^\/blog\/$/, { en: 'Writing', es: 'Artículos' }],
   [/^\/case-studies\/.+/, { en: 'Case study', es: 'Caso de estudio' }],
   [/^\/case-studies\/$/, { en: 'Case studies', es: 'Casos de estudio' }],
-  [/^\/(work|selected-builds|systems|aeo-geo|collab-ideas)\//, { en: 'Work', es: 'Trabajo' }],
+  [/^\/(work|selected-builds|systems|aeo-geo|collab-ideas)\//, { en: 'Work', es: 'Portafolio' }],
   [/^\/services\//, { en: 'Services', es: 'Servicios' }],
   [/^\/products\//, { en: 'Software & tools', es: 'Software y herramientas' }],
   [/^\/lab\//, { en: 'Lab', es: 'Laboratorio' }],

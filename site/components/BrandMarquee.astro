@@ -1,15 +1,20 @@
 ---
 import brands from '../data/brands.json';
-interface Props { heading?: string; id?: string; }
-const { heading = brands.label, id = 'brands' } = Astro.props;
+interface Props { heading?: string; id?: string; lang?: 'en' | 'es'; }
+const { id = 'brands', lang = 'en' } = Astro.props;
+// Spanish pilot strings (site standards 2026-09-24); English stays the data file's label.
+const text = lang === 'es'
+  ? { heading: 'Experiencia en', pause: 'Pausar logotipos', resume: 'Reanudar logotipos', group: 'Logotipos de marcas. Coloca el foco aquí para pausar el desplazamiento.' }
+  : { heading: brands.label, pause: 'Pause logos', resume: 'Resume logos', group: 'Brand logos. Focus here to pause scrolling.' };
+const heading = Astro.props.heading ?? text.heading;
 const list = brands.brands.filter(brand => brand.logo);
 ---
 <section class="ag-marquee" aria-labelledby={`${id}-label`} data-marquee>
   <div class="ag-wrap ag-marquee-head">
     <p class="ag-marquee-label" id={`${id}-label`}>{heading}</p>
-    <button class="ag-marquee-toggle" type="button" aria-pressed="false" aria-controls={`${id}-track`} data-marquee-toggle hidden>Pause logos</button>
+    <button class="ag-marquee-toggle" type="button" aria-pressed="false" aria-controls={`${id}-track`} data-marquee-toggle data-label-pause={text.pause} data-label-resume={text.resume} hidden>{text.pause}</button>
   </div>
-  <div class="ag-marquee-viewport" tabindex="0" role="group" aria-label="Brand logos. Focus here to pause scrolling.">
+  <div class="ag-marquee-viewport" tabindex="0" role="group" aria-label={text.group}>
     <div class="ag-marquee-track" id={`${id}-track`}>
       {[false, true].map(duplicate => (
         <ul aria-hidden={duplicate ? 'true' : undefined} data-marquee-copy={duplicate ? 'duplicate' : 'primary'}>
@@ -32,7 +37,7 @@ const list = brands.brands.filter(brand => brand.logo);
       const paused = toggle.getAttribute('aria-pressed') !== 'true';
       toggle.setAttribute('aria-pressed', String(paused));
       marquee.dataset.paused = String(paused);
-      toggle.textContent = paused ? 'Resume logos' : 'Pause logos';
+      toggle.textContent = (paused ? toggle.dataset.labelResume : toggle.dataset.labelPause) || '';
     });
   });
 </script>

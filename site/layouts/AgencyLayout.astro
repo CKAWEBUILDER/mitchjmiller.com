@@ -8,11 +8,14 @@
  * and summary_large_image Twitter set pointing at its generated M² card (the mj2:card marker
  * is consumed and removed by scripts/share-cards.mjs), and light/dark themes: the inline
  * head script applies the stored or system theme before first paint; the header button
- * (aria-pressed) overrides it and remembers the choice.
+ * (aria-pressed) overrides it and remembers the choice. Languages (site/lib/i18n.ts): <html lang>,
+ * hreflang self + translation + x-default, og:locale:alternate, localized shell strings, a globe
+ * language picker with native names (no flags) and a suggestion banner that never redirects.
  */
 import { ResumeChooser } from '../../baseline/src/components/resume-download-dialog';
-import { site, primaryNav, utilityNav, contactCta, footerColumns, isCurrent } from '../lib/agency';
-import { shareFor } from '../lib/share';
+import { site, isCurrent } from '../lib/agency';
+import { shareFor, ogLocale } from '../lib/share';
+import { alternatesFor, counterpartOf, langOf, languageNames, navFor, ui, type Lang } from '../lib/i18n';
 import { themeScript } from '../lib/theme-script.mjs';
 import '../../baseline/src/index.css';
 import '../components/parity/parity.css';
@@ -30,9 +33,21 @@ const canonical = new URL(path, site.url).href;
 const share = shareFor(path, title, { cardTitle, poster });
 const release = process.env.SITE_BUILD_MODE === 'release';
 const year = new Date().getFullYear();
+const lang = langOf(path);
+const other: Lang = lang === 'en' ? 'es' : 'en';
+const t = ui[lang];
+const nav = navFor(lang);
+const alternates = alternatesFor(path);
+const counterpart = counterpartOf(path);
+const home = lang === 'es' ? '/es/' : '/';
+// Links from a Spanish page to a page that exists only in English say so to user agents.
+const hl = (href: string) => lang === 'es' && href.startsWith('/') && langOf(href) === 'en' ? 'en' : undefined;
+const choices = (['en', 'es'] as Lang[]).map(code => code === lang
+  ? { code, href: path, current: true, note: '' }
+  : { code, href: counterpart || (code === 'es' ? '/es/' : '/'), current: false, note: counterpart ? '' : ui[code].homeOnly });
 ---
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -42,6 +57,7 @@ const year = new Date().getFullYear();
     <meta name="description" content={description} />
     <meta name="robots" content={release && !noindex ? 'index, follow' : 'noindex, nofollow, noarchive'} />
     <link rel="canonical" href={canonical} />
+    {alternates.map(item => <link rel="alternate" hreflang={item.hreflang} href={item.href} />)}
     <meta name="theme-color" content="#0f2440" />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={title} />
@@ -49,6 +65,7 @@ const year = new Date().getFullYear();
     <meta property="og:url" content={canonical} />
     <meta property="og:type" content={type} />
     <meta property="og:locale" content={share.locale} />
+    {counterpart && <meta property="og:locale:alternate" content={ogLocale[other]} />}
     <meta property="og:image" content={share.image} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -71,65 +88,81 @@ const year = new Date().getFullYear();
     <slot name="head" />
   </head>
   <body class:list={['ag-body', bodyClass]}>
-    <a class="ag-skip" href="#main-content">Skip to content</a>
+    <a class="ag-skip" href="#main-content">{t.skip}</a>
     <header class="ag-header">
       <div class="ag-wrap ag-header-inner">
-        <a class="ag-brand" href="/" aria-label="Mitchell Miller — home">
+        <a class="ag-brand" href={home} aria-label={t.brandHome}>
           <img src={site.headshot} alt="" width="40" height="40" />
-          <span><span class="ag-brand-name">{site.name}</span><span class="ag-brand-tag">{site.tagline}</span></span>
+          <span><span class="ag-brand-name">{site.name}</span><span class="ag-brand-tag">{t.tagline}</span></span>
         </a>
-        <nav class="ag-nav" aria-label="Primary">
+        <nav class="ag-nav" aria-label={t.primaryNav}>
           <ul>
-            {primaryNav.map(item => (
+            {nav.primary.map(item => (
               <li class:list={{ 'ag-has-drop': Boolean(item.children) }}>
-                <a href={item.href} aria-current={isCurrent(path, item.href) ? 'page' : undefined}>{item.label}{item.children && <span class="ag-caret" aria-hidden="true" />}</a>
-                {item.children && <ul class="ag-drop">{item.children.map(child => <li><a href={child.href}>{child.label}</a></li>)}</ul>}
+                <a href={item.href} hreflang={hl(item.href)} aria-current={isCurrent(path, item.href) ? 'page' : undefined}>{item.label}{item.children && <span class="ag-caret" aria-hidden="true" />}</a>
+                {item.children && <ul class="ag-drop">{item.children.map(child => <li><a href={child.href} hreflang={hl(child.href)}>{child.label}</a></li>)}</ul>}
               </li>
             ))}
           </ul>
         </nav>
         <div class="ag-header-tools">
+          <details class="ag-lang" data-lang-picker>
+            <summary aria-label={`${t.language}: ${languageNames[lang]}`}>
+              <svg class="ag-lang-globe" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z" /></svg>
+              <span class="ag-lang-name">{languageNames[lang]}</span>
+            </summary>
+            <ul class="ag-lang-menu">
+              {choices.map(choice => <li><a href={choice.href} hreflang={choice.code} lang={choice.code} aria-current={choice.current ? 'true' : undefined} data-lang-choice={choice.code}>{languageNames[choice.code]}{choice.note && <span class="ag-lang-note"> {choice.note}</span>}</a></li>)}
+            </ul>
+          </details>
           <button type="button" class="ag-theme-toggle" data-theme-toggle aria-pressed="false">
             <svg class="ag-theme-icon ag-theme-icon--moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.7 14.9A8.5 8.5 0 0 1 9.1 3.3a.8.8 0 0 0-1-1A10 10 0 1 0 21.7 15.9a.8.8 0 0 0-1-1Z"/></svg>
             <svg class="ag-theme-icon ag-theme-icon--sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 1.8v2.4M12 19.8v2.4M1.8 12h2.4M19.8 12h2.4M4.8 4.8l1.7 1.7M17.5 17.5l1.7 1.7M4.8 19.2l1.7-1.7M17.5 6.5l1.7-1.7"/></svg>
-            <span class="ag-sr-only">Dark theme</span>
+            <span class="ag-sr-only">{t.darkTheme}</span>
           </button>
         </div>
         <div class="ag-header-actions">
-          {utilityNav.map(link => <a class="ag-utility-link" href={link.href} data-resume-open={link.href === '/resume/' ? 'true' : undefined}>{link.label}</a>)}
-          <a class="ag-button ag-button--sm" href={contactCta.href}>{contactCta.label}</a>
+          {nav.utility.map(link => <a class="ag-utility-link" href={link.href} hreflang={hl(link.href)} data-resume-open={link.href === '/resume/' ? 'true' : undefined}>{link.label}</a>)}
+          <a class="ag-button ag-button--sm" href={nav.cta.href}>{nav.cta.label}</a>
         </div>
         <details class="ag-menu">
-          <summary aria-label="Open navigation">Menu <span aria-hidden="true">☰</span></summary>
-          <nav class="ag-menu-panel" aria-label="Mobile">
+          <summary aria-label={t.openMenu}><span class="ag-menu-word">{t.menu}</span> <span aria-hidden="true">☰</span></summary>
+          <nav class="ag-menu-panel" aria-label={t.mobileNav}>
             <ul>
-              {primaryNav.map(item => <>
-                <li><a href={item.href} aria-current={isCurrent(path, item.href) ? 'page' : undefined}>{item.label}</a></li>
-                {item.children?.filter(child => child.href !== item.href).map(child => <li class="ag-menu-sub"><a href={child.href}>{child.label}</a></li>)}
+              {nav.primary.map(item => <>
+                <li><a href={item.href} hreflang={hl(item.href)} aria-current={isCurrent(path, item.href) ? 'page' : undefined}>{item.label}</a></li>
+                {item.children?.filter(child => child.href !== item.href).map(child => <li class="ag-menu-sub"><a href={child.href} hreflang={hl(child.href)}>{child.label}</a></li>)}
               </>)}
             </ul>
-            <div class="ag-menu-utility">{utilityNav.map(link => <a class="ag-utility-link" href={link.href} data-resume-open={link.href === '/resume/' ? 'true' : undefined}>{link.label}</a>)}</div>
-            <a class="ag-button" href={contactCta.href}>{contactCta.label}</a>
+            <div class="ag-menu-utility">{nav.utility.map(link => <a class="ag-utility-link" href={link.href} hreflang={hl(link.href)} data-resume-open={link.href === '/resume/' ? 'true' : undefined}>{link.label}</a>)}</div>
+            <a class="ag-button" href={nav.cta.href}>{nav.cta.label}</a>
           </nav>
         </details>
       </div>
     </header>
+    {counterpart && <aside class="ag-lang-banner" aria-label={ui[other].banner.region} lang={other} data-lang-banner data-suggest-lang={other} hidden>
+      <div class="ag-wrap ag-lang-banner-inner">
+        <p>{ui[other].banner.text}</p>
+        <a class="ag-button ag-button--sm" href={counterpart} hreflang={other} data-lang-choice={other}>{ui[other].banner.go}</a>
+        <button type="button" class="ag-lang-dismiss" data-lang-dismiss>{ui[other].banner.dismiss}</button>
+      </div>
+    </aside>}
     <main id="main-content"><slot /></main>
-    <ResumeChooser />
+    {lang === 'en' ? <ResumeChooser /> : <div lang="en"><ResumeChooser /></div>}
     <footer class="ag-footer">
       <div class="ag-wrap ag-footer-main">
         <div>
-          <a class="ag-footer-brand" href="/">{site.name}</a>
-          <p class="ag-footer-blurb">Digital strategy, websites, software and analytics for growing businesses. Work directly with Mitchell Miller.</p>
+          <a class="ag-footer-brand" href={home}>{site.name}</a>
+          <p class="ag-footer-blurb">{t.footerBlurb}</p>
           <ul class="ag-footer-contact">
             <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
             <li><a href={site.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-            <li>United States</li>
+            <li>{t.country}</li>
           </ul>
         </div>
-        {footerColumns.map(column => <div><h2>{column.heading}</h2><ul>{column.links.map(link => <li><a href={link.href}>{link.label}</a></li>)}</ul></div>)}
+        {nav.footer.map(column => <div><h2>{column.heading}</h2><ul>{column.links.map(link => <li><a href={link.href} hreflang={hl(link.href)}>{link.label}</a></li>)}</ul></div>)}
       </div>
-      <div class="ag-wrap ag-footer-bottom"><span>© {year} Mitchell Miller. Case studies describe work delivered in the roles and periods stated on each page.</span><span><a href="/resume/">Resumes</a> · <a href="/clients/">Client sign-in</a> · <a href="/contact/">Contact</a></span></div>
+      <div class="ag-wrap ag-footer-bottom"><span>© {year} Mitchell Miller. {t.footerNote}</span><span>{t.footerLinks.map((link, index) => <>{index > 0 && ' · '}<a href={link.href} hreflang={hl(link.href)}>{link.label}</a></>)}</span></div>
     </footer>
     <script>import '../components/parity/enhance';</script>
   </body>

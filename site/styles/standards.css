@@ -158,3 +158,38 @@
 .mj-narration audio { display: block; width: 100%; min-height: 44px; }
 .mj-narration-note { margin: 10px 0 0; font-size: .85rem; line-height: 1.5; color: var(--ag-muted); }
 .mj-narration-note a { color: inherit; }
+
+/* Language picker (docs/site-standards.md "Languages"): a globe button whose menu lists the
+   language names in their own script, no flags. The button's accessible name says the current
+   language ("Language: English", "Idioma: Español"); the visible name is kept out of the header
+   row so the full navigation still fits at 1296 px and up. */
+.ag-lang { position: relative; flex: none; }
+.ag-lang summary { list-style: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-width: 44px; min-height: 44px; padding: 0 12px; border: 1px solid var(--ag-line); border-radius: var(--ag-radius); color: var(--ag-heading); font-size: .9rem; font-weight: 600; cursor: pointer; }
+.ag-lang summary::-webkit-details-marker { display: none; }
+.ag-lang summary:hover { background: var(--ag-tint); }
+.ag-lang-globe { display: block; flex: none; }
+.ag-lang-menu { position: absolute; right: 0; top: calc(100% + 6px); z-index: 60; min-width: 200px; margin: 0; padding: 6px; list-style: none; background: var(--ag-surface); border: 1px solid var(--ag-line); border-radius: 6px; box-shadow: 0 16px 40px rgba(15,36,64,.14); }
+.ag-lang-menu a { display: flex; align-items: center; gap: 6px; min-height: 44px; padding: 8px 12px; color: var(--ag-text); text-decoration: none; border-radius: var(--ag-radius); font-size: .95rem; }
+.ag-lang-menu a:hover { background: var(--ag-tint); color: var(--ag-heading); }
+.ag-lang-menu a[aria-current] { font-weight: 700; color: var(--ag-heading); }
+.ag-lang-note { color: var(--ag-muted); font-size: .8rem; font-weight: 400; }
+.ag-lang summary { width: 44px; padding: 0; }
+.ag-lang-name { position: absolute !important; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (max-width: 420px) {
+  .ag-menu summary { min-width: 44px; justify-content: center; }
+  .ag-menu-word { position: absolute !important; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
+
+/* Suggest, never redirect: shown only by the script when the visitor's languages rank this
+   page's translation first; the choice is remembered. */
+.ag-lang-banner { background: var(--ag-green-soft); border-bottom: 1px solid var(--ag-line); color: var(--ag-heading); }
+.ag-lang-banner-inner { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; padding-block: 10px; }
+.ag-lang-banner p { margin: 0; flex: 1 1 240px; font-weight: 600; }
+.ag-lang-dismiss { min-height: 44px; padding: 8px 14px; border: 1px solid var(--ag-border-strong); border-radius: var(--ag-radius); background: transparent; color: var(--ag-heading); font: inherit; font-size: .9rem; font-weight: 600; cursor: pointer; }
+.ag-lang-dismiss:hover { background: var(--ag-surface); }
+
+/* Spanish labels run longer: on /es/ pages the desktop header keeps the full navigation and the
+   contact button by leaving its two utility links (Currículums, Clientes: English-only pages) to
+   the footer and the mobile menu, and nav labels stay on one line. */
+:root[lang="es"] .ag-header-actions .ag-utility-link { display: none; }
+:root[lang="es"] .ag-nav > ul > li > a { white-space: nowrap; padding-inline: 8px; }

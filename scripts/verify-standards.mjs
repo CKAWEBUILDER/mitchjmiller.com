@@ -10,7 +10,13 @@
  *    below WCAG AA (4.5:1);
  *  - narration: a published post (English archive + src/lib, and Spanish translations) without
  *    its audio file, player ("Listen to this article (N min)", controls, preload="none") and
- *    current record in site/data/narration.json (text hash equal to the post's text today).
+ *    current record in site/data/narration.json (text hash equal to the post's text today);
+ *  - languages: <html lang> not matching the path, a canonical page without its hreflang set
+ *    (self = canonical, the translation when one exists, x-default → English) or with a target
+ *    that is not built or does not link back, og:locale:alternate out of step with the
+ *    translations, sitemap alternates different from the page's, a shell page without the globe
+ *    picker (native names, no flags), a suggestion banner where no translation exists (or none
+ *    where one does), or any location change in the language script (suggest, never redirect).
  *
  *   node scripts/verify-standards.mjs           (env PARITY_DIST, STANDARDS_REPORT_PATH)
  */
@@ -172,9 +178,64 @@ for (const [lang, list] of Object.entries(posts)) {
 }
 for (const route of Object.keys(narration.items)) if (!expectedRoutes.has(route)) fail(`${route} (narration)`, 'record for a route that is not a published post');
 
+// 4. Languages: hreflang, <html lang>, og:locale:alternate, sitemap alternates, picker, banner.
+const manifestJson = JSON.parse(readFileSync(join(root, 'docs/implementation-2026-09-11/route-manifest.json'), 'utf8'));
+const spanishOf = new Map(manifestJson.routes.filter(route => route.lang === 'es' && route.translationOf).map(route => [route.translationOf, route.path]));
+const englishOf = new Map([...spanishOf].map(([en, es]) => [es, en]));
+const expectedSet = route => { const en = englishOf.get(route) || route; const es = spanishOf.get(en); return [['en', en], ...(es ? [['es', es]] : []), ['x-default', en]].map(([lang, path]) => `${lang}=${origin}${path}`).sort(); };
+const hreflangOf = html => [...headOf(html).matchAll(/<link\b[^>]*rel="alternate"[^>]*>/gi)].map(match => ({ lang: attr(match[0], 'hreflang'), href: attr(match[0], 'href') })).filter(link => link.lang);
+const pageSets = new Map();
+for (const file of htmlFiles) {
+  const route = routeOf(file);
+  const html = readFileSync(file, 'utf8');
+  const isEmbed = (manifestJson.embeds || []).some(embed => embed.path === route);
+  const lang = html.match(/<html\b[^>]*\blang="([^"]+)"/i)?.[1];
+  const wantLang = route.startsWith('/es/') ? 'es' : 'en';
+  if (lang !== wantLang) fail(route, `<html lang="${lang}"> should be "${wantLang}"`);
+  if (route === '/404.html' || isEmbed) continue; // not canonical pages: no hreflang
+  const canonical = [...headOf(html).matchAll(/<link\b[^>]*rel="canonical"[^>]*>/gi)].map(match => attr(match[0], 'href'))[0];
+  if (canonical !== `${origin}${route}`) continue; // hreflang belongs on canonical URLs only
+  const links = hreflangOf(html);
+  const got = links.map(link => `${link.lang}=${link.href}`).sort();
+  const want = expectedSet(route);
+  pageSets.set(route, got);
+  if (JSON.stringify(got) !== JSON.stringify(want)) { fail(route, `hreflang set ${got.join(' ')} ≠ ${want.join(' ')}`); continue; }
+  for (const link of links) {
+    const target = join(dist, new URL(link.href).pathname, 'index.html');
+    if (!existsSync(target)) { fail(route, `hreflang ${link.lang} points to a page that is not built: ${link.href}`); continue; }
+    const back = hreflangOf(readFileSync(target, 'utf8')).some(item => item.href === `${origin}${route}`);
+    if (!back) fail(route, `hreflang ${link.lang} → ${link.href} does not link back`);
+  }
+  const counterpart = spanishOf.get(route) || englishOf.get(route);
+  const alternate = shareMeta(html)['og:locale:alternate'] || [];
+  if (counterpart ? alternate.length !== 1 || alternate[0] !== (wantLang === 'es' ? 'en_US' : 'es_MX') : alternate.length) fail(route, `og:locale:alternate ${alternate.join(',') || 'none'} out of step with the translations`);
+  const banner = html.match(/<aside class="ag-lang-banner"[^>]*>/)?.[0];
+  if (counterpart && (!banner || !/\shidden(\s|>|=)/.test(banner) || !banner.includes(`data-suggest-lang="${wantLang === 'es' ? 'en' : 'es'}"`))) fail(route, 'translation exists but the hidden suggestion banner is missing or wrong');
+  if (!counterpart && banner) fail(route, 'suggestion banner on a page without a translation');
+  if (/<header class="ag-header">/.test(html)) {
+    const picker = html.match(/<details class="ag-lang"[\s\S]*?<\/details>/)?.[0] || '';
+    if (!/class="ag-lang-globe"/.test(picker)) fail(route, 'language picker without the globe icon');
+    for (const [code, name] of [['en', 'English'], ['es', 'Español']]) if (!new RegExp(`hreflang="${code}" lang="${code}"[^>]*>${name}`).test(picker)) fail(route, `language picker lacks "${name}" in its own script`);
+    if (/[\u{1F1E6}-\u{1F1FF}]|flag/iu.test(picker)) fail(route, 'language picker shows a flag');
+    tick('languagePickers');
+  }
+  tick(`hreflang_${wantLang}`);
+}
+const sitemapXml = existsSync(join(dist, 'sitemap.xml')) ? readFileSync(join(dist, 'sitemap.xml'), 'utf8') : '';
+if (!/xmlns:xhtml="http:\/\/www\.w3\.org\/1999\/xhtml"/.test(sitemapXml)) fail('sitemap', 'xhtml namespace for hreflang alternates missing');
+for (const [, entry] of sitemapXml.matchAll(/<url>([\s\S]*?)<\/url>/g)) {
+  const loc = entry.match(/<loc>([^<]+)<\/loc>/)[1];
+  const route = new URL(loc).pathname;
+  const got = [...entry.matchAll(/<xhtml:link rel="alternate" hreflang="([^"]+)" href="([^"]+)"\/>/g)].map(match => `${match[1]}=${match[2]}`).sort();
+  if (JSON.stringify(got) !== JSON.stringify(pageSets.get(route) || expectedSet(route))) fail('sitemap', `${route} alternates ${got.join(' ')} differ from the page`);
+  else tick('sitemapAlternates');
+}
+const languageScript = readFileSync(join(root, 'site/components/parity/enhance.ts'), 'utf8');
+if (/location\.(assign|replace)\s*\(|location(\.href)?\s*=[^=]|window\.location\s*=[^=]/.test(languageScript)) fail('enhance.ts', 'a script changes location: the language banner must suggest, never redirect');
+
 const report = { passed: failures.length === 0, checks, darkPairs, failures };
 if (process.env.STANDARDS_REPORT_PATH) writeFileSync(resolve(root, process.env.STANDARDS_REPORT_PATH), `${JSON.stringify(report, null, 2)}\n`);
 const narrated = Object.keys(checks).filter(key => key.startsWith('narrated_')).map(key => `${checks[key]} ${key.slice(9)}`).join(' + ') || '0';
-console.log(`Standards verification ${report.passed ? 'passed' : 'FAILED'}: share tags + 1200×630 card on ${checks.shareCardsOk || 0}/${checks.shareDocuments || 0} documents (${checks.headshotShareImages || 0} headshot references), theme script + toggle on ${checks.themedDocuments || 0} shell documents, dark blocks identical ${checks.darkTokenBlocksIdentical ? 'yes' : 'NO'}, ${darkPairs.length} dark text pairs ≥ 4.5:1 (min ${Math.min(...darkPairs.map(pair => pair.ratio))}), narrated posts ${narrated}.`);
+console.log(`Standards verification ${report.passed ? 'passed' : 'FAILED'}: share tags + 1200×630 card on ${checks.shareCardsOk || 0}/${checks.shareDocuments || 0} documents (${checks.headshotShareImages || 0} headshot references), theme script + toggle on ${checks.themedDocuments || 0} shell documents, dark blocks identical ${checks.darkTokenBlocksIdentical ? 'yes' : 'NO'}, ${darkPairs.length} dark text pairs ≥ 4.5:1 (min ${Math.min(...darkPairs.map(pair => pair.ratio))}), narrated posts ${narrated}; hreflang on ${checks.hreflang_en || 0} en + ${checks.hreflang_es || 0} es pages, ${checks.sitemapAlternates || 0} sitemap entries match, ${checks.languagePickers || 0} pickers.`);
 if (failures.length) console.error(failures.map(value => `  - ${value}`).join('\n'));
 process.exitCode = report.passed ? 0 : 1;

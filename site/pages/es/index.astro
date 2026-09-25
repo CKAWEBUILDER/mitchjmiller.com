@@ -1,0 +1,154 @@
+---
+/**
+ * /es/ — Spanish translation of the home page (site standards pilot, 2026-09-24). Mirrors
+ * site/pages/index.astro section by section; the figures come from the same approved
+ * case-study data and are unchanged. Links to pages that exist only in English say so.
+ * Route manifest: kind "added", lang "es", translationOf "/" (translation review record there).
+ */
+import AgencyLayout from '../../layouts/AgencyLayout.astro';
+import BrandMarquee from '../../components/BrandMarquee.astro';
+import ServiceIcon from '../../components/ServiceIcon.astro';
+import ProductGrid from '../../components/ProductGrid.astro';
+import { caseStudies, portfolioImages, headshot, studyEditorial, sfcEvidenceImages } from '../../lib/content';
+import { publishedBlogPosts } from '../../../baseline/src/lib/published';
+import { esPosts } from '../../i18n/es-posts';
+import { site, organizationJsonLd, personJsonLd, graph } from '../../lib/agency';
+import { esDate } from '../../lib/i18n';
+
+const title = 'Mitchell Miller — Crecimiento digital, software y consultoría';
+const description = 'Investigación, estrategia digital, diseño de experiencia e ingeniería. Trabaja con Mitchell Miller para convertir preguntas complejas en crecimiento práctico.';
+const hero = sfcEvidenceImages[0];
+
+const stages = [
+  { id: 'understand', name: 'Comprender', line: 'Encuentra la oportunidad.', icon: 'research' },
+  { id: 'design', name: 'Diseñar', line: 'Aclara el siguiente paso.', icon: 'design' },
+  { id: 'build', name: 'Construir', line: 'Conecta las piezas.', icon: 'engineering' },
+  { id: 'grow', name: 'Crecer', line: 'Aprende. Ajusta. Crece.', icon: 'growth' },
+];
+const objectives = [
+  { title: 'Encuentra la oportunidad.', body: 'La investigación convierte las señales del mercado en una dirección que vale la pena seguir.', href: '/es/services/#understand', icon: 'research', keyword: 'Investigación' },
+  { title: 'Haz que se sienta simple.', body: 'El diseño de experiencia conecta lo que las personas necesitan con lo que tú haces posible.', href: '/es/services/#design', icon: 'design', keyword: 'Diseño de experiencia' },
+  { title: 'Amplía lo que es posible.', body: 'La ingeniería da vida a ideas útiles, con margen para evolucionar.', href: '/es/services/#build', icon: 'engineering', keyword: 'Ingeniería' },
+  { title: 'Descubre qué funciona.', body: 'La medición hace que la siguiente decisión sea más clara que la anterior.', href: '/es/services/#grow', icon: 'measurement', keyword: 'Medición' },
+];
+const services = [
+  { title: 'Investigación y análisis', body: 'La investigación revela la demanda, la competencia y las preguntas que tus datos pueden responder.', href: '/es/services/#understand', icon: 'research', keyword: 'Investigación' },
+  { title: 'Estrategia digital', body: 'La estrategia digital conecta las prioridades inmediatas con una posición más sólida a largo plazo.', href: '/es/services/#understand', icon: 'strategy', keyword: 'Estrategia digital' },
+  { title: 'Diseño de experiencia', body: 'El diseño de experiencia les da un propósito claro al contenido, a las interfaces y a los recorridos del cliente.', href: '/es/services/#design', icon: 'design', keyword: 'Diseño de experiencia' },
+  { title: 'Ingeniería', body: 'La ingeniería conecta sitios web, aplicaciones, bases de datos y sistemas de contenido hechos para durar.', href: '/es/services/#build', icon: 'engineering', keyword: 'Ingeniería' },
+  { title: 'Búsqueda y crecimiento', body: 'El SEO acerca la demanda relevante. El AEO y las pruebas de conversión ayudan a convertir la atención en oportunidades.', href: '/es/services/#grow', icon: 'growth', keyword: 'SEO' },
+  { title: 'Flujos de trabajo con IA', body: 'Los flujos de trabajo con IA suman automatización útil al trabajo, con criterio humano donde importa.', href: '/es/services/#build', icon: 'automation', keyword: 'Flujos de trabajo con IA' },
+];
+const industries = [
+  { name: 'Salud', body: 'Experiencias de salud que ayudan a las personas a encontrar la atención adecuada.', links: [{ label: 'Motor de conversión de ubicaciones', href: '/case-studies/commonspirit-locations-conversion-engine/' }, { label: 'Stanford MyHealth', href: '/case-studies/stanford-myhealth-seo/' }, { label: 'Arquitectura en AEM', href: '/case-studies/aem-content-fragmentation-architecture/' }] },
+  { name: 'Comercio global y tecnología', body: 'Programas de comercio que conectan el alcance global con la intención local.', links: [{ label: 'Búsqueda estacional de Apple', href: '/case-studies/apple-seasonal-search/' }, { label: 'Apple Store AMR', href: '/case-studies/apple-store-amr/' }, { label: 'Apple Education Store', href: '/case-studies/apple-education-store/' }] },
+  { name: 'IA y software', body: 'Software que hace más útiles la investigación, los reportes y las decisiones.', links: [{ label: 'ClarityPulse', href: '/case-studies/claritypulse-ai-reporting/' }, { label: 'Infraestructura de visibilidad AEO', href: '/case-studies/aeo-visibility-infrastructure/' }, { label: 'SearchForge', href: '/case-studies/searchforge-content-intelligence/' }] },
+  { name: 'Viajes, recreación y servicios locales', body: 'Descubrimiento local que lleva a experiencias reales.', links: [{ label: 'SFC Surf School', href: '/case-studies/sfc-surf-school/' }] },
+  { name: 'Organizaciones sin fines de lucro', body: 'Difusión para organizaciones sin fines de lucro que convierte la visibilidad en participación.', links: [{ label: 'Sistema de crecimiento de Vet Advocates', href: '/case-studies/vet-advocates-growth-system/' }] },
+];
+// Spanish editorial for the four selected cases; values and figures are the English data's.
+const cards: Record<string, { client?: string; category: string; headline: string; summary: string; label: string; note: string; alt: string; caption: string }> = {
+  'commonspirit-locations-conversion-engine': { category: 'Búsqueda empresarial', headline: 'Mil ubicaciones. Un sistema para la siguiente acción del paciente.', summary: 'Un camino más claro desde encontrar atención médica hasta actuar.', label: 'Páginas de ubicaciones', note: 'En nueve áreas de servicio y más de 20 mercados regionales', alt: 'Página de inicio archivada de Dignity Health con la navegación regional de ubicaciones en 2018', caption: 'Navegación archivada de Dignity Health de 2018, con puntos de entrada separados por área de servicio antes de que madurara la capa de ubicaciones y entidades.' },
+  'apple-seasonal-search': { category: 'Búsqueda empresarial', headline: 'Hacer de la búsqueda estacional un programa que toda la organización pueda ejecutar.', summary: 'Planeación de búsqueda para los momentos que les importan a los clientes.', label: 'Mercados de América', note: 'EE. UU., Canadá, México y Brasil', alt: 'Página de Apple Newsroom sobre la temporada navideña con la cobertura de la guía de regalos de temporada', caption: 'Página pública de temporada de Apple, usada como contexto representativo de evidencia.' },
+  'sfc-surf-school': { category: 'Sistemas de crecimiento', headline: 'Hacer del conocimiento local una razón para elegir el negocio.', summary: 'Conocimiento local, experiencias útiles y un camino hacia el agua.', label: 'Clics de búsqueda en Google', note: 'De 5 a 54 en periodos consecutivos de 28 días', alt: 'Explorador interactivo de rompientes de surf de la costa sur (South Shore) de SFC Surf School', caption: 'Revisión de la versión de producción, 10 de septiembre de 2026.' },
+  'claritypulse-ai-reporting': { client: 'Clarity AI · proyecto interno', category: 'IA y medición', headline: 'Darle a la narrativa una fuente rastreable.', summary: 'Un prototipo interno de reportes que mantiene la evidencia cerca de la respuesta.', label: 'Flujo de trabajo de reportes', note: 'Fuentes de GA4, GSC, anuncios y SEO', alt: 'Maqueta representativa del dashboard de reportes con IA de ClarityPulse', caption: 'Maqueta representativa del producto; no son datos de clientes.' },
+};
+const metricValue: Record<string, string> = { 'claritypulse-ai-reporting': 'Datos → brief' };
+const selected = [
+  { slug: 'commonspirit-locations-conversion-engine', image: portfolioImages['commonspirit-locations-conversion-engine'] },
+  { slug: 'apple-seasonal-search', image: portfolioImages['apple-seasonal-search'] },
+  { slug: 'sfc-surf-school', image: { src: hero.src } },
+  { slug: 'claritypulse-ai-reporting', image: portfolioImages['claritypulse-ai-reporting'] },
+].map(item => ({ ...item, entry: caseStudies.find(study => study.slug === item.slug)!, story: studyEditorial[item.slug], es: cards[item.slug] }));
+// Writing: the Spanish posts first, then the newest English posts (marked as English).
+const translated = new Set(esPosts.map(post => post.slug));
+const posts = [
+  ...esPosts.map(post => ({ href: `/es/blog/${post.slug}/`, title: post.title, date: post.date, lang: undefined as string | undefined })),
+  ...publishedBlogPosts.filter(post => !translated.has(post.slug)).map(post => ({ href: `/blog/${post.slug}/`, title: post.title, date: esDate(post.date), lang: 'en' })),
+].slice(0, 3);
+const jsonLd = [graph(organizationJsonLd(), personJsonLd(), { '@type': 'WebPage', '@id': `${site.url}/es/#webpage`, url: `${site.url}/es/`, name: title, description, inLanguage: 'es', isPartOf: { '@id': `${site.url}/#website` }, about: { '@id': `${site.url}/#organization` } })];
+---
+<AgencyLayout path="/es/" title={title} description={description} jsonLd={jsonLd} bodyClass="ag-home">
+  <section class="ag-hero ag-dark" aria-labelledby="home-heading">
+    <div class="ag-wrap ag-hero-grid">
+      <div class="ag-hero-copy">
+        <p class="ag-eyebrow">Investigación · Estrategia · Diseño · Ingeniería</p>
+        <h1 id="home-heading">Haz que el próximo<br />paso cuente.</h1>
+        <p class="ag-hero-deck">Convierte preguntas complejas en una dirección clara, experiencias útiles y sistemas hechos para crecer.</p>
+        <div class="ag-hero-actions"><a class="ag-button" href="/es/contact/">Iniciar una conversación</a></div>
+      </div>
+    </div>
+  </section>
+
+  <BrandMarquee id="home-brands" lang="es" />
+
+  <section class="ag-lifecycle" aria-label="Cómo encaja el trabajo">
+    <div class="ag-wrap">
+      <p class="ag-lifecycle-label">De la estrategia a la entrega</p>
+      <ol>{stages.map(stage => <li><a href={`/es/services/#${stage.id}`}><ServiceIcon name={stage.icon} label={stage.name} decorative /><strong>{stage.name}</strong><span>{stage.line}</span></a></li>)}</ol>
+    </div>
+  </section>
+
+  <section class="ag-section" aria-labelledby="objectives-heading">
+    <div class="ag-wrap">
+      <div class="ag-section-head"><div><p class="ag-eyebrow">Objetivos</p><h2 id="objectives-heading">¿Qué podría venir después?</h2><p>Una pregunta más precisa puede abrir un camino distinto.</p></div><a class="ag-textlink" href="/es/services/">Todos los servicios <span aria-hidden="true">→</span></a></div>
+      <div class="ag-grid-4">{objectives.map(item => <a class="ag-tile" href={item.href}><ServiceIcon name={item.icon} label={item.keyword} /><h3>{item.title}</h3><p>{item.body}</p><span class="ag-textlink">Cómo ayudamos <span aria-hidden="true">→</span></span></a>)}</div>
+    </div>
+  </section>
+
+  <section class="ag-section ag-section--tint" aria-labelledby="services-heading">
+    <div class="ag-wrap">
+      <div class="ag-section-head"><div><p class="ag-eyebrow">Servicios</p><h2 id="services-heading">Pensamiento claro. Trabajo útil.</h2><p>Un solo reto o todo el recorrido. Reúne las disciplinas adecuadas.</p></div><a class="ag-textlink" href="/es/services/">Detalles de los servicios <span aria-hidden="true">→</span></a></div>
+      <div class="ag-grid-3">{services.map(item => <a class="ag-tile" href={item.href}><ServiceIcon name={item.icon} label={item.keyword} /><h3>{item.title}</h3><p>{item.body}</p><span class="ag-textlink">Leer más <span aria-hidden="true">→</span></span></a>)}</div>
+    </div>
+  </section>
+
+  <section class="ag-section ag-products-section" aria-labelledby="products-heading"><div class="ag-wrap"><div class="ag-section-head"><div><p class="ag-eyebrow">Software y herramientas</p><h2 id="products-heading">Pon mejores herramientas a trabajar.</h2><p>Explora una herramienta en funcionamiento. Sigue una idea mientras toma forma. Las páginas de los productos están en inglés.</p></div><a class="ag-textlink" href="/products/" hreflang="en">Todos los productos <span aria-hidden="true">→</span></a></div><ProductGrid featured lang="es" /></div></section>
+
+  <section class="ag-section" aria-labelledby="industries-heading">
+    <div class="ag-wrap">
+      <div class="ag-section-head"><div><p class="ag-eyebrow">Industrias</p><h2 id="industries-heading">Mundos distintos. Pensamiento conectado.</h2><p>De los sistemas globales al negocio de al lado. Los casos de estudio están en inglés.</p></div></div>
+      <div class="ag-grid-3">{industries.map(item => <div class="ag-tile ag-industry"><h3>{item.name}</h3><p>{item.body}</p><p>{item.links.map((link, index) => <>{index > 0 && ' · '}<a href={link.href} hreflang="en">{link.label}</a></>)}</p></div>)}</div>
+    </div>
+  </section>
+
+  <section class="ag-section ag-section--tint" aria-labelledby="work-heading">
+    <div class="ag-wrap">
+      <div class="ag-section-head"><div><p class="ag-eyebrow">Trabajo seleccionado</p><h2 id="work-heading">El trabajo lo hace tangible.</h2><p>Una mirada más de cerca a las preguntas, las decisiones y los resultados. Los casos de estudio están en inglés.</p></div><a class="ag-textlink" href="/work/" hreflang="en">Todos los casos de estudio <span aria-hidden="true">→</span></a></div>
+      <div class="ag-grid-2">{selected.map(({ slug, entry, story, image, es }) => <article class="ag-work-card">
+        <figure><a class="ag-work-image" href={`/case-studies/${slug}/`} hreflang="en" aria-label={`Leer el caso: ${entry.title}`}><img src={image.src} alt={es.alt} loading="lazy" width="1400" height="900" class:list={{ contain: (image as { fit?: string }).fit === 'contain' }} /></a><figcaption>{es.caption}</figcaption></figure>
+        <div class="ag-work-body"><p class="ag-eyebrow">{es.client ?? story.client} · {es.category}</p><h3><a href={`/case-studies/${slug}/`} hreflang="en">{es.headline}</a></h3><p>{es.summary}</p>
+          <div class="ag-work-foot"><span><strong>{metricValue[slug] || story.metrics[0].value}</strong><small>{es.label} · {es.note}</small></span><a class="ag-textlink" href={`/case-studies/${slug}/`} hreflang="en">Leer el caso (en inglés) <span aria-hidden="true">→</span></a></div>
+        </div>
+      </article>)}</div>
+    </div>
+  </section>
+
+  <section class="ag-section" aria-labelledby="lab-heading">
+    <div class="ag-wrap ag-split">
+      <div><p class="ag-eyebrow">Laboratorio</p><h2 id="lab-heading">Sigue tu curiosidad.</h2><p>El laboratorio de aprendizaje convierte los datos en algo que puedes explorar. Cambia un supuesto. Compara un escenario. Mira qué cambia. Las herramientas están en inglés.</p><a class="ag-button" href="/lab/" hreflang="en">Explorar el laboratorio de aprendizaje</a></div>
+      <div class="ag-panel"><h3>También en el laboratorio</h3><ul><li><a href="/lab/#intent" hreflang="en">Explorador de intención de destino</a>: lo que te dice una búsqueda que incluye el destino.</li><li><a href="/lab/#evidence" hreflang="en">La historia detrás de una cifra de crecimiento</a>: cómo la línea base cambia la interpretación.</li><li><a href="/lab/#architecture" hreflang="en">Un campo, experiencias conectadas</a>: reutilización y ajustes locales en sistemas de contenido.</li><li><a href="/lab/population-workbench/methodology/" hreflang="en">Metodología y limitaciones de Population Workbench</a></li></ul></div>
+    </div>
+  </section>
+
+  <section class="ag-section ag-section--tint" aria-labelledby="writing-heading">
+    <div class="ag-wrap ag-split">
+      <div><p class="ag-eyebrow">Artículos</p><h2 id="writing-heading">Signals &amp; Systems.</h2><p>Ideas sobre búsqueda, tecnología y las decisiones entre ambas.</p><a class="ag-textlink" href="/es/blog/">Explorar los artículos <span aria-hidden="true">→</span></a></div>
+      <ul class="ag-posts">{posts.map(post => <li><span class="ag-post-date">{post.date}{post.lang && ' · en inglés'}</span><h3><a href={post.href} hreflang={post.lang} lang={post.lang}>{post.title}</a></h3></li>)}</ul>
+    </div>
+  </section>
+
+  <section class="ag-section" aria-labelledby="principal-heading">
+    <div class="ag-wrap ag-split">
+      <div><p class="ag-eyebrow">Acerca de</p><h2 id="principal-heading">Un socio para pensar. Un creador que pone manos a la obra.</h2><p>Trabaja directamente con Mitchell Miller, desde la primera pregunta hasta los detalles que hacen que funcione.</p><a class="ag-textlink" href="/about/" hreflang="en">Acerca de Mitchell (en inglés) <span aria-hidden="true">→</span></a></div>
+      <div class="ag-principal"><img src={headshot} alt="Mitchell Miller" width="88" height="88" loading="lazy" /><div><strong>Mitchell Miller</strong><p>Estrategia digital, investigación e ingeniería · ¿Estás contratando? <a href="/resume/" hreflang="en">Cuatro currículums por rol (en inglés)</a>.</p></div></div>
+    </div>
+  </section>
+
+  <section class="ag-cta ag-dark" aria-labelledby="cta-heading">
+    <div class="ag-wrap ag-cta-inner">
+      <div><p class="ag-eyebrow">¿Listo para explorar más?</p><h2 id="cta-heading">¿Qué estás imaginando?</h2><p>Trae la pregunta. Juntos definiremos el siguiente paso.</p></div>
+      <div class="ag-cta-actions"><a class="ag-button" href="/es/contact/">Iniciar una conversación</a></div>
+    </div>
+  </section>
+</AgencyLayout>

@@ -1,0 +1,146 @@
+---
+/**
+ * /es/services/ — Spanish translation of /services/ (site standards pilot, 2026-09-24).
+ * Mirrors site/pages/services/index.astro: lifecycle, four stages with outputs, approach and
+ * evidence (English case studies, marked), process, FAQ (FAQPage JSON-LD mirrors the visible
+ * text word for word) and CTA. No staff counts, client counts, prices or invented results.
+ * Route manifest: kind "added", lang "es", translationOf "/services/".
+ */
+import AgencyLayout from '../../../layouts/AgencyLayout.astro';
+import ServiceIcon from '../../../components/ServiceIcon.astro';
+import BrandMarquee from '../../../components/BrandMarquee.astro';
+import { site, organizationJsonLd, breadcrumbJsonLd, graph } from '../../../lib/agency';
+
+const title = 'Estrategia digital, diseño e ingeniería — Mitchell Miller';
+const description = 'Investigación, estrategia digital, diseño de UX y de contenido, ingeniería front-end, flujos de trabajo con IA y crecimiento en búsqueda. Apoyo enfocado del diagnóstico a la entrega.';
+
+const lifecycle = [
+  { id: 'understand', name: 'Comprender', line: 'Encuentra la oportunidad.', icon: 'research' },
+  { id: 'design', name: 'Diseñar', line: 'Aclara el siguiente paso.', icon: 'design' },
+  { id: 'build', name: 'Construir', line: 'Conecta las piezas.', icon: 'engineering' },
+  { id: 'grow', name: 'Crecer', line: 'Aprende. Ajusta. Crece.', icon: 'growth' },
+];
+const stages = [
+  {
+    id: 'understand', name: 'Comprender', kicker: 'Investigación y dirección', icon: 'research', keyword: 'Investigación',
+    lede: 'La investigación conecta las necesidades de los clientes, las señales del mercado y los datos de desempeño para que la siguiente decisión tenga una base más firme.',
+    outputs: ['Análisis de mercado y de la competencia', 'Planes de medición', 'Recomendaciones priorizadas'],
+    approach: 'Establece la línea base. Pon a prueba los supuestos. Convierte los hallazgos en decisiones que tu equipo pueda usar.',
+    evidence: [
+      { label: 'SFC Surf School', note: 'La investigación de la competencia dio forma al contenido y a la experiencia de descubrimiento.', href: '/case-studies/sfc-surf-school/' },
+      { label: 'ClarityPulse', note: 'Un prototipo de reportes que mantiene la evidencia cerca de la decisión.', href: '/case-studies/claritypulse-ai-reporting/' },
+    ],
+  },
+  {
+    id: 'design', name: 'Diseñar', kicker: 'Contenido y experiencia', icon: 'design', keyword: 'Diseño de experiencia',
+    lede: 'El diseño de experiencia hace que la información sea más fácil de entender y que la siguiente acción sea más fácil de realizar.',
+    outputs: ['Dirección de UX/UI', 'Arquitectura de contenido', 'Patrones de página reutilizables'],
+    approach: 'Conecta el recorrido, las palabras y la interfaz. Revisa la experiencia donde la gente la va a usar.',
+    evidence: [
+      { label: 'Experiencia de ubicaciones de Dignity Health', note: 'Una estructura común para la información de ubicaciones y las acciones de los pacientes.', href: '/case-studies/commonspirit-locations-conversion-engine/' },
+      { label: 'SFC Surf School', note: 'Una guía interactiva conecta lugares reales con la decisión de un visitante.', href: '/case-studies/sfc-surf-school/' },
+    ],
+  },
+  {
+    id: 'build', name: 'Construir', kicker: 'Ingeniería y sistemas conectados', icon: 'engineering', keyword: 'Ingeniería',
+    lede: 'La ingeniería convierte el plan en interfaces útiles, datos conectados y flujos de trabajo repetibles que tu equipo puede mantener.',
+    outputs: ['Desarrollo front-end', 'Estructuras de bases de datos y de contenido', 'Flujos de trabajo asistidos por IA'],
+    approach: 'Construye en pasos revisables. Valida las piezas que ya funcionan. Deja responsables y documentación claros.',
+    evidence: [
+      { label: 'Motor de conversión de ubicaciones', note: 'Entidades y plantillas reutilizables en una gran red de salud.', href: '/case-studies/commonspirit-locations-conversion-engine/' },
+      { label: 'ActionThread', note: 'Un flujo de transcripción a seguimiento documentado como herramienta interna.', href: '/case-studies/actionthread-transcript-execution/' },
+    ],
+  },
+  {
+    id: 'grow', name: 'Crecer', kicker: 'Descubrimiento y mejora', icon: 'growth', keyword: 'Estrategia de crecimiento',
+    lede: 'La estrategia de crecimiento conecta la búsqueda, el contenido y la conversión con un ciclo de medición, aprendizaje y mejora.',
+    outputs: ['Planes de SEO y de búsqueda con IA', 'Pruebas de conversión', 'Reportes de desempeño'],
+    approach: 'Prioriza mejoras útiles hoy y protege las bases de lo que viene después.',
+    evidence: [
+      { label: 'Consolidación de la red de CommonSpirit', note: 'Continuidad y crecimiento en búsqueda durante migraciones empresariales.', href: '/case-studies/commonspirit-network-consolidation/' },
+      { label: 'SFC Surf School', note: 'Cambios medidos en búsqueda, con las fechas y los límites de cada lanzamiento a la vista.', href: '/case-studies/sfc-surf-school/' },
+    ],
+  },
+];
+const process = [
+  { name: 'Define la pregunta.', body: 'Acordemos qué importa, a quién sirve y qué significaría el éxito.' },
+  { name: 'Encuentra la evidencia.', body: 'Revisa los datos, las restricciones y los supuestos que dan forma a la decisión.' },
+  { name: 'Hazlo útil.', body: 'Revisa la estrategia, el contenido o el software mientras se desarrolla.' },
+  { name: 'Aprende del resultado.', body: 'Mide lo que cambió y decide qué merece atención después.' },
+];
+const faq = [
+  { q: '¿Con quién voy a trabajar?', a: 'Mitchell Miller dirige el trabajo directamente, desde la investigación y la estrategia hasta la entrega práctica. El alcance determina si hace falta apoyo adicional de especialistas.' },
+  { q: '¿Cuánto cuesta un proyecto?', a: 'El costo depende de la pregunta, el alcance y los entregables. Empieza con una conversación; acordemos el trabajo antes de comenzarlo.' },
+  { q: '¿Trabajas con empresas más pequeñas?', a: 'Sí. El trabajo abarca desde programas empresariales hasta negocios independientes, con un enfoque adaptado a la oportunidad.' },
+  { q: '¿Hay una forma gratuita de conocer el enfoque?', a: 'Sí. El laboratorio de aprendizaje ofrece herramientas interactivas para explorar datos, poner a prueba supuestos y comparar escenarios.' },
+  { q: '¿Cómo se miden los resultados?', a: 'Primero se acuerdan la línea base y las medidas de éxito. Los reportes conectan cada resultado con su fuente, su periodo y sus límites. Los casos de estudio muestran esa disciplina en la práctica.' },
+  { q: '¿Puedes trabajar con nuestro equipo actual?', a: 'Sí. El trabajo puede complementar a tu equipo de ingeniería, diseño, marketing o analítica mediante prioridades compartidas, requisitos claros y entregas prácticas.' },
+];
+const jsonLd = [graph(
+  organizationJsonLd(),
+  {
+    '@type': 'Service', '@id': `${site.url}/es/services/#service`, name: 'Estrategia digital, diseño e ingeniería', serviceType: 'Estrategia digital, diseño e ingeniería',
+    provider: { '@id': `${site.url}/#organization` }, areaServed: 'United States', url: `${site.url}/es/services/`, description, inLanguage: 'es',
+    hasOfferCatalog: { '@type': 'OfferCatalog', name: 'Servicios por etapa', itemListElement: stages.map(stage => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: `${stage.name} — ${stage.kicker}`, description: stage.lede, url: `${site.url}/es/services/#${stage.id}` } })) },
+  },
+  { '@type': 'FAQPage', '@id': `${site.url}/es/services/#faq`, inLanguage: 'es', mainEntity: faq.map(item => ({ '@type': 'Question', name: item.q, acceptedAnswer: { '@type': 'Answer', text: item.a } })) },
+  breadcrumbJsonLd([{ name: 'Inicio', href: '/es/' }, { name: 'Servicios', href: '/es/services/' }]),
+)];
+---
+<AgencyLayout path="/es/services/" title={title} description={description} jsonLd={jsonLd} bodyClass="ag-services">
+  <section class="ag-hero ag-hero--compact ag-dark" aria-labelledby="services-heading">
+    <div class="ag-wrap ag-hero-grid">
+      <div>
+        <ol class="ag-crumbs" aria-label="Ruta de navegación"><li><a href="/es/">Inicio</a></li><li aria-current="page">Servicios</li></ol>
+        <p class="ag-eyebrow">Servicios</p>
+        <h1 id="services-heading">Ve la oportunidad.<br />Hazla realidad.</h1>
+        <p class="ag-hero-deck">Investigación, diseño y tecnología en torno a una sola pregunta: ¿qué marcará la diferencia más útil?</p>
+        <div class="ag-hero-actions"><a class="ag-button" href="/es/contact/">Iniciar una conversación</a></div>
+      </div>
+    </div>
+  </section>
+
+  <BrandMarquee id="services-brands" lang="es" />
+
+  <section class="ag-lifecycle" aria-label="Etapas del trabajo">
+    <div class="ag-wrap">
+      <p class="ag-lifecycle-label">De la estrategia a la entrega</p>
+      <ol>{lifecycle.map(stage => <li><a href={`#${stage.id}`}><ServiceIcon name={stage.icon} label={stage.name} decorative /><strong>{stage.name}</strong><span>{stage.line}</span></a></li>)}</ol>
+    </div>
+  </section>
+
+  <div class="ag-wrap">
+    {stages.map(stage => <section class="ag-stage" aria-labelledby={`${stage.id}-heading`}>
+      <div class="ag-stage-head">
+        <ServiceIcon name={stage.icon} label={stage.keyword} />
+        <p class="ag-eyebrow">{stage.kicker}</p>
+        <h2 id={stage.id}><span id={`${stage.id}-heading`}>{stage.name}</span></h2>
+        <p class="ag-stage-lede">{stage.lede}</p>
+      </div>
+      <ul class="ag-stage-outputs" aria-label={`Entregables de ${stage.name}`}>{stage.outputs.map(item => <li>{item}</li>)}</ul>
+      <p class="ag-stage-approach">{stage.approach}</p>
+      <details class="ag-stage-proof"><summary>Explora el trabajo (casos en inglés) <span aria-hidden="true">+</span></summary><ul>{stage.evidence.map(item => <li><a href={item.href} hreflang="en">{item.label}</a><p>{item.note}</p></li>)}</ul></details>
+    </section>)}
+  </div>
+
+  <section class="ag-section ag-section--tint" id="process" aria-labelledby="process-heading">
+    <div class="ag-wrap">
+      <div class="ag-section-head"><div><p class="ag-eyebrow">Proceso</p><h2 id="process-heading">Empieza en pequeño. Ve con claridad. Avanza.</h2><p>Prioridades claras. Avance compartido. Un siguiente paso útil.</p></div></div>
+      <ol class="ag-process">{process.map(step => <li><h3>{step.name}</h3><p>{step.body}</p></li>)}</ol>
+    </div>
+  </section>
+
+  <section class="ag-section" aria-labelledby="faq-heading">
+    <div class="ag-wrap">
+      <div class="ag-section-head"><div><p class="ag-eyebrow">Preguntas frecuentes</p><h2 id="faq-heading">Preguntas frecuentes</h2></div></div>
+      <div class="ag-faq">{faq.map(item => <details><summary><h3>{item.q}</h3><span aria-hidden="true">+</span></summary><p>{item.a}{item.q.startsWith('¿Hay una forma gratuita') && <> <a href="/lab/" hreflang="en">Explora el laboratorio (en inglés).</a></>}</p></details>)}</div>
+    </div>
+  </section>
+
+  <section class="ag-cta ag-dark" aria-labelledby="services-cta-heading">
+    <div class="ag-wrap ag-cta-inner">
+      <div><p class="ag-eyebrow">¿Listo para explorar más?</p><h2 id="services-cta-heading">¿Qué estás imaginando?</h2><p>Trae la pregunta. Juntos definiremos el siguiente paso.</p></div>
+      <div class="ag-cta-actions"><a class="ag-button" href="/es/contact/">Iniciar una conversación</a></div>
+    </div>
+  </section>
+</AgencyLayout>

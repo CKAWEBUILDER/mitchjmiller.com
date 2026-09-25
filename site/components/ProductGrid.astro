@@ -1,10 +1,20 @@
 ---
 import {products} from '../data/products';
-const {featured = false} = Astro.props;
-const list = featured ? products.filter(p => p.featured) : products;
+const {featured = false, lang = 'en'} = Astro.props;
+// Spanish pilot copy by product id (site standards 2026-09-24); product names stay as they are.
+const es: Record<string, {category: string; status: string; description: string; alt: string; cta: string; note?: string}> = {
+  'population-workbench': {category: 'Ciencia de datos', status: 'Herramienta gratuita en el navegador', description: 'Explora datos de población del Censo de EE. UU., compara escenarios de políticas públicas y exporta un reporte interactivo. No necesitas cuenta.', alt: '', cta: 'Probar la herramienta'},
+  domainsignal: {category: 'Inteligencia de dominios', status: 'En desarrollo', description: 'Reúne en un solo lugar la investigación de dominios y las señales de confianza para evaluar oportunidades con más eficiencia.', alt: 'Prototipo de la interfaz móvil de DomainSignal', cta: 'Explorar el producto'},
+  'date-night': {category: 'Experiencias móviles', status: 'Prototipo', description: 'Descubre actividades y planea tiempo juntos. Una app para parejas diseñada en torno a experiencias compartidas.', alt: 'Prototipo de la app móvil Date Night', cta: 'Explorar la app'},
+  claritypulse: {category: 'Reportes con IA', status: 'Prototipo interno', description: 'Convierte datos de analítica y de búsqueda en reportes ejecutivos con prioridades claras y fuentes rastreables.', alt: 'Maqueta representativa de la interfaz de ClarityPulse', cta: 'Ver el caso de estudio', note: 'Maqueta representativa del producto'},
+  searchforge: {category: 'Inteligencia de contenido', status: 'Prototipo', description: 'Encuentra oportunidades de temas, organiza la investigación y prepara briefs de contenido con análisis de entidades y de la competencia.', alt: 'Maqueta representativa de la interfaz de SearchForge', cta: 'Ver el caso de estudio', note: 'Maqueta representativa del producto'},
+  actionthread: {category: 'Automatización de flujos de trabajo', status: 'Herramienta interna', description: 'Convierte las transcripciones de reuniones en decisiones, tareas asignadas y fechas límite para dar un mejor seguimiento a los proyectos.', alt: 'Maqueta representativa de la interfaz de ActionThread', cta: 'Ver el caso de estudio', note: 'Maqueta representativa del producto'},
+};
+const art = lang === 'es' ? {tagline: 'Explora. Compara. Exporta.', sub: 'Datos públicos · Escenarios interactivos'} : {tagline: 'Explore. Compare. Export.', sub: 'Public data · Interactive scenarios'};
+const list = (featured ? products.filter(p => p.featured) : products).map(p => lang === 'es' && es[p.id] ? {...p, ...es[p.id], hreflang: 'en'} : {...p, hreflang: undefined});
 ---
 <div class="ag-grid-3 ag-product-grid">{list.map(product => <article class="ag-product-card" id={product.id}>
-  <a class:list={['ag-product-visual', {'ag-product-visual--population': product.visual === 'population'}]} href={product.href} aria-label={product.name}>
-    {product.visual === 'population' ? <div class="ag-population-art" aria-hidden="true"><span>POPULATION WORKBENCH</span><div class="ag-population-dots">{Array.from({length: 60}, (_, i) => <i class:list={{accent: i % 5 === 0}} />)}</div><strong>Explore. Compare. Export.</strong><small>Public data · Interactive scenarios</small></div> : <img src={product.image} alt={product.alt} width="900" height="600" loading="lazy" />}
-  </a><div class="ag-product-body"><p class="ag-eyebrow">{product.category}</p><h3>{product.name}</h3><span class="ag-product-status">{product.status}</span><p>{product.description}</p>{product.note && <small>{product.note}</small>}<a class="ag-textlink" href={product.href}>{product.cta} <span aria-hidden="true">→</span></a></div>
+  <a class:list={['ag-product-visual', {'ag-product-visual--population': product.visual === 'population'}]} href={product.href} hreflang={product.hreflang} aria-label={product.name}>
+    {product.visual === 'population' ? <div class="ag-population-art" aria-hidden="true"><span>POPULATION WORKBENCH</span><div class="ag-population-dots">{Array.from({length: 60}, (_, i) => <i class:list={{accent: i % 5 === 0}} />)}</div><strong>{art.tagline}</strong><small>{art.sub}</small></div> : <img src={product.image} alt={product.alt} width="900" height="600" loading="lazy" />}
+  </a><div class="ag-product-body"><p class="ag-eyebrow">{product.category}</p><h3>{product.name}</h3><span class="ag-product-status">{product.status}</span><p>{product.description}</p>{product.note && <small>{product.note}</small>}<a class="ag-textlink" href={product.href} hreflang={product.hreflang}>{product.cta} <span aria-hidden="true">→</span></a></div>
 </article>)}</div>

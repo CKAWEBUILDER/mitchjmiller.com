@@ -92,7 +92,14 @@ if (contactForm) {
     status.classList.toggle("text-red-600", kind === "error");
     status.classList.toggle("text-primary", kind !== "error");
   };
-  const messages: Record<string, string> = {
+  const spanish = document.documentElement.lang === "es";
+  const messages: Record<string, string> = spanish ? {
+    validation: "Revisa los campos marcados e inténtalo de nuevo.",
+    turnstile_failed: "La verificación antispam falló. Inténtalo de nuevo.",
+    rate_limited: `Se enviaron demasiados mensajes desde esta conexión en la última hora. Inténtalo más tarde o escribe a ${email}.`,
+    origin_not_allowed: `Este formulario solo funciona en mj2.pro. Escribe a ${email}.`,
+    network: `No se pudo enviar el mensaje (error de red). Escribe a ${email}.`,
+  } : {
     validation: "Please check the highlighted fields and try again.",
     turnstile_failed: "The spam check did not pass. Please try again.",
     rate_limited: `Too many messages from this connection in the last hour. Please try again later or email ${email}.`,
@@ -105,11 +112,11 @@ if (contactForm) {
     const data = new FormData(contactForm);
     data.set("source_url", location.href);
     if (!data.get("turnstileToken") && !data.get("cf-turnstile-response")) {
-      say("Please wait a moment for the spam check to finish, then send again.", "error");
+      say(spanish ? "Espera un momento a que termine la verificación antispam y vuelve a enviar." : "Please wait a moment for the spam check to finish, then send again.", "error");
       return;
     }
     if (submit) submit.disabled = true;
-    say("Sending…", "info");
+    say(spanish ? "Enviando…" : "Sending…", "info");
     let out: { ok?: boolean; error?: string; fields?: Record<string, string> } = {};
     try {
       const response = await fetch(contactForm.action, { method: "POST", body: data });
@@ -123,14 +130,14 @@ if (contactForm) {
     if (out.ok) {
       contactForm.reset();
       turnstile?.reset?.();
-      say(`Thanks — your message was received. I reply from ${email}.`, "ok");
+      say(spanish ? `Gracias: recibí tu mensaje. Respondo desde ${email}.` : `Thanks — your message was received. I reply from ${email}.`, "ok");
       return;
     }
     if (out.error === "validation" && out.fields) {
       for (const name of Object.keys(out.fields)) contactForm.querySelector<HTMLElement>(`[name="${name}"]`)?.setAttribute("aria-invalid", "true");
     }
     if (out.error === "turnstile_failed") turnstile?.reset?.();
-    say(messages[out.error || ""] || `The message could not be sent (${out.error || "unknown error"}). Please email ${email}.`, "error");
+    say(messages[out.error || ""] || (spanish ? `No se pudo enviar el mensaje (${out.error || "error desconocido"}). Escribe a ${email}.` : `The message could not be sent (${out.error || "unknown error"}). Please email ${email}.`), "error");
   });
 }
 
@@ -194,3 +201,27 @@ themeButtons.forEach(button => button.addEventListener("click", () => {
 window.matchMedia?.("(prefers-color-scheme: dark)").addEventListener?.("change", event => {
   if (!storedTheme()) applyTheme(event.matches ? "dark" : "light");
 });
+
+// Languages (docs/site-standards.md): the picker is a native <details>; it also closes on Escape
+// or an outside click. A language chosen in the picker or the banner is remembered
+// ("mj2-lang"). The banner is shown only when the visitor's preferred languages rank this
+// page's translation above the page's own language, or they chose that language before, and
+// never after a dismissal. Nothing here ever changes location: suggest, never redirect.
+const storedLang = () => { try { return localStorage.getItem("mj2-lang"); } catch { return null; } };
+const rememberLang = (code: string) => { try { localStorage.setItem("mj2-lang", code); } catch { /* storage blocked */ } };
+document.querySelectorAll<HTMLAnchorElement>("[data-lang-choice]").forEach(link => link.addEventListener("click", () => rememberLang(link.dataset.langChoice!)));
+const picker = document.querySelector<HTMLDetailsElement>("[data-lang-picker]");
+if (picker) {
+  document.addEventListener("keydown", event => { if (event.key === "Escape" && picker.open) { picker.open = false; picker.querySelector("summary")?.focus(); } });
+  document.addEventListener("click", event => { if (picker.open && !picker.contains(event.target as Node)) picker.open = false; });
+}
+const langBanner = document.querySelector<HTMLElement>("[data-lang-banner]");
+if (langBanner) {
+  const suggested = langBanner.dataset.suggestLang!;
+  const current = root.lang;
+  const preferred = (navigator.languages?.length ? navigator.languages : [navigator.language || ""]).map(code => code.toLowerCase().split("-")[0]);
+  const firstKnown = preferred.find(code => code === current || code === suggested);
+  const chosen = storedLang();
+  if (chosen ? chosen === suggested : firstKnown === suggested) langBanner.hidden = false;
+  langBanner.querySelector("[data-lang-dismiss]")?.addEventListener("click", () => { langBanner.hidden = true; rememberLang(current); });
+}

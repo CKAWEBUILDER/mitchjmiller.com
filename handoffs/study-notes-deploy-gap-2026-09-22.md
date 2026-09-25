@@ -36,3 +36,11 @@ Mitch reports old links don't reach mj2.pro. Diagnosed by curl:
 - `https://mitchjmiller.com/<path>` → **000 (dead)**. No valid TLS cert on the forwarding host (A record `162.255.119.89`, Namecheap URL-forwarding).
 
 So the registrar URL-redirect covers HTTP only; every https:// old link (and HSTS/browser-default https) hits a dead endpoint. **Fix (registrar/infra lane):** either enable **SSL on the Namecheap URL-redirect record** for `mitchjmiller.com` + `www` (provisions a cert for the forward; ~1h), or front the apex with **Cloudflare** and a redirect rule `mitchjmiller.com/* → https://mj2.pro/$1` (301) for a valid edge cert + path preservation — fits the existing Cloudflare foundation. Needs Namecheap/Cloudflare access (not held by Claude Code).
+
+## New note to wire — figma-shortest-course (2026-09-24, Claude Code)
+
+Source committed to `main` `1ddc06e`: `src/lib/study-notes.ts` now has 25 notes (added `figma-shortest-course`, topic "Design & UX", SVG-only). To deploy on mj2.pro, same wiring as the last 3 restored notes:
+- Add route `/blog/studying/figma-shortest-course/` (kind `note`, title "The World's Shortest Figma Course — 80% in 7 Minutes") to `docs/implementation-2026-09-11/route-manifest.json`.
+- Bump the published-route count in `scripts/verify-agency.mjs` from **68 → 69** (line ~44) and update the adjacent comment.
+- `baseline/src/lib/published.ts` already prepends src/lib-only notes as `added`, so no baseline edit needed.
+Left to the release owner to keep the count constant single-sourced and avoid a mid-release collision.

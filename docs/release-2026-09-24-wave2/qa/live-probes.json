@@ -1,0 +1,556 @@
+{
+  "generated": "2026-09-25T04:13:57.030Z",
+  "origin": "https://mj2.pro",
+  "checks": 91,
+  "passed": 91,
+  "failed": 0,
+  "failures": [],
+  "results": [
+    {
+      "scope": "https://mj2.pro/blog/optimizing-for-ads-in-free-llm-answers/",
+      "check": "HTTP 200 text/html",
+      "pass": true,
+      "detail": "200 text/html; charset=utf-8"
+    },
+    {
+      "scope": "https://mj2.pro/blog/optimizing-for-ads-in-free-llm-answers/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "https://mj2.pro/blog/optimizing-for-ads-in-free-llm-answers/",
+      "check": "canonical is itself, robots index, follow",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/optimizing-for-ads-in-free-llm-answers/ · index, follow"
+    },
+    {
+      "scope": "https://mj2.pro/blog/optimizing-for-ads-in-free-llm-answers/",
+      "check": "JSON-LD parses: Article (datePublished 2026-09-24) + BreadcrumbList + FAQPage",
+      "pass": true,
+      "detail": "Article, BreadcrumbList, FAQPage · FAQ 4 · 2026-09-24"
+    },
+    {
+      "scope": "https://mj2.pro/blog/optimizing-for-ads-in-free-llm-answers/",
+      "check": "audio element with the narration and a \"Listen to this article\" label",
+      "pass": true,
+      "detail": "/audio/blog/optimizing-for-ads-in-free-llm-answers.m4a · Listen to this article (16 min)"
+    },
+    {
+      "scope": "https://mj2.pro/audio/blog/optimizing-for-ads-in-free-llm-answers.m4a",
+      "check": "narration 200 audio/mp4",
+      "pass": true,
+      "detail": "200 audio/mp4"
+    },
+    {
+      "scope": "https://mj2.pro/blog/optimizing-for-ads-in-free-llm-answers/",
+      "check": "share-card meta: og:image = twitter:image, summary_large_image, alt text",
+      "pass": true,
+      "detail": "https://mj2.pro/viz/llm-ads-mandala/ads-in-free-llm-answers-data-mandala-1200x630.png · summary_large_image"
+    },
+    {
+      "scope": "https://mj2.pro/viz/llm-ads-mandala/ads-in-free-llm-answers-data-mandala-1200x630.png",
+      "check": "card 200 image/png 1200×630",
+      "pass": true,
+      "detail": "200 image/png 1200×630 291515 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/optimizing-for-ads-in-free-llm-answers/",
+      "check": "one titled iframe with the canonical ?parent=, noscript poster, full-screen link",
+      "pass": true,
+      "detail": "/viz/llm-ads-mandala/?parent=https%3A%2F%2Fmj2.pro%2Fblog%2Foptimizing-for-ads-in-free-llm-answers%2F"
+    },
+    {
+      "scope": "https://mj2.pro/blog/optimizing-for-ads-in-free-llm-answers/",
+      "check": "all 5 jump anchors present once",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/optimizing-for-ads-in-free-llm-answers/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/viz/llm-ads-mandala/",
+      "check": "embed 200, noindex, follow, no analytics",
+      "pass": true,
+      "detail": "200 · noindex, follow"
+    },
+    {
+      "scope": "https://mj2.pro/viz/llm-ads-mandala/poster-1080x1350.png",
+      "check": "200 image",
+      "pass": true,
+      "detail": "200 image/png"
+    },
+    {
+      "scope": "https://mj2.pro/viz/llm-ads-mandala/poster-1080x1080.png",
+      "check": "200 image",
+      "pass": true,
+      "detail": "200 image/png"
+    },
+    {
+      "scope": "https://mj2.pro/viz/llm-ads-mandala/poster-2160x2700.png",
+      "check": "200 image",
+      "pass": true,
+      "detail": "200 image/png"
+    },
+    {
+      "scope": "https://mj2.pro/viz/llm-ads-mandala/anim-640x800.gif",
+      "check": "200 image",
+      "pass": true,
+      "detail": "200 image/gif"
+    },
+    {
+      "scope": "https://mj2.pro/viz/llm-ads-mandala/ads-in-free-llm-answers-data-mandala-1200x630.png",
+      "check": "200 image",
+      "pass": true,
+      "detail": "200 image/png"
+    },
+    {
+      "scope": "https://mj2.pro/viz/llm-ads-mandala/",
+      "check": "embed share card 200",
+      "pass": true,
+      "detail": "https://mj2.pro/og/viz/llm-ads-mandala.png 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/growth-title-market/",
+      "check": "HTTP 200 text/html",
+      "pass": true,
+      "detail": "200 text/html; charset=utf-8"
+    },
+    {
+      "scope": "https://mj2.pro/blog/growth-title-market/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "https://mj2.pro/blog/growth-title-market/",
+      "check": "canonical is itself, robots index, follow",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/growth-title-market/ · index, follow"
+    },
+    {
+      "scope": "https://mj2.pro/blog/growth-title-market/",
+      "check": "JSON-LD parses: Article (datePublished 2026-09-24) + BreadcrumbList + FAQPage",
+      "pass": true,
+      "detail": "Article, BreadcrumbList, FAQPage · FAQ 3 · 2026-09-24"
+    },
+    {
+      "scope": "https://mj2.pro/blog/growth-title-market/",
+      "check": "audio element with the narration and a \"Listen to this article\" label",
+      "pass": true,
+      "detail": "/audio/blog/growth-title-market.m4a · Listen to this article (10 min)"
+    },
+    {
+      "scope": "https://mj2.pro/audio/blog/growth-title-market.m4a",
+      "check": "narration 200 audio/mp4",
+      "pass": true,
+      "detail": "200 audio/mp4"
+    },
+    {
+      "scope": "https://mj2.pro/blog/growth-title-market/",
+      "check": "share-card meta: og:image = twitter:image, summary_large_image, alt text",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/growth-title-market.png · summary_large_image"
+    },
+    {
+      "scope": "https://mj2.pro/og/blog/growth-title-market.png",
+      "check": "card 200 image/png 1200×630",
+      "pass": true,
+      "detail": "200 image/png 1200×630 527165 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/growth-title-market/",
+      "check": "one titled iframe with the canonical ?parent=, noscript poster, full-screen link",
+      "pass": true,
+      "detail": "/viz/growth-title-market/?parent=https%3A%2F%2Fmj2.pro%2Fblog%2Fgrowth-title-market%2F"
+    },
+    {
+      "scope": "https://mj2.pro/blog/growth-title-market/",
+      "check": "all 6 jump anchors present once",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/growth-title-market/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/viz/growth-title-market/",
+      "check": "embed 200, noindex, follow, no analytics",
+      "pass": true,
+      "detail": "200 · noindex, follow"
+    },
+    {
+      "scope": "https://mj2.pro/viz/growth-title-market/poster-1080x1350.png",
+      "check": "200 image",
+      "pass": true,
+      "detail": "200 image/png"
+    },
+    {
+      "scope": "https://mj2.pro/viz/growth-title-market/poster-1080x1080.png",
+      "check": "200 image",
+      "pass": true,
+      "detail": "200 image/png"
+    },
+    {
+      "scope": "https://mj2.pro/viz/growth-title-market/poster-2160x2700.png",
+      "check": "200 image",
+      "pass": true,
+      "detail": "200 image/png"
+    },
+    {
+      "scope": "https://mj2.pro/viz/growth-title-market/anim-640x800.gif",
+      "check": "200 image",
+      "pass": true,
+      "detail": "200 image/gif"
+    },
+    {
+      "scope": "https://mj2.pro/viz/growth-title-market/",
+      "check": "embed share card 200",
+      "pass": true,
+      "detail": "https://mj2.pro/og/viz/growth-title-market.png 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/b2b-vs-b2c-by-vertical/",
+      "check": "HTTP 200 text/html",
+      "pass": true,
+      "detail": "200 text/html; charset=utf-8"
+    },
+    {
+      "scope": "https://mj2.pro/blog/b2b-vs-b2c-by-vertical/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "https://mj2.pro/blog/b2b-vs-b2c-by-vertical/",
+      "check": "canonical is itself, robots index, follow",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/b2b-vs-b2c-by-vertical/ · index, follow"
+    },
+    {
+      "scope": "https://mj2.pro/blog/b2b-vs-b2c-by-vertical/",
+      "check": "JSON-LD parses: Article (datePublished 2026-09-24) + BreadcrumbList + FAQPage",
+      "pass": true,
+      "detail": "Article, BreadcrumbList, FAQPage · FAQ 3 · 2026-09-24"
+    },
+    {
+      "scope": "https://mj2.pro/blog/b2b-vs-b2c-by-vertical/",
+      "check": "audio element with the narration and a \"Listen to this article\" label",
+      "pass": true,
+      "detail": "/audio/blog/b2b-vs-b2c-by-vertical.m4a · Listen to this article (17 min)"
+    },
+    {
+      "scope": "https://mj2.pro/audio/blog/b2b-vs-b2c-by-vertical.m4a",
+      "check": "narration 200 audio/mp4",
+      "pass": true,
+      "detail": "200 audio/mp4"
+    },
+    {
+      "scope": "https://mj2.pro/blog/b2b-vs-b2c-by-vertical/",
+      "check": "share-card meta: og:image = twitter:image, summary_large_image, alt text",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/b2b-vs-b2c-by-vertical.png · summary_large_image"
+    },
+    {
+      "scope": "https://mj2.pro/og/blog/b2b-vs-b2c-by-vertical.png",
+      "check": "card 200 image/png 1200×630",
+      "pass": true,
+      "detail": "200 image/png 1200×630 413627 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/b2b-vs-b2c-by-vertical/",
+      "check": "one titled iframe with the canonical ?parent=, noscript poster, full-screen link",
+      "pass": true,
+      "detail": "/viz/b2b-vs-b2c-by-vertical/?parent=https%3A%2F%2Fmj2.pro%2Fblog%2Fb2b-vs-b2c-by-vertical%2F"
+    },
+    {
+      "scope": "https://mj2.pro/blog/b2b-vs-b2c-by-vertical/",
+      "check": "all 10 jump anchors present once",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/b2b-vs-b2c-by-vertical/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/viz/b2b-vs-b2c-by-vertical/",
+      "check": "embed 200, noindex, follow, no analytics",
+      "pass": true,
+      "detail": "200 · noindex, follow"
+    },
+    {
+      "scope": "https://mj2.pro/viz/b2b-vs-b2c-by-vertical/poster-1080x1350.png",
+      "check": "200 image",
+      "pass": true,
+      "detail": "200 image/png"
+    },
+    {
+      "scope": "https://mj2.pro/viz/b2b-vs-b2c-by-vertical/poster-1080x1080.png",
+      "check": "200 image",
+      "pass": true,
+      "detail": "200 image/png"
+    },
+    {
+      "scope": "https://mj2.pro/viz/b2b-vs-b2c-by-vertical/poster-2160x2700.png",
+      "check": "200 image",
+      "pass": true,
+      "detail": "200 image/png"
+    },
+    {
+      "scope": "https://mj2.pro/viz/b2b-vs-b2c-by-vertical/anim-640x800.gif",
+      "check": "200 image",
+      "pass": true,
+      "detail": "200 image/gif"
+    },
+    {
+      "scope": "https://mj2.pro/viz/b2b-vs-b2c-by-vertical/",
+      "check": "embed share card 200",
+      "pass": true,
+      "detail": "https://mj2.pro/og/viz/b2b-vs-b2c-by-vertical.png 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/statistician-vs-data-scientist/",
+      "check": "HTTP 200 text/html",
+      "pass": true,
+      "detail": "200 text/html; charset=utf-8"
+    },
+    {
+      "scope": "https://mj2.pro/blog/statistician-vs-data-scientist/",
+      "check": "exactly one h1",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "scope": "https://mj2.pro/blog/statistician-vs-data-scientist/",
+      "check": "canonical is itself, robots index, follow",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/statistician-vs-data-scientist/ · index, follow"
+    },
+    {
+      "scope": "https://mj2.pro/blog/statistician-vs-data-scientist/",
+      "check": "JSON-LD parses: Article (datePublished 2026-09-24) + BreadcrumbList + FAQPage",
+      "pass": true,
+      "detail": "Article, BreadcrumbList, FAQPage · FAQ 3 · 2026-09-24"
+    },
+    {
+      "scope": "https://mj2.pro/blog/statistician-vs-data-scientist/",
+      "check": "audio element with the narration and a \"Listen to this article\" label",
+      "pass": true,
+      "detail": "/audio/blog/statistician-vs-data-scientist.m4a · Listen to this article (7 min)"
+    },
+    {
+      "scope": "https://mj2.pro/audio/blog/statistician-vs-data-scientist.m4a",
+      "check": "narration 200 audio/mp4",
+      "pass": true,
+      "detail": "200 audio/mp4"
+    },
+    {
+      "scope": "https://mj2.pro/blog/statistician-vs-data-scientist/",
+      "check": "share-card meta: og:image = twitter:image, summary_large_image, alt text",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/statistician-vs-data-scientist.png · summary_large_image"
+    },
+    {
+      "scope": "https://mj2.pro/og/blog/statistician-vs-data-scientist.png",
+      "check": "card 200 image/png 1200×630",
+      "pass": true,
+      "detail": "200 image/png 1200×630 457090 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/statistician-vs-data-scientist/",
+      "check": "one titled iframe with the canonical ?parent=, noscript poster, full-screen link",
+      "pass": true,
+      "detail": "/viz/statistician-vs-data-scientist/?parent=https%3A%2F%2Fmj2.pro%2Fblog%2Fstatistician-vs-data-scientist%2F"
+    },
+    {
+      "scope": "https://mj2.pro/blog/statistician-vs-data-scientist/",
+      "check": "all 6 jump anchors present once",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/statistician-vs-data-scientist/",
+      "check": "GA4 loader exactly once",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/viz/statistician-vs-data-scientist/",
+      "check": "embed 200, noindex, follow, no analytics",
+      "pass": true,
+      "detail": "200 · noindex, follow"
+    },
+    {
+      "scope": "https://mj2.pro/viz/statistician-vs-data-scientist/poster-1080x1350.png",
+      "check": "200 image",
+      "pass": true,
+      "detail": "200 image/png"
+    },
+    {
+      "scope": "https://mj2.pro/viz/statistician-vs-data-scientist/poster-1080x1080.png",
+      "check": "200 image",
+      "pass": true,
+      "detail": "200 image/png"
+    },
+    {
+      "scope": "https://mj2.pro/viz/statistician-vs-data-scientist/poster-2160x2700.png",
+      "check": "200 image",
+      "pass": true,
+      "detail": "200 image/png"
+    },
+    {
+      "scope": "https://mj2.pro/viz/statistician-vs-data-scientist/anim-640x800.gif",
+      "check": "200 image",
+      "pass": true,
+      "detail": "200 image/gif"
+    },
+    {
+      "scope": "https://mj2.pro/viz/statistician-vs-data-scientist/",
+      "check": "embed share card 200",
+      "pass": true,
+      "detail": "https://mj2.pro/og/viz/statistician-vs-data-scientist.png 200"
+    },
+    {
+      "scope": "https://mj2.pro/sitemap.xml",
+      "check": "sitemap 200 with 73 URLs including the four posts",
+      "pass": true,
+      "detail": "200 · 73 URLs"
+    },
+    {
+      "scope": "https://mj2.pro/robots.txt",
+      "check": "robots unchanged (byte-identical to the previous release)",
+      "pass": true,
+      "detail": "\"User-agent: *\\nAllow: /\\nSitemap: https://mj2.pro/sitemap.xml\\n\""
+    },
+    {
+      "scope": "https://mj2.pro/",
+      "check": "older route 200, one h1",
+      "pass": true,
+      "detail": "200"
+    },
+    {
+      "scope": "https://mj2.pro/about/",
+      "check": "older route 200, one h1",
+      "pass": true,
+      "detail": "200"
+    },
+    {
+      "scope": "https://mj2.pro/services/",
+      "check": "older route 200, one h1",
+      "pass": true,
+      "detail": "200"
+    },
+    {
+      "scope": "https://mj2.pro/products/",
+      "check": "older route 200, one h1",
+      "pass": true,
+      "detail": "200"
+    },
+    {
+      "scope": "https://mj2.pro/work/",
+      "check": "older route 200, one h1",
+      "pass": true,
+      "detail": "200"
+    },
+    {
+      "scope": "https://mj2.pro/lab/",
+      "check": "older route 200, one h1",
+      "pass": true,
+      "detail": "200"
+    },
+    {
+      "scope": "https://mj2.pro/contact/",
+      "check": "older route 200, one h1",
+      "pass": true,
+      "detail": "200"
+    },
+    {
+      "scope": "https://mj2.pro/resume/",
+      "check": "older route 200, one h1",
+      "pass": true,
+      "detail": "200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/",
+      "check": "older route 200, one h1",
+      "pass": true,
+      "detail": "200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/search-results-by-intent/",
+      "check": "older route 200, one h1",
+      "pass": true,
+      "detail": "200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/gbp-2026-ai-grounding/",
+      "check": "older route 200, one h1",
+      "pass": true,
+      "detail": "200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/figma-shortest-course/",
+      "check": "older route 200, one h1",
+      "pass": true,
+      "detail": "200"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/aeo-visibility-infrastructure/",
+      "check": "older route 200, one h1",
+      "pass": true,
+      "detail": "200"
+    },
+    {
+      "scope": "https://mj2.pro/es/",
+      "check": "older route 200, one h1",
+      "pass": true,
+      "detail": "200"
+    },
+    {
+      "scope": "https://mj2.pro/es/blog/",
+      "check": "older route 200, one h1",
+      "pass": true,
+      "detail": "200"
+    },
+    {
+      "scope": "https://mj2.pro/viz/search-results-by-intent-mandala/",
+      "check": "older route 200, one h1",
+      "pass": true,
+      "detail": "200"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/sfc-surf-school/",
+      "check": "older route 200, one h1",
+      "pass": true,
+      "detail": "200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/",
+      "check": "blog index links the four posts",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/no-such-post-wave-2/",
+      "check": "unknown route 404",
+      "pass": true,
+      "detail": "404"
+    },
+    {
+      "scope": "https://www.mj2.pro/blog/growth-title-market/",
+      "check": "www 301 to the apex",
+      "pass": true,
+      "detail": "301 → https://mj2.pro/blog/growth-title-market/"
+    }
+  ]
+}

@@ -1,0 +1,1943 @@
+{
+  "generated": "2026-09-25T04:15:43.846Z",
+  "origin": "https://mj2.pro",
+  "sitemapUrls": 73,
+  "documents": 79,
+  "withAllShareTags": 79,
+  "headshotShareImages": 0,
+  "narratedPostsOk": "10/10",
+  "hreflangPages": 73,
+  "hreflangReciprocal": 73,
+  "checks": 321,
+  "passed": 321,
+  "failed": 0,
+  "failures": [],
+  "results": [
+    {
+      "scope": "sitemap",
+      "check": "sitemap lists URLs",
+      "pass": true,
+      "detail": "73 URLs"
+    },
+    {
+      "scope": "https://mj2.pro/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/home.png → 200 image/png 1200×630 201255 B"
+    },
+    {
+      "scope": "https://mj2.pro/about/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/about/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/about/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/about.png → 200 image/png 1200×630 178786 B"
+    },
+    {
+      "scope": "https://mj2.pro/contact/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/contact/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/contact/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/contact.png → 200 image/png 1200×630 179586 B"
+    },
+    {
+      "scope": "https://mj2.pro/collab-ideas/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/collab-ideas/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/collab-ideas/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/collab-ideas.png → 200 image/png 1200×630 172539 B"
+    },
+    {
+      "scope": "https://mj2.pro/resume/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/resume/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/resume/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/resume.png → 200 image/png 1200×630 170118 B"
+    },
+    {
+      "scope": "https://mj2.pro/systems/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/systems/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/systems/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/systems.png → 200 image/png 1200×630 179072 B"
+    },
+    {
+      "scope": "https://mj2.pro/work/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/work/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/work/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/work.png → 200 image/png 1200×630 206702 B"
+    },
+    {
+      "scope": "https://mj2.pro/selected-builds/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/selected-builds/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/selected-builds/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/selected-builds.png → 200 image/png 1200×630 173829 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog.png → 200 image/png 1200×630 202730 B"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/case-studies.png → 200 image/png 1200×630 174558 B"
+    },
+    {
+      "scope": "https://mj2.pro/aeo-geo/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/aeo-geo/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/aeo-geo/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/aeo-geo.png → 200 image/png 1200×630 198712 B"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/apple-seasonal-search/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/apple-seasonal-search/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/apple-seasonal-search/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/case-studies/apple-seasonal-search.png → 200 image/png 1200×630 183609 B"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/apple-store-amr/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/apple-store-amr/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/apple-store-amr/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/case-studies/apple-store-amr.png → 200 image/png 1200×630 178726 B"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/apple-education-store/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/apple-education-store/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/apple-education-store/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/case-studies/apple-education-store.png → 200 image/png 1200×630 181184 B"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/stanford-myhealth-seo/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/stanford-myhealth-seo/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/stanford-myhealth-seo/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/case-studies/stanford-myhealth-seo.png → 200 image/png 1200×630 180859 B"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/commonspirit-locations-conversion-engine/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/commonspirit-locations-conversion-engine/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/commonspirit-locations-conversion-engine/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/case-studies/commonspirit-locations-conversion-engine.png → 200 image/png 1200×630 203345 B"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/commonspirit-network-consolidation/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/commonspirit-network-consolidation/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/commonspirit-network-consolidation/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/case-studies/commonspirit-network-consolidation.png → 200 image/png 1200×630 201136 B"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/commonspirit-medical-content-library/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/commonspirit-medical-content-library/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/commonspirit-medical-content-library/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/case-studies/commonspirit-medical-content-library.png → 200 image/png 1200×630 205573 B"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/aem-content-fragmentation-architecture/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/aem-content-fragmentation-architecture/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/aem-content-fragmentation-architecture/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/case-studies/aem-content-fragmentation-architecture.png → 200 image/png 1200×630 198336 B"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/yext-entity-data-foundation/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/yext-entity-data-foundation/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/yext-entity-data-foundation/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/case-studies/yext-entity-data-foundation.png → 200 image/png 1200×630 179688 B"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/claritypulse-ai-reporting/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/claritypulse-ai-reporting/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/claritypulse-ai-reporting/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/case-studies/claritypulse-ai-reporting.png → 200 image/png 1200×630 175529 B"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/searchforge-content-intelligence/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/searchforge-content-intelligence/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/searchforge-content-intelligence/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/case-studies/searchforge-content-intelligence.png → 200 image/png 1200×630 175464 B"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/actionthread-transcript-execution/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/actionthread-transcript-execution/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/actionthread-transcript-execution/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/case-studies/actionthread-transcript-execution.png → 200 image/png 1200×630 173325 B"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/aeo-visibility-infrastructure/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/aeo-visibility-infrastructure/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/aeo-visibility-infrastructure/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/case-studies/aeo-visibility-infrastructure.png → 200 image/png 1200×630 181332 B"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/domainsignal/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/domainsignal/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/domainsignal/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/case-studies/domainsignal.png → 200 image/png 1200×630 174804 B"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/date-night/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/date-night/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/date-night/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/case-studies/date-night.png → 200 image/png 1200×630 172383 B"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/vet-advocates-growth-system/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/vet-advocates-growth-system/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/vet-advocates-growth-system/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/case-studies/vet-advocates-growth-system.png → 200 image/png 1200×630 185910 B"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/sfc-surf-school/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/sfc-surf-school/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/sfc-surf-school/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/case-studies/sfc-surf-school.png → 200 image/png 1200×630 203912 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/gbp-2026-ai-grounding/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/gbp-2026-ai-grounding/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/gbp-2026-ai-grounding/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/gbp-2026-ai-grounding.png → 200 image/png 1200×630 241659 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/multi-agent-billing-traps/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/multi-agent-billing-traps/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/multi-agent-billing-traps/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/multi-agent-billing-traps.png → 200 image/png 1200×630 230103 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/intrepid-agency-spotlight/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/intrepid-agency-spotlight/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/intrepid-agency-spotlight/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/intrepid-agency-spotlight.png → 200 image/png 1200×630 233763 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/mitchell-miller-journey/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/mitchell-miller-journey/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/mitchell-miller-journey/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/mitchell-miller-journey.png → 200 image/png 1200×630 234429 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/hermes-concepts-field-guide/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/hermes-concepts-field-guide/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/hermes-concepts-field-guide/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/studying/hermes-concepts-field-guide.png → 200 image/png 1200×630 228015 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/claude-watermark-seo/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/claude-watermark-seo/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/claude-watermark-seo/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/studying/claude-watermark-seo.png → 200 image/png 1200×630 225683 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/all-in-ai-money-stack/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/all-in-ai-money-stack/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/all-in-ai-money-stack/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/studying/all-in-ai-money-stack.png → 200 image/png 1200×630 242269 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/hermes-seo-agent/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/hermes-seo-agent/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/hermes-seo-agent/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/studying/hermes-seo-agent.png → 200 image/png 1200×630 224772 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/codex-obsolete-9-moves/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/codex-obsolete-9-moves/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/codex-obsolete-9-moves/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/studying/codex-obsolete-9-moves.png → 200 image/png 1200×630 231208 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/chatgpt-sites/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/chatgpt-sites/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/chatgpt-sites/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/studying/chatgpt-sites.png → 200 image/png 1200×630 225144 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/book-to-skill/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/book-to-skill/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/book-to-skill/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/studying/book-to-skill.png → 200 image/png 1200×630 201930 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/claude-code-6-new-rules/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/claude-code-6-new-rules/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/claude-code-6-new-rules/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/studying/claude-code-6-new-rules.png → 200 image/png 1200×630 226900 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/claude-code-make-money/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/claude-code-make-money/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/claude-code-make-money/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/studying/claude-code-make-money.png → 200 image/png 1200×630 211401 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/build-ai-agents-full-course/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/build-ai-agents-full-course/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/build-ai-agents-full-course/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/studying/build-ai-agents-full-course.png → 200 image/png 1200×630 219908 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/codex-voice-jarvis/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/codex-voice-jarvis/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/codex-voice-jarvis/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/studying/codex-voice-jarvis.png → 200 image/png 1200×630 228236 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/pi-coding-agent/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/pi-coding-agent/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/pi-coding-agent/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/studying/pi-coding-agent.png → 200 image/png 1200×630 210304 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/ships-100x-faster/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/ships-100x-faster/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/ships-100x-faster/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/studying/ships-100x-faster.png → 200 image/png 1200×630 211332 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/forget-loop-engineering/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/forget-loop-engineering/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/forget-loop-engineering/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/studying/forget-loop-engineering.png → 200 image/png 1200×630 223342 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/mark-cuban-ai-bubble/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/mark-cuban-ai-bubble/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/mark-cuban-ai-bubble/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/studying/mark-cuban-ai-bubble.png → 200 image/png 1200×630 209939 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/hormozi-build-this-instead/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/hormozi-build-this-instead/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/hormozi-build-this-instead/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/studying/hormozi-build-this-instead.png → 200 image/png 1200×630 209713 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/old-seo-collapsing/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/old-seo-collapsing/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/old-seo-collapsing/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/studying/old-seo-collapsing.png → 200 image/png 1200×630 230531 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/seo-2026-ai-era/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/seo-2026-ai-era/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/seo-2026-ai-era/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/studying/seo-2026-ai-era.png → 200 image/png 1200×630 201432 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/aeo-geo-aio/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/aeo-geo-aio/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/aeo-geo-aio/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/studying/aeo-geo-aio.png → 200 image/png 1200×630 210603 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/smith-chart-scariest-ee/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/smith-chart-scariest-ee/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/smith-chart-scariest-ee/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/studying/smith-chart-scariest-ee.png → 200 image/png 1200×630 206222 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/aeo-80-percent/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/aeo-80-percent/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/aeo-80-percent/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/studying/aeo-80-percent.png → 200 image/png 1200×630 203279 B"
+    },
+    {
+      "scope": "https://mj2.pro/lab/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/lab/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/lab/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/lab.png → 200 image/png 1200×630 193269 B"
+    },
+    {
+      "scope": "https://mj2.pro/lab/population-workbench/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/lab/population-workbench/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/lab/population-workbench/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/lab/population-workbench.png → 200 image/png 1200×630 203345 B"
+    },
+    {
+      "scope": "https://mj2.pro/lab/population-workbench/methodology/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/lab/population-workbench/methodology/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/lab/population-workbench/methodology/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/lab/population-workbench/methodology.png → 200 image/png 1200×630 198629 B"
+    },
+    {
+      "scope": "https://mj2.pro/clients/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/clients/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/clients/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/clients.png → 200 image/png 1200×630 180356 B"
+    },
+    {
+      "scope": "https://mj2.pro/services/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/services/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/services/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/services.png → 200 image/png 1200×630 202166 B"
+    },
+    {
+      "scope": "https://mj2.pro/products/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/products/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/products/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/products.png → 200 image/png 1200×630 178203 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/optimizing-for-ads-in-free-llm-answers/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/optimizing-for-ads-in-free-llm-answers/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/optimizing-for-ads-in-free-llm-answers/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/viz/llm-ads-mandala/ads-in-free-llm-answers-data-mandala-1200x630.png → 200 image/png 1200×630 291515 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/growth-title-market/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/growth-title-market/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/growth-title-market/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/growth-title-market.png → 200 image/png 1200×630 527165 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/b2b-vs-b2c-by-vertical/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/b2b-vs-b2c-by-vertical/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/b2b-vs-b2c-by-vertical/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/b2b-vs-b2c-by-vertical.png → 200 image/png 1200×630 413627 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/statistician-vs-data-scientist/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/statistician-vs-data-scientist/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/statistician-vs-data-scientist/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/statistician-vs-data-scientist.png → 200 image/png 1200×630 457090 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/search-results-by-intent/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/search-results-by-intent/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/search-results-by-intent/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/search-results-by-intent.png → 200 image/png 1200×630 447589 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/pocock-ai-coding-workflow/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/pocock-ai-coding-workflow/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/pocock-ai-coding-workflow/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/studying/pocock-ai-coding-workflow.png → 200 image/png 1200×630 206795 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/fde-1m-ai-job/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/fde-1m-ai-job/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/fde-1m-ai-job/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/studying/fde-1m-ai-job.png → 200 image/png 1200×630 200279 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/pocock-agentic-workflow/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/pocock-agentic-workflow/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/pocock-agentic-workflow/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/studying/pocock-agentic-workflow.png → 200 image/png 1200×630 225522 B"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/figma-shortest-course/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/figma-shortest-course/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/figma-shortest-course/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/blog/studying/figma-shortest-course.png → 200 image/png 1200×630 206902 B"
+    },
+    {
+      "scope": "https://mj2.pro/es/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/es/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/es/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/es/home.png → 200 image/png 1200×630 204616 B"
+    },
+    {
+      "scope": "https://mj2.pro/es/services/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/es/services/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/es/services/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/es/services.png → 200 image/png 1200×630 200133 B"
+    },
+    {
+      "scope": "https://mj2.pro/es/contact/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/es/contact/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/es/contact/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/es/contact.png → 200 image/png 1200×630 197905 B"
+    },
+    {
+      "scope": "https://mj2.pro/es/blog/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/es/blog/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/es/blog/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/es/blog.png → 200 image/png 1200×630 231957 B"
+    },
+    {
+      "scope": "https://mj2.pro/es/blog/gbp-2026-ai-grounding/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/es/blog/gbp-2026-ai-grounding/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/es/blog/gbp-2026-ai-grounding/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/es/blog/gbp-2026-ai-grounding.png → 200 image/png 1200×630 257708 B"
+    },
+    {
+      "scope": "https://mj2.pro/viz/search-results-by-intent-mandala/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/viz/search-results-by-intent-mandala/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/viz/search-results-by-intent-mandala/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/viz/search-results-by-intent-mandala.png → 200 image/png 1200×630 424652 B"
+    },
+    {
+      "scope": "https://mj2.pro/viz/search-results-by-intent-journey/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/viz/search-results-by-intent-journey/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/viz/search-results-by-intent-journey/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/viz/search-results-by-intent-journey.png → 200 image/png 1200×630 462475 B"
+    },
+    {
+      "scope": "https://mj2.pro/viz/llm-ads-mandala/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/viz/llm-ads-mandala/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/viz/llm-ads-mandala/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/viz/llm-ads-mandala.png → 200 image/png 1200×630 424941 B"
+    },
+    {
+      "scope": "https://mj2.pro/viz/growth-title-market/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/viz/growth-title-market/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/viz/growth-title-market/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/viz/growth-title-market.png → 200 image/png 1200×630 530143 B"
+    },
+    {
+      "scope": "https://mj2.pro/viz/b2b-vs-b2c-by-vertical/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/viz/b2b-vs-b2c-by-vertical/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/viz/b2b-vs-b2c-by-vertical/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/viz/b2b-vs-b2c-by-vertical.png → 200 image/png 1200×630 398372 B"
+    },
+    {
+      "scope": "https://mj2.pro/viz/statistician-vs-data-scientist/",
+      "check": "HTTP 200",
+      "pass": true,
+      "detail": "status 200"
+    },
+    {
+      "scope": "https://mj2.pro/viz/statistician-vs-data-scientist/",
+      "check": "full share tag set, twitter:card summary_large_image",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/viz/statistician-vs-data-scientist/",
+      "check": "og:image is a 1200×630 card under 5 MB, not the headshot",
+      "pass": true,
+      "detail": "https://mj2.pro/og/viz/statistician-vs-data-scientist.png → 200 image/png 1200×630 437464 B"
+    },
+    {
+      "scope": "/blog/b2b-vs-b2c-by-vertical/",
+      "check": "narration player present; audio 200 audio/mp4 with the recorded size",
+      "pass": true,
+      "detail": "player true, 200 audio/mp4 6285691/6285691"
+    },
+    {
+      "scope": "/blog/gbp-2026-ai-grounding/",
+      "check": "narration player present; audio 200 audio/mp4 with the recorded size",
+      "pass": true,
+      "detail": "player true, 200 audio/mp4 2485557/2485557"
+    },
+    {
+      "scope": "/blog/growth-title-market/",
+      "check": "narration player present; audio 200 audio/mp4 with the recorded size",
+      "pass": true,
+      "detail": "player true, 200 audio/mp4 3535016/3535016"
+    },
+    {
+      "scope": "/blog/intrepid-agency-spotlight/",
+      "check": "narration player present; audio 200 audio/mp4 with the recorded size",
+      "pass": true,
+      "detail": "player true, 200 audio/mp4 6051245/6051245"
+    },
+    {
+      "scope": "/blog/mitchell-miller-journey/",
+      "check": "narration player present; audio 200 audio/mp4 with the recorded size",
+      "pass": true,
+      "detail": "player true, 200 audio/mp4 1216424/1216424"
+    },
+    {
+      "scope": "/blog/multi-agent-billing-traps/",
+      "check": "narration player present; audio 200 audio/mp4 with the recorded size",
+      "pass": true,
+      "detail": "player true, 200 audio/mp4 2062977/2062977"
+    },
+    {
+      "scope": "/blog/optimizing-for-ads-in-free-llm-answers/",
+      "check": "narration player present; audio 200 audio/mp4 with the recorded size",
+      "pass": true,
+      "detail": "player true, 200 audio/mp4 5748088/5748088"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/",
+      "check": "narration player present; audio 200 audio/mp4 with the recorded size",
+      "pass": true,
+      "detail": "player true, 200 audio/mp4 8303873/8303873"
+    },
+    {
+      "scope": "/blog/statistician-vs-data-scientist/",
+      "check": "narration player present; audio 200 audio/mp4 with the recorded size",
+      "pass": true,
+      "detail": "player true, 200 audio/mp4 2558613/2558613"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/",
+      "check": "narration player present; audio 200 audio/mp4 with the recorded size",
+      "pass": true,
+      "detail": "player true, 200 audio/mp4 3397903/3397903"
+    },
+    {
+      "scope": "https://mj2.pro/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/ es=/es/ x-default=/"
+    },
+    {
+      "scope": "https://mj2.pro/about/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/about/ x-default=/about/"
+    },
+    {
+      "scope": "https://mj2.pro/contact/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/contact/ es=/es/contact/ x-default=/contact/"
+    },
+    {
+      "scope": "https://mj2.pro/collab-ideas/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/collab-ideas/ x-default=/collab-ideas/"
+    },
+    {
+      "scope": "https://mj2.pro/resume/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/resume/ x-default=/resume/"
+    },
+    {
+      "scope": "https://mj2.pro/systems/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/systems/ x-default=/systems/"
+    },
+    {
+      "scope": "https://mj2.pro/work/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/work/ x-default=/work/"
+    },
+    {
+      "scope": "https://mj2.pro/selected-builds/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/selected-builds/ x-default=/selected-builds/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/ es=/es/blog/ x-default=/blog/"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/case-studies/ x-default=/case-studies/"
+    },
+    {
+      "scope": "https://mj2.pro/aeo-geo/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/aeo-geo/ x-default=/aeo-geo/"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/apple-seasonal-search/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/case-studies/apple-seasonal-search/ x-default=/case-studies/apple-seasonal-search/"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/apple-store-amr/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/case-studies/apple-store-amr/ x-default=/case-studies/apple-store-amr/"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/apple-education-store/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/case-studies/apple-education-store/ x-default=/case-studies/apple-education-store/"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/stanford-myhealth-seo/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/case-studies/stanford-myhealth-seo/ x-default=/case-studies/stanford-myhealth-seo/"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/commonspirit-locations-conversion-engine/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/case-studies/commonspirit-locations-conversion-engine/ x-default=/case-studies/commonspirit-locations-conversion-engine/"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/commonspirit-network-consolidation/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/case-studies/commonspirit-network-consolidation/ x-default=/case-studies/commonspirit-network-consolidation/"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/commonspirit-medical-content-library/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/case-studies/commonspirit-medical-content-library/ x-default=/case-studies/commonspirit-medical-content-library/"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/aem-content-fragmentation-architecture/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/case-studies/aem-content-fragmentation-architecture/ x-default=/case-studies/aem-content-fragmentation-architecture/"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/yext-entity-data-foundation/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/case-studies/yext-entity-data-foundation/ x-default=/case-studies/yext-entity-data-foundation/"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/claritypulse-ai-reporting/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/case-studies/claritypulse-ai-reporting/ x-default=/case-studies/claritypulse-ai-reporting/"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/searchforge-content-intelligence/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/case-studies/searchforge-content-intelligence/ x-default=/case-studies/searchforge-content-intelligence/"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/actionthread-transcript-execution/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/case-studies/actionthread-transcript-execution/ x-default=/case-studies/actionthread-transcript-execution/"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/aeo-visibility-infrastructure/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/case-studies/aeo-visibility-infrastructure/ x-default=/case-studies/aeo-visibility-infrastructure/"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/domainsignal/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/case-studies/domainsignal/ x-default=/case-studies/domainsignal/"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/date-night/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/case-studies/date-night/ x-default=/case-studies/date-night/"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/vet-advocates-growth-system/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/case-studies/vet-advocates-growth-system/ x-default=/case-studies/vet-advocates-growth-system/"
+    },
+    {
+      "scope": "https://mj2.pro/case-studies/sfc-surf-school/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/case-studies/sfc-surf-school/ x-default=/case-studies/sfc-surf-school/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/gbp-2026-ai-grounding/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/gbp-2026-ai-grounding/ es=/es/blog/gbp-2026-ai-grounding/ x-default=/blog/gbp-2026-ai-grounding/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/multi-agent-billing-traps/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/multi-agent-billing-traps/ x-default=/blog/multi-agent-billing-traps/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/intrepid-agency-spotlight/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/intrepid-agency-spotlight/ x-default=/blog/intrepid-agency-spotlight/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/mitchell-miller-journey/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/mitchell-miller-journey/ x-default=/blog/mitchell-miller-journey/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/hermes-concepts-field-guide/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/studying/hermes-concepts-field-guide/ x-default=/blog/studying/hermes-concepts-field-guide/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/claude-watermark-seo/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/studying/claude-watermark-seo/ x-default=/blog/studying/claude-watermark-seo/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/all-in-ai-money-stack/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/studying/all-in-ai-money-stack/ x-default=/blog/studying/all-in-ai-money-stack/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/hermes-seo-agent/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/studying/hermes-seo-agent/ x-default=/blog/studying/hermes-seo-agent/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/codex-obsolete-9-moves/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/studying/codex-obsolete-9-moves/ x-default=/blog/studying/codex-obsolete-9-moves/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/chatgpt-sites/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/studying/chatgpt-sites/ x-default=/blog/studying/chatgpt-sites/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/book-to-skill/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/studying/book-to-skill/ x-default=/blog/studying/book-to-skill/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/claude-code-6-new-rules/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/studying/claude-code-6-new-rules/ x-default=/blog/studying/claude-code-6-new-rules/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/claude-code-make-money/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/studying/claude-code-make-money/ x-default=/blog/studying/claude-code-make-money/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/build-ai-agents-full-course/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/studying/build-ai-agents-full-course/ x-default=/blog/studying/build-ai-agents-full-course/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/codex-voice-jarvis/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/studying/codex-voice-jarvis/ x-default=/blog/studying/codex-voice-jarvis/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/pi-coding-agent/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/studying/pi-coding-agent/ x-default=/blog/studying/pi-coding-agent/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/ships-100x-faster/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/studying/ships-100x-faster/ x-default=/blog/studying/ships-100x-faster/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/forget-loop-engineering/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/studying/forget-loop-engineering/ x-default=/blog/studying/forget-loop-engineering/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/mark-cuban-ai-bubble/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/studying/mark-cuban-ai-bubble/ x-default=/blog/studying/mark-cuban-ai-bubble/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/hormozi-build-this-instead/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/studying/hormozi-build-this-instead/ x-default=/blog/studying/hormozi-build-this-instead/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/old-seo-collapsing/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/studying/old-seo-collapsing/ x-default=/blog/studying/old-seo-collapsing/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/seo-2026-ai-era/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/studying/seo-2026-ai-era/ x-default=/blog/studying/seo-2026-ai-era/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/aeo-geo-aio/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/studying/aeo-geo-aio/ x-default=/blog/studying/aeo-geo-aio/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/smith-chart-scariest-ee/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/studying/smith-chart-scariest-ee/ x-default=/blog/studying/smith-chart-scariest-ee/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/aeo-80-percent/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/studying/aeo-80-percent/ x-default=/blog/studying/aeo-80-percent/"
+    },
+    {
+      "scope": "https://mj2.pro/lab/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/lab/ x-default=/lab/"
+    },
+    {
+      "scope": "https://mj2.pro/lab/population-workbench/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/lab/population-workbench/ x-default=/lab/population-workbench/"
+    },
+    {
+      "scope": "https://mj2.pro/lab/population-workbench/methodology/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/lab/population-workbench/methodology/ x-default=/lab/population-workbench/methodology/"
+    },
+    {
+      "scope": "https://mj2.pro/clients/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/clients/ x-default=/clients/"
+    },
+    {
+      "scope": "https://mj2.pro/services/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/services/ es=/es/services/ x-default=/services/"
+    },
+    {
+      "scope": "https://mj2.pro/products/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/products/ x-default=/products/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/optimizing-for-ads-in-free-llm-answers/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/optimizing-for-ads-in-free-llm-answers/ x-default=/blog/optimizing-for-ads-in-free-llm-answers/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/growth-title-market/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/growth-title-market/ x-default=/blog/growth-title-market/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/b2b-vs-b2c-by-vertical/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/b2b-vs-b2c-by-vertical/ x-default=/blog/b2b-vs-b2c-by-vertical/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/statistician-vs-data-scientist/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/statistician-vs-data-scientist/ x-default=/blog/statistician-vs-data-scientist/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/search-results-by-intent/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/search-results-by-intent/ x-default=/blog/search-results-by-intent/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/pocock-ai-coding-workflow/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/studying/pocock-ai-coding-workflow/ x-default=/blog/studying/pocock-ai-coding-workflow/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/fde-1m-ai-job/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/studying/fde-1m-ai-job/ x-default=/blog/studying/fde-1m-ai-job/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/pocock-agentic-workflow/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/studying/pocock-agentic-workflow/ x-default=/blog/studying/pocock-agentic-workflow/"
+    },
+    {
+      "scope": "https://mj2.pro/blog/studying/figma-shortest-course/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/studying/figma-shortest-course/ x-default=/blog/studying/figma-shortest-course/"
+    },
+    {
+      "scope": "https://mj2.pro/es/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/ es=/es/ x-default=/"
+    },
+    {
+      "scope": "https://mj2.pro/es/services/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/services/ es=/es/services/ x-default=/services/"
+    },
+    {
+      "scope": "https://mj2.pro/es/contact/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/contact/ es=/es/contact/ x-default=/contact/"
+    },
+    {
+      "scope": "https://mj2.pro/es/blog/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/ es=/es/blog/ x-default=/blog/"
+    },
+    {
+      "scope": "https://mj2.pro/es/blog/gbp-2026-ai-grounding/",
+      "check": "hreflang self-referencing, reciprocal, x-default to English, matches the sitemap",
+      "pass": true,
+      "detail": "en=/blog/gbp-2026-ai-grounding/ es=/es/blog/gbp-2026-ai-grounding/ x-default=/blog/gbp-2026-ai-grounding/"
+    }
+  ]
+}

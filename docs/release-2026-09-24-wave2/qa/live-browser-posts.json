@@ -1,0 +1,250 @@
+{
+  "generated": "2026-09-25T04:17:44.886Z",
+  "base": "https://mj2.pro",
+  "checks": 40,
+  "passed": 40,
+  "failed": 0,
+  "failures": [],
+  "results": [
+    {
+      "scope": "https://mj2.pro/blog/optimizing-for-ads-in-free-llm-answers/@1360",
+      "check": "post 200 and its living infographic loads in a same-origin frame",
+      "pass": true,
+      "detail": "200 · /viz/llm-ads-mandala/?parent=https%3A%2F%2Fmj2.pro%2Fblog%2Foptimizing-for-ads-in-free-llm-answers%2F"
+    },
+    {
+      "scope": "https://mj2.pro/blog/optimizing-for-ads-in-free-llm-answers/@1360",
+      "check": "frame fits its content; no horizontal overflow in the frame or the page",
+      "pass": true,
+      "detail": "973px for 971px, frame 702/702, page 1360/1360"
+    },
+    {
+      "scope": "https://mj2.pro/blog/optimizing-for-ads-in-free-llm-answers/@1360",
+      "check": "a real click lands the post on #assistant-google-ai-mode below the sticky header",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/optimizing-for-ads-in-free-llm-answers/#assistant-google-ai-mode · #assistant-google-ai-mode top=110"
+    },
+    {
+      "scope": "https://mj2.pro/blog/optimizing-for-ads-in-free-llm-answers/@1360",
+      "check": "narration audio element present",
+      "pass": true,
+      "detail": "/audio/blog/optimizing-for-ads-in-free-llm-answers.m4a"
+    },
+    {
+      "scope": "https://mj2.pro/blog/optimizing-for-ads-in-free-llm-answers/@1360",
+      "check": "no console or page errors (post and frame)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/optimizing-for-ads-in-free-llm-answers/@390",
+      "check": "post 200 and its living infographic loads in a same-origin frame",
+      "pass": true,
+      "detail": "200 · /viz/llm-ads-mandala/?parent=https%3A%2F%2Fmj2.pro%2Fblog%2Foptimizing-for-ads-in-free-llm-answers%2F"
+    },
+    {
+      "scope": "https://mj2.pro/blog/optimizing-for-ads-in-free-llm-answers/@390",
+      "check": "frame fits its content; no horizontal overflow in the frame or the page",
+      "pass": true,
+      "detail": "593px for 591px, frame 356/356, page 390/390"
+    },
+    {
+      "scope": "https://mj2.pro/blog/optimizing-for-ads-in-free-llm-answers/@390",
+      "check": "a real click lands the post on #assistant-google-ai-mode below the sticky header",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/optimizing-for-ads-in-free-llm-answers/#assistant-google-ai-mode · #assistant-google-ai-mode top=110"
+    },
+    {
+      "scope": "https://mj2.pro/blog/optimizing-for-ads-in-free-llm-answers/@390",
+      "check": "narration audio element present",
+      "pass": true,
+      "detail": "/audio/blog/optimizing-for-ads-in-free-llm-answers.m4a"
+    },
+    {
+      "scope": "https://mj2.pro/blog/optimizing-for-ads-in-free-llm-answers/@390",
+      "check": "no console or page errors (post and frame)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/growth-title-market/@1360",
+      "check": "post 200 and its living infographic loads in a same-origin frame",
+      "pass": true,
+      "detail": "200 · /viz/growth-title-market/?parent=https%3A%2F%2Fmj2.pro%2Fblog%2Fgrowth-title-market%2F"
+    },
+    {
+      "scope": "https://mj2.pro/blog/growth-title-market/@1360",
+      "check": "frame fits its content; no horizontal overflow in the frame or the page",
+      "pass": true,
+      "detail": "1006px for 1004px, frame 702/702, page 1360/1360"
+    },
+    {
+      "scope": "https://mj2.pro/blog/growth-title-market/@1360",
+      "check": "a real click lands the post on #title-director-of-seo below the sticky header",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/growth-title-market/#title-director-of-seo · #title-director-of-seo top=110"
+    },
+    {
+      "scope": "https://mj2.pro/blog/growth-title-market/@1360",
+      "check": "narration audio element present",
+      "pass": true,
+      "detail": "/audio/blog/growth-title-market.m4a"
+    },
+    {
+      "scope": "https://mj2.pro/blog/growth-title-market/@1360",
+      "check": "no console or page errors (post and frame)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/growth-title-market/@390",
+      "check": "post 200 and its living infographic loads in a same-origin frame",
+      "pass": true,
+      "detail": "200 · /viz/growth-title-market/?parent=https%3A%2F%2Fmj2.pro%2Fblog%2Fgrowth-title-market%2F"
+    },
+    {
+      "scope": "https://mj2.pro/blog/growth-title-market/@390",
+      "check": "frame fits its content; no horizontal overflow in the frame or the page",
+      "pass": true,
+      "detail": "615px for 613px, frame 356/356, page 390/390"
+    },
+    {
+      "scope": "https://mj2.pro/blog/growth-title-market/@390",
+      "check": "a real click lands the post on #title-director-of-seo below the sticky header",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/growth-title-market/#title-director-of-seo · #title-director-of-seo top=110"
+    },
+    {
+      "scope": "https://mj2.pro/blog/growth-title-market/@390",
+      "check": "narration audio element present",
+      "pass": true,
+      "detail": "/audio/blog/growth-title-market.m4a"
+    },
+    {
+      "scope": "https://mj2.pro/blog/growth-title-market/@390",
+      "check": "no console or page errors (post and frame)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/b2b-vs-b2c-by-vertical/@1360",
+      "check": "post 200 and its living infographic loads in a same-origin frame",
+      "pass": true,
+      "detail": "200 · /viz/b2b-vs-b2c-by-vertical/?parent=https%3A%2F%2Fmj2.pro%2Fblog%2Fb2b-vs-b2c-by-vertical%2F"
+    },
+    {
+      "scope": "https://mj2.pro/blog/b2b-vs-b2c-by-vertical/@1360",
+      "check": "frame fits its content; no horizontal overflow in the frame or the page",
+      "pass": true,
+      "detail": "2074px for 2072px, frame 704/704, page 1360/1360"
+    },
+    {
+      "scope": "https://mj2.pro/blog/b2b-vs-b2c-by-vertical/@1360",
+      "check": "a real click lands the post on #vertical-saas-software below the sticky header",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/b2b-vs-b2c-by-vertical/#vertical-saas-software · #vertical-saas-software top=110"
+    },
+    {
+      "scope": "https://mj2.pro/blog/b2b-vs-b2c-by-vertical/@1360",
+      "check": "narration audio element present",
+      "pass": true,
+      "detail": "/audio/blog/b2b-vs-b2c-by-vertical.m4a"
+    },
+    {
+      "scope": "https://mj2.pro/blog/b2b-vs-b2c-by-vertical/@1360",
+      "check": "no console or page errors (post and frame)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/b2b-vs-b2c-by-vertical/@390",
+      "check": "post 200 and its living infographic loads in a same-origin frame",
+      "pass": true,
+      "detail": "200 · /viz/b2b-vs-b2c-by-vertical/?parent=https%3A%2F%2Fmj2.pro%2Fblog%2Fb2b-vs-b2c-by-vertical%2F"
+    },
+    {
+      "scope": "https://mj2.pro/blog/b2b-vs-b2c-by-vertical/@390",
+      "check": "frame fits its content; no horizontal overflow in the frame or the page",
+      "pass": true,
+      "detail": "2102px for 2100px, frame 358/358, page 390/390"
+    },
+    {
+      "scope": "https://mj2.pro/blog/b2b-vs-b2c-by-vertical/@390",
+      "check": "a real click lands the post on #vertical-saas-software below the sticky header",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/b2b-vs-b2c-by-vertical/#vertical-saas-software · #vertical-saas-software top=110"
+    },
+    {
+      "scope": "https://mj2.pro/blog/b2b-vs-b2c-by-vertical/@390",
+      "check": "narration audio element present",
+      "pass": true,
+      "detail": "/audio/blog/b2b-vs-b2c-by-vertical.m4a"
+    },
+    {
+      "scope": "https://mj2.pro/blog/b2b-vs-b2c-by-vertical/@390",
+      "check": "no console or page errors (post and frame)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/statistician-vs-data-scientist/@1360",
+      "check": "post 200 and its living infographic loads in a same-origin frame",
+      "pass": true,
+      "detail": "200 · /viz/statistician-vs-data-scientist/?parent=https%3A%2F%2Fmj2.pro%2Fblog%2Fstatistician-vs-data-scientist%2F"
+    },
+    {
+      "scope": "https://mj2.pro/blog/statistician-vs-data-scientist/@1360",
+      "check": "frame fits its content; no horizontal overflow in the frame or the page",
+      "pass": true,
+      "detail": "929px for 927px, frame 704/704, page 1360/1360"
+    },
+    {
+      "scope": "https://mj2.pro/blog/statistician-vs-data-scientist/@1360",
+      "check": "a real click lands the post on #role-pay below the sticky header",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/statistician-vs-data-scientist/#role-pay · #role-pay top=110"
+    },
+    {
+      "scope": "https://mj2.pro/blog/statistician-vs-data-scientist/@1360",
+      "check": "narration audio element present",
+      "pass": true,
+      "detail": "/audio/blog/statistician-vs-data-scientist.m4a"
+    },
+    {
+      "scope": "https://mj2.pro/blog/statistician-vs-data-scientist/@1360",
+      "check": "no console or page errors (post and frame)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "https://mj2.pro/blog/statistician-vs-data-scientist/@390",
+      "check": "post 200 and its living infographic loads in a same-origin frame",
+      "pass": true,
+      "detail": "200 · /viz/statistician-vs-data-scientist/?parent=https%3A%2F%2Fmj2.pro%2Fblog%2Fstatistician-vs-data-scientist%2F"
+    },
+    {
+      "scope": "https://mj2.pro/blog/statistician-vs-data-scientist/@390",
+      "check": "frame fits its content; no horizontal overflow in the frame or the page",
+      "pass": true,
+      "detail": "507px for 505px, frame 358/358, page 390/390"
+    },
+    {
+      "scope": "https://mj2.pro/blog/statistician-vs-data-scientist/@390",
+      "check": "a real click lands the post on #role-pay below the sticky header",
+      "pass": true,
+      "detail": "https://mj2.pro/blog/statistician-vs-data-scientist/#role-pay · #role-pay top=110"
+    },
+    {
+      "scope": "https://mj2.pro/blog/statistician-vs-data-scientist/@390",
+      "check": "narration audio element present",
+      "pass": true,
+      "detail": "/audio/blog/statistician-vs-data-scientist.m4a"
+    },
+    {
+      "scope": "https://mj2.pro/blog/statistician-vs-data-scientist/@390",
+      "check": "no console or page errors (post and frame)",
+      "pass": true,
+      "detail": ""
+    }
+  ]
+}

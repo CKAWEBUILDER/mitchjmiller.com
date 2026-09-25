@@ -52,6 +52,20 @@ Last, the canonical checkout's uncommitted and untracked work was copied in and 
 - The release output was compared with a rebuild of `6ad50ce`, which reproduces the wave-2 artifact file for file except the two path-dependent lab island pages. It is byte-identical except for one dead text-transform utility rule, which no page uses and which the Tailwind scan fix no longer emits. That renames the one stylesheet (`AgencyLayout.*.css`), so all 77 shell documents differ only in that `href`. Tailwind still scans the root records and `handoffs/`; only `src/ds`, `.design-sync`, `content-studio` and `docs` are excluded. A word in a record can therefore still add a dead utility: an earlier draft of this handoff named that utility's class, and the rule came back until the wording changed.
 - Worker: `node scripts/test-stripe.mjs` 12/12, `node scripts/test-limits.mjs` 9/9 (in `cloudflare/api-worker`).
 
+## Outcome after the push (2026-09-25, 04:43–04:55 EDT)
+
+- `main` moved `6ad50ce` → `c96e913` (ported commits, records, the copy) → `59e4c31`, both fast-forwards. `59e4c31` syncs three files the content lane wrote between 04:39 and 04:43 (the saturated-market drafts and `routines/runs/2026-09-25-critic-saturated-market.md`). Branch `claude/reconcile-2026-09-25` was pushed at the same tip, and both archive tags were pushed.
+- GitHub Actions on the push: Cloudflare Worker run `36114466582` and Pages mirror run `36114466660` each logged "CLOUDFLARE_API_TOKEN / CLOUDFLARE_ACCOUNT_ID not set; skipping" and skipped every deploy step. `gh-pages` is untouched at `94016fa`.
+- The canonical checkout switched from `claude/agency-redesign` to `main` `59e4c31` at 04:47 EDT, with no stash and nothing discarded.
+  - Before the switch, each of its 119 uncommitted files was checked. 117 were byte-identical to `main`. For PROJECT.md and the parity-design handoff, the added paragraphs were confirmed present on `main`.
+  - Those files were staged, `git checkout main` ran and `git pull --ff-only` found nothing to pull. `git status` is clean, and the local `claude/agency-redesign` ref is kept.
+  - Stale worktree entries for the deleted folders `/private/tmp/mj2-ghpages` and `/private/tmp/mj2-release.pqt3WZ` were pruned; their commits `0b9073d` and `bb32728` are on `origin`.
+  - An insurance copy of the 119 files, with a `README.txt`, is at `~/Archive/2026-09-25/mitchjmiller-html-migration-pre-main-switch/` (24 MB).
+- Another agent created `~/Documents/mitchjmiller-html-migration-UNCOMMITTED-BACKUP-2026-09-25` at 04:36 EDT (117 files, PROJECT.md at its root). 113 of its files are byte-identical to `main`; the other 4 are older versions of PROJECT.md, the parity-design handoff and two saturated-market drafts, all newer on `main`. `where.py --audit` lists it. It was left for its owner to move to `~/Archive/2026-09-25/`.
+- The second checkout `~/Documents/mitchjmiller.com` was not moved (see Result) and nothing in it was changed.
+- Registry: in `~/Documents/ai-os`, the PROJECTS.md row for mitchjmiller.com and BACKLOG #33 and #37 were updated. They are not committed, because that repository is on `codex/m2-ai-search-crm-research` with other agents' pending edits. `where.py mitchjmiller.com` resolves to the canonical checkout. `where.py --audit` still lists three mitchjmiller entries: `~/Documents/mitchjmiller.com` and its `content-studio/AGENTS.md` (kept by Mitch's decision) and the other agent's backup folder.
+- Harness note: Tailwind's automatic source scan still reads the root records and `handoffs/`, so ordinary words in those files can emit dead utilities. A candidate follow-up is adding `@source not` lines for `handoffs` and the root `*.md` files in `baseline/src/index.css`. That changes the release CSS, so it belongs in a release that is reviewed on its own.
+
 ## Rule going forward
 
 - Work only in `/Users/mitchellmiler/Documents/mitchjmiller-html-migration`. To start a task: `git fetch origin && git switch main && git pull --ff-only`, then `git switch -c claude/<task>` (or `codex/<task>`).

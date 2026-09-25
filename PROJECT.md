@@ -4,13 +4,13 @@ Production remains https://mj2.pro/ from GitHub Pages gh-pages 94016fa; this wor
 
 | Item | Current state |
 |---|---|
-| M² source | /Users/mitchellmiler/Documents/mitchjmiller-html-migration, repository CKAWEBUILDER/mitchjmiller.com; this task branch is based on origin/main 4126e78. |
-| Personal source | /Users/mitchellmiler/Documents/mitchjmiller.com, separate public repository CKAWEBUILDER/mitchjmiller-portfolio created; main source commit e34696d pushed; deployment remains pending. |
+| M² source | /Users/mitchellmiler/Documents/mitchjmiller-html-migration, repository CKAWEBUILDER/mitchjmiller.com; task branch codex/personal-site-split-20260925 (32d12eb) was fast-forwarded and pushed to main on Sep 25, 2026. |
+| Personal source | /Users/mitchellmiler/Documents/mitchjmiller.com, separate public repository CKAWEBUILDER/mitchjmiller-portfolio; site-source commit e34696d is pushed; release records are current through 777bee6; deployment remains pending. |
 | M² changes | Profile links to LinkedIn and the personal portfolio; resume chooser removed from shared shell and legacy source; /resume/ retained as a transfer page; old direct PDF URLs remain available during transition; Spanish profile/contact updated. |
 | Personal changes | One-page static profile with selected work, career history, LinkedIn and one PDF (Mitchell-Miller-Search-Systems-Background-2026.pdf). |
-| Verification | M² typecheck passed. Release-candidate build passed parity 57/57, 73 sitemap URLs, agency checks across 77 shell documents, and standards checks across 84 documents. Local probes returned 200 for M² home and /resume/. Personal home, CSS and the one PDF each returned 200; copied PDF SHA-256 matches the approved source. The build reports a pre-existing Vite chunk-over-500-kB warning. |
+| Verification | M² typecheck passed. Release-candidate build passed parity 57/57, 73 sitemap URLs, agency checks across 77 shell documents, and standards checks across 84 documents. Local probes returned 200 for M² home and /resume/. Personal home, CSS and the one PDF each returned 200; copied PDF SHA-256 matches the approved source. The build emitted a Vite chunk-over-500-kB warning. |
 | Crawl input | A fresh crawl export was not present in the canonical project, Downloads or the shared workspace during this task. Work here follows the explicit resume/profile direction; crawl-driven SEO changes remain out of scope until the export is available. |
-| Gated, not done | No production deployment, DNS edit or indexing request. Preserve all five MX records, Replit verification TXT and Namecheap SPF TXT. Show the local release candidate and confirmed DNS/HTTPS plan for review before publication, following RELEASE-READY.md. |
+| Gated, not done | M² main source is 32d12eb; production GitHub Pages remains gh-pages 94016fa. No production deployment, DNS edit or indexing request. Proposed personal-domain cutover: replace only the Namecheap root forwarding A with 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153; add www CNAME ckawebuilder.github.io; preserve Namecheap NS, all five MX, Replit verification TXT and Namecheap SPF TXT. Show the local release candidate and confirmed DNS/HTTPS plan for review before publication, following RELEASE-READY.md. |
 | Detailed record | Personal portfolio handoff: /Users/mitchellmiler/Documents/mitchjmiller.com/handoffs/2026-09-25-personal-portfolio.md; M² split handoff: handoffs/2026-09-25-personal-site-split.md. |
 
 # HISTORY — September 25, 2026: one-checkout reconciliation

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>I Audited 54 Companies Selling AI Visibility — the two layers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&display=swap">
+<style>
+:root{
+  color-scheme:dark;
+  --ink:#080C14; --ink-2:#0E1420; --rule:#26314A; --rule-soft:#18202F;
+  --paper:#EFECE4; --paper-2:#C4C9D4; --dim:#8892A4; --faint:#6E7889;
+  --e2:#3FA08F; --e3:#D99A34; --e4:#E8533C;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --disp:"Bricolage Grotesque","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--ink)}
+body{font-family:var(--serif);color:var(--paper);-webkit-font-smoothing:antialiased}
+#app{max-width:1080px;margin:0 auto;padding:22px 18px 34px}
+h1{font-family:var(--disp);font-size:clamp(26px,4.6vw,40px);font-weight:800;letter-spacing:-.032em;
+   line-height:1.02;margin:0 0 12px;text-wrap:balance}
+h1 em{font-style:normal;color:var(--e4)}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+   color:var(--faint);margin-bottom:10px}
+.sub{font-size:clamp(15px,2.2vw,18px);line-height:1.5;color:var(--paper-2);font-weight:300;max-width:66ch;margin:0 0 6px}
+.hint{font-family:var(--mono);font-size:12px;color:var(--e4);letter-spacing:.06em;margin:14px 0 4px}
+
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+@media (max-width:760px){.cols{grid-template-columns:1fr;gap:22px}}
+.panel{border-top:2px solid var(--rule);padding-top:14px}
+.panel h2{font-family:var(--disp);font-size:19px;font-weight:800;letter-spacing:-.02em;margin:0 0 3px}
+.panel .note{font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;
+   color:var(--faint);margin-bottom:12px;display:block}
+
+.row{display:block;width:100%;text-align:left;background:none;border:0;padding:9px 0;cursor:pointer;
+   border-bottom:1px solid var(--rule-soft);color:inherit;font:inherit}
+.row:hover .lbl,.row[aria-expanded="true"] .lbl{color:var(--paper)}
+.row:focus-visible{outline:2px solid var(--e4);outline-offset:3px}
+.rtop{display:flex;width:100%;align-items:baseline;gap:10px;justify-content:space-between}
+.lbl{display:inline-block;font-family:var(--disp);font-size:15px;font-weight:700;letter-spacing:-.01em;color:var(--paper-2);
+   transition:color .12s}
+.pct{font-family:var(--disp);font-size:17px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.bar{display:block;height:5px;background:var(--rule-soft);margin-top:7px;position:relative;overflow:hidden}
+.bar i{position:absolute;inset:0 auto 0 0;display:block;width:0;transition:width .5s cubic-bezier(.2,.7,.3,1)}
+.det{display:none;font-size:14.5px;line-height:1.45;color:var(--paper-2);font-weight:300;padding:9px 0 3px}
+.row[aria-expanded="true"] .det{display:block}
+.det b{font-weight:500;color:var(--paper)}
+.det .caveat{display:block;margin-top:7px;font-family:var(--mono);font-size:11.5px;line-height:1.5;
+   color:var(--faint);letter-spacing:.02em}
+code{font-family:var(--mono);font-size:.88em;color:var(--dim)}
+
+.colnote{margin:18px 0 0;font-size:14.5px;line-height:1.5;font-weight:300;color:var(--paper-2);
+   border-left:2px solid var(--rule);padding-left:14px}
+.foot{margin-top:26px;border-top:1px solid var(--rule-soft);padding-top:14px;
+   font-family:var(--mono);font-size:11.5px;letter-spacing:.07em;color:var(--faint);line-height:1.8}
+.foot a{color:var(--e4)}
+.kicker{margin-top:20px;border-left:3px solid var(--e4);padding:2px 0 2px 16px;
+   font-size:clamp(15px,2.3vw,19px);line-height:1.4;font-weight:300}
+.kicker b{font-weight:500;color:var(--e4)}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="eyebrow">54 AEO / GEO vendors &middot; one homepage audit each &middot; September 2026</div>
+  <h1>The old checklist is solved. <em>The new layer isn't.</em></h1>
+  <p class="sub">I audited 54 companies selling AEO, GEO and &ldquo;AI visibility&rdquo; &mdash; on their own websites. Left column: the checks we've all been running since 2015. Right column: the ones that only exist because of AI search.</p>
+  <p class="hint">&darr; tap any row for the number behind it</p>
+
+  <div class="cols">
+    <section class="panel">
+      <h2 style="color:var(--e2)">The 2015 checklist</h2>
+      <span class="note">% failing &middot; n=44 fetched</span>
+      <div id="old"></div>
+    </section>
+    <section class="panel">
+      <h2 style="color:var(--e4)">The 2026 layer</h2>
+      <span class="note">% of the frame &middot; n=54</span>
+      <div id="new"></div>
+      <p class="colnote">Four signals is the whole measurable surface right now. There is no agreed metric for &ldquo;chunk-level retrievability&rdquo;, no public citation-share API, and no engine has published what it actually weighs. That absence is part of the finding: the 2026 layer is being sold far ahead of the ability to measure it.</p>
+    </section>
+  </div>
+
+  <p class="kicker">Nearly half shipped <b>the file with no confirmed effect</b>. Nearly one in five skipped <b>the one with a documented path into retrieval</b>. Same 54 companies.</p>
+
+  <div class="foot">
+    Homepage-only &middot; n=54, 44 fetched, 10 refused the crawler &middot; single snapshot, 25&ndash;26 Sept 2026<br>
+    Full method, frame construction and limitations:
+    <a href="https://mj2.pro/blog/ai-visibility-vendors-audited/">mj2.pro/blog/ai-visibility-vendors-audited</a><br>
+    Mitchell Miller &middot; vendors reported in aggregate and unnamed
+  </div>
+</div>
+
+<script>
+const OLD=[
+ ["Schema.org JSON-LD",18,"e4","<b>8 of 44 homepages carry no JSON-LD at all.</b> No Organization, no WebSite, nothing — from companies whose own sales copy sells structured data as the route into AI answers.","Homepage only. A missing tag here doesn't mean the whole site lacks it."],
+ ["Exactly one H1",7,"e3","Three sites ship zero or multiple H1s. A 2015-era nit, and almost the worst thing in this column.",""],
+ ["Canonical tag",5,"e3","Two sites have no canonical on the homepage.",""],
+ ["Meta description",2,"e2","One site out of 44.",""],
+ ["html lang attribute",2,"e2","One site out of 44.",""],
+ ["Sitemap reachable",2,"e2","One site: no sitemap.xml and none referenced in robots.txt.",""],
+ ["robots.txt present",0,"e2","Every fetched vendor serves one.",""],
+ ["Title tag",0,"e2","Zero failures.",""],
+ ["Viewport meta",0,"e2","Zero failures.",""],
+ ["HTTPS",0,"e2","Zero failures.",""]
+];
+const NEW=[
+ ["Ship an <code>llms.txt</code>",46,"e3","<b>25 of 54 serve a real llms.txt or llms-full.txt.</b> It's a proposal — no major AI system has confirmed it as a retrieval or ranking input. Adopted at nearly twice the rate of the thing that demonstrably feeds retrieval.","Presence is adoption, not effectiveness. If engines do start reading it, this looks like foresight instead."],
+ ["Never name an AI crawler",86,"e3","<b>44 of 51 readable robots.txt files mention no AI crawler at all</b> — not GPTBot, ClaudeBot, PerplexityBot or Google-Extended.","Silence is not blocking. Unnamed = allowed, which is what they want. This measures deliberateness, not misconfiguration."],
+ ["Refused our crawler",19,"e4","<b>10 of 54 returned 401/403/429</b> to a self-identifying research crawler — while selling crawler visibility. Your CDN is now an SEO setting.","Concerns our crawler, not GPTBot. Edge rules often challenge unknown agents while allowing named AI bots."],
+ ["Block GPTBot / ClaudeBot / PerplexityBot",0,"e2","<b>Nobody blocks the four that matter.</b> Exactly one vendor blocks CCBot. Entirely rational for this population — they want the citations.",""]
+];
+function render(host,rows,denomNote){
+  document.getElementById(host).innerHTML = rows.map((r,i)=>{
+    const [lbl,pct,tone,det,cav]=r;
+    return `<button class="row" aria-expanded="false" data-i="${i}">
+      <span class="rtop"><span class="lbl">${lbl}</span><span class="pct" style="color:var(--${tone})">${pct}%</span></span>
+      <span class="bar"><i data-w="${pct}" style="background:var(--${tone})"></i></span>
+      <span class="det">${det}${cav?`<span class="caveat">Caveat: ${cav}</span>`:""}</span>
+    </button>`;}).join("");
+}
+render("old",OLD); render("new",NEW);
+document.querySelectorAll(".row").forEach(b=>b.addEventListener("click",()=>{
+  b.setAttribute("aria-expanded", b.getAttribute("aria-expanded")==="true"?"false":"true");
+}));
+// bars fill from a visible resting state on load
+requestAnimationFrame(()=>document.querySelectorAll(".bar i").forEach(el=>{
+  el.style.width = Math.max(1.5, +el.dataset.w) + "%";
+}));
+</script>
+</body>
+</html>

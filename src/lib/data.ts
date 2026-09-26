@@ -249,6 +249,143 @@ export const caseStudies = [
 
 export const blogPosts = [
   {
+    slug: "ai-visibility-vendors-audited",
+    title: "I Audited 54 Companies Selling AI Visibility",
+    author: "Mitchell Miller",
+    date: "September 26, 2026",
+    status: "published",
+    teaser: "Nearly half shipped the fashionable file. Nearly one in five skipped the one that actually feeds retrieval. Same 54 companies.",
+    metaDescription: "I ran one technical audit against 54 companies selling AEO, GEO and AI visibility. 68% pass the 2015 checklist. 18% have no structured data. 46% shipped llms.txt.",
+    card: { src: "/viz/ai-visibility-vendors-audited/ai-visibility-vendors-audited-1200x630.png", alt: "Audit results for 54 companies selling AI visibility: 68% pass all ten 2015-era technical checks, 18% ship no structured data, 86% never name an AI crawler in robots.txt, 46% ship an llms.txt file, and 19% refused an identified research crawler with a 403." },
+    contentHtml: `<p><em>By Mitchell Miller · ~7 min read · AI search / measurement · September 26, 2026</em></p>
+<figure class="viz-embed">
+  <iframe src="/viz/ai-visibility-vendors-audited/?parent=https%3A%2F%2Fmj2.pro%2Fblog%2Fai-visibility-vendors-audited%2F"
+          title="The 2015 checklist versus the 2026 layer, across 54 AI-visibility vendors"
+          loading="lazy" width="100%" height="1080"
+          style="display:block;width:100%;border:1px solid #0f2440;border-radius:10px"></iframe>
+  <noscript>
+    <img src="/viz/ai-visibility-vendors-audited/ai-visibility-vendors-audited-poster-1080x1350.png" width="1080" height="1350"
+         alt="Audit results for 54 companies selling AI visibility: 68% pass all ten 2015-era technical checks, 18% ship no structured data, 86% never name an AI crawler in robots.txt, 46% ship an llms.txt file, and 19% refused an identified research crawler with a 403."
+         style="display:block;width:100%;height:auto;border-radius:10px" />
+  </noscript>
+  <figcaption>
+    <strong>Tap any row for the number behind it.</strong>
+    Left column: the ten checks we have all been running since 2015, as fail rates. Right column: the four signals that only exist because of AI search.
+    <a href="/viz/ai-visibility-vendors-audited/">Open the full-screen version</a> if the frame is cut off.
+  </figcaption>
+</figure>
+<p>I went looking for evidence that most sites still fail the same technical audit they failed in 2015. I picked the population most likely to prove it by contrast — companies that sell AEO, GEO and &quot;AI visibility&quot; — expecting them to be clean and everyone else to be the mess.</p>
+<p>They were clean. <strong>68% passed all ten 2015-era checks on their own homepage.</strong> That killed the thesis I started with, so here is the one the data actually supports.</p>
+<p>The old checklist is broadly solved among people who sell this work. The interesting failure is inside the <em>new</em> layer, and it does not look like incompetence. It looks like a bet on the wrong artifact.</p>
+<h2>What I measured</h2>
+<p>54 vendors. One homepage request, one <code>robots.txt</code>, one <code>sitemap.xml</code>, and a check for <code>llms.txt</code> — each. The crawler identified itself honestly as <code>mj2-audit/1.0 (+https://mj2.pro)</code>.</p>
+<p>The sample is a rule, not a shortlist. I took the first page of four searches on 25 September 2026 (GEO agencies, AEO agencies, AI visibility tools, LLM SEO agencies), collected every domain that appeared as a result plus every vendor named in those results — 62 candidates — then kept only the ones whose <em>own homepage</em> matches at least one category term. 54 qualified. Full frame, queries, exclusions and scripts are in the method section at the bottom.</p>
+<p>Vendors are reported in aggregate and unnamed. The point is the pattern, not a pillory.</p>
+<h2>Finding 1 — the 2015 checklist is not the differentiator any more</h2>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Fail rate (n=44 fetched)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Title tag</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>Viewport meta</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>HTTPS</td>
+<td>0%</td>
+</tr>
+<tr>
+<td><code>robots.txt</code> present</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>Meta description</td>
+<td>2%</td>
+</tr>
+<tr>
+<td><code>html lang</code></td>
+<td>2%</td>
+</tr>
+<tr>
+<td>Sitemap reachable</td>
+<td>2%</td>
+</tr>
+<tr>
+<td>Canonical tag</td>
+<td>5%</td>
+</tr>
+<tr>
+<td>Exactly one H1</td>
+<td>7%</td>
+</tr>
+<tr>
+<td><strong>Schema.org JSON-LD</strong></td>
+<td><strong>18%</strong></td>
+</tr>
+</tbody></table>
+<p>30 of 44 passed everything. Twelve failed exactly one check. Two failed two.</p>
+<p>If you have been telling clients that their AI visibility problem is a missing canonical, this population says otherwise. Whatever separates winners here, it is not the 2015 exam.</p>
+<h2>Finding 2 — 18% ship no structured data at all</h2>
+<p>Eight of 44 homepages carry no JSON-LD whatsoever. No <code>Organization</code>, no <code>WebSite</code>, nothing.</p>
+<p>Structured data is the single most common technical recommendation in AEO and GEO sales copy. It is the one thing in the category with a clear mechanical path into retrieval: it tells a parser what an entity <em>is</em> without asking it to infer from prose. Among the 36 that do ship it, the types are exactly what you would expect — <code>Organization</code> (31), <code>WebSite</code> (26), <code>WebPage</code> (22), <code>Person</code> (15).</p>
+<p>Nearly one in five companies selling that advice have not taken it on their own front page.</p>
+<h2>Finding 3 — 86% have never named an AI crawler</h2>
+<p>Of the 51 vendors serving a readable <code>robots.txt</code>, <strong>seven name any AI crawler at all.</strong> The other 44 mention none of GPTBot, ClaudeBot, PerplexityBot, Google-Extended, Applebot-Extended, CCBot, meta-externalagent or Bytespider.</p>
+<p><strong>This one needs an honest caveat, so here it is up front: silence is not blocking.</strong> An unnamed crawler is allowed by default, and allow-everything is the <em>correct</em> configuration for a company that wants to be cited. None of these vendors are shooting themselves in the foot. Exactly one blocks CCBot; nobody blocks the four that matter.</p>
+<p>So the finding is not &quot;they misconfigured it.&quot; The finding is thinner and more interesting: the people who sell bot policy as a deliberate business decision have mostly never made one themselves. They inherited a default that happens to point the right way. Their clients inherit the same silence — and for a client with paywalled content, licensing exposure, or a competitor scraping them, the default does <em>not</em> point the right way.</p>
+<h2>Finding 4 — 46% shipped <code>llms.txt</code></h2>
+<p>25 of 54 serve a real <code>llms.txt</code> or <code>llms-full.txt</code>.</p>
+<p><code>llms.txt</code> is a proposal. No major AI system has confirmed it as a retrieval or ranking input. It might become one. Today its measurable effect is that it exists.</p>
+<p>Put the two numbers side by side:</p>
+<ul>
+<li><strong>46%</strong> adopted a file with no confirmed effect.</li>
+<li><strong>82%</strong> ship structured data, which has a documented path into retrieval — meaning <strong>18% skipped it.</strong></li>
+</ul>
+<p>Adoption tracked how <em>visible and new</em> the artifact was, not how much evidence sat behind it. <code>llms.txt</code> is cheap, legible, and demonstrates currency to a prospect who just read about it. Schema is tedious, invisible, and demonstrates nothing to anyone who is not looking at your source.</p>
+<p>That is the actual shape of the 2026 layer in this sample: fashionable work outpacing load-bearing work, in the one population that should know the difference.</p>
+<h2>Finding 5 — 19% refused an identified crawler</h2>
+<p>Ten of 54 returned 401, 403 or 429 to a self-identifying research crawler. A plain refusal at the edge, from companies whose product is being fetched and cited.</p>
+<p>This is not hypocrisy — edge rules from Cloudflare and similar commonly challenge unknown agents while explicitly allowing named AI crawlers, and several of these had permissive <code>robots.txt</code> files behind the block. But it is worth noticing: <strong>your CDN is now an SEO setting.</strong> Whatever <code>robots.txt</code> says, the rule in front of it votes first, and in most companies that rule was written by someone who has never read <code>robots.txt</code>.</p>
+<p>I kept those ten in the sample rather than dropping them. Dropping unfetchable sites would have biased the results toward permissive hosts and quietly inflated every pass rate on this page.</p>
+<h2>What this means</h2>
+<p><strong>If you are buying:</strong> ask the vendor to run their own audit on their own domain and show you. It takes one afternoon. Ask specifically whether their recommendations are load-bearing (a documented path into retrieval) or fashionable (present because it is new). Both can be worth paying for; only one should be sold as mechanism.</p>
+<p><strong>If you are doing the work:</strong> the boring layer still wins. Structured data over <code>llms.txt</code> if you only have budget for one. And go read your edge configuration — it is the part of your technical SEO that no SEO tool audits.</p>
+<p><strong>If you run the team:</strong> make the bot policy an explicit decision with a date and an owner, even if the decision is &quot;allow everything.&quot; A default is not a policy; it is just what happened.</p>
+<p><strong>For the industry:</strong> every number here came from one HTTP request per site and a short script. The bar for first-party evidence in AI search is far lower than the volume of opinion suggests. More of us should be measuring instead of asserting — I started this expecting a different answer and the data corrected me, which is the whole point of collecting it.</p>
+<h2>Limitations</h2>
+<p>Stated plainly, because they matter:</p>
+<ul>
+<li><strong>Homepage only.</strong> Not a full-site crawl. A missing canonical or JSON-LD on a homepage does not mean the site lacks it everywhere.</li>
+<li><strong>n=54, one snapshot, one day.</strong> This is a sample of who ranks for four queries, not a census of the industry.</li>
+<li><strong>Silence in <code>robots.txt</code> is not blocking</strong>, and for this population allow-by-default is the outcome they want. The 86% is about deliberateness.</li>
+<li><strong>The 19% refusal rate concerns my crawler, not GPTBot.</strong> Named AI crawlers may well be allowed through the same edge rules.</li>
+<li><strong><code>llms.txt</code> presence is adoption, not effectiveness.</strong> If it turns out engines do read it, 46% looks like foresight rather than fashion.</li>
+<li><strong>I am not neutral.</strong> I work in this field and compete with some of these companies for the same roles. That is why every vendor is unnamed, the frame is a documented rule rather than my judgement, and the scripts are published so you can re-run it and contradict me.</li>
+</ul>
+<h2>Method — reproduce it</h2>
+<p>Frame construction, the four queries, the qualification rule, the exclusion list, every check and every limitation are recorded in the research directory alongside the raw JSON. The audit is three short stdlib-only Python scripts: <code>qualify.py</code> builds the frame, <code>audit.py</code> runs the ten checks plus bot policy, <code>llms.py</code> checks for <code>llms.txt</code>. Re-run them and you will get a different snapshot — the population moves.</p>
+<h2>Sources for the timeline references</h2>
+<ul>
+<li>Schema.org launch, 2 June 2011 — <a href="https://developers.google.com/search/blog/2011/06/introducing-schemaorg-search-engines">Google Search Central blog</a></li>
+<li>Knowledge Graph, 16 May 2012 — <a href="https://blog.google/products-and-platforms/products/search/introducing-knowledge-graph-things-not/">Google blog</a></li>
+<li>Hummingbird, announced 26 September 2013 — <a href="https://searchengineland.com/google-birthday-event-172791">Search Engine Land</a></li>
+<li>BERT, 25 October 2019 — <a href="https://searchengineland.com/welcome-bert-google-artificial-intelligence-for-understanding-search-queries-323976">Search Engine Land</a></li>
+<li>ChatGPT public release, 30 November 2022 — <a href="https://en.wikipedia.org/wiki/ChatGPT">Wikipedia</a></li>
+<li>GPTBot documentation published, 7 August 2023 — <a href="https://searchengineland.com/gptbot-openais-new-web-crawler-430360">Search Engine Land</a></li>
+<li>AI Overviews US rollout, 14 May 2024 — <a href="https://blog.google/products-and-platforms/products/search/generative-ai-google-search-may-2024/">Google blog</a></li>
+</ul>
+<hr>
+<p><em>Share this with someone about to sign a GEO retainer.</em></p>
+`,
+  },
+  {
     slug: "optimizing-for-ads-in-free-llm-answers",
     title: "Ads in Free LLM Answers: What to Buy, What Gets Cited",
     author: "Mitchell Miller",

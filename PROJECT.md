@@ -45,6 +45,19 @@ What changed in source besides the posts: the `viz-intent` listener (`site/compo
 
 Open for Mitch: (1) post 2's first-person line ("The prompt-set tracking I've built…") paraphrases the AEO case study; (2) post 3's ZipRecruiter $101,752 and Glassdoor $359,824 could not be re-fetched automatically (403); a signed-in check is worth it; (3) the live "Search Results by Intent" post still says the ads follow-up is "— coming"; linking it needs that post's narration re-rendered; (4) no keyword research (Semrush UI) for these posts; (5) Search Console: resubmit `https://mj2.pro/sitemap.xml` (73 URLs). For the content kit owners: `content-studio/viz/` templates still lack the published fixes (group role, skip control, same-origin jump, `anchor` in the message).
 
+# PUBLISHED — September 26, 2026 (09:15 EDT): AI-visibility vendor audit (release owner: Claude Code)
+
+| Field | Value |
+|---|---|
+| Source | `d19c119` on `main`. Deploy tree built from the **previously deployed source `b838034` plus this content only**, deliberately excluding `32d12eb` (personal-portfolio split), which stays gated pending Mitch's release-candidate and DNS review. |
+| Deploy | gh-pages `dc21cc3` (previous `94016fa`); Pages reported `built`. Tree hash equals artifact `cd7fd2cc35b60172d14d4ccf6bae3d1fe9df7648ad7399525a66728d7bfe42b7`; `git diff --cached` deleted **nothing** (6 added, rest modified); `CNAME` (mj2.pro), `.nojekyll`, `404.html`, `sitemap.xml`, `robots.txt` and the IndexNow key all present. |
+| Content | `/blog/ai-visibility-vendors-audited/` + living embed `/viz/ai-visibility-vendors-audited/`. First-party audit of 54 AEO/GEO/AI-visibility vendors: 68% pass all ten 2015-era checks, 18% ship no JSON-LD, 86% never name an AI crawler, 46% ship llms.txt, 19% refused an identified crawler. Frame, scripts and raw JSON in `content-studio/research/2026-09-25/seo-aeo-geo-gatekeepers/`. Vendors unnamed. |
+| Route count | 73 → **74** published URLs; `scripts/verify-agency.mjs` expectation bumped to 74. |
+| QA | parity, agency and standards all pass at release-candidate; crawl 1080/1080 over 78 routes; standards 814/814 over 86 documents, 0 serious/critical axe violations in light and dark. Records in `docs/release-2026-09-26/qa/`. |
+| Live probes | post, embed, poster, share card and narration all 200; one h1; self canonical; no `noindex`; GA present; FAQPage JSON-LD present; 5 jump anchors; sitemap 74 including the new URL; robots unchanged; `/`, `/blog/`, `/es/` and a prior post still 200; unknown route 404. IndexNow 200. |
+| Rollback | in a clean gh-pages worktree: `git revert --no-edit dc21cc3 && git push origin gh-pages` (restores `94016fa`). Source: `git revert d19c119` on `main`. |
+| Notes | The published embed was rewritten to the embed contract: self-contained (system fonts, no network), one `noindex`, `viz-intent` jump contract with same-origin-only fallback, a working "Skip animation" control and a settled frame under `prefers-reduced-motion`. `content-studio/skills/publish/SKILL.md` was stale (`dist/public`, plain `npm run build`, `rsync --delete`) and has been corrected — a plain build is a **staging** build: every page renders `noindex` with no analytics, and its `dist/` has no `CNAME`. |
+
 # PUBLISHED — September 24, 2026 (21:55 EDT): site standards, deploy 2 — Spanish pilot (release owner: Claude Code)
 
 Deploy 2 of 2 of the site standards ([docs/site-standards.md](docs/site-standards.md), brief [handoffs/2026-09-24-site-standards-build.md](handoffs/2026-09-24-site-standards-build.md)): Spanish versions of the core pages and one post, hreflang on every page, a globe language picker and a browser-language suggestion banner that never redirects. The same release ships the study note `/blog/studying/figma-shortest-course/`, wired per the handoff another session left on `main`.

@@ -256,7 +256,7 @@ export const blogPosts = [
     status: "published",
     teaser: "Nearly half shipped the fashionable file. Nearly one in five skipped the one that actually feeds retrieval. Same 54 companies.",
     metaDescription: "I ran one technical audit against 54 companies selling AEO, GEO and AI visibility. 68% pass the 2015 checklist. 18% have no structured data. 46% shipped llms.txt.",
-    card: { src: "/viz/ai-visibility-vendors-audited/ai-visibility-vendors-audited-1200x630.png", alt: "Audit results for 54 companies selling AI visibility: 68% pass all ten 2015-era technical checks, 18% ship no structured data, 86% never name an AI crawler in robots.txt, 46% ship an llms.txt file, and 19% refused an identified research crawler with a 403." },
+    card: { src: "/viz/ai-visibility-vendors-audited/share-1200x630.png", alt: "Audit results for 54 companies selling AI visibility: 68% pass all ten 2015-era technical checks, 18% ship no structured data, 86% never name an AI crawler in robots.txt, 46% ship an llms.txt file, and 19% refused an identified research crawler with a 403." },
     contentHtml: `<p><em>By Mitchell Miller · ~7 min read · AI search / measurement · September 26, 2026</em></p>
 <figure class="viz-embed">
   <iframe src="/viz/ai-visibility-vendors-audited/?parent=https%3A%2F%2Fmj2.pro%2Fblog%2Fai-visibility-vendors-audited%2F"
@@ -264,7 +264,7 @@ export const blogPosts = [
           loading="lazy" width="100%" height="1080"
           style="display:block;width:100%;border:1px solid #0f2440;border-radius:10px"></iframe>
   <noscript>
-    <img src="/viz/ai-visibility-vendors-audited/ai-visibility-vendors-audited-poster-1080x1350.png" width="1080" height="1350"
+    <img src="/viz/ai-visibility-vendors-audited/poster-1080x1350.png" width="1080" height="1350"
          alt="Audit results for 54 companies selling AI visibility: 68% pass all ten 2015-era technical checks, 18% ship no structured data, 86% never name an AI crawler in robots.txt, 46% ship an llms.txt file, and 19% refused an identified research crawler with a 403."
          style="display:block;width:100%;height:auto;border-radius:10px" />
   </noscript>
@@ -281,8 +281,7 @@ export const blogPosts = [
 <p>54 vendors. One homepage request, one <code>robots.txt</code>, one <code>sitemap.xml</code>, and a check for <code>llms.txt</code> — each. The crawler identified itself honestly as <code>mj2-audit/1.0 (+https://mj2.pro)</code>.</p>
 <p>The sample is a rule, not a shortlist. I took the first page of four searches on 25 September 2026 (GEO agencies, AEO agencies, AI visibility tools, LLM SEO agencies), collected every domain that appeared as a result plus every vendor named in those results — 62 candidates — then kept only the ones whose <em>own homepage</em> matches at least one category term. 54 qualified. Full frame, queries, exclusions and scripts are in the method section at the bottom.</p>
 <p>Vendors are reported in aggregate and unnamed. The point is the pattern, not a pillory.</p>
-<h2>Finding 1 — the 2015 checklist is not the differentiator any more</h2>
-<table>
+<h2 id="finding-checklist">Finding 1 — the 2015 checklist is not the differentiator any more</h2><table>
 <thead>
 <tr>
 <th>Check</th>
@@ -332,16 +331,13 @@ export const blogPosts = [
 </tbody></table>
 <p>30 of 44 passed everything. Twelve failed exactly one check. Two failed two.</p>
 <p>If you have been telling clients that their AI visibility problem is a missing canonical, this population says otherwise. Whatever separates winners here, it is not the 2015 exam.</p>
-<h2>Finding 2 — 18% ship no structured data at all</h2>
-<p>Eight of 44 homepages carry no JSON-LD whatsoever. No <code>Organization</code>, no <code>WebSite</code>, nothing.</p>
+<h2 id="finding-schema">Finding 2 — 18% ship no structured data at all</h2><p>Eight of 44 homepages carry no JSON-LD whatsoever. No <code>Organization</code>, no <code>WebSite</code>, nothing.</p>
 <p>Structured data is the single most common technical recommendation in AEO and GEO sales copy. It is the one thing in the category with a clear mechanical path into retrieval: it tells a parser what an entity <em>is</em> without asking it to infer from prose. Among the 36 that do ship it, the types are exactly what you would expect — <code>Organization</code> (31), <code>WebSite</code> (26), <code>WebPage</code> (22), <code>Person</code> (15).</p>
 <p>Nearly one in five companies selling that advice have not taken it on their own front page.</p>
-<h2>Finding 3 — 86% have never named an AI crawler</h2>
-<p>Of the 51 vendors serving a readable <code>robots.txt</code>, <strong>seven name any AI crawler at all.</strong> The other 44 mention none of GPTBot, ClaudeBot, PerplexityBot, Google-Extended, Applebot-Extended, CCBot, meta-externalagent or Bytespider.</p>
+<h2 id="finding-botpolicy">Finding 3 — 86% have never named an AI crawler</h2><p>Of the 51 vendors serving a readable <code>robots.txt</code>, <strong>seven name any AI crawler at all.</strong> The other 44 mention none of GPTBot, ClaudeBot, PerplexityBot, Google-Extended, Applebot-Extended, CCBot, meta-externalagent or Bytespider.</p>
 <p><strong>This one needs an honest caveat, so here it is up front: silence is not blocking.</strong> An unnamed crawler is allowed by default, and allow-everything is the <em>correct</em> configuration for a company that wants to be cited. None of these vendors are shooting themselves in the foot. Exactly one blocks CCBot; nobody blocks the four that matter.</p>
 <p>So the finding is not &quot;they misconfigured it.&quot; The finding is thinner and more interesting: the people who sell bot policy as a deliberate business decision have mostly never made one themselves. They inherited a default that happens to point the right way. Their clients inherit the same silence — and for a client with paywalled content, licensing exposure, or a competitor scraping them, the default does <em>not</em> point the right way.</p>
-<h2>Finding 4 — 46% shipped <code>llms.txt</code></h2>
-<p>25 of 54 serve a real <code>llms.txt</code> or <code>llms-full.txt</code>.</p>
+<h2 id="finding-llmstxt">Finding 4 — 46% shipped llms.txt</h2><p>25 of 54 serve a real <code>llms.txt</code> or <code>llms-full.txt</code>.</p>
 <p><code>llms.txt</code> is a proposal. No major AI system has confirmed it as a retrieval or ranking input. It might become one. Today its measurable effect is that it exists.</p>
 <p>Put the two numbers side by side:</p>
 <ul>
@@ -350,8 +346,7 @@ export const blogPosts = [
 </ul>
 <p>Adoption tracked how <em>visible and new</em> the artifact was, not how much evidence sat behind it. <code>llms.txt</code> is cheap, legible, and demonstrates currency to a prospect who just read about it. Schema is tedious, invisible, and demonstrates nothing to anyone who is not looking at your source.</p>
 <p>That is the actual shape of the 2026 layer in this sample: fashionable work outpacing load-bearing work, in the one population that should know the difference.</p>
-<h2>Finding 5 — 19% refused an identified crawler</h2>
-<p>Ten of 54 returned 401, 403 or 429 to a self-identifying research crawler. A plain refusal at the edge, from companies whose product is being fetched and cited.</p>
+<h2 id="finding-refused">Finding 5 — 19% refused an identified crawler</h2><p>Ten of 54 returned 401, 403 or 429 to a self-identifying research crawler. A plain refusal at the edge, from companies whose product is being fetched and cited.</p>
 <p>This is not hypocrisy — edge rules from Cloudflare and similar commonly challenge unknown agents while explicitly allowing named AI crawlers, and several of these had permissive <code>robots.txt</code> files behind the block. But it is worth noticing: <strong>your CDN is now an SEO setting.</strong> Whatever <code>robots.txt</code> says, the rule in front of it votes first, and in most companies that rule was written by someone who has never read <code>robots.txt</code>.</p>
 <p>I kept those ten in the sample rather than dropping them. Dropping unfetchable sites would have biased the results toward permissive hosts and quietly inflated every pass rate on this page.</p>
 <h2>What this means</h2>
@@ -359,6 +354,15 @@ export const blogPosts = [
 <p><strong>If you are doing the work:</strong> the boring layer still wins. Structured data over <code>llms.txt</code> if you only have budget for one. And go read your edge configuration — it is the part of your technical SEO that no SEO tool audits.</p>
 <p><strong>If you run the team:</strong> make the bot policy an explicit decision with a date and an owner, even if the decision is &quot;allow everything.&quot; A default is not a policy; it is just what happened.</p>
 <p><strong>For the industry:</strong> every number here came from one HTTP request per site and a short script. The bar for first-party evidence in AI search is far lower than the volume of opinion suggests. More of us should be measuring instead of asserting — I started this expecting a different answer and the data corrected me, which is the whole point of collecting it.</p>
+<h2>Common questions</h2>
+<h3>What is the difference between AEO and GEO?</h3>
+<p>AEO optimises to be the extracted answer on a results page, so the unit of value is a passage or an entity. GEO optimises to be a source inside an answer the model writes, so the unit of value is a retrieved chunk. They stack on top of ordinary SEO rather than replacing it.</p>
+<h3>Does llms.txt actually help AI visibility?</h3>
+<p>There is no published evidence that it does. It is a proposal, and no major AI system has confirmed it as a retrieval or ranking input. In this sample 46 percent of vendors shipped one anyway, which says more about how legible the file is to a prospect than about how engines behave.</p>
+<h3>Should I block GPTBot in robots.txt?</h3>
+<p>Only if you have a reason, and the reason is a business decision rather than a technical default. None of the 54 vendors block GPTBot, ClaudeBot, PerplexityBot or Google-Extended, because they want the citations. A publisher with licensing exposure or paywalled content may reach the opposite answer.</p>
+<h3>Is structured data still worth it for AI search?</h3>
+<p>Yes. It is the one item in the category with a clear mechanical path into retrieval, because it states what an entity is instead of asking a parser to infer it from prose. In this sample 18 percent of companies selling that advice shipped no structured data on their own homepage.</p>
 <h2>Limitations</h2>
 <p>Stated plainly, because they matter:</p>
 <ul>
@@ -383,7 +387,8 @@ export const blogPosts = [
 </ul>
 <hr>
 <p><em>Share this with someone about to sign a GEO retainer.</em></p>
-`,
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the difference between AEO and GEO?","acceptedAnswer":{"@type":"Answer","text":"AEO optimises to be the extracted answer on a results page, so the unit of value is a passage or an entity. GEO optimises to be a source inside an answer the model writes, so the unit of value is a retrieved chunk. They stack on top of ordinary SEO rather than replacing it."}},{"@type":"Question","name":"Does llms.txt actually help AI visibility?","acceptedAnswer":{"@type":"Answer","text":"There is no published evidence that it does. It is a proposal, and no major AI system has confirmed it as a retrieval or ranking input. In this sample 46 percent of vendors shipped one anyway, which says more about how legible the file is to a prospect than about how engines behave."}},{"@type":"Question","name":"Should I block GPTBot in robots.txt?","acceptedAnswer":{"@type":"Answer","text":"Only if you have a reason, and the reason is a business decision rather than a technical default. None of the 54 vendors block GPTBot, ClaudeBot, PerplexityBot or Google-Extended, because they want the citations. A publisher with licensing exposure or paywalled content may reach the opposite answer."}},{"@type":"Question","name":"Is structured data still worth it for AI search?","acceptedAnswer":{"@type":"Answer","text":"Yes. It is the one item in the category with a clear mechanical path into retrieval, because it states what an entity is instead of asking a parser to infer it from prose. In this sample 18 percent of companies selling that advice shipped no structured data on their own homepage."}}]}</script>`,
   },
   {
     slug: "optimizing-for-ads-in-free-llm-answers",

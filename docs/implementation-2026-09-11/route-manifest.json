@@ -173,7 +173,7 @@
       "expected": [
         "ActionThread",
         "Post-call follow-up was manual, inconsistent, and created execution debt",
-        "Transcript \u2192 summary \u2192 decisions \u2192 owners \u2192 deadlines \u2192 follow-up tasks and task updates",
+        "Transcript → summary → decisions → owners → deadlines → follow-up tasks and task updates",
         "Converted transcripts into owner-tagged follow-ups, decisions, deadlines, and task updates."
       ]
     },
@@ -235,17 +235,17 @@
     {
       "path": "/blog/gbp-2026-ai-grounding/",
       "kind": "article",
-      "title": "Your Google Business Profile Is Now an AI Grounding Source \u2014 What Actually Changed in 2026",
+      "title": "Your Google Business Profile Is Now an AI Grounding Source — What Actually Changed in 2026",
       "expected": [
-        "Your Google Business Profile Is Now an AI Grounding Source \u2014 What Actually Changed in 2026"
+        "Your Google Business Profile Is Now an AI Grounding Source — What Actually Changed in 2026"
       ]
     },
     {
       "path": "/blog/multi-agent-billing-traps/",
       "kind": "article",
-      "title": "The Flat-Fee Multi-Agent Stack \u2014 and the 3 Billing Traps That Quietly Meter You",
+      "title": "The Flat-Fee Multi-Agent Stack — and the 3 Billing Traps That Quietly Meter You",
       "expected": [
-        "The Flat-Fee Multi-Agent Stack \u2014 and the 3 Billing Traps That Quietly Meter You"
+        "The Flat-Fee Multi-Agent Stack — and the 3 Billing Traps That Quietly Meter You"
       ]
     },
     {
@@ -299,9 +299,9 @@
     {
       "path": "/blog/studying/hermes-concepts-field-guide/",
       "kind": "note",
-      "title": "Every Hermes Concept in Plain English \u2014 a Field Guide to the Agent Harness",
+      "title": "Every Hermes Concept in Plain English — a Field Guide to the Agent Harness",
       "expected": [
-        "Every Hermes Concept in Plain English \u2014 a Field Guide to the Agent Harness"
+        "Every Hermes Concept in Plain English — a Field Guide to the Agent Harness"
       ]
     },
     {
@@ -323,17 +323,17 @@
     {
       "path": "/blog/studying/hermes-seo-agent/",
       "kind": "note",
-      "title": "A \"Hermes\" Agent That Runs SEO End-to-End \u2014 What Actually Holds Up",
+      "title": "A \"Hermes\" Agent That Runs SEO End-to-End — What Actually Holds Up",
       "expected": [
-        "A \"Hermes\" Agent That Runs SEO End-to-End \u2014 What Actually Holds Up"
+        "A \"Hermes\" Agent That Runs SEO End-to-End — What Actually Holds Up"
       ]
     },
     {
       "path": "/blog/studying/codex-obsolete-9-moves/",
       "kind": "note",
-      "title": "Codex Just Made Claude \"Obsolete\"? \u2014 9 Platform Moves Worth Studying",
+      "title": "Codex Just Made Claude \"Obsolete\"? — 9 Platform Moves Worth Studying",
       "expected": [
-        "Codex Just Made Claude \"Obsolete\"? \u2014 9 Platform Moves Worth Studying"
+        "Codex Just Made Claude \"Obsolete\"? — 9 Platform Moves Worth Studying"
       ]
     },
     {
@@ -355,9 +355,9 @@
     {
       "path": "/blog/studying/claude-code-6-new-rules/",
       "kind": "note",
-      "title": "Claude Code Just Changed \u2014 the 6 New Rules of Context Engineering",
+      "title": "Claude Code Just Changed — the 6 New Rules of Context Engineering",
       "expected": [
-        "Claude Code Just Changed \u2014 the 6 New Rules of Context Engineering"
+        "Claude Code Just Changed — the 6 New Rules of Context Engineering"
       ]
     },
     {
@@ -371,9 +371,9 @@
     {
       "path": "/blog/studying/build-ai-agents-full-course/",
       "kind": "note",
-      "title": "Build AI Agents to Automate Your Business \u2014 the Full Framework",
+      "title": "Build AI Agents to Automate Your Business — the Full Framework",
       "expected": [
-        "Build AI Agents to Automate Your Business \u2014 the Full Framework"
+        "Build AI Agents to Automate Your Business — the Full Framework"
       ]
     },
     {
@@ -387,9 +387,9 @@
     {
       "path": "/blog/studying/pi-coding-agent/",
       "kind": "note",
-      "title": "The Pi Coding Agent \u2014 the Only Real Claude Code Competitor",
+      "title": "The Pi Coding Agent — the Only Real Claude Code Competitor",
       "expected": [
-        "The Pi Coding Agent \u2014 the Only Real Claude Code Competitor"
+        "The Pi Coding Agent — the Only Real Claude Code Competitor"
       ]
     },
     {
@@ -403,9 +403,9 @@
     {
       "path": "/blog/studying/forget-loop-engineering/",
       "kind": "note",
-      "title": "Forget \"Loop Engineering\" \u2014 Agentic Engineering Is About This",
+      "title": "Forget \"Loop Engineering\" — Agentic Engineering Is About This",
       "expected": [
-        "Forget \"Loop Engineering\" \u2014 Agentic Engineering Is About This"
+        "Forget \"Loop Engineering\" — Agentic Engineering Is About This"
       ]
     },
     {
@@ -427,9 +427,9 @@
     {
       "path": "/blog/studying/old-seo-collapsing/",
       "kind": "note",
-      "title": "The Old SEO System Is Collapsing \u2014 Here's What Replaces It",
+      "title": "The Old SEO System Is Collapsing — Here's What Replaces It",
       "expected": [
-        "The Old SEO System Is Collapsing \u2014 Here's What Replaces It"
+        "The Old SEO System Is Collapsing — Here's What Replaces It"
       ]
     },
     {
@@ -443,9 +443,9 @@
     {
       "path": "/blog/studying/aeo-geo-aio/",
       "kind": "note",
-      "title": "AEO vs GEO vs AIO \u2014 How AI Search Actually Works in 2026",
+      "title": "AEO vs GEO vs AIO — How AI Search Actually Works in 2026",
       "expected": [
-        "AEO vs GEO vs AIO \u2014 How AI Search Actually Works in 2026"
+        "AEO vs GEO vs AIO — How AI Search Actually Works in 2026"
       ]
     },
     {
@@ -468,7 +468,7 @@
       "path": "/lab/",
       "kind": "added",
       "since": "release-2026-09-12",
-      "title": "Lab \u00b7 Interactive tools",
+      "title": "Lab · Interactive tools",
       "expected": [
         "Think it through.",
         "Build your own simulated population",
@@ -583,14 +583,14 @@
       "path": "/blog/b2b-vs-b2c-by-vertical/",
       "kind": "added",
       "since": "post-2026-09-24-wave-2",
-      "title": "In Education, Winning a B2B Customer Costs 7.3\u00d7 More Than Winning a B2C One",
+      "title": "In Education, Winning a B2B Customer Costs 7.3× More Than Winning a B2C One",
       "minText": 1500,
       "expected": [
-        "In Education, Winning a B2B Customer Costs 7.3\u00d7 More Than Winning a B2C One",
+        "In Education, Winning a B2B Customer Costs 7.3× More Than Winning a B2C One",
         "See it by vertical, not by average",
         "Acquisition cost: the range hiding inside the average",
         "Conversion rate isn't one number",
-        "Paid search: the same click costs 4\u00d7 more in one vertical than another",
+        "Paid search: the same click costs 4× more in one vertical than another",
         "The sales cycle that goes unmeasured on the B2C side",
         "By vertical",
         "How to read these numbers",
@@ -602,10 +602,10 @@
       "path": "/blog/statistician-vs-data-scientist/",
       "kind": "added",
       "since": "post-2026-09-24-wave-2",
-      "title": "Statistician vs Data Scientist \u2014 and Two Jobs With No BLS Code",
+      "title": "Statistician vs Data Scientist — and Two Jobs With No BLS Code",
       "minText": 1500,
       "expected": [
-        "Statistician vs Data Scientist \u2014 and Two Jobs With No BLS Code",
+        "Statistician vs Data Scientist — and Two Jobs With No BLS Code",
         "The gap in the data",
         "What each role pays",
         "Who's growing faster",
@@ -624,11 +624,11 @@
       "minText": 1500,
       "expected": [
         "Search Results by Intent: Five Pages and the Zero-Click Future SEOs Already Measured",
-        "Informational \u2014 the cheapest answer to keep in-platform",
-        "Commercial investigation \u2014 the shortlist Google monetizes twice",
-        "Transactional \u2014 the one intent moving away from AI synthesis",
-        "Navigational \u2014 the intent that needed AI least, and got it anyway",
-        "Local \u2014 the intent Google never has to hand off",
+        "Informational — the cheapest answer to keep in-platform",
+        "Commercial investigation — the shortlist Google monetizes twice",
+        "Transactional — the one intent moving away from AI synthesis",
+        "Navigational — the intent that needed AI least, and got it anyway",
+        "Local — the intent Google never has to hand off",
         "The route through all five",
         "How often does an AI Overview appear, by search intent?",
         "Representative rendering; real capture pending."
@@ -639,10 +639,10 @@
       "path": "/blog/studying/pocock-ai-coding-workflow/",
       "kind": "added",
       "since": "post-2026-09-24",
-      "title": "Matt Pocock's Full AI-Coding Workflow \u2014 Idea to Merge",
+      "title": "Matt Pocock's Full AI-Coding Workflow — Idea to Merge",
       "minText": 1500,
       "expected": [
-        "Matt Pocock's Full AI-Coding Workflow \u2014 Idea to Merge"
+        "Matt Pocock's Full AI-Coding Workflow — Idea to Merge"
       ],
       "note": "Study note from src/lib/study-notes.ts (7068a03); absent from the 2026-09-21 build, restored 2026-09-24 (handoffs/study-notes-deploy-gap-2026-09-22.md)."
     },
@@ -661,10 +661,10 @@
       "path": "/blog/studying/pocock-agentic-workflow/",
       "kind": "added",
       "since": "post-2026-09-24",
-      "title": "Matt Pocock's Agentic Engineering Workflow \u2014 Harness Over Model",
+      "title": "Matt Pocock's Agentic Engineering Workflow — Harness Over Model",
       "minText": 1500,
       "expected": [
-        "Matt Pocock's Agentic Engineering Workflow \u2014 Harness Over Model"
+        "Matt Pocock's Agentic Engineering Workflow — Harness Over Model"
       ],
       "note": "Study note from src/lib/study-notes.ts (512be11); absent from the 2026-09-21 build, restored 2026-09-24 (handoffs/study-notes-deploy-gap-2026-09-22.md)."
     },
@@ -672,10 +672,10 @@
       "path": "/blog/studying/figma-shortest-course/",
       "kind": "added",
       "since": "standards-deploy-2",
-      "title": "The World's Shortest Figma Course \u2014 80% in 7 Minutes",
+      "title": "The World's Shortest Figma Course — 80% in 7 Minutes",
       "minText": 1500,
       "expected": [
-        "The World's Shortest Figma Course \u2014 80% in 7 Minutes"
+        "The World's Shortest Figma Course — 80% in 7 Minutes"
       ],
       "note": "Study note from src/lib/study-notes.ts (main 1ddc06e); wired for release per handoffs/study-notes-deploy-gap-2026-09-22.md (\"New note to wire\"), shipped with site-standards deploy 2."
     },
@@ -685,19 +685,19 @@
       "since": "standards-deploy-2",
       "lang": "es",
       "translationOf": "/",
-      "title": "Haz que el pr\u00f3ximo paso cuente.",
+      "title": "Haz que el próximo paso cuente.",
       "minText": 1500,
       "expected": [
-        "Haz que el pr\u00f3ximo",
+        "Haz que el próximo",
         "De la estrategia a la entrega",
-        "Pensamiento claro. Trabajo \u00fatil.",
-        "Iniciar una conversaci\u00f3n"
+        "Pensamiento claro. Trabajo útil.",
+        "Iniciar una conversación"
       ],
       "translation": {
         "draft": "model (Claude Code build agent), 2026-09-24",
         "review": "independent review pass in a separate model context, 2026-09-24: 32 findings (1 must-fix: a superlative that overstated how Google tightened its policy; 21 should-fix; 10 optional), all applied; numbers, dates and sources checked equal to the English",
         "reviewed": true,
-        "register": "neutral Latin American Spanish, t\u00fa",
+        "register": "neutral Latin American Spanish, tú",
         "keptEnglish": [
           "SEO",
           "AEO",
@@ -730,14 +730,14 @@
       "expected": [
         "Ve la oportunidad.",
         "Preguntas frecuentes",
-        "\u00bfCon qui\u00e9n voy a trabajar?",
-        "Empieza en peque\u00f1o. Ve con claridad. Avanza."
+        "¿Con quién voy a trabajar?",
+        "Empieza en pequeño. Ve con claridad. Avanza."
       ],
       "translation": {
         "draft": "model (Claude Code build agent), 2026-09-24",
         "review": "independent review pass in a separate model context, 2026-09-24: 32 findings (1 must-fix: a superlative that overstated how Google tightened its policy; 21 should-fix; 10 optional), all applied; numbers, dates and sources checked equal to the English",
         "reviewed": true,
-        "register": "neutral Latin American Spanish, t\u00fa",
+        "register": "neutral Latin American Spanish, tú",
         "keptEnglish": [
           "SEO",
           "AEO",
@@ -768,8 +768,8 @@
       "title": "Contacto",
       "minText": 400,
       "expected": [
-        "Env\u00eda un mensaje",
-        "Correo electr\u00f3nico",
+        "Envía un mensaje",
+        "Correo electrónico",
         "Enviar mensaje"
       ],
       "note": "Same Worker form contract and topic values as /contact/; Spanish labels and status messages.",
@@ -777,7 +777,7 @@
         "draft": "model (Claude Code build agent), 2026-09-24",
         "review": "independent review pass in a separate model context, 2026-09-24: 32 findings (1 must-fix: a superlative that overstated how Google tightened its policy; 21 should-fix; 10 optional), all applied; numbers, dates and sources checked equal to the English",
         "reviewed": true,
-        "register": "neutral Latin American Spanish, t\u00fa",
+        "register": "neutral Latin American Spanish, tú",
         "keptEnglish": [
           "SEO",
           "AEO",
@@ -808,14 +808,14 @@
       "title": "Signals & Systems",
       "minText": 400,
       "expected": [
-        "En espa\u00f1ol",
-        "M\u00e1s art\u00edculos, en ingl\u00e9s"
+        "En español",
+        "Más artículos, en inglés"
       ],
       "translation": {
         "draft": "model (Claude Code build agent), 2026-09-24",
         "review": "independent review pass in a separate model context, 2026-09-24: 32 findings (1 must-fix: a superlative that overstated how Google tightened its policy; 21 should-fix; 10 optional), all applied; numbers, dates and sources checked equal to the English",
         "reviewed": true,
-        "register": "neutral Latin American Spanish, t\u00fa",
+        "register": "neutral Latin American Spanish, tú",
         "keptEnglish": [
           "SEO",
           "AEO",
@@ -843,20 +843,20 @@
       "since": "standards-deploy-2",
       "lang": "es",
       "translationOf": "/blog/gbp-2026-ai-grounding/",
-      "title": "Tu Google Business Profile ahora es una fuente de grounding para la IA: lo que realmente cambi\u00f3 en 2026",
+      "title": "Tu Google Business Profile ahora es una fuente de grounding para la IA: lo que realmente cambió en 2026",
       "minText": 1500,
       "expected": [
         "En resumen",
         "Las palancas de mayor impacto",
-        "aumento de 2.8\u00d7 en el CTR",
-        "El plan de acci\u00f3n de GBP para 2026"
+        "aumento de 2.8× en el CTR",
+        "El plan de acción de GBP para 2026"
       ],
       "note": "Translation of the English post (src/lib/data.ts) held in site/i18n/es-posts.ts; Spanish narration with Paulina (es_MX).",
       "translation": {
         "draft": "model (Claude Code build agent), 2026-09-24",
         "review": "independent review pass in a separate model context, 2026-09-24: 32 findings (1 must-fix: a superlative that overstated how Google tightened its policy; 21 should-fix; 10 optional), all applied; numbers, dates and sources checked equal to the English",
         "reviewed": true,
-        "register": "neutral Latin American Spanish, t\u00fa",
+        "register": "neutral Latin American Spanish, tú",
         "keptEnglish": [
           "SEO",
           "AEO",
@@ -877,13 +877,33 @@
         ],
         "native": "pending: native-speaker spot check (Mitch)"
       }
+    },
+    {
+      "path": "/blog/ai-visibility-vendors-audited/",
+      "kind": "added",
+      "since": "post-2026-09-26-ai-visibility-audit",
+      "title": "I Audited 54 Companies Selling AI Visibility",
+      "minText": 1500,
+      "expected": [
+        "I Audited 54 Companies Selling AI Visibility",
+        "What I measured",
+        "Finding 1 — the 2015 checklist is not the differentiator any more",
+        "Finding 2 — 18% ship no structured data at all",
+        "Finding 3 — 86% have never named an AI crawler",
+        "Finding 4 — 46% shipped llms.txt",
+        "Finding 5 — 19% refused an identified crawler",
+        "What this means",
+        "Limitations",
+        "Method — reproduce it"
+      ],
+      "note": "Published 2026-09-26 (Mitch: \"approved\"). Entry in src/lib/data.ts. First-party audit; frame, scripts and raw JSON in content-studio/research/2026-09-25/seo-aeo-geo-gatekeepers/. Embeds the living infographic declared under \"embeds\"."
     }
   ],
   "embeds": [
     {
       "path": "/viz/search-results-by-intent-mandala/",
       "embeddedIn": "/blog/search-results-by-intent/",
-      "title": "Data Mandala \u2014 Search Intent 2026",
+      "title": "Data Mandala — Search Intent 2026",
       "files": [
         "poster-1080x1080.png",
         "poster-1080x1350.png",
@@ -902,7 +922,7 @@
     {
       "path": "/viz/search-results-by-intent-journey/",
       "embeddedIn": "/blog/search-results-by-intent/",
-      "title": "The Journey Map \u2014 Search Results by Intent",
+      "title": "The Journey Map — Search Results by Intent",
       "files": [
         "poster-1080x1080.png",
         "poster-1080x1350.png",
@@ -921,7 +941,7 @@
     {
       "path": "/viz/llm-ads-mandala/",
       "embeddedIn": "/blog/optimizing-for-ads-in-free-llm-answers/",
-      "title": "Ads Inside Free AI Answers \u2014 Data Mandala",
+      "title": "Ads Inside Free AI Answers — Data Mandala",
       "files": [
         "poster-1080x1080.png",
         "poster-1080x1350.png",
@@ -936,12 +956,12 @@
         "assistant-perplexity",
         "assistant-meta-ai"
       ],
-      "note": "Standalone living infographic (no site shell, no analytics, noindex, follow; the post is the indexable page). Published copy of content-studio/viz/final/llm-ads-mandala with same-origin jump links and a group-role wheel; ships the post's ready-made 1200\u00d7630 share card."
+      "note": "Standalone living infographic (no site shell, no analytics, noindex, follow; the post is the indexable page). Published copy of content-studio/viz/final/llm-ads-mandala with same-origin jump links and a group-role wheel; ships the post's ready-made 1200×630 share card."
     },
     {
       "path": "/viz/growth-title-market/",
       "embeddedIn": "/blog/growth-title-market/",
-      "title": "Ten Job Titles, Two Right Answers \u2014 data mandala",
+      "title": "Ten Job Titles, Two Right Answers — data mandala",
       "files": [
         "poster-1080x1080.png",
         "poster-1080x1350.png",
@@ -961,7 +981,7 @@
     {
       "path": "/viz/b2b-vs-b2c-by-vertical/",
       "embeddedIn": "/blog/b2b-vs-b2c-by-vertical/",
-      "title": "B2B vs B2C by vertical \u2014 the fractal stack",
+      "title": "B2B vs B2C by vertical — the fractal stack",
       "files": [
         "poster-1080x1080.png",
         "poster-1080x1350.png",
@@ -1001,6 +1021,23 @@
         "role-methods"
       ],
       "note": "Standalone living infographic (no site shell, no analytics, noindex, follow; the post is the indexable page). Published copy of content-studio/viz/final/statistician-vs-data-scientist with same-origin jump links, width-scaled live mode and a Skip animation control."
+    },
+    {
+      "path": "/viz/ai-visibility-vendors-audited/",
+      "embeddedIn": "/blog/ai-visibility-vendors-audited/",
+      "title": "The Two Layers",
+      "files": [
+        "poster-1080x1350.png",
+        "share-1200x630.png"
+      ],
+      "anchors": [
+        "finding-checklist",
+        "finding-schema",
+        "finding-botpolicy",
+        "finding-llmstxt",
+        "finding-refused"
+      ],
+      "note": "Standalone living infographic (no site shell, no analytics, noindex, follow; the post is the indexable page). Two clickable columns: the ten 2015-era checks as fail rates, and the four 2026 signals. Source: content-studio/viz/ai-visibility-vendors-audited/."
     }
   ],
   "note": "kind 'added' = routes introduced by the 2026-09-12 release (not in production snapshot 2745c7e): public lab page, population workbench (lane 2) and the client workspace entrance. They are indexable and in the sitemap; scripts/verify-parity.mjs checks them separately from the 57 archived routes. Agency redesign 2026-09-14: /services/ added (kind added); the home page is an Astro page in the agency shell; all other routes unchanged. Post 2026-09-24: /blog/search-results-by-intent/ plus the three study notes the 2026-09-21 build omitted (kind added, rendered from src/lib via baseline/src/lib/published.ts); the post's two standalone living infographics are listed under \"embeds\" (noindex, outside the shell, checked by scripts/verify-agency.mjs and scripts/qa/crawl.mjs). Site standards deploy 2 (2026-09-24): the Spanish pilot adds five routes of kind \"added\" with lang \"es\" and translationOf (the English path); site/lib/i18n.ts derives hreflang pairs from them, and each carries a \"translation\" record (model draft, independent review, native check pending)."

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Agency redesign verifier (2026-09-14). Runs after scripts/verify-parity.mjs on the
- * built dist/: route count (73 published URLs incl. /services/, the 2026-09-24 post and
+ * built dist/: route count (74 published URLs incl. /services/, the 2026-09-26 audit post and
  * study notes, the figma-shortest-course note, since site-standards deploy 2 the five Spanish pilot routes under /es/,
  * and since wave 2 (2026-09-24) four more posts with living infographics,
  * whose shell is checked with its Spanish labels), the agency shell on every document except the byte-preserved standalone SFC
@@ -38,16 +38,16 @@ const walk = dir => readdirSync(dir, { withFileTypes: true }).flatMap(entry => e
 const jsonLdOf = html => [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(match => { try { return JSON.parse(match[1]); } catch { return null; } });
 const typesOf = html => jsonLdOf(html).flatMap(doc => doc ? (doc['@graph'] || [doc]).map(node => node['@type']) : ['INVALID']);
 
-// 1. Routes: 73 published (53 archived public + lab, workbench, methodology, clients, services, products,
+// 1. Routes: 74 published (53 archived public + lab, workbench, methodology, clients, services, products,
 //    since 2026-09-24 one post and four study notes rendered from src/lib, since site-standards
 //    deploy 2 five Spanish routes: /es/, /es/services/, /es/contact/, /es/blog/ and the GBP post, and
 //    since wave 2 four posts: optimizing-for-ads-in-free-llm-answers, growth-title-market,
 //    b2b-vs-b2c-by-vertical, statistician-vs-data-scientist) + 4 placeholders.
 const eligible = manifest.routes.filter(route => route.kind !== 'placeholder').map(route => route.path);
-if (eligible.length !== 73) fail('manifest', `expected 73 published routes, found ${eligible.length}`);
+if (eligible.length !== 74) fail('manifest', `expected 74 published routes, found ${eligible.length}`);
 if (!manifest.routes.some(route => route.path === '/services/' && route.kind === 'added')) fail('manifest', '/services/ missing or not kind "added"');
 const sitemap = existsSync(join(dist, 'sitemap.xml')) ? [...read(join(dist, 'sitemap.xml')).matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]) : [];
-if (sitemap.length !== 73 || !sitemap.includes(`${canonicalOrigin}/services/`) || !sitemap.includes(`${canonicalOrigin}/es/services/`)) fail('sitemap', `expected 73 URLs including /services/ and /es/services/, found ${sitemap.length}`);
+if (sitemap.length !== 74 || !sitemap.includes(`${canonicalOrigin}/services/`) || !sitemap.includes(`${canonicalOrigin}/es/services/`)) fail('sitemap', `expected 74 URLs including /services/ and /es/services/, found ${sitemap.length}`);
 tick('routes');
 
 // 2. Shell on every document except the standalone SFC report (byte-preserved by parity rule).
@@ -71,9 +71,9 @@ for (const file of walk(dist).filter(file => file.endsWith('.html'))) {
   if (!/<nav class="ag-nav" aria-label="(Primary|Principal)">/.test(pageBody)) fail(route, 'missing primary navigation');
   for (const label of shellText.labels) if (!new RegExp(`<a href="[^"]+"[^>]*>${label}(<span class="ag-caret"[^>]*></span>)?</a>`).test(pageBody)) fail(route, `primary nav lacks ${label}`);
   if (!shellText.cta.test(pageBody)) fail(route, `missing green ${shellText.ctaName} contact button`);
-  if (!/href="https:\/\/mitchjmiller\.com\/"/.test(pageBody) || !/href="\/clients\/"/.test(pageBody)) fail(route, 'utility links (personal portfolio, Clients) missing');
+  if (!/href="\/resume\/"/.test(pageBody) || !/href="\/clients\/"/.test(pageBody)) fail(route, 'utility links (Resumes, Clients) missing');
   if (!/<details class="ag-menu">/.test(pageBody)) fail(route, 'missing mobile menu');
-  if (/<dialog id="resume-chooser"|data-resume-open|resume-download-dialog/.test(pageBody)) fail(route, 'retired resume chooser is still present');
+  if (!/<dialog id="resume-chooser"/.test(pageBody)) fail(route, 'missing resume chooser dialog');
   if ((pageBody.match(/<h1\b/gi) || []).length !== 1) fail(route, 'expected exactly one h1');
   // TODO/TBD are uppercase developer markers; case-insensitive matching would flag the Spanish word "todo".
   if (/lorem ipsum|\[insert|Design review|THEME UNDER REVIEW/i.test(text(pageBody)) || /\bTODO\b|\bTBD\b/.test(text(pageBody))) fail(route, 'placeholder or review wording');

@@ -1,6 +1,20 @@
 {
   "about": "Narrated audio per post (docs/site-standards.md). Written by scripts/narrate.mjs; do not edit by hand. Render or refresh: npm run narrate -- <slug> | --lang es <slug> | --missing | --all.",
   "items": {
+    "/blog/ai-visibility-vendors-audited/": {
+      "src": "/audio/blog/ai-visibility-vendors-audited.m4a",
+      "lang": "en",
+      "voice": "Samantha",
+      "voiceLocale": "en_US",
+      "seconds": 621.8,
+      "minutes": 10,
+      "bytes": 3792659,
+      "bitRate": 47999,
+      "channels": 1,
+      "textSha256": "50e94335011e74abe34ebae434022e87f4951145666194e7c6d8e7067d21a9ad",
+      "words": 1645,
+      "rendered": "2026-09-26"
+    },
     "/blog/b2b-vs-b2c-by-vertical/": {
       "src": "/audio/blog/b2b-vs-b2c-by-vertical.m4a",
       "lang": "en",

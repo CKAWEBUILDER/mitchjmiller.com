@@ -41,7 +41,7 @@ The sample is a rule, not a shortlist. I took the first page of four searches on
 
 Vendors are reported in aggregate and unnamed. The point is the pattern, not a pillory.
 
-## Finding 1 — the 2015 checklist is not the differentiator any more
+<h2 id="finding-checklist">Finding 1 — the 2015 checklist is not the differentiator any more</h2>
 
 | Check | Fail rate (n=44 fetched) |
 |---|---|
@@ -60,7 +60,7 @@ Vendors are reported in aggregate and unnamed. The point is the pattern, not a p
 
 If you have been telling clients that their AI visibility problem is a missing canonical, this population says otherwise. Whatever separates winners here, it is not the 2015 exam.
 
-## Finding 2 — 18% ship no structured data at all
+<h2 id="finding-schema">Finding 2 — 18% ship no structured data at all</h2>
 
 Eight of 44 homepages carry no JSON-LD whatsoever. No `Organization`, no `WebSite`, nothing.
 
@@ -68,7 +68,7 @@ Structured data is the single most common technical recommendation in AEO and GE
 
 Nearly one in five companies selling that advice have not taken it on their own front page.
 
-## Finding 3 — 86% have never named an AI crawler
+<h2 id="finding-botpolicy">Finding 3 — 86% have never named an AI crawler</h2>
 
 Of the 51 vendors serving a readable `robots.txt`, **seven name any AI crawler at all.** The other 44 mention none of GPTBot, ClaudeBot, PerplexityBot, Google-Extended, Applebot-Extended, CCBot, meta-externalagent or Bytespider.
 
@@ -76,7 +76,7 @@ Of the 51 vendors serving a readable `robots.txt`, **seven name any AI crawler a
 
 So the finding is not "they misconfigured it." The finding is thinner and more interesting: the people who sell bot policy as a deliberate business decision have mostly never made one themselves. They inherited a default that happens to point the right way. Their clients inherit the same silence — and for a client with paywalled content, licensing exposure, or a competitor scraping them, the default does *not* point the right way.
 
-## Finding 4 — 46% shipped `llms.txt`
+<h2 id="finding-llmstxt">Finding 4 — 46% shipped llms.txt</h2>
 
 25 of 54 serve a real `llms.txt` or `llms-full.txt`.
 
@@ -91,7 +91,7 @@ Adoption tracked how *visible and new* the artifact was, not how much evidence s
 
 That is the actual shape of the 2026 layer in this sample: fashionable work outpacing load-bearing work, in the one population that should know the difference.
 
-## Finding 5 — 19% refused an identified crawler
+<h2 id="finding-refused">Finding 5 — 19% refused an identified crawler</h2>
 
 Ten of 54 returned 401, 403 or 429 to a self-identifying research crawler. A plain refusal at the edge, from companies whose product is being fetched and cited.
 
@@ -108,6 +108,24 @@ I kept those ten in the sample rather than dropping them. Dropping unfetchable s
 **If you run the team:** make the bot policy an explicit decision with a date and an owner, even if the decision is "allow everything." A default is not a policy; it is just what happened.
 
 **For the industry:** every number here came from one HTTP request per site and a short script. The bar for first-party evidence in AI search is far lower than the volume of opinion suggests. More of us should be measuring instead of asserting — I started this expecting a different answer and the data corrected me, which is the whole point of collecting it.
+
+## Common questions
+
+### What is the difference between AEO and GEO?
+
+AEO optimises to be the extracted answer on a results page, so the unit of value is a passage or an entity. GEO optimises to be a source inside an answer the model writes, so the unit of value is a retrieved chunk. They stack on top of ordinary SEO rather than replacing it.
+
+### Does llms.txt actually help AI visibility?
+
+There is no published evidence that it does. It is a proposal, and no major AI system has confirmed it as a retrieval or ranking input. In this sample 46 percent of vendors shipped one anyway, which says more about how legible the file is to a prospect than about how engines behave.
+
+### Should I block GPTBot in robots.txt?
+
+Only if you have a reason, and the reason is a business decision rather than a technical default. None of the 54 vendors block GPTBot, ClaudeBot, PerplexityBot or Google-Extended, because they want the citations. A publisher with licensing exposure or paywalled content may reach the opposite answer.
+
+### Is structured data still worth it for AI search?
+
+Yes. It is the one item in the category with a clear mechanical path into retrieval, because it states what an entity is instead of asking a parser to infer it from prose. In this sample 18 percent of companies selling that advice shipped no structured data on their own homepage.
 
 ## Limitations
 

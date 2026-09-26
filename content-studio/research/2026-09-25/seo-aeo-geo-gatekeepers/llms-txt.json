@@ -1,0 +1,272 @@
+[
+  {
+    "domain": "thriveagency.com",
+    "/llms.txt": true,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "seoprofy.com",
+    "/llms.txt": false,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "position.digital",
+    "/llms.txt": true,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "thedigitalelevator.com",
+    "/llms.txt": true,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "minuttia.com",
+    "/llms.txt": false,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "silverbackstrategies.com",
+    "/llms.txt": true,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "gen-optima.com",
+    "/llms.txt": false,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "elsner.com",
+    "/llms.txt": true,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "respona.com",
+    "/llms.txt": false,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "saffronedge.com",
+    "/llms.txt": true,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "firstpagesage.com",
+    "/llms.txt": false,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "semai.ai",
+    "/llms.txt": false,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "frase.io",
+    "/llms.txt": true,
+    "/llms-full.txt": true
+  },
+  {
+    "domain": "exposureninja.com",
+    "/llms.txt": false,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "arcintermedia.com",
+    "/llms.txt": true,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "dageno.ai",
+    "/llms.txt": true,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "humanizeai.com",
+    "/llms.txt": true,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "seobrand.com",
+    "/llms.txt": false,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "coalitiontechnologies.com",
+    "/llms.txt": false,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "embarque.io",
+    "/llms.txt": false,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "derivatex.agency",
+    "/llms.txt": true,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "breakingb2b.com",
+    "/llms.txt": false,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "revvgrowth.com",
+    "/llms.txt": true,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "llmseoservices.agency",
+    "/llms.txt": false,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "docdigitalsem.com",
+    "/llms.txt": false,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "siegemedia.com",
+    "/llms.txt": false,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "beomniscient.com",
+    "/llms.txt": true,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "graphite.io",
+    "/llms.txt": false,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "ipullrank.com",
+    "/llms.txt": false,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "animalz.co",
+    "/llms.txt": false,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "gofishdigital.com",
+    "/llms.txt": true,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "interodigital.com",
+    "/llms.txt": true,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "straightnorth.com",
+    "/llms.txt": false,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "webfx.com",
+    "/llms.txt": true,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "hawksem.com",
+    "/llms.txt": false,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "searchbloom.com",
+    "/llms.txt": true,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "tryprofound.com",
+    "/llms.txt": false,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "peec.ai",
+    "/llms.txt": false,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "athenahq.ai",
+    "/llms.txt": true,
+    "/llms-full.txt": true
+  },
+  {
+    "domain": "seranking.com",
+    "/llms.txt": false,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "writesonic.com",
+    "/llms.txt": true,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "otterly.ai",
+    "/llms.txt": false,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "ziptie.dev",
+    "/llms.txt": false,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "stellarising.com",
+    "/llms.txt": false,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "semrush.com",
+    "/llms.txt": true,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "conductor.com",
+    "/llms.txt": true,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "brightedge.com",
+    "/llms.txt": true,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "seoclarity.net",
+    "/llms.txt": false,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "knowatoa.com",
+    "/llms.txt": true,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "rankscale.ai",
+    "/llms.txt": true,
+    "/llms-full.txt": true
+  },
+  {
+    "domain": "trakkr.ai",
+    "/llms.txt": true,
+    "/llms-full.txt": true
+  },
+  {
+    "domain": "nightwatch.io",
+    "/llms.txt": false,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "surferseo.com",
+    "/llms.txt": false,
+    "/llms-full.txt": false
+  },
+  {
+    "domain": "clearscope.io",
+    "/llms.txt": false,
+    "/llms-full.txt": false
+  }
+]

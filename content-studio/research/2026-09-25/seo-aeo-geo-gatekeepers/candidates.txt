@@ -1,0 +1,68 @@
+# Frame: vendors selling AEO / GEO / "AI visibility" services or tools.
+# Collected 2026-09-25 from the first page of 4 queries (see FRAME.md), plus
+# vendors named in those results' summaries. Qualification is automated:
+# a domain enters the sample only if its own homepage sells AEO/GEO/AI-visibility.
+# --- domains that appeared directly as result URLs ---
+thriveagency.com
+seoprofy.com
+position.digital
+thedigitalelevator.com
+minuttia.com
+silverbackstrategies.com
+gen-optima.com
+elsner.com
+respona.com
+moosend.com
+saffronedge.com
+firstpagesage.com
+semai.ai
+frase.io
+exposureninja.com
+arcintermedia.com
+data-mania.com
+dageno.ai
+humanizeai.com
+seobrand.com
+coalitiontechnologies.com
+embarque.io
+derivatex.agency
+breakingb2b.com
+revvgrowth.com
+llmseoservices.agency
+docdigitalsem.com
+# --- vendors named in the result summaries ---
+siegemedia.com
+beomniscient.com
+graphite.io
+ipullrank.com
+directiveconsulting.com
+animalz.co
+gofishdigital.com
+interodigital.com
+straightnorth.com
+webfx.com
+hawksem.com
+piperocketdigital.com
+searchbloom.com
+tryprofound.com
+peec.ai
+athenahq.ai
+seranking.com
+writesonic.com
+otterly.ai
+ziptie.dev
+algomizer.com
+stellarising.com
+semrush.com
+conductor.com
+brightedge.com
+seoclarity.net
+scrunch.ai
+goodie.ai
+knowatoa.com
+rankscale.ai
+trakkr.ai
+nightwatch.io
+surferseo.com
+clearscope.io
+marketmuse.com

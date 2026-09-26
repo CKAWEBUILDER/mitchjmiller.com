@@ -1,0 +1,9 @@
+{
+  "n_frame": 54,
+  "n_fetched": 44,
+  "n_refused": 10,
+  "pass_all": 30,
+  "fail_any": 14,
+  "named_ai_bots": 7,
+  "with_robots": 51
+}

@@ -2,7 +2,9 @@
 import ParityShell from '../../layouts/ParityShell.astro';
 // Public entrance to the private client workspace (Cloudflare Pages, lane 3).
 // Not linked from the main navigation; clients arrive from their onboarding email.
-const portal = 'https://clients.mj2.pro/';
+// clients.mj2.pro was never activated (2026-09-25), so this points at the Pages hostname; switch
+// back to https://clients.mj2.pro/ once that custom domain serves the portal.
+const portal = 'https://mitchjmiller-clients.pages.dev/';
 ---
 <ParityShell path="/clients/" title="Client workspace sign-in | Mitchell Miller" description="Sign in to the private client workspace where Mitchell Miller shares interactive deliverables and files for your engagement.">
   <div class="container mx-auto px-4 md:px-8 max-w-2xl py-24">

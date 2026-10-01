@@ -1,6 +1,6 @@
 {
   "label": "Experience across",
-  "note": "Professional association evidence, retained independently of logo availability. The carousel displays only entries with original logo artwork. Relationship categories remain internal metadata and are not rendered. Original artwork sources are recorded in docs/redesign-2026-09-14/brand-logo-sources.json.",
+  "note": "Professional association evidence, retained independently of logo availability. The carousel displays only entries with original logo artwork, in this order (most recognizable first). Relationship categories remain internal metadata and are not rendered. Original artwork sources are recorded in docs/redesign-2026-09-14/brand-logo-sources.json; client entries added 2026-09-25 from Mitch's list wait there for official artwork (logo null until sourced).",
   "brands": [
     {
       "name": "Apple",
@@ -14,6 +14,94 @@
       "height": 44
     },
     {
+      "name": "Adobe",
+      "kind": "client",
+      "wordmark": false,
+      "logo": null,
+      "url": null,
+      "evidence": "Listed by Mitch, 2026-09-25, as a client he has worked with; engagement details not recorded."
+    },
+    {
+      "name": "Pixar",
+      "kind": "client",
+      "wordmark": false,
+      "logo": null,
+      "url": null,
+      "evidence": "Listed by Mitch, 2026-09-25, as a client he has worked with; engagement details not recorded."
+    },
+    {
+      "name": "Intuit",
+      "kind": "client",
+      "wordmark": false,
+      "logo": null,
+      "url": null,
+      "evidence": "Listed by Mitch, 2026-09-25, as a client he has worked with; engagement details not recorded."
+    },
+    {
+      "name": "Dropbox",
+      "kind": "client",
+      "wordmark": false,
+      "logo": null,
+      "url": null,
+      "evidence": "Listed by Mitch, 2026-09-25, as a client he has worked with; engagement details not recorded."
+    },
+    {
+      "name": "DHL",
+      "kind": "client",
+      "wordmark": false,
+      "logo": null,
+      "url": null,
+      "evidence": "Listed by Mitch, 2026-09-25, as a client he has worked with; engagement details not recorded."
+    },
+    {
+      "name": "Bayer",
+      "kind": "client",
+      "wordmark": false,
+      "logo": null,
+      "url": null,
+      "evidence": "Listed by Mitch, 2026-09-25, as a client he has worked with; engagement details not recorded."
+    },
+    {
+      "name": "Lyft",
+      "kind": "client",
+      "wordmark": false,
+      "logo": null,
+      "url": null,
+      "evidence": "Listed by Mitch, 2026-09-25, as a client he has worked with; engagement details not recorded."
+    },
+    {
+      "name": "Beats",
+      "kind": "client",
+      "wordmark": false,
+      "logo": null,
+      "url": null,
+      "evidence": "Listed by Mitch, 2026-09-25, as a client he has worked with; engagement details not recorded. Listed as \"Beats Headphones\"."
+    },
+    {
+      "name": "Whirlpool",
+      "kind": "client",
+      "wordmark": false,
+      "logo": null,
+      "url": null,
+      "evidence": "Listed by Mitch, 2026-09-25, as a client he has worked with; engagement details not recorded."
+    },
+    {
+      "name": "Square",
+      "kind": "client",
+      "wordmark": false,
+      "logo": null,
+      "url": null,
+      "evidence": "Listed by Mitch, 2026-09-25, as a client he has worked with; engagement details not recorded."
+    },
+    {
+      "name": "MongoDB",
+      "kind": "client",
+      "wordmark": false,
+      "logo": null,
+      "url": null,
+      "evidence": "Listed by Mitch, 2026-09-25, as a client he has worked with; engagement details not recorded."
+    },
+    {
       "name": "Stanford Health Care",
       "kind": "employer",
       "wordmark": false,
@@ -23,6 +111,33 @@
       "sourceUrl": "https://stanfordhealthcare.org/etc/clientlibs/shc/main/img/stanfordHealthcareLogo.svg",
       "width": 244.9662,
       "height": 37.7296
+    },
+    {
+      "name": "UCSF",
+      "kind": "client",
+      "wordmark": false,
+      "logo": null,
+      "url": null,
+      "evidence": "Listed by Mitch, 2026-09-25, as a client he has worked with; engagement details not recorded. Whether this is the university (UCSF) or the medical center (UCSF Health) is not recorded."
+    },
+    {
+      "name": "Grab",
+      "kind": "client",
+      "wordmark": false,
+      "logo": null,
+      "url": null,
+      "evidence": "Listed by Mitch, 2026-09-25, as a client he has worked with; engagement details not recorded."
+    },
+    {
+      "name": "CommonSpirit Health",
+      "kind": "employer",
+      "wordmark": false,
+      "logo": "/images/brands/commonspirit-health.svg",
+      "url": null,
+      "evidence": "PM, SEO & Web Analytics through the CHI-Dignity Health merger and 63+ site network consolidation, Sept 2018-Aug 2022.",
+      "sourceUrl": "https://www.commonspirit.org/content/dam/shared/en/logos/commonspirit-logo-1.svg",
+      "width": 200,
+      "height": 48
     },
     {
       "name": "Dignity Health",
@@ -36,15 +151,151 @@
       "height": 549
     },
     {
-      "name": "CommonSpirit Health",
-      "kind": "employer",
+      "name": "Veracode",
+      "kind": "client",
       "wordmark": false,
-      "logo": "/images/brands/commonspirit-health.svg",
+      "logo": null,
       "url": null,
-      "evidence": "PM, SEO & Web Analytics through the CHI-Dignity Health merger and 63+ site network consolidation, Sept 2018-Aug 2022.",
-      "sourceUrl": "https://www.commonspirit.org/content/dam/shared/en/logos/commonspirit-logo-1.svg",
-      "width": 200,
-      "height": 48
+      "evidence": "Listed by Mitch, 2026-09-25, as a client he has worked with; engagement details not recorded."
+    },
+    {
+      "name": "BeyondTrust",
+      "kind": "client",
+      "wordmark": false,
+      "logo": null,
+      "url": null,
+      "evidence": "Client during his Wpromote (DemandWave) SEO Campaign Manager role, Apr 2015-Aug 2018: \"Directed full-lifecycle SEO across enterprise portfolio including Unilever, BeyondTrust, Dynapar, Whoop\" (docs/overhaul-2026-09-10/resumes/scripts/build_exact_resume.py:678)."
+    },
+    {
+      "name": "Schneider National",
+      "kind": "client",
+      "wordmark": false,
+      "logo": null,
+      "url": null,
+      "evidence": "Listed by Mitch, 2026-09-25, as a client he has worked with; engagement details not recorded."
+    },
+    {
+      "name": "inContact",
+      "kind": "client",
+      "wordmark": false,
+      "logo": null,
+      "url": null,
+      "evidence": "Listed by Mitch, 2026-09-25, as a client he has worked with; engagement details not recorded. inContact was acquired by NICE (NICE inContact, now NICE CXone); shown under the name he worked with."
+    },
+    {
+      "name": "App Annie",
+      "kind": "client",
+      "wordmark": false,
+      "logo": null,
+      "url": null,
+      "evidence": "Listed by Mitch, 2026-09-25, as a client he has worked with. His note (MY PROJECT NOTES, Design/Fix Notes): \"i think was like 10M pages and a ton of hreflangs\". App Annie later renamed itself data.ai; shown under the name he worked with."
+    },
+    {
+      "name": "Virginia Mason Franciscan Health",
+      "kind": "client",
+      "wordmark": false,
+      "logo": null,
+      "url": null,
+      "evidence": "Listed by Mitch, 2026-09-25, as a client he has worked with; engagement details not recorded."
+    },
+    {
+      "name": "St. Luke's Health",
+      "kind": "client",
+      "wordmark": false,
+      "logo": null,
+      "url": null,
+      "evidence": "Listed by Mitch, 2026-09-25, as a client he has worked with; engagement details not recorded. Which St. Luke's Health is not recorded (several systems share the name)."
+    },
+    {
+      "name": "Esker",
+      "kind": "client",
+      "wordmark": false,
+      "logo": null,
+      "url": null,
+      "evidence": "Listed by Mitch, 2026-09-25, as a client he has worked with; engagement details not recorded."
+    },
+    {
+      "name": "Bosley",
+      "kind": "client",
+      "wordmark": false,
+      "logo": null,
+      "url": null,
+      "evidence": "Listed by Mitch, 2026-09-25, as a client he has worked with. His note (MY PROJECT NOTES, Design/Fix Notes): \"PR, reputation mgmt\"."
+    },
+    {
+      "name": "CalCoast Credit Union",
+      "kind": "client",
+      "wordmark": false,
+      "logo": null,
+      "url": null,
+      "evidence": "Listed by Mitch, 2026-09-25, as a client he has worked with. His note (MY PROJECT NOTES, Design/Fix Notes): \"business wikipedia page\" (listed as \"Calcoast fcu\")."
+    },
+    {
+      "name": "Dynapar",
+      "kind": "client",
+      "wordmark": false,
+      "logo": null,
+      "url": null,
+      "evidence": "Client during his Wpromote (DemandWave) SEO Campaign Manager role, Apr 2015-Aug 2018: \"Directed full-lifecycle SEO across enterprise portfolio including Unilever, BeyondTrust, Dynapar, Whoop\" (docs/overhaul-2026-09-10/resumes/scripts/build_exact_resume.py:678)."
+    },
+    {
+      "name": "HRDQ",
+      "kind": "client",
+      "wordmark": false,
+      "logo": null,
+      "url": null,
+      "evidence": "Listed by Mitch, 2026-09-25, as a client he has worked with; engagement details not recorded."
+    },
+    {
+      "name": "MiaDonna",
+      "kind": "client",
+      "wordmark": false,
+      "logo": null,
+      "url": null,
+      "evidence": "Listed by Mitch, 2026-09-25, as a client he has worked with; engagement details not recorded."
+    },
+    {
+      "name": "Insomnia Cafe",
+      "kind": "client",
+      "wordmark": false,
+      "logo": null,
+      "url": null,
+      "evidence": "Listed by Mitch, 2026-09-25, as a client he has worked with; engagement details not recorded."
+    },
+    {
+      "name": "Blue Planet Adventures",
+      "kind": "client",
+      "wordmark": false,
+      "logo": null,
+      "url": null,
+      "evidence": "Listed by Mitch, 2026-09-25, as a client he has worked with; engagement details not recorded."
+    },
+    {
+      "name": "SUPDog",
+      "kind": "client",
+      "wordmark": false,
+      "logo": null,
+      "url": null,
+      "evidence": "Listed by Mitch, 2026-09-25, as a client he has worked with; engagement details not recorded."
+    },
+    {
+      "name": "Zoomifi",
+      "kind": "client",
+      "wordmark": false,
+      "logo": null,
+      "url": null,
+      "evidence": "Listed by Mitch, 2026-09-25, as a client he has worked with; engagement details not recorded."
+    },
+    {
+      "name": "SFC Surf School",
+      "kind": "client",
+      "wordmark": false,
+      "logo": "/images/brands/sfc-surf-school.svg",
+      "url": null,
+      "evidence": "Growth strategy, search, design & engineering - current client engagement, May 2026-present (90-day pilot).",
+      "sourceUrl": "https://sfcsurfschool.com/media/sfc-wave-mark.svg",
+      "width": 290,
+      "height": 254
     },
     {
       "name": "Wpromote",
@@ -69,17 +320,6 @@
       "logo": null,
       "url": null,
       "evidence": "Builder / AI Practitioner - AEO/GEO measurement and internal AI reporting systems (ClarityPulse); role ran through Feb 2026."
-    },
-    {
-      "name": "SFC Surf School",
-      "kind": "client",
-      "wordmark": false,
-      "logo": "/images/brands/sfc-surf-school.svg",
-      "url": null,
-      "evidence": "Growth strategy, search, design & engineering - current client engagement, May 2026-present (90-day pilot).",
-      "sourceUrl": "https://sfcsurfschool.com/media/sfc-wave-mark.svg",
-      "width": 290,
-      "height": 254
     },
     {
       "name": "Clear Kayak Adventures",

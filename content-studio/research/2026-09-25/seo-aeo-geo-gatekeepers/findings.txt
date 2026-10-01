@@ -1,0 +1,35 @@
+FRAME: 54 vendors selling AEO/GEO/AI-visibility
+  page fetched ........ 44
+  refused our crawler . 10  (19%)
+
+2015-ERA CHECKS (n=44 fetched)
+  title tag              fail   0/44     0%
+  meta description       fail   1/44     2%
+  exactly one H1         fail   3/44     7%
+  canonical tag          fail   2/44     5%
+  html lang attribute    fail   1/44     2%
+  viewport meta          fail   0/44     0%
+  robots.txt             fail   0/44     0%
+  sitemap reachable      fail   1/44     2%
+  HTTPS                  fail   0/44     0%
+  Schema.org JSON-LD     fail   8/44    18%
+
+  PASS ALL TEN ......... 30/44  (68%)
+  fail at least one .... 14/44  (32%)
+  failures per site: {0: 30, 1: 12, 2: 2}
+
+AI BOT POLICY (n=51 with a readable robots.txt)
+  names ANY AI crawler in robots.txt .. 7/51  14%
+  silent on every AI crawler ......... 44/51  86%
+
+  GPTBot               blocked   0  allowed  51
+  ClaudeBot            blocked   0  allowed  51
+  PerplexityBot        blocked   0  allowed  51
+  Google-Extended      blocked   0  allowed  51
+  CCBot                blocked   1  allowed  50
+  Applebot-Extended    blocked   0  allowed  51
+  Bytespider           blocked   0  allowed  51
+
+TOP SCHEMA TYPES: {'Organization': 31, 'WebSite': 26, 'ImageObject': 22, 'WebPage': 22, 'PostalAddress': 20, 'SearchAction': 16, 'Person': 15, 'ContactPoint': 14, 'ListItem': 14, 'EntryPoint': 14}
+
+No JSON-LD at all: 8/44

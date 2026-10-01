@@ -659,6 +659,19 @@ function scaleToViewport(){
   frame.style.height = (L.H*k) + 'px';
 }
 
+/* WCAG 2.2.2 (site standards, 2026-09-24): the tick loop below repeats indefinitely, so a
+   visible button stops it on the settled frame. It exists only while the loop plays; reduced
+   motion skips the loop entirely (isStatic), so the button never appears there. */
+function skipButton(onSkip) {
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.textContent = 'Skip animation';
+  b.style.cssText = 'position:fixed;top:10px;right:10px;z-index:20;min-height:44px;padding:10px 16px;border:1px solid #0f2440;border-radius:8px;background:#ffffff;color:#0f2440;font:600 14px/1.2 system-ui,-apple-system,"Segoe UI",sans-serif;cursor:pointer';
+  b.addEventListener('click', () => { onSkip(); b.remove(); });
+  document.body.append(b);
+  return b;
+}
+
 function boot(){
   build();
   seek(DURATION);               // fit against final counter text, not "0"
@@ -674,13 +687,15 @@ function boot(){
   else seek(DURATION);
 
   if (!isStatic) {
+    let tickRaf = 0;
     const t0 = performance.now();
     const tick = () => {
       const t = ((performance.now() - t0)/1000) % (DURATION + 0.9);
       seek(Math.min(t, DURATION));
-      requestAnimationFrame(tick);
+      tickRaf = requestAnimationFrame(tick);
     };
-    requestAnimationFrame(tick);
+    tickRaf = requestAnimationFrame(tick);
+    skipButton(() => { if (tickRaf) cancelAnimationFrame(tickRaf); tickRaf = 0; seek(DURATION); });
   }
 
   document.documentElement.dataset.ready = '1';

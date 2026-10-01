@@ -491,13 +491,30 @@ function render(t){
   frame.dataset.t = t.toFixed(3);
 }
 
+const REDUCED_MOTION = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
 const isStatic = Q.has("static") || Q.has("poster") || Q.get("anim") === "0";
-let raf = 0, t0 = 0;
+let raf = 0, t0 = 0, skip = null;
 function loop(ts){ if (!t0) t0 = ts; render(((ts - t0) / 1000) % (DUR + 1.2)); raf = requestAnimationFrame(loop); }
 
+/* WCAG 2.2.2 (site standards, 2026-09-24): the loop above repeats indefinitely, so a visible
+   button stops it on the settled frame. It exists only while the loop plays. Reduced motion
+   skips the loop entirely, straight to the settled frame. */
+function skipButton(onSkip) {
+  const b = document.createElement("button");
+  b.type = "button";
+  b.textContent = "Skip animation";
+  b.style.cssText = 'position:fixed;top:10px;right:10px;z-index:20;min-height:44px;padding:10px 16px;border:1px solid #0f2440;border-radius:8px;background:#ffffff;color:#0f2440;font:600 14px/1.2 system-ui,-apple-system,"Segoe UI",sans-serif;cursor:pointer';
+  b.addEventListener("click", () => { onSkip(); b.remove(); });
+  document.body.append(b);
+  return b;
+}
+
 if (Q.has("t")) render(parseFloat(Q.get("t")));
-else if (isStatic) render(SETTLED);
-else raf = requestAnimationFrame(loop);
+else if (isStatic || REDUCED_MOTION) render(SETTLED);
+else {
+  raf = requestAnimationFrame(loop);
+  skip = skipButton(() => { if (raf) { cancelAnimationFrame(raf); raf = 0; } render(SETTLED); });
+}
 
 /* ------------------------------------------ export hook (kit openViz contract) */
 window.VIZ = {
@@ -505,7 +522,7 @@ window.VIZ = {
   duration: DUR,
   settled: SETTLED,
   size: S,
-  seek(t){ if (raf){ cancelAnimationFrame(raf); raf = 0; } render(t); return t; },
+  seek(t){ if (raf){ cancelAnimationFrame(raf); raf = 0; } if (skip) { skip.remove(); skip = null; } render(t); return t; },
   play(){ if (!raf){ t0 = 0; raf = requestAnimationFrame(loop); } }
 };
 

@@ -8,6 +8,9 @@ const text = lang === 'es'
   : { heading: brands.label, pause: 'Pause logos', resume: 'Resume logos', group: 'Brand logos. Focus here to pause scrolling.' };
 const heading = Astro.props.heading ?? text.heading;
 const list = brands.brands.filter(brand => brand.logo);
+// One loop scrolls one copy of the list: about 6 s per logo keeps the speed steady as logos are added
+// (never faster than the original 42 s loop).
+const duration = Math.max(42, list.length * 6);
 ---
 <section class="ag-marquee" aria-labelledby={`${id}-label`} data-marquee>
   <div class="ag-wrap ag-marquee-head">
@@ -15,7 +18,7 @@ const list = brands.brands.filter(brand => brand.logo);
     <button class="ag-marquee-toggle" type="button" aria-pressed="false" aria-controls={`${id}-track`} data-marquee-toggle data-label-pause={text.pause} data-label-resume={text.resume} hidden>{text.pause}</button>
   </div>
   <div class="ag-marquee-viewport" tabindex="0" role="group" aria-label={text.group}>
-    <div class="ag-marquee-track" id={`${id}-track`}>
+    <div class="ag-marquee-track" id={`${id}-track`} style={`--ag-marquee-duration:${duration}s`}>
       {[false, true].map(duplicate => (
         <ul aria-hidden={duplicate ? 'true' : undefined} data-marquee-copy={duplicate ? 'duplicate' : 'primary'}>
           {list.map(brand => (

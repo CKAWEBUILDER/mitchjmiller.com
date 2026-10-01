@@ -9,12 +9,11 @@
  * Checks: HTTP 200, exactly one h1, main text length above a per-template threshold,
  * canonical present/correct, meta description present and unique, robots policy,
  * GA4 tag once per indexable page, internal links/assets resolve, images have alt,
- * the four PDFs serve 200 with the corrected hashes, declared standalone embeds (manifest
+ * the retired resume PDFs (manifest "retired") return 404, declared standalone embeds (manifest
  * "embeds") serve 200 with their files and stay noindex, unknown routes return the 404
  * document, former missing routes now carry full content, sitemap/robots/CNAME/.nojekyll,
  * and no review/staging/draft output or source maps in the artifact.
  */
-import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync, statSync, writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { decodeHTML } from 'entities';
@@ -24,7 +23,6 @@ const base = args.base || 'http://127.0.0.1:5193';
 const dist = resolve(args.dist || 'dist');
 const out = resolve(args.out || 'docs/redesign-2026-09-14/qa/crawl.json');
 const manifest = JSON.parse(readFileSync('docs/implementation-2026-09-11/route-manifest.json', 'utf8'));
-const releaseFiles = JSON.parse(readFileSync('docs/release-2026-09-12/release-files.json', 'utf8'));
 const GA = 'G-HCKYWCZQ8E';
 const canonicalOrigin = 'https://mj2.pro';
 const minText = { general: 300, case: 700, article: 1500, note: 1500, placeholder: 40, added: 400 };
@@ -41,7 +39,6 @@ const attrs = tag => {
 };
 const tags = (html, name) => [...html.matchAll(tagPattern)].map(m => m[0]).filter(t => new RegExp(`^<${name}\\b`, 'i').test(t));
 const mainOf = html => html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)?.[1] ?? html.match(/<body\b[^>]*>([\s\S]*?)<\/body>/i)?.[1] ?? '';
-const sha256 = bytes => createHash('sha256').update(bytes).digest('hex');
 const fileFor = route => { const dir = join(dist, route); return existsSync(join(dir, 'index.html')) ? join(dir, 'index.html') : null; };
 const walk = dir => readdirSync(dir, { withFileTypes: true }).flatMap(e => e.isDirectory() ? walk(join(dir, e.name)) : [join(dir, e.name)]);
 
@@ -135,10 +132,9 @@ if (health.status === 200) {
     const hostHtml = host.body ? host.body.toString('utf8') : '';
     record(embed.embeddedIn, `iframes ${embed.path} with the canonical ?parent=`, hostHtml.includes(`<iframe src="${embed.path}?parent=${encodeURIComponent(`${canonicalOrigin}${embed.embeddedIn}`)}"`), '');
   }
-  for (const pdf of releaseFiles.pdfs) {
-    const r = await fetchStatus(`${base}${pdf.path}`);
-    const hash = r.body ? sha256(r.body) : '';
-    record(pdf.path, 'PDF serves 200 with the corrected sha256 and application/pdf', r.status === 200 && hash === pdf.sha256 && r.body.length === pdf.bytes && /application\/pdf/.test(r.type), `status ${r.status}, ${r.body?.length} bytes, sha256 ${hash.slice(0, 12)}… (expected ${pdf.sha256.slice(0, 12)}…, previous ${pdf.previousSha256.slice(0, 12)}…)`);
+  for (const item of manifest.retired || []) {
+    const r = await fetchStatus(`${base}${item.path}`, 'HEAD');
+    record(item.path, `retired ${item.kind} returns 404 (${item.decidedBy}, ${item.date})`, r.status === 404, `status ${r.status}`);
   }
   for (const unknown of ['/no-such-page/', '/blog/does-not-exist/', '/case-studies/nope/', '/lab/missing/']) {
     const r = await fetchStatus(`${base}${unknown}`);

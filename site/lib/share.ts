@@ -23,7 +23,7 @@ const sections: [RegExp, Record<Lang, string>][] = [
   [/^\/lab\//, { en: 'Lab', es: 'Laboratorio' }],
   [/^\/about\//, { en: 'About', es: 'Acerca de' }],
   [/^\/contact\//, { en: 'Contact', es: 'Contacto' }],
-  [/^\/resume\//, { en: 'Resumes', es: 'Currículums' }],
+  [/^\/resume\//, { en: 'Personal portfolio', es: 'Portafolio personal' }],
   [/^\/clients\//, { en: 'Clients', es: 'Clientes' }],
 ];
 

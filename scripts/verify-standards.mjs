@@ -233,9 +233,28 @@ for (const [, entry] of sitemapXml.matchAll(/<url>([\s\S]*?)<\/url>/g)) {
 const languageScript = readFileSync(join(root, 'site/components/parity/enhance.ts'), 'utf8');
 if (/location\.(assign|replace)\s*\(|location(\.href)?\s*=[^=]|window\.location\s*=[^=]/.test(languageScript)) fail('enhance.ts', 'a script changes location: the language banner must suggest, never redirect');
 
+// 5. Brand mark (2026-09-25): the M² icon files replace the old favicon set, none of them is the
+//    headshot, and the Organization JSON-LD logo is the 512×512 M² PNG (scripts/brand-icons.mjs).
+const icoSizes = bytes => bytes.readUInt16LE(0) === 0 && bytes.readUInt16LE(2) === 1 ? Array.from({ length: bytes.readUInt16LE(4) }, (_, i) => bytes.readUInt8(6 + 16 * i) || 256) : [];
+const brandFiles = [['favicon.png', 32], ['apple-touch-icon.png', 180], ['images/brand/m2-logo-512.png', 512]];
+for (const [path, size] of brandFiles) {
+  const file = join(dist, path);
+  if (!existsSync(file)) { fail(path, 'brand icon missing'); continue; }
+  const bytes = readFileSync(file), dims = imageSize(bytes);
+  if (dims?.type !== 'png' || dims.width !== size || dims.height !== size) fail(path, `expected a ${size}×${size} PNG`);
+  else if (headshotHashes.has(hash(bytes))) fail(path, 'brand icon is the headshot');
+  else tick('brandIcons');
+}
+const icoFile = join(dist, 'favicon.ico');
+if (!existsSync(icoFile) || JSON.stringify(icoSizes(readFileSync(icoFile))) !== JSON.stringify([16, 32, 48])) fail('favicon.ico', 'expected an ICO with 16, 32 and 48 px images');
+else tick('brandIcons');
+const homeLd = readFileSync(join(dist, 'index.html'), 'utf8').match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g) || [];
+if (!homeLd.some(script => script.includes('"logo":"https://mj2.pro/images/brand/m2-logo-512.png"'))) fail('/', 'Organization JSON-LD logo is not the M² logo');
+else tick('brandIcons');
+
 const report = { passed: failures.length === 0, checks, darkPairs, failures };
 if (process.env.STANDARDS_REPORT_PATH) writeFileSync(resolve(root, process.env.STANDARDS_REPORT_PATH), `${JSON.stringify(report, null, 2)}\n`);
 const narrated = Object.keys(checks).filter(key => key.startsWith('narrated_')).map(key => `${checks[key]} ${key.slice(9)}`).join(' + ') || '0';
-console.log(`Standards verification ${report.passed ? 'passed' : 'FAILED'}: share tags + 1200×630 card on ${checks.shareCardsOk || 0}/${checks.shareDocuments || 0} documents (${checks.headshotShareImages || 0} headshot references), theme script + toggle on ${checks.themedDocuments || 0} shell documents, dark blocks identical ${checks.darkTokenBlocksIdentical ? 'yes' : 'NO'}, ${darkPairs.length} dark text pairs ≥ 4.5:1 (min ${Math.min(...darkPairs.map(pair => pair.ratio))}), narrated posts ${narrated}; hreflang on ${checks.hreflang_en || 0} en + ${checks.hreflang_es || 0} es pages, ${checks.sitemapAlternates || 0} sitemap entries match, ${checks.languagePickers || 0} pickers.`);
+console.log(`Standards verification ${report.passed ? 'passed' : 'FAILED'}: share tags + 1200×630 card on ${checks.shareCardsOk || 0}/${checks.shareDocuments || 0} documents (${checks.headshotShareImages || 0} headshot references), theme script + toggle on ${checks.themedDocuments || 0} shell documents, dark blocks identical ${checks.darkTokenBlocksIdentical ? 'yes' : 'NO'}, ${darkPairs.length} dark text pairs ≥ 4.5:1 (min ${Math.min(...darkPairs.map(pair => pair.ratio))}), narrated posts ${narrated}; M² brand files ${checks.brandIcons || 0}/5; hreflang on ${checks.hreflang_en || 0} en + ${checks.hreflang_es || 0} es pages, ${checks.sitemapAlternates || 0} sitemap entries match, ${checks.languagePickers || 0} pickers.`);
 if (failures.length) console.error(failures.map(value => `  - ${value}`).join('\n'));
 process.exitCode = report.passed ? 0 : 1;

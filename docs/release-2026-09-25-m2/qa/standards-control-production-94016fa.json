@@ -1,0 +1,966 @@
+{
+  "generated": "2026-09-25T18:08:41.427Z",
+  "base": "http://127.0.0.1:5195",
+  "documents": 9,
+  "axe": {
+    "version": "4.13.0",
+    "tags": [
+      "wcag2a",
+      "wcag2aa",
+      "wcag21a",
+      "wcag21aa",
+      "wcag22a",
+      "wcag22aa"
+    ],
+    "gate": "zero serious or critical",
+    "violationsByTheme": {
+      "light": {
+        "serious": 0,
+        "critical": 0,
+        "other": 0
+      },
+      "dark": {
+        "serious": 0,
+        "critical": 0,
+        "other": 0
+      }
+    }
+  },
+  "checks": 142,
+  "passed": 129,
+  "failed": 13,
+  "failures": [
+    {
+      "scope": "/blog/studying/all-in-ai-money-stack/@390",
+      "check": "no horizontal overflow",
+      "pass": false,
+      "detail": "scrollWidth 404 / viewport 390"
+    },
+    {
+      "scope": "/es/@1281",
+      "check": "desktop header items fit inside the header",
+      "pass": false,
+      "detail": "31px past the edge"
+    },
+    {
+      "scope": "/es/@1360",
+      "check": "desktop header items fit inside the header",
+      "pass": false,
+      "detail": "16px past the edge"
+    },
+    {
+      "scope": "/es/@1500",
+      "check": "desktop header items fit inside the header",
+      "pass": false,
+      "detail": "16px past the edge"
+    },
+    {
+      "scope": "/es/services/@1281",
+      "check": "desktop header items fit inside the header",
+      "pass": false,
+      "detail": "31px past the edge"
+    },
+    {
+      "scope": "/es/services/@1360",
+      "check": "desktop header items fit inside the header",
+      "pass": false,
+      "detail": "16px past the edge"
+    },
+    {
+      "scope": "/es/services/@1500",
+      "check": "desktop header items fit inside the header",
+      "pass": false,
+      "detail": "16px past the edge"
+    },
+    {
+      "scope": "/es/contact/@1281",
+      "check": "desktop header items fit inside the header",
+      "pass": false,
+      "detail": "31px past the edge"
+    },
+    {
+      "scope": "/es/contact/@1360",
+      "check": "desktop header items fit inside the header",
+      "pass": false,
+      "detail": "16px past the edge"
+    },
+    {
+      "scope": "/es/blog/@1281",
+      "check": "desktop header items fit inside the header",
+      "pass": false,
+      "detail": "31px past the edge"
+    },
+    {
+      "scope": "/es/blog/@1360",
+      "check": "desktop header items fit inside the header",
+      "pass": false,
+      "detail": "16px past the edge"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/@1281",
+      "check": "desktop header items fit inside the header",
+      "pass": false,
+      "detail": "31px past the edge"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/@1360",
+      "check": "desktop header items fit inside the header",
+      "pass": false,
+      "detail": "16px past the edge"
+    }
+  ],
+  "results": [
+    {
+      "scope": "/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/services/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/services/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/services/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/services/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/services/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/services/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/search-results-by-intent/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/search-results-by-intent/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/es/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/es/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/es/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/es/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/services/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/es/services/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/es/services/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/services/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/es/services/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/es/services/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/contact/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/es/contact/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/es/contact/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/contact/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/es/contact/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/es/contact/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/blog/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/es/blog/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/es/blog/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/blog/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/es/blog/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/es/blog/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/all-in-ai-money-stack/@light",
+      "check": "HTTP 200 and the light theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body light, now light, body rgb(255, 255, 255)"
+    },
+    {
+      "scope": "/blog/studying/all-in-ai-money-stack/@light",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/all-in-ai-money-stack/@light",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/studying/all-in-ai-money-stack/@dark",
+      "check": "HTTP 200 and the dark theme is set before <body> is parsed",
+      "pass": true,
+      "detail": "status 200, at body dark, now dark, body rgb(10, 19, 34)"
+    },
+    {
+      "scope": "/blog/studying/all-in-ai-money-stack/@dark",
+      "check": "axe WCAG 2.2 A/AA: zero serious or critical violations",
+      "pass": true,
+      "detail": "0 minor/moderate"
+    },
+    {
+      "scope": "/blog/studying/all-in-ai-money-stack/@dark",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/services/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/services/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/es/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/es/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/es/services/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/es/services/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/es/contact/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/es/contact/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/es/blog/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/es/blog/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/@390",
+      "check": "no horizontal overflow",
+      "pass": true,
+      "detail": "scrollWidth 390 / viewport 390"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/blog/studying/all-in-ai-money-stack/@390",
+      "check": "no horizontal overflow",
+      "pass": false,
+      "detail": "scrollWidth 404 / viewport 390"
+    },
+    {
+      "scope": "/blog/studying/all-in-ai-money-stack/@390",
+      "check": "theme toggle visible inside the viewport, at least 44×44",
+      "pass": true,
+      "detail": "44×44"
+    },
+    {
+      "scope": "/@1281",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/@1360",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/@1500",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/services/@1281",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/services/@1360",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/services/@1500",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/@1281",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/@1360",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/@1500",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/es/@1281",
+      "check": "desktop header items fit inside the header",
+      "pass": false,
+      "detail": "31px past the edge"
+    },
+    {
+      "scope": "/es/@1360",
+      "check": "desktop header items fit inside the header",
+      "pass": false,
+      "detail": "16px past the edge"
+    },
+    {
+      "scope": "/es/@1500",
+      "check": "desktop header items fit inside the header",
+      "pass": false,
+      "detail": "16px past the edge"
+    },
+    {
+      "scope": "/es/services/@1281",
+      "check": "desktop header items fit inside the header",
+      "pass": false,
+      "detail": "31px past the edge"
+    },
+    {
+      "scope": "/es/services/@1360",
+      "check": "desktop header items fit inside the header",
+      "pass": false,
+      "detail": "16px past the edge"
+    },
+    {
+      "scope": "/es/services/@1500",
+      "check": "desktop header items fit inside the header",
+      "pass": false,
+      "detail": "16px past the edge"
+    },
+    {
+      "scope": "/es/contact/@1281",
+      "check": "desktop header items fit inside the header",
+      "pass": false,
+      "detail": "31px past the edge"
+    },
+    {
+      "scope": "/es/contact/@1360",
+      "check": "desktop header items fit inside the header",
+      "pass": false,
+      "detail": "16px past the edge"
+    },
+    {
+      "scope": "/es/contact/@1500",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/es/blog/@1281",
+      "check": "desktop header items fit inside the header",
+      "pass": false,
+      "detail": "31px past the edge"
+    },
+    {
+      "scope": "/es/blog/@1360",
+      "check": "desktop header items fit inside the header",
+      "pass": false,
+      "detail": "16px past the edge"
+    },
+    {
+      "scope": "/es/blog/@1500",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/@1281",
+      "check": "desktop header items fit inside the header",
+      "pass": false,
+      "detail": "31px past the edge"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/@1360",
+      "check": "desktop header items fit inside the header",
+      "pass": false,
+      "detail": "16px past the edge"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/@1500",
+      "check": "desktop header items fit inside the header",
+      "pass": true,
+      "detail": "0px past the edge"
+    },
+    {
+      "scope": "/ toggle",
+      "check": "system light: the named button (aria-pressed=false) switches to dark, aria-pressed=true, choice stored",
+      "pass": true,
+      "detail": "{\"pressed\":\"false\",\"name\":\"Dark theme\",\"tag\":\"BUTTON\"} → {\"theme\":\"dark\",\"pressed\":\"true\",\"stored\":\"dark\",\"bg\":\"rgb(10, 19, 34)\"}"
+    },
+    {
+      "scope": "/ toggle",
+      "check": "the choice persists across reloads against the system setting, before first paint",
+      "pass": true,
+      "detail": "{\"atBody\":\"dark\",\"pressed\":\"true\"}"
+    },
+    {
+      "scope": "/ toggle",
+      "check": "a stored choice ignores later system changes",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/ toggle",
+      "check": "keyboard operable (Enter and Space)",
+      "pass": true,
+      "detail": "light → dark"
+    },
+    {
+      "scope": "/ toggle",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/ system",
+      "check": "system dark: dark before first paint, aria-pressed=true; without a stored choice it follows a live system change",
+      "pass": true,
+      "detail": "{\"atBody\":\"dark\",\"pressed\":\"true\"} → light"
+    },
+    {
+      "scope": "/ system",
+      "check": "a stored light choice wins over system dark before first paint",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/ storage",
+      "check": "storage blocked: the system theme still applies, the toggle still works, no errors",
+      "pass": true,
+      "detail": "dark → light; "
+    },
+    {
+      "scope": "/services/ toggle",
+      "check": "system light: the named button (aria-pressed=false) switches to dark, aria-pressed=true, choice stored",
+      "pass": true,
+      "detail": "{\"pressed\":\"false\",\"name\":\"Dark theme\",\"tag\":\"BUTTON\"} → {\"theme\":\"dark\",\"pressed\":\"true\",\"stored\":\"dark\",\"bg\":\"rgb(10, 19, 34)\"}"
+    },
+    {
+      "scope": "/services/ toggle",
+      "check": "the choice persists across reloads against the system setting, before first paint",
+      "pass": true,
+      "detail": "{\"atBody\":\"dark\",\"pressed\":\"true\"}"
+    },
+    {
+      "scope": "/services/ toggle",
+      "check": "a stored choice ignores later system changes",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/services/ toggle",
+      "check": "keyboard operable (Enter and Space)",
+      "pass": true,
+      "detail": "light → dark"
+    },
+    {
+      "scope": "/services/ toggle",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/services/ system",
+      "check": "system dark: dark before first paint, aria-pressed=true; without a stored choice it follows a live system change",
+      "pass": true,
+      "detail": "{\"atBody\":\"dark\",\"pressed\":\"true\"} → light"
+    },
+    {
+      "scope": "/services/ system",
+      "check": "a stored light choice wins over system dark before first paint",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/services/ storage",
+      "check": "storage blocked: the system theme still applies, the toggle still works, no errors",
+      "pass": true,
+      "detail": "dark → light; "
+    },
+    {
+      "scope": "/blog/search-results-by-intent/ toggle",
+      "check": "system light: the named button (aria-pressed=false) switches to dark, aria-pressed=true, choice stored",
+      "pass": true,
+      "detail": "{\"pressed\":\"false\",\"name\":\"Dark theme\",\"tag\":\"BUTTON\"} → {\"theme\":\"dark\",\"pressed\":\"true\",\"stored\":\"dark\",\"bg\":\"rgb(10, 19, 34)\"}"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/ toggle",
+      "check": "the choice persists across reloads against the system setting, before first paint",
+      "pass": true,
+      "detail": "{\"atBody\":\"dark\",\"pressed\":\"true\"}"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/ toggle",
+      "check": "a stored choice ignores later system changes",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/search-results-by-intent/ toggle",
+      "check": "keyboard operable (Enter and Space)",
+      "pass": true,
+      "detail": "light → dark"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/ toggle",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/search-results-by-intent/ system",
+      "check": "system dark: dark before first paint, aria-pressed=true; without a stored choice it follows a live system change",
+      "pass": true,
+      "detail": "{\"atBody\":\"dark\",\"pressed\":\"true\"} → light"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/ system",
+      "check": "a stored light choice wins over system dark before first paint",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/search-results-by-intent/ storage",
+      "check": "storage blocked: the system theme still applies, the toggle still works, no errors",
+      "pass": true,
+      "detail": "dark → light; "
+    },
+    {
+      "scope": "/services/ no-js",
+      "check": "JavaScript off + system dark: dark background, toggle hidden",
+      "pass": true,
+      "detail": "{\"bg\":\"rgb(10, 19, 34)\",\"toggle\":\"none\"}"
+    },
+    {
+      "scope": "/services/ banner",
+      "check": "Spanish browser: Spanish banner suggests /es/services/, and the page does not redirect",
+      "pass": true,
+      "detail": "{\"exists\":true,\"visible\":true,\"lang\":\"es\",\"href\":\"/es/services/\",\"text\":\"Esta página también está disponible en español.\",\"path\":\"/services/\"}"
+    },
+    {
+      "scope": "/services/ banner",
+      "check": "“No, gracias” hides it and is remembered across reloads; still no redirect",
+      "pass": true,
+      "detail": "{\"hidden\":true,\"lang\":\"en\"} → {\"exists\":true,\"visible\":false,\"lang\":\"es\",\"href\":\"/es/services/\",\"text\":\"Esta página también está disponible en español.\",\"path\":\"/services/\"}"
+    },
+    {
+      "scope": "/services/ banner",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/services/ banner",
+      "check": "English browser on an English page: no banner",
+      "pass": true,
+      "detail": "en-US,en → {\"exists\":true,\"visible\":false,\"lang\":\"es\",\"href\":\"/es/services/\",\"text\":\"Esta página también está disponible en español.\",\"path\":\"/services/\"}"
+    },
+    {
+      "scope": "/services/ banner",
+      "check": "English ranked above Spanish: no banner",
+      "pass": true,
+      "detail": "en-US,es → {\"exists\":true,\"visible\":false,\"lang\":\"es\",\"href\":\"/es/services/\",\"text\":\"Esta página también está disponible en español.\",\"path\":\"/services/\"}"
+    },
+    {
+      "scope": "/es/services/ banner",
+      "check": "Spanish browser on the Spanish page: no banner",
+      "pass": true,
+      "detail": "es-MX,es → {\"exists\":true,\"visible\":false,\"lang\":\"en\",\"href\":\"/services/\",\"text\":\"This page is also available in English.\",\"path\":\"/es/services/\"}"
+    },
+    {
+      "scope": "/es/services/ banner",
+      "check": "English browser on the Spanish page: English banner suggests /services/",
+      "pass": true,
+      "detail": "en-US,en → {\"exists\":true,\"visible\":true,\"lang\":\"en\",\"href\":\"/services/\",\"text\":\"This page is also available in English.\",\"path\":\"/es/services/\"}"
+    },
+    {
+      "scope": "/about/ banner",
+      "check": "page without a translation: no banner at all",
+      "pass": true,
+      "detail": "es-MX,es → {\"exists\":false,\"visible\":false,\"path\":\"/about/\"}"
+    },
+    {
+      "scope": "/services/ picker",
+      "check": "globe picker opens with Enter, lists English (current) and Español in their own script, Escape closes and returns focus",
+      "pass": true,
+      "detail": "[{\"text\":\"English\",\"lang\":\"en\",\"href\":\"/services/\",\"current\":\"true\"},{\"text\":\"Español\",\"lang\":\"es\",\"href\":\"/es/services/\",\"current\":null}] {\"open\":false,\"focus\":true}"
+    },
+    {
+      "scope": "/services/ picker",
+      "check": "choosing Español opens /es/services/ (lang=\"es\") and remembers the choice",
+      "pass": true,
+      "detail": "{\"path\":\"/es/services/\",\"lang\":\"es\",\"stored\":\"es\"}"
+    },
+    {
+      "scope": "/work/ picker",
+      "check": "on a page without a translation, Español leads to the Spanish home and says so",
+      "pass": true,
+      "detail": "{\"href\":\"/es/\",\"text\":\"Español (página de inicio)\"}"
+    },
+    {
+      "scope": "picker",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/contact/ form",
+      "check": "mocked Worker 200 ok: the status message is in Spanish",
+      "pass": true,
+      "detail": "Gracias: recibí tu mensaje. Respondo desde mitchelljmillerjr26@gmail.com."
+    },
+    {
+      "scope": "/es/contact/ form",
+      "check": "mocked Worker 400 validation: the status message is in Spanish",
+      "pass": true,
+      "detail": "Revisa los campos marcados e inténtalo de nuevo."
+    },
+    {
+      "scope": "share cards",
+      "check": "every referenced card serves 200 image/png at 1200×630 (9 cards)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/blog/search-results-by-intent/ audio",
+      "check": "narration serves 200 audio/mp4",
+      "pass": true,
+      "detail": "200 audio/mp4"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/ audio",
+      "check": "\"Listen to this article (23 min)\" (preload=\"none\") plays and its duration matches the record",
+      "pass": true,
+      "detail": "{\"found\":true,\"label\":\"Listen to this article (23 min)\",\"preloadAttr\":\"none\",\"currentTime\":0.570061,\"duration\":1362.08254}"
+    },
+    {
+      "scope": "/blog/search-results-by-intent/ audio",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/ audio",
+      "check": "narration serves 200 audio/mp4",
+      "pass": true,
+      "detail": "200 audio/mp4"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/ audio",
+      "check": "\"Escuchar este artículo (9 min)\" (preload=\"none\") plays and its duration matches the record",
+      "pass": true,
+      "detail": "{\"found\":true,\"label\":\"Escuchar este artículo (9 min)\",\"preloadAttr\":\"none\",\"currentTime\":0.562413,\"duration\":556.768073}"
+    },
+    {
+      "scope": "/es/blog/gbp-2026-ai-grounding/ audio",
+      "check": "no console or page errors",
+      "pass": true,
+      "detail": ""
+    }
+  ]
+}

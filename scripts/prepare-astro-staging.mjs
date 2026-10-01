@@ -8,22 +8,16 @@ rmSync(output,{recursive:true,force:true}); mkdirSync(output,{recursive:true});
 for(const name of ['images','files','artifacts','viz','audio','favicon.ico','favicon.png','favicon.svg','apple-touch-icon.png','opengraph.jpg','data/ca-pums-sample-2019.json','data/ca-pums-meta-2019.json','9b0893b8818bd5bce05d66051f2bc971.txt']){
  const source=resolve('public',name); if(existsSync(source)) cpSync(source,resolve(output,name),{recursive:true});
 }
-// Staging keeps the production download bytes at the public URLs; updated review
-// PDFs have an explicit separate location and cannot silently replace production.
-// Release (SITE_BUILD_MODE=release) ships the September 10 corrected PDFs from
-// public/files at the same four paths: release-owner decision recorded in
-// docs/release-2026-09-12/release-files.json, verified by scripts/verify-parity.mjs.
+// The four resume PDFs were retired on 2026-09-25 (Mitch; route manifest "retired"): neither
+// mode publishes them, and scripts/verify-parity.mjs fails the build if one reaches dist/.
+// The archived July bytes stay in baseline/public/files as part of the production snapshot.
 const release=process.env.SITE_BUILD_MODE==='release';
-if(release){
- cpSync(resolve('public/files'),resolve(output,'files'),{recursive:true});
-}else{
+if(!release&&existsSync(resolve('public/review-assets/brand-options'))){
  mkdirSync(resolve(output,'review-assets'),{recursive:true});
- if(existsSync(resolve('public/review-assets/brand-options'))) cpSync(resolve('public/review-assets/brand-options'),resolve(output,'review-assets/brand-options'),{recursive:true});
- cpSync(resolve('public/files'),resolve(output,'review-assets/files'),{recursive:true});
- cpSync(resolve('baseline/public/files'),resolve(output,'files'),{recursive:true});
+ cpSync(resolve('public/review-assets/brand-options'),resolve(output,'review-assets/brand-options'),{recursive:true});
 }
 cpSync(resolve('baseline/public/case-studies'),resolve(output,'case-studies'),{recursive:true});
 // Public source is an allowlist: no production CNAME, SPA rewrites or unapproved drafts.
 writeFileSync(resolve(output,'robots.txt'),'User-agent: *\nAllow: /\n');
 writeFileSync(resolve(output,'_headers'),'/*\n  X-Robots-Tag: noindex, follow\n  X-Content-Type-Options: nosniff\n');
-console.log(release?'Prepared shared imagery, workbench data, corrected release PDFs and retained standalone SFC report.':'Prepared shared imagery, workbench data, production PDFs, separate updated review PDFs and retained standalone SFC report.');
+console.log(release?'Prepared shared imagery, workbench data and retained standalone SFC report (resume PDFs retired).':'Prepared shared imagery, workbench data, review brand options and retained standalone SFC report (resume PDFs retired).');

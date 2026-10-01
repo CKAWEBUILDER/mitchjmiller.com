@@ -80,5 +80,87 @@
     "svgExternalReferences": 0,
     "pngSignatureAndDimensionsChecked": true,
     "sourceBytesPreserved": true
-  }
+  },
+  "pending": {
+    "recordedAt": "2026-09-25",
+    "reason": "Official artwork not yet fetched: the cloud session that staged these entries has an egress policy that blocks brand sites (HTTP 403 at the proxy). Method when fetched: the brand's own site or press kit only, bytes unchanged, SVG preferred; record sourceUrl, sourcePage, method, bytes, sha256 and viewBox; no Wikipedia, Brandfetch, Clearbit or other aggregator copies; no official source, or only a raster under about 300 px wide: hold. Keep total logo bytes under about 200 KB.",
+    "names": [
+      "Adobe",
+      "Pixar",
+      "Intuit",
+      "Dropbox",
+      "DHL",
+      "Bayer",
+      "Lyft",
+      "Beats",
+      "Whirlpool",
+      "Square",
+      "MongoDB",
+      "UCSF",
+      "Grab",
+      "Veracode",
+      "BeyondTrust",
+      "Schneider National",
+      "inContact",
+      "App Annie",
+      "Virginia Mason Franciscan Health",
+      "St. Luke's Health",
+      "Esker",
+      "Bosley",
+      "CalCoast Credit Union",
+      "Dynapar",
+      "HRDQ",
+      "MiaDonna",
+      "Insomnia Cafe",
+      "Blue Planet Adventures",
+      "SUPDog",
+      "Zoomifi"
+    ],
+    "confirmWithMitch": {
+      "St. Luke's Health": "Several health systems share the name; CommonSpirit's Texas system (stlukeshealth.org) is the likely one given his CommonSpirit tenure, but the records do not say.",
+      "UCSF": "University (UCSF) or medical center (UCSF Health): the two use different official lockups.",
+      "Insomnia Cafe": "Several unrelated businesses use the name.",
+      "Blue Planet Adventures": "Several unrelated businesses use the name."
+    }
+  },
+  "hold": [
+    {
+      "name": "Minecraft",
+      "reason": "Mitch's cousin's YouTube channel (his note: helped his cousin grow YouTube subscribers with Discord and Reddit strategy), not a Mojang/Microsoft engagement; the Minecraft logo would imply one."
+    },
+    {
+      "name": "Michigan State University (Eli Broad College of Business)",
+      "reason": "His school, not a client."
+    },
+    {
+      "name": "City of Berkeley Animal Shelter",
+      "reason": "A government seal (use of official seals is restricted); not in the Design/Fix Notes list."
+    },
+    {
+      "name": "CHI (Catholic Health Initiatives)",
+      "reason": "Retired brand: merged into CommonSpirit Health, which is already shown."
+    },
+    {
+      "name": "Baylor Health",
+      "reason": "Ask Mitch which organization. Never use the Baylor Scott & White logo."
+    },
+    {
+      "name": "Reef",
+      "reason": "Matches more than one company."
+    },
+    {
+      "name": "Pendleton",
+      "reason": "Matches more than one company (for example Pendleton Woolen Mills and Pendleton Whisky)."
+    }
+  ],
+  "proposed": [
+    {
+      "name": "Unilever",
+      "reason": "In his resume evidence (Wpromote/DemandWave portfolio, docs/overhaul-2026-09-10/resumes/scripts/build_exact_resume.py:678) but not on his 2026-09-25 list; not added."
+    },
+    {
+      "name": "Whoop",
+      "reason": "Same record as Unilever; not on his list; not added."
+    }
+  ]
 }

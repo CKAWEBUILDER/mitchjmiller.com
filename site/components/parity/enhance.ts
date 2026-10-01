@@ -1,20 +1,4 @@
 // Progressive enhancements only: every page body and destination is static HTML.
-const resumeChooser = document.querySelector<HTMLDialogElement>("#resume-chooser");
-document.querySelectorAll<HTMLAnchorElement>("[data-resume-open]").forEach(trigger => {
-  trigger.addEventListener("click", event => {
-    if (!resumeChooser?.showModal) return;
-    event.preventDefault();
-    document.querySelectorAll<HTMLDetailsElement>(".parity-mobile-menu, .ag-menu").forEach(menu => menu.open = false);
-    resumeChooser.showModal();
-  });
-});
-resumeChooser?.querySelector("[data-resume-close]")?.addEventListener("click", () => resumeChooser.close());
-resumeChooser?.addEventListener("click", event => {
-  if (event.target !== resumeChooser) return;
-  const rect = resumeChooser.getBoundingClientRect();
-  if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) resumeChooser.close();
-});
-
 document.querySelectorAll<HTMLElement>("[data-filter-group]").forEach(group => {
   const buttons = [...group.querySelectorAll<HTMLButtonElement>("[data-filter-value]")];
   const cards = [...group.querySelectorAll<HTMLElement>("[data-filter-card]")];

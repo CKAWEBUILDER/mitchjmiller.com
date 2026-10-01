@@ -1,0 +1,13 @@
+---
+/**
+ * The M² mark, inline so the theme's CSS custom properties recolor it (an <img> cannot).
+ * Geometry: site/data/m2-mark.json, written by scripts/brand-icons.mjs (Inter Bold outlines in
+ * the Roundel ring). Decorative: the surrounding link or text names it. The fill attributes are
+ * the light-theme fallback; agency.css sets .m2-ring/.m2-ink to --ag-heading and .m2-exp to
+ * --ag-green-text, which standards.css redefines for the dark theme.
+ */
+import mark from '../data/m2-mark.json';
+interface Props { class?: string; size?: number; }
+const { class: className, size = 40 } = Astro.props;
+---
+<svg class:list={['m2-mark', className]} viewBox={mark.viewBox} width={size} height={size} aria-hidden="true" focusable="false"><path class="m2-ring" d={mark.ring} fill="none" stroke="#0f2440" stroke-width={mark.ringStroke} /><path class="m2-ink" d={mark.m} fill="#0f2440" /><path class="m2-exp" d={mark.two} fill="#14804a" /></svg>

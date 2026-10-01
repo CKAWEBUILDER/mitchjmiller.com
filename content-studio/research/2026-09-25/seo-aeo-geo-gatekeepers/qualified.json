@@ -1,0 +1,609 @@
+[
+  {
+    "domain": "thriveagency.com",
+    "qualified": true,
+    "hits": [
+      "AI Overviews",
+      "AI SEO",
+      "AI visibility",
+      "LLM SEO",
+      "generative engine optimi"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "seoprofy.com",
+    "qualified": true,
+    "hits": [
+      "AI Overviews",
+      "AI SEO",
+      "AI search visibility",
+      "AI visibility",
+      "\\bAEO\\b",
+      "\\bGEO\\b",
+      "generative engine optimi"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "position.digital",
+    "qualified": true,
+    "hits": [
+      "AI Overviews",
+      "AI SEO",
+      "AI visibility",
+      "\\bGEO\\b",
+      "cited in (chatgpt|ai)",
+      "generative engine optimi"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "thedigitalelevator.com",
+    "qualified": true,
+    "hits": [
+      "AI SEO",
+      "AI search visibility",
+      "AI visibility",
+      "\\bAEO\\b",
+      "\\bGEO\\b",
+      "answer engine optimi"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "minuttia.com",
+    "qualified": true,
+    "reason": "HTTP 403 (crawler refused)",
+    "refused": true,
+    "hits": []
+  },
+  {
+    "domain": "silverbackstrategies.com",
+    "qualified": true,
+    "hits": [
+      "\\bAEO\\b"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "gen-optima.com",
+    "qualified": true,
+    "reason": "HTTP 403 (crawler refused)",
+    "refused": true,
+    "hits": []
+  },
+  {
+    "domain": "elsner.com",
+    "qualified": true,
+    "hits": [
+      "\\bAEO\\b",
+      "\\bGEO\\b",
+      "answer engine optimi",
+      "generative engine optimi"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "respona.com",
+    "qualified": true,
+    "hits": [
+      "AI visibility",
+      "\\bGEO\\b"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "moosend.com",
+    "qualified": false,
+    "hits": [],
+    "reason": "no category terms on homepage"
+  },
+  {
+    "domain": "saffronedge.com",
+    "qualified": true,
+    "hits": [
+      "AI Overviews",
+      "AI SEO",
+      "AI search visibility",
+      "AI visibility",
+      "LLM SEO",
+      "\\bAEO\\b",
+      "\\bGEO\\b",
+      "answer engine optimi",
+      "generative engine optimi"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "firstpagesage.com",
+    "qualified": true,
+    "hits": [
+      "\\bAEO\\b",
+      "\\bGEO\\b"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "semai.ai",
+    "qualified": true,
+    "reason": "HTTP 403 (crawler refused)",
+    "refused": true,
+    "hits": []
+  },
+  {
+    "domain": "frase.io",
+    "qualified": true,
+    "hits": [
+      "AI visibility",
+      "\\bGEO\\b"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "exposureninja.com",
+    "qualified": true,
+    "hits": [
+      "AI Overviews",
+      "AI visibility",
+      "\\bGEO\\b",
+      "generative engine optimi"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "arcintermedia.com",
+    "qualified": true,
+    "hits": [
+      "AI visibility",
+      "\\bAEO\\b",
+      "\\bGEO\\b"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "data-mania.com",
+    "qualified": false,
+    "hits": [],
+    "reason": "no category terms on homepage"
+  },
+  {
+    "domain": "dageno.ai",
+    "qualified": true,
+    "hits": [
+      "AI visibility",
+      "\\bAEO\\b",
+      "\\bGEO\\b"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "humanizeai.com",
+    "qualified": true,
+    "hits": [
+      "AI search visibility",
+      "\\bAEO\\b",
+      "\\bGEO\\b"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "seobrand.com",
+    "qualified": true,
+    "reason": "HTTP 403 (crawler refused)",
+    "refused": true,
+    "hits": []
+  },
+  {
+    "domain": "coalitiontechnologies.com",
+    "qualified": true,
+    "reason": "HTTP 403 (crawler refused)",
+    "refused": true,
+    "hits": []
+  },
+  {
+    "domain": "embarque.io",
+    "qualified": true,
+    "hits": [
+      "AI Overviews",
+      "AI SEO",
+      "LLM SEO",
+      "\\bAEO\\b",
+      "\\bGEO\\b"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "derivatex.agency",
+    "qualified": true,
+    "hits": [
+      "AI Overviews",
+      "AI SEO",
+      "AI search visibility",
+      "AI visibility",
+      "LLM SEO",
+      "\\bAEO\\b",
+      "\\bGEO\\b",
+      "answer engine optimi",
+      "generative engine optimi"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "breakingb2b.com",
+    "qualified": true,
+    "hits": [
+      "AI Overviews",
+      "AI search visibility",
+      "LLM SEO",
+      "\\bAEO\\b",
+      "\\bGEO\\b",
+      "answer engine optimi",
+      "cited in (chatgpt|ai)",
+      "generative engine optimi"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "revvgrowth.com",
+    "qualified": true,
+    "hits": [
+      "AI Overviews",
+      "AI SEO",
+      "AI search visibility",
+      "AI visibility",
+      "\\bAEO\\b",
+      "\\bGEO\\b",
+      "answer engine optimi",
+      "cited in (chatgpt|ai)",
+      "generative engine optimi"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "llmseoservices.agency",
+    "qualified": true,
+    "reason": "HTTP 403 (crawler refused)",
+    "refused": true,
+    "hits": []
+  },
+  {
+    "domain": "docdigitalsem.com",
+    "qualified": true,
+    "reason": "HTTP 403 (crawler refused)",
+    "refused": true,
+    "hits": []
+  },
+  {
+    "domain": "siegemedia.com",
+    "qualified": true,
+    "hits": [
+      "AI visibility",
+      "\\bGEO\\b"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "beomniscient.com",
+    "qualified": true,
+    "hits": [
+      "AI visibility",
+      "\\bAEO\\b",
+      "\\bGEO\\b",
+      "generative engine optimi"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "graphite.io",
+    "qualified": true,
+    "hits": [
+      "\\bAEO\\b",
+      "answer engine optimi"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "ipullrank.com",
+    "qualified": true,
+    "hits": [
+      "\\bGEO\\b",
+      "generative engine optimi"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "directiveconsulting.com",
+    "qualified": false,
+    "hits": [],
+    "reason": "no category terms on homepage"
+  },
+  {
+    "domain": "animalz.co",
+    "qualified": true,
+    "hits": [
+      "\\bAEO\\b",
+      "answer engine optimi"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "gofishdigital.com",
+    "qualified": true,
+    "hits": [
+      "AI Overviews",
+      "AI visibility",
+      "\\bGEO\\b",
+      "cited in (chatgpt|ai)",
+      "generative engine optimi"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "interodigital.com",
+    "qualified": true,
+    "reason": "HTTP 403 (crawler refused)",
+    "refused": true,
+    "hits": []
+  },
+  {
+    "domain": "straightnorth.com",
+    "qualified": true,
+    "reason": "HTTP 403 (crawler refused)",
+    "refused": true,
+    "hits": []
+  },
+  {
+    "domain": "webfx.com",
+    "qualified": true,
+    "hits": [
+      "AI Overviews",
+      "AI SEO",
+      "AI visibility",
+      "\\bGEO\\b",
+      "generative engine optimi"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "hawksem.com",
+    "qualified": true,
+    "hits": [
+      "AI Overviews",
+      "AI visibility",
+      "\\bGEO\\b"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "piperocketdigital.com",
+    "qualified": false,
+    "reason": "HTTP 0"
+  },
+  {
+    "domain": "searchbloom.com",
+    "qualified": true,
+    "hits": [
+      "AI SEO",
+      "AI search visibility",
+      "answer engine optimi",
+      "generative engine optimi"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "tryprofound.com",
+    "qualified": true,
+    "hits": [
+      "AI Overviews",
+      "AI search visibility",
+      "\\bAEO\\b"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "peec.ai",
+    "qualified": true,
+    "hits": [
+      "AI visibility",
+      "\\bAEO\\b",
+      "\\bGEO\\b"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "athenahq.ai",
+    "qualified": true,
+    "hits": [
+      "AI Overviews",
+      "AI search visibility",
+      "AI visibility",
+      "\\bAEO\\b",
+      "\\bGEO\\b",
+      "answer engine optimi"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "seranking.com",
+    "qualified": true,
+    "hits": [
+      "AI Overviews",
+      "AI SEO",
+      "AI visibility",
+      "\\bGEO\\b"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "writesonic.com",
+    "qualified": true,
+    "hits": [
+      "AI search visibility",
+      "AI visibility",
+      "\\bAEO\\b",
+      "\\bGEO\\b"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "otterly.ai",
+    "qualified": true,
+    "reason": "HTTP 403 (crawler refused)",
+    "refused": true,
+    "hits": []
+  },
+  {
+    "domain": "ziptie.dev",
+    "qualified": true,
+    "hits": [
+      "AI Overviews"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "algomizer.com",
+    "qualified": false,
+    "hits": [],
+    "reason": "no category terms on homepage"
+  },
+  {
+    "domain": "stellarising.com",
+    "qualified": true,
+    "hits": [
+      "\\bAEO\\b",
+      "\\bGEO\\b",
+      "generative engine optimi"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "semrush.com",
+    "qualified": true,
+    "hits": [
+      "AI visibility",
+      "\\bGEO\\b"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "conductor.com",
+    "qualified": true,
+    "hits": [
+      "AI Overviews",
+      "AI visibility",
+      "\\bAEO\\b",
+      "\\bGEO\\b",
+      "answer engine optimi"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "brightedge.com",
+    "qualified": true,
+    "hits": [
+      "AI Overviews",
+      "AI search visibility",
+      "\\bAEO\\b"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "seoclarity.net",
+    "qualified": true,
+    "hits": [
+      "AI Overviews",
+      "AI search visibility",
+      "\\bAEO\\b",
+      "\\bGEO\\b"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "scrunch.ai",
+    "qualified": false,
+    "reason": "HTTP 0"
+  },
+  {
+    "domain": "goodie.ai",
+    "qualified": false,
+    "hits": [],
+    "reason": "no category terms on homepage"
+  },
+  {
+    "domain": "knowatoa.com",
+    "qualified": true,
+    "hits": [
+      "AI Overviews",
+      "AI search visibility",
+      "AI visibility"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "rankscale.ai",
+    "qualified": true,
+    "hits": [
+      "AI Overviews",
+      "AI SEO",
+      "AI search visibility",
+      "AI visibility",
+      "\\bAEO\\b",
+      "\\bGEO\\b",
+      "answer engine optimi",
+      "generative engine optimi"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "trakkr.ai",
+    "qualified": true,
+    "hits": [
+      "AI Overviews",
+      "AI search visibility",
+      "AI visibility",
+      "\\bAEO\\b",
+      "\\bGEO\\b"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "nightwatch.io",
+    "qualified": true,
+    "hits": [
+      "AI Overviews",
+      "AI visibility",
+      "cited in (chatgpt|ai)"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "surferseo.com",
+    "qualified": true,
+    "hits": [
+      "AI Overviews",
+      "AI SEO",
+      "AI search visibility",
+      "AI visibility"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "clearscope.io",
+    "qualified": true,
+    "hits": [
+      "AI visibility",
+      "\\bAEO\\b",
+      "\\bGEO\\b",
+      "answer engine optimi",
+      "cited in (chatgpt|ai)"
+    ],
+    "reason": "sells category"
+  },
+  {
+    "domain": "marketmuse.com",
+    "qualified": false,
+    "hits": [],
+    "reason": "no category terms on homepage"
+  }
+]

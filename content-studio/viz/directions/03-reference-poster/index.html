@@ -470,14 +470,30 @@ function render(t){
 }
 
 /* ------------------------------------------------------------- export hook */
-let raf = null;
+/* WCAG 2.2.2 (site standards, 2026-09-24): the reveal replays indefinitely (play() re-arms
+   itself after each hold), so a visible button stops it on the settled frame. It exists only
+   while the loop plays. Reduced motion skips the reveal entirely, straight to the settled frame. */
+const REDUCED_MOTION = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+function skipButton(onSkip) {
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.textContent = 'Skip animation';
+  b.style.cssText = 'position:fixed;top:10px;right:10px;z-index:20;min-height:44px;padding:10px 16px;border:1px solid #0f2440;border-radius:8px;background:#ffffff;color:#0f2440;font:600 14px/1.2 system-ui,-apple-system,"Segoe UI",sans-serif;cursor:pointer';
+  b.addEventListener('click', () => { onSkip(); b.remove(); });
+  document.body.append(b);
+  return b;
+}
+let raf = null, stopped = false;
 function play(){
+  if (stopped) return;
   const t0 = performance.now();
   const step = now => {
+    if (stopped) return;
     const t = (now - t0) / 1000;
     render(Math.min(t, DURATION));
     if (t < DURATION + 1.2) raf = requestAnimationFrame(step);
     else { const again = performance.now(); raf = requestAnimationFrame(function loop(n){
+      if (stopped) return;
       const tt = (n - again) / 1000;
       if (tt > 0.8) { play(); return; }
       raf = requestAnimationFrame(loop);
@@ -495,8 +511,11 @@ window.VIZ = {
     .then(() => {
       layout();
       if (SEEK_T !== null) render(SEEK_T);
-      else if (STATIC) render(DURATION);
-      else play();
+      else if (STATIC || REDUCED_MOTION) render(DURATION);
+      else {
+        play();
+        skipButton(() => { stopped = true; if (raf) { cancelAnimationFrame(raf); raf = null; } render(DURATION); });
+      }
       document.documentElement.dataset.ready = '1';
       return true;
     }),
@@ -504,7 +523,7 @@ window.VIZ = {
 
 // first paint is the settled state for stills, an empty stage for the reveal
 if (SEEK_T !== null) render(SEEK_T);
-else if (STATIC) render(DURATION);
+else if (STATIC || REDUCED_MOTION) render(DURATION);
 else render(0);
 </script>
 </body>

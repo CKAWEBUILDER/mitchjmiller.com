@@ -12,8 +12,8 @@
  * hreflang self + translation + x-default, og:locale:alternate, localized shell strings, a globe
  * language picker with native names (no flags) and a suggestion banner that never redirects.
  */
-import { ResumeChooser } from '../../baseline/src/components/resume-download-dialog';
 import { site, isCurrent } from '../lib/agency';
+import M2Mark from '../components/M2Mark.astro';
 import { shareFor, ogLocale } from '../lib/share';
 import { alternatesFor, counterpartOf, langOf, languageNames, navFor, ui, type Lang } from '../lib/i18n';
 import { themeScript } from '../lib/theme-script.mjs';
@@ -93,7 +93,7 @@ const choices = (['en', 'es'] as Lang[]).map(code => code === lang
     <header class="ag-header">
       <div class="ag-wrap ag-header-inner">
         <a class="ag-brand" href={home} aria-label={t.brandHome}>
-          <img src={site.headshot} alt="" width="40" height="40" />
+          <M2Mark />
           <span><span class="ag-brand-name">{site.name}</span><span class="ag-brand-tag">{t.tagline}</span></span>
         </a>
         <nav class="ag-nav" aria-label={t.primaryNav}>
@@ -123,7 +123,7 @@ const choices = (['en', 'es'] as Lang[]).map(code => code === lang
           </button>
         </div>
         <div class="ag-header-actions">
-          {nav.utility.map(link => <a class="ag-utility-link" href={link.href} hreflang={hl(link.href)} data-resume-open={link.href === '/resume/' ? 'true' : undefined}>{link.label}</a>)}
+          {nav.utility.map(link => <a class="ag-utility-link" href={link.href} hreflang={hl(link.href)}>{link.label}</a>)}
           <a class="ag-button ag-button--sm" href={nav.cta.href}>{nav.cta.label}</a>
         </div>
         <details class="ag-menu">
@@ -135,7 +135,7 @@ const choices = (['en', 'es'] as Lang[]).map(code => code === lang
                 {item.children?.filter(child => child.href !== item.href).map(child => <li class="ag-menu-sub"><a href={child.href} hreflang={hl(child.href)}>{child.label}</a></li>)}
               </>)}
             </ul>
-            <div class="ag-menu-utility">{nav.utility.map(link => <a class="ag-utility-link" href={link.href} hreflang={hl(link.href)} data-resume-open={link.href === '/resume/' ? 'true' : undefined}>{link.label}</a>)}</div>
+            <div class="ag-menu-utility">{nav.utility.map(link => <a class="ag-utility-link" href={link.href} hreflang={hl(link.href)}>{link.label}</a>)}</div>
             <a class="ag-button" href={nav.cta.href}>{nav.cta.label}</a>
           </nav>
         </details>
@@ -149,7 +149,6 @@ const choices = (['en', 'es'] as Lang[]).map(code => code === lang
       </div>
     </aside>}
     <main id="main-content"><slot /></main>
-    {lang === 'en' ? <ResumeChooser /> : <div lang="en"><ResumeChooser /></div>}
     <footer class="ag-footer">
       <div class="ag-wrap ag-footer-main">
         <div>

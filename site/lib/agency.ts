@@ -11,9 +11,12 @@ export const site = {
   email: 'mitchelljmillerjr26@gmail.com',
   phone: '+1-626-316-8682',
   linkedin: 'https://linkedin.com/in/mitchelljmillerjr',
-  // Retired 2026 social card (old domain wording). Only the Organization JSON-LD `logo` still
-  // points here until Mitch supplies the final M² logo file (docs/site-standards.md "Brand mark").
-  socialImage: '/images/portfolio-social.png',
+  // Not linked while https://mitchjmiller.com/ does not serve the personal portfolio (2026-09-25:
+  // HTTPS times out, HTTP 301s back to mj2.pro). Every personal-portfolio link points to LinkedIn
+  // until then; revert the commit "Point personal-portfolio links to LinkedIn" to restore them.
+  personalPortfolio: 'https://mitchjmiller.com/',
+  // Organization JSON-LD logo: the M² roundel on white, 512×512 (scripts/brand-icons.mjs).
+  logo: '/images/brand/m2-logo-512.png',
   // Site default share image: the generated M² card of the home page (scripts/share-cards.mjs).
   defaultCard: '/og/home.png',
   headshot,
@@ -52,7 +55,7 @@ export const primaryNav: NavItem[] = [
   { label: 'About', href: '/about/' },
 ];
 export const utilityNav: NavLink[] = [
-  { label: 'Resumes', href: '/resume/' },
+  { label: 'LinkedIn', href: site.linkedin },
   { label: 'Clients', href: '/clients/' },
 ];
 export const contactCta: NavLink = { label: 'Let’s talk', href: '/contact/' };
@@ -83,7 +86,6 @@ export const footerColumns: { heading: string; links: NavLink[] }[] = [
   { heading: 'Company', links: [
     { label: 'About', href: '/about/' },
     { label: 'Contact', href: '/contact/' },
-    { label: 'Resumes', href: '/resume/' },
     { label: 'Client sign-in', href: '/clients/' },
   ] },
 ];
@@ -108,7 +110,7 @@ export function organizationJsonLd() {
     email: site.email,
     telephone: site.phone,
     image: `${site.url}${site.defaultCard}`,
-    logo: `${site.url}${site.socialImage}`,
+    logo: `${site.url}${site.logo}`,
     areaServed: 'United States',
     founder: { '@id': personId },
     sameAs: [site.linkedin],

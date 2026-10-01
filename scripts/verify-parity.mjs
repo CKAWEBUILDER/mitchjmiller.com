@@ -12,15 +12,15 @@ const canonicalOrigin = 'https://mj2.pro';
 const read = path => readFileSync(path, 'utf8');
 const manifest = JSON.parse(read(join(root, 'docs/implementation-2026-09-11/route-manifest.json')));
 const production = JSON.parse(read(join(root, 'docs/implementation-2026-09-11/production-files.json')));
-// Release 2026-09-12 ships the corrected September 10 PDFs at the same paths (release-owner decision).
-const releaseFiles = JSON.parse(read(join(root, 'docs/release-2026-09-12/release-files.json')));
+// Files retired by an explicit decision (route manifest "retired"; the four resume PDFs, Mitch 2026-09-25).
+const retired = manifest.retired || [];
 // Routes added after the production snapshot (kind 'added') are checked apart from the 57 archived routes.
 const addedRoutes = manifest.routes.filter(route => route.kind === 'added');
 const productionManifestRoutes = manifest.routes.filter(route => route.kind !== 'added');
 const reference = await exportParityReference();
 const failures = [];
 const historicalBrokenAnchors = [];
-const checks = { routes: 0, fullBodies: 0, caseFields: 0, pdfs: 0, htmlDocuments: 0, localLinksAndAssets: 0, anchorLinks: 0 };
+const checks = { routes: 0, fullBodies: 0, caseFields: 0, retiredAbsent: 0, htmlDocuments: 0, localLinksAndAssets: 0, anchorLinks: 0 };
 const fail = (scope, message) => failures.push(`${scope}: ${message}`);
 const normalizePath = value => value === '/' ? '/' : `/${value.replace(/^\/+|\/+$/g, '')}/`;
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -97,16 +97,14 @@ if (!originalSfcBody || body(rendered.get(sfcPath) || '') !== originalSfcBody) f
 for (const { href } of attrTags(originalSfcBody, 'a')) {
   try { const url = new URL(href, `${canonicalOrigin}${sfcPath}`); if (url.hash) historicalAnchors.add(`${sfcPath}|${url.href}`); } catch {}
 }
-const expectedPdfs = release ? releaseFiles.pdfs : production.pdfs;
-for (const pdf of expectedPdfs) {
-  const file = localFile(pdf.path);
-  if (!file) fail(pdf.path, 'missing PDF');
-  else {
-    const bytes = readFileSync(file);
-    if (hash(bytes) !== pdf.sha256 || bytes.length !== pdf.bytes) fail(pdf.path, release ? 'bytes differ from the corrected September 10 PDF recorded in docs/release-2026-09-12/release-files.json' : 'bytes differ from verified gh-pages PDF');
-    if (bytes.subarray(0, 5).toString() !== '%PDF-') fail(pdf.path, 'not a PDF file');
-  }
-  checks.pdfs++;
+// Retired files: absent from the output in both modes, and no built text file names them.
+const textFiles = walk(dist).filter(file => /\.(?:html|js|mjs|css|json|xml|txt|svg|webmanifest)$/.test(file));
+for (const item of retired) {
+  const name = item.path.split('/').pop();
+  if (localFile(item.path)) fail(item.path, 'retired file is still in the output');
+  const referencing = textFiles.filter(file => read(file).includes(name));
+  if (referencing.length) fail(item.path, `retired file is still referenced by ${referencing.length} built file(s), e.g. ${referencing[0].slice(dist.length)}`);
+  if (!referencing.length && !localFile(item.path)) checks.retiredAbsent++;
 }
 
 const eligible = new Set([...reference.routes.filter(route => route.kind !== 'placeholder').map(route => route.path), ...addedRoutes.map(route => route.path)]);
@@ -192,14 +190,14 @@ if (release && existsSync(join(dist, '_headers'))) fail('release', 'staging noin
 if (!release && (!existsSync(join(dist, '_headers')) || !/X-Robots-Tag:\s*noindex/i.test(read(join(dist, '_headers'))))) fail('staging', 'missing noindex response-header configuration');
 const report = {
   mode: release ? 'local-release-candidate' : 'private-staging', passed: failures.length === 0,
-  source: reference.source, productionDeployment: production.deployed, checks, addedRoutes: addedRoutes.map(route => route.path), pdfExpectation: release ? 'docs/release-2026-09-12/release-files.json (corrected September 10 PDFs)' : 'docs/implementation-2026-09-11/production-files.json (gh-pages bytes)',
+  source: reference.source, productionDeployment: production.deployed, checks, addedRoutes: addedRoutes.map(route => route.path), retiredFiles: retired.map(item => item.path),
   indexableDocuments, preservedStandaloneBodySha256: hash(originalSfcBody),
   duplicatePublishedSlugsDeduplicated: reference.duplicateSlugs,
   historicalBrokenAnchors: [...new Set(historicalBrokenAnchors)], failures: [...new Set(failures)],
   limits: ['HTTP 200/404 behavior, visual parity, responsive layout and interaction behavior require separate local/browser verification.', 'Local or private-staging checks do not establish production indexing.'],
 };
 if (process.env.PARITY_REPORT_PATH) writeFileSync(resolve(root, process.env.PARITY_REPORT_PATH), `${JSON.stringify(report, null, 2)}\n`);
-console.log(`Parity verification ${report.passed ? 'passed' : 'FAILED'} (${report.mode}): ${checks.routes}/57 routes, ${checks.addedRoutes}/${addedRoutes.length} added routes, ${checks.fullBodies}/25 complete articles/notes, ${checks.caseFields} original case fields, ${checks.pdfs}/4 exact PDFs (${release ? 'corrected September 10' : 'production'}), ${eligible.size} sitemap URLs.`);
+console.log(`Parity verification ${report.passed ? 'passed' : 'FAILED'} (${report.mode}): ${checks.routes}/57 routes, ${checks.addedRoutes}/${addedRoutes.length} added routes, ${checks.fullBodies}/25 complete articles/notes, ${checks.caseFields} original case fields, ${checks.retiredAbsent}/${retired.length} retired PDFs absent and unreferenced, ${eligible.size} sitemap URLs.`);
 if (report.historicalBrokenAnchors.length) console.log(`Historical broken anchors retained (${report.historicalBrokenAnchors.length}):\n${report.historicalBrokenAnchors.map(value => `  - ${value}`).join('\n')}`);
 if (report.failures.length) console.error(report.failures.map(value => `  - ${value}`).join('\n'));
 process.exitCode = report.passed ? 0 : 1;

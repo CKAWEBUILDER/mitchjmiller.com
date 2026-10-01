@@ -1,4 +1,6 @@
 <!doctype html>
+<html lang="en">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Ads Inside Free AI Answers — Data Mandala</title>
@@ -66,6 +68,8 @@
   body.live a:focus-visible, body.live button:focus-visible { outline: 3px solid #0B63CE; outline-offset: 2px; }
   .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 </style>
+</head>
+<body>
 <div id="app"><div id="stage"><svg id="viz" xmlns="http://www.w3.org/2000/svg"></svg></div></div>
 <script>
 (function () {
@@ -343,7 +347,7 @@ const svg = document.getElementById('viz');
 svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
 svg.setAttribute('width', W); svg.setAttribute('height', H);
 if (POSTER) { stage.style.width = W + 'px'; stage.style.height = H + 'px'; }
-svg.setAttribute('role', 'img');
+svg.setAttribute('role', 'group'); // a group, not an img: the sectors inside are buttons (axe nested-interactive)
 svg.setAttribute('aria-label',
   'Data mandala: ChatGPT, Google AI Mode, Microsoft Copilot, Perplexity and Meta AI as five sectors, with three rings - who sees the ads, how often ads appear and in what format, and what still gets cited. Hub: 5.6% of ChatGPT weekly users pay.');
 
@@ -990,38 +994,21 @@ if (!POSTER && !REDUCED) playOnce();
 let selected = null;
 let panel = null, promptEl = null;
 
-/* Where "Read the section" lands. The canonical post by default; a ?parent= override counts only
-   for the production origin or a localhost test host. document.referrer is never used: it can be
-   any site, and sending the top window there would take the reader off mj2.pro.                 */
-const CANONICAL_PARENT = 'https://mj2.pro/blog/optimizing-for-ads-in-free-llm-answers/';
-const PROD_ORIGIN = 'https://mj2.pro';
-function trustedParent(raw) {
-  if (!raw) return null;
-  try {
-    const u = new URL(raw);                                           // absolute URLs only
-    if (u.protocol !== 'https:' && u.protocol !== 'http:') return null; // refuses javascript:, data:, file:
-    const local = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(u.hostname);
-    if (u.origin !== PROD_ORIGIN && !local) return null;
-    return u;
-  } catch (e) { return null; }
-}
+/* Published copy (mj2.pro): the fallback link targets the embedding post itself when it is
+   same-origin (a same-document jump, query string kept), then a same-origin ?parent=, else the
+   post on this origin. Cross-origin values are ignored so the link cannot be pointed off-site. */
 function parentBase() {
-  const u = trustedParent(Q.get('parent'));
-  return u ? u.origin + u.pathname + u.search : CANONICAL_PARENT;
-}
-/* When the host page is same-origin and is the parent post itself, keep its own query string
-   (utm tags) so the jump is an in-page hash change, not a reload of a different URL.           */
-function jumpHref(slug) {
-  const base = parentBase();
   try {
-    if (window.top !== window) {
-      const t = new URL(window.top.location.href);                   // throws when cross-origin
-      const b = new URL(base);
-      if (t.origin === b.origin && t.pathname === b.pathname) return t.origin + t.pathname + t.search + '#assistant-' + slug;
-    }
+    const p = window.parent;
+    if (p && p !== window && p.location.origin === location.origin) return p.location.origin + p.location.pathname + p.location.search;
   } catch (e) {}
-  return base + '#assistant-' + slug;
+  try {
+    const raw = Q.get('parent');
+    if (raw) { const u = new URL(raw, location.href); if (u.origin === location.origin) return u.origin + u.pathname + u.search; }
+  } catch (e) {}
+  return new URL('/blog/optimizing-for-ads-in-free-llm-answers/', location.href).href;
 }
+function jumpHref(slug) { return parentBase() + '#assistant-' + slug; }
 function postHeight() {
   try {
     if (window.parent && window.parent !== window)
@@ -1151,7 +1138,7 @@ function renderPanel(it) {
   panel.querySelector('.close').addEventListener('click', () => selectAssistant(null));
   panel.querySelector('.jump').addEventListener('click', ev => {
     ev.currentTarget.setAttribute('href', jumpHref(slug));           // the host URL may have changed since render
-    try { if (window.parent && window.parent !== window) window.parent.postMessage({ type: 'viz-intent', intent: slug }, '*'); } catch (e) {}
+    try { if (window.parent && window.parent !== window) window.parent.postMessage({ type: 'viz-intent', intent: slug, anchor: 'assistant-' + slug }, '*'); } catch (e) {}
   });
 }
 

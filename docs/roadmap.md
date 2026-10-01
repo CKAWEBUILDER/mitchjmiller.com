@@ -16,7 +16,7 @@ Source for 1–5: Mitch, 2026-09-25, in the [reconciliation handoff](../handoffs
 ## Live now
 - **Production:** https://mj2.pro/ on GitHub Pages. Records: [PROJECT.md](../PROJECT.md), [release-2026-10-01-m2](release-2026-10-01-m2/README.md).
   - **Version:** `gh-pages` `664c757` (2026-10-01 19:34 UTC, Pages build succeeded), built from `main` `956a65b`; `main` has since moved only by docs commits.
-  - **Content:** 74 sitemap URLs: 10 posts (6 with living infographics), 25 study notes, the Spanish pilot (5 pages), `/services/`, `/lab/` with the population workbench, `/products/`, a contact form. 7 `/viz/` embeds and 4 Coming Soon pages are noindex.
+  - **Content:** 74 sitemap URLs, including 10 posts (6 with living infographics), 25 study notes, the case studies, the Spanish pilot (5 pages), `/services/`, `/lab/` with the population workbench, `/products/` and a contact form. 7 `/viz/` embeds and 4 Coming Soon pages are noindex.
   - **Hosting plan** (2026-10-01 brief): static on GitHub Pages, anything dynamic on Cloudflare, no new host.
   - **Not re-probed live:** cloud egress to mj2.pro is blocked, so everything here comes from records and the GitHub API.
 - **Shipped 2026-10-01** (per the release record, not probed live): the M² mark replaced the headshot (header, About cards, favicons); the four resume PDFs are retired and `/resume/` is a transfer page; `/clients/` opens the portal; "portfolio" links go to LinkedIn; the logo carousel is unchanged at 5 logos.
@@ -30,35 +30,36 @@ Source for 1–5: Mitch, 2026-09-25, in the [reconciliation handoff](../handoffs
 - **Open PRs:** [#1](https://github.com/CKAWEBUILDER/mitchjmiller.com/pull/1), records (open since 2026-09-25, branch updated 2026-10-01 with a merge of `main` and the SEO crawl). Until it merges, `main` lacks Mitch's Sept 25 direction, the narration finding and the start-here pointers. #2 (M² mark) is closed; its work shipped.
 - **Gated, not done:**
   - **Stripe:** code on `main` (`114ceec`), not deployed. Needs a restricted key and webhook secret as Worker secrets, `STRIPE_PRICES`, the D1 migration, a webhook endpoint and a tax decision ([runbook](stripe/README.md)). A push to `main` touching `cloudflare/api-worker/**` runs the Worker deploy workflow once repo secrets exist (0 on 2026-09-25, not re-checked).
-  - **Narration:** 11 audio files (10 English, 1 Spanish) use macOS system voices whose license bars publishing them. Replace with Kokoro-82M or drop ([finding](../handoffs/2026-09-24-site-standards-build.md)).
+  - **Narration:** 11 audio files (10 English, 1 Spanish) use macOS system voices; per the 2026-09-25 finding, Apple's license bars publishing recordings of them. Replace with Kokoro-82M or drop ([finding](../handoffs/2026-09-24-site-standards-build.md)).
   - **mitchjmiller.com:** as of 2026-09-25, `http://` 301s to mj2.pro and `https://` times out (the registrar forwarding has no TLS).
   - **Search Console / GA4:** property, sitemap submission and realtime check are not recorded as done since the 2026-09-23 cutover; GA4 has no custom events.
   - **Carousel artwork:** 30 staged clients have no official logo (brand sites are blocked from cloud sessions); 4 ambiguous names plus Baylor are on hold.
-  - **Semrush:** UI only (API units were out on 2026-09-12 and 09-14 per OPERATING.md; not re-tested). Seed lists are ready: [seed-100.txt](../content-studio/research/2026-09-25/keyword-msv/README.md) and an untracked 97-keyword agency list (`content-studio/research/2026-10-01/agency-keywords/`, msv and kd still "pending").
+  - **Semrush:** UI only (API units were out on 2026-09-12 and 09-14 per OPERATING.md; not re-tested). Seed lists are ready: the [100-keyword list](../content-studio/research/2026-09-25/keyword-msv/README.md) and the 97-keyword [agency list](../content-studio/research/2026-10-01/agency-keywords/README.md) (committed `5a9cfd5`); msv and kd are "pending" on every row.
   - **Live probes and IndexNow** for the 2026-10-01 release (74 URLs).
 
 ## Now (this week)
 | Outcome | Owner | Status | Blocker | Record |
 |---|---|---|---|---|
-| **Name the offer:** 2–4 services with prices and a delivery model (audit, then handoff or monthly agent team) | Mitch decides, Claude drafts | Not started. A draft keyword-to-service map (7 candidate lines) is the starting point | Mitch's choice | [handoff](../handoffs/2026-09-25-one-checkout-reconciliation.md), `agency-keywords/` draft |
+| **Name the offer:** 2–4 services with prices and a delivery model (audit, then handoff or monthly agent team) | Mitch decides, Claude drafts | Not decided. The 2026-10-01 research favors an AI-visibility plus local audit (fixed fee, written handoff), then monthly SEO and AI-visibility management as an upsell, then a strategy session; its prices are unverified | Mitch's choice and prices | [handoff](../handoffs/2026-09-25-one-checkout-reconciliation.md), [keyword research](../content-studio/research/2026-10-01/agency-keywords/README.md) |
 | **Close the 2026-10-01 release:** live probes and IndexNow for 74 URLs | Mitch or a local session | Pending since 19:34 UTC | Cloud egress blocks mj2.pro and IndexNow; open question: who checks live after each release | [PROJECT.md](../PROJECT.md), [RELEASE-READY](../RELEASE-READY.md) steps 6–7 |
 | **Merge PR #1** (records, SEO crawl, this roadmap) so `main` carries the Sept 25 direction | Claude | Open since 2026-09-25 | None known; confirm `main` has not moved | [PR #1](https://github.com/CKAWEBUILDER/mitchjmiller.com/pull/1) |
 | **Fix the crawl findings:** 144 no-slash internal links, 40 long titles, 33 long descriptions, 14 pages without schema, study-note suffix still naming Mitchell Miller, orphaned `/resume/` | Claude | Crawl done 2026-10-01, no fixes yet | SFC report's head title needs the parity rule relaxed (Mitch) | [crawl](seo/crawl-2026-10-01/README.md) |
 | **Decide narration:** Kokoro-82M or drop, then one release that removes the Apple-voice files | Mitch decides, Claude builds (render on the Mac) | Finding recorded 2026-09-25 | The decision. Until then a new post needs the Mac for its macOS `say` narration | [brief](../handoffs/2026-09-24-site-standards-build.md) |
 | **Verify Search Console and GA4** for mj2.pro; submit the 74-URL sitemap | Mitch | Not recorded done since 2026-09-23 | Account access | [migration ledger](site-migration-2026-09-21/README.md) |
 | **mitchjmiller.com:** go or no-go on the staged personal-portfolio cutover | Mitch | Built by a 2026-10-01 session; DNS swap ready, mail records preserved, waiting for "go" | The swap replaces the forwarding that 301s old paths to mj2.pro, so old deep links need a plan | [split record](../handoffs/2026-09-25-personal-site-split.md) |
+| **Run the Semrush UI pull:** paste the 97-keyword agency list (US database), export, save beside it; the 100-keyword list too | Mitch | Lists ready; msv and kd pending | His Semrush UI session (no API units) | [README](../content-studio/research/2026-10-01/agency-keywords/README.md) |
 
 ## Next (2–4 weeks)
 | Outcome | Owner | Status | Blocker | Record |
 |---|---|---|---|---|
-| **Rebuild `/services/`** around the chosen offer: one proof per service, a "start with an audit" path, a Hawaii and small-business landing | Claude | Waiting | The offer decision | [services page](../site/pages/services/index.astro) |
-| **Run Mitch's site-audit brief** (service depth and proof, IA, about 60% visuals, internal links) against the new services | Mitch, Claude | Brief drafted in his notes; no result found | Offer decision; where the earlier Screaming Frog export lives is unknown | Mitch's project notes (Drive) |
+| **Rebuild `/services/` and add the new pages** from the research page map (`/services/ai-visibility-audit/`, `/hawaii/`, more): one proof per service, a "start with an audit" path; each new page needs a manifest route, share card and sitemap entry | Claude | Waiting | The offer decision | [page map](../content-studio/research/2026-10-01/agency-keywords/README.md), [services page](../site/pages/services/index.astro) |
+| **Run Mitch's site-audit brief** (service depth and proof, IA, about 60% visuals, internal links) against the new services | Mitch, Claude | Brief drafted in his notes; no result found | Offer decision first; the 2026-10-01 crawl is now the input | Mitch's project notes (Drive), [crawl](seo/crawl-2026-10-01/README.md) |
 | **Stripe go-live** (sandbox first), then a checkout form or `/pay/` | Mitch (login, keys, tax advisor), Claude | Code ready, not deployed | The offer; Mitch's keys | [runbook](stripe/README.md) |
 | **Leads that reach Mitch:** Worker notification on new contacts, plus GA4 events (form submit, CTA click, narration play) | Claude | Not started | Pick a channel and secret; same Worker as Stripe, so sequence the deploys | [Worker source](../cloudflare/api-worker/src/index.js) |
 | **Portal ready for a real client:** activate `clients.mj2.pro` (DNS), login rate limit, Cloudflare Access, retention and backup, shared and internal roadmap templates | Mitch (DNS, client permission), Claude | Live on pages.dev | Mitch's DNS access; the first client's permission | [migration ledger](site-migration-2026-09-21/README.md), `mitchjmiller-clients` repo |
 | **Carousel artwork:** official logos from each brand's own site, a follow-up release, a services-specific logo set | Claude (Full network or local), Mitch for names | 30 staged, none fetched | Network access; the 4 ambiguous names plus Baylor | [carousel handoff](../handoffs/2026-09-25-m2-brand-carousel.md) |
-| **Blog cadence:** next is `rank-new-site-saturated-market` (gate PASS, hero image not built, not approved); fix the live "ads follow-up coming" line (needs re-narration); run the Semrush UI pulls | Routines draft, Claude builds, Mitch approves each | Draft ready | Approval; narration (see Now); Semrush UI | [OPERATING](../content-studio/OPERATING.md), [draft](../content-studio/drafts/2026-09-24-rank-new-site-saturated-market.blog.md) |
-| **Outreach pilot:** the SFC case for Waikīkī businesses, by hand first; decide later whether to build Local Growth Ops | Mitch, Claude | Idea only; the v0 pipeline plan (Drive, 2026-09-27) is unbuilt | The offer; a sending domain and mailbox (the plan says never cold-send from the mj2.pro root) | [direction](../handoffs/2026-09-25-one-checkout-reconciliation.md) |
+| **Blog cadence:** next is `rank-new-site-saturated-market` (gate PASS, hero image not built, not approved); fix the live "ads follow-up coming" line (needs re-narration); a "recommended by ChatGPT" post is on the page map | Routines draft, Claude builds, Mitch approves each | Draft ready | Approval; narration (see Now); the draft's AI Overview claim conflicts with a Search Engine Journal headline and needs a re-check | [OPERATING](../content-studio/OPERATING.md), [draft](../content-studio/drafts/2026-09-24-rank-new-site-saturated-market.blog.md) |
+| **Outreach pilot:** the SFC case for Waikīkī businesses, by hand first (idea: an "AI versus reality" spot check extending the 54-vendor audit method); decide later whether to build Local Growth Ops | Mitch, Claude | Idea only; the v0 pipeline plan (Drive, 2026-09-27) is unbuilt | The offer; a sending domain and mailbox (the plan says never cold-send from the mj2.pro root) | [direction](../handoffs/2026-09-25-one-checkout-reconciliation.md) |
 | **Spanish pilot review:** native-speaker check, `og:locale` choice, Search Console by language at 60–90 days (2026-11-23 to 2026-12-23) | Mitch | Live since 2026-09-24 | A native speaker; Search Console access | [PROJECT.md](../PROJECT.md), [standards](site-standards.md) |
 
 ## Later
@@ -73,7 +74,7 @@ Source for 1–5: Mitch, 2026-09-25, in the [reconciliation handoff](../handoffs
 | **Housekeeping:** brand name and slogan ("Measured Momentum" was the only candidate with no conflicts found; parked), mj2.pro renewal (paid to 2027-09-21), lockfile (`npm ci` needs npm 11), Linux card fonts | Mitch, Claude | Parked | None urgent | [handoff](../handoffs/2026-09-25-one-checkout-reconciliation.md) |
 
 ## Decisions waiting on Mitch (ranked by what each unblocks)
-1. **Name the offer** (2–4 services, prices, delivery model). Unblocks the services rebuild, the Stripe catalog, the outreach pilot, post CTAs and the site audit.
+1. **Name the offer** (2–4 services, prices, delivery model; the 2026-10-01 research favors an audit-first line, then a monthly line, then a strategy session). Unblocks the services rebuild, the Stripe catalog, the outreach pilot, post CTAs and the site audit.
 2. **Narration: Kokoro or drop.** Unblocks removal of license-conflicting audio and releasing new posts without the Mac.
 3. **mitchjmiller.com: redirect to mj2.pro (fix HTTPS) or serve the personal portfolio (go on the staged cutover, plus a plan for old deep links).** Unblocks a waiting session, the HTTPS fix and reverting the LinkedIn-link stopgap (`3c9519d`).
 4. **Who checks live and submits IndexNow after each release; whether cloud sessions get Full network.** Unblocks closing the 2026-10-01 release and logo sourcing from the cloud.
@@ -81,11 +82,11 @@ Source for 1–5: Mitch, 2026-09-25, in the [reconciliation handoff](../handoffs
 6. **Collab lab placement** (`lab.mj2.pro` or `/lab/`) and what is free versus gated. Unblocks lab scoping and lead capture.
 7. **Outreach:** manual pilot first, or build Local Growth Ops. Unblocks the first small-business pipeline.
 8. **Carousel answers:** which St. Luke's, UCSF, Insomnia Cafe, Blue Planet Adventures and Baylor; keep Stanford. Unblocks the artwork release.
-9. **Content debts:** post 2's first-person AEO line; a signed-in check of the ZipRecruiter and Glassdoor figures in post 3; approve `rank-new-site-saturated-market`; the publish target for the weekly intake routine; the SFC report head-title exception; X handle for `twitter:site`.
+9. **Content debts:** post 2's first-person AEO line; a signed-in check of the ZipRecruiter and Glassdoor figures in post 3; approve `rank-new-site-saturated-market`; the publish target for the weekly intake routine; the SFC report head-title exception; a service-area Google Business Profile for M² (no home address); X handle for `twitter:site`.
 10. **Brand name and slogan; Spanish `og:locale`.** Parked, nothing blocks on them.
 
 ## Sources inspected (2026-10-01)
-- **Agent sessions and routines:** `list_sessions` (own, 100 newest, 2026-09-01 to 2026-10-01), `get_session` on 9 M²-related sessions, `list_triggers` (13 routines) and the claude.ai artifact "One Host, One Plan". Sessions waiting on Mitch:
+- **Agent sessions and routines:** `list_sessions` (own, 100 newest, 2026-09-01 to 2026-10-01), `get_session` on 9 M²-related sessions, `list_triggers` (13 routines) and the claude.ai artifact "One Host, One Plan". Sessions last reported as waiting on Mitch:
   - *mitchjmiller.com migration*: go for the personal-site DNS swap.
   - *Artifact shipping*: Full network access for logo sourcing.
   - *Ship M² logo, client logos and resume removal*: who checks live after each release.
@@ -93,7 +94,7 @@ Source for 1–5: Mitch, 2026-09-25, in the [reconciliation handoff](../handoffs
   - *File audit and organization across devices*: a `mj2-pro` GitHub org and a `/skills` page.
   - *Version status and client gating setup* asked where mitchjmiller.com is hosted and who owns the redesign; both are answered in PROJECT.md.
 - **Repos (read-only):**
-  - This repository: `git log --since=2026-09-20 --all`, the top six PROJECT.md entries, the 9 handoffs changed since 2026-09-20, the 2026-10-01 release record, Stripe runbook, site standards, content-studio OPERATING and PIPELINE, draft approval states, the 2026-10-01 SEO crawl.
+  - This repository: `git log --since=2026-09-20 --all`, the top six PROJECT.md entries, the 9 handoffs changed since 2026-09-20, the 2026-10-01 release record, Stripe runbook, site standards, content-studio OPERATING and PIPELINE, draft approval states, the 2026-10-01 SEO crawl and agency keyword research (both committed to the records branch during this run).
   - GitHub PRs, commits and Actions runs; the `mitchjmiller-clients` PROJECT.md.
   - `ai-os` `origin/main` (fetched): newest commit 2026-09-22, so BACKLOG, PROJECTS, sprint W39 and the registry lag; later registry edits on Mitch's Mac are uncommitted per the reconciliation record.
 - **Drive (read-only):** the M² project folder and its roadmap doc, searches for roadmap / M2 / M² / mj2, the 50 most recently modified files (back to 2026-09-25), Mitch's project notes (site, services and collab-lab sections only), the Local Growth Ops v0 plan, the fleet tracker sheet and the 10/1 to-do sheet.

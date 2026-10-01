@@ -40,6 +40,7 @@ Read `PROJECT.md` (top entry first), then the current handoff (September 25: [ha
 
 - Use only as many agents as useful and authorized; give disjoint ownership. At most a lead plus three contributors were proposed. One browser driver and one deploy owner prevent conflicting actions.
 - Save time and usage: read the records, use the cheapest sufficient tools, consolidate missing-information questions, and keep updates short and concrete.
+- Report to Mitch in single sentences: what was accomplished and why, then what was not and why. Add nothing else unless he asks (Mitch, 2026-10-01).
 - At each milestone, update PROJECT.md and the applicable handoff/task record with completed work, evidence, exact next action, unresolved blockers and outstanding approval. Commit and push documentation with accepted changes.
 - Close only task-created resources no longer needed. Preserve user tabs and active review previews. Never discard unsaved work.
 

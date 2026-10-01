@@ -1,6 +1,6 @@
 # M² mark, resumes retired, client carousel — September 25, 2026
 
-Owner: Claude Code (cloud session), sole M² deploy owner for the day. Status: **release candidate verified, waiting for Mitch's review** ("ship it"). None of it is published. Production is gh-pages `dc21cc3` (another session's 2026-09-26 audit-post release, built from `b838034` + that post, which kept the split gated for this review); DNS untouched.
+Owner: Claude Code (cloud session). Status: **SHIPPED 2026-10-01** as gh-pages `664c757` from `main` `956a65b` (see "2026-10-01: SHIPPED" below and PROJECT.md). Do not ship it again. Still open: live probes and IndexNow (this environment's egress blocks mj2.pro and api.indexnow.org) and logo sourcing for the staged carousel.
 
 ## Direction (Mitch, 2026-09-25)
 

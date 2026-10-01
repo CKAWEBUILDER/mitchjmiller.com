@@ -1,6 +1,21 @@
-# CURRENT STATE — September 25, 2026: M² profile and personal portfolio split
+# PUBLISHED — October 1, 2026: M² mark, resumes retired, /clients/ fixed, carousel staged (release owner: Claude Code, cloud session)
 
-Production remains https://mj2.pro/ from GitHub Pages gh-pages 94016fa; this work has not changed production or DNS. Mitch approved removing the M² four-resume chooser and moving his personal work history to a separate mitchjmiller.com portfolio with one current public resume PDF. Implementation is on branch codex/personal-site-split-20260925 in the M² checkout and in the separate personal project folder.
+Mitch, 2026-10-01: "please ship these asap" (the [2026-09-25 M² release-candidate review](docs/release-2026-09-25-m2/README.md) artifact's "ship it"), shipped with the handoff's documented defaults since the open questions were not answered.
+
+| Item | Value |
+|---|---|
+| Source | `main` `956a65b`, fast-forwarded from `claude/vibrant-volta-i6e53w` (= `claude/m2-brand-carousel` tip `9ce049d`, which merged main `41bc2f7`, + QA evidence commits). Built from `9ce049d` in a cloud Linux container (npm 11, Chrome for Testing 150). |
+| Deploy | gh-pages `664c757` (previous `dc21cc3`), pushed 19:33 UTC; GitHub Pages `github-pages` deployment for `664c757` created 19:34:52Z, status **success** (public deployments API; the Pages builds endpoint and the live host are not reachable from this container). Tree hash equals artifact `cfc77557a667284fee868d4cafc69fee4b3b52ac58f2b8c9db9122b2105d56f4`. Deletions outside hashed `_astro/`: exactly the four retired resume PDFs. `CNAME` (mj2.pro) and `robots.txt` byte-identical; sitemap 74 URLs. |
+| What shipped | (A) The four resume PDFs are gone (404, nothing links to them); /resume/ stays as a transfer page. (B) The M² mark (Inter Bold Roundel, inline SVG on theme tokens) replaces the headshot in the header, both home About cards, all favicons, the touch icon and the Organization JSON-LD logo. (D) /clients/ opens `https://mitchjmiller-clients.pages.dev/`. Every "Mitch's portfolio" link goes to LinkedIn (revert `3c9519d` once mitchjmiller.com serves the portfolio). (C) is staged only: 30 clients in `site/data/brands.json` with `logo: null`; the carousel keeps its 5 current logos until artwork is sourced. |
+| Share cards | 83/84 cards are production `dc21cc3`'s files byte-identical (card template uses system fonts; a Linux rebuild would re-render all in a different face); only `/og/resume.png` newly rendered (its title changed). |
+| QA | typecheck PASS; `build:release-candidate` PASS (parity 57/57 + 21/21, 25/25 bodies, 4/4 retired PDFs absent and unreferenced, 74 sitemap URLs; agency 78 shell documents; standards 86/86, M² brand files 5/5, 0 headshot share images). Crawl 1080/1080 over 78 routes; browser 536/536; standards 813/814 over 86 documents, axe 0 violations of any impact in light and dark — the one failure is the known container-only `all-in-ai-money-stack/@390`, which production fails identically in a Linux container ([control](docs/release-2026-09-25-m2/qa/standards-control-production-94016fa.json)). Evidence: [docs/release-2026-10-01-m2/](docs/release-2026-10-01-m2/). |
+| Blocked in the cloud session | Egress denies mj2.pro, mitchjmiller.com, api.indexnow.org and brand sites (Claude's web fetch included). **Pending for Mitch or a local session:** (1) live probes / `scripts/qa/live-standards.mjs` against https://mj2.pro/ (spot-check: M² mark in the header, /resume/ transfer page, old PDF URLs 404, /clients/ → pages.dev); (2) IndexNow POST with the full 74-URL sitemap (every page's head changed); (3) carousel logo artwork sourcing, then a follow-up release. |
+| Still waiting on Mitch | The candidate's open questions: which St. Luke's / UCSF / Insomnia Cafe / Blue Planet Adventures; which "Baylor Health"; keep Stanford Health Care; photo back in the About cards or keep the mark; network access for logo sourcing. Defaults shipped are reversible. |
+| Rollback | In a clean gh-pages worktree: `git revert --no-edit 664c757 && git push origin gh-pages` (restores `dc21cc3`). Source: `git revert -m 1 9ce049d` plus the follow-up commits on `main`. |
+
+# HISTORY — September 25, 2026: M² profile and personal portfolio split
+
+Production at the time of this record was gh-pages 94016fa (since superseded; see the October 1 release above); this work has not changed production or DNS. Mitch approved removing the M² four-resume chooser and moving his personal work history to a separate mitchjmiller.com portfolio with one current public resume PDF. Implementation is on branch codex/personal-site-split-20260925 in the M² checkout and in the separate personal project folder.
 
 | Item | Current state |
 |---|---|

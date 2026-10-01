@@ -38,3 +38,7 @@ Mitch (2026-09-30): "I don't know... someone will get back to you." A bare "ship
 ## Next action
 
 On "ship it": RELEASE-READY.md steps 1–8 from this branch (fast-forward `main`, never force), IndexNow with the full sitemap, then PROJECT.md and this handoff. Logos land in a follow-up release once artwork can be fetched and hashed.
+
+## 2026-10-01: SHIPPED
+
+Mitch: "please ship these asap" — treated as the "ship it", shipped with the defaults above. `main` `956a65b` (via `claude/vibrant-volta-i6e53w` = this branch's `9ce049d` + QA evidence), gh-pages `664c757` (previous `dc21cc3`), artifact `cfc77557a667284fee868d4cafc69fee4b3b52ac58f2b8c9db9122b2105d56f4`. QA in [docs/release-2026-10-01-m2/](../docs/release-2026-10-01-m2/): crawl 1080/1080, browser 536/536, standards 813/814 (axe 0 both themes; the one failure is the known container-only @390, matching the production control). 83/84 share cards carried over from production byte-identical; only `/og/resume.png` re-rendered. Egress still denied mj2.pro/IndexNow/brand sites, so live probes and the IndexNow submission are pending (PROJECT.md October 1 section), and the carousel logos remain a follow-up release. Rollback: `git revert --no-edit 664c757` on gh-pages.

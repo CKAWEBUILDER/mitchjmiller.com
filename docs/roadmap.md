@@ -1,6 +1,6 @@
 # M² roadmap
 
-**As of 2026-10-01** · **Owner:** Mitch · The canonical roadmap for M² and https://mj2.pro (source: this repository).
+**As of 2026-10-02** · **Owner:** Mitch · The canonical roadmap for M² and https://mj2.pro (source: this repository).
 **To update:** each session edits this file at its end: move items between Now / Next / Later, refresh status and blockers, add record links, bump the date above and add itself to Sources.
 **Scope:** [PROJECT.md](../PROJECT.md) stays the release log and `handoffs/` hold session detail; link them, do not copy them here. This repository is public: no client names, credentials, personal data or job-search specifics.
 
@@ -62,6 +62,20 @@ Source for 1–5: Mitch, 2026-09-25, in the [reconciliation handoff](../handoffs
 | **Outreach pilot:** the SFC case for Waikīkī businesses, by hand first (idea: an "AI versus reality" spot check extending the 54-vendor audit method); decide later whether to build Local Growth Ops | Mitch, Claude | Idea only; the v0 pipeline plan (Drive, 2026-09-27) is unbuilt | The offer; a sending domain and mailbox (the plan says never cold-send from the mj2.pro root) | [direction](../handoffs/2026-09-25-one-checkout-reconciliation.md) |
 | **Spanish pilot review:** native-speaker check, `og:locale` choice, Search Console by language at 60–90 days (2026-11-23 to 2026-12-23) | Mitch | Live since 2026-09-24 | A native speaker; Search Console access | [PROJECT.md](../PROJECT.md), [standards](site-standards.md) |
 
+## Growth engine (Mitch, 2026-10-02)
+Direction from Mitch: M² is the client-facing brand, so "clients" wording belongs here and only here. The personal portfolio (mitchjmiller.com) is employer-facing, never says "client" and never links M². The two blogs serve different readers.
+
+| Workstream | What it is | First deliverable | Owner | Status |
+|---|---|---|---|---|
+| **Optimization plan** | Technical, on-page and AI-answer (AEO) fixes for mj2.pro: crawl errors, schema, internal links, Core Web Vitals, llms.txt/robots for AI crawlers | Ranked fix list from the 2026-10-01 SEO crawl, each with effort and expected effect | Claude drafts, Mitch approves | Not started |
+| **Content plan** | Pillar topics tied to the offer, with a cadence and one owner per post | 90-day calendar: topic, search intent, target query, format, CTA | Claude drafts, Mitch approves | Not started; CTAs wait on decision 1 |
+| **Social drip calendar** | Every post repurposed into 3–5 native LinkedIn/X posts released over two weeks | Two-week drip for the newest post, in the content studio | Claude drafts | Not started; per-post approval gate stays |
+| **Network and groups** | Join small-business, local (Waikīkī/Oʻahu) and marketing groups where owners ask about search and AI visibility; answer questions first, follow each group's rules, no automation or bulk DMs | Shortlist of 10 groups with rules, audience size and posting norms | Mitch joins; Claude researches | Not started |
+| **Value-offer posts** | Group and feed posts that give something useful (checklist, mini-audit, free tool) with a clear next step | Three post templates, one per offer type | Claude drafts | Waits on decision 1 (offer) |
+| **Infographics** | One catchy, shareable infographic per post (six posts already have living infographics); LinkedIn carousel PDF versions | Infographic spec and template, then one per existing post | Claude builds | Not started |
+| **Free tools: invite and share** | Every post and group answer invites readers to try a free tool (population workbench, lab tools) and to share it | "Try it, share it" CTA block plus share links on tool pages | Claude builds | Not started; lab placement is decision 6 |
+| **Two blogs, two audiences** | mj2.pro blog: small-business owners and prospective clients (lead generation, offers, case studies). mitchjmiller.com blog: hiring managers (expertise and proof of skill; no client-seeking, no M² link, no shared schema entity) | Audience brief for each blog and the first three titles for each | Mitch approves | Not started |
+
 ## Later
 | Outcome | Owner | Status | Blocker | Record |
 |---|---|---|---|---|
@@ -76,7 +90,7 @@ Source for 1–5: Mitch, 2026-09-25, in the [reconciliation handoff](../handoffs
 ## Decisions waiting on Mitch (ranked by what each unblocks)
 1. **Name the offer** (2–4 services, prices, delivery model; the 2026-10-01 research favors an audit-first line, then a monthly line, then a strategy session). Unblocks the services rebuild, the Stripe catalog, the outreach pilot, post CTAs and the site audit.
 2. **Narration: Kokoro or drop.** Unblocks removal of license-conflicting audio and releasing new posts without the Mac.
-3. **mitchjmiller.com: redirect to mj2.pro (fix HTTPS) or serve the personal portfolio (go on the staged cutover, plus a plan for old deep links).** Unblocks a waiting session, the HTTPS fix and reverting the LinkedIn-link stopgap (`3c9519d`).
+3. ~~mitchjmiller.com: redirect or personal portfolio.~~ **Decided 2026-10-02:** personal, employer-facing portfolio on Cloudflare Pages (`mitchjmiller-portfolio`), never GitHub Pages; old M² deep links on that domain still need redirects to mj2.pro.
 4. **Who checks live and submits IndexNow after each release; whether cloud sessions get Full network.** Unblocks closing the 2026-10-01 release and logo sourcing from the cloud.
 5. **Stripe inputs** (login, restricted keys, catalog, webhook, tax advisor). Unblocks checkout and invoicing; the catalog depends on 1.
 6. **Collab lab placement** (`lab.mj2.pro` or `/lab/`) and what is free versus gated. Unblocks lab scoping and lead capture.

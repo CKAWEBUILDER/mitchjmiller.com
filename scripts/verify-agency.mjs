@@ -100,7 +100,13 @@ for (const route of ['/', '/services/', '/es/', '/es/services/']) {
   const items = (marquee.match(/<li /g) || []).length;
   if (items !== brands.brands.filter(b => b.logo).length * 2) fail(route, `marquee items ${items} != 2 × ${brands.brands.filter(b => b.logo).length} brands`);
   for (const brand of brands.brands.filter(b => b.logo)) if (!marquee.includes(brand.logo ? `alt="${brand.name}"` : `<span>${brand.name}</span>`)) fail(route, `brand ${brand.name} missing`);
-  if (!text(marquee).includes(route.startsWith('/es/') ? 'Experiencia en' : brands.label)) fail(route, 'marquee label text missing');
+  // 2026-10-02: heading is "Trusted by" (brands.json label) / "Con la confianza de" on /es/.
+  if (!text(marquee).includes(route.startsWith('/es/') ? 'Con la confianza de' : brands.label)) fail(route, 'marquee label text missing');
+  // Text twin of the carousel (2026-10-02): the association names render as plain text right
+  // after the marquee so crawlers and LLMs that skip image-only carousels still see them.
+  const names = html.match(/<div class="ag-marquee-names">[\s\S]*?<\/div>\s*<\/div>/)?.[0] || '';
+  for (const brand of ['Apple', 'Adobe', 'CommonSpirit Health', 'SFC Surf School']) if (!text(names).includes(brand)) fail(route, `marquee text twin lacks ${brand}`);
+  for (const pending of ["St. Luke", 'UCSF', 'Insomnia Cafe', 'Blue Planet Adventures', 'Baylor']) if (text(names).includes(pending)) fail(route, `marquee text twin names unresolved brand ${pending}`);
   tick('marquees');
 }
 const stripComments = value => value.replace(/\/\*[\s\S]*?\*\//g, '');
@@ -145,7 +151,10 @@ if (!/href="\/case-studies\//.test(services)) fail('/services/', 'no evidence li
 // The approved refinement uses a quiet text-only hero; supporting imagery stays in products/work.
 for (const [route, html] of [['/', home], ['/services/', services], ['/es/', read(fileFor('/es/'))], ['/es/services/', read(fileFor('/es/services/'))]]) {
   const hero = html.match(/<section class="ag-hero[^>]*>[\s\S]*?<\/section>/)?.[0] || '';
-  if ((hero.match(/class="ag-button(?:\s|"|$)/g) || []).length !== 1) fail(route, 'hero needs exactly one CTA button');
+  // 2026-10-02, Mitch: the home hero carries no CTA button ("I don't even want that button
+  // there"); the services hero keeps its single CTA.
+  const expectedHeroButtons = route === '/' || route === '/es/' ? 0 : 1;
+  if ((hero.match(/class="ag-button(?:\s|"|$)/g) || []).length !== expectedHeroButtons) fail(route, `hero needs exactly ${expectedHeroButtons} CTA button(s)`);
   if (html.indexOf('data-marquee') > html.indexOf('class="ag-lifecycle"')) fail(route, 'brand logos must precede strategy through delivery');
   const marquee = html.match(/<section class="ag-marquee"[\s\S]*?<\/section>/)?.[0] || '';
   if (/employer|<abbr|<li[^>]*>\s*<span/i.test(marquee)) fail(route, 'marquee must render only logo art without relationship badges');

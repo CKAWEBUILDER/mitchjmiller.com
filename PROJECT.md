@@ -1,3 +1,7 @@
+# HANDOFF — October 2, 2026: production unchanged; three decisions waiting on Mitch
+
+Production is still gh-pages `664c757` (the October 1 release below). mitchjmiller.com went live as the separate personal portfolio on October 2 (Codex). Waiting on Mitch: "ship all" (header "Contact", revert `3c9519d`, old mitchjmiller.com links redirected to mj2.pro), the whitepaper/case-study list, and the projects tab. Record: [handoffs/2026-10-02-session-handoff.md](handoffs/2026-10-02-session-handoff.md).
+
 # PUBLISHED — October 1, 2026: M² mark, resumes retired, /clients/ fixed, carousel staged (release owner: Claude Code, cloud session)
 
 Mitch, 2026-10-01: "please ship these asap" (the [2026-09-25 M² release-candidate review](docs/release-2026-09-25-m2/README.md) artifact's "ship it"), shipped with the handoff's documented defaults since the open questions were not answered.

@@ -1,3 +1,60 @@
+# HANDOFF — Client portal link in header + footer (2026-10-02, client-portal link lane)
+
+Same branch, on top of `b338eee`. **Nothing pushed, nothing deployed, no gh-pages/DNS touched.** The shared checkout was on `cloud/cf-cutover-20261002` (`5590b36`, clean tree); this lane switched to `cloud/m2-trustedby-20261002` for the work and switched back afterwards.
+
+Owner decision (2026-10-02): mj2.pro is the client-facing site; client-only material lives in the private portal (separate repo, `https://mitchjmiller-clients.pages.dev`), opened by the existing `/clients/` route.
+
+**Diagnosis (measured, source):** the shell already linked `/clients/` from the header utility links + mobile menu ("Clients" / "Clientes") and the footer Company column + bottom bar ("Client sign-in" / "Acceso de clientes"), but `standards.css` hid the header utility links on Spanish desktop pages. So the work was: one label everywhere, the Spanish desktop header link, and a layout that keeps the longer labels on one line.
+
+## What changed
+
+| File | Change |
+|---|---|
+| `site/lib/agency.ts`, `site/lib/i18n.ts` | EN labels → **"Client portal"** (header utility link, footer Company column, footer bottom bar). Still `/clients/`. |
+| `site/i18n/es.ts` | ES labels → **"Portal de clientes"** (same three places). **Needs native-speaker review** (flagged in the file header). No `/es/clients/` exists, so ES links keep `/clients/`; the layout adds `hreflang="en"` as for every English-only target. |
+| `site/layouts/AgencyLayout.astro` | Header utility links wrapped in `<div class="ag-header-utility">` (inside `.ag-header-actions`, before the CTA). DOM/focus order unchanged: utility links, then the green CTA. Mobile menu and footer markup unchanged. |
+| `site/styles/standards.css` | (1) Spanish desktop header now hides only LinkedIn, so "Portal de clientes" shows (`:not([href="/clients/"])`). (2) At ≥1281 px (where header actions show) the small utility links sit in one row **above** the green CTA; labels `nowrap`; utility targets ≥24 px tall (WCAG 2.2 2.5.8). Same `.ag-utility-link` muted 13.76 px/500 style vs. CTA 14.4 px/600 white on green — the CTA stays primary. ≤1280 px untouched (menu panel carries the links, 48 px targets). In standards.css, not agency.css, so the DS mirror (`scripts/build-ds-css.mjs` reads agency.css only) is unaffected. |
+| `site/pages/clients/index.astro` | Comment only: it is now linked from header + footer. |
+| `scripts/verify-agency.mjs` | **Changed on purpose:** the old check only required some `href="/clients/"` anywhere. New check, every shell document: the labelled link (`Client portal`, or `Portal de clientes` + `hreflang="en"` on /es/) must be inside the header's `.ag-header-utility` **and** in the footer; summary line reports the count. Negative test (measured): removing the /es/ header link and relabelling the /services/ footer links on a scratch copy of dist → exit 1 with exactly those two failures. |
+| `docs/staging-2026-10-02-clientportal/qa/` | Evidence: crawl.json, browser.json, standards-header-routes.json, header-fit.txt. |
+
+## Why the header layout changed (measured, headless Chrome, single-line widths)
+
+The desktop header was already over capacity before this change: on one line its items need 1254 px (EN) / 1256 px (ES) against 1185–1280 px available, absorbed by squeezing the brand box. Measured on a DOM-simulated baseline (old labels, production layout): EN **"Let's talk" already wraps to two lines at every desktop width** and the EN tagline overruns the nav by 4 px at 1281; ES tagline overruns by 37 px (1281) / 22 px (1366+).
+
+The plain relabel (first build) made it worse: "Client portal" and "Let's talk" wrapped to two lines (EN); "Portal de clientes" wrapped to **three** lines (ES, +137 px). The repo's `standards.mjs` header-fit check still passed, because flex shrinks the actions box instead of overflowing — it does not detect label wrapping. Shrinking gaps or hiding the tagline could not recover ES without the brand name colliding with the nav.
+
+Stacked layout (final): every header label on one line at 1281/1300/1360/1500/1920 on 10 shell routes (EN + ES + 404 + /clients/); EN tagline overrun gone (−46 to −94 px clearance), EN "Let's talk" back on one line; ES overrun identical to the production baseline (37/22 px — pre-existing, not introduced); header height unchanged at 85 px (measured on the DOM prototype of the same CSS, inferred for the final build); no horizontal overflow. 52/52 in `header-fit.txt` (one-off Puppeteer script, not committed; logic: text-node line count, inter-group gaps, portal ≥24 px, scrollWidth).
+
+## Validation (this container; exit codes read directly, not through a pipe)
+
+| Check | Command | Result |
+|---|---|---|
+| Install | none | `node_modules` present; no `npm install`/`npm ci` run; package-lock.json untouched. |
+| Typecheck | `npm run typecheck` | **PASS** exit 0 (final source) |
+| Release candidate | `CHROME_PATH=/opt/pw-browsers/chromium-1194/chrome-linux/chrome npm run build:release-candidate` | **PASS** exit 0 (final source): parity 57/57 + 21/21, 25/25 bodies, 74 sitemap URLs; agency 78 shell documents, **78 with the client portal link in header and footer**; standards 86/86 documents, 40 dark pairs ≥ 4.5:1. |
+| JS-off crawl | `node scripts/qa/serve.mjs dist 5193` + `node scripts/qa/crawl.mjs --out docs/staging-2026-10-02-clientportal/qa/crawl.json` | **PASS** exit 0: 1080/1080 across 78 routes. |
+| Browser QA | `CHROME_PATH=… node scripts/qa/browser.mjs --out docs/staging-2026-10-02-clientportal/qa/browser.json --shots <scratch>` | **PASS** exit 0: 536/536 (incl. mobile menu @390, overflow @1360/@390 on 27 pages). |
+| Standards/axe | `VERBOSE=1 CHROME_PATH=… node scripts/qa/standards.mjs --routes "/,/services/,/es/,/es/services/,/es/contact/,/es/blog/,/clients/" --out docs/staging-2026-10-02-clientportal/qa/standards-header-routes.json` | **PASS** exit 0: 106/106 over 7 documents; axe serious+critical 0 light / 0 dark; desktop header fit @1281/1360/1500 on all 6 header routes; no overflow @390. |
+| Header label fit | one-off script (see above) | **PASS** exit 0: 52/52. |
+
+**Standards on narrated posts: two failed attempts, stopped.** Both runs that included a narrated post (`/blog/search-results-by-intent/`, then `/es/blog/gbp-2026-ai-grounding/`) crashed with Puppeteer `ProtocolError: Runtime.callFunctionOn timed out` after the share-card check, i.e. in narration playback (`audio.play()`); 117/117 recorded checks before the second crash passed. Inferred cause: headless audio playback hangs in this container — unrelated to this change (narration markup untouched). Final run used non-narrated routes. Release owner: run the full suite per RELEASE-READY.md on a machine with audio.
+
+## Decisions for Mitch
+
+1. **Header layout:** desktop utility links ("LinkedIn · Client portal") now sit above the green "Let's talk" button on every page. Say so to revert to one row (labels would then wrap — see above).
+2. **"Portal de clientes"** — native-speaker check (with the trusted-by Spanish strings below).
+3. Footer now has two identical "Client portal" links (Company column + bottom bar, both pre-existing slots). Keep both or drop one.
+4. Pre-existing, not changed: the ES desktop tagline runs 22–37 px under "Servicios" (same as production); ES desktop header still omits LinkedIn (footer + menu carry it).
+5. Suggested follow-up (not done): teach `scripts/qa/standards.mjs`'s header-fit check to fail on wrapped labels, since flex shrinking hides them.
+
+## For the parent session
+
+- Push this branch (draft PR #4 picks it up); release per RELEASE-READY.md when approved. PROJECT.md not updated (release owner records the release).
+- STATUS.md line for /home/user/job-search: `2026-10-02 · M² client-portal link lane · "Client portal"/"Portal de clientes" in header (stacked above CTA ≥1281px, menu ≤1280px) + footer on all 78 shell pages, verify-agency checks it; typecheck/RC build/crawl 1080/browser 536/standards 106 pass; branch cloud/m2-trustedby-20261002 · pending: push, Mitch decisions (layout, ES review), full standards suite on a machine with audio.`
+
+---
+
 # HANDOFF — Trusted-by carousel, hero button removal, home FAQ, SEO pass (2026-10-02)
 
 Branch `cloud/m2-trustedby-20261002` off `main` `d684347`, cloud container, M² site lane. **Nothing pushed, nothing deployed** — the parent session owns push/release per RELEASE-READY.md.

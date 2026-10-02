@@ -2,7 +2,8 @@
 // Drafted by the model and checked by an independent review pass (route manifest
 // "translation" records); terms Spanish-speaking marketers use in English stay in English.
 // Links to pages that exist only in English keep their English URLs; the layout marks them
-// hreflang="en".
+// hreflang="en". "Portal de clientes" (client portal link, 2026-10-02) awaits a native-speaker review;
+// /clients/ has no Spanish counterpart.
 import { site, type NavItem, type NavLink } from '../lib/agency';
 
 export const esUi = {
@@ -12,7 +13,7 @@ export const esUi = {
   footerBlurb: 'Estrategia digital, sitios web, software y analítica para empresas en crecimiento. Trabaja directamente con Mitchell Miller.',
   country: 'Estados Unidos',
   footerNote: 'Los casos de estudio describen trabajo realizado en los roles y periodos que indica cada página.',
-  footerLinks: [{ label: 'Acceso de clientes', href: '/clients/' }, { label: 'Contacto', href: '/es/contact/' }],
+  footerLinks: [{ label: 'Portal de clientes', href: '/clients/' }, { label: 'Contacto', href: '/es/contact/' }],
   banner: { region: 'Sugerencia de idioma', text: 'Esta página también está disponible en español.', go: 'Leer en español', dismiss: 'No, gracias' },
 } as const;
 
@@ -47,7 +48,7 @@ const primary: NavItem[] = [
 
 export const esNav = {
   primary,
-  utility: [{ label: 'LinkedIn', href: site.linkedin }, { label: 'Clientes', href: '/clients/' }] as NavLink[],
+  utility: [{ label: 'LinkedIn', href: site.linkedin }, { label: 'Portal de clientes', href: '/clients/' }] as NavLink[],
   cta: { label: 'Hablemos', href: '/es/contact/' } as NavLink,
   footer: [
     { heading: 'Servicios', links: [
@@ -75,7 +76,7 @@ export const esNav = {
     { heading: 'Empresa', links: [
       { label: 'Acerca de', href: '/about/' },
       { label: 'Contacto', href: '/es/contact/' },
-      { label: 'Acceso de clientes', href: '/clients/' },
+      { label: 'Portal de clientes', href: '/clients/' },
     ] },
   ],
 };

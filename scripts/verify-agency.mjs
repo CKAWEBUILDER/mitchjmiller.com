@@ -72,6 +72,15 @@ for (const file of walk(dist).filter(file => file.endsWith('.html'))) {
   for (const label of shellText.labels) if (!new RegExp(`<a href="[^"]+"[^>]*>${label}(<span class="ag-caret"[^>]*></span>)?</a>`).test(pageBody)) fail(route, `primary nav lacks ${label}`);
   if (!shellText.cta.test(pageBody)) fail(route, `missing green ${shellText.ctaName} contact button`);
   if (!/<a class="ag-utility-link" href="https:\/\/linkedin\.com\/in\/mitchelljmillerjr"/.test(pageBody) || !/href="\/clients\/"/.test(pageBody)) fail(route, 'utility links (LinkedIn, Clients) missing');
+  // Client portal login link (2026-10-02): labelled in the page's language in the desktop header
+  // actions and in the footer; /clients/ is English-only, so Spanish pages mark it hreflang="en".
+  const portalLink = new RegExp(`<a class="ag-utility-link" href="/clients/"${spanish ? ' hreflang="en"' : ''}>${spanish ? 'Portal de clientes' : 'Client portal'}</a>`);
+  const portalFooter = new RegExp(`<a href="/clients/"${spanish ? ' hreflang="en"' : ''}>${spanish ? 'Portal de clientes' : 'Client portal'}</a>`);
+  const portalInHeader = portalLink.test(pageBody.match(/<div class="ag-header-actions">\s*<div class="ag-header-utility">([\s\S]*?)<\/div>/)?.[1] || '');
+  const portalInFooter = portalFooter.test(pageBody.match(/<footer class="ag-footer">([\s\S]*?)<\/footer>/)?.[1] || '');
+  if (!portalInHeader) fail(route, 'header lacks the client portal link');
+  if (!portalInFooter) fail(route, 'footer lacks the client portal link');
+  if (portalInHeader && portalInFooter) tick('clientPortalLinks');
   // mitchjmiller.com does not serve the personal portfolio yet (see site/lib/agency.ts personalPortfolio).
   if (/href="https?:\/\/(?:www\.)?mitchjmiller\.com\/?"/.test(pageBody)) fail(route, 'links to mitchjmiller.com, which does not serve the personal portfolio yet');
   if (!/<details class="ag-menu">/.test(pageBody)) fail(route, 'missing mobile menu');
@@ -256,6 +265,6 @@ for (const embed of embeds) {
 
 const report = { mode: release ? 'local-release-candidate' : 'private-staging', passed: failures.length === 0, publishedRoutes: eligible.length, sitemapUrls: sitemap.length, checks, tokens, contrast: contrastReport, failures };
 if (process.env.AGENCY_REPORT_PATH) writeFileSync(resolve(root, process.env.AGENCY_REPORT_PATH), `${JSON.stringify(report, null, 2)}\n`);
-console.log(`Agency verification ${report.passed ? 'passed' : 'FAILED'} (${report.mode}): ${eligible.length} published routes, ${sitemap.length} sitemap URLs, ${checks.shellDocuments || 0} documents in the agency shell, ${checks.marquees || 0} marquees, ${checks.faqQuestions || 0} FAQ questions mirrored in JSON-LD, ${checks.jsonLdDocuments || 0} documents with JSON-LD, ${checks.addedArticles || 0} added posts/notes with Article JSON-LD, ${checks.embeds || 0} embeds (${checks.embedFiles || 0} files), post FAQ ${checks.postFaqQuestions || 0} mirrored, ${checks.postImages || 0} post images; contrast ${contrastReport.map(pair => `${pair.ratio}`).join('/')}.`);
+console.log(`Agency verification ${report.passed ? 'passed' : 'FAILED'} (${report.mode}): ${eligible.length} published routes, ${sitemap.length} sitemap URLs, ${checks.shellDocuments || 0} documents in the agency shell (${checks.clientPortalLinks || 0} with the client portal link in header and footer), ${checks.marquees || 0} marquees, ${checks.faqQuestions || 0} FAQ questions mirrored in JSON-LD, ${checks.jsonLdDocuments || 0} documents with JSON-LD, ${checks.addedArticles || 0} added posts/notes with Article JSON-LD, ${checks.embeds || 0} embeds (${checks.embedFiles || 0} files), post FAQ ${checks.postFaqQuestions || 0} mirrored, ${checks.postImages || 0} post images; contrast ${contrastReport.map(pair => `${pair.ratio}`).join('/')}.`);
 if (failures.length) console.error(failures.map(value => `  - ${value}`).join('\n'));
 process.exitCode = report.passed ? 0 : 1;

@@ -76,6 +76,33 @@ Direction from Mitch: M² is the client-facing brand, so "clients" wording belon
 | **Free tools: invite and share** | Every post and group answer invites readers to try a free tool (population workbench, lab tools) and to share it | "Try it, share it" CTA block plus share links on tool pages | Claude builds | Not started; lab placement is decision 6 |
 | **Two blogs, two audiences** | mj2.pro blog: small-business owners and prospective clients (lead generation, offers, case studies). mitchjmiller.com blog: hiring managers (expertise and proof of skill; no client-seeking, no M² link, no shared schema entity) | Audience brief for each blog and the first three titles for each | Mitch approves | Not started |
 
+## Offer and site architecture (plan only, Mitch 2026-10-02; nothing implemented)
+Direction from Mitch: mj2.pro spans free tools for solo builders and individual users up to paid tiers for small, mid-size and enterprise clients, organized by industry and by the services each industry needs. Plan the content and the architecture now; build later.
+
+**Audience ladder**
+| Tier | Who | What they get | Business role |
+|---|---|---|---|
+| Free | Solo builders, individual users | Free tools (population workbench, lab tools), checklists, the blog | Reach, email capture, "try it, share it" |
+| Small business | Owner-led, local and service businesses | Fixed-fee audit with a written handoff, then optional monthly management | First revenue line (decision 1) |
+| Mid-size | Multi-location or in-house marketing teams | Audits plus implementation sprints, reporting, AI-visibility tracking | Retainers |
+| Enterprise | Large organizations, regulated industries | Strategy, migrations, governance, multi-agent operations | Large engagements; proof from past enterprise work |
+
+**Industries (candidates; Mitch confirms the list, evidence decides the order):** healthcare and behavioral health; travel, tourism and recreation; local and home services; B2B, SaaS and data; e-commerce and retail; finance and fintech; education.
+
+**Service types (each industry page shows only the ones that fit):** SEO and technical SEO; AI search visibility (AEO/GEO); local search and Google Business Profile; content and data-viz; analytics and measurement; site migrations and CMS; AI agents and automation; strategy and training.
+
+**Proposed URL architecture**
+- `/tools/` (free hub) and `/tools/<tool>/`
+- `/for/solo/`, `/for/small-business/`, `/for/mid-size/`, `/for/enterprise/` (tier pages)
+- `/industries/` and `/industries/<industry>/`
+- `/services/` and `/services/<service>/`
+- `/industries/<industry>/<service>/` only where a real case study or data exists (no thin programmatic pages)
+- `/pricing/` (after decision 1), `/case-studies/<slug>/`, `/clients/` (client portal entry; "clients" wording belongs on M² only)
+
+**Content plan per page type:** each industry page gets the problem, the services that fit, one proof point, a free tool and a CTA matched to the tier. Each service page gets the method, deliverables, timeline, the tier it fits and FAQs (AEO). Tier pages get scope, price band (after decision 1) and the next step.
+
+**Gates before any build:** decision 1 (offer and prices), the industry list, and a keyword and SERP check per industry and service so pages target real demand. The growth-engine workstreams above feed these pages.
+
 ## Later
 | Outcome | Owner | Status | Blocker | Record |
 |---|---|---|---|---|

@@ -1,3 +1,5 @@
+**Roadmap:** [docs/roadmap.md](docs/roadmap.md) holds the objectives, the Now / Next / Later plan and Mitch's open decisions (updated 2026-10-01). This file stays the release log.
+
 # PUBLISHED — October 1, 2026: M² mark, resumes retired, /clients/ fixed, carousel staged (release owner: Claude Code, cloud session)
 
 Mitch, 2026-10-01: "please ship these asap" (the [2026-09-25 M² release-candidate review](docs/release-2026-09-25-m2/README.md) artifact's "ship it"), shipped with the handoff's documented defaults since the open questions were not answered.

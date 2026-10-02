@@ -47,3 +47,27 @@ Shipped as gh-pages `6edd43f` from `main` `3d2a026` (artifact `fcb3f68b675e5…`
 
 ## Completion — deploy 2 (2026-09-24 21:55 EDT, Claude Code build agent)
 Shipped as gh-pages `3559667` from `main` `c04e56e` (artifact `4b76d8ad7f192…`); record, evidence and rollback in `main`'s PROJECT.md ("PUBLISHED — September 24, 2026 (21:55 EDT): site standards, deploy 2") and [docs/release-2026-09-24-spanish/](../docs/release-2026-09-24-spanish/). Spanish pilot live: `/es/`, `/es/services/`, `/es/contact/`, `/es/blog/`, `/es/blog/gbp-2026-ai-grounding/` (model draft + independent review, 32 findings applied; Paulina narration), hreflang reciprocal on all 69 sitemap pages, globe picker, suggestion banner (never redirects). Also shipped: study note `figma-shortest-course` (wired from another session's handoff). Still blocked on Mitch: logo file, X handle, optional Premium voice, study-note narration scope, native-speaker check, `og:locale` choice. The redesign branch `claude/agency-redesign` must adopt both deploys before any release.
+
+## Narration voice: finding and decision needed (2026-09-25, Claude Code cloud session)
+
+- **Mitch, September 25:** the narration voice (macOS `say`, compact Samantha; Spanish: Paulina) sounds terrible. He asked for a much better free voice, and whether the player could sit behind a "prefer to listen?" prompt.
+- **License.** The macOS license allows its system voices only for personal, non-commercial projects. It excludes "recording, publishing or redistribution of any of the System Voices in a profit, non-profit, public sharing or commercial context" (Apple SLA, macOS Sequoia and Tahoe 26). All 10 live narrations were recorded that way, so keeping them on the M² site conflicts with that license. Premium and Enhanced macOS voices carry the same terms, so they are not the fix.
+- **Replacement: Kokoro-82M.** Apache-2.0, free for commercial use, runs locally with no account. Install `pip install kokoro-onnx`. The model files `kokoro-v1.0.int8.onnx` and `voices-v1.0.bin` come from GitHub release `thewh1teagle/kokoro-onnx` `model-files-v1.0`; Hugging Face is blocked from cloud sessions. English voices to audition: `af_heart` (the default pick), `am_michael` and `bf_emma`. For Spanish, audition `ef_dora` and `em_alex` before use. Speed: the int8 model ran at about 1.7× real time on a 4-core cloud CPU. That is too slow there for about 114 minutes of audio, so render on the Mac. The cloud session's sample run was stopped by its sandbox before any sample finished; no samples exist.
+- **Text preparation Kokoro needs** (espeak-ng G2P, tested on the statistician post):
+  - `$14,600` is read "dollar fourteen thousand six hundred". Rewrite it as `14,600 dollars`, using `\$(\d{1,3}(?:,\d{3})+|\d+)(\.\d+)?` so a following comma is not captured, and `$4.7B` as `4.7 billion dollars`.
+  - `2025–2035` loses its dash. Rewrite it as `2025 to 2035`.
+  - Years 2010–2099 are read "two thousand twenty-five". Rewrite them as `twenty 25`, which espeak reads "twenty twenty-five".
+  - `3x` → `3 times`.
+  - Unknown acronyms are read as words (OEWS). Keep a small pronunciation map.
+  - `4 min read` → `4 minute read`, and ` / ` → `, `.
+  - Put all of this in `scripts/lib/narration.mjs`, so the text hash in `site/data/narration.json` stays the check.
+- **Player (Mitch's idea, trimmed).**
+  - Wrap the player in a native `<details>` whose summary is the prompt: "Prefer to listen? (N min)".
+  - Keep the note that it is an AI voice and the article is the full transcript.
+  - No voice picker: one good voice beats a menu, and every full render adds about 40 MB of audio to git history.
+  - Screen-reader users already hear the page in their own voice and speed, so the prompt is for everyone, not aimed at blind readers.
+  - Add a GA4 `narration_play` event with the slug, so there is a record of whether anyone listens.
+- **Decision for Mitch, then one release:**
+  - (a) Switch to Kokoro: render one post, Mitch listens, then render every post and the Spanish one in a single release.
+  - (b) Drop narration: amend `docs/site-standards.md`, the narration check in `scripts/verify-standards.mjs` and the player, then remove `public/audio/`.
+  - Either way, the Apple-voice files should not stay live.

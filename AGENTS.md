@@ -2,7 +2,7 @@
 
 ## Start here
 
-Read `PROJECT.md`, then `handoffs/parity-design-2026-09-11.md`, then the applicable linked project records before substantive work. Use the newest explicit user instruction if it changes this record, and update the record. Do not re-discover documented facts or infer completed work from a plan.
+Read `PROJECT.md` (top entry first), then [docs/roadmap.md](docs/roadmap.md) (objectives, Now / Next / Later, Mitch's open decisions), then the handoff the top PROJECT.md entry names, then the applicable linked project records before substantive work. Use the newest explicit user instruction if it changes this record, and update the record. Do not re-discover documented facts or infer completed work from a plan.
 
 ## Source of truth and workspace
 
@@ -40,6 +40,8 @@ Read `PROJECT.md`, then `handoffs/parity-design-2026-09-11.md`, then the applica
 
 - Use only as many agents as useful and authorized; give disjoint ownership. At most a lead plus three contributors were proposed. One browser driver and one deploy owner prevent conflicting actions.
 - Save time and usage: read the records, use the cheapest sufficient tools, consolidate missing-information questions, and keep updates short and concrete.
+- Report to Mitch in single sentences: what was accomplished and why, then what was not and why. Add nothing else unless he asks (Mitch, 2026-10-01).
+- Roadmaps: every project has exactly one, a Google Sheet named `<Project> — Roadmap and Progress` in Mitch's standard Roadmap and Progress layout, kept in the project's `01_Roadmap` Drive folder and drafted with the `draft-roadmap` skill; no other roadmap format (Mitch, 2026-10-02). M²'s is [M² — Roadmap and Progress](https://docs.google.com/spreadsheets/d/15kz_xkYZuyKoTnFdQZ7ohdfXQri91HvR4pPG6_N8SaY/edit); [docs/roadmap.md](docs/roadmap.md) predates this rule.
 - At each milestone, update PROJECT.md and the applicable handoff/task record with completed work, evidence, exact next action, unresolved blockers and outstanding approval. Commit and push documentation with accepted changes.
 - Close only task-created resources no longer needed. Preserve user tabs and active review previews. Never discard unsaved work.
 

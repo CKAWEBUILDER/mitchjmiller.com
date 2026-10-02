@@ -190,8 +190,20 @@
 .ag-lang-dismiss { min-height: 44px; padding: 8px 14px; border: 1px solid var(--ag-border-strong); border-radius: var(--ag-radius); background: transparent; color: var(--ag-heading); font: inherit; font-size: .9rem; font-weight: 600; cursor: pointer; }
 .ag-lang-dismiss:hover { background: var(--ag-surface); }
 
-/* Spanish labels run longer: on /es/ pages the desktop header keeps the full navigation and the
-   contact button by leaving its two utility links (Currículums, Clientes: English-only pages) to
+/* Spanish labels run longer: on /es/ pages the desktop header keeps the full navigation, the
+   client portal link (2026-10-02) and the contact button by leaving its LinkedIn utility link to
    the footer and the mobile menu, and nav labels stay on one line. */
-:root[lang="es"] .ag-header-actions .ag-utility-link { display: none; }
+:root[lang="es"] .ag-header-actions .ag-utility-link:not([href="/clients/"]) { display: none; }
 :root[lang="es"] .ag-nav > ul > li > a { white-space: nowrap; padding-inline: 8px; }
+
+/* Client portal link (2026-10-02): where the desktop header actions show, the small utility links
+   sit in one row above the green contact button, so "Client portal" / "Portal de clientes" and the
+   button label each stay on one line without taking width from the navigation; the button stays
+   the primary action. Utility targets are at least 24 px tall (WCAG 2.2 target size). At 1280 px
+   and below the actions are hidden and the menu panel carries the same links. */
+@media (min-width: 1281px) {
+  .ag-header-actions { flex-direction: column; align-items: flex-end; gap: 2px; }
+  .ag-header-utility { display: flex; gap: 16px; }
+  .ag-header-actions .ag-utility-link { display: inline-flex; align-items: center; min-height: 24px; white-space: nowrap; }
+  .ag-header-actions .ag-button { white-space: nowrap; }
+}

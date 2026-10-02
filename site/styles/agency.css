@@ -390,12 +390,18 @@ a.ag-tile:hover{border-color:var(--ag-chevron);box-shadow:0 12px 28px rgba(15,36
 .ag-marquee-toggle{position:absolute;right:0;top:0;color:var(--ag-muted);font-size:.75rem;background:#fff;border:1px solid var(--ag-line);padding:8px 12px;border-radius:4px;cursor:pointer;min-height:36px}
 .ag-marquee-toggle[hidden]{display:none}
 .ag-marquee-track ul{width:max-content;min-width:max(100vw,1100px);justify-content:space-around}
-.ag-marquee-track li{height:84px;padding:8px 34px;flex:1 0 auto}
-.ag-marquee-track li img{display:block;width:190px;max-width:none;height:45px;object-fit:contain;filter:none;opacity:1}
-.ag-marquee-track li[data-brand="Apple"] img{width:32px;height:101px}
-.ag-marquee-track li[data-brand="Stanford Health Care"] img{width:214px;height:40px}
-.ag-marquee-track li[data-brand="Dignity Health"] img{width:180px;height:65px}
-.ag-marquee-track li[data-brand="SFC Surf School"] img{width:66px;height:60px}
+/* 2026-10-02 (Mitch): logos ~30% larger, tighter gaps between them. */
+.ag-marquee-track li{height:108px;padding:8px 20px;flex:1 0 auto}
+.ag-marquee-track li img{display:block;width:250px;max-width:none;height:60px;object-fit:contain;filter:none;opacity:1}
+.ag-marquee-track li[data-brand="Apple"] img{width:42px;height:134px}
+.ag-marquee-track li[data-brand="Stanford Health Care"] img{width:282px;height:53px}
+.ag-marquee-track li[data-brand="Dignity Health"] img{width:238px;height:86px}
+.ag-marquee-track li[data-brand="SFC Surf School"] img{width:87px;height:79px}
 .ag-marquee[data-paused="true"] .ag-marquee-track{animation-play-state:paused}
-@media(max-width:560px){.ag-marquee-head{justify-content:space-between}.ag-marquee-label{text-align:left;font-size:.68rem}.ag-marquee-toggle{position:static}.ag-marquee-track li{padding:8px 26px}}
-@media(prefers-reduced-motion:reduce){.ag-marquee-toggle{display:none}.ag-marquee-track ul{width:100%;min-width:0;gap:12px}.ag-marquee-track li{flex:0 1 210px}}
+/* Text twin of the carousel (2026-10-02): plain-text association list below the logos so
+   crawlers and LLMs read the names; theme-aware (the marquee itself stays a light island). */
+.ag-marquee-names{border-bottom:1px solid var(--ag-line);background:var(--ag-surface);padding:16px 0 22px}
+.ag-marquee-names p{margin:0 auto;max-width:88ch;text-align:center;font-size:.8rem;line-height:1.7;color:var(--ag-muted)}
+.ag-marquee-names p+p{margin-top:6px}
+@media(max-width:560px){.ag-marquee-head{justify-content:space-between}.ag-marquee-label{text-align:left;font-size:.68rem}.ag-marquee-toggle{position:static}.ag-marquee-track li{padding:8px 14px}.ag-marquee-names p{text-align:left}}
+@media(prefers-reduced-motion:reduce){.ag-marquee-toggle{display:none}.ag-marquee-track ul{width:100%;min-width:0;gap:12px}.ag-marquee-track li{flex:0 1 250px}}

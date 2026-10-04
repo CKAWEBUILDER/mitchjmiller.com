@@ -1,0 +1,55 @@
+PASS /404.html@1281 portal="Client portal" linkedin=true gaps={"brandToNav":46,"navToTools":46,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=-46 portalH=24 sw=1281/1281
+PASS /404.html@1300 portal="Client portal" linkedin=true gaps={"brandToNav":54,"navToTools":54,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=-54 portalH=24 sw=1300/1300
+PASS /404.html@1360 portal="Client portal" linkedin=true gaps={"brandToNav":54,"navToTools":54,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=-54 portalH=24 sw=1360/1360
+PASS /404.html@1500 portal="Client portal" linkedin=true gaps={"brandToNav":94,"navToTools":94,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=-94 portalH=24 sw=1500/1500
+PASS /404.html@1920 portal="Client portal" linkedin=true gaps={"brandToNav":94,"navToTools":94,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=-94 portalH=24 sw=1920/1920
+PASS /@1281 portal="Client portal" linkedin=true gaps={"brandToNav":46,"navToTools":46,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=-46 portalH=24 sw=1281/1281
+  portal style {"size":"13.76px","weight":"500","color":"rgb(91, 106, 120)","bg":"rgba(0, 0, 0, 0)"} | CTA style {"size":"14.4px","weight":"600","color":"rgb(255, 255, 255)","bg":"rgb(20, 128, 74)"}
+PASS /@1300 portal="Client portal" linkedin=true gaps={"brandToNav":54,"navToTools":54,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=-54 portalH=24 sw=1300/1300
+PASS /@1360 portal="Client portal" linkedin=true gaps={"brandToNav":54,"navToTools":54,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=-54 portalH=24 sw=1360/1360
+PASS /@1500 portal="Client portal" linkedin=true gaps={"brandToNav":54,"navToTools":54,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=-54 portalH=24 sw=1500/1500
+PASS /@1920 portal="Client portal" linkedin=true gaps={"brandToNav":54,"navToTools":54,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=-54 portalH=24 sw=1920/1920
+PASS /services/@1281 portal="Client portal" linkedin=true gaps={"brandToNav":46,"navToTools":46,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=-46 portalH=24 sw=1281/1281
+PASS /services/@1300 portal="Client portal" linkedin=true gaps={"brandToNav":54,"navToTools":54,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=-54 portalH=24 sw=1300/1300
+PASS /services/@1360 portal="Client portal" linkedin=true gaps={"brandToNav":54,"navToTools":54,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=-54 portalH=24 sw=1360/1360
+PASS /services/@1500 portal="Client portal" linkedin=true gaps={"brandToNav":54,"navToTools":54,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=-54 portalH=24 sw=1500/1500
+PASS /services/@1920 portal="Client portal" linkedin=true gaps={"brandToNav":54,"navToTools":54,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=-54 portalH=24 sw=1920/1920
+PASS /blog/search-results-by-intent/@1281 portal="Client portal" linkedin=true gaps={"brandToNav":46,"navToTools":46,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=-46 portalH=24 sw=1281/1281
+PASS /blog/search-results-by-intent/@1300 portal="Client portal" linkedin=true gaps={"brandToNav":54,"navToTools":54,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=-54 portalH=24 sw=1300/1300
+PASS /blog/search-results-by-intent/@1360 portal="Client portal" linkedin=true gaps={"brandToNav":54,"navToTools":54,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=-54 portalH=24 sw=1360/1360
+PASS /blog/search-results-by-intent/@1500 portal="Client portal" linkedin=true gaps={"brandToNav":94,"navToTools":94,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=-94 portalH=24 sw=1500/1500
+PASS /blog/search-results-by-intent/@1920 portal="Client portal" linkedin=true gaps={"brandToNav":94,"navToTools":94,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=-94 portalH=24 sw=1920/1920
+PASS /clients/@1281 portal="Client portal" linkedin=true gaps={"brandToNav":46,"navToTools":46,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=-46 portalH=24 sw=1281/1281
+PASS /clients/@1300 portal="Client portal" linkedin=true gaps={"brandToNav":54,"navToTools":54,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=-54 portalH=24 sw=1300/1300
+PASS /clients/@1360 portal="Client portal" linkedin=true gaps={"brandToNav":54,"navToTools":54,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=-54 portalH=24 sw=1360/1360
+PASS /clients/@1500 portal="Client portal" linkedin=true gaps={"brandToNav":94,"navToTools":94,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=-94 portalH=24 sw=1500/1500
+PASS /clients/@1920 portal="Client portal" linkedin=true gaps={"brandToNav":94,"navToTools":94,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=-94 portalH=24 sw=1920/1920
+PASS /es/@1281 portal="Portal de clientes" linkedin=false gaps={"brandToNav":32,"navToTools":32,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=37 portalH=24 sw=1281/1281
+  portal style {"size":"13.76px","weight":"500","color":"rgb(91, 106, 120)","bg":"rgba(0, 0, 0, 0)"} | CTA style {"size":"14.4px","weight":"600","color":"rgb(255, 255, 255)","bg":"rgb(20, 128, 74)"}
+PASS /es/@1300 portal="Portal de clientes" linkedin=false gaps={"brandToNav":32,"navToTools":32,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=22 portalH=24 sw=1300/1300
+PASS /es/@1360 portal="Portal de clientes" linkedin=false gaps={"brandToNav":32,"navToTools":32,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=22 portalH=24 sw=1360/1360
+PASS /es/@1500 portal="Portal de clientes" linkedin=false gaps={"brandToNav":32,"navToTools":32,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=22 portalH=24 sw=1500/1500
+PASS /es/@1920 portal="Portal de clientes" linkedin=false gaps={"brandToNav":32,"navToTools":32,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=22 portalH=24 sw=1920/1920
+PASS /es/services/@1281 portal="Portal de clientes" linkedin=false gaps={"brandToNav":32,"navToTools":32,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=37 portalH=24 sw=1281/1281
+PASS /es/services/@1300 portal="Portal de clientes" linkedin=false gaps={"brandToNav":32,"navToTools":32,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=22 portalH=24 sw=1300/1300
+PASS /es/services/@1360 portal="Portal de clientes" linkedin=false gaps={"brandToNav":32,"navToTools":32,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=22 portalH=24 sw=1360/1360
+PASS /es/services/@1500 portal="Portal de clientes" linkedin=false gaps={"brandToNav":32,"navToTools":32,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=22 portalH=24 sw=1500/1500
+PASS /es/services/@1920 portal="Portal de clientes" linkedin=false gaps={"brandToNav":32,"navToTools":32,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=22 portalH=24 sw=1920/1920
+PASS /es/contact/@1281 portal="Portal de clientes" linkedin=false gaps={"brandToNav":32,"navToTools":32,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=37 portalH=24 sw=1281/1281
+PASS /es/contact/@1300 portal="Portal de clientes" linkedin=false gaps={"brandToNav":32,"navToTools":32,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=22 portalH=24 sw=1300/1300
+PASS /es/contact/@1360 portal="Portal de clientes" linkedin=false gaps={"brandToNav":32,"navToTools":32,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=22 portalH=24 sw=1360/1360
+PASS /es/contact/@1500 portal="Portal de clientes" linkedin=false gaps={"brandToNav":45,"navToTools":45,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=-45 portalH=24 sw=1500/1500
+PASS /es/contact/@1920 portal="Portal de clientes" linkedin=false gaps={"brandToNav":45,"navToTools":45,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=-45 portalH=24 sw=1920/1920
+PASS /es/blog/@1281 portal="Portal de clientes" linkedin=false gaps={"brandToNav":32,"navToTools":32,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=37 portalH=24 sw=1281/1281
+PASS /es/blog/@1300 portal="Portal de clientes" linkedin=false gaps={"brandToNav":32,"navToTools":32,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=22 portalH=24 sw=1300/1300
+PASS /es/blog/@1360 portal="Portal de clientes" linkedin=false gaps={"brandToNav":32,"navToTools":32,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=22 portalH=24 sw=1360/1360
+PASS /es/blog/@1500 portal="Portal de clientes" linkedin=false gaps={"brandToNav":45,"navToTools":45,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=-45 portalH=24 sw=1500/1500
+PASS /es/blog/@1920 portal="Portal de clientes" linkedin=false gaps={"brandToNav":45,"navToTools":45,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=-45 portalH=24 sw=1920/1920
+PASS /es/blog/gbp-2026-ai-grounding/@1281 portal="Portal de clientes" linkedin=false gaps={"brandToNav":32,"navToTools":32,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=37 portalH=24 sw=1281/1281
+PASS /es/blog/gbp-2026-ai-grounding/@1300 portal="Portal de clientes" linkedin=false gaps={"brandToNav":32,"navToTools":32,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=22 portalH=24 sw=1300/1300
+PASS /es/blog/gbp-2026-ai-grounding/@1360 portal="Portal de clientes" linkedin=false gaps={"brandToNav":32,"navToTools":32,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=22 portalH=24 sw=1360/1360
+PASS /es/blog/gbp-2026-ai-grounding/@1500 portal="Portal de clientes" linkedin=false gaps={"brandToNav":45,"navToTools":45,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=-45 portalH=24 sw=1500/1500
+PASS /es/blog/gbp-2026-ai-grounding/@1920 portal="Portal de clientes" linkedin=false gaps={"brandToNav":45,"navToTools":45,"toolsToActions":32,"actionsToEdge":0} wrapped=[] tagOverflow=-45 portalH=24 sw=1920/1920
+PASS /@390 menu portal="Client portal" visible=true inside=true height=48 sw=390/390
+PASS /es/@390 menu portal="Portal de clientes" visible=true inside=true height=48 sw=390/390
+header-fit: 52/52 passed

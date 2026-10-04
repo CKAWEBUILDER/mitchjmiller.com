@@ -6,7 +6,6 @@
  * to the English original. Route manifest: kind "added", lang "es", translationOf the English post.
  */
 import AgencyLayout from '../../../layouts/AgencyLayout.astro';
-import { NarrationPlayer } from '../../../../baseline/src/components/narration-player';
 import { esPosts } from '../../../i18n/es-posts';
 import { site, personJsonLd, breadcrumbJsonLd, graph } from '../../../lib/agency';
 
@@ -27,7 +26,6 @@ const jsonLd = [graph(
       <div class="mb-4"><span class="text-sm font-bold uppercase tracking-wider text-secondary">{post.date}</span></div>
       <h1 class="text-4xl md:text-5xl font-bold text-primary mb-6 leading-tight">{post.title}</h1>
       <p class="text-xl text-muted-foreground leading-relaxed">{post.teaser}</p>
-      <NarrationPlayer route={path} />
       <p class="mt-6 text-sm text-muted-foreground">Traducción del artículo original en inglés: <a class="text-secondary hover:underline" href={`/blog/${post.slug}/`} hreflang="en">léelo en inglés</a>.</p>
     </header>
     <div class="prose prose-lg prose-slate dark:prose-invert max-w-none" set:html={post.contentHtml} />

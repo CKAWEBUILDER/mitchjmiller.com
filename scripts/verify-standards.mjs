@@ -138,10 +138,14 @@ for (const file of htmlFiles) {
 }
 
 // 3. Narration for every published post, in every language it is published in.
+// Narration is opt-in: an empty items map in site/data/narration.json means the feature is
+// off for the whole site and these checks are skipped (Mitch removed the synthetic reads
+// 2026-10-04). Record one narration and the section enforces itself again.
 const narration = readManifest();
+const narrationOn = Object.keys(narration.items || {}).length > 0;
 const posts = await loadPosts();
 const expectedRoutes = new Set();
-for (const [lang, list] of Object.entries(posts)) {
+for (const [lang, list] of Object.entries(narrationOn ? posts : {})) {
   for (const post of list) {
     const route = routeFor(lang, post.slug);
     expectedRoutes.add(route);

@@ -21,7 +21,9 @@ description: Ship an approved post to mitchjmiller.com (Writing) and LinkedIn. S
    - a `docs/implementation-2026-09-11/route-manifest.json` **route** entry, and an **embeds**
      entry for its viz with real `anchors` that each appear exactly once as `id="…"` in the post;
    - the published-route count bumped in `scripts/verify-agency.mjs` (it is hardcoded);
-   - narration: `npm run narrate -- <slug>` — **re-run it if the post text changes afterwards.**
+   - narration: **off since 2026-10-04** — Mitch removed the synthetic voice reads. Leave
+     `site/data/narration.json` `items` empty and do NOT run `npm run narrate`. Only if he asks
+     for it back does a post need narration (and then re-run it whenever the text changes).
 3. The published viz under `public/viz/<slug>/` must satisfy the embed contract:
    self-contained (**no network at all — system fonts only, no Google Fonts link**), exactly one
    `noindex` robots meta, no analytics, a `postMessage({ type: 'viz-intent', … })` jump contract

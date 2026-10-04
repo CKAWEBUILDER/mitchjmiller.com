@@ -1,3 +1,16 @@
+# PUBLISHED — October 4, 2026 (14:45 EDT): synthetic narration removed (release owner: Claude Code)
+
+| Field | Value |
+|---|---|
+| Why | Mitch, 2026-10-04: "we gott remove these terrible voice reds" — the machine-read (macOS `say`/Samantha) narrations come off the site. |
+| Source | `6c5f081` on `main`, cherry-picked onto `origin/main` after the 2026-10-01 M² release so nothing from that release was reverted. |
+| Deploy | gh-pages `d96d3f3` (previous `664c757`); Pages reported `built`. Tree hash equals artifact `de99a6ea4efc92d78c1d2f970c579ba5d1cf5612afec021f000fa8e374958d35`. `git diff --cached` deleted **only** the 11 `.m4a` files outside hashed `_astro/`; `CNAME`, `.nojekyll`, `404.html`, `sitemap.xml`, `robots.txt` and the IndexNow key all present. |
+| Change | `NarrationPlayer` removed from `baseline/src/pages/blog-post.tsx` and `site/pages/es/blog/[slug].astro`; all 11 generated `.m4a` files removed with `git rm` (recoverable from history); `site/data/narration.json` `items` emptied. |
+| Narration is now opt-in | An empty `items` map disables the `verify-standards` narration section and the QA playback checks instead of failing the build. `scripts/narrate.mjs`, `scripts/lib/narration.mjs` and the `NarrationPlayer` component are all left in place — recording one narration re-enables the entire contract. |
+| QA | parity, agency and standards all pass ("narrated posts 0"); crawl 1080/1080 over 78 routes; standards 781/781 over 86 documents, 0 serious/critical axe violations in light and dark. Records in `docs/release-2026-10-04/qa/`. |
+| Live probes | 0 `<audio>` elements across all 7 English posts and the Spanish post; `/audio/blog/*.m4a` now 404; `/`, `/blog/`, the audit post, its viz, `/es/` all 200; unknown route 404; sitemap still 74. |
+| Rollback | in a clean gh-pages worktree: `git revert --no-edit d96d3f3 && git push origin gh-pages`. Source: `git revert 6c5f081` on `main`, then `npm run narrate -- --missing` to regenerate the audio. |
+
 # PUBLISHED — October 1, 2026: M² mark, resumes retired, /clients/ fixed, carousel staged (release owner: Claude Code, cloud session)
 
 Mitch, 2026-10-01: "please ship these asap" (the [2026-09-25 M² release-candidate review](docs/release-2026-09-25-m2/README.md) artifact's "ship it"), shipped with the handoff's documented defaults since the open questions were not answered.

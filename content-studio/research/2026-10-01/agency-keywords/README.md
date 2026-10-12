@@ -1,5 +1,7 @@
 # M² agency keyword research, 2026-10-01
 
+> **HYPOTHESIS RESEARCH — not evidence yet.** MSV and KD are `pending` on all 70 rows, so the rankings, page map and offer direction below are hypotheses. They become evidence only after the existing list (`semrush-paste.txt`, 97 keywords) is run through Semrush's web UI (US database) and the resulting export is checked: expected row count, nonzero file size, and no duplicate keywords. Record that check here before any decision cites this research. (Label added 2026-10-12.)
+
 **Question:** which searches should mj2.pro target, and which 2–4 services does the evidence favor? **Status:** SERP and competitor research is done. **MSV and KD are `pending` on every row**; they come from Mitch's Semrush web-UI paste (`semrush-paste.txt`). No Semrush API or MCP report was called, and no volume, difficulty, CPC or percentage here is invented. Personal resume and work-history queries belong to the separate mitchjmiller.com portfolio and are out of scope.
 
 ## Method and sources

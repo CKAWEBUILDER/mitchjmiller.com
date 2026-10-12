@@ -123,7 +123,7 @@ const choices = (['en', 'es'] as Lang[]).map(code => code === lang
           </button>
         </div>
         <div class="ag-header-actions">
-          {nav.utility.map(link => <a class="ag-utility-link" href={link.href} hreflang={hl(link.href)}>{link.label}</a>)}
+          <div class="ag-header-utility">{nav.utility.map(link => <a class="ag-utility-link" href={link.href} hreflang={hl(link.href)}>{link.label}</a>)}</div>
           <a class="ag-button ag-button--sm" href={nav.cta.href}>{nav.cta.label}</a>
         </div>
         <details class="ag-menu">

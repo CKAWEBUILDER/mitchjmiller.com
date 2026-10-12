@@ -56,7 +56,8 @@ export const primaryNav: NavItem[] = [
 ];
 export const utilityNav: NavLink[] = [
   { label: 'LinkedIn', href: site.linkedin },
-  { label: 'Clients', href: '/clients/' },
+  // Client portal login (2026-10-02): /clients/ opens the private portal (mitchjmiller-clients.pages.dev).
+  { label: 'Client portal', href: '/clients/' },
 ];
 export const contactCta: NavLink = { label: 'Let’s talk', href: '/contact/' };
 
@@ -86,7 +87,7 @@ export const footerColumns: { heading: string; links: NavLink[] }[] = [
   { heading: 'Company', links: [
     { label: 'About', href: '/about/' },
     { label: 'Contact', href: '/contact/' },
-    { label: 'Client sign-in', href: '/clients/' },
+    { label: 'Client portal', href: '/clients/' },
   ] },
 ];
 

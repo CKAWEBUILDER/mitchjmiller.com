@@ -3,7 +3,6 @@ import { SEO } from "@/components/seo";
 import { visibleBlogPosts } from "@/lib/published";
 import { Link } from "@/components/native-link";
 import { useRoute } from "wouter";
-import { NarrationPlayer } from "@/components/narration-player";
 
 export default function BlogPost() {
   const [, params] = useRoute("/blog/:slug");
@@ -41,7 +40,6 @@ export default function BlogPost() {
           <p className="text-xl text-muted-foreground leading-relaxed">
             {post.teaser}
           </p>
-          {post.status !== 'draft' && <NarrationPlayer route={`/blog/${post.slug}/`} />}
         </header>
 
         {post.status === 'draft' ? (

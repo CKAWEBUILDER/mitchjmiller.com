@@ -134,7 +134,32 @@ const selected = [
   { slug: 'claritypulse-ai-reporting', image: portfolioImages['claritypulse-ai-reporting'] },
 ].map(item => ({ ...item, entry: caseStudies.find(study => study.slug === item.slug)!, story: studyEditorial[item.slug] }));
 const posts = publishedBlogPosts.slice(0, 3);
-const jsonLd = [graph(organizationJsonLd(), personJsonLd(), { '@type': 'WebSite', '@id': `${site.url}/#website`, url: `${site.url}/`, name: site.name, publisher: { '@id': `${site.url}/#organization` } })];
+// Home FAQ (2026-10-02): every answer restates copy that already exists on this site (home
+// sections, /services/, /about/); nothing here invents staff, clients, prices or results.
+// The visible answers and the FAQPage JSON-LD stay word-for-word identical.
+const faq = [
+  {
+    q: 'What does Mitchell Miller do?',
+    a: 'Research, digital strategy, experience design and engineering — turning complex questions into clear direction, useful experiences and systems built for growth.',
+  },
+  {
+    q: 'Do I work directly with Mitchell?',
+    a: 'Yes. Work directly with Mitchell Miller — from the first question to the details that make it work. The scope determines any additional specialist support.',
+  },
+  {
+    q: 'What industries does the work cover?',
+    a: 'Healthcare, global commerce and technology, AI and software, travel, recreation and local services, and nonprofit outreach — from global systems to the businesses next door.',
+  },
+  {
+    q: 'Where can I see examples of the work?',
+    a: 'The case studies take a closer look at the questions, decisions and outcomes. The learning lab turns data into something you can explore, and Signals & Systems shares ideas about search, technology and the decisions between them.',
+  },
+  {
+    q: 'How does an engagement begin?',
+    a: 'Start a conversation. Bring the question, and we’ll work out the next move together — agree the work before it begins.',
+  },
+];
+const jsonLd = [graph(organizationJsonLd(), personJsonLd(), { '@type': 'WebSite', '@id': `${site.url}/#website`, url: `${site.url}/`, name: site.name, publisher: { '@id': `${site.url}/#organization` } }, { '@type': 'FAQPage', '@id': `${site.url}/#faq`, mainEntity: faq.map(item => ({ '@type': 'Question', name: item.q, acceptedAnswer: { '@type': 'Answer', text: item.a } })) })];
 ---
 <AgencyLayout path="/" title={title} description={description} jsonLd={jsonLd} bodyClass="ag-home">
   <section class="ag-hero ag-dark" aria-labelledby="home-heading">
@@ -143,7 +168,9 @@ const jsonLd = [graph(organizationJsonLd(), personJsonLd(), { '@type': 'WebSite'
         <p class="ag-eyebrow">Research · Strategy · Design · Engineering</p>
         <h1 id="home-heading">Make the next<br />move matter.</h1>
         <p class="ag-hero-deck">Turn complex questions into clear direction, useful experiences and systems built for growth.</p>
-        <div class="ag-hero-actions"><a class="ag-button" href="/contact/">Start a conversation</a></div>
+        {/* 2026-10-02, Mitch: the hero's green CTA button is removed entirely ("I don't even want
+            that button there"). The header "Let's talk" button and the closing CTA band remain
+            the page's conversion paths. */}
       </div>
     </div>
   </section>
@@ -215,6 +242,13 @@ const jsonLd = [graph(organizationJsonLd(), personJsonLd(), { '@type': 'WebSite'
     <div class="ag-wrap ag-split">
       <div><p class="ag-eyebrow">About</p><h2 id="principal-heading">A thinking partner. A hands-on builder.</h2><p>Work directly with Mitchell Miller—from the first question to the details that make it work.</p><a class="ag-textlink" href="/about/">About Mitchell <span aria-hidden="true">→</span></a></div>
       <div class="ag-principal"><M2Mark size={88} /><div><strong>Mitchell Miller</strong><p>Digital strategy, research &amp; engineering · <a href={site.linkedin}>Work history on LinkedIn</a>.</p></div></div>
+    </div>
+  </section>
+
+  <section class="ag-section ag-section--tint" aria-labelledby="faq-heading">
+    <div class="ag-wrap">
+      <div class="ag-section-head"><div><p class="ag-eyebrow">FAQ</p><h2 id="faq-heading">Frequently asked questions</h2></div></div>
+      <div class="ag-faq">{faq.map(item => <details><summary><h3>{item.q}</h3><span aria-hidden="true">+</span></summary><p>{item.a}{item.q.startsWith('Where can I see') && <> <a href="/work/">All case studies.</a></>}{item.q.startsWith('How does an engagement') && <> <a href="/contact/">Start a conversation.</a></>}</p></details>)}</div>
     </div>
   </section>
 

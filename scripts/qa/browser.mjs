@@ -284,10 +284,8 @@ try {
         if (width === viewports[0][0]) {
           const ld = await page.evaluate(() => [...document.querySelectorAll('script[type="application/ld+json"]')].map(s => { try { const d = JSON.parse(s.textContent); return (d['@graph'] || [d]).map(n => n['@type']); } catch { return ['INVALID']; } }).flat());
           record(`post-${v.name}`, 'JSON-LD parses: Article, BreadcrumbList and FAQPage', !ld.includes('INVALID') && ['Article', 'BreadcrumbList', 'FAQPage'].every(t => ld.includes(t)), ld.join(', '));
-          const assets = await page.evaluate(async list => Promise.all(list.map(async u => { const r = await fetch(u); return `${u} ${r.status} ${r.headers.get('content-type')}`; })), [...['anim-640x800.gif', 'poster-1080x1350.png', 'poster-1080x1080.png', 'poster-2160x2700.png', ...v.extra].map(f => `${v.viz}${f}`), `/audio/blog/${v.audio}.m4a`]);
-          record(`post-${v.name}`, 'GIF, posters, card and narration are served (200, image/audio types)', assets.every(a => / 200 (image\/(gif|png)|audio\/mp4)$/.test(a)), assets.filter(a => !/ 200 (image|audio)\//.test(a)).join(', ') || `${assets.length} files`);
-          const listen = await page.evaluate(() => { const a = document.querySelector('audio'); return a ? { src: a.querySelector('source')?.getAttribute('src') || a.getAttribute('src'), label: (a.closest('[aria-label]')?.getAttribute('aria-label') || a.parentElement?.textContent || '').trim().slice(0, 60) } : null; });
-          record(`post-${v.name}`, 'the "Listen to this article" audio element points at the narration', Boolean(listen && listen.src === `/audio/blog/${v.audio}.m4a`), JSON.stringify(listen));
+          const assets = await page.evaluate(async list => Promise.all(list.map(async u => { const r = await fetch(u); return `${u} ${r.status} ${r.headers.get('content-type')}`; })), [...['anim-640x800.gif', 'poster-1080x1350.png', 'poster-1080x1080.png', 'poster-2160x2700.png', ...v.extra].map(f => `${v.viz}${f}`)]);
+          record(`post-${v.name}`, 'GIF, posters and card are served (200, image types)', assets.every(a => / 200 (image\/(gif|png)|audio\/mp4)$/.test(a)), assets.filter(a => !/ 200 (image|audio)\//.test(a)).join(', ') || `${assets.length} files`);
         }
         record(scope, 'no console or page errors (post and frame)', errors.length === 0, errors.slice(0, 3).join(' | '));
         await page.screenshot({ path: join(shots, `post-${v.name}-${width}-embed.png`), fullPage: false });

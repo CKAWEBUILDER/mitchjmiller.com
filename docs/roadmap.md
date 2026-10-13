@@ -5,7 +5,7 @@
 **Scope:** [PROJECT.md](../PROJECT.md) stays the release log and `handoffs/` hold session detail; link them, do not copy them here. This repository is public: no client names, credentials, personal data or job-search specifics.
 
 ## Objectives
-1. **Career:** become a forward-deployed / multi-agent engineer (the job search continues). M² and this site are the proof of work.
+1. **Proof of work:** M² and this site show Mitch's forward-deployed and multi-agent engineering.
 2. **Offer:** define 2–4 services. Small, non-technical businesses first: an audit, then a handoff with clear instructions or an agent team that implements for a monthly fee, growing into larger clients.
 3. **Content:** a large data-viz blog (interactives, fintech, glossaries) that earns inbound, plus a freemium collab lab (simulated populations, prediction models, data science, design/dev, audits, strategy consults with handoffs).
 4. **Outreach:** use the SFC case for new or underperforming Waikīkī businesses.

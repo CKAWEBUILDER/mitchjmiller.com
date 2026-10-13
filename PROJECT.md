@@ -19,6 +19,7 @@ Mitch, 2026-10-13: "ship all". Details, QA and commands: [docs/release-2026-10-1
 | Field | Value |
 |---|---|
 | Why | Mitch, 2026-10-04: "we gott remove these terrible voice reds" — the machine-read (macOS `say`/Samantha) narrations come off the site. |
+| Decision (2026-10-13) | Mitch: "remove voice overs". No narration or voice-over on any page ([AGENTS.md](AGENTS.md), [docs/site-standards.md](docs/site-standards.md)). Do not roll this release back or run `npm run narrate`: it records with macOS system voices, whose license excludes publishing the recordings ([site-standards handoff](handoffs/2026-09-24-site-standards-build.md)). |
 | Source | `6c5f081` on `main`, cherry-picked onto `origin/main` after the 2026-10-01 M² release so nothing from that release was reverted. |
 | Deploy | gh-pages `d96d3f3` (previous `664c757`); Pages reported `built`. Tree hash equals artifact `de99a6ea4efc92d78c1d2f970c579ba5d1cf5612afec021f000fa8e374958d35`. `git diff --cached` deleted **only** the 11 `.m4a` files outside hashed `_astro/`; `CNAME`, `.nojekyll`, `404.html`, `sitemap.xml`, `robots.txt` and the IndexNow key all present. |
 | Change | `NarrationPlayer` removed from `baseline/src/pages/blog-post.tsx` and `site/pages/es/blog/[slug].astro`; all 11 generated `.m4a` files removed with `git rm` (recoverable from history); `site/data/narration.json` `items` emptied. |

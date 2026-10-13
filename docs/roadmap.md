@@ -14,8 +14,8 @@
 Source for 1–5: Mitch, 2026-09-25, in the [reconciliation handoff](../handoffs/2026-09-25-one-checkout-reconciliation.md) (on PR #1 until it merges).
 
 ## Live now
-- **Production:** https://mj2.pro/ on GitHub Pages. Records: [PROJECT.md](../PROJECT.md), [release-2026-10-01-m2](release-2026-10-01-m2/README.md).
-  - **Version:** `gh-pages` `664c757` (2026-10-01 19:34 UTC, Pages build succeeded), built from `main` `956a65b`; `main` has since moved only by docs commits.
+- **Production:** https://mj2.pro/ on GitHub Pages. Records: [PROJECT.md](../PROJECT.md), [release-2026-10-13](release-2026-10-13/README.md).
+  - **Version:** `gh-pages` `2df12f5` (2026-10-13 06:34 UTC, Pages deployment succeeded), built from `main` `5c1ee29`. Before it: `d96d3f3` (2026-10-04, narration removed) and `664c757` (2026-10-01).
   - **Content:** 74 sitemap URLs, including 10 posts (6 with living infographics), 25 study notes, the case studies, the Spanish pilot (5 pages), `/services/`, `/lab/` with the population workbench, `/products/` and a contact form. 7 `/viz/` embeds and 4 Coming Soon pages are noindex.
   - **Hosting plan** (2026-10-01 brief): static on GitHub Pages, anything dynamic on Cloudflare, no new host.
   - **Not re-probed live:** cloud egress to mj2.pro is blocked, so everything here comes from records and the GitHub API.

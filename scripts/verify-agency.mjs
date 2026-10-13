@@ -71,7 +71,7 @@ for (const file of walk(dist).filter(file => file.endsWith('.html'))) {
   if (!/<nav class="ag-nav" aria-label="(Primary|Principal)">/.test(pageBody)) fail(route, 'missing primary navigation');
   for (const label of shellText.labels) if (!new RegExp(`<a href="[^"]+"[^>]*>${label}(<span class="ag-caret"[^>]*></span>)?</a>`).test(pageBody)) fail(route, `primary nav lacks ${label}`);
   if (!shellText.cta.test(pageBody)) fail(route, `missing green ${shellText.ctaName} contact button`);
-  if (!/<a class="ag-utility-link" href="https:\/\/linkedin\.com\/in\/mitchelljmillerjr"/.test(pageBody) || !/href="\/clients\/"/.test(pageBody)) fail(route, 'utility links (LinkedIn, Clients) missing');
+  if (!/href="https:\/\/mitchjmiller\.com\/"/.test(pageBody) || !/href="\/clients\/"/.test(pageBody)) fail(route, 'utility links (personal portfolio, client portal) missing');
   // Client portal login link (2026-10-02): labelled in the page's language in the desktop header
   // actions and in the footer; /clients/ is English-only, so Spanish pages mark it hreflang="en".
   const portalLink = new RegExp(`<a class="ag-utility-link" href="/clients/"${spanish ? ' hreflang="en"' : ''}>${spanish ? 'Portal de clientes' : 'Client portal'}</a>`);
@@ -81,8 +81,6 @@ for (const file of walk(dist).filter(file => file.endsWith('.html'))) {
   if (!portalInHeader) fail(route, 'header lacks the client portal link');
   if (!portalInFooter) fail(route, 'footer lacks the client portal link');
   if (portalInHeader && portalInFooter) tick('clientPortalLinks');
-  // mitchjmiller.com does not serve the personal portfolio yet (see site/lib/agency.ts personalPortfolio).
-  if (/href="https?:\/\/(?:www\.)?mitchjmiller\.com\/?"/.test(pageBody)) fail(route, 'links to mitchjmiller.com, which does not serve the personal portfolio yet');
   if (!/<details class="ag-menu">/.test(pageBody)) fail(route, 'missing mobile menu');
   // M² mark (2026-09-25): the brand link carries the inline mark, never a photo.
   const brandLink = pageBody.match(/<a class="ag-brand"[^>]*>([\s\S]*?)<\/a>/)?.[1] || '';

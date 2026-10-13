@@ -11,9 +11,6 @@ export const site = {
   email: 'mitchelljmillerjr26@gmail.com',
   phone: '+1-626-316-8682',
   linkedin: 'https://linkedin.com/in/mitchelljmillerjr',
-  // Not linked while https://mitchjmiller.com/ does not serve the personal portfolio (2026-09-25:
-  // HTTPS times out, HTTP 301s back to mj2.pro). Every personal-portfolio link points to LinkedIn
-  // until then; revert the commit "Point personal-portfolio links to LinkedIn" to restore them.
   personalPortfolio: 'https://mitchjmiller.com/',
   // Organization JSON-LD logo: the M² roundel on white, 512×512 (scripts/brand-icons.mjs).
   logo: '/images/brand/m2-logo-512.png',
@@ -55,7 +52,8 @@ export const primaryNav: NavItem[] = [
   { label: 'About', href: '/about/' },
 ];
 export const utilityNav: NavLink[] = [
-  { label: 'LinkedIn', href: site.linkedin },
+  // 2026-10-13: mitchjmiller.com serves the personal portfolio again, so the LinkedIn stopgap (3c9519d) is reverted.
+  { label: 'Mitch’s portfolio', href: site.personalPortfolio },
   // Client portal login (2026-10-02): /clients/ opens the private portal (mitchjmiller-clients.pages.dev).
   { label: 'Client portal', href: '/clients/' },
 ];
@@ -87,6 +85,7 @@ export const footerColumns: { heading: string; links: NavLink[] }[] = [
   { heading: 'Company', links: [
     { label: 'About', href: '/about/' },
     { label: 'Contact', href: '/contact/' },
+    { label: 'Mitch’s portfolio', href: site.personalPortfolio },
     { label: 'Client portal', href: '/clients/' },
   ] },
 ];
@@ -128,7 +127,7 @@ export function personJsonLd() {
     image: `${site.url}${site.headshot}`,
     jobTitle: site.jobTitle,
     worksFor: { '@id': organizationId },
-    sameAs: [site.linkedin],
+    sameAs: [site.linkedin, site.personalPortfolio],
     email: site.email,
   };
 }

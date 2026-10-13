@@ -1,5 +1,7 @@
 # Session handoff — October 2, 2026
 
+> **Superseded 2026-10-13.** Mitch said "ship all" on October 13; see the top of PROJECT.md for the release that followed. This file is history.
+
 Owner: Claude Code (cloud session), handing off at Mitch's request ("hand off to another chat"). Read after PROJECT.md. Private project detail (the projects list, domains, hosting) went to Mitch in chat and is not recorded in this public repository.
 
 ## State (checked 2026-10-02)

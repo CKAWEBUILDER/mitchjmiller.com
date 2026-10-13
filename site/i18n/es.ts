@@ -49,7 +49,7 @@ const primary: NavItem[] = [
 export const esNav = {
   primary,
   utility: [{ label: 'Portafolio de Mitch', href: 'https://mitchjmiller.com/' }, { label: 'Portal de clientes', href: '/clients/' }] as NavLink[],
-  cta: { label: 'Hablemos', href: '/es/contact/' } as NavLink,
+  cta: { label: 'Contacto', href: '/es/contact/' } as NavLink,
   footer: [
     { heading: 'Servicios', links: [
       { label: 'Todos los servicios', href: '/es/services/' },

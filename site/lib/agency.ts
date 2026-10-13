@@ -57,7 +57,8 @@ export const utilityNav: NavLink[] = [
   // Client portal login (2026-10-02): /clients/ opens the private portal (mitchjmiller-clients.pages.dev).
   { label: 'Client portal', href: '/clients/' },
 ];
-export const contactCta: NavLink = { label: 'Let’s talk', href: '/contact/' };
+// 2026-10-13, Mitch: "Let’s talk" wrapped onto two stacked lines in the header; "Contact" stays on one.
+export const contactCta: NavLink = { label: 'Contact', href: '/contact/' };
 
 export const footerColumns: { heading: string; links: NavLink[] }[] = [
   { heading: 'Services', links: [

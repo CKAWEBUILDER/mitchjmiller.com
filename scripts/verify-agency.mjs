@@ -62,8 +62,8 @@ for (const file of walk(dist).filter(file => file.endsWith('.html'))) {
   const html = read(file), pageBody = body(html);
   const spanish = /^\/es\//.test(route);
   const shellText = spanish
-    ? { labels: ['Servicios', 'Productos', 'Portafolio', 'Laboratorio', 'Artículos', 'Acerca de'], cta: /<a class="ag-button ag-button--sm" href="\/es\/contact\/">Hablemos<\/a>/, ctaName: '“Hablemos”' }
-    : { labels: ['Services', 'Products', 'Work', 'Lab', 'Writing', 'About'], cta: /<a class="ag-button ag-button--sm" href="\/contact\/">Let’s talk<\/a>/, ctaName: '“Let’s talk”' };
+    ? { labels: ['Servicios', 'Productos', 'Portafolio', 'Laboratorio', 'Artículos', 'Acerca de'], cta: /<a class="ag-button ag-button--sm" href="\/es\/contact\/">Contacto<\/a>/, ctaName: '“Contacto”' }
+    : { labels: ['Services', 'Products', 'Work', 'Lab', 'Writing', 'About'], cta: /<a class="ag-button ag-button--sm" href="\/contact\/">Contact<\/a>/, ctaName: '“Contact”' };
   tick('shellDocuments');
   if (!/<header class="ag-header">/.test(pageBody)) fail(route, 'missing agency header');
   if (!/<footer class="ag-footer">/.test(pageBody)) fail(route, 'missing agency footer');
@@ -103,9 +103,11 @@ for (const route of ['/', '/services/', '/es/', '/es/services/']) {
   const marquee = marquees[0];
   if (!/aria-labelledby="[^"]+-label"/.test(marquee)) fail(route, 'marquee lacks aria-labelledby');
   const lists = marquee.match(/<ul[^>]*>/g) || [];
-  if (lists.length !== 2 || !lists[1].includes('aria-hidden="true"')) fail(route, 'marquee needs two lists with the duplicate aria-hidden');
+  // Three copies (2026-10-13): the contained strip loops seamlessly while two copies cover the viewport.
+  if (lists.length !== 3 || !lists.slice(1).every(list => list.includes('aria-hidden="true"'))) fail(route, 'marquee needs three lists with both duplicates aria-hidden');
   const items = (marquee.match(/<li /g) || []).length;
-  if (items !== brands.brands.filter(b => b.logo).length * 2) fail(route, `marquee items ${items} != 2 × ${brands.brands.filter(b => b.logo).length} brands`);
+  if (items !== brands.brands.filter(b => b.logo).length * 3) fail(route, `marquee items ${items} != 3 × ${brands.brands.filter(b => b.logo).length} brands`);
+  if (!/<div class="ag-wrap ag-marquee-viewport"/.test(marquee)) fail(route, 'marquee viewport must sit in the content column (ag-wrap), not run to the screen edges');
   for (const brand of brands.brands.filter(b => b.logo)) if (!marquee.includes(brand.logo ? `alt="${brand.name}"` : `<span>${brand.name}</span>`)) fail(route, `brand ${brand.name} missing`);
   // 2026-10-02: heading is "Trusted by" (brands.json label) / "Con la confianza de" on /es/.
   if (!text(marquee).includes(route.startsWith('/es/') ? 'Con la confianza de' : brands.label)) fail(route, 'marquee label text missing');

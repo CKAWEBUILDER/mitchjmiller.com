@@ -1,13 +1,12 @@
-# Deploys the built site (dist/) to the Cloudflare Pages project `mitchjmiller-com` on every push to main.
+# Deploys the production build (build:release-candidate, the same artifact gh-pages served) to the
+# Cloudflare Pages project `mitchjmiller-com` on every push to main.
 #
-# INACTIVE until Mitch adds the repository secrets CLOUDFLARE_API_TOKEN (Pages: Edit) and
-# CLOUDFLARE_ACCOUNT_ID (e956c778b32a922cca488cfdb46fbec8). The gate step below skips every
-# deploy step while they are missing, so pushes stay green instead of failing.
+# Skipped until the repository secrets CLOUDFLARE_API_TOKEN (Pages: Edit) and CLOUDFLARE_ACCOUNT_ID
+# (e956c778b32a922cca488cfdb46fbec8) exist, so pushes stay green instead of failing.
 #
-# The public production host is still GitHub Pages; this Pages project is the staging/cutover mirror.
-# BUILD_SCRIPT is `build` (currently the noindex staging build). Switch it to the production build
-# script once the site lane unlocks it in package.json, before the custom domains are activated.
-name: Cloudflare Pages mirror
+# Cloudflare Pages replaces GitHub Pages as production for mj2.pro. Attach mj2.pro to this project
+# before switching DNS; GitHub Pages is unpublished only after Cloudflare serves mj2.pro.
+name: Cloudflare Pages production
 
 on:
   push:
@@ -15,14 +14,14 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: cloudflare-pages-mirror
+  group: cloudflare-pages-production
   cancel-in-progress: false
 
 permissions:
   contents: read
 
 env:
-  BUILD_SCRIPT: build
+  BUILD_SCRIPT: build:release-candidate
 
 jobs:
   deploy:

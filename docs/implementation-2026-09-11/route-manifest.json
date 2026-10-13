@@ -687,10 +687,11 @@
       "since": "standards-deploy-2",
       "lang": "es",
       "translationOf": "/",
-      "title": "Haz que el próximo paso cuente.",
+      "title": "Primero, la evidencia. Luego, construimos.",
       "minText": 1500,
+      "headlineChange": "2026-10-13: hero headline replaced (Mitch: too much alliteration in 'Make the next move matter'). EN 'Evidence first. Then we build.', ES 'Primero, la evidencia. Luego, construimos.' (Claude Code; not independently reviewed; native-speaker check pending).",
       "expected": [
-        "Haz que el próximo",
+        "Primero, la evidencia",
         "De la estrategia a la entrega",
         "Pensamiento claro. Trabajo útil.",
         "Iniciar una conversación"

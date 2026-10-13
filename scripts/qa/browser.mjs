@@ -319,15 +319,32 @@ try {
     const marquee = await page.evaluate(() => {
       const track = document.querySelector('.ag-marquee-track');
       const style = track && getComputedStyle(track);
-      const lists = document.querySelectorAll('.ag-marquee-track ul');
-      return { animation: style?.animationName, state: style?.animationPlayState, lists: lists.length, hiddenDuplicate: lists[1]?.getAttribute('aria-hidden') === 'true', items: document.querySelectorAll('.ag-marquee-track li').length, labelled: Boolean(document.querySelector('.ag-marquee[aria-labelledby]')) };
+      const lists = [...document.querySelectorAll('.ag-marquee-track ul')];
+      const box = el => { const r = document.querySelector(el).getBoundingClientRect(); return { left: Math.round(r.left), right: Math.round(r.right), width: Math.round(r.width), height: Math.round(r.height) }; };
+      const logos = [...(lists[0]?.querySelectorAll('img') || [])].map(img => img.getBoundingClientRect());
+      const gaps = logos.slice(1).map((r, i) => Math.round(r.left - logos[i].right));
+      return { animation: style?.animationName, state: style?.animationPlayState, lists: lists.length, hiddenDuplicates: lists.slice(1).every(list => list.getAttribute('aria-hidden') === 'true'), items: document.querySelectorAll('.ag-marquee-track li').length, labelled: Boolean(document.querySelector('.ag-marquee[aria-labelledby]')),
+        viewport: box('.ag-marquee-viewport'), head: box('.ag-marquee-head'), screen: window.innerWidth, copy: Math.round(lists[0]?.getBoundingClientRect().width || 0), maxGap: Math.max(...gaps), toggle: box('.ag-marquee-toggle') };
     });
-    record(name, 'brand marquee animates (CSS only, duplicated track, aria-hidden copy, labelled section)', marquee.animation === 'ag-marquee' && marquee.state === 'running' && marquee.lists === 2 && marquee.hiddenDuplicate && marquee.items >= 10 && marquee.labelled, `${marquee.animation} ${marquee.state}, ${marquee.items} items`);
+    record(name, 'brand marquee animates (CSS only, three copies, aria-hidden duplicates, labelled section)', marquee.animation === 'ag-marquee' && marquee.state === 'running' && marquee.lists === 3 && marquee.hiddenDuplicates && marquee.items >= 15 && marquee.labelled, `${marquee.animation} ${marquee.state}, ${marquee.items} items`);
+    // 2026-10-13, Mitch: logos stop at an invisible border (the content column), sit closer together, no visible Pause button.
+    record(name, 'logos stop at the content column edges, not the screen edges', Math.abs(marquee.viewport.left - marquee.head.left) <= 1 && Math.abs(marquee.viewport.right - marquee.head.right) <= 1 && marquee.viewport.left >= 20 && marquee.screen - marquee.viewport.right >= 20, JSON.stringify({ viewport: marquee.viewport, head: marquee.head, screen: marquee.screen }));
+    record(name, 'logos sit close together (largest gap ≤ 80 px) and the loop is seamless (two copies cover the viewport)', marquee.maxGap <= 80 && marquee.copy * 2 >= marquee.viewport.width, `max gap ${marquee.maxGap}px, copy ${marquee.copy}px, viewport ${marquee.viewport.width}px`);
+    record(name, 'no visible Pause button', marquee.toggle.width <= 1 && marquee.toggle.height <= 1, JSON.stringify(marquee.toggle));
     await page.hover('.ag-marquee-track li');
     await wait(100);
     record(name, 'marquee pauses on hover', await page.$eval('.ag-marquee-track', el => getComputedStyle(el).animationPlayState) === 'paused', '');
-    const cta = await page.$eval('.ag-header .ag-button', el => ({ bg: getComputedStyle(el).backgroundColor, color: getComputedStyle(el).color, text: el.textContent.trim(), href: el.getAttribute('href') }));
-    record(name, 'header “Let’s talk” button is green with white text and links to /contact/', cta.bg === 'rgb(20, 128, 74)' && cta.color === 'rgb(255, 255, 255)' && cta.href === '/contact/' && /Let’s talk/.test(cta.text), `${cta.bg} ${cta.color} ${cta.href}`);
+    await page.mouse.move(5, 5);
+    await page.$eval('.ag-marquee-label', el => { el.tabIndex = -1; el.focus(); });
+    await page.keyboard.press('Tab');
+    const toggle = await page.$eval('.ag-marquee-toggle', el => { const r = el.getBoundingClientRect(); return { focused: document.activeElement === el, width: Math.round(r.width), height: Math.round(r.height), text: el.textContent.trim() }; });
+    await page.keyboard.press('Enter');
+    await wait(100);
+    const held = await page.evaluate(() => { document.activeElement.blur(); return { flag: document.querySelector('[data-marquee]').dataset.paused, state: getComputedStyle(document.querySelector('.ag-marquee-track')).animationPlayState }; });
+    record(name, 'keyboard: the Pause button appears on focus and keeps the logos paused (WCAG 2.2.2)', toggle.focused && toggle.width > 20 && toggle.height > 20 && held.flag === 'true' && held.state === 'paused', JSON.stringify({ toggle, held }));
+    await page.$eval('.ag-marquee-toggle', el => el.click());
+    const cta = await page.$eval('.ag-header .ag-button', el => ({ bg: getComputedStyle(el).backgroundColor, color: getComputedStyle(el).color, text: el.textContent.trim(), href: el.getAttribute('href'), height: Math.round(el.getBoundingClientRect().height) }));
+    record(name, 'header “Contact” button is green with white text, one line, and links to /contact/', cta.bg === 'rgb(20, 128, 74)' && cta.color === 'rgb(255, 255, 255)' && cta.href === '/contact/' && cta.text === 'Contact' && cta.height <= 46, `${cta.bg} ${cta.color} ${cta.href} "${cta.text}" ${cta.height}px`);
     const navLabels = await page.$$eval('.ag-nav > ul > li > a', links => links.map(link => link.textContent.trim()));
     record(name, 'primary nav order Services · Products · Work · Lab · Writing · About', navLabels.join(' · ') === 'Services · Products · Work · Lab · Writing · About', navLabels.join(' · '));
     await page.hover('.ag-nav .ag-has-drop > a');
@@ -402,8 +419,9 @@ try {
       chooser: document.querySelectorAll('#resume-chooser, [data-resume-open]').length,
       pdfLinks: document.querySelectorAll('a[href$=".pdf"]').length,
       linkedin: [...document.querySelectorAll('main a[href]')].some(a => /linkedin\.com\/in\//.test(a.href)),
+      portfolio: [...document.querySelectorAll('main a[href]')].some(a => a.href === 'https://mitchjmiller.com/'),
     }));
-    record('resume', 'transfer page: one h1, a LinkedIn link, no chooser and no PDF links', transfer.h1 === 1 && transfer.linkedin && transfer.chooser === 0 && transfer.pdfLinks === 0, JSON.stringify(transfer));
+    record('resume', 'transfer page: one h1, links to the personal portfolio and LinkedIn, no chooser and no PDF links', transfer.h1 === 1 && transfer.portfolio && transfer.linkedin && transfer.chooser === 0 && transfer.pdfLinks === 0, JSON.stringify(transfer));
     record('resume', 'no console or page errors', errors.length === 0, errors.slice(0, 3).join(' | '));
     await page.close();
   }

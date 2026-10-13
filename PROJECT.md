@@ -1,5 +1,19 @@
 **Roadmap:** [docs/roadmap.md](docs/roadmap.md) holds the objectives, the Now / Next / Later plan and Mitch's open decisions (updated 2026-10-01). This file stays the release log.
 
+# PUBLISHED — October 13, 2026 (06:34 UTC): header "Contact", new headline, contained carousel, portfolio links restored (release owner: Claude Code, cloud session)
+
+Mitch, 2026-10-13: "ship all". Details, QA and commands: [docs/release-2026-10-13/README.md](docs/release-2026-10-13/README.md).
+
+| Item | Value |
+|---|---|
+| Source | `main` `5c1ee29`, fast-forwarded from `claude/jolly-carson-qx254x` (`main` `fc173a6` merged + `074b588` + `2538fd7`). Built in a cloud Linux container from the tree of `2538fd7`. |
+| What shipped | Header button "Contact" / "Contacto" (no wrapping). Hero "Evidence first. Then we build." / "Primero, la evidencia. Luego, construimos." Spanish native-speaker check pending. Carousel inside the content column, 64 px between logos, three copies, Pause button hidden until keyboard focus (WCAG 2.2.2 kept). "Mitch’s portfolio" links restored (revert of `3c9519d`), keeping the "Client portal" labels. Also the first release of the 2026-10-12 merges: PR #4 (Trusted-by carousel and its text twin, home hero button removed, home FAQ), PR #5 and `46e3b13` (client portal link). |
+| Deploy | gh-pages `2df12f5` (previous `d96d3f3`). Pages deployment `7031769694` **success** at 06:34:05 UTC. Tree equals artifact `5e5d8f169d53fdc2565a2050be197a933b851f90e1253967b7a80865068dfdf1`. 83/84 share cards are production's bytes; only `/og/resume.png` was re-rendered (new title). `CNAME`, robots and the IndexNow key are unchanged; sitemap 74. |
+| QA | typecheck and `build:release-candidate` PASS. Crawl 1080/1080; browser 540/540 (new carousel, Pause-button and CTA checks); standards 780/781 with axe 0 serious/critical in light and dark. The one failure is the known container-only `all-in-ai-money-stack/@390`. |
+| Held | Forwarding old `mitchjmiller.com/<path>` URLs to mj2.pro conflicts with the portfolio's owner rule of 2026-10-02 (nothing on mitchjmiller.com may mention M² or mj2.pro). Mitch decides. |
+| Pending (egress) | Live checks and IndexNow (74 URLs) from the Mac or Lenovo; commands in the release README. |
+| Rollback | `git revert --no-edit 2df12f5 && git push origin gh-pages` in a clean gh-pages worktree (restores `d96d3f3`); source `git revert 2538fd7 074b588`. |
+
 # PUBLISHED — October 4, 2026 (14:45 EDT): synthetic narration removed (release owner: Claude Code)
 
 | Field | Value |

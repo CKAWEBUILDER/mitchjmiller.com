@@ -3,23 +3,37 @@ import brands from '../data/brands.json';
 interface Props { heading?: string; id?: string; lang?: 'en' | 'es'; }
 const { id = 'brands', lang = 'en' } = Astro.props;
 // Spanish pilot strings (site standards 2026-09-24); English stays the data file's label.
+// 2026-10-02: heading is "Trusted by" (Mitch); Spanish equivalent pending native-speaker check.
 const text = lang === 'es'
-  ? { heading: 'Experiencia en', pause: 'Pausar logotipos', resume: 'Reanudar logotipos', group: 'Logotipos de marcas. Coloca el foco aquí para pausar el desplazamiento.' }
-  : { heading: brands.label, pause: 'Pause logos', resume: 'Resume logos', group: 'Brand logos. Focus here to pause scrolling.' };
+  ? { heading: 'Con la confianza de', pause: 'Pausar logotipos', resume: 'Reanudar logotipos', group: 'Logotipos de marcas. Coloca el foco aquí para pausar el desplazamiento.', inHouse: 'Experiencia interna en', clients: 'Trabajo con clientes como' }
+  : { heading: brands.label, pause: 'Pause logos', resume: 'Resume logos', group: 'Brand logos. Focus here to pause scrolling.', inHouse: 'In-house experience at', clients: 'Client work includes' };
 const heading = Astro.props.heading ?? text.heading;
 const list = brands.brands.filter(brand => brand.logo);
-// One loop scrolls one copy of the list: about 6 s per logo keeps the speed steady as logos are added
-// (never faster than the original 42 s loop).
-const duration = Math.max(42, list.length * 6);
+// One loop scrolls one copy of the list: about 15 s per logo keeps the rotation deliberately slow
+// (2026-10-02, Mitch: slow the rotation noticeably; previously 6 s per logo / 42 s minimum).
+const duration = Math.max(75, list.length * 15);
+// 2026-10-13, Mitch: the logos stop at the content edges (an invisible border) instead of running to
+// the screen edges, sit closer together, and the visible Pause button goes (hover and focus already
+// pause). The button stays for keyboard and screen-reader users and appears only when focused, so the
+// strip still meets WCAG 2.2.2. Three copies keep the loop seamless at any container width (the
+// viewport must stay narrower than two copies).
+// Text twin of the carousel (2026-10-02): crawlers and LLMs cannot read an image-only marquee,
+// so the same associations render as plain text below it, sourced from brands.json. Entries whose
+// exact identity is unresolved (PROJECT.md open questions) are skipped until Mitch confirms them;
+// independent project marks (kind "project") are not "trusted by" evidence and stay out too.
+const unresolved = new Set(["St. Luke's Health", 'UCSF', 'Insomnia Cafe', 'Blue Planet Adventures', 'Baylor Health']);
+const joinNames = (names: string[]) => names.length > 1 ? `${names.slice(0, -1).join(', ')} ${lang === 'es' ? 'y' : 'and'} ${names[names.length - 1]}` : names.join('');
+const employers = joinNames(brands.brands.filter(brand => brand.kind === 'employer' && !unresolved.has(brand.name)).map(brand => brand.name));
+const clients = joinNames(brands.brands.filter(brand => brand.kind === 'client' && !unresolved.has(brand.name)).map(brand => brand.name));
 ---
 <section class="ag-marquee" aria-labelledby={`${id}-label`} data-marquee>
   <div class="ag-wrap ag-marquee-head">
     <p class="ag-marquee-label" id={`${id}-label`}>{heading}</p>
     <button class="ag-marquee-toggle" type="button" aria-pressed="false" aria-controls={`${id}-track`} data-marquee-toggle data-label-pause={text.pause} data-label-resume={text.resume} hidden>{text.pause}</button>
   </div>
-  <div class="ag-marquee-viewport" tabindex="0" role="group" aria-label={text.group}>
+  <div class="ag-wrap ag-marquee-viewport" tabindex="0" role="group" aria-label={text.group}>
     <div class="ag-marquee-track" id={`${id}-track`} style={`--ag-marquee-duration:${duration}s`}>
-      {[false, true].map(duplicate => (
+      {[false, true, true].map(duplicate => (
         <ul aria-hidden={duplicate ? 'true' : undefined} data-marquee-copy={duplicate ? 'duplicate' : 'primary'}>
           {list.map(brand => (
             <li title={brand.name} data-brand={brand.name}>
@@ -31,6 +45,12 @@ const duration = Math.max(42, list.length * 6);
     </div>
   </div>
 </section>
+<div class="ag-marquee-names">
+  <div class="ag-wrap">
+    <p>{text.inHouse} {employers}.</p>
+    <p>{text.clients} {clients}.</p>
+  </div>
+</div>
 <script>
   document.querySelectorAll<HTMLElement>('[data-marquee]').forEach(marquee => {
     const toggle = marquee.querySelector<HTMLButtonElement>('[data-marquee-toggle]');

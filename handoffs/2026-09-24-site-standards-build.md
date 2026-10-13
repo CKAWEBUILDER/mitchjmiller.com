@@ -50,13 +50,15 @@ Shipped as gh-pages `3559667` from `main` `c04e56e` (artifact `4b76d8ad7f192…`
 
 ## Narration voice: finding and decision needed (2026-09-25, Claude Code cloud session)
 
+> **Decided: no voice-overs.** The narrations were removed from the site on 2026-10-04 (gh-pages `d96d3f3`; see the top of PROJECT.md), which also ended the Apple-license conflict below, and Mitch, 2026-10-13: "remove voice overs". The Kokoro plan in this section is withdrawn and kept only as history.
+
 - **Mitch, September 25:** the narration voice (macOS `say`, compact Samantha; Spanish: Paulina) sounds terrible. He asked for a much better free voice, and whether the player could sit behind a "prefer to listen?" prompt.
 - **License.** The macOS license allows its system voices only for personal, non-commercial projects. It excludes "recording, publishing or redistribution of any of the System Voices in a profit, non-profit, public sharing or commercial context" (Apple SLA, macOS Sequoia and Tahoe 26). All 10 live narrations were recorded that way, so keeping them on the M² site conflicts with that license. Premium and Enhanced macOS voices carry the same terms, so they are not the fix.
 - **Replacement: Kokoro-82M.** Apache-2.0, free for commercial use, runs locally with no account. Install `pip install kokoro-onnx`. The model files `kokoro-v1.0.int8.onnx` and `voices-v1.0.bin` come from GitHub release `thewh1teagle/kokoro-onnx` `model-files-v1.0`; Hugging Face is blocked from cloud sessions. English voices to audition: `af_heart` (the default pick), `am_michael` and `bf_emma`. For Spanish, audition `ef_dora` and `em_alex` before use. Speed: the int8 model ran at about 1.7× real time on a 4-core cloud CPU. That is too slow there for about 114 minutes of audio, so render on the Mac. The cloud session's sample run was stopped by its sandbox before any sample finished; no samples exist.
 - **Text preparation Kokoro needs** (espeak-ng G2P, tested on the statistician post):
   - `$14,600` is read "dollar fourteen thousand six hundred". Rewrite it as `14,600 dollars`, using `\$(\d{1,3}(?:,\d{3})+|\d+)(\.\d+)?` so a following comma is not captured, and `$4.7B` as `4.7 billion dollars`.
   - `2025–2035` loses its dash. Rewrite it as `2025 to 2035`.
-  - Years 2010–2099 are read "two thousand twenty-five". Rewrite them as `twenty 25`, which espeak reads "twenty twenty-five".
+  - Years 2010–2099 are read "two thousand twenty-five". In English narration only, rewrite them as `twenty 25`, which espeak reads "twenty twenty-five"; Spanish narration keeps its years for the Spanish G2P (every normalization here is per language).
   - `3x` → `3 times`.
   - Unknown acronyms are read as words (OEWS). Keep a small pronunciation map.
   - `4 min read` → `4 minute read`, and ` / ` → `, `.

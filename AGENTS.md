@@ -47,7 +47,7 @@ Read `PROJECT.md` (top entry first), then [docs/roadmap.md](docs/roadmap.md) (ob
 
 ## Site standards — September 24 standing instruction
 
-Every page and post follows [docs/site-standards.md](docs/site-standards.md): per-page share cards (`og:image` 1200×630 plus a `summary_large_image` Twitter card, never Mitch's photo), a hero per post that doubles as its share card, light and dark themes, English plus a Spanish pilot with hreflang and a language picker (suggest, never redirect), a WCAG 2.2 AA baseline and narrated audio for every post. Production builds from `main`; the first implementation is briefed in [handoffs/2026-09-24-site-standards-build.md](handoffs/2026-09-24-site-standards-build.md).
+Every page and post follows [docs/site-standards.md](docs/site-standards.md): per-page share cards (`og:image` 1200×630 plus a `summary_large_image` Twitter card, never Mitch's photo), a hero per post that doubles as its share card, light and dark themes, English plus a Spanish pilot with hreflang and a language picker (suggest, never redirect), a WCAG 2.2 AA baseline, and no narration or voice-over on any page (removed 2026-10-04; Mitch, 2026-10-13: "remove voice overs"). Production builds from `main`; the first implementation is briefed in [handoffs/2026-09-24-site-standards-build.md](handoffs/2026-09-24-site-standards-build.md).
 
 ## One record set — September 14 standing instruction
 

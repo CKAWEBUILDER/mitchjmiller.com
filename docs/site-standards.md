@@ -28,7 +28,7 @@ Mitch's standing instruction, 2026-09-24. Applies to every page on mj2.pro and e
 
 ## Accessibility (WCAG 2.2 AA baseline)
 - Skip link, landmarks, one h1, logical headings, visible focus, labelled controls and forms, alt text, captions or transcripts for media, reduced motion, a pause control for anything that animates longer than five seconds, 44×44 px touch targets where practical.
-- Every post has a narrated audio file (mono AAC, about 48 kbps) and a labelled "Listen to this article (N min)" control near the top. The article text is the transcript. Translated posts get narration in their language.
+- No narration or voice-over on any page: no audio player and no synthetic voice track. The machine-read narrations were removed on 2026-10-04 (gh-pages `d96d3f3`), and Mitch confirmed on 2026-10-13: "remove voice overs". The unused narration scripts in `scripts/` add nothing to a build unless someone records audio, so do not.
 - Audit every template with axe before release: zero serious or critical violations.
 
 ## Later

@@ -1,5 +1,17 @@
 **Roadmap:** [docs/roadmap.md](docs/roadmap.md) holds the objectives, the Now / Next / Later plan and Mitch's open decisions (updated 2026-10-01). This file stays the release log.
 
+# ON MAIN, NOT YET RELEASED — October 13, 2026: narration code removed (Claude Code, cloud session)
+
+| Item | Value |
+|---|---|
+| Why | Mitch, 2026-10-13: "remove voice overs", then "fix". The recordings came off the site on 2026-10-04 (entry below); this removes the code that made them, so no post can get a voice-over again by accident. |
+| Source | `b3a08a8` (code) plus the records commit after it, on `claude/compassionate-lamport-18j0ai`, fast-forwarded to `main` together with the records branch ([PR](https://github.com/CKAWEBUILDER/mitchjmiller.com/pull/1)). |
+| Removed | `scripts/narrate.mjs`, `scripts/lib/narration.mjs`, `site/data/narration.json`, the unused `NarrationPlayer` (`baseline/src/components/narration-player.tsx`), the `narrate` npm script, the narration checks in `scripts/verify-standards.mjs`, `scripts/qa/standards.mjs` and `scripts/qa/live-standards.mjs`, the `.mj-narration` CSS, and the narration steps in `RELEASE-READY.md` and `content-studio/skills/publish/SKILL.md`. |
+| Output | `build:release-candidate` of `b3a08a8` against the same build of `bc283a4` (site source identical to `main` `7efe6c2`; same container and path): 516 = 516 files, all byte-identical except `_astro/AgencyLayout.*.css` (the 5 unused `.mj-narration` rules removed, 177,734 → 177,333 bytes, renamed `D0CG1hfo` → `BAjli4Kj`) and the 78 shell documents that reference it, whose only difference is that name. |
+| QA | typecheck PASS. `build:release-candidate` PASS: parity 57/57 + 21/21, agency 74 routes, standards 86/86 documents. Standards suite 39/39 on `/`, `/blog/statistician-vs-data-scientist/` and `/es/blog/gbp-2026-ai-grounding/`, axe serious+critical 0 in light and dark. |
+| Release | Not deployed. Production `2df12f5` keeps the 5 unused rules, and no visitor sees a difference; they leave with the next release. |
+| Rollback | `git revert b3a08a8` on `main`. |
+
 # PUBLISHED — October 13, 2026 (06:34 UTC): header "Contact", new headline, contained carousel, portfolio links restored (release owner: Claude Code, cloud session)
 
 Mitch, 2026-10-13: "ship all". Details, QA and commands: [docs/release-2026-10-13/README.md](docs/release-2026-10-13/README.md).
@@ -19,7 +31,7 @@ Mitch, 2026-10-13: "ship all". Details, QA and commands: [docs/release-2026-10-1
 | Field | Value |
 |---|---|
 | Why | Mitch, 2026-10-04: "we gott remove these terrible voice reds" — the machine-read (macOS `say`/Samantha) narrations come off the site. |
-| Decision (2026-10-13) | Mitch: "remove voice overs". No narration or voice-over on any page ([AGENTS.md](AGENTS.md), [docs/site-standards.md](docs/site-standards.md)). Do not roll this release back or run `npm run narrate`: it records with macOS system voices, whose license excludes publishing the recordings ([site-standards handoff](handoffs/2026-09-24-site-standards-build.md)). |
+| Decision (2026-10-13) | Mitch: "remove voice overs". No narration or voice-over on any page ([AGENTS.md](AGENTS.md), [docs/site-standards.md](docs/site-standards.md)). Do not roll this release back or run `npm run narrate`: it records with macOS system voices, whose license excludes publishing the recordings ([site-standards handoff](handoffs/2026-09-24-site-standards-build.md)). The narration code itself was removed on 2026-10-13 (`b3a08a8`, top entry), so the opt-in path and the rollback's `npm run narrate` below no longer exist. |
 | Source | `6c5f081` on `main`, cherry-picked onto `origin/main` after the 2026-10-01 M² release so nothing from that release was reverted. |
 | Deploy | gh-pages `d96d3f3` (previous `664c757`); Pages reported `built`. Tree hash equals artifact `de99a6ea4efc92d78c1d2f970c579ba5d1cf5612afec021f000fa8e374958d35`. `git diff --cached` deleted **only** the 11 `.m4a` files outside hashed `_astro/`; `CNAME`, `.nojekyll`, `404.html`, `sitemap.xml`, `robots.txt` and the IndexNow key all present. |
 | Change | `NarrationPlayer` removed from `baseline/src/pages/blog-post.tsx` and `site/pages/es/blog/[slug].astro`; all 11 generated `.m4a` files removed with `git rm` (recoverable from history); `site/data/narration.json` `items` emptied. |

@@ -30,7 +30,7 @@ Source for 1–5: Mitch, 2026-09-25, in the [reconciliation handoff](../handoffs
 - **Open PRs:** [#1](https://github.com/CKAWEBUILDER/mitchjmiller.com/pull/1), records (open since 2026-09-25, branch updated 2026-10-01 with a merge of `main` and the SEO crawl). Until it merges, `main` lacks Mitch's Sept 25 direction, the narration finding and the start-here pointers. #2 (M² mark) is closed; its work shipped.
 - **Gated, not done:**
   - **Stripe:** code on `main` (`114ceec`), not deployed. Needs a restricted key and webhook secret as Worker secrets, `STRIPE_PRICES`, the D1 migration, a webhook endpoint and a tax decision ([runbook](stripe/README.md)). A push to `main` touching `cloudflare/api-worker/**` runs the Worker deploy workflow once repo secrets exist (0 on 2026-09-25, not re-checked).
-  - **Narration:** removed. All 11 macOS-voice recordings came off the site on 2026-10-04 (gh-pages `d96d3f3`), which also ended the Apple-license conflict; Mitch, 2026-10-13: "remove voice overs". No voice-overs anywhere.
+  - **Narration:** removed. All 11 macOS-voice recordings came off the site on 2026-10-04 (gh-pages `d96d3f3`), which also ended the Apple-license conflict; Mitch, 2026-10-13: "remove voice overs". No voice-overs anywhere, and the narration code was removed the same day (`b3a08a8`).
   - **mitchjmiller.com:** as of 2026-09-25, `http://` 301s to mj2.pro and `https://` times out (the registrar forwarding has no TLS).
   - **Search Console / GA4:** property, sitemap submission and realtime check are not recorded as done since the 2026-09-23 cutover; GA4 has no custom events.
   - **Carousel artwork:** 30 staged clients have no official logo (brand sites are blocked from cloud sessions); 4 ambiguous names plus Baylor are on hold.

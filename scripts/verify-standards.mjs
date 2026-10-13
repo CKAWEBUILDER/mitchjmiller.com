@@ -8,9 +8,6 @@
  *  - themes: a shell document without the pre-paint theme script or the aria-pressed toggle,
  *    the two dark-token blocks in site/styles/standards.css differing, or a dark text pair
  *    below WCAG AA (4.5:1);
- *  - narration: a published post (English archive + src/lib, and Spanish translations) without
- *    its audio file, player ("Listen to this article (N min)", controls, preload="none") and
- *    current record in site/data/narration.json (text hash equal to the post's text today);
  *  - languages: <html lang> not matching the path, a canonical page without its hreflang set
  *    (self = canonical, the translation when one exists, x-default → English) or with a target
  *    that is not built or does not link back, og:locale:alternate out of step with the
@@ -23,10 +20,8 @@
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
-import { decodeHTML } from 'entities';
 import { root } from './lib/load-ts.mjs';
 import { attr, headOf, shareMeta } from './lib/html.mjs';
-import { audioPathFor, loadPosts, narrationText, readManifest, routeFor, sha256 } from './lib/narration.mjs';
 
 const dist = resolve(root, process.env.PARITY_DIST || 'dist');
 const origin = 'https://mj2.pro';
@@ -137,52 +132,7 @@ for (const file of htmlFiles) {
   else if (!/class="ag-sr-only">[^<]{3,}</.test(toggle) && !/aria-label="[^"]{3,}"/.test(toggle)) fail(route, 'theme toggle has no accessible name');
 }
 
-// 3. Narration for every published post, in every language it is published in.
-// Narration is opt-in: an empty items map in site/data/narration.json means the feature is
-// off for the whole site and these checks are skipped (Mitch removed the synthetic reads
-// 2026-10-04). Record one narration and the section enforces itself again.
-const narration = readManifest();
-const narrationOn = Object.keys(narration.items || {}).length > 0;
-const posts = await loadPosts();
-const expectedRoutes = new Set();
-for (const [lang, list] of Object.entries(narrationOn ? posts : {})) {
-  for (const post of list) {
-    const route = routeFor(lang, post.slug);
-    expectedRoutes.add(route);
-    const item = narration.items[route];
-    const scope = `${route} (narration)`;
-    if (!item) { fail(scope, `no narration; run: npm run narrate -- ${lang === 'es' ? '--lang es ' : ''}${post.slug}`); continue; }
-    if (item.src !== audioPathFor(lang, post.slug)) fail(scope, `audio path ${item.src} is not ${audioPathFor(lang, post.slug)}`);
-    const file = join(dist, item.src);
-    if (!existsSync(file)) { fail(scope, `audio file missing from dist: ${item.src}`); continue; }
-    const bytes = readFileSync(file);
-    if (bytes.subarray(4, 8).toString('latin1') !== 'ftyp') fail(scope, 'audio is not an MP4/M4A container');
-    if (bytes.length !== item.bytes) fail(scope, `audio is ${bytes.length} bytes, record says ${item.bytes}`);
-    if (item.channels !== 1 || item.bitRate < 40000 || item.bitRate > 56000) fail(scope, `audio must be mono ~48 kbps (record: ${item.channels} ch, ${item.bitRate} bps)`);
-    const text = narrationText({ title: post.title, html: post.html, lang });
-    if (item.textSha256 !== sha256(text)) fail(scope, `stale: the post text changed after narration; run: npm run narrate -- ${lang === 'es' ? '--lang es ' : ''}${post.slug}`);
-    const page = join(dist, route, 'index.html');
-    if (!existsSync(page)) { fail(scope, 'post page missing'); continue; }
-    const html = readFileSync(page, 'utf8');
-    const audio = html.match(/<audio\b[^>]*>[\s\S]*?<\/audio>/)?.[0] || '';
-    const label = decodeHTML(html.match(new RegExp(`<p class="mj-narration-label" id="([^"]+)">([^<]+)</p>`))?.[2] || '');
-    const labelId = html.match(/<p class="mj-narration-label" id="([^"]+)">/)?.[1];
-    const wantedLabel = lang === 'es' ? `Escuchar este artículo (${item.minutes} min)` : `Listen to this article (${item.minutes} min)`;
-    if (!audio) fail(scope, 'no <audio> player on the page');
-    else {
-      if (!/\scontrols(\s|>|=)/.test(audio) || !/preload="none"/.test(audio)) fail(scope, 'player needs controls and preload="none"');
-      if (!audio.includes(`<source src="${item.src}" type="audio/mp4"`)) fail(scope, 'player source does not point at the narration');
-      if (!labelId || !audio.includes(`aria-labelledby="${labelId}"`)) fail(scope, 'player is not labelled by the visible label');
-    }
-    if (label !== wantedLabel) fail(scope, `label "${label}" ≠ "${wantedLabel}"`);
-    const firstAudio = html.indexOf('<audio'), body = html.indexOf('class="prose');
-    if (firstAudio < 0 || body < 0 || firstAudio > body) fail(scope, 'player is not near the top (before the article body)');
-    tick(`narrated_${lang}`);
-  }
-}
-for (const route of Object.keys(narration.items)) if (!expectedRoutes.has(route)) fail(`${route} (narration)`, 'record for a route that is not a published post');
-
-// 4. Languages: hreflang, <html lang>, og:locale:alternate, sitemap alternates, picker, banner.
+// 3. Languages: hreflang, <html lang>, og:locale:alternate, sitemap alternates, picker, banner.
 const manifestJson = JSON.parse(readFileSync(join(root, 'docs/implementation-2026-09-11/route-manifest.json'), 'utf8'));
 const spanishOf = new Map(manifestJson.routes.filter(route => route.lang === 'es' && route.translationOf).map(route => [route.translationOf, route.path]));
 const englishOf = new Map([...spanishOf].map(([en, es]) => [es, en]));
@@ -237,7 +187,7 @@ for (const [, entry] of sitemapXml.matchAll(/<url>([\s\S]*?)<\/url>/g)) {
 const languageScript = readFileSync(join(root, 'site/components/parity/enhance.ts'), 'utf8');
 if (/location\.(assign|replace)\s*\(|location(\.href)?\s*=[^=]|window\.location\s*=[^=]/.test(languageScript)) fail('enhance.ts', 'a script changes location: the language banner must suggest, never redirect');
 
-// 5. Brand mark (2026-09-25): the M² icon files replace the old favicon set, none of them is the
+// 4. Brand mark (2026-09-25): the M² icon files replace the old favicon set, none of them is the
 //    headshot, and the Organization JSON-LD logo is the 512×512 M² PNG (scripts/brand-icons.mjs).
 const icoSizes = bytes => bytes.readUInt16LE(0) === 0 && bytes.readUInt16LE(2) === 1 ? Array.from({ length: bytes.readUInt16LE(4) }, (_, i) => bytes.readUInt8(6 + 16 * i) || 256) : [];
 const brandFiles = [['favicon.png', 32], ['apple-touch-icon.png', 180], ['images/brand/m2-logo-512.png', 512]];
@@ -258,7 +208,6 @@ else tick('brandIcons');
 
 const report = { passed: failures.length === 0, checks, darkPairs, failures };
 if (process.env.STANDARDS_REPORT_PATH) writeFileSync(resolve(root, process.env.STANDARDS_REPORT_PATH), `${JSON.stringify(report, null, 2)}\n`);
-const narrated = Object.keys(checks).filter(key => key.startsWith('narrated_')).map(key => `${checks[key]} ${key.slice(9)}`).join(' + ') || '0';
-console.log(`Standards verification ${report.passed ? 'passed' : 'FAILED'}: share tags + 1200×630 card on ${checks.shareCardsOk || 0}/${checks.shareDocuments || 0} documents (${checks.headshotShareImages || 0} headshot references), theme script + toggle on ${checks.themedDocuments || 0} shell documents, dark blocks identical ${checks.darkTokenBlocksIdentical ? 'yes' : 'NO'}, ${darkPairs.length} dark text pairs ≥ 4.5:1 (min ${Math.min(...darkPairs.map(pair => pair.ratio))}), narrated posts ${narrated}; M² brand files ${checks.brandIcons || 0}/5; hreflang on ${checks.hreflang_en || 0} en + ${checks.hreflang_es || 0} es pages, ${checks.sitemapAlternates || 0} sitemap entries match, ${checks.languagePickers || 0} pickers.`);
+console.log(`Standards verification ${report.passed ? 'passed' : 'FAILED'}: share tags + 1200×630 card on ${checks.shareCardsOk || 0}/${checks.shareDocuments || 0} documents (${checks.headshotShareImages || 0} headshot references), theme script + toggle on ${checks.themedDocuments || 0} shell documents, dark blocks identical ${checks.darkTokenBlocksIdentical ? 'yes' : 'NO'}, ${darkPairs.length} dark text pairs ≥ 4.5:1 (min ${Math.min(...darkPairs.map(pair => pair.ratio))}); M² brand files ${checks.brandIcons || 0}/5; hreflang on ${checks.hreflang_en || 0} en + ${checks.hreflang_es || 0} es pages, ${checks.sitemapAlternates || 0} sitemap entries match, ${checks.languagePickers || 0} pickers.`);
 if (failures.length) console.error(failures.map(value => `  - ${value}`).join('\n'));
 process.exitCode = report.passed ? 0 : 1;

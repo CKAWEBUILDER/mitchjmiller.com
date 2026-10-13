@@ -20,8 +20,7 @@
  *   translation first (or that language was chosen before), never redirects, and remembers a
  *   dismissal; the globe picker opens and closes by keyboard and remembers the language chosen;
  *   the Spanish contact form reports in Spanish (mocked Worker).
- * - Every share card referenced by a page serves 200 image/png at 1200×630; every narration
- *   serves 200 audio/mp4, reports the recorded duration and actually plays.
+ * - Every share card referenced by a page serves 200 image/png at 1200×630.
  * Third-party hosts are blocked, as in scripts/qa/browser.mjs.
  */
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
@@ -35,7 +34,6 @@ const shots = args.shots ? resolve(args.shots) : null;
 const chrome = process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const blocked = /^(https?:\/\/)(fonts\.googleapis\.com|fonts\.gstatic\.com|www\.googletagmanager\.com|www\.google-analytics\.com|analytics\.google\.com|stats\.g\.doubleclick\.net|challenges\.cloudflare\.com|linkedin\.com|www\.linkedin\.com)\//;
 const manifest = JSON.parse(readFileSync('docs/implementation-2026-09-11/route-manifest.json', 'utf8'));
-const narration = JSON.parse(readFileSync('site/data/narration.json', 'utf8'));
 const axePath = createRequire(import.meta.url).resolve('axe-core/axe.min.js');
 const wcagTags = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22a', 'wcag22aa'];
 
@@ -293,7 +291,7 @@ try {
     }
   }
 
-  // 4. Share cards over HTTP and narration playback.
+  // 4. Share cards over HTTP.
   {
     const { page, context } = await newPage();
     await page.goto(`${base}/`, settle);
@@ -306,28 +304,6 @@ try {
     const served = await page.evaluate(async list => Promise.all(list.map(async path => { const r = await fetch(path); const b = new Uint8Array(await r.arrayBuffer()); return { path, status: r.status, type: r.headers.get('content-type'), w: (b[16] << 24 | b[17] << 16 | b[18] << 8 | b[19]) >>> 0, h: (b[20] << 24 | b[21] << 16 | b[22] << 8 | b[23]) >>> 0 }; })), [...cards]);
     const bad = served.filter(c => c.status !== 200 || c.type !== 'image/png' || c.w !== 1200 || c.h !== 630);
     record('share cards', `every referenced card serves 200 image/png at 1200×630 (${served.length} cards)`, bad.length === 0 && served.length > 0, bad.slice(0, 5).map(c => `${c.path} ${c.status} ${c.type} ${c.w}×${c.h}`).join(', '));
-    await context.close();
-  }
-  for (const [route, item] of Object.entries(narration.items).filter(([route]) => routes.includes(route))) {
-    const { page, errors, context } = await newPage();
-    await page.goto(`${base}${route}`, settle);
-    const head = await page.evaluate(async src => { const r = await fetch(src, { method: 'HEAD' }); return { status: r.status, type: r.headers.get('content-type') }; }, item.src);
-    const play = await page.evaluate(async () => {
-      const audio = document.querySelector('.mj-narration audio');
-      if (!audio) return { found: false };
-      const label = document.getElementById(audio.getAttribute('aria-labelledby'))?.textContent;
-      const preloadAttr = audio.getAttribute('preload');
-      audio.muted = true;
-      try { await audio.play(); } catch (error) { return { found: true, label, error: String(error) }; }
-      const started = Date.now();
-      while (audio.currentTime < 0.5 && Date.now() - started < 8000) await new Promise(r => setTimeout(r, 100));
-      audio.pause();
-      return { found: true, label, preloadAttr, currentTime: audio.currentTime, duration: audio.duration };
-    });
-    const wanted = item.lang === 'es' ? `Escuchar este artículo (${item.minutes} min)` : `Listen to this article (${item.minutes} min)`;
-    record(`${route} audio`, 'narration serves 200 audio/mp4', head.status === 200 && head.type === 'audio/mp4', `${head.status} ${head.type}`);
-    record(`${route} audio`, `"${wanted}" (preload="none") plays and its duration matches the record`, play.found && play.preloadAttr === 'none' && play.currentTime >= 0.5 && Math.abs(play.duration - item.seconds) < 1.5 && play.label === wanted, JSON.stringify(play));
-    record(`${route} audio`, 'no console or page errors', errors.length === 0, errors.slice(0, 3).join(' | '));
     await context.close();
   }
 } finally {

@@ -1,6 +1,6 @@
 // Spanish translations of published posts (site standards pilot, 2026-09-24). Route
-// /es/blog/<slug>/, rendered by site/pages/es/blog/[slug].astro; narrated with
-// `npm run narrate -- --lang es <slug>`. The English post in src/lib/data.ts stays canonical.
+// /es/blog/<slug>/, rendered by site/pages/es/blog/[slug].astro. The English post in
+// src/lib/data.ts stays canonical.
 // Model draft + independent review pass: see the route manifest's "translation" record.
 // Every number, date, source and link is the English post's; kept-English terms are the ones
 // Spanish-speaking marketers use (SEO, AEO/GEO, CTR, ROI, NAP, Local Pack, AI Overviews, and

@@ -1,5 +1,5 @@
-/* Site standards (docs/site-standards.md, 2026-09-24): light and dark themes, header tools,
-   narration player. Imported after agency.css by site/layouts/AgencyLayout.astro.
+/* Site standards (docs/site-standards.md, 2026-09-24): light and dark themes and header tools.
+   Imported after agency.css by site/layouts/AgencyLayout.astro.
 
    Themes. Light values live in :root (agency.css, baseline/src/index.css) and are unchanged.
    Dark values are declared twice with identical declarations: once for visitors whose system
@@ -153,13 +153,6 @@
   .ag-brand { gap: 10px; }
   .ag-brand-name { font-size: 1.05rem; }
 }
-
-/* Narration: "Listen to this article (N min)" near the top of every post. */
-.mj-narration { margin: 28px 0 0; padding: 16px 18px; border: 1px solid var(--ag-line); border-radius: 8px; background: var(--ag-tint); }
-.mj-narration-label { margin: 0 0 10px; font-size: 1rem; font-weight: 600; color: var(--ag-heading); }
-.mj-narration audio { display: block; width: 100%; min-height: 44px; }
-.mj-narration-note { margin: 10px 0 0; font-size: .85rem; line-height: 1.5; color: var(--ag-muted); }
-.mj-narration-note a { color: inherit; }
 
 /* Language picker (docs/site-standards.md "Languages"): a globe button whose menu lists the
    language names in their own script, no flags. The button's accessible name says the current

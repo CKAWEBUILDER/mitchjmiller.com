@@ -1,4 +1,0 @@
-{
-  "about": "Narration is OFF (Mitch, 2026-10-04: the synthetic voice reads were removed from the site). An empty items map disables every narration check. Re-enable by running npm run narrate -- <slug> and restoring the player in baseline/src/pages/blog-post.tsx.",
-  "items": {}
-}

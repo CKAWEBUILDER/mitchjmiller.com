@@ -25,7 +25,6 @@
     "qa:serve": "node scripts/qa/serve.mjs dist 5189",
     "qa:crawl": "node scripts/qa/crawl.mjs --base http://127.0.0.1:5189",
     "qa:browser": "node scripts/qa/browser.mjs --base http://127.0.0.1:5189",
-    "narrate": "node scripts/narrate.mjs",
     "verify:standards": "node scripts/verify-standards.mjs"
   },
   "dependencies": {

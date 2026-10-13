@@ -19,7 +19,7 @@
  * click on a sector/title/vertical/stop lands the post on that section, every jump target the
  * embed can produce is a heading in the post, the listener ignores foreign senders, malformed
  * anchors and non-heading targets, the full-screen embed keeps its links on this origin even
- * with an off-site ?parent=, JSON-LD parses, and posters, GIF, card and narration are served.
+ * with an off-site ?parent=, JSON-LD parses, and posters, GIF and card are served.
  * Third-party hosts (fonts, GA4, Turnstile, LinkedIn) are blocked so no analytics
  * hits leave the machine and the run is hermetic.
  */
@@ -285,7 +285,7 @@ try {
           const ld = await page.evaluate(() => [...document.querySelectorAll('script[type="application/ld+json"]')].map(s => { try { const d = JSON.parse(s.textContent); return (d['@graph'] || [d]).map(n => n['@type']); } catch { return ['INVALID']; } }).flat());
           record(`post-${v.name}`, 'JSON-LD parses: Article, BreadcrumbList and FAQPage', !ld.includes('INVALID') && ['Article', 'BreadcrumbList', 'FAQPage'].every(t => ld.includes(t)), ld.join(', '));
           const assets = await page.evaluate(async list => Promise.all(list.map(async u => { const r = await fetch(u); return `${u} ${r.status} ${r.headers.get('content-type')}`; })), [...['anim-640x800.gif', 'poster-1080x1350.png', 'poster-1080x1080.png', 'poster-2160x2700.png', ...v.extra].map(f => `${v.viz}${f}`)]);
-          record(`post-${v.name}`, 'GIF, posters and card are served (200, image types)', assets.every(a => / 200 (image\/(gif|png)|audio\/mp4)$/.test(a)), assets.filter(a => !/ 200 (image|audio)\//.test(a)).join(', ') || `${assets.length} files`);
+          record(`post-${v.name}`, 'GIF, posters and card are served (200, image types)', assets.every(a => / 200 image\/(gif|png)$/.test(a)), assets.filter(a => !/ 200 image\//.test(a)).join(', ') || `${assets.length} files`);
         }
         record(scope, 'no console or page errors (post and frame)', errors.length === 0, errors.slice(0, 3).join(' | '));
         await page.screenshot({ path: join(shots, `post-${v.name}-${width}-embed.png`), fullPage: false });

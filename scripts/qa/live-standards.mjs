@@ -5,8 +5,6 @@
  *  - share tags: the full Open Graph + summary_large_image set, og:image fetched (200, image/png
  *    or image/jpeg, 1200×630, under 5 MB), and a count of share images that are the headshot
  *    (by URL and by bytes);
- *  - narration: every post in site/data/narration.json has its player and its audio serves 200
- *    audio/mp4 with the recorded byte size;
  *  - hreflang: self-reference, reciprocity, x-default to English, every target 200, and the
  *    sitemap alternates match the page tags.
  *
@@ -21,7 +19,6 @@ const args = Object.fromEntries(process.argv.slice(2).map((value, index, list) =
 const origin = args.origin || 'https://mj2.pro';
 const out = args.out ? resolve(args.out) : null;
 const manifest = JSON.parse(readFileSync('docs/implementation-2026-09-11/route-manifest.json', 'utf8'));
-const narration = JSON.parse(readFileSync('site/data/narration.json', 'utf8'));
 const headshot = createHash('sha256').update(readFileSync('public/images/headshot.png')).digest('hex');
 const required = ['og:title', 'og:description', 'og:url', 'og:type', 'og:locale', 'og:image', 'og:image:alt', 'twitter:card', 'twitter:title', 'twitter:description', 'twitter:image', 'twitter:image:alt'];
 const results = [];
@@ -74,17 +71,6 @@ for (const url of targets) {
   record(url, 'og:image is a 1200×630 card under 5 MB, not the headshot', card.status === 200 && /image\/(png|jpeg)/.test(card.type) && card.size?.[0] === 1200 && card.size?.[1] === 630 && card.bytes < 5 * 1024 * 1024 && !isHeadshot, `${image} → ${card.status} ${card.type} ${card.size?.join('×')} ${card.bytes} B${isHeadshot ? ' HEADSHOT' : ''}`);
 }
 
-// Narration on every narrated post.
-let narrated = 0;
-for (const [route, item] of Object.entries(narration.items)) {
-  const html = pages.get(`${canonical}${route}`) ?? (await get(`${canonical}${route}`)).body?.toString('utf8') ?? '';
-  const player = /<audio\b[^>]*preload="none"[^>]*>/.test(html) && html.includes(`<source src="${item.src}" type="audio/mp4"`);
-  const audio = await get(`${canonical}${item.src}`, 'HEAD');
-  const ok = player && audio.status === 200 && /audio\/(mp4|x-m4a|aac)/.test(audio.type) && (!audio.length || audio.length === item.bytes);
-  if (ok) narrated++;
-  record(route, 'narration player present; audio 200 audio/mp4 with the recorded size', ok, `player ${player}, ${audio.status} ${audio.type} ${audio.length}/${item.bytes}`);
-}
-
 // hreflang: self, reciprocal, x-default to English, targets 200, sitemap alternates match.
 let hreflangPages = 0, reciprocal = 0;
 for (const url of urls) {
@@ -106,7 +92,7 @@ for (const url of urls) {
 }
 
 const failures = results.filter(r => !r.pass);
-const summary = { generated: new Date().toISOString(), origin, sitemapUrls: urls.length, documents: targets.length, withAllShareTags: withAllTags, headshotShareImages: headshots, narratedPostsOk: `${narrated}/${Object.keys(narration.items).length}`, hreflangPages, hreflangReciprocal: reciprocal, checks: results.length, passed: results.length - failures.length, failed: failures.length, failures, results };
+const summary = { generated: new Date().toISOString(), origin, sitemapUrls: urls.length, documents: targets.length, withAllShareTags: withAllTags, headshotShareImages: headshots, hreflangPages, hreflangReciprocal: reciprocal, checks: results.length, passed: results.length - failures.length, failed: failures.length, failures, results };
 if (out) { mkdirSync(dirname(out), { recursive: true }); writeFileSync(out, `${JSON.stringify(summary, null, 2)}\n`); }
-console.log(`Live standards @ ${origin}: ${summary.passed}/${summary.checks} checks; ${urls.length} sitemap URLs + ${targets.length - urls.length} embeds; full share tags ${withAllTags}/${targets.length}; headshot share images ${headshots}; narration ${summary.narratedPostsOk}; hreflang pages ${hreflangPages}, reciprocal ${reciprocal}.`);
+console.log(`Live standards @ ${origin}: ${summary.passed}/${summary.checks} checks; ${urls.length} sitemap URLs + ${targets.length - urls.length} embeds; full share tags ${withAllTags}/${targets.length}; headshot share images ${headshots}; hreflang pages ${hreflangPages}, reciprocal ${reciprocal}.`);
 process.exitCode = failures.length ? 1 : 0;
